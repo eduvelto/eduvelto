@@ -1,0 +1,2303 @@
+[
+  {
+    "id": "JOBQ-J061",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'সাহসী' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "ভীরু",
+      "দৃঢ়",
+      "নির্ভীক",
+      "বীর"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ভীরু",
+    "explanation": "সাহসীর বিপরীত ভীরু।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J062",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'আগমন' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "আসা",
+      "প্রস্থান",
+      "উপস্থিতি",
+      "অভ্যর্থনা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "প্রস্থান",
+    "explanation": "আগমনের বিপরীত প্রস্থান।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J063",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'প্রাচীন' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "ঐতিহাসিক",
+      "পুরাতন",
+      "নবীন",
+      "প্রাচীনতম"
+    ],
+    "correct_index": 2,
+    "correct_answer": "নবীন",
+    "explanation": "প্রাচীনের বিপরীত নবীন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J064",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'আদি' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "অন্ত",
+      "প্রথম",
+      "মূল",
+      "শুরু"
+    ],
+    "correct_index": 0,
+    "correct_answer": "অন্ত",
+    "explanation": "আদির বিপরীত অন্ত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J065",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'মিষ্টি' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "মিঠা",
+      "তিক্ত",
+      "সুস্বাদু",
+      "মধুর"
+    ],
+    "correct_index": 1,
+    "correct_answer": "তিক্ত",
+    "explanation": "মিষ্টির বিপরীত তিক্ত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J066",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'ধনী' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "দরিদ্র",
+      "সম্পদশালী",
+      "ধনবান",
+      "বিত্তবান"
+    ],
+    "correct_index": 0,
+    "correct_answer": "দরিদ্র",
+    "explanation": "ধনীর বিপরীত দরিদ্র।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J067",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'স্বাগত' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "সাগত",
+      "স্বাগতম",
+      "স্বাগত",
+      "স্বগত"
+    ],
+    "correct_index": 2,
+    "correct_answer": "স্বাগত",
+    "explanation": "শুদ্ধ বানান 'স্বাগত'; 'স্বাগতম' অশুদ্ধ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J068",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'দূরত্ব' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "দুরত্ত",
+      "দুরত্ব",
+      "দূরত",
+      "দূরত্ব"
+    ],
+    "correct_index": 3,
+    "correct_answer": "দূরত্ব",
+    "explanation": "শুদ্ধ বানান 'দূরত্ব'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J069",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'মুহূর্ত' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "মুহূর্ত",
+      "মুহুর্ত",
+      "মুহূর্ত্ত",
+      "মূহূর্ত"
+    ],
+    "correct_index": 0,
+    "correct_answer": "মুহূর্ত",
+    "explanation": "শুদ্ধ বানান 'মুহূর্ত'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J070",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'শারীরিক' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "সারীরিক",
+      "শারীরীক",
+      "শারিরিক",
+      "শারীরিক"
+    ],
+    "correct_index": 3,
+    "correct_answer": "শারীরিক",
+    "explanation": "শুদ্ধ বানান 'শারীরিক'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J071",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'দায়িত্ব' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "দায়িত্য",
+      "দায়িত্ব",
+      "দায়িত্ত",
+      "দাইত্ব"
+    ],
+    "correct_index": 1,
+    "correct_answer": "দায়িত্ব",
+    "explanation": "শুদ্ধ বানান 'দায়িত্ব'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J072",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'অপরাহ্ণ' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "অপরাহ্ন",
+      "অপরাহ্ণ",
+      "অপরাহ্ন্ন",
+      "অপোরাহ্ণ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অপরাহ্ণ",
+    "explanation": "শুদ্ধ বানান 'অপরাহ্ণ'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J073",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'ব্যবসা' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "ব্যবশা",
+      "ব্যবসা",
+      "ব্যাবশা",
+      "ব্যাবসা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ব্যবসা",
+    "explanation": "শুদ্ধ বানান 'ব্যবসা'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J074",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'সান্ত্বনা' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "সান্তোনা",
+      "সান্তনা",
+      "শান্ত্বনা",
+      "সান্ত্বনা"
+    ],
+    "correct_index": 3,
+    "correct_answer": "সান্ত্বনা",
+    "explanation": "শুদ্ধ বানান 'সান্ত্বনা'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J075",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'বুদ্ধিজীবী' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "বুদ্ধিজীবী",
+      "বুদ্ধীজীবী",
+      "বুদ্ধিজিবী",
+      "বুদ্ধিজীবি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বুদ্ধিজীবী",
+    "explanation": "শুদ্ধ বানান 'বুদ্ধিজীবী'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J076",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'শুশ্রূষা' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "শুশ্রূষা",
+      "শুশ্রুষা",
+      "শুশ্রুসা",
+      "শুশ্রূশা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "শুশ্রূষা",
+    "explanation": "শুদ্ধ বানান 'শুশ্রূষা'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J077",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'স্বতন্ত্র' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "সতন্ত্র",
+      "সতন্ত",
+      "স্বতন্ত",
+      "স্বতন্ত্র"
+    ],
+    "correct_index": 3,
+    "correct_answer": "স্বতন্ত্র",
+    "explanation": "শুদ্ধ বানান 'স্বতন্ত্র'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J078",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'পরীক্ষা' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "পরীক্ষা",
+      "পরীখ্যা",
+      "পরীক্ষ্যা",
+      "পরিক্ষা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "পরীক্ষা",
+    "explanation": "শুদ্ধ বানান 'পরীক্ষা'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J079",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "প্রত্যয়",
+    "difficulty": "medium",
+    "question": "'দয়ালু' শব্দে কোন প্রত্যয় যুক্ত হয়েছে?",
+    "options": [
+      "লু",
+      "আ",
+      "উ",
+      "আলু"
+    ],
+    "correct_index": 3,
+    "correct_answer": "আলু",
+    "explanation": "দয়া + আলু = দয়ালু (তদ্ধিত প্রত্যয় 'আলু')।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "প্রত্যয়",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J080",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "প্রত্যয়",
+    "difficulty": "medium",
+    "question": "'মানবতা' শব্দে কোন প্রত্যয় যুক্ত হয়েছে?",
+    "options": [
+      "আ",
+      "তা",
+      "অ",
+      "ত্ব"
+    ],
+    "correct_index": 1,
+    "correct_answer": "তা",
+    "explanation": "মানব + তা = মানবতা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "প্রত্যয়",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J081",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "প্রত্যয়",
+    "difficulty": "medium",
+    "question": "'সৌন্দর্য' শব্দে কোন প্রত্যয় যুক্ত হয়েছে?",
+    "options": [
+      "আ",
+      "য",
+      "অ",
+      "র্য"
+    ],
+    "correct_index": 1,
+    "correct_answer": "য",
+    "explanation": "সুন্দর + য = সৌন্দর্য।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "প্রত্যয়",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J082",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "উপসর্গ",
+    "difficulty": "medium",
+    "question": "'বিজ্ঞান' শব্দে কোন উপসর্গ আছে?",
+    "options": [
+      "আন",
+      "জ্ঞান",
+      "বিজ্",
+      "বি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "বি",
+    "explanation": "বি + জ্ঞান = বিজ্ঞান; 'বি' উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "উপসর্গ",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J083",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "উপসর্গ",
+    "difficulty": "medium",
+    "question": "'পরাজয়' শব্দে কোন উপসর্গ আছে?",
+    "options": [
+      "জয়",
+      "পরা",
+      "অ",
+      "পর"
+    ],
+    "correct_index": 1,
+    "correct_answer": "পরা",
+    "explanation": "পরা + জয় = পরাজয়; 'পরা' উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "উপসর্গ",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J084",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "উপসর্গ",
+    "difficulty": "medium",
+    "question": "'অপমান' শব্দে কোন উপসর্গ আছে?",
+    "options": [
+      "মান",
+      "প",
+      "অপ",
+      "অ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অপ",
+    "explanation": "অপ + মান = অপমান; 'অপ' উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "উপসর্গ",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J085",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "উপসর্গ",
+    "difficulty": "medium",
+    "question": "'সুকাজ' শব্দে কোন উপসর্গ আছে?",
+    "options": [
+      "কু",
+      "স",
+      "সু",
+      "কাজ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "সু",
+    "explanation": "সু + কাজ = সুকাজ; 'সু' উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "উপসর্গ",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J086",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "উপসর্গ",
+    "difficulty": "medium",
+    "question": "'দুর্নীতি' শব্দে কোন উপসর্গ আছে?",
+    "options": [
+      "নীতি",
+      "দুর্",
+      "দু",
+      "দুর"
+    ],
+    "correct_index": 1,
+    "correct_answer": "দুর্",
+    "explanation": "দুর্ + নীতি = দুর্নীতি; 'দুর্' উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "উপসর্গ",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J087",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যা বলা হয়নি' — এক কথায় কী হবে?",
+    "options": [
+      "অনুচ্চারিত",
+      "অব্যক্ত",
+      "অনুক্ত",
+      "অকথ্য"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অনুক্ত",
+    "explanation": "যা বলা হয়নি = অনুক্ত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J088",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যা আগে কখনো হয়নি' — এক কথায় কী হবে?",
+    "options": [
+      "অপূর্ব",
+      "অদ্ভুত",
+      "অভূতপূর্ব",
+      "নতুন"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অভূতপূর্ব",
+    "explanation": "যা আগে কখনো হয়নি = অভূতপূর্ব।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J089",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "‘যা আগে দেখা যায়নি’ — এক কথায় কী হবে?",
+    "options": [
+      "অভূতপূর্ব",
+      "অদেখা",
+      "নতুন",
+      "অদৃষ্টপূর্ব"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অদৃষ্টপূর্ব",
+    "explanation": "‘যা আগে দেখা যায়নি’ তাকে এক কথায় ‘অদৃষ্টপূর্ব’ বলে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J090",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যা সহজে পাওয়া যায় না' — এক কথায় কী হবে?",
+    "options": [
+      "সুলভ",
+      "দুর্লভ",
+      "সাধারণ",
+      "সহজলভ্য"
+    ],
+    "correct_index": 1,
+    "correct_answer": "দুর্লভ",
+    "explanation": "যা সহজে পাওয়া যায় না তাকে দুর্লভ বলে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J091",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যার তুলনা নেই' — এক কথায় কী হবে?",
+    "options": [
+      "অতুলনীয়",
+      "অনুপম",
+      "শ্রেষ্ঠ",
+      "অদ্বিতীয়"
+    ],
+    "correct_index": 0,
+    "correct_answer": "অতুলনীয়",
+    "explanation": "যার তুলনা নেই = অতুলনীয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J092",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যা জয় করা যায় না' — এক কথায় কী হবে?",
+    "options": [
+      "দুর্বল",
+      "পরাজিত",
+      "অজেয়",
+      "ভঙ্গুর"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অজেয়",
+    "explanation": "যা জয় করা যায় না তাকে অজেয় বলে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J093",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'দেখার যোগ্য' — এক কথায় কী হবে?",
+    "options": [
+      "দৃষ্টিগোচর",
+      "দৃশ্যমান",
+      "দর্শনীয়",
+      "সুন্দর"
+    ],
+    "correct_index": 2,
+    "correct_answer": "দর্শনীয়",
+    "explanation": "দেখার যোগ্য = দর্শনীয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J094",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'পড়ার যোগ্য' — এক কথায় কী হবে?",
+    "options": [
+      "পাঠ",
+      "পুস্তক",
+      "পঠনীয়",
+      "পাঠ্য"
+    ],
+    "correct_index": 3,
+    "correct_answer": "পাঠ্য",
+    "explanation": "পড়ার যোগ্য = পাঠ্য।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J095",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "‘যা চিরকাল থাকে’ — এক কথায় কী হবে?",
+    "options": [
+      "চিরন্তন",
+      "অস্থায়ী",
+      "ক্ষণস্থায়ী",
+      "নশ্বর"
+    ],
+    "correct_index": 0,
+    "correct_answer": "চিরন্তন",
+    "explanation": "‘যা চিরকাল থাকে’ তাকে এক কথায় ‘চিরন্তন’ বলে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J096",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যার শেষ নেই' — এক কথায় কী হবে?",
+    "options": [
+      "অনন্ত",
+      "অফুরন্ত",
+      "অসীম",
+      "অনাদি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "অনন্ত",
+    "explanation": "যার শেষ নেই = অনন্ত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J097",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "লিঙ্গ",
+    "difficulty": "easy",
+    "question": "'পিতা' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+    "options": [
+      "পত্নী",
+      "মাতা",
+      "কন্যা",
+      "ভগিনী"
+    ],
+    "correct_index": 1,
+    "correct_answer": "মাতা",
+    "explanation": "'পিতা' শব্দের স্ত্রীলিঙ্গ 'মাতা'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "ব্যাকরণ",
+      "লিঙ্গ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J098",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "লিঙ্গ",
+    "difficulty": "easy",
+    "question": "'শিক্ষক' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+    "options": [
+      "শিক্ষকিনী",
+      "শিক্ষিকা",
+      "শিক্ষকা-বধূ",
+      "শিক্ষকা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "শিক্ষিকা",
+    "explanation": "শিক্ষকের স্ত্রীলিঙ্গ শিক্ষিকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "ব্যাকরণ",
+      "লিঙ্গ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J099",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "লিঙ্গ",
+    "difficulty": "easy",
+    "question": "'গায়ক' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+    "options": [
+      "গায়িকা",
+      "গায়কী",
+      "গাইয়া",
+      "গায়নী"
+    ],
+    "correct_index": 0,
+    "correct_answer": "গায়িকা",
+    "explanation": "গায়কের স্ত্রীলিঙ্গ গায়িকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "ব্যাকরণ",
+      "লিঙ্গ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J100",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "লিঙ্গ",
+    "difficulty": "easy",
+    "question": "'নেতা' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+    "options": [
+      "নেতানী",
+      "নেতৃ",
+      "নেত্রী",
+      "নেতা-পত্নী"
+    ],
+    "correct_index": 2,
+    "correct_answer": "নেত্রী",
+    "explanation": "নেতার স্ত্রীলিঙ্গ নেত্রী।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "ব্যাকরণ",
+      "লিঙ্গ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J101",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "লিঙ্গ",
+    "difficulty": "easy",
+    "question": "'মামা' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+    "options": [
+      "মাসি",
+      "মা",
+      "মামা-বউ",
+      "মামি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "মামি",
+    "explanation": "মামার স্ত্রীলিঙ্গ মামি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "ব্যাকরণ",
+      "লিঙ্গ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J102",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "লিঙ্গ",
+    "difficulty": "easy",
+    "question": "'যুবক' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+    "options": [
+      "যুবকী",
+      "যুবতী",
+      "যুবতী-কন্যা",
+      "যুবা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "যুবতী",
+    "explanation": "যুবকের স্ত্রীলিঙ্গ যুবতী।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "ব্যাকরণ",
+      "লিঙ্গ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J103",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "লিঙ্গ",
+    "difficulty": "easy",
+    "question": "'রাজা' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+    "options": [
+      "রানি",
+      "রাজবধূ",
+      "রাজমাতা",
+      "রাজকুমারী"
+    ],
+    "correct_index": 0,
+    "correct_answer": "রানি",
+    "explanation": "রাজার স্ত্রীলিঙ্গ রানি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "ব্যাকরণ",
+      "লিঙ্গ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J104",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "লিঙ্গ",
+    "difficulty": "easy",
+    "question": "'সাধু' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+    "options": [
+      "সাধ্বী-মা",
+      "সাধুনী",
+      "সাধিকা",
+      "সাধ্বী"
+    ],
+    "correct_index": 3,
+    "correct_answer": "সাধ্বী",
+    "explanation": "সাধুর স্ত্রীলিঙ্গ সাধ্বী।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "ব্যাকরণ",
+      "লিঙ্গ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J105",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "বাংলা সাহিত্যের প্রথম মহাকাব্য কোনটি?",
+    "options": [
+      "বৃত্রসংহার",
+      "পদ্মাবতী",
+      "মেঘনাদবধ কাব্য",
+      "তিলোত্তমাসম্ভব কাব্য"
+    ],
+    "correct_index": 2,
+    "correct_answer": "মেঘনাদবধ কাব্য",
+    "explanation": "মাইকেল মধুসূদন দত্তের 'মেঘনাদবধ কাব্য' বাংলা সাহিত্যের প্রথম মহাকাব্য।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "সাহিত্য",
+      "সাহিত্যের ইতিহাস"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J106",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "easy",
+    "question": "'গীতাঞ্জলি' কাব্যগ্রন্থের রচয়িতা কে?",
+    "options": [
+      "সুকান্ত ভট্টাচার্য",
+      "রবীন্দ্রনাথ ঠাকুর",
+      "কাজী নজরুল ইসলাম",
+      "জীবনানন্দ দাশ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "রবীন্দ্রনাথ ঠাকুর",
+    "explanation": "'গীতাঞ্জলি' রবীন্দ্রনাথ ঠাকুরের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "কাব্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J107",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'মেঘনাদবধ কাব্য'-এর রচয়িতা কে?",
+    "options": [
+      "কাজী নজরুল ইসলাম",
+      "রবীন্দ্রনাথ ঠাকুর",
+      "মাইকেল মধুসূদন দত্ত",
+      "বঙ্কিমচন্দ্র চট্টোপাধ্যায়"
+    ],
+    "correct_index": 2,
+    "correct_answer": "মাইকেল মধুসূদন দত্ত",
+    "explanation": "'মেঘনাদবধ কাব্য' রচনা করেন মাইকেল মধুসূদন দত্ত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "উপন্যাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J108",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'চাঁদের অমাবস্যা' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "সৈয়দ ওয়ালীউল্লাহ",
+      "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+      "মানিক বন্দ্যোপাধ্যায়",
+      "তারাশঙ্কর বন্দ্যোপাধ্যায়"
+    ],
+    "correct_index": 0,
+    "correct_answer": "সৈয়দ ওয়ালীউল্লাহ",
+    "explanation": "'চাঁদের অমাবস্যা' উপন্যাসের রচয়িতা সৈয়দ ওয়ালীউল্লাহ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "উপন্যাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J110",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'কপালকুণ্ডলা' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "শরৎচন্দ্র চট্টোপাধ্যায়",
+      "তারাশঙ্কর বন্দ্যোপাধ্যায়",
+      "রবীন্দ্রনাথ ঠাকুর",
+      "বঙ্কিমচন্দ্র চট্টোপাধ্যায়"
+    ],
+    "correct_index": 3,
+    "correct_answer": "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+    "explanation": "'কপালকুণ্ডলা' বঙ্কিমচন্দ্র চট্টোপাধ্যায়ের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "উপন্যাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J111",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "easy",
+    "question": "'বিদ্রোহী' কবিতার রচয়িতা কে?",
+    "options": [
+      "জসীমউদ্দীন",
+      "রবীন্দ্রনাথ ঠাকুর",
+      "কাজী নজরুল ইসলাম",
+      "জীবনানন্দ দাশ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "কাজী নজরুল ইসলাম",
+    "explanation": "'বিদ্রোহী' কাজী নজরুল ইসলামের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "কবিতা",
+      "সাহিত্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J112",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'সোজন বাদিয়ার ঘাট' কাব্যের রচয়িতা কে?",
+    "options": [
+      "সুকান্ত ভট্টাচার্য",
+      "কাজী নজরুল ইসলাম",
+      "জীবনানন্দ দাশ",
+      "জসীমউদ্দীন"
+    ],
+    "correct_index": 3,
+    "correct_answer": "জসীমউদ্দীন",
+    "explanation": "'সোজন বাদিয়ার ঘাট' কাব্যের রচয়িতা জসীমউদ্দীন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "কাব্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J113",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'পথের দাবী' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "মানিক বন্দ্যোপাধ্যায়",
+      "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+      "শরৎচন্দ্র চট্টোপাধ্যায়",
+      "বঙ্কিমচন্দ্র চট্টোপাধ্যায়"
+    ],
+    "correct_index": 2,
+    "correct_answer": "শরৎচন্দ্র চট্টোপাধ্যায়",
+    "explanation": "'পথের দাবী' শরৎচন্দ্র চট্টোপাধ্যায়ের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "উপন্যাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J114",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'দেশে বিদেশে' ভ্রমণকাহিনির রচয়িতা কে?",
+    "options": [
+      "আবুল ফজল",
+      "অন্নদাশঙ্কর রায়",
+      "সৈয়দ মুজতবা আলী",
+      "সৈয়দ ওয়ালীউল্লাহ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "সৈয়দ মুজতবা আলী",
+    "explanation": "'দেশে বিদেশে' সৈয়দ মুজতবা আলীর রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "ভ্রমণসাহিত্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J115",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "বাংলা উপন্যাসের জনক কে?",
+    "options": [
+      "রবীন্দ্রনাথ ঠাকুর",
+      "মাইকেল মধুসূদন দত্ত",
+      "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+      "শরৎচন্দ্র চট্টোপাধ্যায়"
+    ],
+    "correct_index": 2,
+    "correct_answer": "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+    "explanation": "বাংলা উপন্যাসের জনক বঙ্কিমচন্দ্র চট্টোপাধ্যায়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "সাহিত্য",
+      "সাহিত্যের ইতিহাস"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J116",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "চর্যাপদ আবিষ্কার করেন কে?",
+    "options": [
+      "দীনেশচন্দ্র সেন",
+      "হরপ্রসাদ শাস্ত্রী",
+      "সুনীতিকুমার চট্টোপাধ্যায়",
+      "মুহম্মদ শহীদুল্লাহ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "হরপ্রসাদ শাস্ত্রী",
+    "explanation": "চর্যাপদ আবিষ্কার করেন হরপ্রসাদ শাস্ত্রী (১৯০৭)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "সাহিত্য",
+      "সাহিত্যের ইতিহাস"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J117",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "বাংলা সাহিত্যের প্রথম উপন্যাস কোনটি?",
+    "options": [
+      "আলালের ঘরের দুলাল",
+      "কপালকুণ্ডলা",
+      "দুর্গেশনন্দিনী",
+      "পথের পাঁচালী"
+    ],
+    "correct_index": 0,
+    "correct_answer": "আলালের ঘরের দুলাল",
+    "explanation": "প্যারীচাঁদ মিত্রের 'আলালের ঘরের দুলাল' বাংলা সাহিত্যের প্রথম উপন্যাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "সাহিত্য",
+      "সাহিত্যের ইতিহাস"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J118",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "মাইকেল মধুসূদন দত্ত জন্মগ্রহণ করেন কত সালে?",
+    "options": [
+      "১৮৩৮",
+      "১৮৯৯",
+      "১৮৬১",
+      "১৮২৪"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৮২৪",
+    "explanation": "মাইকেল মধুসূদন দত্ত ১৮২৪ সালে যশোরের সাগরদাঁড়িতে জন্মগ্রহণ করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "সাহিত্য",
+      "সাহিত্যিক পরিচিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J119",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'রূপসী বাংলা' কাব্যের রচয়িতা কে?",
+    "options": [
+      "জীবনানন্দ দাশ",
+      "জসীমউদ্দীন",
+      "সুকান্ত ভট্টাচার্য",
+      "বুদ্ধদেব বসু"
+    ],
+    "correct_index": 0,
+    "correct_answer": "জীবনানন্দ দাশ",
+    "explanation": "'রূপসী বাংলা' জীবনানন্দ দাশের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "কাব্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J120",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "বাংলা একাডেমি প্রতিষ্ঠিত হয় কত সালে?",
+    "options": [
+      "১৯৪৭",
+      "১৯৭১",
+      "১৯৫২",
+      "১৯৫৫"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৯৫৫",
+    "explanation": "বাংলা একাডেমি প্রতিষ্ঠিত হয় ১৯৫৫ সালে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%. 19th NTRCA 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "bangla",
+      "ntrca",
+      "সাহিত্য",
+      "সাহিত্যের ইতিহাস"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-bangla-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

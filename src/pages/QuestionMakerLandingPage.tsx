@@ -51,7 +51,7 @@ export default function QuestionMakerLandingPage() {
           <p className="ev-qm-hero-copy">
             Eduvelto প্রশ্নপত্র জেনারেটর — শিক্ষক ও কোচিং সেন্টারের জন্য অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরির ফ্রি
             টুল। সাধারণ (NCTB), মাদ্রাসা এবং চাকরি ও ভর্তি কোচিং — তিন ধারাতেই প্রশ্নপত্র বানানো যায়।
-            শুধু যাচাইকৃত প্রশ্ন দিয়ে — যাচাই হয়নি এমন প্রশ্ন কখনো দেখানো হয় না।
+            শুধু যাচাইকৃত অনুশীলন প্রশ্ন দিয়ে — যাচাই হয়নি এমন প্রশ্ন এই জেনারেটরে কখনো দেখানো হয় না।
           </p>
           <div className="ev-qm-hero-cta">
             <LinkButton to="/question-paper-generator">প্রশ্নপত্র তৈরি শুরু করুন — ফ্রি</LinkButton>
@@ -141,7 +141,7 @@ export default function QuestionMakerLandingPage() {
       <Card style={{ marginBottom: 16 }}>
         <h2 style={{ margin: '0 0 8px', fontSize: 17 }}>সচরাচর প্রশ্ন</h2>
         <p style={{ fontSize: 14, lineHeight: 1.7, margin: '0 0 8px' }}>
-          <strong>প্রশ্ন কি যাচাইকৃত?</strong> হ্যাঁ — জেনারেটরে শুধু যাচাইকৃত, ভুলমুক্ত প্রশ্ন দেখানো হয়।
+          <strong>প্রশ্ন কি যাচাইকৃত?</strong> হ্যাঁ — জেনারেটরে শুধু যাচাইকৃত অনুশীলন প্রশ্ন দেখানো হয়।
           Class 9-এর সংশোধিত প্যাক এখনো মালিকের যাচাইয়ের অপেক্ষায় — যাচাই শেষ না হলে তা পুলে ঢুকবে না।
         </p>
         <p style={{ fontSize: 14, lineHeight: 1.7, margin: '0 0 8px' }}>

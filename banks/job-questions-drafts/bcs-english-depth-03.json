@@ -1,0 +1,380 @@
+[
+ {
+  "id": "JOBQ-D709",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Prose",
+  "difficulty": "medium",
+  "question": "Who wrote 'The Pilgrim's Progress'?",
+  "options": [
+   "Samuel Richardson",
+   "Daniel Defoe",
+   "Jonathan Swift",
+   "John Bunyan"
+  ],
+  "correct_index": 3,
+  "correct_answer": "John Bunyan",
+  "explanation": "'The Pilgrim's Progress' (1678) was written by John Bunyan.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "bunyan",
+   "english",
+   "prose"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D710",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Novel",
+  "difficulty": "medium",
+  "question": "Who wrote 'Pamela'?",
+  "options": [
+   "Jonathan Swift",
+   "Henry Fielding",
+   "Daniel Defoe",
+   "Samuel Richardson"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Samuel Richardson",
+  "explanation": "'Pamela' (1740) was written by Samuel Richardson.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "novel",
+   "richardson"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D711",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Drama",
+  "difficulty": "medium",
+  "question": "Who wrote 'She Stoops to Conquer'?",
+  "options": [
+   "Oliver Goldsmith",
+   "Richard Sheridan",
+   "George Bernard Shaw",
+   "Oscar Wilde"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Oliver Goldsmith",
+  "explanation": "'She Stoops to Conquer' was written by Oliver Goldsmith.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "drama",
+   "english",
+   "goldsmith"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D712",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Shakespeare",
+  "difficulty": "medium",
+  "question": "Who is the protagonist of 'The Tempest'?",
+  "options": [
+   "Caliban",
+   "Ariel",
+   "Prospero",
+   "Ferdinand"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Prospero",
+  "explanation": "Prospero, the exiled Duke of Milan, is the protagonist of 'The Tempest'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "shakespeare",
+   "tempest"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D713",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Shakespeare",
+  "difficulty": "medium",
+  "question": "Who is King Lear's youngest daughter?",
+  "options": [
+   "Goneril",
+   "Cordelia",
+   "Regan",
+   "Ophelia"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Cordelia",
+  "explanation": "Cordelia is King Lear's youngest and most loving daughter.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "king-lear",
+   "shakespeare"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D714",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Shakespeare",
+  "difficulty": "medium",
+  "question": "Where is Shakespeare's 'Hamlet' set?",
+  "options": [
+   "Scotland",
+   "England",
+   "Denmark",
+   "Italy"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Denmark",
+  "explanation": "'Hamlet' is set in Denmark, at Elsinore Castle.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "hamlet",
+   "shakespeare"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D715",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Shakespeare",
+  "difficulty": "medium",
+  "question": "Who says 'Et tu, Brute?' in 'Julius Caesar'?",
+  "options": [
+   "Julius Caesar",
+   "Brutus",
+   "Cassius",
+   "Mark Antony"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Julius Caesar",
+  "explanation": "In Shakespeare's 'Julius Caesar', Caesar says 'Et tu, Brute?' to Brutus.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "julius-caesar",
+   "shakespeare"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D716",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Poetry",
+  "difficulty": "medium",
+  "question": "Who wrote 'The Prelude'?",
+  "options": [
+   "William Wordsworth",
+   "S. T. Coleridge",
+   "John Keats",
+   "P. B. Shelley"
+  ],
+  "correct_index": 0,
+  "correct_answer": "William Wordsworth",
+  "explanation": "'The Prelude' is an autobiographical poem by William Wordsworth.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "poetry",
+   "wordsworth"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D717",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Idiom",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To spill the beans' mean?",
+  "options": [
+   "To cook beans",
+   "To make a mess",
+   "To plant seeds",
+   "To reveal a secret"
+  ],
+  "correct_index": 3,
+  "correct_answer": "To reveal a secret",
+  "explanation": "'To spill the beans' means to reveal a secret.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED-AFTER-FIX",
+  "review_reason": "Reviewed NEEDS-FIX 26 Nov 2026; fix applied + re-verified 26 Nov 2026 (review-bcs-fixes-applied.md). Replacement text is new — content-team spot-check still recommended before treating as fully VERIFIED.",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D718",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — One word",
+  "difficulty": "medium",
+  "question": "A place where money is coined is called —",
+  "options": [
+   "Vault",
+   "Bank",
+   "Treasury",
+   "Mint"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Mint",
+  "explanation": "A mint is a place where money is coined.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

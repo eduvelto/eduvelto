@@ -29,11 +29,11 @@ import {
 } from '../questionPaper';
 
 describe('verified pool (MVP content)', () => {
-  it('holds the 35 owner-verified BCS English questions + 1,841 verified Academic MCQ (Classes 6–12, thirty-five subjects) + 359 reviewed CQ (Classes 9–12)', () => {
-    expect(QPG_VERIFIED_POOL).toHaveLength(2235);
-    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(2235);
+  it('holds the 35 owner-verified BCS English questions + 1,842 verified Academic MCQ (Classes 6–12, thirty-five subjects) + 359 reviewed CQ (Classes 9–12)', () => {
+    expect(QPG_VERIFIED_POOL).toHaveLength(2236);
+    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(2236);
     expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toHaveLength(35);
-    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-') && q.type === 'mcq')).toHaveLength(1841);
+    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-') && q.type === 'mcq')).toHaveLength(1842);
     expect(QPG_VERIFIED_POOL.filter((q) => q.type === 'cq')).toHaveLength(359);
   });
 
@@ -126,7 +126,7 @@ describe('verified pool (MVP content)', () => {
     // Chapters are filtered by subject — a Math pick never shows English units.
     for (const c of c6mat) expect(c.subjectId).toBe('math');
     for (const c of c6eng) expect(c.subjectId).toBe('english');
-    // Class 9 is live now (26 Nov 2026) — 557 questions, 323 chapters.
+    // Class 9 is live now (26 Nov 2026) — 558 questions, 323 chapters.
     // CQ (26 Nov 2026): Math gains 1 CQ-only chapter (15 total, 12 CQ
     // across 11 merged + 1 CQ-only); Bangla 1st's 12 CQ all merge into
     // existing chapters (21 total); Physics-depth has no CQ.
@@ -140,7 +140,7 @@ describe('verified pool (MVP content)', () => {
     expect(c9ban1st.reduce((a, c) => a + (c.cqVerifiedCount ?? 0), 0)).toBe(12);
     const c9phydepth = qpgChaptersFor('general', 'class-9', 'physics-depth');
     expect(c9phydepth).toHaveLength(13);
-    expect(c9phydepth.reduce((a, c) => a + c.verifiedCount, 0)).toBe(31);
+    expect(c9phydepth.reduce((a, c) => a + c.verifiedCount, 0)).toBe(32);
     expect(c9phydepth.reduce((a, c) => a + (c.cqVerifiedCount ?? 0), 0)).toBe(0);
     // Class 10 shares the Class 9 pool — same chapters, same counts.
     const c10mat = qpgChaptersFor('general', 'class-10', 'math');

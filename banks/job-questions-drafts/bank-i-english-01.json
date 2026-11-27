@@ -1,0 +1,4460 @@
+[
+ {
+  "id": "JOBQ-I121",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'obstinate'.",
+  "options": [
+   "stubborn",
+   "flexible",
+   "polite",
+   "calm"
+  ],
+  "correct_index": 0,
+  "correct_answer": "stubborn",
+  "explanation": "'Obstinate' means stubborn.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I122",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'vivid'.",
+  "options": [
+   "dull",
+   "bright",
+   "vague",
+   "silent"
+  ],
+  "correct_index": 1,
+  "correct_answer": "bright",
+  "explanation": "'Vivid' means bright and clear.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I123",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'accurate'.",
+  "options": [
+   "cruel",
+   "exact",
+   "hot",
+   "relieve"
+  ],
+  "correct_index": 1,
+  "correct_answer": "exact",
+  "explanation": "'accurate' means 'exact'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I124",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'adverse'.",
+  "options": [
+   "hide",
+   "unfavourable",
+   "hot",
+   "plentiful"
+  ],
+  "correct_index": 1,
+  "correct_answer": "unfavourable",
+  "explanation": "'adverse' means 'unfavourable'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I125",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'alleviate'.",
+  "options": [
+   "keen",
+   "careful",
+   "relieve",
+   "sympathy"
+  ],
+  "correct_index": 2,
+  "correct_answer": "relieve",
+  "explanation": "'alleviate' means 'relieve'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I126",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'ambiguous'.",
+  "options": [
+   "sympathy",
+   "hardworking",
+   "unclear",
+   "easy"
+  ],
+  "correct_index": 2,
+  "correct_answer": "unclear",
+  "explanation": "'ambiguous' means 'unclear'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I127",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'scarce'.",
+  "options": [
+   "common",
+   "plentiful",
+   "rare",
+   "cheap"
+  ],
+  "correct_index": 2,
+  "correct_answer": "rare",
+  "explanation": "'Scarce' means rare or in short supply.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I128",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'anonymous'.",
+  "options": [
+   "hard",
+   "graceful",
+   "nameless",
+   "obvious"
+  ],
+  "correct_index": 2,
+  "correct_answer": "nameless",
+  "explanation": "'anonymous' means 'nameless'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I129",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'apparent'.",
+  "options": [
+   "graceful",
+   "short",
+   "obvious",
+   "poor"
+  ],
+  "correct_index": 2,
+  "correct_answer": "obvious",
+  "explanation": "'apparent' means 'obvious'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I130",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'authentic'.",
+  "options": [
+   "big",
+   "modern",
+   "relieve",
+   "genuine"
+  ],
+  "correct_index": 3,
+  "correct_answer": "genuine",
+  "explanation": "'authentic' means 'genuine'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I131",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'barrier'.",
+  "options": [
+   "obstacle",
+   "easy",
+   "courageous",
+   "slow"
+  ],
+  "correct_index": 0,
+  "correct_answer": "obstacle",
+  "explanation": "'barrier' means 'obstacle'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I132",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'benevolent'.",
+  "options": [
+   "short",
+   "rich",
+   "kind",
+   "happy"
+  ],
+  "correct_index": 2,
+  "correct_answer": "kind",
+  "explanation": "'benevolent' means 'kind'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I133",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'fragile'.",
+  "options": [
+   "strong",
+   "delicate",
+   "heavy",
+   "rough"
+  ],
+  "correct_index": 1,
+  "correct_answer": "delicate",
+  "explanation": "'Fragile' means delicate.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I134",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'brief'.",
+  "options": [
+   "sympathy",
+   "varied",
+   "brave",
+   "short"
+  ],
+  "correct_index": 3,
+  "correct_answer": "short",
+  "explanation": "'brief' means 'short'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I135",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'calm'.",
+  "options": [
+   "joy",
+   "peaceful",
+   "varied",
+   "graceful"
+  ],
+  "correct_index": 1,
+  "correct_answer": "peaceful",
+  "explanation": "'calm' means 'peaceful'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I136",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'candid'.",
+  "options": [
+   "unfavourable",
+   "good",
+   "cruel",
+   "frank"
+  ],
+  "correct_index": 3,
+  "correct_answer": "frank",
+  "explanation": "'candid' means 'frank'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I137",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'cautious'.",
+  "options": [
+   "careful",
+   "hard",
+   "brave",
+   "peaceful"
+  ],
+  "correct_index": 0,
+  "correct_answer": "careful",
+  "explanation": "'cautious' means 'careful'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I138",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'cease'.",
+  "options": [
+   "keen",
+   "leave",
+   "stop",
+   "old"
+  ],
+  "correct_index": 2,
+  "correct_answer": "stop",
+  "explanation": "'cease' means 'stop'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I139",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'compassion'.",
+  "options": [
+   "unfavourable",
+   "bad",
+   "bravery",
+   "sympathy"
+  ],
+  "correct_index": 3,
+  "correct_answer": "sympathy",
+  "explanation": "'compassion' means 'sympathy'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I140",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'conceal'.",
+  "options": [
+   "leave",
+   "hide",
+   "plentiful",
+   "bad"
+  ],
+  "correct_index": 1,
+  "correct_answer": "hide",
+  "explanation": "'conceal' means 'hide'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I141",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'contemporary'.",
+  "options": [
+   "new",
+   "exact",
+   "weak",
+   "modern"
+  ],
+  "correct_index": 3,
+  "correct_answer": "modern",
+  "explanation": "'contemporary' means 'modern'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I142",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'courage'.",
+  "options": [
+   "bravery",
+   "courageous",
+   "poor",
+   "stop"
+  ],
+  "correct_index": 0,
+  "correct_answer": "bravery",
+  "explanation": "'courage' means 'bravery'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I143",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'crucial'.",
+  "options": [
+   "bravery",
+   "old",
+   "weak",
+   "important"
+  ],
+  "correct_index": 3,
+  "correct_answer": "important",
+  "explanation": "'crucial' means 'important'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I144",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'delight'.",
+  "options": [
+   "reduce",
+   "true",
+   "joy",
+   "happy"
+  ],
+  "correct_index": 2,
+  "correct_answer": "joy",
+  "explanation": "'delight' means 'joy'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I145",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'gloomy'.",
+  "options": [
+   "cheerful",
+   "dreary",
+   "bright",
+   "calm"
+  ],
+  "correct_index": 1,
+  "correct_answer": "dreary",
+  "explanation": "'Gloomy' means dreary and dark.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I146",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'diminish'.",
+  "options": [
+   "big",
+   "reduce",
+   "sad",
+   "varied"
+  ],
+  "correct_index": 1,
+  "correct_answer": "reduce",
+  "explanation": "'diminish' means 'reduce'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I147",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'disaster'.",
+  "options": [
+   "poor",
+   "weak",
+   "true",
+   "calamity"
+  ],
+  "correct_index": 3,
+  "correct_answer": "calamity",
+  "explanation": "'disaster' means 'calamity'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I148",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'diverse'.",
+  "options": [
+   "hard",
+   "weak",
+   "false",
+   "varied"
+  ],
+  "correct_index": 3,
+  "correct_answer": "varied",
+  "explanation": "'diverse' means 'varied'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I149",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'eager'.",
+  "options": [
+   "bad",
+   "keen",
+   "unfavourable",
+   "reduce"
+  ],
+  "correct_index": 1,
+  "correct_answer": "keen",
+  "explanation": "'eager' means 'keen'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I150",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'elegant'.",
+  "options": [
+   "graceful",
+   "calamity",
+   "obstacle",
+   "good"
+  ],
+  "correct_index": 0,
+  "correct_answer": "graceful",
+  "explanation": "'elegant' means 'graceful'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I151",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'honesty'.",
+  "options": [
+   "truth",
+   "dishonesty",
+   "fairness",
+   "loyalty"
+  ],
+  "correct_index": 1,
+  "correct_answer": "dishonesty",
+  "explanation": "The antonym of 'honesty' is 'dishonesty'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I152",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'arrival'.",
+  "options": [
+   "coming",
+   "departure",
+   "entry",
+   "return"
+  ],
+  "correct_index": 1,
+  "correct_answer": "departure",
+  "explanation": "The antonym of 'arrival' is 'departure'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I153",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'bright'.",
+  "options": [
+   "dull",
+   "dark",
+   "small",
+   "hot"
+  ],
+  "correct_index": 0,
+  "correct_answer": "dull",
+  "explanation": "The opposite of 'bright' is 'dull'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I154",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'cruel'.",
+  "options": [
+   "bad",
+   "kind",
+   "dark",
+   "temporary"
+  ],
+  "correct_index": 1,
+  "correct_answer": "kind",
+  "explanation": "The opposite of 'cruel' is 'kind'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I155",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'deep'.",
+  "options": [
+   "pessimistic",
+   "cowardly",
+   "bad",
+   "shallow"
+  ],
+  "correct_index": 3,
+  "correct_answer": "shallow",
+  "explanation": "The opposite of 'deep' is 'shallow'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I156",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'scarce'.",
+  "options": [
+   "rare",
+   "plentiful",
+   "few",
+   "little"
+  ],
+  "correct_index": 1,
+  "correct_answer": "plentiful",
+  "explanation": "The antonym of 'scarce' is 'plentiful'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I157",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'obedient'.",
+  "options": [
+   "faithful",
+   "disobedient",
+   "loyal",
+   "humble"
+  ],
+  "correct_index": 1,
+  "correct_answer": "disobedient",
+  "explanation": "The antonym of 'obedient' is 'disobedient'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I158",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'false'.",
+  "options": [
+   "poor",
+   "temporary",
+   "rich",
+   "true"
+  ],
+  "correct_index": 3,
+  "correct_answer": "true",
+  "explanation": "The opposite of 'false' is 'true'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I159",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'noisy'.",
+  "options": [
+   "loud",
+   "quiet",
+   "harsh",
+   "busy"
+  ],
+  "correct_index": 1,
+  "correct_answer": "quiet",
+  "explanation": "The antonym of 'noisy' is 'quiet'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I160",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'wealthy'.",
+  "options": [
+   "rich",
+   "poor",
+   "lucky",
+   "proud"
+  ],
+  "correct_index": 1,
+  "correct_answer": "poor",
+  "explanation": "The antonym of 'wealthy' is 'poor'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I161",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'rigid'.",
+  "options": [
+   "stiff",
+   "flexible",
+   "firm",
+   "hard"
+  ],
+  "correct_index": 1,
+  "correct_answer": "flexible",
+  "explanation": "The antonym of 'rigid' is 'flexible'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I162",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'hot'.",
+  "options": [
+   "sad",
+   "cold",
+   "cruel",
+   "shallow"
+  ],
+  "correct_index": 1,
+  "correct_answer": "cold",
+  "explanation": "The opposite of 'hot' is 'cold'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I163",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'gentle'.",
+  "options": [
+   "soft",
+   "rough",
+   "mild",
+   "calm"
+  ],
+  "correct_index": 1,
+  "correct_answer": "rough",
+  "explanation": "The antonym of 'gentle' is 'rough'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I164",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'innocent'.",
+  "options": [
+   "guilty",
+   "new",
+   "true",
+   "dark"
+  ],
+  "correct_index": 0,
+  "correct_answer": "guilty",
+  "explanation": "The opposite of 'innocent' is 'guilty'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I165",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'just'.",
+  "options": [
+   "rich",
+   "new",
+   "unjust",
+   "bad"
+  ],
+  "correct_index": 2,
+  "correct_answer": "unjust",
+  "explanation": "The opposite of 'just' is 'unjust'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I166",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'kind'.",
+  "options": [
+   "false",
+   "cruel",
+   "bright",
+   "rude"
+  ],
+  "correct_index": 1,
+  "correct_answer": "cruel",
+  "explanation": "The opposite of 'kind' is 'cruel'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I167",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'expand'.",
+  "options": [
+   "enlarge",
+   "contract",
+   "extend",
+   "widen"
+  ],
+  "correct_index": 1,
+  "correct_answer": "contract",
+  "explanation": "The antonym of 'expand' is 'contract'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I168",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'legal'.",
+  "options": [
+   "old",
+   "new",
+   "guilty",
+   "illegal"
+  ],
+  "correct_index": 3,
+  "correct_answer": "illegal",
+  "explanation": "The opposite of 'legal' is 'illegal'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I169",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'loyal'.",
+  "options": [
+   "modern",
+   "kind",
+   "disloyal",
+   "small"
+  ],
+  "correct_index": 2,
+  "correct_answer": "disloyal",
+  "explanation": "The opposite of 'loyal' is 'disloyal'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I170",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'moral'.",
+  "options": [
+   "rich",
+   "modern",
+   "immoral",
+   "hot"
+  ],
+  "correct_index": 2,
+  "correct_answer": "immoral",
+  "explanation": "The opposite of 'moral' is 'immoral'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I171",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'natural'.",
+  "options": [
+   "full",
+   "temporary",
+   "hard",
+   "artificial"
+  ],
+  "correct_index": 3,
+  "correct_answer": "artificial",
+  "explanation": "The opposite of 'natural' is 'artificial'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I172",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'tidy'.",
+  "options": [
+   "neat",
+   "messy",
+   "clean",
+   "orderly"
+  ],
+  "correct_index": 1,
+  "correct_answer": "messy",
+  "explanation": "The antonym of 'tidy' is 'messy'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I173",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'permanent'.",
+  "options": [
+   "dishonest",
+   "bad",
+   "temporary",
+   "cruel"
+  ],
+  "correct_index": 2,
+  "correct_answer": "temporary",
+  "explanation": "The opposite of 'permanent' is 'temporary'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I174",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'frequent'.",
+  "options": [
+   "often",
+   "rare",
+   "usual",
+   "common"
+  ],
+  "correct_index": 1,
+  "correct_answer": "rare",
+  "explanation": "The antonym of 'frequent' is 'rare'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I175",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Vocabulary",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'poor'.",
+  "options": [
+   "rude",
+   "rich",
+   "cold",
+   "kind"
+  ],
+  "correct_index": 1,
+  "correct_answer": "rich",
+  "explanation": "The opposite of 'poor' is 'rich'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bank",
+   "english",
+   "vocabulary"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I176",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Subject-verb agreement",
+  "difficulty": "medium",
+  "question": "Each of the students ___ present today.",
+  "options": [
+   "is",
+   "are",
+   "were",
+   "have"
+  ],
+  "correct_index": 0,
+  "correct_answer": "is",
+  "explanation": "'Each' is singular, so it takes the singular verb 'is'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I177",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Subject-verb agreement",
+  "difficulty": "medium",
+  "question": "The committee ___ decided to postpone the meeting.",
+  "options": [
+   "has",
+   "have",
+   "were",
+   "are"
+  ],
+  "correct_index": 0,
+  "correct_answer": "has",
+  "explanation": "A committee acting as one unit takes a singular verb.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I178",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Subject-verb agreement",
+  "difficulty": "medium",
+  "question": "Each of the students ___ a pen.",
+  "options": [
+   "has",
+   "were",
+   "are",
+   "have"
+  ],
+  "correct_index": 0,
+  "correct_answer": "has",
+  "explanation": "'Each' takes a singular verb.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I179",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "They are interested ___ cricket.",
+  "options": [
+   "in",
+   "on",
+   "at",
+   "of"
+  ],
+  "correct_index": 0,
+  "correct_answer": "in",
+  "explanation": "'Interested in' is the correct collocation — interested in cricket, interested in reading.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I180",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "You should depend ___ your own effort.",
+  "options": [
+   "on",
+   "to",
+   "at",
+   "in"
+  ],
+  "correct_index": 0,
+  "correct_answer": "on",
+  "explanation": "'Depend on' is the correct phrase.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I181",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "The book is divided ___ three chapters.",
+  "options": [
+   "into",
+   "in",
+   "on",
+   "to"
+  ],
+  "correct_index": 0,
+  "correct_answer": "into",
+  "explanation": "'Divided into' is the correct collocation — a book is divided into chapters.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I182",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "medium",
+  "question": "___ honest man always speaks the truth.",
+  "options": [
+   "An",
+   "The",
+   "A",
+   "No article"
+  ],
+  "correct_index": 0,
+  "correct_answer": "An",
+  "explanation": "'Honest' begins with a vowel sound, so 'an' is used.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I183",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "medium",
+  "question": "She is ___ honest woman.",
+  "options": [
+   "a",
+   "an",
+   "the",
+   "no article"
+  ],
+  "correct_index": 1,
+  "correct_answer": "an",
+  "explanation": "'Honest' begins with a silent 'h', so it takes 'an'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I184",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Tense",
+  "difficulty": "medium",
+  "question": "She ___ to school every day.",
+  "options": [
+   "gone",
+   "go",
+   "goes",
+   "going"
+  ],
+  "correct_index": 2,
+  "correct_answer": "goes",
+  "explanation": "Present simple with third person singular takes 'goes'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I185",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Tense",
+  "difficulty": "medium",
+  "question": "It ___ raining now.",
+  "options": [
+   "is",
+   "are",
+   "was",
+   "were"
+  ],
+  "correct_index": 0,
+  "correct_answer": "is",
+  "explanation": "With 'now', the present continuous 'is raining' is used.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I186",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Tense",
+  "difficulty": "medium",
+  "question": "I ___ him yesterday.",
+  "options": [
+   "seeing",
+   "saw",
+   "see",
+   "seen"
+  ],
+  "correct_index": 1,
+  "correct_answer": "saw",
+  "explanation": "Past simple of 'see' is 'saw'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I187",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Voice",
+  "difficulty": "medium",
+  "question": "The letter ___ yesterday.",
+  "options": [
+   "was written",
+   "has written",
+   "wrote",
+   "is written"
+  ],
+  "correct_index": 0,
+  "correct_answer": "was written",
+  "explanation": "Passive past: 'was written'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I188",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Voice",
+  "difficulty": "medium",
+  "question": "The work ___ by them tomorrow.",
+  "options": [
+   "will do",
+   "will be done",
+   "is done",
+   "has done"
+  ],
+  "correct_index": 1,
+  "correct_answer": "will be done",
+  "explanation": "Passive future: 'will be done'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I189",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Narration",
+  "difficulty": "medium",
+  "question": "He said, 'I am busy.' — He said that he ___ busy.",
+  "options": [
+   "has been",
+   "is",
+   "was",
+   "will be"
+  ],
+  "correct_index": 2,
+  "correct_answer": "was",
+  "explanation": "In reported speech the present simple shifts to past simple.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I190",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Narration",
+  "difficulty": "medium",
+  "question": "She asked me where I ___.",
+  "options": [
+   "had live",
+   "living",
+   "live",
+   "lived"
+  ],
+  "correct_index": 3,
+  "correct_answer": "lived",
+  "explanation": "Reported question uses past simple 'lived'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I191",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Conditional",
+  "difficulty": "medium",
+  "question": "If he works hard, he ___ succeed.",
+  "options": [
+   "will",
+   "can",
+   "shall",
+   "would"
+  ],
+  "correct_index": 0,
+  "correct_answer": "will",
+  "explanation": "First conditional: if + present, will + verb.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I192",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Conditional",
+  "difficulty": "medium",
+  "question": "If I were rich, I ___ travel the world.",
+  "options": [
+   "can",
+   "shall",
+   "would",
+   "will"
+  ],
+  "correct_index": 2,
+  "correct_answer": "would",
+  "explanation": "Second conditional uses 'would'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I193",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "He has been ill ___ Monday.",
+  "options": [
+   "since",
+   "from",
+   "for",
+   "by"
+  ],
+  "correct_index": 0,
+  "correct_answer": "since",
+  "explanation": "'Since' is used with a point of time.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I194",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "It has been raining ___ two hours.",
+  "options": [
+   "for",
+   "from",
+   "since",
+   "at"
+  ],
+  "correct_index": 0,
+  "correct_answer": "for",
+  "explanation": "'For' is used with a period of time.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I195",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "The teacher divided the sweets ___ the children.",
+  "options": [
+   "in",
+   "among",
+   "between",
+   "with"
+  ],
+  "correct_index": 1,
+  "correct_answer": "among",
+  "explanation": "'Among' is used for more than two.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I196",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "There is no difference ___ the two books.",
+  "options": [
+   "between",
+   "among",
+   "in",
+   "of"
+  ],
+  "correct_index": 0,
+  "correct_answer": "between",
+  "explanation": "'Between' is used for two things.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I197",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "She is good ___ singing.",
+  "options": [
+   "at",
+   "in",
+   "on",
+   "of"
+  ],
+  "correct_index": 0,
+  "correct_answer": "at",
+  "explanation": "'Good' is followed by 'at' when it means skilled.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I198",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "He succeeded ___ passing the examination.",
+  "options": [
+   "by",
+   "on",
+   "in",
+   "at"
+  ],
+  "correct_index": 2,
+  "correct_answer": "in",
+  "explanation": "'Succeed in' is correct.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I199",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Correct sentence",
+  "difficulty": "medium",
+  "question": "Choose the correct sentence: 'He is senior ___ me.'",
+  "options": [
+   "from",
+   "over",
+   "to",
+   "than"
+  ],
+  "correct_index": 2,
+  "correct_answer": "to",
+  "explanation": "'Senior to' is correct; 'senior' does not take 'than'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I200",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Correct sentence",
+  "difficulty": "medium",
+  "question": "Choose the correct sentence: 'I prefer tea ___ coffee.'",
+  "options": [
+   "from",
+   "than",
+   "to",
+   "over"
+  ],
+  "correct_index": 2,
+  "correct_answer": "to",
+  "explanation": "'Prefer' takes 'to'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I201",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verb",
+  "difficulty": "medium",
+  "question": "He ___ (go) home yesterday.",
+  "options": [
+   "gone",
+   "going",
+   "went",
+   "goes"
+  ],
+  "correct_index": 2,
+  "correct_answer": "went",
+  "explanation": "Past simple 'went' fits 'yesterday'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I202",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verb",
+  "difficulty": "medium",
+  "question": "The train had left before we ___ (reach) the station.",
+  "options": [
+   "reached",
+   "reach",
+   "had reached",
+   "reaching"
+  ],
+  "correct_index": 0,
+  "correct_answer": "reached",
+  "explanation": "After 'before' with past perfect in the main clause, the subordinate clause takes past simple — 'reached'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I203",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verb",
+  "difficulty": "medium",
+  "question": "I have just ___ (finish) my work.",
+  "options": [
+   "finishing",
+   "finished",
+   "finish",
+   "finishes"
+  ],
+  "correct_index": 1,
+  "correct_answer": "finished",
+  "explanation": "Present perfect takes past participle 'finished'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I204",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Subject-verb agreement",
+  "difficulty": "medium",
+  "question": "The news ___ true.",
+  "options": [
+   "are",
+   "have been",
+   "were",
+   "is"
+  ],
+  "correct_index": 3,
+  "correct_answer": "is",
+  "explanation": "'News' is uncountable and takes a singular verb.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I205",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Subject-verb agreement",
+  "difficulty": "medium",
+  "question": "Mathematics ___ my favourite subject.",
+  "options": [
+   "have",
+   "were",
+   "are",
+   "is"
+  ],
+  "correct_index": 3,
+  "correct_answer": "is",
+  "explanation": "'Mathematics' takes a singular verb.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "grammar"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I206",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To bite the dust' mean?",
+  "options": [
+   "To be very expensive",
+   "To be defeated",
+   "To say exactly the right thing",
+   "To start a conversation"
+  ],
+  "correct_index": 1,
+  "correct_answer": "To be defeated",
+  "explanation": "'To bite the dust' means: To be defeated.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I207",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'A bolt from the blue' mean?",
+  "options": [
+   "An unexpected event",
+   "To be very expensive",
+   "Very rarely",
+   "To reveal a secret"
+  ],
+  "correct_index": 0,
+  "correct_answer": "An unexpected event",
+  "explanation": "'A bolt from the blue' means: An unexpected event.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I208",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To call it a day' mean?",
+  "options": [
+   "To stop working",
+   "To be very expensive",
+   "To do something cheaply and quickly",
+   "Slightly ill"
+  ],
+  "correct_index": 0,
+  "correct_answer": "To stop working",
+  "explanation": "'To call it a day' means: To stop working.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I209",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To break the ice' mean?",
+  "options": [
+   "To do something cheaply and quickly",
+   "To say exactly the right thing",
+   "To study or work late at night",
+   "To start a conversation"
+  ],
+  "correct_index": 3,
+  "correct_answer": "To start a conversation",
+  "explanation": "'To break the ice' means: To start a conversation.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I210",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'Once in a blue moon' mean?",
+  "options": [
+   "To regret something past that cannot be changed",
+   "By any means possible",
+   "Slightly ill",
+   "Very rarely"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Very rarely",
+  "explanation": "'Once in a blue moon' means: Very rarely.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I211",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To spill the beans' mean?",
+  "options": [
+   "To stop working",
+   "To be defeated",
+   "To reveal a secret",
+   "To say exactly the right thing"
+  ],
+  "correct_index": 2,
+  "correct_answer": "To reveal a secret",
+  "explanation": "'To spill the beans' means: To reveal a secret.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I212",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'Under the weather' mean?",
+  "options": [
+   "Practical and realistic",
+   "To do something cheaply and quickly",
+   "Slightly ill",
+   "To be defeated"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Slightly ill",
+  "explanation": "'Under the weather' means: Slightly ill.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I213",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To hit the nail on the head' mean?",
+  "options": [
+   "To say exactly the right thing",
+   "Slightly ill",
+   "To do something cheaply and quickly",
+   "Very rarely"
+  ],
+  "correct_index": 0,
+  "correct_answer": "To say exactly the right thing",
+  "explanation": "'To hit the nail on the head' means: To say exactly the right thing.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I214",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'The ball is in your court' mean?",
+  "options": [
+   "It is your turn to act",
+   "To stop working",
+   "An unexpected event",
+   "By any means possible"
+  ],
+  "correct_index": 0,
+  "correct_answer": "It is your turn to act",
+  "explanation": "'The ball is in your court' means: It is your turn to act.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I215",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To cost an arm and a leg' mean?",
+  "options": [
+   "To stop working",
+   "To regret something past that cannot be changed",
+   "To be very expensive",
+   "To be defeated"
+  ],
+  "correct_index": 2,
+  "correct_answer": "To be very expensive",
+  "explanation": "'To cost an arm and a leg' means: To be very expensive.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I216",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To burn the midnight oil' mean?",
+  "options": [
+   "Practical and realistic",
+   "Slightly ill",
+   "To be defeated",
+   "To study or work late at night"
+  ],
+  "correct_index": 3,
+  "correct_answer": "To study or work late at night",
+  "explanation": "'To burn the midnight oil' means: To study or work late at night.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I217",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'By hook or by crook' mean?",
+  "options": [
+   "By any means possible",
+   "Slightly ill",
+   "To be defeated",
+   "Very rarely"
+  ],
+  "correct_index": 0,
+  "correct_answer": "By any means possible",
+  "explanation": "'By hook or by crook' means: By any means possible.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I218",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To cry over spilt milk' mean?",
+  "options": [
+   "To reveal a secret",
+   "To start a conversation",
+   "To regret something past that cannot be changed",
+   "Very rarely"
+  ],
+  "correct_index": 2,
+  "correct_answer": "To regret something past that cannot be changed",
+  "explanation": "'To cry over spilt milk' means: To regret something past that cannot be changed.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I219",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'To cut corners' mean?",
+  "options": [
+   "To stop working",
+   "To do something cheaply and quickly",
+   "To regret something past that cannot be changed",
+   "To be defeated"
+  ],
+  "correct_index": 1,
+  "correct_answer": "To do something cheaply and quickly",
+  "explanation": "'To cut corners' means: To do something cheaply and quickly.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I220",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "What does the idiom 'Down to earth' mean?",
+  "options": [
+   "Practical and realistic",
+   "To be defeated",
+   "Slightly ill",
+   "To study or work late at night"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Practical and realistic",
+  "explanation": "'Down to earth' means: Practical and realistic.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I221",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'necessary' is spelt correctly in which option?",
+  "options": [
+   "necessary",
+   "necessarye",
+   "necessari",
+   "necesary"
+  ],
+  "correct_index": 0,
+  "correct_answer": "necessary",
+  "explanation": "The correct spelling is 'necessary'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I222",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'accommodate' is spelt correctly in which option?",
+  "options": [
+   "accommodate",
+   "acommodate",
+   "accommodat",
+   "accomodate"
+  ],
+  "correct_index": 0,
+  "correct_answer": "accommodate",
+  "explanation": "The correct spelling is 'accommodate'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I223",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'separate' is spelt correctly in which option?",
+  "options": [
+   "separat",
+   "seperate",
+   "separatx",
+   "separate"
+  ],
+  "correct_index": 3,
+  "correct_answer": "separate",
+  "explanation": "The correct spelling is 'separate'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I224",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'occurred' is spelt correctly in which option?",
+  "options": [
+   "occurred",
+   "occured",
+   "ocurred",
+   "occurrede"
+  ],
+  "correct_index": 0,
+  "correct_answer": "occurred",
+  "explanation": "The correct spelling is 'occurred'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I225",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'millennium' is spelt correctly in which option?",
+  "options": [
+   "millenniums",
+   "milennium",
+   "millenniume",
+   "millennium"
+  ],
+  "correct_index": 3,
+  "correct_answer": "millennium",
+  "explanation": "The correct spelling is 'millennium'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I226",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'embarrass' is spelt correctly in which option?",
+  "options": [
+   "embarras",
+   "embarrasse",
+   "embarrass",
+   "embarass"
+  ],
+  "correct_index": 2,
+  "correct_answer": "embarrass",
+  "explanation": "The correct spelling is 'embarrass'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I227",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'occurrence' is spelt correctly in which option?",
+  "options": [
+   "occurence",
+   "occurrence",
+   "ocurrence",
+   "occurrenc"
+  ],
+  "correct_index": 1,
+  "correct_answer": "occurrence",
+  "explanation": "The correct spelling is 'occurrence'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I228",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'recommend' is spelt correctly in which option?",
+  "options": [
+   "recommend",
+   "recommends",
+   "recomend",
+   "recommende"
+  ],
+  "correct_index": 0,
+  "correct_answer": "recommend",
+  "explanation": "The correct spelling is 'recommend'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I229",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'definitely' is spelt correctly in which option?",
+  "options": [
+   "definitelys",
+   "definiteli",
+   "definitelye",
+   "definitely"
+  ],
+  "correct_index": 3,
+  "correct_answer": "definitely",
+  "explanation": "The correct spelling is 'definitely'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I230",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'independent' is spelt correctly in which option?",
+  "options": [
+   "independenb",
+   "independente",
+   "independents",
+   "independent"
+  ],
+  "correct_index": 3,
+  "correct_answer": "independent",
+  "explanation": "The correct spelling is 'independent'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I231",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'maintenance' is spelt correctly in which option?",
+  "options": [
+   "maintenanca",
+   "maintenanc",
+   "maintenance",
+   "meintenance"
+  ],
+  "correct_index": 2,
+  "correct_answer": "maintenance",
+  "explanation": "The correct spelling is 'maintenance'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I232",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Choose the correctly spelt word: 'possession' is spelt correctly in which option?",
+  "options": [
+   "posession",
+   "possessions",
+   "possession",
+   "possessione"
+  ],
+  "correct_index": 2,
+  "correct_answer": "possession",
+  "explanation": "The correct spelling is 'possession'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I234",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "One who speaks many languages:",
+  "options": [
+   "Ambidextrous",
+   "Polyglot",
+   "Astronomer",
+   "Misanthrope"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Polyglot",
+  "explanation": "The correct one-word substitution is 'Polyglot'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I235",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "A place where birds are kept:",
+  "options": [
+   "Ambidextrous",
+   "Biography",
+   "Autobiography",
+   "Aviary"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Aviary",
+  "explanation": "The correct one-word substitution is 'Aviary'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I236",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "A place where bees are kept:",
+  "options": [
+   "Biography",
+   "Apiary",
+   "Aviary",
+   "Astronomer"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Apiary",
+  "explanation": "The correct one-word substitution is 'Apiary'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I237",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "A person who studies the stars:",
+  "options": [
+   "Misanthrope",
+   "Aviary",
+   "Astronomer",
+   "Polyglot"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Astronomer",
+  "explanation": "The correct one-word substitution is 'Astronomer'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I238",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "A life history written by oneself:",
+  "options": [
+   "Autobiography",
+   "Apiary",
+   "Biography",
+   "Ambidextrous"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Autobiography",
+  "explanation": "The correct one-word substitution is 'Autobiography'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I239",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "A life history written by another:",
+  "options": [
+   "Biography",
+   "Apiary",
+   "Ambidextrous",
+   "Polyglot"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Biography",
+  "explanation": "The correct one-word substitution is 'Biography'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I240",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "One who hates mankind:",
+  "options": [
+   "Astronomer",
+   "Aviary",
+   "Misanthrope",
+   "Autobiography"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Misanthrope",
+  "explanation": "The correct one-word substitution is 'Misanthrope'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-english-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

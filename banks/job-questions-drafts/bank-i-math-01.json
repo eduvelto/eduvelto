@@ -1,0 +1,4562 @@
+[
+ {
+  "id": "JOBQ-I241",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 800 and sold at a profit of 25%. What is the selling price?",
+  "options": [
+   "1000",
+   "1100",
+   "950",
+   "1050"
+  ],
+  "correct_index": 0,
+  "correct_answer": "1000",
+  "explanation": "Profit = 800 × 25% = Tk. 200; SP = 800 + 200 = Tk. 1000.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I242",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "easy",
+  "question": "Tk. 1200 is divided between A and B in the ratio 1:2. How much does A get?",
+  "options": [
+   "500",
+   "350",
+   "400",
+   "300"
+  ],
+  "correct_index": 2,
+  "correct_answer": "400",
+  "explanation": "A's share = 1200 × 1/(1+2) = Tk. 400.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I243",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the LCM of 6 and 9?",
+  "options": [
+   "12",
+   "18",
+   "30",
+   "24"
+  ],
+  "correct_index": 1,
+  "correct_answer": "18",
+  "explanation": "LCM(6, 9) = 18.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I244",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the HCF (GCD) of 28 and 42?",
+  "options": [
+   "12",
+   "14",
+   "10",
+   "16"
+  ],
+  "correct_index": 1,
+  "correct_answer": "14",
+  "explanation": "HCF(28, 42) = 14.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I245",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 1000 at 8% per annum for 4 years?",
+  "options": [
+   "320",
+   "120",
+   "720",
+   "220"
+  ],
+  "correct_index": 0,
+  "correct_answer": "320",
+  "explanation": "SI = P×R×T/100 = 1000×8×4/100 = Tk. 320.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I246",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 180 km in 6 hours. What is its speed in km/h?",
+  "options": [
+   "30",
+   "50",
+   "40",
+   "60"
+  ],
+  "correct_index": 0,
+  "correct_answer": "30",
+  "explanation": "Speed = distance/time = 180/6 = 30 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I247",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 3, what is the value of 2x + 1?",
+  "options": [
+   "4",
+   "7",
+   "15",
+   "12"
+  ],
+  "correct_index": 1,
+  "correct_answer": "7",
+  "explanation": "2×3 + 1 = 6 + 1 = 7.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I248",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square of 21?",
+  "options": [
+   "541",
+   "466",
+   "416",
+   "441"
+  ],
+  "correct_index": 3,
+  "correct_answer": "441",
+  "explanation": "21² = 441.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I249",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square root of 196?",
+  "options": [
+   "16",
+   "19",
+   "14",
+   "12"
+  ],
+  "correct_index": 2,
+  "correct_answer": "14",
+  "explanation": "√196 = 14 because 14² = 196.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I250",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 400. If a discount of 10% is given, what is the selling price?",
+  "options": [
+   "360",
+   "460",
+   "260",
+   "310"
+  ],
+  "correct_index": 0,
+  "correct_answer": "360",
+  "explanation": "Discount = 400 × 10% = Tk. 40; SP = 400 − 40 = Tk. 360.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I251",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "5% of 500 is how much?",
+  "options": [
+   "5",
+   "25",
+   "45",
+   "35"
+  ],
+  "correct_index": 1,
+  "correct_answer": "25",
+  "explanation": "5% of 500 = 500 × 5/100 = 25.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I252",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 500 and sold at a profit of 10%. What is the selling price?",
+  "options": [
+   "525",
+   "600",
+   "650",
+   "550"
+  ],
+  "correct_index": 3,
+  "correct_answer": "550",
+  "explanation": "Profit = 500 × 10% = Tk. 50; SP = 500 + 50 = Tk. 550.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I253",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "easy",
+  "question": "Tk. 1200 is divided between A and B in the ratio 1:3. How much does A get?",
+  "options": [
+   "300",
+   "400",
+   "350",
+   "200"
+  ],
+  "correct_index": 0,
+  "correct_answer": "300",
+  "explanation": "A's share = 1200 × 1/(1+3) = Tk. 300.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I254",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Average",
+  "difficulty": "easy",
+  "question": "What is the average of 65, 70, 25, 40?",
+  "options": [
+   "50",
+   "45",
+   "60",
+   "55"
+  ],
+  "correct_index": 0,
+  "correct_answer": "50",
+  "explanation": "Sum = 200; average = 200/4 = 50.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "average",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I255",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the LCM of 4 and 6?",
+  "options": [
+   "24",
+   "18",
+   "12",
+   "6"
+  ],
+  "correct_index": 2,
+  "correct_answer": "12",
+  "explanation": "LCM(4, 6) = 12.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I256",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the HCF (GCD) of 15 and 25?",
+  "options": [
+   "1",
+   "3",
+   "5",
+   "7"
+  ],
+  "correct_index": 2,
+  "correct_answer": "5",
+  "explanation": "HCF(15, 25) = 5.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I257",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 8000 at 8% per annum for 2 years?",
+  "options": [
+   "1180",
+   "1380",
+   "1280",
+   "1680"
+  ],
+  "correct_index": 2,
+  "correct_answer": "1280",
+  "explanation": "SI = P×R×T/100 = 8000×8×2/100 = Tk. 1280.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I258",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Time and work",
+  "difficulty": "medium",
+  "question": "A can do a work in 6 days and B in 12 days. In how many days can they do it together?",
+  "options": [
+   "7",
+   "2",
+   "4",
+   "1"
+  ],
+  "correct_index": 2,
+  "correct_answer": "4",
+  "explanation": "Together in 1 day they do 1/6 + 1/12 = 18/72 of the work, so days = 72/18 = 4.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "time-work"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I259",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 6, what is the value of 3x + 3?",
+  "options": [
+   "24",
+   "26",
+   "21",
+   "29"
+  ],
+  "correct_index": 2,
+  "correct_answer": "21",
+  "explanation": "3×6 + 3 = 18 + 3 = 21.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I260",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square of 30?",
+  "options": [
+   "1000",
+   "925",
+   "850",
+   "900"
+  ],
+  "correct_index": 3,
+  "correct_answer": "900",
+  "explanation": "30² = 900.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I261",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square root of 256?",
+  "options": [
+   "21",
+   "12",
+   "18",
+   "16"
+  ],
+  "correct_index": 3,
+  "correct_answer": "16",
+  "explanation": "√256 = 16 because 16² = 256.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I262",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 1000. If a discount of 20% is given, what is the selling price?",
+  "options": [
+   "1000",
+   "800",
+   "700",
+   "850"
+  ],
+  "correct_index": 1,
+  "correct_answer": "800",
+  "explanation": "Discount = 1000 × 20% = Tk. 200; SP = 1000 − 200 = Tk. 800.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I263",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "40% of 600 is how much?",
+  "options": [
+   "190",
+   "290",
+   "230",
+   "240"
+  ],
+  "correct_index": 3,
+  "correct_answer": "240",
+  "explanation": "40% of 600 = 600 × 40/100 = 240.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I264",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 400 and sold at a profit of 15%. What is the selling price?",
+  "options": [
+   "460",
+   "510",
+   "560",
+   "410"
+  ],
+  "correct_index": 0,
+  "correct_answer": "460",
+  "explanation": "Profit = 400 × 15% = Tk. 60; SP = 400 + 60 = Tk. 460.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I265",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 5000 at 5% per annum for 3 years?",
+  "options": [
+   "750",
+   "850",
+   "650",
+   "1150"
+  ],
+  "correct_index": 0,
+  "correct_answer": "750",
+  "explanation": "SI = P×R×T/100 = 5000×5×3/100 = Tk. 750.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I266",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 300 km in 4 hours. What is its speed in km/h?",
+  "options": [
+   "65",
+   "75",
+   "95",
+   "55"
+  ],
+  "correct_index": 1,
+  "correct_answer": "75",
+  "explanation": "Speed = distance/time = 300/4 = 75 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I267",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 5, what is the value of 4x + 3?",
+  "options": [
+   "31",
+   "23",
+   "28",
+   "20"
+  ],
+  "correct_index": 1,
+  "correct_answer": "23",
+  "explanation": "4×5 + 3 = 20 + 3 = 23.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I268",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square of 22?",
+  "options": [
+   "509",
+   "459",
+   "534",
+   "484"
+  ],
+  "correct_index": 3,
+  "correct_answer": "484",
+  "explanation": "22² = 484.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I269",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square root of 121?",
+  "options": [
+   "11",
+   "13",
+   "16",
+   "9"
+  ],
+  "correct_index": 0,
+  "correct_answer": "11",
+  "explanation": "√121 = 11 because 11² = 121.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I270",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 800. If a discount of 25% is given, what is the selling price?",
+  "options": [
+   "600",
+   "550",
+   "700",
+   "650"
+  ],
+  "correct_index": 0,
+  "correct_answer": "600",
+  "explanation": "Discount = 800 × 25% = Tk. 200; SP = 800 − 200 = Tk. 600.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I271",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "10% of 600 is how much?",
+  "options": [
+   "60",
+   "80",
+   "10",
+   "110"
+  ],
+  "correct_index": 0,
+  "correct_answer": "60",
+  "explanation": "10% of 600 = 600 × 10/100 = 60.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I272",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 250 and sold at a profit of 20%. What is the selling price?",
+  "options": [
+   "350",
+   "250",
+   "275",
+   "300"
+  ],
+  "correct_index": 3,
+  "correct_answer": "300",
+  "explanation": "Profit = 250 × 20% = Tk. 50; SP = 250 + 50 = Tk. 300.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I273",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the LCM of 14 and 21?",
+  "options": [
+   "54",
+   "36",
+   "42",
+   "30"
+  ],
+  "correct_index": 2,
+  "correct_answer": "42",
+  "explanation": "LCM(14, 21) = 42.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I274",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the HCF (GCD) of 24 and 36?",
+  "options": [
+   "14",
+   "15",
+   "10",
+   "12"
+  ],
+  "correct_index": 3,
+  "correct_answer": "12",
+  "explanation": "HCF(24, 36) = 12.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I275",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 10000 at 5% per annum for 4 years?",
+  "options": [
+   "2000",
+   "2400",
+   "2200",
+   "2100"
+  ],
+  "correct_index": 0,
+  "correct_answer": "2000",
+  "explanation": "SI = P×R×T/100 = 10000×5×4/100 = Tk. 2000.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I276",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Time and work",
+  "difficulty": "medium",
+  "question": "A can do a work in 10 days and B in 15 days. In how many days can they do it together?",
+  "options": [
+   "8",
+   "4",
+   "3",
+   "6"
+  ],
+  "correct_index": 3,
+  "correct_answer": "6",
+  "explanation": "Together in 1 day they do 1/10 + 1/15 = 25/150 of the work, so days = 150/25 = 6.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "time-work"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I277",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 150 km in 5 hours. What is its speed in km/h?",
+  "options": [
+   "30",
+   "50",
+   "20",
+   "60"
+  ],
+  "correct_index": 0,
+  "correct_answer": "30",
+  "explanation": "Speed = distance/time = 150/5 = 30 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I278",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 8, what is the value of 4x + 1?",
+  "options": [
+   "41",
+   "30",
+   "36",
+   "33"
+  ],
+  "correct_index": 3,
+  "correct_answer": "33",
+  "explanation": "4×8 + 1 = 32 + 1 = 33.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I279",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square of 13?",
+  "options": [
+   "194",
+   "169",
+   "219",
+   "269"
+  ],
+  "correct_index": 1,
+  "correct_answer": "169",
+  "explanation": "13² = 169.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I280",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 1200. If a discount of 20% is given, what is the selling price?",
+  "options": [
+   "960",
+   "910",
+   "1160",
+   "1060"
+  ],
+  "correct_index": 0,
+  "correct_answer": "960",
+  "explanation": "Discount = 1200 × 20% = Tk. 240; SP = 1200 − 240 = Tk. 960.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I281",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "5% of 200 is how much?",
+  "options": [
+   "10",
+   "110",
+   "-10",
+   "0"
+  ],
+  "correct_index": 0,
+  "correct_answer": "10",
+  "explanation": "5% of 200 = 200 × 5/100 = 10.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I282",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 100 and sold at a profit of 15%. What is the selling price?",
+  "options": [
+   "115",
+   "140",
+   "90",
+   "165"
+  ],
+  "correct_index": 0,
+  "correct_answer": "115",
+  "explanation": "Profit = 100 × 15% = Tk. 15; SP = 100 + 15 = Tk. 115.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I283",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the LCM of 15 and 20?",
+  "options": [
+   "84",
+   "66",
+   "48",
+   "60"
+  ],
+  "correct_index": 3,
+  "correct_answer": "60",
+  "explanation": "LCM(15, 20) = 60.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I284",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the HCF (GCD) of 20 and 30?",
+  "options": [
+   "10",
+   "6",
+   "12",
+   "8"
+  ],
+  "correct_index": 0,
+  "correct_answer": "10",
+  "explanation": "HCF(20, 30) = 10.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I285",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 1000 at 5% per annum for 2 years?",
+  "options": [
+   "0",
+   "200",
+   "-100",
+   "100"
+  ],
+  "correct_index": 3,
+  "correct_answer": "100",
+  "explanation": "SI = P×R×T/100 = 1000×5×2/100 = Tk. 100.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I286",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Time and work",
+  "difficulty": "medium",
+  "question": "A can do a work in 20 days and B in 30 days. In how many days can they do it together?",
+  "options": [
+   "9",
+   "15",
+   "17",
+   "12"
+  ],
+  "correct_index": 3,
+  "correct_answer": "12",
+  "explanation": "Together in 1 day they do 1/20 + 1/30 = 50/600 of the work, so days = 600/50 = 12.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "time-work"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I287",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 240 km in 5 hours. What is its speed in km/h?",
+  "options": [
+   "68",
+   "78",
+   "58",
+   "48"
+  ],
+  "correct_index": 3,
+  "correct_answer": "48",
+  "explanation": "Speed = distance/time = 240/5 = 48 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I288",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 3, what is the value of 4x + 1?",
+  "options": [
+   "10",
+   "13",
+   "16",
+   "21"
+  ],
+  "correct_index": 1,
+  "correct_answer": "13",
+  "explanation": "4×3 + 1 = 12 + 1 = 13.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I289",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square of 24?",
+  "options": [
+   "526",
+   "676",
+   "576",
+   "601"
+  ],
+  "correct_index": 2,
+  "correct_answer": "576",
+  "explanation": "24² = 576.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I290",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 400. If a discount of 15% is given, what is the selling price?",
+  "options": [
+   "390",
+   "240",
+   "540",
+   "340"
+  ],
+  "correct_index": 3,
+  "correct_answer": "340",
+  "explanation": "Discount = 400 × 15% = Tk. 60; SP = 400 − 60 = Tk. 340.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I291",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "10% of 1500 is how much?",
+  "options": [
+   "130",
+   "150",
+   "100",
+   "160"
+  ],
+  "correct_index": 1,
+  "correct_answer": "150",
+  "explanation": "10% of 1500 = 1500 × 10/100 = 150.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I292",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 100 and sold at a profit of 20%. What is the selling price?",
+  "options": [
+   "120",
+   "170",
+   "145",
+   "70"
+  ],
+  "correct_index": 0,
+  "correct_answer": "120",
+  "explanation": "Profit = 100 × 20% = Tk. 20; SP = 100 + 20 = Tk. 120.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I293",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "easy",
+  "question": "Tk. 900 is divided between A and B in the ratio 1:3. How much does A get?",
+  "options": [
+   "375",
+   "125",
+   "325",
+   "225"
+  ],
+  "correct_index": 3,
+  "correct_answer": "225",
+  "explanation": "A's share = 900 × 1/(1+3) = Tk. 225.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I294",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the LCM of 10 and 15?",
+  "options": [
+   "30",
+   "36",
+   "18",
+   "24"
+  ],
+  "correct_index": 0,
+  "correct_answer": "30",
+  "explanation": "LCM(10, 15) = 30.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I295",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the HCF (GCD) of 18 and 27?",
+  "options": [
+   "5",
+   "9",
+   "7",
+   "11"
+  ],
+  "correct_index": 1,
+  "correct_answer": "9",
+  "explanation": "HCF(18, 27) = 9.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I296",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 1000 at 10% per annum for 2 years?",
+  "options": [
+   "200",
+   "100",
+   "600",
+   "400"
+  ],
+  "correct_index": 0,
+  "correct_answer": "200",
+  "explanation": "SI = P×R×T/100 = 1000×10×2/100 = Tk. 200.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I297",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 300 km in 6 hours. What is its speed in km/h?",
+  "options": [
+   "40",
+   "50",
+   "30",
+   "60"
+  ],
+  "correct_index": 1,
+  "correct_answer": "50",
+  "explanation": "Speed = distance/time = 300/6 = 50 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I298",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 6, what is the value of 5x + 3?",
+  "options": [
+   "33",
+   "30",
+   "38",
+   "41"
+  ],
+  "correct_index": 0,
+  "correct_answer": "33",
+  "explanation": "5×6 + 3 = 30 + 3 = 33.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I299",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square root of 289?",
+  "options": [
+   "13",
+   "15",
+   "17",
+   "21"
+  ],
+  "correct_index": 2,
+  "correct_answer": "17",
+  "explanation": "√289 = 17 because 17² = 289.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I300",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "40% of 240 is how much?",
+  "options": [
+   "116",
+   "106",
+   "96",
+   "76"
+  ],
+  "correct_index": 2,
+  "correct_answer": "96",
+  "explanation": "40% of 240 = 240 × 40/100 = 96.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I301",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 1000 and sold at a profit of 15%. What is the selling price?",
+  "options": [
+   "1200",
+   "1250",
+   "1175",
+   "1150"
+  ],
+  "correct_index": 3,
+  "correct_answer": "1150",
+  "explanation": "Profit = 1000 × 15% = Tk. 150; SP = 1000 + 150 = Tk. 1150.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I302",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "easy",
+  "question": "Tk. 800 is divided between A and B in the ratio 2:3. How much does A get?",
+  "options": [
+   "470",
+   "220",
+   "420",
+   "320"
+  ],
+  "correct_index": 3,
+  "correct_answer": "320",
+  "explanation": "A's share = 800 × 2/(2+3) = Tk. 320.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I303",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the LCM of 12 and 18?",
+  "options": [
+   "36",
+   "24",
+   "60",
+   "42"
+  ],
+  "correct_index": 0,
+  "correct_answer": "36",
+  "explanation": "LCM(12, 18) = 36.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I304",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 8, what is the value of 3x + 5?",
+  "options": [
+   "26",
+   "24",
+   "29",
+   "37"
+  ],
+  "correct_index": 2,
+  "correct_answer": "29",
+  "explanation": "3×8 + 5 = 24 + 5 = 29.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I305",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square of 16?",
+  "options": [
+   "256",
+   "281",
+   "231",
+   "206"
+  ],
+  "correct_index": 0,
+  "correct_answer": "256",
+  "explanation": "16² = 256.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I306",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square root of 225?",
+  "options": [
+   "20",
+   "11",
+   "13",
+   "15"
+  ],
+  "correct_index": 3,
+  "correct_answer": "15",
+  "explanation": "√225 = 15 because 15² = 225.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I307",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 400. If a discount of 20% is given, what is the selling price?",
+  "options": [
+   "420",
+   "320",
+   "220",
+   "520"
+  ],
+  "correct_index": 1,
+  "correct_answer": "320",
+  "explanation": "Discount = 400 × 20% = Tk. 80; SP = 400 − 80 = Tk. 320.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I308",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "60% of 800 is how much?",
+  "options": [
+   "430",
+   "480",
+   "530",
+   "500"
+  ],
+  "correct_index": 1,
+  "correct_answer": "480",
+  "explanation": "60% of 800 = 800 × 60/100 = 480.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I309",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the HCF (GCD) of 12 and 18?",
+  "options": [
+   "12",
+   "2",
+   "9",
+   "6"
+  ],
+  "correct_index": 3,
+  "correct_answer": "6",
+  "explanation": "HCF(12, 18) = 6.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I310",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 1000 at 5% per annum for 5 years?",
+  "options": [
+   "250",
+   "350",
+   "450",
+   "650"
+  ],
+  "correct_index": 0,
+  "correct_answer": "250",
+  "explanation": "SI = P×R×T/100 = 1000×5×5/100 = Tk. 250.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I311",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 180 km in 3 hours. What is its speed in km/h?",
+  "options": [
+   "40",
+   "50",
+   "60",
+   "70"
+  ],
+  "correct_index": 2,
+  "correct_answer": "60",
+  "explanation": "Speed = distance/time = 180/3 = 60 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I312",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 4, what is the value of 3x + 2?",
+  "options": [
+   "17",
+   "14",
+   "9",
+   "22"
+  ],
+  "correct_index": 1,
+  "correct_answer": "14",
+  "explanation": "3×4 + 2 = 12 + 2 = 14.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I313",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square root of 361?",
+  "options": [
+   "23",
+   "19",
+   "15",
+   "21"
+  ],
+  "correct_index": 1,
+  "correct_answer": "19",
+  "explanation": "√361 = 19 because 19² = 361.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I314",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 1000. If a discount of 10% is given, what is the selling price?",
+  "options": [
+   "1100",
+   "800",
+   "850",
+   "900"
+  ],
+  "correct_index": 3,
+  "correct_answer": "900",
+  "explanation": "Discount = 1000 × 10% = Tk. 100; SP = 1000 − 100 = Tk. 900.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I315",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "medium",
+  "question": "The sum of the ages of two brothers is 45 years and their ages are in the ratio 4:5. What is the younger brother's age?",
+  "options": [
+   "20",
+   "15",
+   "35",
+   "30"
+  ],
+  "correct_index": 0,
+  "correct_answer": "20",
+  "explanation": "Younger's age = 45 × 4/(4+5) = 20 years.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I316",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "10% of 1000 is how much?",
+  "options": [
+   "120",
+   "100",
+   "110",
+   "200"
+  ],
+  "correct_index": 1,
+  "correct_answer": "100",
+  "explanation": "10% of 1000 = 1000 × 10/100 = 100.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I317",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 800 and sold at a profit of 20%. What is the selling price?",
+  "options": [
+   "985",
+   "960",
+   "935",
+   "910"
+  ],
+  "correct_index": 1,
+  "correct_answer": "960",
+  "explanation": "Profit = 800 × 20% = Tk. 160; SP = 800 + 160 = Tk. 960.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I318",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "easy",
+  "question": "Tk. 600 is divided between A and B in the ratio 3:5. How much does A get?",
+  "options": [
+   "375",
+   "175",
+   "225",
+   "125"
+  ],
+  "correct_index": 2,
+  "correct_answer": "225",
+  "explanation": "A's share = 600 × 3/(3+5) = Tk. 225.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I319",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Average",
+  "difficulty": "easy",
+  "question": "What is the average of 70, 10, 45, 35?",
+  "options": [
+   "50",
+   "40",
+   "35",
+   "45"
+  ],
+  "correct_index": 1,
+  "correct_answer": "40",
+  "explanation": "Sum = 160; average = 160/4 = 40.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "average",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I320",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 5000 at 12% per annum for 2 years?",
+  "options": [
+   "1400",
+   "1200",
+   "1000",
+   "1100"
+  ],
+  "correct_index": 1,
+  "correct_answer": "1200",
+  "explanation": "SI = P×R×T/100 = 5000×12×2/100 = Tk. 1200.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I321",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 120 km in 4 hours. What is its speed in km/h?",
+  "options": [
+   "30",
+   "20",
+   "40",
+   "50"
+  ],
+  "correct_index": 0,
+  "correct_answer": "30",
+  "explanation": "Speed = distance/time = 120/4 = 30 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I322",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 3, what is the value of 5x + 3?",
+  "options": [
+   "21",
+   "23",
+   "18",
+   "15"
+  ],
+  "correct_index": 2,
+  "correct_answer": "18",
+  "explanation": "5×3 + 3 = 15 + 3 = 18.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I323",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 1000. If a discount of 25% is given, what is the selling price?",
+  "options": [
+   "650",
+   "750",
+   "700",
+   "800"
+  ],
+  "correct_index": 1,
+  "correct_answer": "750",
+  "explanation": "Discount = 1000 × 25% = Tk. 250; SP = 1000 − 250 = Tk. 750.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I324",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "20% of 500 is how much?",
+  "options": [
+   "200",
+   "150",
+   "100",
+   "110"
+  ],
+  "correct_index": 2,
+  "correct_answer": "100",
+  "explanation": "20% of 500 = 500 × 20/100 = 100.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I325",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 400 and sold at a profit of 25%. What is the selling price?",
+  "options": [
+   "450",
+   "600",
+   "550",
+   "500"
+  ],
+  "correct_index": 3,
+  "correct_answer": "500",
+  "explanation": "Profit = 400 × 25% = Tk. 100; SP = 400 + 100 = Tk. 500.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I326",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 10000 at 5% per annum for 5 years?",
+  "options": [
+   "2500",
+   "2300",
+   "2900",
+   "2400"
+  ],
+  "correct_index": 0,
+  "correct_answer": "2500",
+  "explanation": "SI = P×R×T/100 = 10000×5×5/100 = Tk. 2500.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I327",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 240 km in 2 hours. What is its speed in km/h?",
+  "options": [
+   "120",
+   "140",
+   "110",
+   "100"
+  ],
+  "correct_index": 0,
+  "correct_answer": "120",
+  "explanation": "Speed = distance/time = 240/2 = 120 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I328",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 4, what is the value of 4x + 5?",
+  "options": [
+   "18",
+   "21",
+   "24",
+   "16"
+  ],
+  "correct_index": 1,
+  "correct_answer": "21",
+  "explanation": "4×4 + 5 = 16 + 5 = 21.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I329",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square root of 900?",
+  "options": [
+   "30",
+   "32",
+   "34",
+   "28"
+  ],
+  "correct_index": 0,
+  "correct_answer": "30",
+  "explanation": "√900 = 30 because 30² = 900.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I330",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 1000. If a discount of 15% is given, what is the selling price?",
+  "options": [
+   "750",
+   "800",
+   "950",
+   "850"
+  ],
+  "correct_index": 3,
+  "correct_answer": "850",
+  "explanation": "Discount = 1000 × 15% = Tk. 150; SP = 1000 − 150 = Tk. 850.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I331",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "30% of 1500 is how much?",
+  "options": [
+   "430",
+   "400",
+   "450",
+   "460"
+  ],
+  "correct_index": 2,
+  "correct_answer": "450",
+  "explanation": "30% of 1500 = 1500 × 30/100 = 450.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I332",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 400 and sold at a profit of 20%. What is the selling price?",
+  "options": [
+   "580",
+   "455",
+   "480",
+   "430"
+  ],
+  "correct_index": 2,
+  "correct_answer": "480",
+  "explanation": "Profit = 400 × 20% = Tk. 80; SP = 400 + 80 = Tk. 480.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I333",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 8000 at 10% per annum for 2 years?",
+  "options": [
+   "1700",
+   "1400",
+   "1800",
+   "1600"
+  ],
+  "correct_index": 3,
+  "correct_answer": "1600",
+  "explanation": "SI = P×R×T/100 = 8000×10×2/100 = Tk. 1600.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I334",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 240 km in 3 hours. What is its speed in km/h?",
+  "options": [
+   "70",
+   "90",
+   "80",
+   "110"
+  ],
+  "correct_index": 2,
+  "correct_answer": "80",
+  "explanation": "Speed = distance/time = 240/3 = 80 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I335",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 2, what is the value of 2x + 2?",
+  "options": [
+   "3",
+   "1",
+   "6",
+   "9"
+  ],
+  "correct_index": 2,
+  "correct_answer": "6",
+  "explanation": "2×2 + 2 = 4 + 2 = 6.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I336",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 1200. If a discount of 10% is given, what is the selling price?",
+  "options": [
+   "1180",
+   "1280",
+   "1080",
+   "1130"
+  ],
+  "correct_index": 2,
+  "correct_answer": "1080",
+  "explanation": "Discount = 1200 × 10% = Tk. 120; SP = 1200 − 120 = Tk. 1080.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I337",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "80% of 1200 is how much?",
+  "options": [
+   "1010",
+   "980",
+   "970",
+   "960"
+  ],
+  "correct_index": 3,
+  "correct_answer": "960",
+  "explanation": "80% of 1200 = 1200 × 80/100 = 960.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I338",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 400 and sold at a profit of 10%. What is the selling price?",
+  "options": [
+   "390",
+   "540",
+   "440",
+   "465"
+  ],
+  "correct_index": 2,
+  "correct_answer": "440",
+  "explanation": "Profit = 400 × 10% = Tk. 40; SP = 400 + 40 = Tk. 440.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I339",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Average",
+  "difficulty": "easy",
+  "question": "What is the average of 80, 85, 90, 65?",
+  "options": [
+   "90",
+   "80",
+   "70",
+   "85"
+  ],
+  "correct_index": 1,
+  "correct_answer": "80",
+  "explanation": "Sum = 320; average = 320/4 = 80.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "average",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I340",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 5000 at 12% per annum for 3 years?",
+  "options": [
+   "1900",
+   "1800",
+   "2200",
+   "1700"
+  ],
+  "correct_index": 1,
+  "correct_answer": "1800",
+  "explanation": "SI = P×R×T/100 = 5000×12×3/100 = Tk. 1800.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I341",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Speed and distance",
+  "difficulty": "easy",
+  "question": "A train covers 150 km in 3 hours. What is its speed in km/h?",
+  "options": [
+   "60",
+   "80",
+   "50",
+   "70"
+  ],
+  "correct_index": 2,
+  "correct_answer": "50",
+  "explanation": "Speed = distance/time = 150/3 = 50 km/h.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I342",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 5, what is the value of 2x + 7?",
+  "options": [
+   "20",
+   "25",
+   "17",
+   "12"
+  ],
+  "correct_index": 2,
+  "correct_answer": "17",
+  "explanation": "2×5 + 7 = 10 + 7 = 17.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I343",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square of 20?",
+  "options": [
+   "350",
+   "450",
+   "375",
+   "400"
+  ],
+  "correct_index": 3,
+  "correct_answer": "400",
+  "explanation": "20² = 400.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I344",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "75% of 240 is how much?",
+  "options": [
+   "130",
+   "200",
+   "170",
+   "180"
+  ],
+  "correct_index": 3,
+  "correct_answer": "180",
+  "explanation": "75% of 240 = 240 × 75/100 = 180.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I345",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "A thing is bought for Tk. 100 and sold at a profit of 5%. What is the selling price?",
+  "options": [
+   "205",
+   "155",
+   "105",
+   "55"
+  ],
+  "correct_index": 2,
+  "correct_answer": "105",
+  "explanation": "Profit = 100 × 5% = Tk. 5; SP = 100 + 5 = Tk. 105.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I346",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "easy",
+  "question": "Tk. 900 is divided between A and B in the ratio 5:7. How much does A get?",
+  "options": [
+   "375",
+   "525",
+   "475",
+   "425"
+  ],
+  "correct_index": 0,
+  "correct_answer": "375",
+  "explanation": "A's share = 900 × 5/(5+7) = Tk. 375.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I347",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the LCM of 6 and 8?",
+  "options": [
+   "48",
+   "36",
+   "24",
+   "12"
+  ],
+  "correct_index": 2,
+  "correct_answer": "24",
+  "explanation": "LCM(6, 8) = 24.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I348",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 1000 at 8% per annum for 2 years?",
+  "options": [
+   "-40",
+   "260",
+   "160",
+   "60"
+  ],
+  "correct_index": 2,
+  "correct_answer": "160",
+  "explanation": "SI = P×R×T/100 = 1000×8×2/100 = Tk. 160.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I349",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square of 14?",
+  "options": [
+   "171",
+   "196",
+   "146",
+   "221"
+  ],
+  "correct_index": 1,
+  "correct_answer": "196",
+  "explanation": "14² = 196.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I350",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 400. If a discount of 25% is given, what is the selling price?",
+  "options": [
+   "400",
+   "350",
+   "300",
+   "250"
+  ],
+  "correct_index": 2,
+  "correct_answer": "300",
+  "explanation": "Discount = 400 × 25% = Tk. 100; SP = 400 − 100 = Tk. 300.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I351",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "30% of 1000 is how much?",
+  "options": [
+   "280",
+   "310",
+   "300",
+   "250"
+  ],
+  "correct_index": 2,
+  "correct_answer": "300",
+  "explanation": "30% of 1000 = 1000 × 30/100 = 300.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I352",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Profit and loss",
+  "difficulty": "easy",
+  "question": "The marked price of an article is Tk. 800. If a discount of 20% is given, what is the selling price?",
+  "options": [
+   "840",
+   "640",
+   "590",
+   "540"
+  ],
+  "correct_index": 1,
+  "correct_answer": "640",
+  "explanation": "Discount = 800 × 20% = Tk. 160; SP = 800 − 160 = Tk. 640.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I353",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "medium",
+  "question": "The sum of the ages of two brothers is 55 years and their ages are in the ratio 2:3. What is the younger brother's age?",
+  "options": [
+   "22",
+   "17",
+   "12",
+   "37"
+  ],
+  "correct_index": 0,
+  "correct_answer": "22",
+  "explanation": "Younger's age = 55 × 2/(2+3) = 22 years.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I354",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Percentage",
+  "difficulty": "easy",
+  "question": "25% of 300 is how much?",
+  "options": [
+   "95",
+   "25",
+   "85",
+   "75"
+  ],
+  "correct_index": 3,
+  "correct_answer": "75",
+  "explanation": "25% of 300 = 300 × 25/100 = 75.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I355",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "easy",
+  "question": "Tk. 600 is divided between A and B in the ratio 1:2. How much does A get?",
+  "options": [
+   "150",
+   "200",
+   "250",
+   "100"
+  ],
+  "correct_index": 1,
+  "correct_answer": "200",
+  "explanation": "A's share = 600 × 1/(1+2) = Tk. 200.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I356",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "LCM and HCF",
+  "difficulty": "easy",
+  "question": "What is the LCM of 8 and 12?",
+  "options": [
+   "12",
+   "24",
+   "18",
+   "48"
+  ],
+  "correct_index": 1,
+  "correct_answer": "24",
+  "explanation": "LCM(8, 12) = 24.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "lcm-hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I357",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Simple interest",
+  "difficulty": "medium",
+  "question": "What is the simple interest on Tk. 4000 at 5% per annum for 4 years?",
+  "options": [
+   "1200",
+   "700",
+   "800",
+   "600"
+  ],
+  "correct_index": 2,
+  "correct_answer": "800",
+  "explanation": "SI = P×R×T/100 = 4000×5×4/100 = Tk. 800.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I358",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Algebra",
+  "difficulty": "easy",
+  "question": "If x = 6, what is the value of 2x + 5?",
+  "options": [
+   "25",
+   "14",
+   "17",
+   "12"
+  ],
+  "correct_index": 2,
+  "correct_answer": "17",
+  "explanation": "2×6 + 5 = 12 + 5 = 17.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I359",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Squares and roots",
+  "difficulty": "easy",
+  "question": "What is the square root of 324?",
+  "options": [
+   "14",
+   "20",
+   "16",
+   "18"
+  ],
+  "correct_index": 3,
+  "correct_answer": "18",
+  "explanation": "√324 = 18 because 18² = 324.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I360",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "Ratio and proportion",
+  "difficulty": "medium",
+  "question": "The sum of the ages of two brothers is 50 years and their ages are in the ratio 2:3. What is the younger brother's age?",
+  "options": [
+   "15",
+   "20",
+   "35",
+   "10"
+  ],
+  "correct_index": 1,
+  "correct_answer": "20",
+  "explanation": "Younger's age = 50 × 2/(2+3) = 20 years.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-math-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

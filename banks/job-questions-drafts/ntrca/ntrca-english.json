@@ -1,0 +1,534 @@
+[
+ {
+  "id": "JOBQ-0298",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Completing sentences",
+  "difficulty": "easy",
+  "question": "If you work hard, ___",
+  "options": [
+   "you will succeed",
+   "you would succeed",
+   "you succeeded",
+   "you succeed in past"
+  ],
+  "correct_index": 0,
+  "correct_answer": "you will succeed",
+  "explanation": "First conditional: if + present simple, will + base verb — 'you will succeed'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "conditional",
+   "english",
+   "grammar",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0299",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Translation",
+  "difficulty": "easy",
+  "question": "Choose the correct English of: 'সে ঢাকায় থাকে।'",
+  "options": [
+   "He lives in Dhaka.",
+   "He live in Dhaka.",
+   "He is live in Dhaka.",
+   "He lived in Dhaka."
+  ],
+  "correct_index": 0,
+  "correct_answer": "He lives in Dhaka.",
+  "explanation": "'He lives in Dhaka' is the correct present-simple translation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "translation"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0300",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Change of parts of speech",
+  "difficulty": "easy",
+  "question": "The adjective form of 'Beauty' is —",
+  "options": [
+   "Beautiful",
+   "Beautify",
+   "Beautifully",
+   "Beautician"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Beautiful",
+  "explanation": "'Beauty' (noun) becomes the adjective 'beautiful'; 'beautify' is a verb.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "parts-of-speech"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0301",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "She ___ to school yesterday.",
+  "options": [
+   "go",
+   "goes",
+   "went",
+   "gone"
+  ],
+  "correct_index": 2,
+  "correct_answer": "went",
+  "explanation": "With 'yesterday', past simple is needed: 'went'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "tense"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0302",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "He is interested ___ music.",
+  "options": [
+   "in",
+   "on",
+   "at",
+   "for"
+  ],
+  "correct_index": 0,
+  "correct_answer": "in",
+  "explanation": "'Interested in' is the correct collocation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "preposition"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0303",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "easy",
+  "question": "Wait for ___ hour.",
+  "options": [
+   "a",
+   "an",
+   "the",
+   "no article"
+  ],
+  "correct_index": 1,
+  "correct_answer": "an",
+  "explanation": "'Hour' begins with a vowel sound (silent 'h'), so 'an' is used.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "article",
+   "english",
+   "grammar",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0304",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Transformation of sentences",
+  "difficulty": "medium",
+  "question": "He is taller than I. (Positive degree)",
+  "options": [
+   "I am not as tall as he.",
+   "I am taller than he.",
+   "He is not as tall as I.",
+   "I am as tall as he."
+  ],
+  "correct_index": 0,
+  "correct_answer": "I am not as tall as he.",
+  "explanation": "Comparative 'taller than' becomes positive 'not as tall as'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "transformation"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0305",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Brave' is —",
+  "options": [
+   "Cowardly",
+   "Courageous",
+   "Timid",
+   "Weak"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Courageous",
+  "explanation": "'Brave' means courageous.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "ntrca",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0306",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Victory' is —",
+  "options": [
+   "Triumph",
+   "Success",
+   "Defeat",
+   "Glory"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Defeat",
+  "explanation": "'Victory' means winning; its opposite is 'defeat'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "antonym",
+   "english",
+   "ntrca",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0307",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "easy",
+  "question": "'A piece of cake' means —",
+  "options": [
+   "Something very easy",
+   "A sweet food",
+   "A small cake",
+   "A difficult task"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Something very easy",
+  "explanation": "The idiom 'a piece of cake' means something very easy to do.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "idiom",
+   "ntrca",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0308",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Voice",
+  "difficulty": "easy",
+  "question": "Choose the passive form of: 'The cat killed the mouse.'",
+  "options": [
+   "The mouse was killed by the cat.",
+   "The mouse is killed by the cat.",
+   "The mouse has been killed by the cat.",
+   "The mouse killed by the cat."
+  ],
+  "correct_index": 0,
+  "correct_answer": "The mouse was killed by the cat.",
+  "explanation": "Past simple active becomes past simple passive: 'was killed'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "voice"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0309",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Narration",
+  "difficulty": "medium",
+  "question": "She said, 'I am ill.' The indirect speech is —",
+  "options": [
+   "She said that she was ill.",
+   "She said that she is ill.",
+   "She said that I was ill.",
+   "She said that she had been ill."
+  ],
+  "correct_index": 0,
+  "correct_answer": "She said that she was ill.",
+  "explanation": "Present simple shifts to past simple in indirect speech: 'was ill'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "grammar",
+   "narration",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0311",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "A place where birds are kept is called a/an —",
+  "options": [
+   "Aviary",
+   "Apiary",
+   "Aquarium",
+   "Stable"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Aviary",
+  "explanation": "An aviary is a place where birds are kept; an apiary keeps bees.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "ntrca",
+   "one-word",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0312",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "She is fond ___ sweets.",
+  "options": [
+   "of",
+   "in",
+   "at",
+   "with"
+  ],
+  "correct_index": 0,
+  "correct_answer": "of",
+  "explanation": "'Fond of' is the correct collocation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "preposition"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

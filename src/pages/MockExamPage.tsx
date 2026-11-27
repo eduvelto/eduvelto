@@ -308,8 +308,8 @@ export default function MockExamPage() {
     >
       <p style={{ color: '#5A6478', margin: '0 0 20px' }}>
         {t({
-          bn: 'যাচাইকৃত প্রশ্নে নিজের গতিতে মক পরীক্ষা দিন — সময় শেষ হলে উত্তর জমা হয়ে যাবে।',
-          en: 'Take a self-paced mock exam on verified questions — answers submit when the time ends.',
+          bn: 'যাচাইকৃত অনুশীলন প্রশ্নে নিজের গতিতে মক পরীক্ষা দিন — সময় শেষ হলে উত্তর জমা হয়ে যাবে।',
+          en: 'Take a self-paced mock exam on verified practice questions — answers submit when the time ends.',
         })}
       </p>
 
@@ -395,7 +395,11 @@ export default function MockExamPage() {
                           <div style={{ color: '#5A6478', fontSize: 14 }}>
                             {t({ bn: `${b.questionCount}টি প্রশ্ন · ${timeMinutesFor(b.questionCount)} মিনিট`, en: `${b.questionCount} questions · ${timeMinutesFor(b.questionCount)} min` })}
                             {' '}
-                            <Chip tone="outline">{t({ bn: 'যাচাইকৃত', en: 'Verified' })}</Chip>
+                            {cat.category === 'academic' ? (
+                              <Chip tone="outline">
+                                {t({ bn: 'যাচাইকৃত অনুশীলন প্রশ্ন', en: 'Verified practice questions' })}
+                              </Chip>
+                            ) : null}
                           </div>
                         </div>
                         <LinkButton
@@ -419,8 +423,8 @@ export default function MockExamPage() {
           <h2 style={{ margin: '0 0 6px', fontSize: 20 }}>{lang === 'bn' ? meta.titleBn : meta.titleEn}</h2>
           <p style={{ margin: '0 0 6px', color: '#5A6478' }}>
             {t({
-              bn: `${bundle.questions.length}টি যাচাইকৃত প্রশ্ন · ${timeMinutesFor(bundle.questions.length)} মিনিট · প্রতি প্রশ্নে ১ নম্বর`,
-              en: `${bundle.questions.length} verified questions · ${timeMinutesFor(bundle.questions.length)} minutes · 1 mark per question`,
+              bn: `${bundle.questions.length}টি যাচাইকৃত অনুশীলন প্রশ্ন · ${timeMinutesFor(bundle.questions.length)} মিনিট · প্রতি প্রশ্নে ১ নম্বর`,
+              en: `${bundle.questions.length} verified practice questions · ${timeMinutesFor(bundle.questions.length)} minutes · 1 mark per question`,
             })}
           </p>
           {fromCache ? (

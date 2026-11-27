@@ -1,0 +1,799 @@
+[
+  {
+    "id": "JOBQ-D200",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার পরিচিতি",
+    "difficulty": "easy",
+    "question": "কম্পিউটারের সব নির্দেশনা প্রক্রিয়াকরণের কাজ করে কোন অংশ?",
+    "options": [
+      "সিপিইউ",
+      "মনিটর",
+      "প্রিন্টার",
+      "কীবোর্ড"
+    ],
+    "correct_index": 0,
+    "correct_answer": "সিপিইউ",
+    "explanation": "সিপিইউ কম্পিউটারের সব নির্দেশনা প্রক্রিয়াকরণ করে, তাই একে কম্পিউটারের মস্তিষ্ক বলা হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "cpu",
+      "ict",
+      "ict-computer"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D201",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার পরিচিতি",
+    "difficulty": "easy",
+    "question": "১ কিলোবিট (Kb) সমান কত বিট?",
+    "options": [
+      "১০২৪ বিট",
+      "১০০০ বিট",
+      "২০৪৮ বিট",
+      "৫১২ বিট"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১০২৪ বিট",
+    "explanation": "১ কিলোবিট = ১০২৪ বিট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "kilobit",
+      "units"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D202",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার পরিচিতি",
+    "difficulty": "easy",
+    "question": "১ মেগাবাইট (MB) সমান কত কিলোবাইট?",
+    "options": [
+      "১০০০ কিলোবাইট",
+      "২০৪৮ কিলোবাইট",
+      "৫১২ কিলোবাইট",
+      "১০২৪ কিলোবাইট"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১০২৪ কিলোবাইট",
+    "explanation": "১ MB = ১০২৪ KB।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "megabyte",
+      "units"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D203",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "মেমোরি",
+    "difficulty": "medium",
+    "question": "কোন মেমোরি বিদ্যুৎ চলে গেলে তথ্য মুছে যায়?",
+    "options": [
+      "হার্ড ডিস্ক",
+      "ROM",
+      "RAM",
+      "পেন ড্রাইভ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "RAM",
+    "explanation": "RAM উদ্বায়ী (volatile) মেমোরি — বিদ্যুৎ বন্ধ হলে তথ্য মুছে যায়; ROM অস্থায়ী নয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "memory",
+      "ram"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D204",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "মেমোরি",
+    "difficulty": "medium",
+    "question": "কোনটি স্থায়ী (non-volatile) মেমোরি?",
+    "options": [
+      "ক্যাশ মেমোরি",
+      "RAM",
+      "রেজিস্টার",
+      "ROM"
+    ],
+    "correct_index": 3,
+    "correct_answer": "ROM",
+    "explanation": "ROM স্থায়ী মেমোরি; বিদ্যুৎ বন্ধ হলেও এর তথ্য থাকে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "memory",
+      "rom"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D205",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "ইনপুট-আউটপুট",
+    "difficulty": "easy",
+    "question": "কম্পিউটারে তথ্য প্রবেশ করাতে কোন ডিভাইসটি ব্যবহৃত হয়?",
+    "options": [
+      "স্পিকার",
+      "মনিটর",
+      "প্রিন্টার",
+      "স্ক্যানার"
+    ],
+    "correct_index": 3,
+    "correct_answer": "স্ক্যানার",
+    "explanation": "স্ক্যানার ইনপুট ডিভাইস; মনিটর, প্রিন্টার ও স্পিকার আউটপুট ডিভাইস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "devices",
+      "ict",
+      "ict-computer",
+      "input"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D206",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "ইনপুট-আউটপুট",
+    "difficulty": "easy",
+    "question": "নিচের কোনটি আউটপুট ডিভাইস?",
+    "options": [
+      "মাইক্রোফোন",
+      "মাউস",
+      "স্ক্যানার",
+      "মনিটর"
+    ],
+    "correct_index": 3,
+    "correct_answer": "মনিটর",
+    "explanation": "মনিটর আউটপুট ডিভাইস; মাউস, স্ক্যানার ও মাইক্রোফোন ইনপুট ডিভাইস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "devices",
+      "ict",
+      "ict-computer",
+      "output"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D207",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "সফটওয়্যার",
+    "difficulty": "easy",
+    "question": "MS Excel-এ সারি ও কলামের ছেদবিন্দুকে কী বলা হয়?",
+    "options": [
+      "শিট",
+      "রেঞ্জ",
+      "সেল",
+      "চার্ট"
+    ],
+    "correct_index": 2,
+    "correct_answer": "সেল",
+    "explanation": "MS Excel-এ সারি ও কলামের ছেদবিন্দুকে সেল বলা হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "excel",
+      "ict",
+      "ict-computer",
+      "software"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D208",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অপারেটিং সিস্টেম",
+    "difficulty": "medium",
+    "question": "নিচের কোনটি অপারেটিং সিস্টেম?",
+    "options": [
+      "গুগল ক্রোম",
+      "লিনাক্স",
+      "MS Excel",
+      "MS Word"
+    ],
+    "correct_index": 1,
+    "correct_answer": "লিনাক্স",
+    "explanation": "লিনাক্স একটি অপারেটিং সিস্টেম; MS Word ও Excel অ্যাপ্লিকেশন সফটওয়্যার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "os",
+      "software"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D209",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "ইন্টারনেট",
+    "difficulty": "medium",
+    "question": "ইন্টারনেটে কথা বলার প্রযুক্তিকে কী বলে?",
+    "options": [
+      "HTTP",
+      "VoIP",
+      "FTP",
+      "SMTP"
+    ],
+    "correct_index": 1,
+    "correct_answer": "VoIP",
+    "explanation": "ইন্টারনেটের মাধ্যমে কথা বলার প্রযুক্তিকে VoIP (Voice over Internet Protocol) বলে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "internet",
+      "www"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D210",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "ইন্টারনেট",
+    "difficulty": "medium",
+    "question": "WWW-এর সম্পূর্ণ রূপ কোনটি?",
+    "options": [
+      "World Web Window",
+      "Wide World Web",
+      "World Wide Web",
+      "Web World Wide"
+    ],
+    "correct_index": 2,
+    "correct_answer": "World Wide Web",
+    "explanation": "WWW-এর সম্পূর্ণ রূপ World Wide Web।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "http",
+      "ict",
+      "ict-computer",
+      "internet"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D211",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "নেটওয়ার্ক",
+    "difficulty": "medium",
+    "question": "Wi-Fi-এর সম্পূর্ণ রূপ কোনটি?",
+    "options": [
+      "Wireless Fidelity",
+      "Wired Fidelity",
+      "Wireless Function",
+      "Wide Fidelity"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Wireless Fidelity",
+    "explanation": "Wi-Fi-এর সম্পূর্ণ রূপ Wireless Fidelity।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "lan",
+      "network"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D212",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "নেটওয়ার্ক",
+    "difficulty": "medium",
+    "question": "কোন ডিভাইস একাধিক নেটওয়ার্ককে সংযুক্ত করে?",
+    "options": [
+      "মনিটর",
+      "স্ক্যানার",
+      "রাউটার",
+      "প্রিন্টার"
+    ],
+    "correct_index": 2,
+    "correct_answer": "রাউটার",
+    "explanation": "রাউটার একাধিক নেটওয়ার্কের মধ্যে তথ্য আদান-প্রদান করে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "network",
+      "router"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D213",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "সাইবার নিরাপত্তা",
+    "difficulty": "medium",
+    "question": "'ফিশিং' বলতে কী বোঝায়?",
+    "options": [
+      "পাসওয়ার্ড ভুলে যাওয়া",
+      "ভাইরাস ছড়ানো",
+      "ভুয়া বার্তা দিয়ে তথ্য চুরি করা",
+      "মাছ ধরা"
+    ],
+    "correct_index": 2,
+    "correct_answer": "ভুয়া বার্তা দিয়ে তথ্য চুরি করা",
+    "explanation": "ফিশিং হলো ভুয়া ইমেইল/বার্তা দিয়ে ব্যবহারকারীর পাসওয়ার্ড বা ব্যাংক তথ্য চুরি করা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "phishing",
+      "security"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D214",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "সাইবার নিরাপত্তা",
+    "difficulty": "easy",
+    "question": "কম্পিউটার ভাইরাস থেকে রক্ষা পেতে কী ব্যবহার করা হয়?",
+    "options": [
+      "ফায়ারওয়াল",
+      "অ্যান্টিভাইরাস",
+      "মডেম",
+      "রাউটার"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অ্যান্টিভাইরাস",
+    "explanation": "অ্যান্টিভাইরাস সফটওয়্যার ভাইরাস শনাক্ত ও অপসারণ করে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "antivirus",
+      "bcs",
+      "ict",
+      "ict-computer",
+      "security"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D215",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "ডাটাবেস",
+    "difficulty": "hard",
+    "question": "ডাটাবেস পরিচালনার জন্য ব্যবহৃত ভাষা কোনটি?",
+    "options": [
+      "HTML",
+      "Python",
+      "CSS",
+      "SQL"
+    ],
+    "correct_index": 3,
+    "correct_answer": "SQL",
+    "explanation": "SQL (Structured Query Language) ডাটাবেসের তথ্য পরিচালনার ভাষা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "database",
+      "ict",
+      "ict-computer",
+      "sql"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D216",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "প্রোগ্রামিং",
+    "difficulty": "medium",
+    "question": "নিচের কোনটি প্রোগ্রামিং ভাষা?",
+    "options": [
+      "পাইথন",
+      "MS Word",
+      "উইন্ডোজ",
+      "গুগল"
+    ],
+    "correct_index": 0,
+    "correct_answer": "পাইথন",
+    "explanation": "পাইথন একটি প্রোগ্রামিং ভাষা; MS Word অ্যাপ্লিকেশন সফটওয়্যার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ict",
+      "ict-computer",
+      "programming",
+      "python"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D217",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "ই-মেইল",
+    "difficulty": "easy",
+    "question": "ই-মেইল ঠিকানায় '@' চিহ্নের পরের অংশকে কী বলে?",
+    "options": [
+      "পাসওয়ার্ড",
+      "ডোমেইন",
+      "সার্ভার",
+      "ইউজারনেম"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ডোমেইন",
+    "explanation": "ই-মেইল ঠিকানায় @-এর পরের অংশ ডোমেইন (যেমন gmail.com)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "email",
+      "ict",
+      "ict-computer"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D218",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "সংখ্যা পদ্ধতি",
+    "difficulty": "medium",
+    "question": "দশমিক সংখ্যা ২৫৫-এর হেক্সাডেসিমেল মান কোনটি?",
+    "options": [
+      "F0",
+      "FF",
+      "FE",
+      "EF"
+    ],
+    "correct_index": 1,
+    "correct_answer": "FF",
+    "explanation": "২৫৫ = ১৫×১৬ + ১৫, তাই হেক্সাডেসিমেলে FF।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "binary",
+      "ict",
+      "ict-computer",
+      "number-system"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D219",
+    "exam_canonical": "bcs",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "ক্লাউড ও AI",
+    "difficulty": "medium",
+    "question": "'ক্লাউড কম্পিউটিং' বলতে কী বোঝায়?",
+    "options": [
+      "ইন্টারনেটের মাধ্যমে সেবা ও সংরক্ষণ ব্যবহার",
+      "মেঘের ছবি তোলা",
+      "আকাশে কম্পিউটার",
+      "ওয়াইফাই সংযোগ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ইন্টারনেটের মাধ্যমে সেবা ও সংরক্ষণ ব্যবহার",
+    "explanation": "ক্লাউড কম্পিউটিং হলো ইন্টারনেটের মাধ্যমে সার্ভার, সংরক্ষণ ও সফটওয়্যার সেবা ব্যবহার করা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB) — computer fundamentals",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "cloud",
+      "ict",
+      "ict-computer"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ict-depth-01.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

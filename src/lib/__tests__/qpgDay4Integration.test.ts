@@ -55,8 +55,8 @@ describe('Day 4 integration — set seed on the paper', () => {
       questions: QPG_VERIFIED_POOL.slice(0, 5),
       isCustomVariant: false,
       kind: 'chapter-paper',
-      patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত প্রশ্ন',
-      patternLabelEn: 'Chapter-based paper — verified questions',
+      patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত অনুশীলন প্রশ্ন',
+      patternLabelEn: 'Chapter-based paper — verified practice questions',
     });
     expect(paper.setup.seed).toBe(42);
     expect(paper.setup.setCode).toBe('গ');

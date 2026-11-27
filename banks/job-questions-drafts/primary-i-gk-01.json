@@ -1,0 +1,3802 @@
+[
+ {
+  "id": "JOBQ-I901",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "When was the United Nations founded?",
+  "options": [
+   "1 January 1946",
+   "24 October 1945",
+   "24 October 1944",
+   "26 June 1945"
+  ],
+  "correct_index": 1,
+  "correct_answer": "24 October 1945",
+  "explanation": "The UN was founded on 24 October 1945.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I902",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of the United Nations?",
+  "options": [
+   "Paris",
+   "London",
+   "New York",
+   "Geneva"
+  ],
+  "correct_index": 2,
+  "correct_answer": "New York",
+  "explanation": "The UN headquarters is in New York, USA.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I903",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of UNESCO?",
+  "options": [
+   "Geneva",
+   "Rome",
+   "Paris",
+   "Vienna"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Paris",
+  "explanation": "UNESCO headquarters is in Paris, France.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I904",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of the World Health Organization (WHO)?",
+  "options": [
+   "New York",
+   "Paris",
+   "Rome",
+   "Geneva"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Geneva",
+  "explanation": "WHO headquarters is in Geneva, Switzerland.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I905",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of the World Bank?",
+  "options": [
+   "New York",
+   "Washington D.C.",
+   "Geneva",
+   "London"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Washington D.C.",
+  "explanation": "The World Bank headquarters is in Washington D.C., USA.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I906",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of SAARC?",
+  "options": [
+   "Kathmandu",
+   "New Delhi",
+   "Colombo",
+   "Dhaka"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Kathmandu",
+  "explanation": "SAARC headquarters is in Kathmandu, Nepal.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I907",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "When was SAARC founded?",
+  "options": [
+   "1985",
+   "1975",
+   "1980",
+   "1990"
+  ],
+  "correct_index": 0,
+  "correct_answer": "1985",
+  "explanation": "SAARC was founded in 1985.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I908",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of ASEAN?",
+  "options": [
+   "Kuala Lumpur",
+   "Bangkok",
+   "Jakarta",
+   "Singapore"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Jakarta",
+  "explanation": "ASEAN headquarters is in Jakarta, Indonesia.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I909",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which is the longest river in the world?",
+  "options": [
+   "Amazon",
+   "Nile",
+   "Yangtze",
+   "Mississippi"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Nile",
+  "explanation": "The Nile is generally regarded as the longest river in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I910",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which is the largest desert in the world?",
+  "options": [
+   "Kalahari",
+   "Gobi",
+   "Sahara",
+   "Arabian"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Sahara",
+  "explanation": "The Sahara is the largest hot desert in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I911",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which is the largest ocean in the world?",
+  "options": [
+   "Arctic Ocean",
+   "Atlantic Ocean",
+   "Pacific Ocean",
+   "Indian Ocean"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Pacific Ocean",
+  "explanation": "The Pacific Ocean is the largest ocean in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I912",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which is the smallest ocean in the world?",
+  "options": [
+   "Arctic Ocean",
+   "Atlantic Ocean",
+   "Indian Ocean",
+   "Southern Ocean"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Arctic Ocean",
+  "explanation": "The Arctic Ocean is the smallest ocean in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I913",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which is the highest mountain peak in the world?",
+  "options": [
+   "K2",
+   "Makalu",
+   "Kangchenjunga",
+   "Mount Everest"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Mount Everest",
+  "explanation": "Mount Everest (8,848 m) is the highest peak in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I914",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Who was the first man to walk on the Moon?",
+  "options": [
+   "Michael Collins",
+   "Buzz Aldrin",
+   "Yuri Gagarin",
+   "Neil Armstrong"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Neil Armstrong",
+  "explanation": "Neil Armstrong first walked on the Moon in 1969.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I915",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "In which year did the Second World War end?",
+  "options": [
+   "1943",
+   "1944",
+   "1945",
+   "1946"
+  ],
+  "correct_index": 2,
+  "correct_answer": "1945",
+  "explanation": "The Second World War ended in 1945.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I916",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of the International Labour Organization (ILO)?",
+  "options": [
+   "Geneva",
+   "Paris",
+   "Rome",
+   "Vienna"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Geneva",
+  "explanation": "ILO headquarters is in Geneva, Switzerland.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I917",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of the Food and Agriculture Organization (FAO)?",
+  "options": [
+   "Rome",
+   "Geneva",
+   "New York",
+   "Paris"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Rome",
+  "explanation": "FAO headquarters is in Rome, Italy.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I918",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of the International Committee of the Red Cross?",
+  "options": [
+   "London",
+   "Brussels",
+   "Geneva",
+   "Paris"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Geneva",
+  "explanation": "The Red Cross headquarters is in Geneva, Switzerland.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I919",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which country is known as the 'Land of the Rising Sun'?",
+  "options": [
+   "South Korea",
+   "Thailand",
+   "Japan",
+   "China"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Japan",
+  "explanation": "Japan is known as the 'Land of the Rising Sun'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I920",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which country is known as the 'Land of the Midnight Sun'?",
+  "options": [
+   "Sweden",
+   "Norway",
+   "Iceland",
+   "Finland"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Norway",
+  "explanation": "Norway is known as the 'Land of the Midnight Sun'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I921",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the capital of Australia?",
+  "options": [
+   "Perth",
+   "Melbourne",
+   "Canberra",
+   "Sydney"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Canberra",
+  "explanation": "Canberra is the capital of Australia.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I922",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the capital of Canada?",
+  "options": [
+   "Toronto",
+   "Ottawa",
+   "Vancouver",
+   "Montreal"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Ottawa",
+  "explanation": "Ottawa is the capital of Canada.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I923",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the capital of Japan?",
+  "options": [
+   "Nagoya",
+   "Osaka",
+   "Tokyo",
+   "Kyoto"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Tokyo",
+  "explanation": "Tokyo is the capital of Japan.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I924",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the capital of France?",
+  "options": [
+   "Nice",
+   "Lyon",
+   "Marseille",
+   "Paris"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Paris",
+  "explanation": "Paris is the capital of France.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I925",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the currency of Japan?",
+  "options": [
+   "Won",
+   "Ringgit",
+   "Yuan",
+   "Yen"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Yen",
+  "explanation": "The currency of Japan is the Yen.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I926",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the currency of the United Kingdom?",
+  "options": [
+   "Euro",
+   "Pound Sterling",
+   "Dollar",
+   "Franc"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Pound Sterling",
+  "explanation": "The currency of the United Kingdom is the Pound Sterling.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I927",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which planet is known as the Red Planet?",
+  "options": [
+   "Saturn",
+   "Jupiter",
+   "Venus",
+   "Mars"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Mars",
+  "explanation": "Mars is known as the Red Planet.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I928",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which planet is the largest in the solar system?",
+  "options": [
+   "Jupiter",
+   "Earth",
+   "Saturn",
+   "Neptune"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Jupiter",
+  "explanation": "Jupiter is the largest planet in the solar system.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I929",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "How many continents are there in the world?",
+  "options": [
+   "5",
+   "7",
+   "6",
+   "8"
+  ],
+  "correct_index": 1,
+  "correct_answer": "7",
+  "explanation": "There are 7 continents in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I930",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which is the largest continent in the world?",
+  "options": [
+   "Asia",
+   "Africa",
+   "Europe",
+   "North America"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Asia",
+  "explanation": "Asia is the largest continent in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I931",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which is the smallest continent in the world?",
+  "options": [
+   "Australia",
+   "Europe",
+   "South America",
+   "Antarctica"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Australia",
+  "explanation": "Australia is the smallest continent in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I932",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "When did Bangladesh become a member of the United Nations?",
+  "options": [
+   "1975",
+   "1972",
+   "1973",
+   "1974"
+  ],
+  "correct_index": 3,
+  "correct_answer": "1974",
+  "explanation": "Bangladesh became a UN member on 17 September 1974.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I933",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Where is the headquarters of the Commonwealth?",
+  "options": [
+   "New York",
+   "Ottawa",
+   "London",
+   "Geneva"
+  ],
+  "correct_index": 2,
+  "correct_answer": "London",
+  "explanation": "The Commonwealth headquarters is in London.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I934",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the full form of UNO?",
+  "options": [
+   "Universal Nations Organization",
+   "United Nations Organization",
+   "United National Organization",
+   "Union of Nations Organization"
+  ],
+  "correct_index": 1,
+  "correct_answer": "United Nations Organization",
+  "explanation": "UNO stands for United Nations Organization.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I935",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the full form of UNICEF?",
+  "options": [
+   "United International Children's Emergency Fund",
+   "United Nations International Children's Emergency Fund",
+   "United Nations Industrial Child Education Fund",
+   "United Nations International Child Education Fund"
+  ],
+  "correct_index": 1,
+  "correct_answer": "United Nations International Children's Emergency Fund",
+  "explanation": "UNICEF stands for United Nations International Children's Emergency Fund.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I936",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which gas do plants absorb from the air for photosynthesis?",
+  "options": [
+   "Oxygen",
+   "Nitrogen",
+   "Carbon dioxide",
+   "Hydrogen"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Carbon dioxide",
+  "explanation": "Plants absorb carbon dioxide for photosynthesis and release oxygen.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I937",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which gas do humans need to breathe to live?",
+  "options": [
+   "Nitrogen",
+   "Oxygen",
+   "Helium",
+   "Carbon dioxide"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Oxygen",
+  "explanation": "Humans need oxygen to breathe.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I938",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "What is the chemical formula of water?",
+  "options": [
+   "O2",
+   "H2O",
+   "CO2",
+   "NaCl"
+  ],
+  "correct_index": 1,
+  "correct_answer": "H2O",
+  "explanation": "The chemical formula of water is H2O.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I939",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "What is the boiling point of pure water at sea level?",
+  "options": [
+   "90°C",
+   "120°C",
+   "100°C",
+   "80°C"
+  ],
+  "correct_index": 2,
+  "correct_answer": "100°C",
+  "explanation": "Pure water boils at 100°C at sea level.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I940",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "What is the freezing point of water?",
+  "options": [
+   "10°C",
+   "0°C",
+   "5°C",
+   "-10°C"
+  ],
+  "correct_index": 1,
+  "correct_answer": "0°C",
+  "explanation": "Water freezes at 0°C.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I941",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which vitamin is produced in the skin by sunlight?",
+  "options": [
+   "Vitamin D",
+   "Vitamin A",
+   "Vitamin C",
+   "Vitamin B"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Vitamin D",
+  "explanation": "Sunlight helps the skin produce Vitamin D.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I942",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which vitamin is found in citrus fruits and prevents scurvy?",
+  "options": [
+   "Vitamin D",
+   "Vitamin B12",
+   "Vitamin A",
+   "Vitamin C"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Vitamin C",
+  "explanation": "Vitamin C is found in citrus fruits and prevents scurvy.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I943",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which vitamin is important for good eyesight?",
+  "options": [
+   "Vitamin C",
+   "Vitamin D",
+   "Vitamin A",
+   "Vitamin E"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Vitamin A",
+  "explanation": "Vitamin A is important for good eyesight.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I944",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which organ pumps blood through the human body?",
+  "options": [
+   "Kidney",
+   "Heart",
+   "Liver",
+   "Lung"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Heart",
+  "explanation": "The heart pumps blood through the body.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I945",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "How many bones are there in the adult human body?",
+  "options": [
+   "196",
+   "206",
+   "226",
+   "216"
+  ],
+  "correct_index": 1,
+  "correct_answer": "206",
+  "explanation": "An adult human has 206 bones.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I946",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "What is the normal body temperature of a healthy human?",
+  "options": [
+   "40°C",
+   "39°C",
+   "37°C (98.6°F)",
+   "35°C"
+  ],
+  "correct_index": 2,
+  "correct_answer": "37°C (98.6°F)",
+  "explanation": "Normal body temperature is about 37°C (98.6°F).",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I947",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which part of the plant makes food by photosynthesis?",
+  "options": [
+   "Root",
+   "Stem",
+   "Flower",
+   "Leaf"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Leaf",
+  "explanation": "Leaves make food by photosynthesis.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I948",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "What force pulls objects towards the Earth?",
+  "options": [
+   "Inertia",
+   "Friction",
+   "Magnetism",
+   "Gravity"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Gravity",
+  "explanation": "Gravity pulls objects towards the Earth.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I949",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which instrument is used to measure temperature?",
+  "options": [
+   "Ammeter",
+   "Barometer",
+   "Thermometer",
+   "Voltmeter"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Thermometer",
+  "explanation": "A thermometer measures temperature.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I950",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which instrument is used to measure atmospheric pressure?",
+  "options": [
+   "Altimeter",
+   "Barometer",
+   "Thermometer",
+   "Speedometer"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Barometer",
+  "explanation": "A barometer measures atmospheric pressure.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I951",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "What is the unit of electric current?",
+  "options": [
+   "Ampere",
+   "Watt",
+   "Ohm",
+   "Volt"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Ampere",
+  "explanation": "The unit of electric current is the ampere.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I952",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "What is the unit of power?",
+  "options": [
+   "Volt",
+   "Joule",
+   "Ampere",
+   "Watt"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Watt",
+  "explanation": "The unit of power is the watt.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I953",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which planet is closest to the Sun?",
+  "options": [
+   "Mercury",
+   "Venus",
+   "Earth",
+   "Mars"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Mercury",
+  "explanation": "Mercury is the closest planet to the Sun.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I954",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "How many days are there in a leap year?",
+  "options": [
+   "365",
+   "366",
+   "364",
+   "360"
+  ],
+  "correct_index": 1,
+  "correct_answer": "366",
+  "explanation": "A leap year has 366 days.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I955",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "What is the main source of energy for the Earth?",
+  "options": [
+   "The Sun",
+   "The Moon",
+   "Coal",
+   "Wind"
+  ],
+  "correct_index": 0,
+  "correct_answer": "The Sun",
+  "explanation": "The Sun is the main source of energy for the Earth.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I956",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the national fruit of Bangladesh?",
+  "options": [
+   "Litchi",
+   "Jackfruit",
+   "Banana",
+   "Mango"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Jackfruit",
+  "explanation": "Jackfruit is the national fruit of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I957",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the national game of Bangladesh?",
+  "options": [
+   "Cricket",
+   "Hockey",
+   "Football",
+   "Kabaddi (Ha-du-du)"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Kabaddi (Ha-du-du)",
+  "explanation": "Kabaddi (Ha-du-du) is the national game of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I958",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Who designed the national flag of Bangladesh?",
+  "options": [
+   "Kamrul Hasan",
+   "Zainul Abedin",
+   "Hamidur Rahman",
+   "Syed Mainul Hossain"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Kamrul Hasan",
+  "explanation": "The national flag of Bangladesh was designed by Kamrul Hasan.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I959",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "In which year was the national flag of Bangladesh adopted?",
+  "options": [
+   "1973",
+   "1971",
+   "1972",
+   "1975"
+  ],
+  "correct_index": 2,
+  "correct_answer": "1972",
+  "explanation": "The national flag was adopted on 17 January 1972.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I960",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Liberation War",
+  "difficulty": "easy",
+  "question": "How many Bir Sreshtho gallantry awards were given for the Liberation War?",
+  "options": [
+   "7",
+   "175",
+   "69",
+   "11"
+  ],
+  "correct_index": 0,
+  "correct_answer": "7",
+  "explanation": "Seven Bir Sreshtho awards were given for the Liberation War.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "liberation-war",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I961",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "In which year did Dhaka first become a capital city?",
+  "options": [
+   "1610",
+   "1757",
+   "1608",
+   "1700"
+  ],
+  "correct_index": 0,
+  "correct_answer": "1610",
+  "explanation": "Dhaka first became a capital in 1610 under the Mughals (as Jahangirnagar).",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I962",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "In which year was Dhaka University founded?",
+  "options": [
+   "1921",
+   "1925",
+   "1911",
+   "1947"
+  ],
+  "correct_index": 0,
+  "correct_answer": "1921",
+  "explanation": "Dhaka University was founded in 1921.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I963",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which building is the National Parliament House of Bangladesh?",
+  "options": [
+   "Curzon Hall",
+   "Jatiya Sangsad Bhaban",
+   "Bangabhaban",
+   "Ahsan Manzil"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Jatiya Sangsad Bhaban",
+  "explanation": "The Jatiya Sangsad Bhaban in Dhaka is the National Parliament House.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I964",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Who designed the Jatiya Sangsad Bhaban?",
+  "options": [
+   "Muzharul Islam",
+   "Louis I. Kahn",
+   "Syed Mainul Hossain",
+   "Hamidur Rahman"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Louis I. Kahn",
+  "explanation": "The Jatiya Sangsad Bhaban was designed by Louis I. Kahn.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I965",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which is the largest island of Bangladesh?",
+  "options": [
+   "Saint Martin's",
+   "Bhola",
+   "Hatiya",
+   "Sandwip"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Bhola",
+  "explanation": "Bhola is the largest island of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "geography",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I966",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which place is the southernmost point of Bangladesh?",
+  "options": [
+   "Tetulia",
+   "Teknaf",
+   "Kuakata",
+   "Cox's Bazar"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Teknaf",
+  "explanation": "Teknaf is the southernmost point of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "geography",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I967",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which place is the northernmost point of Bangladesh?",
+  "options": [
+   "Panchagarh town",
+   "Dinajpur",
+   "Tetulia",
+   "Teknaf"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Tetulia",
+  "explanation": "Tetulia is the northernmost point of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "geography",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I968",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which beach is known as the 'Daughter of the Sea' (Sagarkanya)?",
+  "options": [
+   "Saint Martin's",
+   "Cox's Bazar",
+   "Kuakata",
+   "Patenga"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Kuakata",
+  "explanation": "Kuakata is known as Sagarkanya, the Daughter of the Sea.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "geography",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I969",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which is the largest man-made lake of Bangladesh?",
+  "options": [
+   "Dhanmondi Lake",
+   "Foy's Lake",
+   "Kaptai Lake",
+   "Boga Lake"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Kaptai Lake",
+  "explanation": "Kaptai Lake in Rangamati is the largest man-made lake of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "geography",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I970",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "When was the Padma Bridge opened to traffic?",
+  "options": [
+   "26 March 2022",
+   "25 June 2021",
+   "16 December 2022",
+   "25 June 2022"
+  ],
+  "correct_index": 3,
+  "correct_answer": "25 June 2022",
+  "explanation": "The Padma Bridge was opened on 25 June 2022.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I971",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "When was the first metro rail line of Bangladesh opened?",
+  "options": [
+   "28 December 2021",
+   "1 January 2023",
+   "16 December 2022",
+   "28 December 2022"
+  ],
+  "correct_index": 3,
+  "correct_answer": "28 December 2022",
+  "explanation": "The first metro rail (MRT-6) was opened on 28 December 2022.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I972",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Where is the Rooppur Nuclear Power Plant located?",
+  "options": [
+   "Pabna",
+   "Khulna",
+   "Rajshahi",
+   "Chattogram"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Pabna",
+  "explanation": "The Rooppur Nuclear Power Plant is in Pabna.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I973",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "In which year did Bangladesh get Test cricket status?",
+  "options": [
+   "2001",
+   "1997",
+   "2000",
+   "1999"
+  ],
+  "correct_index": 2,
+  "correct_answer": "2000",
+  "explanation": "Bangladesh got Test status in 2000.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I974",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "When is Pahela Boishakh, the Bangla New Year, celebrated?",
+  "options": [
+   "21 February",
+   "1 January",
+   "15 August",
+   "14 April"
+  ],
+  "correct_index": 3,
+  "correct_answer": "14 April",
+  "explanation": "Pahela Boishakh is celebrated on 14 April.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I975",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which organization organizes the Ekushey Book Fair in February?",
+  "options": [
+   "Bangla Academy",
+   "Asiatic Society",
+   "Shilpakala Academy",
+   "National Museum"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Bangla Academy",
+  "explanation": "The Ekushey Book Fair is organized by Bangla Academy.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I976",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "In which year was Bangla Academy established?",
+  "options": [
+   "1952",
+   "1960",
+   "1955",
+   "1947"
+  ],
+  "correct_index": 2,
+  "correct_answer": "1955",
+  "explanation": "Bangla Academy was established in 1955.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I977",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which river flows through Dhaka city as its main river?",
+  "options": [
+   "Padma",
+   "Jamuna",
+   "Buriganga",
+   "Meghna"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Buriganga",
+  "explanation": "The Buriganga is the main river flowing by Dhaka city.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "geography",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I978",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the time zone of Bangladesh?",
+  "options": [
+   "UTC+5",
+   "UTC+6",
+   "UTC+7",
+   "UTC+5:30"
+  ],
+  "correct_index": 1,
+  "correct_answer": "UTC+6",
+  "explanation": "Bangladesh Standard Time is UTC+6.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I979",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Economy",
+  "difficulty": "easy",
+  "question": "How many paisa make one taka?",
+  "options": [
+   "10",
+   "50",
+   "100",
+   "1000"
+  ],
+  "correct_index": 2,
+  "correct_answer": "100",
+  "explanation": "One taka equals 100 paisa.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "economy",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I980",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which three districts make up the Chittagong Hill Tracts?",
+  "options": [
+   "Khagrachari, Sylhet and Rangamati",
+   "Rangamati, Cox's Bazar and Bandarban",
+   "Rangamati, Bandarban and Khagrachari",
+   "Bandarban, Cumilla and Rangamati"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Rangamati, Bandarban and Khagrachari",
+  "explanation": "The Chittagong Hill Tracts comprise Rangamati, Bandarban and Khagrachari.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "geography",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I981",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which waterfall is commonly cited as the highest in Bangladesh?",
+  "options": [
+   "Shuvolong",
+   "Jadipai",
+   "Nafa-khum",
+   "Madhabkunda"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Madhabkunda",
+  "explanation": "Madhabkunda waterfall in Moulvibazar is commonly cited as the highest in Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "geography",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I982",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "In which year was the Sundarbans declared a UNESCO World Heritage Site?",
+  "options": [
+   "2000",
+   "1997",
+   "1985",
+   "1990"
+  ],
+  "correct_index": 1,
+  "correct_answer": "1997",
+  "explanation": "The Sundarbans was declared a UNESCO World Heritage Site in 1997.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I983",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which historic mosque city in Bagerhat was declared a UNESCO World Heritage Site in 1985?",
+  "options": [
+   "Sixty Dome Mosque only",
+   "Paharpur Vihara",
+   "Kantajew Temple",
+   "Historic Mosque City of Bagerhat"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Historic Mosque City of Bagerhat",
+  "explanation": "The Historic Mosque City of Bagerhat was listed by UNESCO in 1985.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I984",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Where is the Sixty Dome Mosque located?",
+  "options": [
+   "Bagerhat",
+   "Rajshahi",
+   "Dinajpur",
+   "Khulna city"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Bagerhat",
+  "explanation": "The Sixty Dome Mosque is in Bagerhat.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I985",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Where is the Somapura Mahavihara (Paharpur) located?",
+  "options": [
+   "Dinajpur",
+   "Bogra",
+   "Naogaon",
+   "Rajshahi"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Naogaon",
+  "explanation": "Somapura Mahavihara at Paharpur is in Naogaon district.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh-affairs",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I986",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the capital of Nepal?",
+  "options": [
+   "Kathmandu",
+   "Bhaktapur",
+   "Lalitpur",
+   "Pokhara"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Kathmandu",
+  "explanation": "Kathmandu is the capital of Nepal.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I987",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "What is the currency of India?",
+  "options": [
+   "Rupiah",
+   "Ringgit",
+   "Taka",
+   "Rupee"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Rupee",
+  "explanation": "The currency of India is the Rupee.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I988",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which is the largest country in the world by area?",
+  "options": [
+   "China",
+   "Canada",
+   "Russia",
+   "United States"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Russia",
+  "explanation": "Russia is the largest country in the world by area.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I989",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "Which is the smallest country in the world by area?",
+  "options": [
+   "Maldives",
+   "San Marino",
+   "Monaco",
+   "Vatican City"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Vatican City",
+  "explanation": "Vatican City is the smallest country in the world by area.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I990",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "The Great Wall is located in which country?",
+  "options": [
+   "China",
+   "Japan",
+   "Mongolia",
+   "India"
+  ],
+  "correct_index": 0,
+  "correct_answer": "China",
+  "explanation": "The Great Wall is in China.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I991",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "The Eiffel Tower is located in which city?",
+  "options": [
+   "London",
+   "Rome",
+   "Berlin",
+   "Paris"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Paris",
+  "explanation": "The Eiffel Tower is in Paris, France.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I992",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "The Statue of Liberty is located in which city?",
+  "options": [
+   "Washington D.C.",
+   "Boston",
+   "New York",
+   "Los Angeles"
+  ],
+  "correct_index": 2,
+  "correct_answer": "New York",
+  "explanation": "The Statue of Liberty is in New York, USA.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I993",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "The Pyramids of Giza are located in which country?",
+  "options": [
+   "Iraq",
+   "Turkey",
+   "Greece",
+   "Egypt"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Egypt",
+  "explanation": "The Pyramids of Giza are in Egypt.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I994",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "International affairs",
+  "difficulty": "easy",
+  "question": "In which continent is the Amazon rainforest mainly located?",
+  "options": [
+   "Africa",
+   "Asia",
+   "Australia",
+   "South America"
+  ],
+  "correct_index": 3,
+  "correct_answer": "South America",
+  "explanation": "The Amazon rainforest is mainly in South America.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "international-affairs",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I995",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which gas is most abundant in the Earth's atmosphere?",
+  "options": [
+   "Nitrogen",
+   "Carbon dioxide",
+   "Argon",
+   "Oxygen"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Nitrogen",
+  "explanation": "Nitrogen makes up about 78% of the Earth's atmosphere.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I996",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which metal is liquid at room temperature?",
+  "options": [
+   "Iron",
+   "Mercury",
+   "Aluminium",
+   "Copper"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Mercury",
+  "explanation": "Mercury is a metal that is liquid at room temperature.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I997",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "Which organ in the human body produces insulin?",
+  "options": [
+   "Spleen",
+   "Kidney",
+   "Pancreas",
+   "Liver"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Pancreas",
+  "explanation": "The pancreas produces insulin.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I998",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "How many minutes are there in 3 hours?",
+  "options": [
+   "180",
+   "150",
+   "240",
+   "120"
+  ],
+  "correct_index": 0,
+  "correct_answer": "180",
+  "explanation": "3 hours = 3 × 60 = 180 minutes.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I999",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Daily science",
+  "difficulty": "easy",
+  "question": "What is the largest organ of the human body?",
+  "options": [
+   "Liver",
+   "Skin",
+   "Heart",
+   "Lung"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Skin",
+  "explanation": "The skin is the largest organ of the human body.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "daily-science",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I1000",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Economy",
+  "difficulty": "easy",
+  "question": "What is the main export product of Bangladesh?",
+  "options": [
+   "Jute",
+   "Leather",
+   "Tea",
+   "Readymade garments"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Readymade garments",
+  "explanation": "Readymade garments are the main export product of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "syllabus_source": "DPE — Government Primary School Teacher Recruitment Rules 2025, Schedule 2 (dpe.gov.bd); written 90 marks: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "economy",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary-i-gk-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

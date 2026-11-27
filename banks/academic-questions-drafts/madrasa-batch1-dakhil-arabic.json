@@ -1,0 +1,384 @@
+{
+  "header": {
+    "status": "NEEDS-REVIEW — DRAFT ONLY. Not verified, not published, not imported.",
+    "level": "Dakhil 9-10",
+    "subject": "Arabic (Ittisaliyyah), Dakhil 9-10",
+    "question_count": 12,
+    "rule": "NCTB-first: every question cites its NCTB book lesson; no invented questions, graphs, or sources.",
+    "source": "Worker D (CONTENT GAPS), 27 Nov 2026 — see fast-program/D-content/."
+  },
+  "questions": [
+    {
+      "chapter": "সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ",
+      "class": "Dakhil 9-10",
+      "correct_index": 1,
+      "difficulty": "easy",
+      "explanation": "আশ-শাবাকাতুল আলামিয়্যাহ (International Network / ইন্টারনেট) হলো বিশ্বের বিভিন্ন দেশের কম্পিউটারের নেটওয়ার্কসমূহের সমষ্টি; নেটওয়ার্কগুলো পরস্পরের সঙ্গে যুক্ত হয়েছে কোনো সরকারি নিয়ন্ত্রণ ছাড়াই।",
+      "fact_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ, পৃ. ১২২",
+      "id": "ACAD-8134",
+      "level": "Dakhil 9-10",
+      "options": [
+        "একটি একক কম্পিউটার",
+        "বিশ্বের বিভিন্ন দেশের কম্পিউটারের নেটওয়ার্কসমূহের সমষ্টি (International Network)",
+        "শুধু একটি ওয়েবসাইট",
+        "একটি প্রিন্টার যন্ত্র"
+      ],
+      "question": "আশ-শাবাকাতুল আলামিয়্যাহ (الشبكة العالمية) বলতে কী বোঝায়?",
+      "source": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ, পৃ. ১২২",
+      "source_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ, পৃ. ১২২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Ittisaliyyah)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "ittisaliyyah",
+        "internet"
+      ],
+      "topic": "আশ-শাবাকাতুল আলামিয়্যাহ",
+      "original_id": "MADX-D9-01",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ",
+      "class": "Dakhil 9-10",
+      "correct_index": 0,
+      "difficulty": "easy",
+      "explanation": "www হলো World Wide Web-এর সংক্ষিপ্ত রূপ — বিশ্বজুড়ে তথ্য ও সেবা দেখার জালব্যবস্থা।",
+      "fact_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ, পৃ. ১২২",
+      "id": "ACAD-8135",
+      "level": "Dakhil 9-10",
+      "options": [
+        "World Wide Web",
+        "World Web Window",
+        "Wide World Web",
+        "Web World Wide"
+      ],
+      "question": "www-এর পূর্ণরূপ কী?",
+      "source": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ, পৃ. ১২২",
+      "source_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ, পৃ. ১২২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Ittisaliyyah)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "ittisaliyyah",
+        "internet"
+      ],
+      "topic": "আশ-শাবাকাতুল আলামিয়্যাহ",
+      "original_id": "MADX-D9-02",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ",
+      "class": "Dakhil 9-10",
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "পাঠ অনুযায়ী শাবাকার সাধারণ উদ্দেশ্য হলো পেশাগত উন্নয়ন ও পাঠক্রমের ক্রমাগত উন্নতি — তথ্য ও অভিজ্ঞতা বিনিময়, পরামর্শ, বৈজ্ঞানিক সম্মেলনে অংশগ্রহণ এবং ইলেকট্রনিক যোগাযোগমাধ্যমে দূরবর্তী সরাসরি সংলাপের মাধ্যমে। ই-মেইলের মাধ্যমেও যোগাযোগ করা যায়।",
+      "fact_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ, পৃ. ১২২",
+      "id": "ACAD-8136",
+      "level": "Dakhil 9-10",
+      "options": [
+        "শুধু গান শোনা যায়",
+        "শুধু ছবি আঁকা যায়",
+        "ইন্টারনেটে কিছুই করা যায় না",
+        "তথ্য ও অভিজ্ঞতা বিনিময়, বৈজ্ঞানিক সম্মেলনে অংশগ্রহণ ও দূরবর্তী সরাসরি সংলাপ করা যায়"
+      ],
+      "question": "ইন্টারনেট (আশ-শাবাকাতুল আলামিয়্যাহ) দিয়ে কী করা যায়?",
+      "source": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ, পৃ. ১২২",
+      "source_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — সপ্তম ইউনিট, প্রথম পাঠ: আশ-শাবাকাতুল আলামিয়্যাহ, পৃ. ১২২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Ittisaliyyah)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "ittisaliyyah",
+        "internet"
+      ],
+      "topic": "আশ-শাবাকাতুল আলামিয়্যাহ",
+      "original_id": "MADX-D9-03",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ",
+      "class": "Dakhil 9-10",
+      "correct_index": 2,
+      "difficulty": "easy",
+      "explanation": "আল-উমামুল মুত্তাহিদাহ (জাতিসংঘ) একটি আন্তর্জাতিক সংস্থা, যা দ্বিতীয় বিশ্বযুদ্ধের পর ১৯৪৫ সালে প্রতিষ্ঠিত হয়।",
+      "fact_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ, পৃ. ১৫০",
+      "id": "ACAD-8137",
+      "level": "Dakhil 9-10",
+      "options": [
+        "১৯১৯ সালে",
+        "১৯৩৯ সালে",
+        "১৯৪৫ সালে, দ্বিতীয় বিশ্বযুদ্ধের পর",
+        "১৯৬০ সালে"
+      ],
+      "question": "জাতিসংঘ (الأمم المتحدة) কখন প্রতিষ্ঠিত হয়?",
+      "source": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ, পৃ. ১৫০",
+      "source_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ, পৃ. ১৫০",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Ittisaliyyah)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "ittisaliyyah",
+        "un"
+      ],
+      "topic": "আল-উমামুল মুত্তাহিদাহ",
+      "original_id": "MADX-D9-04",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ",
+      "class": "Dakhil 9-10",
+      "correct_index": 0,
+      "difficulty": "medium",
+      "explanation": "প্রতিষ্ঠার সময় ৫১টি দেশ জাতিসংঘের সদস্য ছিল; বর্তমানে সদস্য দেশের সংখ্যা ১৯৩টি।",
+      "fact_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ, পৃ. ১৫০",
+      "id": "ACAD-8138",
+      "level": "Dakhil 9-10",
+      "options": [
+        "৫১টি",
+        "১০০টি",
+        "১৯৩টি",
+        "২৫টি"
+      ],
+      "question": "জাতিসংঘ প্রতিষ্ঠার সময় কয়টি দেশ এর সদস্য ছিল?",
+      "source": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ, পৃ. ১৫০",
+      "source_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ, পৃ. ১৫০",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Ittisaliyyah)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "ittisaliyyah",
+        "un"
+      ],
+      "topic": "আল-উমামুল মুত্তাহিদাহ",
+      "original_id": "MADX-D9-05",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ",
+      "class": "Dakhil 9-10",
+      "correct_index": 1,
+      "difficulty": "easy",
+      "explanation": "পাঠ অনুযায়ী জাতিসংঘের উদ্দেশ্য: আন্তর্জাতিক শান্তি ও নিরাপত্তা রক্ষা, জাতিগুলোর মধ্যে বন্ধুত্বপূর্ণ সম্পর্কের উন্নয়ন, সামাজিক অগ্রগতি, জীবনযাত্রার মান উন্নয়ন ও মানবাধিকার।",
+      "fact_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ, পৃ. ১৫০",
+      "id": "ACAD-8139",
+      "level": "Dakhil 9-10",
+      "options": [
+        "শুধু বাণিজ্য বৃদ্ধি করা",
+        "আন্তর্জাতিক শান্তি ও নিরাপত্তা রক্ষা করা",
+        "শুধু খেলাধুলার আয়োজন করা",
+        "শুধু চলচ্চিত্র নির্মাণ করা"
+      ],
+      "question": "জাতিসংঘের একটি প্রধান উদ্দেশ্য কী?",
+      "source": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ, পৃ. ১৫০",
+      "source_reference": "আললুগাতুল আরাবিয়্যাতুল ইত্তিসালিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — অষ্টম ইউনিট, দ্বিতীয় পাঠ: আল-উমামুল মুত্তাহিদাহ, পৃ. ১৫০",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Ittisaliyyah)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "ittisaliyyah",
+        "un"
+      ],
+      "topic": "আল-উমামুল মুত্তাহিদাহ",
+      "original_id": "MADX-D9-06",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ",
+      "class": "Dakhil 9-10",
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "পাঠের অনুসন্ধান (البحث) অনুযায়ী: (ক) দলের ফে'লগুলো (خَلَقَ، سَمِعَ، شَرَحَ، شَكَرَ، قَرَأَ) তিন হরফের, সব হরফই আসল — এগুলো ফে'লে মুজাররাদ। (খ) দলের ফে'লগুলোতে আসল হরফের ওপর এক বা দুই হরফ বাড়ানো হয়েছে — এগুলো ফে'লে মাযীদ।",
+      "fact_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ, পৃ. ১৫",
+      "id": "ACAD-8140",
+      "level": "Dakhil 9-10",
+      "options": [
+        "যে ফে'লে এক বা দুই হরফ বাড়ানো হয়",
+        "যে ফে'ল শুধু ভবিষ্যৎ বোঝায়",
+        "যে ফে'লের কোনো হরফ নেই",
+        "যে ফে'লের সব হরফই আসল (মূল) হরফ"
+      ],
+      "question": "ফে'লে মুজাররাদ কাকে বলে?",
+      "source": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ, পৃ. ১৫",
+      "source_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ, পৃ. ১৫",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Kawaid)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "kawaid",
+        "sarf"
+      ],
+      "topic": "আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ",
+      "original_id": "MADX-D9-07",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ",
+      "class": "Dakhil 9-10",
+      "correct_index": 2,
+      "difficulty": "medium",
+      "explanation": "বইয়ের উদাহরণের তালিকায় شَارَكَ (শারাকা) (খ) দলে আছে — এতে মূল হরফের সঙ্গে আলিফ বাড়ানো হয়েছে, তাই এটি ফে'লে মাযীদ। আর خَلَقَ، سَمِعَ ও قَرَأَ-এর সব হরফ আসল, তাই সেগুলো মুজাররাদ।",
+      "fact_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ, পৃ. ১৫",
+      "id": "ACAD-8141",
+      "level": "Dakhil 9-10",
+      "options": [
+        "خَلَقَ",
+        "سَمِعَ",
+        "شَارَكَ",
+        "قَرَأَ"
+      ],
+      "question": "নিচের কোনটি ফে'লে মাযীদ?",
+      "source": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ, পৃ. ১৫",
+      "source_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ, পৃ. ১৫",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Kawaid)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "kawaid",
+        "sarf"
+      ],
+      "topic": "আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ",
+      "original_id": "MADX-D9-08",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ",
+      "class": "Dakhil 9-10",
+      "correct_index": 0,
+      "difficulty": "easy",
+      "explanation": "ফে'লে মাযীদ হয় যখন আসল (মূল) হরফের ওপর এক বা দুই হরফ বাড়ানো হয় — যেমন شَارَكَ, حَاسَبَ, اِسْتَنْصَرَ।",
+      "fact_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ, পৃ. ১৫",
+      "id": "ACAD-8142",
+      "level": "Dakhil 9-10",
+      "options": [
+        "মূল হরফের সঙ্গে এক বা দুই হরফ বাড়িয়ে",
+        "মূল হরফ কমিয়ে",
+        "হরফ না বদলে",
+        "শুধু হরকত বদলে"
+      ],
+      "question": "ফে'লে মাযীদ কীভাবে গঠিত হয়?",
+      "source": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ, পৃ. ১৫",
+      "source_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — প্রথম বাব, তৃতীয় পাঠ: আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ, পৃ. ১৫",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Kawaid)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "kawaid",
+        "sarf"
+      ],
+      "topic": "আল-ফি'লুল মুজাররাদু ওয়াল মাযীদ",
+      "original_id": "MADX-D9-09",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ",
+      "class": "Dakhil 9-10",
+      "correct_index": 1,
+      "difficulty": "medium",
+      "explanation": "পাঠের কায়দা (القاعدة): যেসব শব্দের শেষে তিনটি হরকত ও তানবীন প্রকাশ পায়, সেগুলো মুনসরিফ। বইয়ের উদাহরণে قُرْآن তিন বাক্যেই তিন হরকত নেয় — রফা, নসব ও জর।",
+      "fact_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ, পৃ. ৭২",
+      "id": "ACAD-8143",
+      "level": "Dakhil 9-10",
+      "options": [
+        "যে ইসমের শেষে কাসরা ও তানবীন কখনো আসে না",
+        "যে ইসমের শেষে তিনটি হরকত ও তানবীন প্রকাশ পায়",
+        "যে ইসম সব সময় মাবনি থাকে",
+        "যে ইসমের কোনো ই'রাব নেই"
+      ],
+      "question": "মুনসরিফ ইসম কাকে বলে?",
+      "source": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ, পৃ. ৭২",
+      "source_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ, পৃ. ৭২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Kawaid)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "kawaid",
+        "nahw"
+      ],
+      "topic": "আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ",
+      "original_id": "MADX-D9-10",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ",
+      "class": "Dakhil 9-10",
+      "correct_index": 2,
+      "difficulty": "medium",
+      "explanation": "পাঠের কায়দা অনুযায়ী যেসব শব্দের শেষে কাসরা ও তানবীন আসে না, সেগুলো গাইরে মুনসরিফ। বইয়ের উদাহরণে إِبْرَاهِيم জর অবস্থায় কাসরার বদলে ফাতহা নেয়।",
+      "fact_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ, পৃ. ৭২",
+      "id": "ACAD-8144",
+      "level": "Dakhil 9-10",
+      "options": [
+        "শেষে তিনটি হরকত ও তানবীন আসে",
+        "শেষে সব সময় কাসরা আসে",
+        "শেষে কাসরা ও তানবীন আসে না; জর অবস্থায় ফাতহা দিয়ে জর হয়",
+        "এটি সব সময় মারফু থাকে"
+      ],
+      "question": "গাইরে মুনসরিফ ইসমের বৈশিষ্ট্য কী?",
+      "source": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ, পৃ. ৭২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Kawaid)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "kawaid",
+        "nahw"
+      ],
+      "topic": "আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ",
+      "source_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ, পৃ. ৭২",
+      "original_id": "MADX-D9-11",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "chapter": "দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ",
+      "class": "Dakhil 9-10",
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "বইয়ের উদাহরণে قُرْآن মুনসরিফ — তিন বাক্যে রফা, নসব ও জর তিন হরকতই নেয়। আর إِبْرَاهِيم গাইরে মুনসরিফ — জর অবস্থায় কাসরার বদলে ফাতহা নেয়।",
+      "fact_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ, পৃ. ৭২",
+      "id": "ACAD-8145",
+      "level": "Dakhil 9-10",
+      "options": [
+        "قُرْآن",
+        "كِتَاب",
+        "بَيْت",
+        "إِبْرَاهِيم"
+      ],
+      "question": "বইয়ের উদাহরণ অনুযায়ী নিচের কোনটি গাইরে মুনসরিফ?",
+      "source": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ, পৃ. ৭২",
+      "source_reference": "কাওয়াইদুল লুগাতিল আরাবিয়্যাহ, দাখিল ৯ম-১০ম শ্রেণি — দ্বিতীয় বাব, পঞ্চম পাঠ: আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ, পৃ. ৭২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Arabic (Kawaid)",
+      "tags": [
+        "madrasa",
+        "arabic",
+        "kawaid",
+        "nahw"
+      ],
+      "topic": "আল-মুনসরিফু ওয়া গাইরুল মুনসরিফ",
+      "original_id": "MADX-D9-12",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    }
+  ]
+}

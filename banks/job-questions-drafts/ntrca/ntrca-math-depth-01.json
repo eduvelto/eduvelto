@@ -1,0 +1,914 @@
+[
+ {
+  "id": "JOBQ-N171",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লসাগু",
+  "difficulty": "easy",
+  "question": "২০ ও ২৮-এর লসাগু কত?",
+  "options": [
+   "৫৬",
+   "১৪০",
+   "২৮০",
+   "৭০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৪০",
+  "explanation": "২০ ও ২৮-এর লসাগু ১৪০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "পাটিগণিত",
+   "লসাগু"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N172",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গসাগু",
+  "difficulty": "easy",
+  "question": "১৮ ও ২৭-এর গসাগু কত?",
+  "options": [
+   "৩",
+   "৬",
+   "৯",
+   "১৮"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৯",
+  "explanation": "১৮ ও ২৭-এর গসাগু ৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "গসাগু",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N173",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "শতকরা",
+  "difficulty": "easy",
+  "question": "৩৫০-এর ২০% কত?",
+  "options": [
+   "৫০",
+   "৬০",
+   "৭০",
+   "৮০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৭০",
+  "explanation": "৩৫০ × ২০/১০০ = ৭০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "পাটিগণিত",
+   "শতকরা"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N174",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "সরল সুদ",
+  "difficulty": "easy",
+  "question": "৭০০০ টাকার ৬% হারে ২ বছরের সরল সুদ কত?",
+  "options": [
+   "৭০০ টাকা",
+   "৮৪০ টাকা",
+   "৯৬০ টাকা",
+   "৪২০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৮৪০ টাকা",
+  "explanation": "সুদ = ৭০০০ × ৬/১০০ × ২ = ৮৪০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "পাটিগণিত",
+   "সুদ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N175",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লাভ-ক্ষতি",
+  "difficulty": "easy",
+  "question": "৬০০ টাকায় কিনে ৭৫০ টাকায় বিক্রি করলে লাভের হার কত?",
+  "options": [
+   "২০%",
+   "২৫%",
+   "৩০%",
+   "১৫%"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৫%",
+  "explanation": "লাভ ১৫০ টাকা; হার = ১৫০/৬০০ × ১০০ = ২৫%।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "পাটিগণিত",
+   "লাভ-ক্ষতি"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N176",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গড়",
+  "difficulty": "easy",
+  "question": "প্রথম ৫টি বিজোড় সংখ্যার গড় কত?",
+  "options": [
+   "৩",
+   "৪",
+   "৫",
+   "৬"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৫",
+  "explanation": "১, ৩, ৫, ৭, ৯-এর যোগফল ২৫; গড় = ২৫ ÷ ৫ = ৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "গড়",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N177",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "অনুপাত",
+  "difficulty": "easy",
+  "question": "দুটি সংখ্যার অনুপাত ২ : ৩ এবং যোগফল ১০০ হলে ছোট সংখ্যাটি কত?",
+  "options": [
+   "৩০",
+   "৪০",
+   "৫০",
+   "৬০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪০",
+  "explanation": "২ + ৩ = ৫ ভাগ; এক ভাগ ২০; ছোট সংখ্যা ২ × ২০ = ৪০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "অনুপাত",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N178",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "easy",
+  "question": "3x − ৫ = ১০ হলে x-এর মান কত?",
+  "options": [
+   "৩",
+   "৪",
+   "৫",
+   "৬"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৫",
+  "explanation": "3x = ১৫; x = ৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "বীজগণিত",
+   "সমীকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N179",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বর্গমূল",
+  "difficulty": "easy",
+  "question": "√১৯৬ = কত?",
+  "options": [
+   "১২",
+   "১৩",
+   "১৪",
+   "১৬"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৪",
+  "explanation": "১৪ × ১৪ = ১৯৬, তাই √১৯৬ = ১৪।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "বর্গমূল",
+   "বীজগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N180",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "medium",
+  "question": "(x − ২)(x + ৩) বিস্তৃত করলে কী পাওয়া যায়?",
+  "options": [
+   "x² + x − ৬",
+   "x² − x − ৬",
+   "x² + ৫x − ৬",
+   "x² − ৫x + ৬"
+  ],
+  "correct_index": 0,
+  "correct_answer": "x² + x − ৬",
+  "explanation": "(x − ২)(x + ৩) = x² + ৩x − ২x − ৬ = x² + x − ৬।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "বিস্তৃতি",
+   "বীজগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N181",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "medium",
+  "question": "x² − ৫x + ৬ = ০ সমীকরণের মূলদ্বয় কত?",
+  "options": [
+   "২ ও ৩",
+   "১ ও ৬",
+   "−২ ও −৩",
+   "২ ও −৩"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২ ও ৩",
+  "explanation": "x² − ৫x + ৬ = (x − ২)(x − ৩) = ০; x = ২, ৩।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "বীজগণিত",
+   "সমীকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N182",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লগারিদম",
+  "difficulty": "medium",
+  "question": "log₁₀ ১০০ = কত?",
+  "options": [
+   "১",
+   "২",
+   "১০",
+   "১০০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২",
+  "explanation": "১০² = ১০০, তাই log₁₀ ১০০ = ২।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "বীজগণিত",
+   "লগারিদম"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N183",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "সূচক",
+  "difficulty": "easy",
+  "question": "২³ × ২² = কত?",
+  "options": [
+   "২⁵",
+   "২⁶",
+   "২¹",
+   "২³"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২⁵",
+  "explanation": "ঘাতের যোগ: ২³ × ২² = ২^(৩+২) = ২⁵।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "বীজগণিত",
+   "সূচক"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N184",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "medium",
+  "question": "x = ৪ হলে x² + ৩x-এর মান কত?",
+  "options": [
+   "২৪",
+   "২৬",
+   "২৮",
+   "৩২"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২৮",
+  "explanation": "x = ৪ হলে x² + ৩x = ১৬ + ১২ = ২৮।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "বীজগণিত",
+   "মান নির্ণয়"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N185",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ক্ষেত্রফল",
+  "difficulty": "easy",
+  "question": "ভূমি ১২ সেমি ও উচ্চতা ৮ সেমি ত্রিভুজের ক্ষেত্রফল কত?",
+  "options": [
+   "৪৮ বর্গ সেমি",
+   "৯৬ বর্গ সেমি",
+   "৪০ বর্গ সেমি",
+   "৩২ বর্গ সেমি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৪৮ বর্গ সেমি",
+  "explanation": "ক্ষেত্রফল = ½ × ১২ × ৮ = ৪৮ বর্গ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "ক্ষেত্রফল",
+   "পরিমিতি"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N186",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "পরিমিতি",
+  "difficulty": "medium",
+  "question": "ব্যাসার্ধ ৭ সেমি বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+  "options": [
+   "৪৪ বর্গ সেমি",
+   "১৫৪ বর্গ সেমি",
+   "১৫৪ সেমি",
+   "৪৯ বর্গ সেমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৫৪ বর্গ সেমি",
+  "explanation": "ক্ষেত্রফল = πr² = ২২/৭ × ৪৯ = ১৫৪ বর্গ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "জ্যামিতি",
+   "পরিমিতি"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N187",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "জ্যামিতি",
+  "difficulty": "easy",
+  "question": "৩৫° কোণের পূরক কোণ কত?",
+  "options": [
+   "৪৫°",
+   "৫৫°",
+   "৬৫°",
+   "১৪৫°"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৫৫°",
+  "explanation": "পূরক কোণের সমষ্টি ৯০°; ৯০ − ৩৫ = ৫৫°।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "কোণ",
+   "জ্যামিতি"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N188",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গতি",
+  "difficulty": "easy",
+  "question": "একটি গাড়ি ১.৫ ঘণ্টায় ৯০ কিমি গেলে গতিবেগ কত?",
+  "options": [
+   "৪৫ কিমি/ঘণ্টা",
+   "৬০ কিমি/ঘণ্টা",
+   "৭৫ কিমি/ঘণ্টা",
+   "৯০ কিমি/ঘণ্টা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৬০ কিমি/ঘণ্টা",
+  "explanation": "গতিবেগ = ৯০ ÷ ১.৫ = ৬০ কিমি/ঘণ্টা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "গতি",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N189",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "কাজ ও সময়",
+  "difficulty": "medium",
+  "question": "A একটি কাজ ১২ দিনে এবং B একই কাজ ৬ দিনে করতে পারে। একসঙ্গে কাজটি কত দিনে শেষ হবে?",
+  "options": [
+   "৩ দিন",
+   "৪ দিন",
+   "৬ দিন",
+   "৯ দিন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪ দিন",
+  "explanation": "১/১২ + ১/৬ = ৩/১২ = ১/৪; সময় = ৪ দিন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "কাজ ও সময়",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N190",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "অনুপাত",
+  "difficulty": "medium",
+  "question": "দুই ব্যক্তির বর্তমান বয়সের অনুপাত ৪ : ৫ এবং যোগফল ৪৫ হলে ছোটজনের বয়স কত?",
+  "options": [
+   "১৫",
+   "২০",
+   "২৫",
+   "৩০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২০",
+  "explanation": "৪ + ৫ = ৯ ভাগ; এক ভাগ ৫; ছোটজন ৪ × ৫ = ২০ বছর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "অনুপাত",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N191",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ছাড়",
+  "difficulty": "easy",
+  "question": "১২০০ টাকার পণ্যে ২৫% ছাড় দিলে দাম কত হবে?",
+  "options": [
+   "৮০০ টাকা",
+   "৯০০ টাকা",
+   "১০০০ টাকা",
+   "৭৫০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৯০০ টাকা",
+  "explanation": "ছাড় ৩০০ টাকা; দাম ১২০০ − ৩০০ = ৯০০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "ছাড়",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N192",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ভগ্নাংশ",
+  "difficulty": "easy",
+  "question": "৪০০-এর ৩/৫ অংশ কত?",
+  "options": [
+   "২০০",
+   "২৪০",
+   "১৬০",
+   "৩০০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৪০",
+  "explanation": "৪০০ × ৩/৫ = ২৪০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "পাটিগণিত",
+   "ভগ্নাংশ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N193",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ধারা",
+  "difficulty": "medium",
+  "question": "২, ৬, ১২, ২০, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "২৪",
+   "৩০",
+   "২৮",
+   "৩৬"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩০",
+  "explanation": "পার্থক্য ৪, ৬, ৮, …; পরের পার্থক্য ১০; ২০ + ১০ = ৩০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "ধারা",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N195",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "সেট",
+  "difficulty": "medium",
+  "question": "A = {১, ২, ৩}, B = {২, ৩, ৪} হলে A ∩ B = কত?",
+  "options": [
+   "{১, ২, ৩, ৪}",
+   "{২, ৩}",
+   "{১, ৪}",
+   "{৩}"
+  ],
+  "correct_index": 1,
+  "correct_answer": "{২, ৩}",
+  "explanation": "ছেদ সেটে শুধু উভয় সেটের সাধারণ উপাদান থাকে: {২, ৩}।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "mathematics",
+   "ntrca",
+   "বীজগণিত",
+   "সেট"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-math-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

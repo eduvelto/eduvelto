@@ -1,0 +1,1104 @@
+[
+ {
+  "id": "JOBQ-L382",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "He ___ a letter now. (write)",
+  "options": [
+   "writes",
+   "is writing",
+   "wrote",
+   "written"
+  ],
+  "correct_index": 1,
+  "correct_answer": "is writing",
+  "explanation": "এখন চলমান কাজ — present continuous is writing।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "right-form"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L383",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "She ___ a book last month. (buy)",
+  "options": [
+   "buys",
+   "buying",
+   "bought",
+   "buy"
+  ],
+  "correct_index": 2,
+  "correct_answer": "bought",
+  "explanation": "last month অতীত — bought।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "right-form"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L384",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "It ___ yesterday. (rain)",
+  "options": [
+   "rains",
+   "rained",
+   "raining",
+   "rain"
+  ],
+  "correct_index": 1,
+  "correct_answer": "rained",
+  "explanation": "yesterday অতীত — rained।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "right-form"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L385",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "They are proud ___ their village.",
+  "options": [
+   "of",
+   "on",
+   "in",
+   "for"
+  ],
+  "correct_index": 0,
+  "correct_answer": "of",
+  "explanation": "'Proud of' is the correct collocation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "preposition"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L386",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "They are waiting ___ the bus stop.",
+  "options": [
+   "at",
+   "in",
+   "on",
+   "of"
+  ],
+  "correct_index": 0,
+  "correct_answer": "at",
+  "explanation": "Waiting at a place takes the preposition 'at'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "preposition"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L387",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "He laughed ___ me.",
+  "options": [
+   "on",
+   "at",
+   "to",
+   "with"
+  ],
+  "correct_index": 1,
+  "correct_answer": "at",
+  "explanation": "কাউকে নিয়ে হাসা অর্থে laugh at ব্যবহৃত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "preposition"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L388",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "easy",
+  "question": "___ United States is a big country.",
+  "options": [
+   "A",
+   "An",
+   "The",
+   "No article"
+  ],
+  "correct_index": 2,
+  "correct_answer": "The",
+  "explanation": "দেশের নামের আগে সাধারণত article বসে না, তবে United States-এর আগে The বসে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "article",
+   "english",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L389",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "easy",
+  "question": "___ Quran is a holy book.",
+  "options": [
+   "A",
+   "An",
+   "The",
+   "No article"
+  ],
+  "correct_index": 2,
+  "correct_answer": "The",
+  "explanation": "ধর্মগ্রন্থের নামের আগে The বসে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "article",
+   "english",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L390",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Angry' is —",
+  "options": [
+   "Calm",
+   "Furious",
+   "Sad",
+   "Happy"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Furious",
+  "explanation": "Angry-এর synonym Furious।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L391",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Silent' is —",
+  "options": [
+   "Noisy",
+   "Quiet",
+   "Loud",
+   "Talkative"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Quiet",
+  "explanation": "Silent-এর synonym Quiet।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L392",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Empty' is —",
+  "options": [
+   "Vacant",
+   "Full",
+   "Blank",
+   "Hollow"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Full",
+  "explanation": "Empty-এর antonym Full।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "antonym",
+   "english",
+   "grade11-20",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L393",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Cheap' is —",
+  "options": [
+   "Low",
+   "Expensive",
+   "Cheap",
+   "Dear"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Expensive",
+  "explanation": "Cheap-এর antonym Expensive।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "antonym",
+   "english",
+   "grade11-20",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L394",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Voice",
+  "difficulty": "easy",
+  "question": "Choose the passive form of: 'She is singing a song.'",
+  "options": [
+   "A song is sung by her.",
+   "A song is being sung by her.",
+   "A song was sung by her.",
+   "A song has been sung by her."
+  ],
+  "correct_index": 1,
+  "correct_answer": "A song is being sung by her.",
+  "explanation": "Present continuous-এর passive: is being + past participle।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "voice"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L396",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Narration",
+  "difficulty": "medium",
+  "question": "He said to me, 'I am ill.' The indirect speech is —",
+  "options": [
+   "He told me that I was ill.",
+   "He told me that he was ill.",
+   "He told me that he is ill.",
+   "He said to me that I am ill."
+  ],
+  "correct_index": 1,
+  "correct_answer": "He told me that he was ill.",
+  "explanation": "said to → told; I → he; am → was।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "narration"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L397",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "easy",
+  "question": "The correct spelling of the word 'believe' is —",
+  "options": [
+   "Beleive",
+   "Believe",
+   "Bilieve",
+   "Beleave"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Believe",
+  "explanation": "সঠিক বানান Believe।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "spelling",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L398",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "easy",
+  "question": "The correct spelling of the word 'receive' is —",
+  "options": [
+   "Recieve",
+   "Receive",
+   "Receeve",
+   "Riceive"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Receive",
+  "explanation": "সঠিক বানান Receive।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "spelling",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L399",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Degree",
+  "difficulty": "medium",
+  "question": "Rahim is the ___ student in the class. (intelligent)",
+  "options": [
+   "more intelligent",
+   "most intelligent",
+   "intelligent",
+   "intelligenter"
+  ],
+  "correct_index": 1,
+  "correct_answer": "most intelligent",
+  "explanation": "Superlative degree: the most intelligent।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "degree",
+   "english",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L400",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Degree",
+  "difficulty": "easy",
+  "question": "This mango is ___ than that one. (sweet)",
+  "options": [
+   "sweet",
+   "sweeter",
+   "sweetest",
+   "more sweet"
+  ],
+  "correct_index": 1,
+  "correct_answer": "sweeter",
+  "explanation": "Comparative degree: sweeter than।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "degree",
+   "english",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L401",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms",
+  "difficulty": "medium",
+  "question": "'At a stretch' means —",
+  "options": [
+   "at last",
+   "continuously",
+   "suddenly",
+   "easily"
+  ],
+  "correct_index": 1,
+  "correct_answer": "continuously",
+  "explanation": "At a stretch অর্থ একটানা / বিরতিহীনভাবে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "idiom",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L402",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms",
+  "difficulty": "medium",
+  "question": "'By hook or by crook' means —",
+  "options": [
+   "by stealing",
+   "by any means",
+   "by force",
+   "by chance"
+  ],
+  "correct_index": 1,
+  "correct_answer": "by any means",
+  "explanation": "By hook or by crook অর্থ যেকোনো উপায়ে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "idiom",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L403",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "One who can do many things is called —",
+  "options": [
+   "Versatile",
+   "Ambidextrous",
+   "Talented",
+   "Skilful"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Versatile",
+  "explanation": "'Versatile' means able to do many different things well.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "one-word",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L404",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "easy",
+  "question": "A person who makes maps is called —",
+  "options": [
+   "Geographer",
+   "Cartographer",
+   "Photographer",
+   "Navigator"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Cartographer",
+  "explanation": "মানচিত্র তৈরি করেন যিনি — Cartographer।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "one-word",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L405",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Translation",
+  "difficulty": "easy",
+  "question": "Choose the correct English of: 'আমি প্রতিদিন ভোরে উঠি।'",
+  "options": [
+   "I get up early every day.",
+   "I got up early every day.",
+   "I am get up early every day.",
+   "I gets up early every day."
+  ],
+  "correct_index": 0,
+  "correct_answer": "I get up early every day.",
+  "explanation": "সঠিক অনুবাদ: I get up early every day।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "translation"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L406",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Subject-verb agreement",
+  "difficulty": "medium",
+  "question": "One of the boys ___ absent.",
+  "options": [
+   "are",
+   "is",
+   "were",
+   "have been"
+  ],
+  "correct_index": 1,
+  "correct_answer": "is",
+  "explanation": "One of-এর পর singular verb — is।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "agreement",
+   "english",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L407",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "The cat jumped ___ the table.",
+  "options": [
+   "in",
+   "on",
+   "at",
+   "of"
+  ],
+  "correct_index": 1,
+  "correct_answer": "on",
+  "explanation": "টেবিলের ওপরে অর্থে on বসে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "preposition"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L408",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English literature",
+  "difficulty": "medium",
+  "question": "Who wrote 'Bleak House'?",
+  "options": [
+   "Charles Dickens",
+   "William Thackeray",
+   "Thomas Hardy",
+   "Charlotte Brontë"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Charles Dickens",
+  "explanation": "'Bleak House' is a novel by Charles Dickens.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "literature",
+   "novel"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L409",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English literature",
+  "difficulty": "medium",
+  "question": "Who is the author of 'Pride and Prejudice'?",
+  "options": [
+   "Charlotte Brontë",
+   "Jane Austen",
+   "Mary Shelley",
+   "Virginia Woolf"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Jane Austen",
+  "explanation": "'Pride and Prejudice' (১৮১৩) জেন অস্টেনের উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "literature",
+   "novel"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L410",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Gender",
+  "difficulty": "easy",
+  "question": "What is the masculine form of 'Widow'?",
+  "options": [
+   "Widower",
+   "Widowess",
+   "Widow",
+   "Man"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Widower",
+  "explanation": "Widow-এর masculine Widower।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "gender",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L411",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Plural number",
+  "difficulty": "medium",
+  "question": "What is the plural form of 'Analysis'?",
+  "options": [
+   "Analysis",
+   "Analyses",
+   "Analysises",
+   "Analysiss"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Analyses",
+  "explanation": "Analysis-এর plural Analyses।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "plural"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english-depth-02.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

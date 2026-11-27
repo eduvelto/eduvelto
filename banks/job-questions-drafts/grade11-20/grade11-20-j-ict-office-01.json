@@ -1,0 +1,2244 @@
+[
+  {
+    "id": "JOBQ-J941",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ কপি করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + C",
+      "Ctrl + Z",
+      "Ctrl + V",
+      "Ctrl + X"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Ctrl + C",
+    "explanation": "কপি করার শর্টকাট Ctrl + C।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J942",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ পেস্ট করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + P",
+      "Ctrl + C",
+      "Ctrl + X",
+      "Ctrl + V"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Ctrl + V",
+    "explanation": "পেস্ট করার শর্টকাট Ctrl + V।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J943",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ কাট করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + X",
+      "Ctrl + S",
+      "Ctrl + V",
+      "Ctrl + C"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Ctrl + X",
+    "explanation": "কাট করার শর্টকাট Ctrl + X।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J944",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ আনডু করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + U",
+      "Ctrl + A",
+      "Ctrl + Y",
+      "Ctrl + Z"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Ctrl + Z",
+    "explanation": "আনডু করার শর্টকাট Ctrl + Z।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J945",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ সংরক্ষণ (Save) করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + P",
+      "Ctrl + O",
+      "Ctrl + S",
+      "Ctrl + N"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Ctrl + S",
+    "explanation": "সংরক্ষণ করার শর্টকাট Ctrl + S।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J946",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ প্রিন্ট করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + P",
+      "Ctrl + N",
+      "Ctrl + S",
+      "Ctrl + F"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Ctrl + P",
+    "explanation": "প্রিন্ট করার শর্টকাট Ctrl + P।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J947",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ সব নির্বাচন (Select All) করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + S",
+      "Ctrl + E",
+      "Ctrl + A",
+      "Ctrl + L"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Ctrl + A",
+    "explanation": "সব নির্বাচন করার শর্টকাট Ctrl + A।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J948",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ বোল্ড করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + I",
+      "Ctrl + U",
+      "Ctrl + B",
+      "Ctrl + D"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Ctrl + B",
+    "explanation": "বোল্ড করার শর্টকাট Ctrl + B।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J949",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ ইটালিক করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + I",
+      "Ctrl + T",
+      "Ctrl + U",
+      "Ctrl + B"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Ctrl + I",
+    "explanation": "ইটালিক করার শর্টকাট Ctrl + I।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J950",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ আন্ডারলাইন করার শর্টকাট কী?",
+    "options": [
+      "Ctrl + B",
+      "Ctrl + U",
+      "Ctrl + I",
+      "Ctrl + D"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Ctrl + U",
+    "explanation": "আন্ডারলাইন করার শর্টকাট Ctrl + U।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J951",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ খোঁজার (Find) শর্টকাট কী?",
+    "options": [
+      "Ctrl + H",
+      "Ctrl + F",
+      "Ctrl + G",
+      "Ctrl + K"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Ctrl + F",
+    "explanation": "খোঁজার শর্টকাট Ctrl + F।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J952",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word-এ নতুন ফাইল খোলার শর্টকাট কী?",
+    "options": [
+      "Ctrl + O",
+      "Ctrl + N",
+      "Ctrl + W",
+      "Ctrl + S"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Ctrl + N",
+    "explanation": "নতুন ফাইল খোলার শর্টকাট Ctrl + N।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J953",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "উইন্ডোজে এক উইন্ডো থেকে অন্য উইন্ডোতে যাওয়ার শর্টকাট কী?",
+    "options": [
+      "Ctrl + Tab",
+      "Shift + Tab",
+      "Alt + Tab",
+      "Alt + F4"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Alt + Tab",
+    "explanation": "উইন্ডো পরিবর্তনের শর্টকাট Alt + Tab।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J954",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "ব্রাউজারে পেজ রিফ্রেশ করার শর্টকাট কী?",
+    "options": [
+      "F2",
+      "F1",
+      "F5",
+      "F9"
+    ],
+    "correct_index": 2,
+    "correct_answer": "F5",
+    "explanation": "রিফ্রেশ করার শর্টকাট F5।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "শর্টকাট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J955",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Word ফাইলের এক্সটেনশন কোনটি?",
+    "options": [
+      ".docx",
+      ".pptx",
+      ".xlsx",
+      ".pdf"
+    ],
+    "correct_index": 0,
+    "correct_answer": ".docx",
+    "explanation": "MS Word ফাইলের এক্সটেনশন .docx।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "ফাইল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J956",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS Excel ফাইলের এক্সটেনশন কোনটি?",
+    "options": [
+      ".pptx",
+      ".docx",
+      ".txt",
+      ".xlsx"
+    ],
+    "correct_index": 3,
+    "correct_answer": ".xlsx",
+    "explanation": "MS Excel ফাইলের এক্সটেনশন .xlsx।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "ফাইল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J957",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Office, Typing and Accounts",
+    "subject_slug": "office-typing-accounts",
+    "topic": "MS Office",
+    "difficulty": "easy",
+    "question": "MS PowerPoint ফাইলের এক্সটেনশন কোনটি?",
+    "options": [
+      ".xlsx",
+      ".docx",
+      ".pdf",
+      ".pptx"
+    ],
+    "correct_index": 3,
+    "correct_answer": ".pptx",
+    "explanation": "MS PowerPoint ফাইলের এক্সটেনশন .pptx।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "office-typing-accounts",
+      "ফাইল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J958",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "URL-এর পূর্ণরূপ কী?",
+    "options": [
+      "Uniform Record Locator",
+      "Universal Record Locator",
+      "Uniform Resource Locator",
+      "Universal Resource Locator"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Uniform Resource Locator",
+    "explanation": "URL = Uniform Resource Locator।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "ইন্টারনেট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J959",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "HTTP-এর পূর্ণরূপ কী?",
+    "options": [
+      "HyperText Transfer Program",
+      "HyperText Transfer Protocol",
+      "HighText Transfer Protocol",
+      "HyperText Transmission Protocol"
+    ],
+    "correct_index": 1,
+    "correct_answer": "HyperText Transfer Protocol",
+    "explanation": "HTTP = HyperText Transfer Protocol।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "ইন্টারনেট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J960",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "WWW-এর পূর্ণরূপ কী?",
+    "options": [
+      "Web World Wide",
+      "Wide World Web",
+      "World Wide Web",
+      "World Web Wide"
+    ],
+    "correct_index": 2,
+    "correct_answer": "World Wide Web",
+    "explanation": "WWW = World Wide Web।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "ইন্টারনেট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J961",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "ই-মেইল ঠিকানায় কোন চিহ্নটি থাকে?",
+    "options": [
+      "#",
+      "@",
+      "%",
+      "$"
+    ],
+    "correct_index": 1,
+    "correct_answer": "@",
+    "explanation": "ই-মেইল ঠিকানায় @ চিহ্ন থাকে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "ইন্টারনেট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J962",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "1 বাইট সমান কত বিট?",
+    "options": [
+      "৪ বিট",
+      "৮ বিট",
+      "৩২ বিট",
+      "১৬ বিট"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৮ বিট",
+    "explanation": "1 বাইট = ৮ বিট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J964",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "কম্পিউটার ভাইরাস থেকে রক্ষার জন্য কী ব্যবহৃত হয়?",
+    "options": [
+      "স্প্রেডশিট",
+      "অ্যান্টিভাইরাস",
+      "ফায়ারওয়াল",
+      "ব্রাউজার"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অ্যান্টিভাইরাস",
+    "explanation": "ভাইরাস থেকে রক্ষার জন্য অ্যান্টিভাইরাস ব্যবহৃত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J965",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "medium",
+    "question": "কম্পিউটারের অপারেটিং সিস্টেম কোনটি?",
+    "options": [
+      "MS Word",
+      "MS Excel",
+      "গুগল ক্রোম",
+      "উইন্ডোজ"
+    ],
+    "correct_index": 3,
+    "correct_answer": "উইন্ডোজ",
+    "explanation": "উইন্ডোজ একটি অপারেটিং সিস্টেম; MS Word ও Excel অ্যাপ্লিকেশন সফটওয়্যার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J966",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "মাউস কী ধরনের ডিভাইস?",
+    "options": [
+      "প্রসেসিং ডিভাইস",
+      "ইনপুট ডিভাইস",
+      "আউটপুট ডিভাইস",
+      "স্টোরেজ ডিভাইস"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ইনপুট ডিভাইস",
+    "explanation": "মাউস একটি ইনপুট ডিভাইস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J967",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "স্পিকার কী ধরনের ডিভাইস?",
+    "options": [
+      "আউটপুট ডিভাইস",
+      "প্রসেসিং ডিভাইস",
+      "স্টোরেজ ডিভাইস",
+      "ইনপুট ডিভাইস"
+    ],
+    "correct_index": 0,
+    "correct_answer": "আউটপুট ডিভাইস",
+    "explanation": "স্পিকার একটি আউটপুট ডিভাইস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J968",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "হার্ড ডিস্ক কী ধরনের ডিভাইস?",
+    "options": [
+      "প্রসেসিং ডিভাইস",
+      "ইনপুট ডিভাইস",
+      "আউটপুট ডিভাইস",
+      "স্টোরেজ ডিভাইস"
+    ],
+    "correct_index": 3,
+    "correct_answer": "স্টোরেজ ডিভাইস",
+    "explanation": "হার্ড ডিস্ক একটি স্টোরেজ ডিভাইস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J969",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "স্ক্যানার কী ধরনের ডিভাইস?",
+    "options": [
+      "প্রসেসিং ডিভাইস",
+      "আউটপুট ডিভাইস",
+      "স্টোরেজ ডিভাইস",
+      "ইনপুট ডিভাইস"
+    ],
+    "correct_index": 3,
+    "correct_answer": "ইনপুট ডিভাইস",
+    "explanation": "স্ক্যানার একটি ইনপুট ডিভাইস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J970",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "কম্পিউটার",
+    "difficulty": "easy",
+    "question": "ওয়েবসাইট দেখার জন্য কোনটি ব্যবহৃত হয়?",
+    "options": [
+      "ই-মেইল",
+      "ব্রাউজার",
+      "ওয়ার্ড প্রসেসর",
+      "স্প্রেডশিট"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ব্রাউজার",
+    "explanation": "ওয়েবসাইট দেখার জন্য ব্রাউজার ব্যবহৃত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "ইন্টারনেট"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J971",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "অফিস সহকারী কাম কম্পিউটার মুদ্রাক্ষরিক পদের জন্য নির্ধারিত কম্পিউটার টাইপিং গতি বাংলা ও ইংরেজিতে কত?",
+    "options": [
+      "বাংলা ২০ ও ইংরেজি ২০ শব্দ/মিনিট",
+      "বাংলা ২৫ ও ইংরেজি ৩০ শব্দ/মিনিট",
+      "বাংলা ১৫ ও ইংরেজি ১৫ শব্দ/মিনিট",
+      "বাংলা ৪৫ ও ইংরেজি ৭০ শব্দ/মিনিট"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বাংলা ২০ ও ইংরেজি ২০ শব্দ/মিনিট",
+    "explanation": "সরকারি বিজ্ঞপ্তি অনুযায়ী অফিস সহকারী কাম কম্পিউটার মুদ্রাক্ষরিক পদের টাইপিং গতি বাংলা ২০ ও ইংরেজি ২০ শব্দ/মিনিট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "টাইপিং"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J972",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "স্টেনো-টাইপিস্ট কাম কম্পিউটার অপারেটর পদের শর্টহ্যান্ড গতি বাংলা ও ইংরেজিতে কত?",
+    "options": [
+      "বাংলা ৩০ ও ইংরেজি ৪০ শব্দ/মিনিট",
+      "বাংলা ২০ ও ইংরেজি ২০ শব্দ/মিনিট",
+      "বাংলা ২৫ ও ইংরেজি ৩০ শব্দ/মিনিট",
+      "বাংলা ৪৫ ও ইংরেজি ৭০ শব্দ/মিনিট"
+    ],
+    "correct_index": 3,
+    "correct_answer": "বাংলা ৪৫ ও ইংরেজি ৭০ শব্দ/মিনিট",
+    "explanation": "সরকারি বিজ্ঞপ্তি অনুযায়ী স্টেনো-টাইপিস্ট পদের শর্টহ্যান্ড গতি বাংলা ৪৫ ও ইংরেজি ৭০ শব্দ/মিনিট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "শর্টহ্যান্ড"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J973",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "স্টেনো-টাইপিস্ট কাম কম্পিউটার অপারেটর পদের টাইপিং গতি বাংলা ও ইংরেজিতে কত?",
+    "options": [
+      "বাংলা ২০ ও ইংরেজি ২০ শব্দ/মিনিট",
+      "বাংলা ১৫ ও ইংরেজি ২৫ শব্দ/মিনিট",
+      "বাংলা ২৫ ও ইংরেজি ৩০ শব্দ/মিনিট",
+      "বাংলা ৪৫ ও ইংরেজি ৭০ শব্দ/মিনিট"
+    ],
+    "correct_index": 2,
+    "correct_answer": "বাংলা ২৫ ও ইংরেজি ৩০ শব্দ/মিনিট",
+    "explanation": "সরকারি বিজ্ঞপ্তি অনুযায়ী স্টেনো-টাইপিস্ট পদের টাইপিং গতি বাংলা ২৫ ও ইংরেজি ৩০ শব্দ/মিনিট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "টাইপিং"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J974",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "ডেটা এন্ট্রি/কন্ট্রোল অপারেটর পদের টাইপিং গতি বাংলা ও ইংরেজিতে কত?",
+    "options": [
+      "বাংলা ২০ ও ইংরেজি ২০ শব্দ/মিনিট",
+      "বাংলা ৪৫ ও ইংরেজি ৭০ শব্দ/মিনিট",
+      "বাংলা ২০ ও ইংরেজি ২৫ শব্দ/মিনিট",
+      "বাংলা ২৫ ও ইংরেজি ৩০ শব্দ/মিনিট"
+    ],
+    "correct_index": 2,
+    "correct_answer": "বাংলা ২০ ও ইংরেজি ২৫ শব্দ/মিনিট",
+    "explanation": "সরকারি বিজ্ঞপ্তি অনুযায়ী ডেটা এন্ট্রি অপারেটর পদের টাইপিং গতি বাংলা ২০ ও ইংরেজি ২৫ শব্দ/মিনিট এবং অপারেটর স্ট্যান্ডার্ড অ্যাপটিটিউড টেস্টে উত্তীর্ণ হতে হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "টাইপিং"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J975",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "স্টেনো-টাইপিস্ট কাম কম্পিউটার অপারেটর পদ কোন গ্রেডের?",
+    "options": [
+      "১৩তম গ্রেড",
+      "২০তম গ্রেড",
+      "১৪তম গ্রেড",
+      "১৬তম গ্রেড"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৩তম গ্রেড",
+    "explanation": "স্টেনো-টাইপিস্ট কাম কম্পিউটার অপারেটর ১৩তম গ্রেডের পদ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "গ্রেড"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J976",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "ডেটা এন্ট্রি/কন্ট্রোল অপারেটর পদ কোন গ্রেডের?",
+    "options": [
+      "২০তম গ্রেড",
+      "১৬তম গ্রেড",
+      "১৪তম গ্রেড",
+      "১৩তম গ্রেড"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৪তম গ্রেড",
+    "explanation": "ডেটা এন্ট্রি/কন্ট্রোল অপারেটর ১৪তম গ্রেডের পদ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "গ্রেড"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J977",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "অফিস সহকারী কাম কম্পিউটার অপারেটর পদ কোন গ্রেডের?",
+    "options": [
+      "২০তম গ্রেড",
+      "১৩তম গ্রেড",
+      "১৪তম গ্রেড",
+      "১৬তম গ্রেড"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৬তম গ্রেড",
+    "explanation": "অফিস সহকারী কাম কম্পিউটার অপারেটর ১৬তম গ্রেডের পদ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "গ্রেড"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J978",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "অফিস সহায়ক পদ কোন গ্রেডের?",
+    "options": [
+      "২০তম গ্রেড",
+      "১৪তম গ্রেড",
+      "১৬তম গ্রেড",
+      "১৩তম গ্রেড"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২০তম গ্রেড",
+    "explanation": "অফিস সহায়ক ২০তম গ্রেডের পদ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "গ্রেড"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J979",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "অফিস সহকারী কাম কম্পিউটার মুদ্রাক্ষরিক পদের ন্যূনতম শিক্ষাগত যোগ্যতা কী?",
+    "options": [
+      "স্নাতক পাস",
+      "এইচএসসি পাস",
+      "এসএসসি পাস",
+      "অষ্টম শ্রেণি পাস"
+    ],
+    "correct_index": 1,
+    "correct_answer": "এইচএসসি পাস",
+    "explanation": "অফিস সহকারী কাম কম্পিউটার মুদ্রাক্ষরিক পদের ন্যূনতম যোগ্যতা এইচএসসি পাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "যোগ্যতা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J980",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "স্টেনো-টাইপিস্ট কাম কম্পিউটার অপারেটর পদের ন্যূনতম শিক্ষাগত যোগ্যতা কী?",
+    "options": [
+      "এসএসসি পাস",
+      "স্নাতকোত্তর পাস",
+      "স্নাতক পাস",
+      "এইচএসসি পাস"
+    ],
+    "correct_index": 2,
+    "correct_answer": "স্নাতক পাস",
+    "explanation": "স্টেনো-টাইপিস্ট পদের ন্যূনতম যোগ্যতা স্নাতক বা সমমানের ডিগ্রি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "যোগ্যতা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J981",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "স্টেনোগ্রাফি কী?",
+    "options": [
+      "সংক্ষিপ্ত লিখন পদ্ধতি",
+      "দ্রুত টাইপিং",
+      "ফাইল সংরক্ষণ",
+      "কম্পিউটার প্রোগ্রামিং"
+    ],
+    "correct_index": 0,
+    "correct_answer": "সংক্ষিপ্ত লিখন পদ্ধতি",
+    "explanation": "স্টেনোগ্রাফি হলো সংক্ষিপ্ত লিখন পদ্ধতি (শর্টহ্যান্ড)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "শর্টহ্যান্ড"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J982",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "ডেটা এন্ট্রি কী?",
+    "options": [
+      "তথ্য কম্পিউটারে প্রবেশ করানো",
+      "তথ্য মুছে ফেলা",
+      "তথ্য ছাপানো",
+      "তথ্য বিশ্লেষণ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "তথ্য কম্পিউটারে প্রবেশ করানো",
+    "explanation": "ডেটা এন্ট্রি হলো তথ্য কম্পিউটারে প্রবেশ করানো।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "ডেটা এন্ট্রি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J983",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "অফিস সহকারীর প্রধান কাজ কী?",
+    "options": [
+      "হিসাব পরীক্ষা করা",
+      "দাপ্তরিক কাজে সহায়তা করা",
+      "আইন প্রণয়ন করা",
+      "বিচার করা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "দাপ্তরিক কাজে সহায়তা করা",
+    "explanation": "অফিস সহকারীর প্রধান কাজ দাপ্তরিক কাজে সহায়তা করা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J984",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "সরকারি অফিসে আগত ডাক নথিভুক্ত করা হয় কোথায়?",
+    "options": [
+      "ক্যাশ বইয়ে",
+      "ডাক রেজিস্টারে",
+      "নোটশিটে",
+      "ফাইলে"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ডাক রেজিস্টারে",
+    "explanation": "আগত ডাক ডাক রেজিস্টারে নথিভুক্ত করা হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J985",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "সরকারি চিঠির উপরে সাধারণত কী থাকে?",
+    "options": [
+      "স্মারক নম্বর ও তারিখ",
+      "শুধু প্রাপকের নাম",
+      "শুধু স্বাক্ষর",
+      "শুধু তারিখ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "স্মারক নম্বর ও তারিখ",
+    "explanation": "সরকারি চিঠির উপরে স্মারক নম্বর ও তারিখ থাকে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J986",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "MS Excel অফিসের কোন কাজে ব্যবহৃত হয়?",
+    "options": [
+      "চিঠি লেখা",
+      "ছবি সম্পাদনা",
+      "প্রেজেন্টেশন",
+      "হিসাব ও তালিকা তৈরি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "হিসাব ও তালিকা তৈরি",
+    "explanation": "MS Excel হিসাব ও তালিকা তৈরির কাজে ব্যবহৃত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J987",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "টাইপিং টেস্টে মূলত কী যাচাই করা হয়?",
+    "options": [
+      "গতি ও নির্ভুলতা",
+      "শুধু বানান",
+      "শুধু গতি",
+      "শুধু নির্ভুলতা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "গতি ও নির্ভুলতা",
+    "explanation": "টাইপিং টেস্টে গতি ও নির্ভুলতা যাচাই করা হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "টাইপিং"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J988",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "বাংলা টাইপিংয়ের জন্য কোন কিবোর্ড লেআউট ব্যবহৃত হয়?",
+    "options": [
+      "কোয়ার্টি",
+      "বিজয় ও অভ্র",
+      "ডভোরাক",
+      "আসকি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "বিজয় ও অভ্র",
+    "explanation": "বাংলা টাইপিংয়ের জন্য বিজয় ও অভ্র কিবোর্ড লেআউট ব্যবহৃত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "টাইপিং"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J989",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "সরকারি চাকরিতে প্রবেশের সর্বোচ্চ বয়সসীমা (সাধারণ প্রার্থী) কত বছর?",
+    "options": [
+      "৩২ বছর",
+      "৩৫ বছর",
+      "২৮ বছর",
+      "৩০ বছর"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৩২ বছর",
+    "explanation": "সরকারি চাকরিতে প্রবেশের সর্বোচ্চ বয়সসীমা সাধারণ প্রার্থীদের জন্য ৩২ বছর।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "নিয়োগ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J990",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "সরকারি অফিসের সাধারণ কর্মঘণ্টা কত?",
+    "options": [
+      "সকাল ৯টা থেকে দুপুর ২টা",
+      "সকাল ৯টা থেকে বিকেল ৫টা",
+      "সকাল ১০টা থেকে বিকেল ৬টা",
+      "সকাল ৮টা থেকে বিকেল ৪টা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "সকাল ৯টা থেকে বিকেল ৫টা",
+    "explanation": "সরকারি অফিসের সাধারণ কর্মঘণ্টা সকাল ৯টা থেকে বিকেল ৫টা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J991",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "অফিসে নথিপত্র সংরক্ষণের পদ্ধতিকে কী বলে?",
+    "options": [
+      "ডাক বিভাজন",
+      "রেজিস্টার করা",
+      "নোট লেখা",
+      "ফাইলিং"
+    ],
+    "correct_index": 3,
+    "correct_answer": "ফাইলিং",
+    "explanation": "নথিপত্র সংরক্ষণের পদ্ধতিকে ফাইলিং বলে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J992",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "কম্পিউটার অপারেটরের কাজের মধ্যে কোনটি পড়ে?",
+    "options": [
+      "বিচারকার্য",
+      "তদন্ত",
+      "ডেটা এন্ট্রি ও রিপোর্ট তৈরি",
+      "আইন প্রণয়ন"
+    ],
+    "correct_index": 2,
+    "correct_answer": "ডেটা এন্ট্রি ও রিপোর্ট তৈরি",
+    "explanation": "কম্পিউটার অপারেটরের কাজ ডেটা এন্ট্রি, রিপোর্ট তৈরি ও ই-মেইল পরিচালনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J993",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "সরকারি দপ্তরে ই-নথি ব্যবস্থা কীসের জন্য ব্যবহৃত হয়?",
+    "options": [
+      "হিসাব পরীক্ষা",
+      "ডাক বিতরণ",
+      "কাগজের ফাইল ছাপানো",
+      "ডিজিটাল ফাইল পরিচালনা"
+    ],
+    "correct_index": 3,
+    "correct_answer": "ডিজিটাল ফাইল পরিচালনা",
+    "explanation": "ই-নথি ব্যবস্থা ডিজিটাল ফাইল পরিচালনার জন্য ব্যবহৃত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J994",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "সরকারি চিঠিতে 'বিষয়' কেন লেখা হয়?",
+    "options": [
+      "চিঠির মূল বিষয় বোঝানোর জন্য",
+      "প্রাপকের নাম জানানোর জন্য",
+      "তারিখ জানানোর জন্য",
+      "স্বাক্ষর যাচাইয়ের জন্য"
+    ],
+    "correct_index": 0,
+    "correct_answer": "চিঠির মূল বিষয় বোঝানোর জন্য",
+    "explanation": "সরকারি চিঠিতে 'বিষয়' চিঠির মূল বিষয় বোঝানোর জন্য লেখা হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J995",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "অফিসের গোপনীয় নথি সম্পর্কে অফিস সহকারীর দায়িত্ব কী?",
+    "options": [
+      "নথি ফেলে দেওয়া",
+      "সবাইকে জানানো",
+      "গোপনীয়তা রক্ষা করা",
+      "নথি বাড়ি নিয়ে যাওয়া"
+    ],
+    "correct_index": 2,
+    "correct_answer": "গোপনীয়তা রক্ষা করা",
+    "explanation": "অফিসের গোপনীয় নথির গোপনীয়তা রক্ষা করা অফিস সহকারীর দায়িত্ব।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J996",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "MS Word-এ সরকারি চিঠির কী তৈরি করা যায়?",
+    "options": [
+      "প্রেজেন্টেশন",
+      "খসড়া",
+      "ডেটাবেজ",
+      "হিসাব"
+    ],
+    "correct_index": 1,
+    "correct_answer": "খসড়া",
+    "explanation": "MS Word-এ সরকারি চিঠির খসড়া তৈরি করা যায়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J997",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "সরকারি অফিসে ছুটির আবেদন কার কাছে করতে হয়?",
+    "options": [
+      "জনগণের কাছে",
+      "সহকর্মীর কাছে",
+      "পিয়নের কাছে",
+      "সংশ্লিষ্ট কর্তৃপক্ষের কাছে"
+    ],
+    "correct_index": 3,
+    "correct_answer": "সংশ্লিষ্ট কর্তৃপক্ষের কাছে",
+    "explanation": "ছুটির আবেদন সংশ্লিষ্ট কর্তৃপক্ষের কাছে করতে হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J998",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "দাপ্তরিক চিঠিতে বাংলা বানান শুদ্ধ রাখা কেন গুরুত্বপূর্ণ?",
+    "options": [
+      "ফাইল বড় করার জন্য",
+      "টাইপিং গতি বাড়ানোর জন্য",
+      "চিঠির নির্ভুলতা ও গ্রহণযোগ্যতার জন্য",
+      "শুধু সৌন্দর্যের জন্য"
+    ],
+    "correct_index": 2,
+    "correct_answer": "চিঠির নির্ভুলতা ও গ্রহণযোগ্যতার জন্য",
+    "explanation": "দাপ্তরিক চিঠির নির্ভুলতা ও গ্রহণযোগ্যতার জন্য বাংলা বানান শুদ্ধ রাখা গুরুত্বপূর্ণ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J999",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "medium",
+    "question": "সরকারি কর্মচারীদের আচরণবিধি কোন বিধিমালায় নির্ধারিত?",
+    "options": [
+      "সরকারি কর্মচারী (শৃঙ্খলা) বিধিমালা, ২০১৮",
+      "বাংলাদেশ সার্ভিস রুলস",
+      "সরকারি কর্মচারী (আচরণ) বিধিমালা, ১৯৭৯",
+      "সচিবালয় নির্দেশমালা"
+    ],
+    "correct_index": 2,
+    "correct_answer": "সরকারি কর্মচারী (আচরণ) বিধিমালা, ১৯৭৯",
+    "explanation": "সরকারি কর্মচারীদের আচরণবিধি সরকারি কর্মচারী (আচরণ) বিধিমালা, ১৯৭৯-এ নির্ধারিত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J1000",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "ICT and Computer",
+    "subject_slug": "ict-computer",
+    "topic": "অফিস জ্ঞান",
+    "difficulty": "easy",
+    "question": "অফিসে ফটোকপি ও স্ক্যানার কী কাজে ব্যবহৃত হয়?",
+    "options": [
+      "ই-মেইল পাঠাতে",
+      "হিসাব তৈরিতে",
+      "টাইপিংয়ে",
+      "নথির অনুলিপি তৈরি ও সংরক্ষণে"
+    ],
+    "correct_index": 3,
+    "correct_answer": "নথির অনুলিপি তৈরি ও সংরক্ষণে",
+    "explanation": "ফটোকপি ও স্ক্যানার নথির অনুলিপি তৈরি ও সংরক্ষণে ব্যবহৃত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB তথ্য ও যোগাযোগ প্রযুক্তি (ষষ্ঠ–দ্বাদশ শ্রেণি), সরকারি নিয়োগ বিজ্ঞপ্তি (মন্ত্রণালয়/বিভাগ) ও প্রমিত কম্পিউটার জ্ঞান",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "ict-computer",
+      "অফিস জ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-ict-office-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

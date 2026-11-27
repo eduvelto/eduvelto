@@ -1,0 +1,876 @@
+[
+ {
+  "id": "JOBQ-N121",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'নিষ্কলঙ্ক' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "নিঃ + কলঙ্ক",
+   "নি + কলঙ্ক",
+   "নিষ্ + কলঙ্ক",
+   "নিঃ + অলঙ্ক"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নিঃ + কলঙ্ক",
+  "explanation": "নিঃ + কলঙ্ক = নিষ্কলঙ্ক (বিসর্গ সন্ধি)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N122",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'উজ্জ্বল' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "উ + জ্জ্বল",
+   "উৎ + জ্বল",
+   "উজ + জ্বল",
+   "উজ্জ + অল"
+  ],
+  "correct_index": 1,
+  "correct_answer": "উৎ + জ্বল",
+  "explanation": "উৎ + জ্বল = উজ্জ্বল (ত্ স্থানে জ্ হয়)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N123",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'সদৈব' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "সদা + এব",
+   "সদ + ঐব",
+   "সৎ + এব",
+   "সদা + ঐব"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সদা + এব",
+  "explanation": "সদা + এব = সদৈব (আ + এ = ঐ)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N124",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'হাতঘড়ি' কোন সমাসের উদাহরণ?",
+  "options": [
+   "দ্বন্দ্ব",
+   "তৎপুরুষ",
+   "মধ্যপদলোপী কর্মধারয়",
+   "দ্বিগু"
+  ],
+  "correct_index": 2,
+  "correct_answer": "মধ্যপদলোপী কর্মধারয়",
+  "explanation": "হাতে পরার ঘড়ি — মধ্যবর্তী পদ লোপ পেয়ে মধ্যপদলোপী কর্মধারয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N125",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "easy",
+  "question": "'হাতঘড়ি' কোন সমাস?",
+  "options": [
+   "দ্বিগু",
+   "কর্মধারয়",
+   "তৎপুরুষ",
+   "দ্বন্দ্ব"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কর্মধারয়",
+  "explanation": "'হাতঘড়ি' মধ্যপদলোপী কর্মধারয় সমাস (হাতে পরার ঘড়ি)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N126",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "easy",
+  "question": "'চতুর্ভুজ' কোন সমাস?",
+  "options": [
+   "দ্বিগু",
+   "তৎপুরুষ",
+   "কর্মধারয়",
+   "বহুব্রীহি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "দ্বিগু",
+  "explanation": "'চতুর্ভুজ' দ্বিগু সমাস (চার ভুজের সমাহার)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N127",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "medium",
+  "question": "'বুলবুলিতে ধান খেয়েছে' — 'বুলবুলিতে' কোন কারক?",
+  "options": [
+   "কর্তৃ",
+   "কর্ম",
+   "করণ",
+   "অপাদান"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কর্তৃ",
+  "explanation": "খাওয়ার কাজটি বুলবুলি করেছে — কর্তৃকারক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "কারক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N128",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "easy",
+  "question": "'পাখি আকাশে উড়ে' — 'আকাশে' কোন কারক?",
+  "options": [
+   "করণ",
+   "অধিকরণ",
+   "অপাদান",
+   "সম্প্রদান"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অধিকরণ",
+  "explanation": "ওড়ার স্থান আকাশ — অধিকরণ কারক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "কারক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N129",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "easy",
+  "question": "'শিক্ষককে সম্মান কর' — 'শিক্ষককে' কোন কারক?",
+  "options": [
+   "কর্ম",
+   "সম্প্রদান",
+   "করণ",
+   "অধিকরণ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সম্প্রদান",
+  "explanation": "সম্মান স্বত্ব ত্যাগ করে দেওয়া বোঝায় — সম্প্রদান কারক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "কারক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N130",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'ধরি মাছ না ছুঁই পানি' বাগধারাটির অর্থ কী?",
+  "options": [
+   "সাহসী কাজ করা",
+   "কৌশলে কাজ করা",
+   "ভয়ে পালানো",
+   "অলসভাবে থাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কৌশলে কাজ করা",
+  "explanation": "ধরি মাছ না ছুঁই পানি অর্থ কৌশলে কাজ করা (দায় এড়িয়ে সুবিধা নেওয়া)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "বাগধারা",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N132",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বানান",
+  "difficulty": "medium",
+  "question": "'দূরবীক্ষণ' শব্দের শুদ্ধ রূপ কোনটি?",
+  "options": [
+   "দূরবীক্ষণ",
+   "দুরবীক্ষণ",
+   "দূরবিক্ষণ",
+   "দুরবিক্ষণ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "দূরবীক্ষণ",
+  "explanation": "'দূরবীক্ষণ' শুদ্ধ বানান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "বানান",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N133",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বানান",
+  "difficulty": "medium",
+  "question": "'স্বতঃস্ফূর্ত' শব্দের শুদ্ধ বানান কোনটি?",
+  "options": [
+   "স্বতঃস্ফূর্ত",
+   "সতঃস্ফূর্ত",
+   "স্বতঃস্ফুর্ত",
+   "স্বতস্ফূর্ত"
+  ],
+  "correct_index": 0,
+  "correct_answer": "স্বতঃস্ফূর্ত",
+  "explanation": "শুদ্ধ বানান 'স্বতঃস্ফূর্ত'।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "বানান",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N134",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "নিচের কোনটি 'জল' শব্দের সমার্থক?",
+  "options": [
+   "সলিল",
+   "মেঘ",
+   "বৃষ্টি",
+   "নদী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সলিল",
+  "explanation": "'জল' শব্দের সমার্থক শব্দ 'সলিল'।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ব্যাকরণ",
+   "সমার্থক"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N135",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "নিচের কোনটি 'ফুল' শব্দের সমার্থক?",
+  "options": [
+   "পুষ্প",
+   "পাতা",
+   "ডাল",
+   "কাঁটা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পুষ্প",
+  "explanation": "'ফুল' শব্দের সমার্থক শব্দ 'পুষ্প'।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ব্যাকরণ",
+   "সমার্থক"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N136",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীতার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "‘শীত’-এর বিপরীতার্থক শব্দ কোনটি?",
+  "options": [
+   "গ্রীষ্ম",
+   "বর্ষা",
+   "শরৎ",
+   "হেমন্ত"
+  ],
+  "correct_index": 0,
+  "correct_answer": "গ্রীষ্ম",
+  "explanation": "‘শীত’-এর বিপরীতার্থক শব্দ গ্রীষ্ম।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "বিপরীতার্থক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N137",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীতার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "'অন্ধকার' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "রাত",
+   "আলো",
+   "ছায়া",
+   "কালো"
+  ],
+  "correct_index": 1,
+  "correct_answer": "আলো",
+  "explanation": "অন্ধকারের বিপরীত আলো।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "বিপরীতার্থক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N138",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "easy",
+  "question": "‘ইতিহাস রচনা করেন যিনি’ — এক কথায় প্রকাশ কী?",
+  "options": [
+   "ঐতিহাসিক",
+   "কবি",
+   "গবেষক",
+   "লেখক"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ঐতিহাসিক",
+  "explanation": "ইতিহাস রচনা করেন যিনি, তাঁকে এক কথায় ঐতিহাসিক বলে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "এককথায়",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N139",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "'যা কখনো হয় না' — এক কথায় কী হবে?",
+  "options": [
+   "সম্ভব",
+   "অসম্ভব",
+   "অসাধ্য",
+   "অলৌকিক"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অসম্ভব",
+  "explanation": "যা কখনো হয় না — অসম্ভব।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "এককথায়",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N140",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "easy",
+  "question": "'বলাকা' কাব্যগ্রন্থের রচয়িতা কে?",
+  "options": [
+   "রবীন্দ্রনাথ ঠাকুর",
+   "কাজী নজরুল ইসলাম",
+   "জসীমউদ্দীন",
+   "সুকান্ত ভট্টাচার্য"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রবীন্দ্রনাথ ঠাকুর",
+  "explanation": "'বলাকা' কাব্যগ্রন্থের রচয়িতা রবীন্দ্রনাথ ঠাকুর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "কবিতা",
+   "সাহিত্য"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N141",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "medium",
+  "question": "বাংলা সাহিত্যের প্রাচীনতম নিদর্শন কোনটি?",
+  "options": [
+   "শ্রীকৃষ্ণকীর্তন",
+   "চর্যাপদ",
+   "মঙ্গলকাব্য",
+   "বৈষ্ণব পদাবলি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "চর্যাপদ",
+  "explanation": "চর্যাপদ (আনুমানিক ৬৫০–১২০০ খ্রি.) বাংলা সাহিত্যের প্রাচীনতম নিদর্শন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ইতিহাস",
+   "সাহিত্য"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N142",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "medium",
+  "question": "'মেঘনাদবধ কাব্য' রচনা করেন কে?",
+  "options": [
+   "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+   "মাইকেল মধুসূদন দত্ত",
+   "রবীন্দ্রনাথ ঠাকুর",
+   "ঈশ্বরচন্দ্র বিদ্যাসাগর"
+  ],
+  "correct_index": 1,
+  "correct_answer": "মাইকেল মধুসূদন দত্ত",
+  "explanation": "'মেঘনাদবধ কাব্য' (১৮৬১) মাইকেল মধুসূদন দত্তের মহাকাব্য।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "কাব্য",
+   "সাহিত্য"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N143",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "medium",
+  "question": "'দেনাপাওনা' উপন্যাসের রচয়িতা কে?",
+  "options": [
+   "শরৎচন্দ্র চট্টোপাধ্যায়",
+   "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+   "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+   "তারাশঙ্কর বন্দ্যোপাধ্যায়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "শরৎচন্দ্র চট্টোপাধ্যায়",
+  "explanation": "'দেনাপাওনা' উপন্যাসের রচয়িতা শরৎচন্দ্র চট্টোপাধ্যায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "উপন্যাস",
+   "সাহিত্য"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N144",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "medium",
+  "question": "‘শর্মিষ্ঠা’ নাটকের রচয়িতা কে?",
+  "options": [
+   "মাইকেল মধুসূদন দত্ত",
+   "দীনবন্ধু মিত্র",
+   "রবীন্দ্রনাথ ঠাকুর",
+   "বঙ্কিমচন্দ্র চট্টোপাধ্যায়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মাইকেল মধুসূদন দত্ত",
+  "explanation": "মাইকেল মধুসূদন দত্তের ‘শর্মিষ্ঠা’ (১৮৫৯) বাংলা ভাষার প্রথম মৌলিক নাটক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "bangla",
+   "ntrca",
+   "ইতিহাস",
+   "সাহিত্য"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-bangla-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

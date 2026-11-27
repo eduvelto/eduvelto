@@ -1,0 +1,353 @@
+[
+  {
+    "id": "JOBQ-0181",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সুশাসন",
+    "difficulty": "easy",
+    "question": "'Good Governance' শব্দের বাংলা অর্থ কী?",
+    "options": [
+      "সুশৃঙ্খল সরকার",
+      "সুশাসন",
+      "জনপ্রশাসন",
+      "সুন্দর শাসন"
+    ],
+    "correct_index": 1,
+    "correct_answer": "সুশাসন",
+    "explanation": "'Good Governance'-এর বাংলা প্রতিশব্দ সুশাসন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Constitution of Bangladesh (1972) and standard good-governance concepts (transparency, accountability, rule of law)",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Ethics, Values and Good Governance 15 of 200",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "good-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-ethics-values-and-good-governance.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0182",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সংবিধান",
+    "difficulty": "medium",
+    "question": "সংবিধানের কোন অনুচ্ছেদে গণতন্ত্র ও মানবাধিকারের কথা বলা হয়েছে?",
+    "options": [
+      "১১ নং অনুচ্ছেদ",
+      "১৯ নং অনুচ্ছেদ",
+      "৩ নং অনুচ্ছেদ",
+      "৭ নং অনুচ্ছেদ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১১ নং অনুচ্ছেদ",
+    "explanation": "১১ নং অনুচ্ছেদে বলা হয়েছে প্রজাতন্ত্র হবে একটি গণতন্ত্র, যেখানে মৌলিক মানবাধিকার ও স্বাধীনতার নিশ্চয়তা থাকবে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Constitution of Bangladesh (1972) and standard good-governance concepts (transparency, accountability, rule of law)",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Ethics, Values and Good Governance 15 of 200",
+    "tags": [
+      "bcs",
+      "constitution",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-ethics-values-and-good-governance.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0183",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সুশাসন",
+    "difficulty": "easy",
+    "question": "স্বচ্ছতা (Transparency) বলতে কী বোঝায়?",
+    "options": [
+      "দ্রুত কাজ করা",
+      "কঠোর নিয়ম মানা",
+      "তথ্য ও সিদ্ধান্ত সবার কাছে উন্মুক্ত থাকা",
+      "গোপনে সিদ্ধান্ত নেওয়া"
+    ],
+    "correct_index": 2,
+    "correct_answer": "তথ্য ও সিদ্ধান্ত সবার কাছে উন্মুক্ত থাকা",
+    "explanation": "স্বচ্ছতা মানে সরকারি তথ্য ও সিদ্ধান্ত প্রক্রিয়া জনগণের কাছে উন্মুক্ত ও বোধগম্য থাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Constitution of Bangladesh (1972) and standard good-governance concepts (transparency, accountability, rule of law)",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Ethics, Values and Good Governance 15 of 200",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "good-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-ethics-values-and-good-governance.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0184",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সুশাসন",
+    "difficulty": "easy",
+    "question": "জবাবদিহিতা (Accountability) বলতে কী বোঝায়?",
+    "options": [
+      "নিজের কাজের জন্য দায় স্বীকার করা",
+      "নিয়ম ভাঙা",
+      "অন্যকে দোষ দেওয়া",
+      "আদেশ মানা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "নিজের কাজের জন্য দায় স্বীকার করা",
+    "explanation": "জবাবদিহিতা মানে নিজের সিদ্ধান্ত ও কাজের জন্য দায় স্বীকার করা এবং ব্যাখ্যা দিতে প্রস্তুত থাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Constitution of Bangladesh (1972) and standard good-governance concepts (transparency, accountability, rule of law)",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Ethics, Values and Good Governance 15 of 200",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "good-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-ethics-values-and-good-governance.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0185",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সুশাসন",
+    "difficulty": "medium",
+    "question": "নিচের কোনটি সুশাসনের অন্যতম স্তম্ভ?",
+    "options": [
+      "দুর্নীতি",
+      "গোপনীয়তা",
+      "জবাবদিহিতা",
+      "স্বেচ্ছাচারিতা"
+    ],
+    "correct_index": 2,
+    "correct_answer": "জবাবদিহিতা",
+    "explanation": "সুশাসনের স্তম্ভগুলোর মধ্যে জবাবদিহিতা, স্বচ্ছতা, অংশগ্রহণ ও আইনের শাসন অন্যতম।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Constitution of Bangladesh (1972) and standard good-governance concepts (transparency, accountability, rule of law)",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Ethics, Values and Good Governance 15 of 200",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "good-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-ethics-values-and-good-governance.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0186",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সংবিধান",
+    "difficulty": "medium",
+    "question": "সংবিধানের কোন অনুচ্ছেদে আইনের দৃষ্টিতে সমতার কথা বলা হয়েছে?",
+    "options": [
+      "৭ নং অনুচ্ছেদ",
+      "৩৯ নং অনুচ্ছেদ",
+      "১১ নং অনুচ্ছেদ",
+      "২৭ নং অনুচ্ছেদ"
+    ],
+    "correct_index": 3,
+    "correct_answer": "২৭ নং অনুচ্ছেদ",
+    "explanation": "২৭ নং অনুচ্ছেদে বলা হয়েছে সকল নাগরিক আইনের দৃষ্টিতে সমান।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Constitution of Bangladesh (1972) and standard good-governance concepts (transparency, accountability, rule of law)",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Ethics, Values and Good Governance 15 of 200",
+    "tags": [
+      "bcs",
+      "constitution",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-ethics-values-and-good-governance.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0187",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সংবিধান",
+    "difficulty": "medium",
+    "question": "সংবিধানের কোন অনুচ্ছেদে চিন্তা, বিবেক ও বাক-স্বাধীনতার কথা বলা হয়েছে?",
+    "options": [
+      "২৭ নং অনুচ্ছেদ",
+      "১৯ নং অনুচ্ছেদ",
+      "২৮ নং অনুচ্ছেদ",
+      "৩৯ নং অনুচ্ছেদ"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৩৯ নং অনুচ্ছেদ",
+    "explanation": "৩৯ নং অনুচ্ছেদে চিন্তা ও বিবেকের স্বাধীনতা এবং বাক ও ভাবপ্রকাশের স্বাধীনতার নিশ্চয়তা দেওয়া হয়েছে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Constitution of Bangladesh (1972) and standard good-governance concepts (transparency, accountability, rule of law)",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Ethics, Values and Good Governance 15 of 200",
+    "tags": [
+      "bcs",
+      "constitution",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-ethics-values-and-good-governance.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0188",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "মূল্যবোধ",
+    "difficulty": "easy",
+    "question": "নিচের কোনটি একজন সরকারি কর্মচারীর জন্য গুরুত্বপূর্ণ নৈতিক গুণ?",
+    "options": [
+      "গোপনীয়তা রক্ষা না করা",
+      "সততা",
+      "পক্ষপাত",
+      "স্বজনপ্রীতি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "সততা",
+    "explanation": "সততা সরকারি কর্মচারীর মৌলিক নৈতিক গুণ; পক্ষপাত ও স্বজনপ্রীতি নৈতিকতার পরিপন্থী।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Constitution of Bangladesh (1972) and standard good-governance concepts (transparency, accountability, rule of law)",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Ethics, Values and Good Governance 15 of 200",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "values"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-ethics-values-and-good-governance.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0189",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "দুর্নীতি প্রতিরোধ",
+    "difficulty": "medium",
+    "question": "দুর্নীতি প্রতিরোধে নিচের কোনটি সবচেয়ে কার্যকর?",
+    "options": [
+      "স্বচ্ছতা ও জবাবদিহিতা নিশ্চিত করা",
+      "একক সিদ্ধান্ত নেওয়া",
+      "তদারকি কমানো",
+      "তথ্য গোপন রাখা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "স্বচ্ছতা ও জবাবদিহিতা নিশ্চিত করা",
+    "explanation": "স্বচ্ছতা ও জবাবদিহিতা দুর্নীতির সুযোগ কমায়; তথ্য গোপন রাখলে দুর্নীতি বাড়ে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Constitution of Bangladesh (1972) and standard good-governance concepts (transparency, accountability, rule of law)",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Ethics, Values and Good Governance 15 of 200",
+    "tags": [
+      "anti-corruption",
+      "bcs",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-ethics-values-and-good-governance.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

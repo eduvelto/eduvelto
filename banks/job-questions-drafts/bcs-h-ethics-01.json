@@ -1,0 +1,1864 @@
+[
+ {
+  "id": "JOBQ-H1029",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — সততা",
+  "difficulty": "easy",
+  "question": "সততা (Integrity) বলতে কী বোঝায়?",
+  "options": [
+   "আইন ভঙ্গ করা",
+   "গোপনীয়তা রক্ষা না করা",
+   "স্বার্থপরতা",
+   "নৈতিক নীতির প্রতি অবিচল থাকা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "নৈতিক নীতির প্রতি অবিচল থাকা",
+  "explanation": "সততা হলো নৈতিক নীতি ও সত্যের প্রতি অবিচল থাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1030",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — জবাবদিহিতা",
+  "difficulty": "easy",
+  "question": "কোন প্রতিষ্ঠানটি সরকারি হিসাব পরীক্ষা করে?",
+  "options": [
+   "বাংলাদেশ ব্যাংক",
+   "মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রক",
+   "দুর্নীতি দমন কমিশন",
+   "নির্বাচন কমিশন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রক",
+  "explanation": "মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রক (CAG) সরকারি হিসাব পরীক্ষা করেন, যা জবাবদিহিতার একটি গুরুত্বপূর্ণ উপায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1031",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — স্বচ্ছতা",
+  "difficulty": "easy",
+  "question": "তথ্য অধিকার আইন অনুযায়ী তথ্য চাইলে কত দিনের মধ্যে দিতে হয়?",
+  "options": [
+   "১০ দিন",
+   "২০ দিন",
+   "৩০ দিন",
+   "৬০ দিন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২০ দিন",
+  "explanation": "তথ্য অধিকার আইন অনুযায়ী তথ্য চাইলে ২০ কর্মদিবসের মধ্যে দিতে হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1032",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — নিরপেক্ষতা",
+  "difficulty": "easy",
+  "question": "নিরপেক্ষতা (Impartiality) বলতে কী বোঝায়?",
+  "options": [
+   "পক্ষপাতহীনভাবে সবার প্রতি সমান আচরণ",
+   "নিজের পক্ষে সিদ্ধান্ত",
+   "স্বজনপ্রীতি",
+   "ঘুষ গ্রহণ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পক্ষপাতহীনভাবে সবার প্রতি সমান আচরণ",
+  "explanation": "নিরপেক্ষতা হলো কোনো পক্ষপাত ছাড়া সবার প্রতি সমান আচরণ করা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1033",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — বৈশিষ্ট্য",
+  "difficulty": "easy",
+  "question": "সুশাসনের প্রধান বৈশিষ্ট্য কোনটি?",
+  "options": [
+   "গোপনীয়তা",
+   "স্বেচ্ছাচারিতা",
+   "পক্ষপাত",
+   "অংশগ্রহণ, আইনের শাসন, স্বচ্ছতা ও জবাবদিহিতা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "অংশগ্রহণ, আইনের শাসন, স্বচ্ছতা ও জবাবদিহিতা",
+  "explanation": "সুশাসনের বৈশিষ্ট্য: অংশগ্রহণ, আইনের শাসন, স্বচ্ছতা, জবাবদিহিতা, সাড়াদানশীলতা, সমতা ও কার্যকারিতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1034",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — আইনের শাসন",
+  "difficulty": "easy",
+  "question": "আইনের শাসন (Rule of Law) বলতে কী বোঝায়?",
+  "options": [
+   "আইন শুধু সাধারণ মানুষের জন্য",
+   "আইন ছাড়া শাসন",
+   "আইন সবার জন্য সমানভাবে প্রযোজ্য",
+   "শাসকের ইচ্ছাই আইন"
+  ],
+  "correct_index": 2,
+  "correct_answer": "আইন সবার জন্য সমানভাবে প্রযোজ্য",
+  "explanation": "আইনের শাসন মানে আইন সবার জন্য সমানভাবে প্রযোজ্য, কেউ আইনের ঊর্ধ্বে নয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1035",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — দুর্নীতি",
+  "difficulty": "easy",
+  "question": "দুর্নীতি বলতে কী বোঝায়?",
+  "options": [
+   "জবাবদিহিতা",
+   "ব্যক্তিগত লাভের জন্য সরকারি ক্ষমতার অপব্যবহার",
+   "আইন মেনে চলা",
+   "স্বচ্ছতা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ব্যক্তিগত লাভের জন্য সরকারি ক্ষমতার অপব্যবহার",
+  "explanation": "দুর্নীতি হলো ব্যক্তিগত লাভের জন্য সরকারি ক্ষমতা বা পদের অপব্যবহার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1036",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — দুর্নীতি",
+  "difficulty": "medium",
+  "question": "স্বজনপ্রীতি (Nepotism) কী?",
+  "options": [
+   "আত্মীয়দের অযোগ্য হলেও সুবিধা দেওয়া",
+   "যোগ্যতার ভিত্তিতে নিয়োগ",
+   "স্বচ্ছ নিয়োগ",
+   "মেধার মূল্যায়ন"
+  ],
+  "correct_index": 0,
+  "correct_answer": "আত্মীয়দের অযোগ্য হলেও সুবিধা দেওয়া",
+  "explanation": "স্বজনপ্রীতি হলো আত্মীয়স্বজনকে অযোগ্য হলেও সুবিধা দেওয়া।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1037",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — স্বার্থের সংঘাত",
+  "difficulty": "medium",
+  "question": "স্বার্থের সংঘাত (Conflict of Interest) কী?",
+  "options": [
+   "স্বচ্ছ সিদ্ধান্ত",
+   "নিরপেক্ষতা",
+   "জবাবদিহিতা",
+   "ব্যক্তিগত স্বার্থ ও দায়িত্বের মধ্যে বিরোধ"
+  ],
+  "correct_index": 3,
+  "correct_answer": "ব্যক্তিগত স্বার্থ ও দায়িত্বের মধ্যে বিরোধ",
+  "explanation": "স্বার্থের সংঘাত হলো ব্যক্তিগত স্বার্থ দায়িত্ব পালনে বাধা দেওয়ার পরিস্থিতি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1038",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — হুইসেলব্লোয়িং",
+  "difficulty": "medium",
+  "question": "হুইসেলব্লোয়িং (Whistleblowing) কী?",
+  "options": [
+   "অনিয়ম লুকানো",
+   "ঘুষ দেওয়া",
+   "অনিয়মের তথ্য কর্তৃপক্ষকে জানানো",
+   "গোপন তথ্য ফাঁস করে লাভ করা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "অনিয়মের তথ্য কর্তৃপক্ষকে জানানো",
+  "explanation": "হুইসেলব্লোয়িং হলো প্রতিষ্ঠানের অনিয়মের তথ্য কর্তৃপক্ষের কাছে প্রকাশ করা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1039",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — আচরণবিধি",
+  "difficulty": "easy",
+  "question": "আচরণবিধি (Code of Conduct) কী?",
+  "options": [
+   "ছুটির নিয়ম",
+   "কর্মচারীদের আচরণের লিখিত নীতিমালা",
+   "আইনের বই",
+   "বেতন তালিকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কর্মচারীদের আচরণের লিখিত নীতিমালা",
+  "explanation": "আচরণবিধি হলো কর্মচারীদের আচরণের জন্য লিখিত নীতিমালা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1040",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — মূল্যবোধ",
+  "difficulty": "easy",
+  "question": "মূল্যবোধ (Values) কী?",
+  "options": [
+   "ভালো-মন্দ বিচারের মানদণ্ড",
+   "আইন",
+   "নিয়ম",
+   "শাস্তি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ভালো-মন্দ বিচারের মানদণ্ড",
+  "explanation": "মূল্যবোধ হলো ভালো-মন্দ, উচিত-অনুচিত বিচারের মানদণ্ড।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1041",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — সংজ্ঞা",
+  "difficulty": "easy",
+  "question": "নৈতিকতা (Ethics) কী?",
+  "options": [
+   "আইন",
+   "ধর্ম",
+   "প্রথা",
+   "সঠিক-ভুল আচরণের নীতিশাস্ত্র"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সঠিক-ভুল আচরণের নীতিশাস্ত্র",
+  "explanation": "নৈতিকতা হলো সঠিক ও ভুল আচরণের নীতিশাস্ত্র।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1042",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — সংজ্ঞা",
+  "difficulty": "easy",
+  "question": "সুশাসন (Good Governance) কী?",
+  "options": [
+   "গোপন শাসন",
+   "একনায়কতন্ত্র",
+   "স্বচ্ছ, জবাবদিহিমূলক ও অংশগ্রহণমূলক শাসন",
+   "স্বেচ্ছাচারী শাসন"
+  ],
+  "correct_index": 2,
+  "correct_answer": "স্বচ্ছ, জবাবদিহিমূলক ও অংশগ্রহণমূলক শাসন",
+  "explanation": "সুশাসন হলো স্বচ্ছ, জবাবদিহিমূলক, অংশগ্রহণমূলক ও আইনের শাসনভিত্তিক শাসন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1043",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — সাড়াদানশীলতা",
+  "difficulty": "medium",
+  "question": "নাগরিক সেবায় সাড়াদানশীলতা (Responsiveness) কী?",
+  "options": [
+   "সেবা বন্ধ করা",
+   "নাগরিকের প্রয়োজনে দ্রুত সাড়া দেওয়া",
+   "নাগরিককে উপেক্ষা করা",
+   "দেরিতে সেবা দেওয়া"
+  ],
+  "correct_index": 1,
+  "correct_answer": "নাগরিকের প্রয়োজনে দ্রুত সাড়া দেওয়া",
+  "explanation": "সাড়াদানশীলতা হলো নাগরিকের প্রয়োজনে দ্রুত ও যথাযথ সাড়া দেওয়া।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1044",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — সমতা",
+  "difficulty": "easy",
+  "question": "সমতা (Equity) বলতে কী বোঝায়?",
+  "options": [
+   "সবার জন্য ন্যায্য সুযোগ",
+   "সবার জন্য একই সুবিধা",
+   "ধনীদের অগ্রাধিকার",
+   "পক্ষপাত"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সবার জন্য ন্যায্য সুযোগ",
+  "explanation": "সমতা হলো সবার জন্য ন্যায্য সুযোগ নিশ্চিত করা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1045",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — কার্যকারিতা",
+  "difficulty": "medium",
+  "question": "কার্যকারিতা (Effectiveness) বলতে কী বোঝায়?",
+  "options": [
+   "অপচয়",
+   "দেরি",
+   "অদক্ষতা",
+   "লক্ষ্য অর্জনে সক্ষমতা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "লক্ষ্য অর্জনে সক্ষমতা",
+  "explanation": "কার্যকারিতা হলো নির্ধারিত লক্ষ্য অর্জনের সক্ষমতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1046",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — দক্ষতা",
+  "difficulty": "medium",
+  "question": "দক্ষতা (Efficiency) বলতে কী বোঝায়?",
+  "options": [
+   "অপচয়",
+   "দেরি",
+   "কম সম্পদে বেশি ফল অর্জন",
+   "বেশি খরচ"
+  ],
+  "correct_index": 2,
+  "correct_answer": "কম সম্পদে বেশি ফল অর্জন",
+  "explanation": "দক্ষতা হলো কম সময় ও সম্পদে বেশি ফল অর্জন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1047",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — অংশগ্রহণ",
+  "difficulty": "medium",
+  "question": "অংশগ্রহণ (Participation) সুশাসনে কেন গুরুত্বপূর্ণ?",
+  "options": [
+   "জনগণ দূরে থাকে",
+   "সিদ্ধান্তে জনগণের মতামত প্রতিফলিত হয়",
+   "সিদ্ধান্ত গোপন থাকে",
+   "শাসক একা সিদ্ধান্ত নেয়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সিদ্ধান্তে জনগণের মতামত প্রতিফলিত হয়",
+  "explanation": "অংশগ্রহণ সিদ্ধান্তে জনগণের মতামত প্রতিফলিত করে ও বৈধতা দেয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1049",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — তথ্য অধিকার",
+  "difficulty": "easy",
+  "question": "তথ্য অধিকার আইনের উদ্দেশ্য কী?",
+  "options": [
+   "তথ্য গোপন রাখা",
+   "সরকারি গোপনীয়তা বাড়ানো",
+   "সংবাদমাধ্যম নিয়ন্ত্রণ",
+   "জনগণের তথ্য পাওয়ার অধিকার নিশ্চিত করা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "জনগণের তথ্য পাওয়ার অধিকার নিশ্চিত করা",
+  "explanation": "তথ্য অধিকার আইন জনগণের তথ্য পাওয়ার অধিকার নিশ্চিত করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1050",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — দুর্নীতি দমন",
+  "difficulty": "medium",
+  "question": "দুর্নীতি দমন কমিশন (দুদক) কত সালে প্রতিষ্ঠিত হয়?",
+  "options": [
+   "২০০৯",
+   "২০১০",
+   "২০০৪",
+   "২০০০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২০০৪",
+  "explanation": "দুর্নীতি দমন কমিশন ২০০৪ সালে প্রতিষ্ঠিত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1051",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — দুর্নীতি দমন",
+  "difficulty": "easy",
+  "question": "দুদকের পূর্ণরূপ কী?",
+  "options": [
+   "দুর্নীতি দমন কর্তৃপক্ষ",
+   "দুর্নীতি দমন কমিশন",
+   "দুর্নীতি দমন কেন্দ্র",
+   "দুর্নীতি নিয়ন্ত্রণ কমিশন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "দুর্নীতি দমন কমিশন",
+  "explanation": "দুদক = দুর্নীতি দমন কমিশন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1052",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — আচরণবিধি",
+  "difficulty": "easy",
+  "question": "সরকারি কর্মচারীদের জন্য আচরণবিধি কেন প্রয়োজন?",
+  "options": [
+   "সততা ও নিরপেক্ষতা নিশ্চিত করতে",
+   "ঘুষ নিতে",
+   "পক্ষপাত করতে",
+   "দায় এড়াতে"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সততা ও নিরপেক্ষতা নিশ্চিত করতে",
+  "explanation": "আচরণবিধি সরকারি কর্মচারীদের সততা ও নিরপেক্ষতা নিশ্চিত করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1053",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — পরিস্থিতি",
+  "difficulty": "easy",
+  "question": "একজন সরকারি কর্মকর্তা ঘুষের প্রস্তাব পেলে কী করা উচিত?",
+  "options": [
+   "ঘুষ গ্রহণ করা",
+   "চুপ থাকা",
+   "সহকর্মীকে দেওয়া",
+   "প্রস্তাব প্রত্যাখ্যান করে ঊর্ধ্বতনকে জানানো"
+  ],
+  "correct_index": 3,
+  "correct_answer": "প্রস্তাব প্রত্যাখ্যান করে ঊর্ধ্বতনকে জানানো",
+  "explanation": "ঘুষের প্রস্তাব প্রত্যাখ্যান করে ঊর্ধ্বতন কর্তৃপক্ষকে জানানোই নৈতিক আচরণ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1054",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — পরিস্থিতি",
+  "difficulty": "easy",
+  "question": "একজন কর্মকর্তা আত্মীয়কে অযোগ্য হলেও চাকরি দিলে তা কী?",
+  "options": [
+   "নিরপেক্ষতা",
+   "দক্ষতা",
+   "স্বজনপ্রীতি ও দুর্নীতি",
+   "সততা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "স্বজনপ্রীতি ও দুর্নীতি",
+  "explanation": "অযোগ্য আত্মীয়কে সুবিধা দেওয়া স্বজনপ্রীতি ও দুর্নীতি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1055",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — স্বচ্ছতা",
+  "difficulty": "medium",
+  "question": "সরকারি তথ্য গোপন রাখা কখন উচিত?",
+  "options": [
+   "সুবিধা পেতে",
+   "জাতীয় নিরাপত্তা ও ব্যক্তিগত গোপনীয়তার স্বার্থে",
+   "সবসময়",
+   "দুর্নীতি ঢাকতে"
+  ],
+  "correct_index": 1,
+  "correct_answer": "জাতীয় নিরাপত্তা ও ব্যক্তিগত গোপনীয়তার স্বার্থে",
+  "explanation": "জাতীয় নিরাপত্তা ও ব্যক্তিগত গোপনীয়তা ছাড়া সরকারি তথ্য উন্মুক্ত রাখা উচিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1056",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — নাগরিক সনদ",
+  "difficulty": "medium",
+  "question": "নাগরিক সনদ (Citizen's Charter) কী?",
+  "options": [
+   "সেবার মান ও সময়ের লিখিত অঙ্গীকার",
+   "নাগরিকত্বের সনদ",
+   "জন্ম সনদ",
+   "ভোটার তালিকা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সেবার মান ও সময়ের লিখিত অঙ্গীকার",
+  "explanation": "নাগরিক সনদ হলো সেবার মান, সময় ও অভিযোগের উপায় সম্পর্কে লিখিত অঙ্গীকার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1057",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — সেবা",
+  "difficulty": "medium",
+  "question": "সেবা প্রদানে হয়রানি রোধে কী প্রয়োজন?",
+  "options": [
+   "গোপনীয়তা",
+   "দেরি",
+   "পক্ষপাত",
+   "স্বচ্ছতা, জবাবদিহিতা ও অভিযোগ ব্যবস্থা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "স্বচ্ছতা, জবাবদিহিতা ও অভিযোগ ব্যবস্থা",
+  "explanation": "স্বচ্ছতা, জবাবদিহিতা ও কার্যকর অভিযোগ ব্যবস্থা হয়রানি রোধ করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1058",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — ভিত্তি",
+  "difficulty": "easy",
+  "question": "সুশাসনের জন্য কোনটি সবচেয়ে গুরুত্বপূর্ণ?",
+  "options": [
+   "গোপনীয়তা",
+   "পক্ষপাত",
+   "আইনের শাসন",
+   "স্বেচ্ছাচারিতা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "আইনের শাসন",
+  "explanation": "আইনের শাসন সুশাসনের ভিত্তি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1059",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — গণতন্ত্র",
+  "difficulty": "easy",
+  "question": "গণতন্ত্রে জনগণের সার্বভৌমত্ব বলতে কী বোঝায়?",
+  "options": [
+   "ক্ষমতার উৎস ধনী",
+   "ক্ষমতার উৎস জনগণ",
+   "ক্ষমতার উৎস শাসক",
+   "ক্ষমতার উৎস সেনাবাহিনী"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ক্ষমতার উৎস জনগণ",
+  "explanation": "গণতন্ত্রে ক্ষমতার উৎস জনগণ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1060",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — অধিকার",
+  "difficulty": "easy",
+  "question": "মতপ্রকাশের স্বাধীনতা কেন গুরুত্বপূর্ণ?",
+  "options": [
+   "গণতন্ত্র ও জবাবদিহিতার জন্য",
+   "দুর্নীতির জন্য",
+   "গোপনীয়তার জন্য",
+   "স্বেচ্ছাচারিতার জন্য"
+  ],
+  "correct_index": 0,
+  "correct_answer": "গণতন্ত্র ও জবাবদিহিতার জন্য",
+  "explanation": "মতপ্রকাশের স্বাধীনতা গণতন্ত্র ও জবাবদিহিতার জন্য অপরিহার্য।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1061",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — সংবাদমাধ্যম",
+  "difficulty": "medium",
+  "question": "সংবাদমাধ্যমের স্বাধীনতা সুশাসনে কী ভূমিকা রাখে?",
+  "options": [
+   "দুর্নীতি বাড়ায়",
+   "গোপনীয়তা বাড়ায়",
+   "কোনো ভূমিকা নেই",
+   "অনিয়ম উন্মোচন ও জবাবদিহিতা নিশ্চিত করে"
+  ],
+  "correct_index": 3,
+  "correct_answer": "অনিয়ম উন্মোচন ও জবাবদিহিতা নিশ্চিত করে",
+  "explanation": "স্বাধীন সংবাদমাধ্যম অনিয়ম উন্মোচন করে জবাবদিহিতা নিশ্চিত করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1062",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — নির্বাচন",
+  "difficulty": "easy",
+  "question": "নির্বাচন সুষ্ঠু হওয়া সুশাসনের জন্য কেন প্রয়োজন?",
+  "options": [
+   "বিরোধী দল দমন হয়",
+   "ভোটার কমে",
+   "জনগণের রায় প্রতিফলিত হয়",
+   "শাসক ক্ষমতায় থাকে"
+  ],
+  "correct_index": 2,
+  "correct_answer": "জনগণের রায় প্রতিফলিত হয়",
+  "explanation": "সুষ্ঠু নির্বাচন জনগণের রায় প্রতিফলিত করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1063",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — বিচার বিভাগ",
+  "difficulty": "easy",
+  "question": "বিচার বিভাগের স্বাধীনতা কেন প্রয়োজন?",
+  "options": [
+   "আইন ভাঙতে",
+   "নিরপেক্ষ বিচার নিশ্চিত করতে",
+   "শাসকের পক্ষে রায় দিতে",
+   "বিচার দেরি করতে"
+  ],
+  "correct_index": 1,
+  "correct_answer": "নিরপেক্ষ বিচার নিশ্চিত করতে",
+  "explanation": "বিচার বিভাগের স্বাধীনতা নিরপেক্ষ বিচার নিশ্চিত করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1064",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — মানবাধিকার",
+  "difficulty": "easy",
+  "question": "মানবাধিকার কী?",
+  "options": [
+   "মানুষ হিসেবে জন্মগত অধিকার",
+   "সরকারের দেওয়া সুবিধা",
+   "ধনীদের অধিকার",
+   "শাসকের অধিকার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মানুষ হিসেবে জন্মগত অধিকার",
+  "explanation": "মানবাধিকার মানুষ হিসেবে জন্মগতভাবে প্রাপ্ত অধিকার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1065",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — শিশু অধিকার",
+  "difficulty": "easy",
+  "question": "শিশুশ্রম কেন অনৈতিক?",
+  "options": [
+   "শিশু কাজ করতে পারে",
+   "শিশুদের অধিকার নেই",
+   "শিশুশ্রম বৈধ",
+   "শিশুর শিক্ষা ও বিকাশ ব্যাহত হয়"
+  ],
+  "correct_index": 3,
+  "correct_answer": "শিশুর শিক্ষা ও বিকাশ ব্যাহত হয়",
+  "explanation": "শিশুশ্রম শিশুর শিক্ষা, স্বাস্থ্য ও বিকাশ ব্যাহত করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1066",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — পরিবেশ",
+  "difficulty": "easy",
+  "question": "পরিবেশ রক্ষা নৈতিক দায়িত্ব কেন?",
+  "options": [
+   "পরিবেশ ধ্বংস বৈধ",
+   "শুধু বর্তমানের স্বার্থ",
+   "ভবিষ্যৎ প্রজন্মের অধিকার রক্ষা করে",
+   "পরিবেশের কোনো মূল্য নেই"
+  ],
+  "correct_index": 2,
+  "correct_answer": "ভবিষ্যৎ প্রজন্মের অধিকার রক্ষা করে",
+  "explanation": "পরিবেশ রক্ষা ভবিষ্যৎ প্রজন্মের অধিকার রক্ষা করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1067",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — দুর্নীতি",
+  "difficulty": "easy",
+  "question": "সরকারি সম্পদের অপব্যবহার কী?",
+  "options": [
+   "স্বচ্ছতা",
+   "দুর্নীতি",
+   "সততা",
+   "দক্ষতা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "দুর্নীতি",
+  "explanation": "সরকারি সম্পদের ব্যক্তিগত ব্যবহার দুর্নীতি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1068",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — স্বার্থের সংঘাত",
+  "difficulty": "medium",
+  "question": "সরকারি কর্মচারীর উপহার গ্রহণ কেন সমস্যাজনক?",
+  "options": [
+   "স্বার্থের সংঘাত সৃষ্টি করে",
+   "উপহার বৈধ",
+   "উপহার সততা বাড়ায়",
+   "কোনো সমস্যা নেই"
+  ],
+  "correct_index": 0,
+  "correct_answer": "স্বার্থের সংঘাত সৃষ্টি করে",
+  "explanation": "উপহার গ্রহণ স্বার্থের সংঘাত সৃষ্টি করতে পারে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1069",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — প্রণোদনা",
+  "difficulty": "medium",
+  "question": "সততার পুরস্কার হিসেবে কী দেওয়া যায়?",
+  "options": [
+   "ঘুষ",
+   "পক্ষপাত",
+   "শাস্তি",
+   "স্বীকৃতি ও পদোন্নতিতে অগ্রাধিকার"
+  ],
+  "correct_index": 3,
+  "correct_answer": "স্বীকৃতি ও পদোন্নতিতে অগ্রাধিকার",
+  "explanation": "সততার স্বীকৃতি সৎ আচরণকে উৎসাহিত করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1070",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — দুর্নীতি",
+  "difficulty": "easy",
+  "question": "দুর্নীতির সামাজিক ক্ষতি কী?",
+  "options": [
+   "সমতা",
+   "স্বচ্ছতা",
+   "আস্থা নষ্ট ও বৈষম্য বৃদ্ধি",
+   "উন্নয়ন"
+  ],
+  "correct_index": 2,
+  "correct_answer": "আস্থা নষ্ট ও বৈষম্য বৃদ্ধি",
+  "explanation": "দুর্নীতি জনআস্থা নষ্ট করে ও বৈষম্য বাড়ায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1071",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — ই-গভর্ন্যান্স",
+  "difficulty": "medium",
+  "question": "সুশাসনে ই-গভর্ন্যান্সের ভূমিকা কী?",
+  "options": [
+   "সেবা বন্ধ করা",
+   "সেবা দ্রুত, স্বচ্ছ ও সহজলভ্য করা",
+   "সেবা গোপন করা",
+   "দুর্নীতি বাড়ানো"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সেবা দ্রুত, স্বচ্ছ ও সহজলভ্য করা",
+  "explanation": "ই-গভর্ন্যান্স সেবা দ্রুত, স্বচ্ছ ও সহজলভ্য করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1072",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — অভিযোগ",
+  "difficulty": "medium",
+  "question": "অভিযোগ নিষ্পত্তির ব্যবস্থা সুশাসনে কেন প্রয়োজন?",
+  "options": [
+   "নাগরিকের প্রতিকার নিশ্চিত করে",
+   "অভিযোগ বাড়ায়",
+   "সেবা কমায়",
+   "কোনো প্রয়োজন নেই"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নাগরিকের প্রতিকার নিশ্চিত করে",
+  "explanation": "অভিযোগ নিষ্পত্তির ব্যবস্থা নাগরিকের প্রতিকার নিশ্চিত করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1073",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — নেতৃত্ব",
+  "difficulty": "easy",
+  "question": "নৈতিক নেতৃত্বের বৈশিষ্ট্য কী?",
+  "options": [
+   "স্বার্থপরতা",
+   "পক্ষপাত",
+   "গোপনীয়তা",
+   "সততা, ন্যায়পরায়ণতা ও দায়িত্বশীলতা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সততা, ন্যায়পরায়ণতা ও দায়িত্বশীলতা",
+  "explanation": "নৈতিক নেতৃত্বের বৈশিষ্ট্য সততা, ন্যায়পরায়ণতা ও দায়িত্বশীলতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1074",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — মূল্যবোধ",
+  "difficulty": "easy",
+  "question": "সহনশীলতা (Tolerance) কেন মূল্যবোধ?",
+  "options": [
+   "সংঘাত বাড়ায়",
+   "অসহিষ্ণুতা বাড়ায়",
+   "বৈচিত্র্যের প্রতি শ্রদ্ধা বাড়ায়",
+   "বিভেদ বাড়ায়"
+  ],
+  "correct_index": 2,
+  "correct_answer": "বৈচিত্র্যের প্রতি শ্রদ্ধা বাড়ায়",
+  "explanation": "সহনশীলতা বৈচিত্র্যের প্রতি শ্রদ্ধা বাড়ায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1075",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — মূল্যবোধ",
+  "difficulty": "easy",
+  "question": "দেশপ্রেম কী?",
+  "options": [
+   "দেশ ছেড়ে যাওয়া",
+   "দেশের প্রতি ভালোবাসা ও দায়িত্ববোধ",
+   "দেশের ক্ষতি করা",
+   "স্বার্থপরতা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "দেশের প্রতি ভালোবাসা ও দায়িত্ববোধ",
+  "explanation": "দেশপ্রেম হলো দেশের প্রতি ভালোবাসা ও দায়িত্ববোধ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1076",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "নৈতিকতা — দায়বদ্ধতা",
+  "difficulty": "easy",
+  "question": "সামাজিক দায়বদ্ধতা (Social Responsibility) কী?",
+  "options": [
+   "সমাজের প্রতি দায়িত্ব পালন",
+   "শুধু নিজের স্বার্থ",
+   "সমাজকে উপেক্ষা করা",
+   "লাভই একমাত্র লক্ষ্য"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সমাজের প্রতি দায়িত্ব পালন",
+  "explanation": "সামাজিক দায়বদ্ধতা হলো সমাজের প্রতি দায়িত্ব পালন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1077",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — বৈশিষ্ট্য",
+  "difficulty": "hard",
+  "question": "সুশাসনের আটটি বৈশিষ্ট্যের মধ্যে একটি নয় কোনটি?",
+  "options": [
+   "অংশগ্রহণ",
+   "আইনের শাসন",
+   "স্বচ্ছতা",
+   "গোপনীয়তা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "গোপনীয়তা",
+  "explanation": "জাতিসংঘের সুশাসনের আট বৈশিষ্ট্যে গোপনীয়তা নেই; আছে অংশগ্রহণ, আইনের শাসন, স্বচ্ছতা, সাড়াদানশীলতা, ঐকমত্য, সমতা, কার্যকারিতা ও জবাবদিহিতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1078",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Ethics, Values and Good Governance",
+  "subject_slug": "ethics-governance",
+  "topic": "সুশাসন — বৈশিষ্ট্য",
+  "difficulty": "hard",
+  "question": "ঐকমত্য (Consensus Orientation) সুশাসনে কী বোঝায়?",
+  "options": [
+   "সংখ্যাগরিষ্ঠের জোর",
+   "বিরোধ",
+   "বিভিন্ন স্বার্থের মধ্যে সমঝোতা",
+   "একজনের সিদ্ধান্ত"
+  ],
+  "correct_index": 2,
+  "correct_answer": "বিভিন্ন স্বার্থের মধ্যে সমঝোতা",
+  "explanation": "ঐকমত্য হলো বিভিন্ন স্বার্থের মধ্যে সমঝোতার মাধ্যমে সিদ্ধান্ত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB textbooks (Bangladesh and World Civilisation / Bangladesh Studies / General Science / ICT) and standard Bangladesh-studies references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "ethics",
+   "ethics-governance",
+   "jobq-h"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-ethics-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

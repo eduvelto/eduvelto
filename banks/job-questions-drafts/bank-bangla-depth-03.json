@@ -1,0 +1,782 @@
+[
+  {
+    "id": "JOBQ-D731",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — সন্ধি",
+    "difficulty": "medium",
+    "question": "'সংশয়' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "সম্ + শয়",
+      "সং + শয়",
+      "সম + শয়",
+      "স + ংশয়"
+    ],
+    "correct_index": 0,
+    "correct_answer": "সম্ + শয়",
+    "explanation": "সম্ + শয় = সংশয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "sandhi"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D732",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — সন্ধি",
+    "difficulty": "medium",
+    "question": "'দুঃখ' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "দুঃ + খ",
+      "দুঃখ + অ",
+      "দু + খ",
+      "দু + ঃখ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "দুঃ + খ",
+    "explanation": "দুঃ + খ = দুঃখ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "sandhi"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D733",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — সমাস",
+    "difficulty": "medium",
+    "question": "'পঞ্চবটী' কোন সমাস?",
+    "options": [
+      "দ্বন্দ্ব",
+      "বহুব্রীহি",
+      "তৎপুরুষ",
+      "দ্বিগু"
+    ],
+    "correct_index": 3,
+    "correct_answer": "দ্বিগু",
+    "explanation": "'পঞ্চবটী' = পাঁচ বটের সমাহার — দ্বিগু সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "samas"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D734",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — সমাস",
+    "difficulty": "medium",
+    "question": "'সহোদর' কোন সমাস?",
+    "options": [
+      "বহুব্রীহি",
+      "দ্বিগু",
+      "কর্মধারয়",
+      "তৎপুরুষ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বহুব্রীহি",
+    "explanation": "'সহোদর' = সহ উদর যার (একই মায়ের সন্তান) — বহুব্রীহি সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "samas"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D735",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — কারক",
+    "difficulty": "medium",
+    "question": "'মেঘে বৃষ্টি হয়' — 'মেঘে' কোন কারক?",
+    "options": [
+      "কর্ম",
+      "অধিকরণ",
+      "অপাদান",
+      "করণ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অধিকরণ",
+    "explanation": "যেখানে ক্রিয়া সম্পন্ন হয় তা অধিকরণ কারক; 'মেঘে' অধিকরণ কারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "karak"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D736",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — কারক",
+    "difficulty": "medium",
+    "question": "'সাপে কামড়াল' — 'সাপে' কোন কারক?",
+    "options": [
+      "করণ",
+      "অপাদান",
+      "কর্ম",
+      "কর্তৃ"
+    ],
+    "correct_index": 3,
+    "correct_answer": "কর্তৃ",
+    "explanation": "যে ক্রিয়া সম্পন্ন করে তা কর্তৃকারক; 'সাপে' কর্তৃকারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "karak"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D737",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — বাগধারা",
+    "difficulty": "medium",
+    "question": "'চোখের বালি' বাগধারার অর্থ কী?",
+    "options": [
+      "অন্ধ ব্যক্তি",
+      "চতুর ব্যক্তি",
+      "অপ্রিয় ব্যক্তি",
+      "প্রিয় ব্যক্তি"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অপ্রিয় ব্যক্তি",
+    "explanation": "'চোখের বালি' অর্থ অপ্রিয় বা অসহ্য ব্যক্তি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "idiom"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D738",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — বাগধারা",
+    "difficulty": "medium",
+    "question": "'অগ্নিপরীক্ষা' বাগধারার অর্থ কী?",
+    "options": [
+      "কঠিন পরীক্ষা",
+      "মৌখিক পরীক্ষা",
+      "সহজ পরীক্ষা",
+      "আগুনের পরীক্ষা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "কঠিন পরীক্ষা",
+    "explanation": "'অগ্নিপরীক্ষা' অর্থ কঠিন পরীক্ষা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "idiom"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D739",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — এক কথায় প্রকাশ",
+    "difficulty": "medium",
+    "question": "'যা জলে চরে' — এক কথায় কী হবে?",
+    "options": [
+      "জলচর",
+      "সাঁতারু",
+      "জলজ",
+      "জলজীব"
+    ],
+    "correct_index": 0,
+    "correct_answer": "জলচর",
+    "explanation": "যা জলে চরে তাকে 'জলচর' বলে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "one-word"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D740",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — এক কথায় প্রকাশ",
+    "difficulty": "medium",
+    "question": "'অক্ষির সম্মুখে' — এক কথায় কী হবে?",
+    "options": [
+      "সাক্ষাৎ",
+      "প্রত্যক্ষ",
+      "দৃশ্যমান",
+      "পরোক্ষ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "প্রত্যক্ষ",
+    "explanation": "অক্ষির সম্মুখে যা আছে তাকে 'প্রত্যক্ষ' বলে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "one-word"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D741",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — বিপরীত শব্দ",
+    "difficulty": "easy",
+    "question": "'জাগরণ'-এর বিপরীত শব্দ কোনটি?",
+    "options": [
+      "ঘুম",
+      "অলসতা",
+      "স্বপ্ন",
+      "নিদ্রা"
+    ],
+    "correct_index": 3,
+    "correct_answer": "নিদ্রা",
+    "explanation": "'জাগরণ'-এর বিপরীত 'নিদ্রা'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "antonym",
+      "bangla",
+      "bank",
+      "grammar"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D742",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — বিপরীত শব্দ",
+    "difficulty": "easy",
+    "question": "'আদর'-এর বিপরীত শব্দ কোনটি?",
+    "options": [
+      "ভালোবাসা",
+      "মমতা",
+      "অনাদর",
+      "স্নেহ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অনাদর",
+    "explanation": "'আদর'-এর বিপরীত 'অনাদর'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "antonym",
+      "bangla",
+      "bank",
+      "grammar"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D743",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — উপসর্গ",
+    "difficulty": "medium",
+    "question": "'প্রত্যাশা' শব্দে উপসর্গ কোনটি?",
+    "options": [
+      "আশা",
+      "প্রতি",
+      "প্র",
+      "প্রত্য"
+    ],
+    "correct_index": 1,
+    "correct_answer": "প্রতি",
+    "explanation": "'প্রত্যাশা' = প্রতি + আশা; 'প্রতি' উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "prefix"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D744",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ব্যাকরণ — প্রত্যয়",
+    "difficulty": "medium",
+    "question": "'মানবতা' শব্দে প্রত্যয় কোনটি?",
+    "options": [
+      "ত্ব",
+      "বতা",
+      "মানব",
+      "তা"
+    ],
+    "correct_index": 3,
+    "correct_answer": "তা",
+    "explanation": "মানব + তা = মানবতা; 'তা' প্রত্যয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "grammar",
+      "suffix"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D745",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য — কবিতা",
+    "difficulty": "medium",
+    "question": "'অগ্নিবীণা' কাব্যগ্রন্থের কবি কে?",
+    "options": [
+      "সত্যেন্দ্রনাথ দত্ত",
+      "জসীমউদ্দীন",
+      "কাজী নজরুল ইসলাম",
+      "রবীন্দ্রনাথ ঠাকুর"
+    ],
+    "correct_index": 2,
+    "correct_answer": "কাজী নজরুল ইসলাম",
+    "explanation": "'অগ্নিবীণা' (১৯২২) কাজী নজরুল ইসলামের প্রথম কাব্যগ্রন্থ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "literature",
+      "nazrul"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D746",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য — কবিতা",
+    "difficulty": "medium",
+    "question": "'সাম্যবাদী' কাব্যগ্রন্থের কবি কে?",
+    "options": [
+      "ফররুখ আহমদ",
+      "জসীমউদ্দীন",
+      "কাজী নজরুল ইসলাম",
+      "রবীন্দ্রনাথ ঠাকুর"
+    ],
+    "correct_index": 2,
+    "correct_answer": "কাজী নজরুল ইসলাম",
+    "explanation": "'সাম্যবাদী' (১৯২৫) কাজী নজরুল ইসলামের কাব্যগ্রন্থ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "literature",
+      "nazrul"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D747",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য — কবিতা",
+    "difficulty": "medium",
+    "question": "'রূপসী বাংলা' কাব্যগ্রন্থের কবি কে?",
+    "options": [
+      "বিষ্ণু দে",
+      "জীবনানন্দ দাশ",
+      "বুদ্ধদেব বসু",
+      "সুধীন্দ্রনাথ দত্ত"
+    ],
+    "correct_index": 1,
+    "correct_answer": "জীবনানন্দ দাশ",
+    "explanation": "'রূপসী বাংলা' জীবনানন্দ দাশের মরণোত্তর কাব্যগ্রন্থ (১৯৫৭)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "jibanananda",
+      "literature"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D748",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য — কবিতা",
+    "difficulty": "medium",
+    "question": "'ঝরা পালক' কাব্যগ্রন্থের কবি কে?",
+    "options": [
+      "সুধীন্দ্রনাথ দত্ত",
+      "জীবনানন্দ দাশ",
+      "বিষ্ণু দে",
+      "অমিয় চক্রবর্তী"
+    ],
+    "correct_index": 1,
+    "correct_answer": "জীবনানন্দ দাশ",
+    "explanation": "'ঝরা পালক' (১৯২৭) জীবনানন্দ দাশের প্রথম কাব্যগ্রন্থ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "jibanananda",
+      "literature"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D749",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য — কবিতা",
+    "difficulty": "medium",
+    "question": "'সোনালি কাবিন' কাব্যগ্রন্থের কবি কে?",
+    "options": [
+      "শামসুর রাহমান",
+      "নির্মলেন্দু গুণ",
+      "আল মাহমুদ",
+      "আহসান হাবীব"
+    ],
+    "correct_index": 2,
+    "correct_answer": "আল মাহমুদ",
+    "explanation": "'সোনালি কাবিন' (১৯৭৩) আল মাহমুদের কাব্যগ্রন্থ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "al-mahmud",
+      "bangla",
+      "bank",
+      "literature"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D750",
+    "exam_canonical": "bank",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য — কবিতা",
+    "difficulty": "medium",
+    "question": "'কাঁদতে আসিনি ফাঁসির দাবি নিয়ে এসেছি' কবিতাটির রচয়িতা কে?",
+    "options": [
+      "আল মাহমুদ",
+      "আবদুল গাফফার চৌধুরী",
+      "শামসুর রাহমান",
+      "মাহবুব উল আলম চৌধুরী"
+    ],
+    "correct_index": 3,
+    "correct_answer": "মাহবুব উল আলম চৌধুরী",
+    "explanation": "'কাঁদতে আসিনি ফাঁসির দাবি নিয়ে এসেছি' (১৯৫২) কবিতাটি লিখেছেন মাহবুব উল আলম চৌধুরী।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangla",
+      "bank",
+      "language-movement",
+      "literature"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-bangla-depth-03.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

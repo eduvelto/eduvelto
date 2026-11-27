@@ -1,0 +1,2342 @@
+[
+  {
+    "id": "JOBQ-J701",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সন্ধি",
+    "difficulty": "medium",
+    "question": "'যথেষ্ট' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "যথে + ষ্ট",
+      "যথা + ষ্ট",
+      "যথ + ইষ্ট",
+      "যথা + ইষ্ট"
+    ],
+    "correct_index": 3,
+    "correct_answer": "যথা + ইষ্ট",
+    "explanation": "যথা + ইষ্ট = যথেষ্ট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সন্ধি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J702",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সন্ধি",
+    "difficulty": "medium",
+    "question": "'শুভেচ্ছা' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "শুভ + ইচ্ছা",
+      "শু + ভেচ্ছা",
+      "শুভে + চ্ছা",
+      "শুভ + এচ্ছা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "শুভ + ইচ্ছা",
+    "explanation": "শুভ + ইচ্ছা = শুভেচ্ছা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সন্ধি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J703",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সন্ধি",
+    "difficulty": "medium",
+    "question": "'প্রত্যহ' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "প্র + ত্যহ",
+      "প্রত্য + হ",
+      "প্রতি + হ",
+      "প্রতি + অহ"
+    ],
+    "correct_index": 3,
+    "correct_answer": "প্রতি + অহ",
+    "explanation": "প্রতি + অহ = প্রত্যহ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সন্ধি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J704",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সন্ধি",
+    "difficulty": "medium",
+    "question": "'নিরীক্ষা' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "নির্ + ঈক্ষা",
+      "নি + রীক্ষা",
+      "নির + ঈক্ষা",
+      "নিঃ + রীক্ষা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "নির্ + ঈক্ষা",
+    "explanation": "নির্ + ঈক্ষা = নিরীক্ষা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সন্ধি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J705",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সন্ধি",
+    "difficulty": "medium",
+    "question": "'সদুপায়' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "সৎ + পায়",
+      "সৎ + উপায়",
+      "সদু + পায়",
+      "সদ + উপায়"
+    ],
+    "correct_index": 1,
+    "correct_answer": "সৎ + উপায়",
+    "explanation": "সৎ + উপায় = সদুপায়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সন্ধি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J706",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সন্ধি",
+    "difficulty": "medium",
+    "question": "'ইতস্তত' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "ইতঃ + ততঃ",
+      "ইত + স্তত",
+      "ইতঃ + স্তত",
+      "ইতস্ + তত"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ইতঃ + ততঃ",
+    "explanation": "ইতঃ + ততঃ = ইতস্তত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সন্ধি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J707",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'অষ্টধাতু' কোন সমাসের উদাহরণ?",
+    "options": [
+      "বহুব্রীহি",
+      "দ্বন্দ্ব",
+      "দ্বিগু",
+      "তৎপুরুষ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "দ্বিগু",
+    "explanation": "আট ধাতুর সমাহার — দ্বিগু সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J708",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'নবরত্ন' কোন সমাসের উদাহরণ?",
+    "options": [
+      "বহুব্রীহি",
+      "কর্মধারয়",
+      "দ্বন্দ্ব",
+      "দ্বিগু"
+    ],
+    "correct_index": 3,
+    "correct_answer": "দ্বিগু",
+    "explanation": "নয় রত্নের সমাহার — দ্বিগু সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J709",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'দুধভাত' কোন সমাসের উদাহরণ?",
+    "options": [
+      "বহুব্রীহি",
+      "তৎপুরুষ",
+      "দ্বিগু",
+      "দ্বন্দ্ব"
+    ],
+    "correct_index": 3,
+    "correct_answer": "দ্বন্দ্ব",
+    "explanation": "দুধ ও ভাত — দ্বন্দ্ব সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J710",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'ভাইবোন' কোন সমাসের উদাহরণ?",
+    "options": [
+      "তৎপুরুষ",
+      "দ্বন্দ্ব",
+      "দ্বিগু",
+      "কর্মধারয়"
+    ],
+    "correct_index": 1,
+    "correct_answer": "দ্বন্দ্ব",
+    "explanation": "ভাই ও বোন — দ্বন্দ্ব সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J711",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'চন্দ্রশেখর' কোন সমাসের উদাহরণ?",
+    "options": [
+      "দ্বিগু",
+      "তৎপুরুষ",
+      "বহুব্রীহি",
+      "কর্মধারয়"
+    ],
+    "correct_index": 2,
+    "correct_answer": "বহুব্রীহি",
+    "explanation": "চন্দ্র শেখরে যার (শিব) — বহুব্রীহি সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J712",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'পঙ্কজ' কোন সমাসের উদাহরণ?",
+    "options": [
+      "দ্বিগু",
+      "বহুব্রীহি",
+      "উপপদ তৎপুরুষ",
+      "কর্মধারয়"
+    ],
+    "correct_index": 2,
+    "correct_answer": "উপপদ তৎপুরুষ",
+    "explanation": "পঙ্কে জন্মে যে — উপপদ তৎপুরুষ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J713",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "কারক",
+    "difficulty": "medium",
+    "question": "'আমি বাজারে যাব।' — 'বাজারে' কোন কারক?",
+    "options": [
+      "করণকারক",
+      "কর্মকারক",
+      "অপাদান কারক",
+      "অধিকরণ কারক"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অধিকরণ কারক",
+    "explanation": "স্থান বোঝায় — অধিকরণ কারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কারক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J714",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "কারক",
+    "difficulty": "medium",
+    "question": "'সে বইটি পড়ছে।' — 'বইটি' কোন কারক?",
+    "options": [
+      "কর্মকারক",
+      "করণকারক",
+      "অধিকরণ কারক",
+      "কর্তৃকারক"
+    ],
+    "correct_index": 0,
+    "correct_answer": "কর্মকারক",
+    "explanation": "পড়ার কর্ম — কর্মকারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কারক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J715",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "কারক",
+    "difficulty": "medium",
+    "question": "'তারা মাঠে খেলছে।' — 'মাঠে' কোন কারক?",
+    "options": [
+      "করণকারক",
+      "অপাদান কারক",
+      "অধিকরণ কারক",
+      "কর্মকারক"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অধিকরণ কারক",
+    "explanation": "স্থান বোঝায় — অধিকরণ কারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কারক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J716",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "কারক",
+    "difficulty": "medium",
+    "question": "'আমি কলমটি দিয়ে লিখলাম।' — 'কলমটি দিয়ে' কোন কারক?",
+    "options": [
+      "কর্মকারক",
+      "করণকারক",
+      "সম্প্রদান কারক",
+      "অধিকরণ কারক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "করণকারক",
+    "explanation": "লেখার উপকরণ — করণকারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কারক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J717",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "কারক",
+    "difficulty": "medium",
+    "question": "'আমি মাকে ভালোবাসি।' — 'মাকে' কোন কারক?",
+    "options": [
+      "সম্প্রদান কারক",
+      "অপাদান কারক",
+      "কর্মকারক",
+      "কর্তৃকারক"
+    ],
+    "correct_index": 2,
+    "correct_answer": "কর্মকারক",
+    "explanation": "ভালোবাসার কর্ম — কর্মকারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কারক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J718",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'ঘোড়ার ডিম' বাগধারাটির অর্থ কী?",
+    "options": [
+      "অসম্ভব বস্তু",
+      "মূল্যবান জিনিস",
+      "ঘোড়ার ডিম",
+      "বড় ডিম"
+    ],
+    "correct_index": 0,
+    "correct_answer": "অসম্ভব বস্তু",
+    "explanation": "ঘোড়ার ডিম = অসম্ভব বস্তু, কিছুই না।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাগধারা",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J719",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'চোখের মণি' বাগধারাটির অর্থ কী?",
+    "options": [
+      "মণি পাথর",
+      "চোখের আলো",
+      "অত্যন্ত প্রিয়",
+      "চোখের পাথর"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অত্যন্ত প্রিয়",
+    "explanation": "চোখের মণি = অত্যন্ত প্রিয় ব্যক্তি বা বস্তু।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাগধারা",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J720",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'হাতের নাগালে' বাগধারাটির অর্থ কী?",
+    "options": [
+      "হাতে ধরা",
+      "আয়ত্তে",
+      "নাগালের বাইরে",
+      "হাতের কাছে"
+    ],
+    "correct_index": 1,
+    "correct_answer": "আয়ত্তে",
+    "explanation": "হাতের নাগালে = আয়ত্তে, নিকটে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাগধারা",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J721",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'কানে কানে' বাগধারাটির অর্থ কী?",
+    "options": [
+      "শুনে শুনে",
+      "কান পেতে",
+      "কানের কাছে",
+      "গোপনে"
+    ],
+    "correct_index": 3,
+    "correct_answer": "গোপনে",
+    "explanation": "কানে কানে = গোপনে (কথা বলা)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাগধারা",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J722",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'নাক কাটা' বাগধারাটির অর্থ কী?",
+    "options": [
+      "নাক কাটা যাওয়া",
+      "লজ্জা পাওয়া",
+      "অসম্মান করা",
+      "অপমানিত হওয়া"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অপমানিত হওয়া",
+    "explanation": "নাক কাটা = অপমানিত হওয়া।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাগধারা",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J723",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'মাথা ঘামানো' বাগধারাটির অর্থ কী?",
+    "options": [
+      "চিন্তা করা",
+      "ঘাম ঝরানো",
+      "পরিশ্রম করা",
+      "মাথা ব্যথা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "চিন্তা করা",
+    "explanation": "মাথা ঘামানো = চিন্তা করা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাগধারা",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J724",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'আলো' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "তমসা",
+      "আঁধার",
+      "জ্যোতি",
+      "অন্ধকার"
+    ],
+    "correct_index": 2,
+    "correct_answer": "জ্যোতি",
+    "explanation": "আলোর সমার্থক: জ্যোতি, দীপ্তি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমার্থক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J725",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'সকাল' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "রজনী",
+      "নিশা",
+      "সন্ধ্যা",
+      "প্রভাত"
+    ],
+    "correct_index": 3,
+    "correct_answer": "প্রভাত",
+    "explanation": "সকালের সমার্থক: প্রভাত, ঊষা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমার্থক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J726",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'রাত' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "প্রভাত",
+      "নিশা",
+      "দিবস",
+      "ঊষা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "নিশা",
+    "explanation": "রাতের সমার্থক: নিশা, রজনী।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমার্থক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J727",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'সাগর' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "সমুদ্র",
+      "খাল",
+      "নদী",
+      "পুকুর"
+    ],
+    "correct_index": 0,
+    "correct_answer": "সমুদ্র",
+    "explanation": "সাগরের সমার্থক: সমুদ্র, অর্ণব।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমার্থক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J728",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'পর্বত' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "উপত্যকা",
+      "মরু",
+      "সমতল",
+      "গিরি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "গিরি",
+    "explanation": "পর্বতের সমার্থক: গিরি, শৈল।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমার্থক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J729",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'ফুল' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "কুসুম",
+      "কাঁটা",
+      "ডাল",
+      "পাতা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "কুসুম",
+    "explanation": "ফুলের সমার্থক: কুসুম, পুষ্প।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমার্থক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J730",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'আলো' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "উজ্জ্বল",
+      "দীপ্তি",
+      "অন্ধকার",
+      "জ্যোতি"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অন্ধকার",
+    "explanation": "আলোর বিপরীত অন্ধকার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J731",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'জীবন' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "আয়ু",
+      "মৃত্যু",
+      "প্রাণ",
+      "জন্ম"
+    ],
+    "correct_index": 1,
+    "correct_answer": "মৃত্যু",
+    "explanation": "জীবনের বিপরীত মৃত্যু।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J732",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'সত্য' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "যথার্থ",
+      "মিথ্যা",
+      "বাস্তব",
+      "সঠিক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "মিথ্যা",
+    "explanation": "সত্যের বিপরীত মিথ্যা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J733",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'দিন' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "সকাল",
+      "দুপুর",
+      "রাত",
+      "দিবস"
+    ],
+    "correct_index": 2,
+    "correct_answer": "রাত",
+    "explanation": "দিনের বিপরীত রাত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J734",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'গরম' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "ঠান্ডা",
+      "তাপ",
+      "আগুন",
+      "উষ্ণ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ঠান্ডা",
+    "explanation": "গরমের বিপরীত ঠান্ডা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J735",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'শান্তি' শব্দের বিপরীতার্থক শব্দ কোনটি?",
+    "options": [
+      "শান্ত",
+      "সুখ",
+      "সমৃদ্ধি",
+      "অশান্তি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অশান্তি",
+    "explanation": "শান্তির বিপরীত অশান্তি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J736",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'মনোযোগ' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "মনযোগ",
+      "মোনোযোগ",
+      "মনোযোগ",
+      "মনোযুগ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "মনোযোগ",
+    "explanation": "শুদ্ধ বানান 'মনোযোগ'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J737",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'সরকারি' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "সরকারি",
+      "সরকারী",
+      "সর্কারি",
+      "স্বরকারি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "সরকারি",
+    "explanation": "শুদ্ধ বানান 'সরকারি'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J738",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'স্মৃতি' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "স্মিতি",
+      "স্মৃতি",
+      "স্মৃতী",
+      "স্ম্রিতি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "স্মৃতি",
+    "explanation": "শুদ্ধ বানান 'স্মৃতি'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J739",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'মধ্যাহ্ন' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "মধ্যাহ্ণ",
+      "মধ্যাহ্ন",
+      "মধ্যাহ্ন্ন",
+      "মধ্যান্হ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "মধ্যাহ্ন",
+    "explanation": "শুদ্ধ বানান 'মধ্যাহ্ন'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J740",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'পূর্বাহ্ণ' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "পূর্ব্বাহ্ণ",
+      "পূর্বাহ্ণ",
+      "পূর্বাহন্ন",
+      "পূর্বাহ্ন"
+    ],
+    "correct_index": 1,
+    "correct_answer": "পূর্বাহ্ণ",
+    "explanation": "শুদ্ধ বানান 'পূর্বাহ্ণ'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J741",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "শুদ্ধ বানান",
+    "difficulty": "medium",
+    "question": "'আশীর্বাদ' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "আশীর্বাদ",
+      "আশির্বাদ",
+      "আশির্ব্বাদ",
+      "আশীর্ব্বাদ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "আশীর্বাদ",
+    "explanation": "শুদ্ধ বানান 'আশীর্বাদ'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J742",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যে নিজে নিজে জন্মে' — এক কথায় কী হবে?",
+    "options": [
+      "স্বজন্মা",
+      "স্বয়ংজাত",
+      "স্বয়ম্ভূ",
+      "আত্মজ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "স্বয়ম্ভূ",
+    "explanation": "যে নিজে নিজে জন্মে = স্বয়ম্ভূ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J743",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যা সহজে ভাঙা যায় না' — এক কথায় কী হবে?",
+    "options": [
+      "দুর্গম",
+      "অভেদ্য",
+      "দুর্ভেদ্য",
+      "কঠিন"
+    ],
+    "correct_index": 2,
+    "correct_answer": "দুর্ভেদ্য",
+    "explanation": "যা সহজে ভাঙা যায় না = দুর্ভেদ্য।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J744",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যা সহজে জয় করা যায় না' — এক কথায় কী হবে?",
+    "options": [
+      "অজেয়",
+      "দুর্জয়",
+      "অপরাজেয়",
+      "দুর্গম"
+    ],
+    "correct_index": 1,
+    "correct_answer": "দুর্জয়",
+    "explanation": "যা সহজে জয় করা যায় না = দুর্জয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J745",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'যার আদি নেই' — এক কথায় কী হবে?",
+    "options": [
+      "অনন্ত",
+      "অনাদি",
+      "অসীম",
+      "অজন্মা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অনাদি",
+    "explanation": "যার আদি নেই = অনাদি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J746",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাক্য সংকোচন",
+    "difficulty": "medium",
+    "question": "'খাওয়ার যোগ্য' — এক কথায় কী হবে?",
+    "options": [
+      "খাবার",
+      "ভোজ্য",
+      "অন্ন",
+      "খাদ্য"
+    ],
+    "correct_index": 3,
+    "correct_answer": "খাদ্য",
+    "explanation": "খাওয়ার যোগ্য = খাদ্য।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাক্য সংকোচন",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J747",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "প্রত্যয়",
+    "difficulty": "medium",
+    "question": "'মানবিক' শব্দে কোন প্রত্যয় যুক্ত হয়েছে?",
+    "options": [
+      "ক",
+      "আ",
+      "অ",
+      "ইক"
+    ],
+    "correct_index": 3,
+    "correct_answer": "ইক",
+    "explanation": "মানব + ইক = মানবিক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "প্রত্যয়",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J748",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "প্রত্যয়",
+    "difficulty": "medium",
+    "question": "'সাপ্তাহিক' শব্দে কোন প্রত্যয় যুক্ত হয়েছে?",
+    "options": [
+      "ইক",
+      "অ",
+      "ক",
+      "আ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ইক",
+    "explanation": "সপ্তাহ + ইক = সাপ্তাহিক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "প্রত্যয়",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J749",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "উপসর্গ",
+    "difficulty": "medium",
+    "question": "'অভিমান' শব্দে কোন উপসর্গ আছে?",
+    "options": [
+      "অ",
+      "ভি",
+      "মান",
+      "অভি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অভি",
+    "explanation": "অভি + মান = অভিমান; 'অভি' উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "উপসর্গ",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J750",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "উপসর্গ",
+    "difficulty": "medium",
+    "question": "'নিঃস্বার্থ' শব্দে কোন উপসর্গ আছে?",
+    "options": [
+      "নিঃ",
+      "নি",
+      "স্ব",
+      "স্বার্থ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "নিঃ",
+    "explanation": "নিঃ + স্বার্থ = নিঃস্বার্থ; 'নিঃ' উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "উপসর্গ",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J751",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'নৌকাডুবি' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "শরৎচন্দ্র চট্টোপাধ্যায়",
+      "মানিক বন্দ্যোপাধ্যায়",
+      "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+      "রবীন্দ্রনাথ ঠাকুর"
+    ],
+    "correct_index": 3,
+    "correct_answer": "রবীন্দ্রনাথ ঠাকুর",
+    "explanation": "'নৌকাডুবি' রবীন্দ্রনাথ ঠাকুরের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "উপন্যাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J752",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'শেষের কবিতা' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "রবীন্দ্রনাথ ঠাকুর",
+      "কাজী নজরুল ইসলাম",
+      "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+      "শরৎচন্দ্র চট্টোপাধ্যায়"
+    ],
+    "correct_index": 0,
+    "correct_answer": "রবীন্দ্রনাথ ঠাকুর",
+    "explanation": "'শেষের কবিতা' রবীন্দ্রনাথ ঠাকুরের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "উপন্যাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J753",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'সঞ্চিতা' কাব্যগ্রন্থের রচয়িতা কে?",
+    "options": [
+      "কাজী নজরুল ইসলাম",
+      "রবীন্দ্রনাথ ঠাকুর",
+      "সুকান্ত ভট্টাচার্য",
+      "জসীমউদ্দীন"
+    ],
+    "correct_index": 0,
+    "correct_answer": "কাজী নজরুল ইসলাম",
+    "explanation": "'সঞ্চিতা' কাজী নজরুল ইসলামের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কাব্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J754",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'শ্রীকান্ত' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "মানিক বন্দ্যোপাধ্যায়",
+      "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+      "শরৎচন্দ্র চট্টোপাধ্যায়",
+      "তারাশঙ্কর বন্দ্যোপাধ্যায়"
+    ],
+    "correct_index": 2,
+    "correct_answer": "শরৎচন্দ্র চট্টোপাধ্যায়",
+    "explanation": "'শ্রীকান্ত' শরৎচন্দ্র চট্টোপাধ্যায়ের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "উপন্যাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J755",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'চরিত্রহীন' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "মানিক বন্দ্যোপাধ্যায়",
+      "শরৎচন্দ্র চট্টোপাধ্যায়",
+      "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+      "রবীন্দ্রনাথ ঠাকুর"
+    ],
+    "correct_index": 1,
+    "correct_answer": "শরৎচন্দ্র চট্টোপাধ্যায়",
+    "explanation": "'চরিত্রহীন' শরৎচন্দ্র চট্টোপাধ্যায়ের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "উপন্যাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J756",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'চণ্ডীমঙ্গল' কাব্যের রচয়িতা কে?",
+    "options": [
+      "বড়ু চণ্ডীদাস",
+      "বিজয় গুপ্ত",
+      "মুকুন্দরাম চক্রবর্তী",
+      "ভারতচন্দ্র রায়গুণাকর"
+    ],
+    "correct_index": 2,
+    "correct_answer": "মুকুন্দরাম চক্রবর্তী",
+    "explanation": "'চণ্ডীমঙ্গল' মুকুন্দরাম চক্রবর্তীর রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "মঙ্গলকাব্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J757",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'মনসামঙ্গল' কাব্যের রচয়িতা কে?",
+    "options": [
+      "ভারতচন্দ্র রায়গুণাকর",
+      "মুকুন্দরাম চক্রবর্তী",
+      "বিজয় গুপ্ত",
+      "বড়ু চণ্ডীদাস"
+    ],
+    "correct_index": 2,
+    "correct_answer": "বিজয় গুপ্ত",
+    "explanation": "'মনসামঙ্গল' বিজয় গুপ্তের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "মঙ্গলকাব্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J758",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "'শ্রীকৃষ্ণকীর্তন' কাব্যের রচয়িতা কে?",
+    "options": [
+      "মুকুন্দরাম চক্রবর্তী",
+      "চণ্ডীদাস",
+      "বিজয় গুপ্ত",
+      "বড়ু চণ্ডীদাস"
+    ],
+    "correct_index": 3,
+    "correct_answer": "বড়ু চণ্ডীদাস",
+    "explanation": "'শ্রীকৃষ্ণকীর্তন' বড়ু চণ্ডীদাসের রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কাব্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J759",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "বাংলা সাহিত্যের আদি কবি কে?",
+    "options": [
+      "চণ্ডীদাস",
+      "লুইপা",
+      "বিদ্যাপতি",
+      "জয়দেব"
+    ],
+    "correct_index": 1,
+    "correct_answer": "লুইপা",
+    "explanation": "বাংলা সাহিত্যের আদি কবি লুইপা (চর্যাপদের কবি)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "সাহিত্য",
+      "সাহিত্যের ইতিহাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J760",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সাহিত্য",
+    "difficulty": "medium",
+    "question": "কাজী নজরুল ইসলাম জন্মগ্রহণ করেন কত সালে?",
+    "options": [
+      "১৮৬১",
+      "১৮৯৯",
+      "১৯০০",
+      "১৮৯৫"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৮৯৯",
+    "explanation": "কাজী নজরুল ইসলাম ১৮৯৯ সালে জন্মগ্রহণ করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) ও প্রমিত বাংলা সাহিত্যের তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "সাহিত্য",
+      "সাহিত্যিক পরিচিতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-bangla-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

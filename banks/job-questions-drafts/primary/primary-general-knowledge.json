@@ -1,0 +1,762 @@
+[
+ {
+  "id": "JOBQ-0438",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশ — সাধারণ",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের রাজধানী কোনটি?",
+  "options": [
+   "ঢাকা",
+   "চট্টগ্রাম",
+   "খুলনা",
+   "রাজশাহী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ঢাকা",
+  "explanation": "ঢাকা বাংলাদেশের রাজধানী।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangladesh",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0439",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতীয় প্রতীক",
+  "difficulty": "easy",
+  "question": "জাতীয় সংগীত 'আমার সোনার বাংলা'-র কথা ও সুর কার রচনা?",
+  "options": [
+   "রবীন্দ্রনাথ ঠাকুর",
+   "কাজী নজরুল ইসলাম",
+   "জসীমউদ্দীন",
+   "দ্বিজেন্দ্রলাল রায়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রবীন্দ্রনাথ ঠাকুর",
+  "explanation": "'আমার সোনার বাংলা'-র কথা ও সুর রবীন্দ্রনাথ ঠাকুরের রচনা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "national-symbols",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0440",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতীয় প্রতীক",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের জাতীয় প্রতীকে কয়টি তারা আছে?",
+  "options": [
+   "২টি",
+   "৩টি",
+   "৪টি",
+   "৫টি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪টি",
+  "explanation": "বাংলাদেশের জাতীয় প্রতীকে চারটি তারা আছে, যা চার মূলনীতি নির্দেশ করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "national-symbols",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0441",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতীয় স্থাপনা",
+  "difficulty": "medium",
+  "question": "জাতীয় স্মৃতিসৌধ কত সালে উদ্বোধন করা হয়?",
+  "options": [
+   "১৯৭২ সালে",
+   "১৯৭৮ সালে",
+   "১৯৮২ সালে",
+   "১৯৯০ সালে"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৯৮২ সালে",
+  "explanation": "জাতীয় স্মৃতিসৌধ ১৯৮২ সালের ১৬ ডিসেম্বর উদ্বোধন করা হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "landmark",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0442",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মুক্তিযুদ্ধ",
+  "difficulty": "medium",
+  "question": "মুক্তিযুদ্ধের সময় মুজিবনগর সরকারের প্রধানমন্ত্রী কে ছিলেন?",
+  "options": [
+   "তাজউদ্দীন আহমদ",
+   "সৈয়দ নজরুল ইসলাম",
+   "এম এ জি ওসমানী",
+   "ক্যাপ্টেন মনসুর আলী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "তাজউদ্দীন আহমদ",
+  "explanation": "মুজিবনগর সরকারের প্রধানমন্ত্রী ছিলেন তাজউদ্দীন আহমদ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "liberation-war",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0443",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশের ইতিহাস",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম প্রধান সেনাপতি কে ছিলেন?",
+  "options": [
+   "এম এ জি ওসমানী",
+   "জিয়াউর রহমান",
+   "কে এম শফিউল্লাহ",
+   "আবদুর রব"
+  ],
+  "correct_index": 0,
+  "correct_answer": "এম এ জি ওসমানী",
+  "explanation": "বাংলাদেশের প্রথম প্রধান সেনাপতি ছিলেন এম এ জি ওসমানী।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "history",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0444",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "অবকাঠামো",
+  "difficulty": "easy",
+  "question": "পদ্মা সেতু দিয়ে কোন ধরনের যান চলাচল করে?",
+  "options": [
+   "শুধু সড়ক",
+   "সড়ক ও রেল",
+   "শুধু রেল",
+   "শুধু পায়ে হাঁটা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সড়ক ও রেল",
+  "explanation": "পদ্মা সেতু দিয়ে সড়ক ও রেল — উভয় ধরনের যান চলাচল করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "infrastructure",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0445",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ধর্ম",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের জাতীয় মন্দির কোনটি?",
+  "options": [
+   "ঢাকেশ্বরী মন্দির",
+   "কান্তজিউ মন্দির",
+   "পুণ্ড্রবর্ধন",
+   "সোমপুর বিহার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ঢাকেশ্বরী মন্দির",
+  "explanation": "বাংলাদেশের জাতীয় মন্দির ঢাকেশ্বরী মন্দির।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "landmark",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0446",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বন্দর",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের বৃহত্তম সমুদ্রবন্দর কোনটি?",
+  "options": [
+   "চট্টগ্রাম",
+   "মোংলা",
+   "পায়রা",
+   "কক্সবাজার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "চট্টগ্রাম",
+  "explanation": "চট্টগ্রাম বন্দর বাংলাদেশের বৃহত্তম সমুদ্রবন্দর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "port",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0447",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতিসংঘ",
+  "difficulty": "medium",
+  "question": "বাংলাদেশ কত সালে জাতিসংঘের সদস্য হয়?",
+  "options": [
+   "১৯৭২",
+   "১৯৭৪",
+   "১৯৭৬",
+   "১৯৭১"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯৭৪",
+  "explanation": "বাংলাদেশ ১৯৭৪ সালের ১৭ সেপ্টেম্বর জাতিসংঘের সদস্যপদ লাভ করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "primary",
+   "un"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0448",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "আঞ্চলিক সংস্থা",
+  "difficulty": "medium",
+  "question": "সার্কের সদর দপ্তর কোন শহরে অবস্থিত?",
+  "options": [
+   "ঢাকা",
+   "কাঠমান্ডু",
+   "দিল্লি",
+   "কলম্বো"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কাঠমান্ডু",
+  "explanation": "সার্কের সদর দপ্তর নেপালের রাজধানী কাঠমান্ডুতে অবস্থিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "primary",
+   "saarc"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0449",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "বিশ্বের বৃহত্তম মালভূমি কোনটি?",
+  "options": [
+   "তিব্বত মালভূমি",
+   "দাক্ষিণাত্য মালভূমি",
+   "কলোরাডো মালভূমি",
+   "আরব মালভূমি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "তিব্বত মালভূমি",
+  "explanation": "বিশ্বের বৃহত্তম মালভূমি তিব্বত মালভূমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "primary",
+   "world-geography"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0450",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভাষা আন্দোলন",
+  "difficulty": "medium",
+  "question": "ইউনেস্কো ২১ ফেব্রুয়ারিকে আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে ঘোষণা করে কত সালে?",
+  "options": [
+   "১৯৯৯",
+   "১৯৫২",
+   "১৯৭১",
+   "২০০০"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৯৯",
+  "explanation": "ইউনেস্কো ১৯৯৯ সালে ২১ ফেব্রুয়ারিকে আন্তর্জাতিক মাতৃভাষা দিবস হিসেবে ঘোষণা করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "language-movement",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0451",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশের ইতিহাস",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম নারী প্রধানমন্ত্রী কে ছিলেন?",
+  "options": [
+   "বেগম খালেদা জিয়া",
+   "শেখ হাসিনা",
+   "বেগম রওশন এরশাদ",
+   "মতিয়া চৌধুরী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বেগম খালেদা জিয়া",
+  "explanation": "বেগম খালেদা জিয়া ১৯৯১ সালে বাংলাদেশের প্রথম নারী প্রধানমন্ত্রী হন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "history",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0452",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংবিধান",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের সংবিধানে মোট কয়টি অনুচ্ছেদ আছে?",
+  "options": [
+   "১৫৩টি",
+   "১৫০টি",
+   "১৪৫টি",
+   "১৬০টি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৫৩টি",
+  "explanation": "বাংলাদেশের সংবিধানে মোট ১৫৩টি অনুচ্ছেদ আছে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "constitution",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0453",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশের ইতিহাস",
+  "difficulty": "medium",
+  "question": "ঢাকা কত সালে বাংলার রাজধানী হয়?",
+  "options": [
+   "১৬১০",
+   "১৫৭৫",
+   "১৭৫৭",
+   "১৯০৫"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৬১০",
+  "explanation": "১৬১০ সালে সুবেদার ইসলাম খান ঢাকাকে বাংলার রাজধানী করেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "history",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0454",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মুক্তিযুদ্ধ",
+  "difficulty": "medium",
+  "question": "২৬ মার্চ ১৯৭১ স্বাধীনতার ঘোষণা চট্টগ্রাম বেতার থেকে পাঠ করেন কে?",
+  "options": [
+   "এম এ হান্নান",
+   "মেজর জিয়াউর রহমান",
+   "তাজউদ্দীন আহমদ",
+   "এম এ জি ওসমানী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "এম এ হান্নান",
+  "explanation": "বঙ্গবন্ধুর পক্ষে স্বাধীনতার ঘোষণা প্রথম চট্টগ্রাম বেতার থেকে পাঠ করেন এম এ হান্নান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "liberation-war",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0455",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "বিশ্বের গভীরতম খাদ কোনটি?",
+  "options": [
+   "মারিয়ানা খাদ",
+   "জাভা খাদ",
+   "পুয়ের্তো রিকো খাদ",
+   "টোঙ্গা খাদ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মারিয়ানা খাদ",
+  "explanation": "মারিয়ানা খাদ বিশ্বের গভীরতম খাদ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "primary",
+   "world-geography"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0456",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশ — সাধারণ",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের জাতীয় সংগীতের প্রথম লাইন কোনটি?",
+  "options": [
+   "আমার সোনার বাংলা",
+   "জনগণমন অধিনায়ক",
+   "চল চল চল",
+   "ধনধান্য পুষ্প ভরা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "আমার সোনার বাংলা",
+  "explanation": "জাতীয় সংগীত 'আমার সোনার বাংলা' রবীন্দ্রনাথ ঠাকুরের রচনা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "national-symbols",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0457",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশ — সাধারণ",
+  "difficulty": "easy",
+  "question": "বাংলাদেশ ব্যাংকের প্রধান কার্যালয় কোথায় অবস্থিত?",
+  "options": [
+   "ঢাকার মতিঝিলে",
+   "চট্টগ্রামে",
+   "খুলনায়",
+   "রাজশাহীতে"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ঢাকার মতিঝিলে",
+  "explanation": "বাংলাদেশ ব্যাংকের প্রধান কার্যালয় ঢাকার মতিঝিলে অবস্থিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 Bangladesh and Global Studies (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "economy",
+   "general-knowledge",
+   "gk",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-general-knowledge.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

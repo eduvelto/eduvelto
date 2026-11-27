@@ -1,0 +1,1872 @@
+{
+  "seed": "eduvelto-landing-2026-11-27-v1",
+  "date": "2026-11-27",
+  "fixes": [
+    {
+      "id": "JOBQ-L365",
+      "file": "job-questions-drafts/grade11-20/grade11-20-bangla-depth-02.json",
+      "replaced": "পুরষ্কার",
+      "with": "পূরষ্কার",
+      "note": "Duplicated wrong option 'পুরষ্কার' (A and D) — D replaced with distinct misspelling 'পূরষ্কার'."
+    },
+    {
+      "id": "JOBQ-N632",
+      "file": "job-questions-drafts/ntrca/ntrca-english-depth-02.json",
+      "replaced": "Comittee",
+      "with": "Commite",
+      "note": "Duplicated wrong option 'Comittee' (A and C) — C replaced with distinct misspelling 'Commite'."
+    },
+    {
+      "id": "JOBQ-N633",
+      "file": "job-questions-drafts/ntrca/ntrca-english-depth-02.json",
+      "replaced": "Grammer",
+      "with": "Grammaer",
+      "note": "Duplicated wrong option 'Grammer' (A and D) — D replaced with distinct misspelling 'Grammaer'."
+    },
+    {
+      "id": "JOBQ-P033",
+      "file": "job-questions-drafts/primary/primary-english-depth-01.json",
+      "replaced": "Knifes",
+      "with": "Knifves",
+      "note": "Duplicated wrong option 'Knifes' (A and C) — C replaced with distinct plural form 'Knifves'."
+    },
+    {
+      "id": "JOBQ-0251",
+      "file": "job-questions-drafts/grade11-20/grade11-20-general-mathematics.json",
+      "replaced": "৩/৩",
+      "with": "৩/৬",
+      "note": "Two correct options: '১' and '৩/৩' are both 1 — '৩/৩' replaced with '৩/৬' (the standard add-numerators-and-denominators error)."
+    },
+    {
+      "id": "JOBQ-R111",
+      "file": "job-questions-drafts/recurring-english-01.json",
+      "replaced": null,
+      "with": null,
+      "note": "Verdict NEEDS-FIX -> NEEDS-REVIEW (generic-stem false positive); item kept."
+    },
+    {
+      "id": "JOBQ-R112",
+      "file": "job-questions-drafts/recurring-english-01.json",
+      "replaced": null,
+      "with": null,
+      "note": "Verdict NEEDS-FIX -> NEEDS-REVIEW (generic-stem false positive); item kept."
+    }
+  ],
+  "flags": [
+    {
+      "id": "JOBQ-J813",
+      "reason": "Ambiguous stem ('___ cat'); needs a teacher-supplied stem; left NEEDS-FIX."
+    },
+    {
+      "id": "JOBQ-0310",
+      "reason": "Orphan ID: listed in shared-bank-index.json only, no options in any bank file. Flagged only; nothing deleted."
+    },
+    {
+      "id": "JOBQ-0334",
+      "reason": "Orphan ID: listed in shared-bank-index.json only, no options in any bank file. Flagged only; nothing deleted."
+    }
+  ],
+  "shuffled": [
+    {
+      "file": "job-questions-drafts/bank-bangla-depth-01.json",
+      "n": 19,
+      "before": {
+        "0": 19,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 4
+      },
+      "needs_fix_to_needs_review": 19
+    },
+    {
+      "file": "job-questions-drafts/bank-bangla-depth-02.json",
+      "n": 24,
+      "before": {
+        "0": 24,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 6,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 22
+    },
+    {
+      "file": "job-questions-drafts/bank-bangla-depth-03.json",
+      "n": 20,
+      "before": {
+        "0": 20,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 19
+    },
+    {
+      "file": "job-questions-drafts/bank-english-depth-02.json",
+      "n": 25,
+      "before": {
+        "0": 23,
+        "1": 2,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 7,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 25
+    },
+    {
+      "file": "job-questions-drafts/bank-english-depth-03.json",
+      "n": 20,
+      "before": {
+        "0": 20,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 20
+    },
+    {
+      "file": "job-questions-drafts/bank-gk-banking-depth-01.json",
+      "n": 20,
+      "before": {
+        "0": 20,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 19
+    },
+    {
+      "file": "job-questions-drafts/bank-gk-banking-depth-02.json",
+      "n": 20,
+      "before": {
+        "0": 20,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 20
+    },
+    {
+      "file": "job-questions-drafts/bank-gk-banking-depth-03.json",
+      "n": 15,
+      "before": {
+        "0": 15,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 15
+    },
+    {
+      "file": "job-questions-drafts/bank/bank-bangla-grammar-and-language.json",
+      "n": 12,
+      "before": {
+        "0": 12,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 12
+    },
+    {
+      "file": "job-questions-drafts/bank/bank-english-grammar-and-language.json",
+      "n": 12,
+      "before": {
+        "0": 12,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 11
+    },
+    {
+      "file": "job-questions-drafts/bank/bank-financial-and-banking-knowledge.json",
+      "n": 9,
+      "before": {
+        "0": 9,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 3,
+        "1": 2,
+        "2": 2,
+        "3": 2
+      },
+      "needs_fix_to_needs_review": 8
+    },
+    {
+      "file": "job-questions-drafts/bank/bank-general-knowledge.json",
+      "n": 8,
+      "before": {
+        "0": 8,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 2,
+        "1": 2,
+        "2": 2,
+        "3": 2
+      },
+      "needs_fix_to_needs_review": 7
+    },
+    {
+      "file": "job-questions-drafts/bcs-bangladesh-affairs-depth-01.json",
+      "n": 26,
+      "before": {
+        "0": 25,
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 7,
+        "1": 7,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 26
+    },
+    {
+      "file": "job-questions-drafts/bcs-bangladesh-affairs-depth-02.json",
+      "n": 27,
+      "before": {
+        "0": 25,
+        "1": 0,
+        "2": 1,
+        "3": 1
+      },
+      "after": {
+        "0": 7,
+        "1": 7,
+        "2": 7,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 27
+    },
+    {
+      "file": "job-questions-drafts/bcs-bangladesh-affairs-depth-03.json",
+      "n": 6,
+      "before": {
+        "0": 6,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 2,
+        "1": 2,
+        "2": 1,
+        "3": 1
+      },
+      "needs_fix_to_needs_review": 6
+    },
+    {
+      "file": "job-questions-drafts/bcs-ethics-depth-01.json",
+      "n": 18,
+      "before": {
+        "0": 18,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 4,
+        "3": 4
+      },
+      "needs_fix_to_needs_review": 18
+    },
+    {
+      "file": "job-questions-drafts/bcs-ethics-depth-02.json",
+      "n": 18,
+      "before": {
+        "0": 18,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 4,
+        "3": 4
+      },
+      "needs_fix_to_needs_review": 15
+    },
+    {
+      "file": "job-questions-drafts/bcs-general-science-depth-01.json",
+      "n": 18,
+      "before": {
+        "0": 18,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 4,
+        "3": 4
+      },
+      "needs_fix_to_needs_review": 18
+    },
+    {
+      "file": "job-questions-drafts/bcs-geography-environment-depth-01.json",
+      "n": 15,
+      "before": {
+        "0": 15,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 14
+    },
+    {
+      "file": "job-questions-drafts/bcs-ict-depth-01.json",
+      "n": 20,
+      "before": {
+        "0": 18,
+        "1": 1,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 20
+    },
+    {
+      "file": "job-questions-drafts/bcs-ict-depth-02.json",
+      "n": 20,
+      "before": {
+        "0": 19,
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 20
+    },
+    {
+      "file": "job-questions-drafts/bcs/bcs-bangla-language-and-literature.json",
+      "n": 18,
+      "before": {
+        "0": 18,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 4,
+        "3": 4
+      },
+      "needs_fix_to_needs_review": 18
+    },
+    {
+      "file": "job-questions-drafts/bcs/bcs-bangladesh-affairs.json",
+      "n": 15,
+      "before": {
+        "0": 15,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 15
+    },
+    {
+      "file": "job-questions-drafts/bcs/bcs-english-language-and-literature.json",
+      "n": 18,
+      "before": {
+        "0": 18,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 4,
+        "3": 4
+      },
+      "needs_fix_to_needs_review": 18
+    },
+    {
+      "file": "job-questions-drafts/bcs/bcs-ethics-values-and-good-governance.json",
+      "n": 9,
+      "before": {
+        "0": 9,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 3,
+        "1": 2,
+        "2": 2,
+        "3": 2
+      },
+      "needs_fix_to_needs_review": 8
+    },
+    {
+      "file": "job-questions-drafts/bcs/bcs-geography-environment-and-disaster-management.json",
+      "n": 6,
+      "before": {
+        "0": 6,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 2,
+        "1": 2,
+        "2": 1,
+        "3": 1
+      },
+      "needs_fix_to_needs_review": 6
+    },
+    {
+      "file": "job-questions-drafts/bcs/bcs-international-affairs.json",
+      "n": 15,
+      "before": {
+        "0": 15,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 14
+    },
+    {
+      "file": "job-questions-drafts/grade11-20/grade11-20-bangla.json",
+      "n": 20,
+      "before": {
+        "0": 18,
+        "1": 2,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 19
+    },
+    {
+      "file": "job-questions-drafts/grade11-20/grade11-20-general-knowledge.json",
+      "n": 22,
+      "before": {
+        "0": 20,
+        "1": 1,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 6,
+        "1": 6,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 21
+    },
+    {
+      "file": "job-questions-drafts/grade11-20/grade11-20-j-bangla-01.json",
+      "n": 60,
+      "before": {
+        "0": 60,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 15,
+        "1": 15,
+        "2": 15,
+        "3": 15
+      },
+      "needs_fix_to_needs_review": 57
+    },
+    {
+      "file": "job-questions-drafts/grade11-20/grade11-20-j-english-01.json",
+      "n": 60,
+      "before": {
+        "0": 60,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 15,
+        "1": 15,
+        "2": 15,
+        "3": 15
+      },
+      "needs_fix_to_needs_review": 57
+    },
+    {
+      "file": "job-questions-drafts/grade11-20/grade11-20-j-gk-01.json",
+      "n": 60,
+      "before": {
+        "0": 59,
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 15,
+        "1": 15,
+        "2": 15,
+        "3": 15
+      },
+      "needs_fix_to_needs_review": 59
+    },
+    {
+      "file": "job-questions-drafts/grade11-20/grade11-20-j-ict-office-01.json",
+      "n": 59,
+      "before": {
+        "0": 59,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 15,
+        "1": 15,
+        "2": 15,
+        "3": 14
+      },
+      "needs_fix_to_needs_review": 58
+    },
+    {
+      "file": "job-questions-drafts/grade11-20/grade11-20-j-math-01.json",
+      "n": 60,
+      "before": {
+        "0": 60,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 15,
+        "1": 15,
+        "2": 15,
+        "3": 15
+      },
+      "needs_fix_to_needs_review": 58
+    },
+    {
+      "file": "job-questions-drafts/ministries/ministries-bangla.json",
+      "n": 10,
+      "before": {
+        "0": 9,
+        "1": 0,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 3,
+        "1": 3,
+        "2": 2,
+        "3": 2
+      },
+      "needs_fix_to_needs_review": 10
+    },
+    {
+      "file": "job-questions-drafts/ministries/ministries-j-bangla-01.json",
+      "n": 75,
+      "before": {
+        "0": 75,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 19,
+        "1": 19,
+        "2": 19,
+        "3": 18
+      },
+      "needs_fix_to_needs_review": 73
+    },
+    {
+      "file": "job-questions-drafts/ministries/ministries-j-english-01.json",
+      "n": 75,
+      "before": {
+        "0": 75,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 19,
+        "1": 19,
+        "2": 19,
+        "3": 18
+      },
+      "needs_fix_to_needs_review": 71
+    },
+    {
+      "file": "job-questions-drafts/ministries/ministries-j-gk-01.json",
+      "n": 74,
+      "before": {
+        "0": 74,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 19,
+        "1": 19,
+        "2": 18,
+        "3": 18
+      },
+      "needs_fix_to_needs_review": 69
+    },
+    {
+      "file": "job-questions-drafts/ministries/ministries-j-math-01.json",
+      "n": 75,
+      "before": {
+        "0": 74,
+        "1": 0,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 19,
+        "1": 19,
+        "2": 19,
+        "3": 18
+      },
+      "needs_fix_to_needs_review": 73
+    },
+    {
+      "file": "job-questions-drafts/ntrca/ntrca-bangla.json",
+      "n": 15,
+      "before": {
+        "0": 15,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 14
+    },
+    {
+      "file": "job-questions-drafts/ntrca/ntrca-general-knowledge.json",
+      "n": 14,
+      "before": {
+        "0": 13,
+        "1": 0,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 3,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 12
+    },
+    {
+      "file": "job-questions-drafts/ntrca/ntrca-j-bangla-01.json",
+      "n": 60,
+      "before": {
+        "0": 54,
+        "1": 3,
+        "2": 3,
+        "3": 0
+      },
+      "after": {
+        "0": 15,
+        "1": 15,
+        "2": 15,
+        "3": 15
+      },
+      "needs_fix_to_needs_review": 58
+    },
+    {
+      "file": "job-questions-drafts/ntrca/ntrca-j-bangla-02.json",
+      "n": 59,
+      "before": {
+        "0": 57,
+        "1": 2,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 15,
+        "1": 15,
+        "2": 15,
+        "3": 14
+      },
+      "needs_fix_to_needs_review": 58
+    },
+    {
+      "file": "job-questions-drafts/ntrca/ntrca-j-english-01.json",
+      "n": 60,
+      "before": {
+        "0": 58,
+        "1": 0,
+        "2": 2,
+        "3": 0
+      },
+      "after": {
+        "0": 15,
+        "1": 15,
+        "2": 15,
+        "3": 15
+      },
+      "needs_fix_to_needs_review": 58
+    },
+    {
+      "file": "job-questions-drafts/ntrca/ntrca-j-english-02.json",
+      "n": 59,
+      "before": {
+        "0": 59,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 15,
+        "1": 15,
+        "2": 15,
+        "3": 14
+      },
+      "needs_fix_to_needs_review": 57
+    },
+    {
+      "file": "job-questions-drafts/ntrca/ntrca-j-gk-02.json",
+      "n": 38,
+      "before": {
+        "0": 37,
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 10,
+        "1": 10,
+        "2": 9,
+        "3": 9
+      },
+      "needs_fix_to_needs_review": 38
+    },
+    {
+      "file": "job-questions-drafts/ntrca/ntrca-j-math-01.json",
+      "n": 40,
+      "before": {
+        "0": 37,
+        "1": 2,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 10,
+        "1": 10,
+        "2": 10,
+        "3": 10
+      },
+      "needs_fix_to_needs_review": 38
+    },
+    {
+      "file": "job-questions-drafts/ntrca/ntrca-j-math-02.json",
+      "n": 40,
+      "before": {
+        "0": 40,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 10,
+        "1": 10,
+        "2": 10,
+        "3": 10
+      },
+      "needs_fix_to_needs_review": 39
+    },
+    {
+      "file": "admission-questions-drafts/cu-bangla-01.json",
+      "n": 22,
+      "before": {
+        "0": 20,
+        "1": 1,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 6,
+        "1": 6,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/cu-biology-01.json",
+      "n": 10,
+      "before": {
+        "0": 8,
+        "1": 1,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 3,
+        "1": 3,
+        "2": 2,
+        "3": 2
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/cu-chemistry-01.json",
+      "n": 15,
+      "before": {
+        "0": 14,
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/cu-english-01.json",
+      "n": 25,
+      "before": {
+        "0": 22,
+        "1": 3,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 7,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/cu-gk-01.json",
+      "n": 25,
+      "before": {
+        "0": 21,
+        "1": 1,
+        "2": 3,
+        "3": 0
+      },
+      "after": {
+        "0": 7,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/cu-math-01.json",
+      "n": 10,
+      "before": {
+        "0": 8,
+        "1": 0,
+        "2": 2,
+        "3": 0
+      },
+      "after": {
+        "0": 3,
+        "1": 3,
+        "2": 2,
+        "3": 2
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/cu-physics-01.json",
+      "n": 14,
+      "before": {
+        "0": 14,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 3,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/du-accounting-01.json",
+      "n": 15,
+      "before": {
+        "0": 4,
+        "1": 8,
+        "2": 3,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/du-bangla-01.json",
+      "n": 27,
+      "before": {
+        "0": 27,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 7,
+        "1": 7,
+        "2": 7,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/du-biology-01.json",
+      "n": 25,
+      "before": {
+        "0": 4,
+        "1": 17,
+        "2": 4,
+        "3": 0
+      },
+      "after": {
+        "0": 7,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/du-chemistry-01.json",
+      "n": 25,
+      "before": {
+        "0": 6,
+        "1": 13,
+        "2": 6,
+        "3": 0
+      },
+      "after": {
+        "0": 7,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/du-english-01.json",
+      "n": 29,
+      "before": {
+        "0": 10,
+        "1": 18,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 8,
+        "1": 7,
+        "2": 7,
+        "3": 7
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/du-gk-01.json",
+      "n": 20,
+      "before": {
+        "0": 2,
+        "1": 10,
+        "2": 6,
+        "3": 2
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/du-math-01.json",
+      "n": 24,
+      "before": {
+        "0": 11,
+        "1": 10,
+        "2": 3,
+        "3": 0
+      },
+      "after": {
+        "0": 6,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/du-physics-01.json",
+      "n": 30,
+      "before": {
+        "0": 13,
+        "1": 9,
+        "2": 8,
+        "3": 0
+      },
+      "after": {
+        "0": 8,
+        "1": 8,
+        "2": 7,
+        "3": 7
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/eng-chemistry-01.json",
+      "n": 30,
+      "before": {
+        "0": 30,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 8,
+        "1": 8,
+        "2": 7,
+        "3": 7
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/eng-english-01.json",
+      "n": 10,
+      "before": {
+        "0": 9,
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 3,
+        "1": 3,
+        "2": 2,
+        "3": 2
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/eng-math-01.json",
+      "n": 44,
+      "before": {
+        "0": 44,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 11,
+        "1": 11,
+        "2": 11,
+        "3": 11
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/eng-physics-01.json",
+      "n": 40,
+      "before": {
+        "0": 39,
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 10,
+        "1": 10,
+        "2": 10,
+        "3": 10
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/gst-accounting-01.json",
+      "n": 15,
+      "before": {
+        "0": 3,
+        "1": 10,
+        "2": 2,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/gst-biology-01.json",
+      "n": 14,
+      "before": {
+        "0": 1,
+        "1": 9,
+        "2": 4,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 3,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/gst-chemistry-01.json",
+      "n": 25,
+      "before": {
+        "0": 4,
+        "1": 16,
+        "2": 5,
+        "3": 0
+      },
+      "after": {
+        "0": 7,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/gst-english-01.json",
+      "n": 20,
+      "before": {
+        "0": 8,
+        "1": 10,
+        "2": 2,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/gst-gk-01.json",
+      "n": 14,
+      "before": {
+        "0": 4,
+        "1": 9,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 3,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/gst-math-01.json",
+      "n": 15,
+      "before": {
+        "0": 2,
+        "1": 13,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/gst-physics-01.json",
+      "n": 25,
+      "before": {
+        "0": 7,
+        "1": 11,
+        "2": 6,
+        "3": 1
+      },
+      "after": {
+        "0": 7,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ju-bangla-01.json",
+      "n": 16,
+      "before": {
+        "0": 13,
+        "1": 0,
+        "2": 3,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 4
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ju-biology-01.json",
+      "n": 15,
+      "before": {
+        "0": 15,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ju-chemistry-01.json",
+      "n": 15,
+      "before": {
+        "0": 15,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ju-english-01.json",
+      "n": 20,
+      "before": {
+        "0": 19,
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ju-gk-01.json",
+      "n": 15,
+      "before": {
+        "0": 13,
+        "1": 0,
+        "2": 2,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ju-iq-01.json",
+      "n": 5,
+      "before": {
+        "0": 4,
+        "1": 0,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 2,
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ju-math-01.json",
+      "n": 20,
+      "before": {
+        "0": 19,
+        "1": 0,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ju-physics-01.json",
+      "n": 15,
+      "before": {
+        "0": 11,
+        "1": 0,
+        "2": 4,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/med-botany-01.json",
+      "n": 20,
+      "before": {
+        "0": 20,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/med-chemistry-01.json",
+      "n": 30,
+      "before": {
+        "0": 27,
+        "1": 3,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 8,
+        "1": 8,
+        "2": 7,
+        "3": 7
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/med-english-01.json",
+      "n": 20,
+      "before": {
+        "0": 16,
+        "1": 4,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/med-gk-01.json",
+      "n": 15,
+      "before": {
+        "0": 11,
+        "1": 2,
+        "2": 2,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/med-physics-01.json",
+      "n": 20,
+      "before": {
+        "0": 20,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/med-zoology-01.json",
+      "n": 19,
+      "before": {
+        "0": 18,
+        "1": 1,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 4
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ru-accounting-01.json",
+      "n": 10,
+      "before": {
+        "0": 1,
+        "1": 7,
+        "2": 2,
+        "3": 0
+      },
+      "after": {
+        "0": 3,
+        "1": 3,
+        "2": 2,
+        "3": 2
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ru-bangla-01.json",
+      "n": 24,
+      "before": {
+        "0": 19,
+        "1": 4,
+        "2": 1,
+        "3": 0
+      },
+      "after": {
+        "0": 6,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ru-biology-01.json",
+      "n": 15,
+      "before": {
+        "0": 1,
+        "1": 14,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ru-chemistry-01.json",
+      "n": 20,
+      "before": {
+        "0": 3,
+        "1": 14,
+        "2": 3,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ru-english-01.json",
+      "n": 24,
+      "before": {
+        "0": 3,
+        "1": 17,
+        "2": 2,
+        "3": 2
+      },
+      "after": {
+        "0": 6,
+        "1": 6,
+        "2": 6,
+        "3": 6
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ru-gk-01.json",
+      "n": 20,
+      "before": {
+        "0": 13,
+        "1": 7,
+        "2": 0,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ru-math-01.json",
+      "n": 15,
+      "before": {
+        "0": 5,
+        "1": 8,
+        "2": 2,
+        "3": 0
+      },
+      "after": {
+        "0": 4,
+        "1": 4,
+        "2": 4,
+        "3": 3
+      },
+      "needs_fix_to_needs_review": 0
+    },
+    {
+      "file": "admission-questions-drafts/ru-physics-01.json",
+      "n": 20,
+      "before": {
+        "0": 7,
+        "1": 10,
+        "2": 3,
+        "3": 0
+      },
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "needs_fix_to_needs_review": 0
+    }
+  ],
+  "skipped": [
+    {
+      "file": "job-questions-drafts/bcs-bangla-depth-01.json",
+      "n": 27,
+      "after": {
+        "0": 8,
+        "1": 5,
+        "2": 6,
+        "3": 8
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-bangla-depth-02.json",
+      "n": 30,
+      "after": {
+        "0": 7,
+        "1": 9,
+        "2": 8,
+        "3": 6
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-bangla-depth-03.json",
+      "n": 10,
+      "after": {
+        "0": 2,
+        "1": 3,
+        "2": 3,
+        "3": 2
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-english-depth-01.json",
+      "n": 29,
+      "after": {
+        "0": 8,
+        "1": 9,
+        "2": 4,
+        "3": 8
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-english-depth-02.json",
+      "n": 29,
+      "after": {
+        "0": 6,
+        "1": 7,
+        "2": 11,
+        "3": 5
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-english-depth-03.json",
+      "n": 10,
+      "after": {
+        "0": 3,
+        "1": 1,
+        "2": 2,
+        "3": 4
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-math-depth-01.json",
+      "n": 25,
+      "after": {
+        "0": 6,
+        "1": 9,
+        "2": 5,
+        "3": 5
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-math-depth-02.json",
+      "n": 24,
+      "after": {
+        "0": 7,
+        "1": 5,
+        "2": 6,
+        "3": 6
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-math-depth-03.json",
+      "n": 6,
+      "after": {
+        "0": 1,
+        "1": 0,
+        "2": 3,
+        "3": 2
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-mental-ability-depth-01.json",
+      "n": 20,
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "job-questions-drafts/bcs-mental-ability-depth-02.json",
+      "n": 20,
+      "after": {
+        "0": 5,
+        "1": 5,
+        "2": 5,
+        "3": 5
+      },
+      "reason": "Already shuffled 26 Nov 2026 (seed 20261126) — not re-shuffled."
+    },
+    {
+      "file": "admission-questions-drafts/gst-bangla-01.json",
+      "n": 16,
+      "after": {
+        "0": 5,
+        "1": 6,
+        "2": 4,
+        "3": 1
+      },
+      "reason": "shuffleRequired=false in B review (most balanced file, A 31%, D present) — not shuffled."
+    }
+  ],
+  "academic_new": [
+    {
+      "file": "academic-questions-drafts/gap3-written-types-class9.json",
+      "n": 33,
+      "ids": "ACAD-8101..ACAD-8133",
+      "distribution": {
+        "0": 8,
+        "1": 9,
+        "2": 8,
+        "3": 8
+      },
+      "note": "Already balanced (A 8 / B 9 / C 8 / D 8) — no shuffle applied."
+    },
+    {
+      "file": "academic-questions-drafts/madrasa-batch1-dakhil-arabic.json",
+      "n": 12,
+      "ids": "ACAD-8134..ACAD-8145",
+      "distribution": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "note": "Already balanced (3 per position) — no shuffle applied."
+    }
+  ],
+  "verification": {
+    "errors": [],
+    "total_ids": 7371
+  },
+  "dedup_removal": {
+    "id": "JOBQ-D157",
+    "file": "job-questions-drafts/bcs-mental-ability-depth-01.json",
+    "reason": "True duplicate of JOBQ-G318 (same stem, same option set, same correct answer পশ্চিম); G318 kept. No content lost. Removed after importer dry-run flagged it as an exact duplicate."
+  }
+}

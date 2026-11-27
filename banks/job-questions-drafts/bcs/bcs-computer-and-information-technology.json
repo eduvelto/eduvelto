@@ -1,0 +1,344 @@
+[
+ {
+  "id": "JOBQ-0163",
+  "exam_canonical": "bcs",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "কম্পিউটার পরিচিতি",
+  "difficulty": "easy",
+  "question": "১ কিলোবাইট (KB) সমান কত বাইট?",
+  "options": [
+   "১০০০ বাইট",
+   "১০২৪ বাইট",
+   "৫১২ বাইট",
+   "২০৪৮ বাইট"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১০২৪ বাইট",
+  "explanation": "কম্পিউটার পরিমাপে ১ KB = ১০২৪ বাইট।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Computer and Information Technology 15 of 200",
+  "tags": [
+   "bcs",
+   "ict",
+   "ict-computer",
+   "units"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-computer-and-information-technology.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0164",
+  "exam_canonical": "bcs",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "হার্ডওয়্যার",
+  "difficulty": "easy",
+  "question": "CPU-এর পূর্ণরূপ কী?",
+  "options": [
+   "Central Processing Unit",
+   "Central Program Unit",
+   "Computer Processing Unit",
+   "Central Power Unit"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Central Processing Unit",
+  "explanation": "CPU = Central Processing Unit; এটি কম্পিউটারের 'মস্তিষ্ক' হিসেবে পরিচিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Computer and Information Technology 15 of 200",
+  "tags": [
+   "bcs",
+   "hardware",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-computer-and-information-technology.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0165",
+  "exam_canonical": "bcs",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "নেটওয়ার্ক",
+  "difficulty": "medium",
+  "question": "IPv6 ঠিকানার দৈর্ঘ্য কত বিট?",
+  "options": [
+   "৩২ বিট",
+   "৬৪ বিট",
+   "১২৮ বিট",
+   "২৫৬ বিট"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১২৮ বিট",
+  "explanation": "IPv6 ঠিকানা ১২৮ বিটের; IPv4 ঠিকানা ৩২ বিটের।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Computer and Information Technology 15 of 200",
+  "tags": [
+   "bcs",
+   "ict",
+   "ict-computer",
+   "networking"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-computer-and-information-technology.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0166",
+  "exam_canonical": "bcs",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "মেমরি",
+  "difficulty": "easy",
+  "question": "কম্পিউটার বন্ধ করলে কোন মেমরির তথ্য মুছে যায়?",
+  "options": [
+   "RAM",
+   "ROM",
+   "হার্ডডিস্ক",
+   "পেনড্রাইভ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "RAM",
+  "explanation": "RAM অস্থায়ী (volatile) মেমরি; বিদ্যুৎ বন্ধ হলে এর তথ্য মুছে যায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Computer and Information Technology 15 of 200",
+  "tags": [
+   "bcs",
+   "ict",
+   "ict-computer",
+   "memory"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-computer-and-information-technology.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0167",
+  "exam_canonical": "bcs",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ওয়েব",
+  "difficulty": "easy",
+  "question": "HTML-এর পূর্ণরূপ কী?",
+  "options": [
+   "HyperText Markup Language",
+   "HighText Machine Language",
+   "HyperText Main Language",
+   "Home Tool Markup Language"
+  ],
+  "correct_index": 0,
+  "correct_answer": "HyperText Markup Language",
+  "explanation": "HTML = HyperText Markup Language; ওয়েবপেজ তৈরির মূল ভাষা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Computer and Information Technology 15 of 200",
+  "tags": [
+   "bcs",
+   "ict",
+   "ict-computer",
+   "web"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-computer-and-information-technology.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0168",
+  "exam_canonical": "bcs",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "সংখ্যা পদ্ধতি",
+  "difficulty": "easy",
+  "question": "বাইনারি সংখ্যা পদ্ধতিতে কোন অঙ্ক দুটি ব্যবহৃত হয়?",
+  "options": [
+   "০ ও ১",
+   "০ ও ২",
+   "১ ও ২",
+   "০ ও ৯"
+  ],
+  "correct_index": 0,
+  "correct_answer": "০ ও ১",
+  "explanation": "বাইনারি পদ্ধতির ভিত্তি ২; এতে শুধু ০ ও ১ ব্যবহৃত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Computer and Information Technology 15 of 200",
+  "tags": [
+   "bcs",
+   "ict",
+   "ict-computer",
+   "number-system"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-computer-and-information-technology.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0169",
+  "exam_canonical": "bcs",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "হার্ডওয়্যার",
+  "difficulty": "easy",
+  "question": "নিচের কোনটি ইনপুট ডিভাইস?",
+  "options": [
+   "কীবোর্ড",
+   "মনিটর",
+   "প্রিন্টার",
+   "স্পিকার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কীবোর্ড",
+  "explanation": "কীবোর্ড দিয়ে তথ্য কম্পিউটারে প্রবেশ করানো হয়, তাই এটি ইনপুট ডিভাইস; বাকিগুলো আউটপুট ডিভাইস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Computer and Information Technology 15 of 200",
+  "tags": [
+   "bcs",
+   "hardware",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-computer-and-information-technology.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0170",
+  "exam_canonical": "bcs",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "মেমরি",
+  "difficulty": "easy",
+  "question": "১ বাইট সমান কত বিট?",
+  "options": [
+   "৪ বিট",
+   "৮ বিট",
+   "১৬ বিট",
+   "৩২ বিট"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৮ বিট",
+  "explanation": "১ বাইট = ৮ বিট।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Computer and Information Technology 15 of 200",
+  "tags": [
+   "bcs",
+   "ict",
+   "ict-computer",
+   "units"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-computer-and-information-technology.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0171",
+  "exam_canonical": "bcs",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ওয়েব",
+  "difficulty": "medium",
+  "question": "ওয়ার্ল্ড ওয়াইড ওয়েব (WWW) উদ্ভাবন করেন কে?",
+  "options": [
+   "টিম বার্নার্স-লি",
+   "বিল গেটস",
+   "চার্লস ব্যাবেজ",
+   "অ্যালান টুরিং"
+  ],
+  "correct_index": 0,
+  "correct_answer": "টিম বার্নার্স-লি",
+  "explanation": "টিম বার্নার্স-লি ১৯৮৯ সালে ওয়ার্ল্ড ওয়াইড ওয়েব উদ্ভাবন করেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Computer and Information Technology 15 of 200",
+  "tags": [
+   "bcs",
+   "ict",
+   "ict-computer",
+   "web"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-computer-and-information-technology.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

@@ -1,0 +1,762 @@
+[
+ {
+  "id": "JOBQ-M221",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "উপসর্গ",
+  "difficulty": "medium",
+  "question": "তৎসম (সংস্কৃত) উপসর্গ কয়টি?",
+  "options": [
+   "১০টি",
+   "১৫টি",
+   "২০টি",
+   "২১টি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২০টি",
+  "explanation": "তৎসম উপসর্গ ২০টি (প্র, পরা, অপ, সম, নি ইত্যাদি)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "উপসর্গ",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M222",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'সদাচার' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "সৎ + আচার",
+   "সদ + আচার",
+   "সৎ + চার",
+   "সদা + চার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সৎ + আচার",
+  "explanation": "'সদাচার' = সৎ + আচার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M223",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'উচ্ছ্বাস' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "উৎ + শ্বাস",
+   "উচ্ছ + আস",
+   "উ + চ্ছ্বাস",
+   "উৎ + ছ্বাস"
+  ],
+  "correct_index": 0,
+  "correct_answer": "উৎ + শ্বাস",
+  "explanation": "উৎ + শ্বাস = উচ্ছ্বাস (ত্ স্থানে চ্ হয়)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M224",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'রাজপথ' কোন সমাসের উদাহরণ?",
+  "options": [
+   "দ্বন্দ্ব",
+   "ষষ্ঠী তৎপুরুষ",
+   "কর্মধারয়",
+   "দ্বিগু"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ষষ্ঠী তৎপুরুষ",
+  "explanation": "রাজার পথ — ষষ্ঠী তৎপুরুষ সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M225",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'বীণাপাণি' কোন সমাসের উদাহরণ?",
+  "options": [
+   "তৎপুরুষ",
+   "বহুব্রীহি",
+   "দ্বিগু",
+   "কর্মধারয়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বহুব্রীহি",
+  "explanation": "বীণা পাণিতে যার (সরস্বতী) — বহুব্রীহি সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M226",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "easy",
+  "question": "'আমাকে এক গ্লাস পানি দাও' — 'পানি' কোন কারক?",
+  "options": [
+   "কর্তৃ",
+   "কর্ম",
+   "করণ",
+   "সম্প্রদান"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কর্ম",
+  "explanation": "দেওয়ার কাজের বিষয় পানি — কর্মকারক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "কারক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M227",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'কলুর বলদ' বাগধারাটির অর্থ কী?",
+  "options": [
+   "শক্তিশালী লোক",
+   "একটানা খাটা লোক",
+   "অলস লোক",
+   "চতুর লোক"
+  ],
+  "correct_index": 1,
+  "correct_answer": "একটানা খাটা লোক",
+  "explanation": "কলুর বলদ অর্থ একটানা খাটা লোক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "বাগধারা",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M228",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বানান",
+  "difficulty": "easy",
+  "question": "'দূষণ' শব্দের শুদ্ধ বানান কোনটি?",
+  "options": [
+   "দুষণ",
+   "দূষণ",
+   "দূশণ",
+   "দুশণ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "দূষণ",
+  "explanation": "শুদ্ধ বানান 'দূষণ'।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "বানান",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M229",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "'ধোঁয়া' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "ধূম",
+   "আগুন",
+   "বাতাস",
+   "মেঘ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ধূম",
+  "explanation": "'ধোঁয়া'-এর সমার্থক শব্দ ধূম।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "ব্যাকরণ",
+   "সমার্থক"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M230",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীতার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "'সরল' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "সহজ",
+   "জটিল",
+   "সোজা",
+   "সাধারণ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "জটিল",
+  "explanation": "সরলের বিপরীত জটিল (কঠিন)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "বিপরীতার্থক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M231",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "medium",
+  "question": "'বনলতা সেন' কবিতার রচয়িতা কে?",
+  "options": [
+   "রবীন্দ্রনাথ ঠাকুর",
+   "জীবনানন্দ দাশ",
+   "সুকান্ত ভট্টাচার্য",
+   "বুদ্ধদেব বসু"
+  ],
+  "correct_index": 1,
+  "correct_answer": "জীবনানন্দ দাশ",
+  "explanation": "'বনলতা সেন' জীবনানন্দ দাশের কবিতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "কবিতা",
+   "সাহিত্য"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M232",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "medium",
+  "question": "'গোরা' উপন্যাসের রচয়িতা কে?",
+  "options": [
+   "রবীন্দ্রনাথ ঠাকুর",
+   "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+   "শরৎচন্দ্র চট্টোপাধ্যায়",
+   "তারাশঙ্কর বন্দ্যোপাধ্যায়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রবীন্দ্রনাথ ঠাকুর",
+  "explanation": "'গোরা' উপন্যাসের রচয়িতা রবীন্দ্রনাথ ঠাকুর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "উপন্যাস",
+   "সাহিত্য"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M233",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "easy",
+  "question": "'যা সহজে লাভ করা যায়' — এক কথায় কী হবে?",
+  "options": [
+   "দুর্লভ",
+   "সুলভ",
+   "সহজলভ্য",
+   "সহজ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সুলভ",
+  "explanation": "যা সহজে লাভ করা যায় — সুলভ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "এককথায়",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M234",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "উপসর্গ",
+  "difficulty": "easy",
+  "question": "'অপমান' শব্দে কোন উপসর্গ যুক্ত হয়েছে?",
+  "options": [
+   "অপ",
+   "অ",
+   "মান",
+   "অপি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "অপ",
+  "explanation": "অপ + মান = অপমান (অপ উপসর্গ)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "উপসর্গ",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M235",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "প্রত্যয়",
+  "difficulty": "medium",
+  "question": "'সোনালি' শব্দে কোন প্রত্যয় যুক্ত হয়েছে?",
+  "options": [
+   "ই",
+   "আলি",
+   "লি",
+   "আ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "আলি",
+  "explanation": "সোনা + আলি = সোনালি (আলি প্রত্যয়)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "প্রত্যয়",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M236",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "লিঙ্গ",
+  "difficulty": "easy",
+  "question": "'দাদা' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+  "options": [
+   "দিদি",
+   "দাদী",
+   "ঠাকুরমা",
+   "মা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "দিদি",
+  "explanation": "'দাদা' শব্দের স্ত্রীলিঙ্গ দিদি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "ব্যাকরণ",
+   "লিঙ্গ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M237",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বচন",
+  "difficulty": "easy",
+  "question": "'পর্বত' শব্দের বহুবচন কোনটি?",
+  "options": [
+   "পর্বতগণ",
+   "পর্বতমালা",
+   "পর্বতরা",
+   "পর্বতসমূহ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "পর্বতমালা",
+  "explanation": "পর্বতের বহুবচন পর্বতমালা (সমষ্টিবাচক)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "বচন",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M238",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্যের ইতিহাস",
+  "difficulty": "hard",
+  "question": "বাংলা ভাষার প্রথম ব্যাকরণ গ্রন্থের নাম কী?",
+  "options": [
+   "বর্ণপরিচয়",
+   "গৌড়ীয় ব্যাকরণ",
+   "ভোকাবুলারিও এম ইদিওমা বেঙ্গালা এ পর্তুগুয়েজ",
+   "বাংলা ব্যাকরণ"
+  ],
+  "correct_index": 2,
+  "correct_answer": "ভোকাবুলারিও এম ইদিওমা বেঙ্গালা এ পর্তুগুয়েজ",
+  "explanation": "ম্যানোএল দা আসসুম্পসাঁউ রচিত 'ভোকাবুলারিও এম ইদিওমা বেঙ্গালা এ পর্তুগুয়েজ' (১৭৪৩) বাংলা ভাষার প্রথম ব্যাকরণ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "ইতিহাস",
+   "সাহিত্য"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M239",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'সংবাদ' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "সন্ + বাদ",
+   "সম্ + বাদ",
+   "সং + বাদ",
+   "স + ংবাদ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সম্ + বাদ",
+  "explanation": "সম্ + বাদ = সংবাদ (ম্ স্থানে ং হয়)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M240",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "easy",
+  "question": "'ত্রিভুজ' কোন সমাসের উদাহরণ?",
+  "options": [
+   "দ্বন্দ্ব",
+   "কর্মধারয়",
+   "দ্বিগু",
+   "তৎপুরুষ"
+  ],
+  "correct_index": 2,
+  "correct_answer": "দ্বিগু",
+  "explanation": "তিন ভুজের সমাহার — সংখ্যাবাচক পূর্বপদ বলে দ্বিগু সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "bangla",
+   "ministries",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-bangla-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

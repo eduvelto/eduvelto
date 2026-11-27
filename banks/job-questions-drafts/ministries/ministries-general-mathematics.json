@@ -1,0 +1,382 @@
+[
+ {
+  "id": "JOBQ-0363",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "শতকরা",
+  "difficulty": "easy",
+  "question": "১০০০-এর ৫% কত?",
+  "options": [
+   "২৫",
+   "৪০",
+   "৫০",
+   "৬০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৫০",
+  "explanation": "১০০০ × ৫/১০০ = ৫০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "math",
+   "mathematics",
+   "ministries",
+   "percentage"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0364",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লসাগু",
+  "difficulty": "easy",
+  "question": "১০ ও ১৫-এর লসাগু কত?",
+  "options": [
+   "১৫",
+   "৩০",
+   "৪৫",
+   "৬০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩০",
+  "explanation": "১০ ও ১৫ উভয়ের গুণিতকগুলোর মধ্যে ক্ষুদ্রতম ৩০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "lcm",
+   "math",
+   "mathematics",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0365",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গসাগু",
+  "difficulty": "easy",
+  "question": "২৭ ও ৩৬-এর গসাগু কত?",
+  "options": [
+   "৩",
+   "৬",
+   "৯",
+   "১২"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৯",
+  "explanation": "২৭ ও ৩৬ উভয়কে ভাগ করে এমন বৃহত্তম সংখ্যা ৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "hcf",
+   "math",
+   "mathematics",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0366",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গড়",
+  "difficulty": "easy",
+  "question": "৪, ৮, ১২, ১৬-এর গড় কত?",
+  "options": [
+   "৮",
+   "১০",
+   "১২",
+   "৯"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১০",
+  "explanation": "যোগফল ৪০; ৪০ ÷ ৪ = ১০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "average",
+   "math",
+   "mathematics",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0367",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "সরল সুদ",
+  "difficulty": "medium",
+  "question": "৬০০০ টাকার ৮% হারে ২ বছরের সরল সুদ কত?",
+  "options": [
+   "৮৬০ টাকা",
+   "৯৬০ টাকা",
+   "১০৬০ টাকা",
+   "৭৬০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৯৬০ টাকা",
+  "explanation": "সুদ = ৬০০০ × ৮ × ২ ÷ ১০০ = ৯৬০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "interest",
+   "math",
+   "mathematics",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0368",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "easy",
+  "question": "2x − ৫ = ৯ হলে x-এর মান কত?",
+  "options": [
+   "৫",
+   "৬",
+   "৭",
+   "৮"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৭",
+  "explanation": "2x = ৯ + ৫ = ১৪; x = ৭।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "algebra",
+   "math",
+   "mathematics",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0369",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "অনুপাত",
+  "difficulty": "medium",
+  "question": "দুটি সংখ্যার অনুপাত ২ : ৩ এবং যোগফল ১০০ হলে বড় সংখ্যাটি কত?",
+  "options": [
+   "৪০",
+   "৫০",
+   "৬০",
+   "৭০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৬০",
+  "explanation": "মোট অংশ ৫; এক অংশ = ১০০ ÷ ৫ = ২০; বড় সংখ্যা = ৩ × ২০ = ৬০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "math",
+   "mathematics",
+   "ministries",
+   "ratio"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0370",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লাভ-ক্ষতি",
+  "difficulty": "easy",
+  "question": "৮০০ টাকায় কিনে ১০০০ টাকায় বিক্রি করলে লাভের হার কত?",
+  "options": [
+   "২০%",
+   "২৫%",
+   "৩০%",
+   "১৫%"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৫%",
+  "explanation": "লাভ ২০০ টাকা; হার = ২০০/৮০০ × ১০০% = ২৫%।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "math",
+   "mathematics",
+   "ministries",
+   "profit-loss"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0371",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গতি",
+  "difficulty": "easy",
+  "question": "একটি গাড়ি ৩ ঘণ্টায় ১৮০ কিমি যায়। গাড়ির গতিবেগ কত?",
+  "options": [
+   "৫০ কিমি/ঘণ্টা",
+   "৬০ কিমি/ঘণ্টা",
+   "৭০ কিমি/ঘণ্টা",
+   "৪৫ কিমি/ঘণ্টা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৬০ কিমি/ঘণ্টা",
+  "explanation": "গতিবেগ = ১৮০ ÷ ৩ = ৬০ কিমি/ঘণ্টা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "math",
+   "mathematics",
+   "ministries",
+   "speed"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0372",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বর্গমূল",
+  "difficulty": "easy",
+  "question": "√১৬৯ = কত?",
+  "options": [
+   "১১",
+   "১২",
+   "১৩",
+   "১৪"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৩",
+  "explanation": "১৩ × ১৩ = ১৬৯, তাই √১৬৯ = ১৩।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "math",
+   "mathematics",
+   "ministries",
+   "square-root"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-mathematics.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

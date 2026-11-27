@@ -1,0 +1,722 @@
+[
+  {
+    "id": "JOBQ-D511",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সুশাসন — স্তম্ভ",
+    "difficulty": "medium",
+    "question": "নিচের কোনটি সুশাসনের স্তম্ভ নয়?",
+    "options": [
+      "জবাবদিহি",
+      "স্বচ্ছতা",
+      "অংশগ্রহণ",
+      "গোপনীয়তা"
+    ],
+    "correct_index": 3,
+    "correct_answer": "গোপনীয়তা",
+    "explanation": "স্বচ্ছতা, জবাবদিহি ও অংশগ্রহণ সুশাসনের স্তম্ভ; গোপনীয়তা এর বিপরীত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "good-governance",
+      "pillars"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D512",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "দুর্নীতি — স্বচ্ছতা",
+    "difficulty": "medium",
+    "question": "ট্রান্সপারেন্সি ইন্টারন্যাশনালের সদর দপ্তর কোথায়?",
+    "options": [
+      "লন্ডন",
+      "বার্লিন",
+      "জেনেভা",
+      "নিউইয়র্ক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "বার্লিন",
+    "explanation": "ট্রান্সপারেন্সি ইন্টারন্যাশনালের সদর দপ্তর জার্মানির বার্লিনে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "anti-corruption",
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "transparency-international"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D513",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "দুর্নীতি — সূচক",
+    "difficulty": "medium",
+    "question": "দুর্নীতি ধারণা সূচক (CPI) প্রকাশ করে কোন সংস্থা?",
+    "options": [
+      "জাতিসংঘ",
+      "ট্রান্সপারেন্সি ইন্টারন্যাশনাল",
+      "IMF",
+      "বিশ্বব্যাংক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ট্রান্সপারেন্সি ইন্টারন্যাশনাল",
+    "explanation": "ট্রান্সপারেন্সি ইন্টারন্যাশনাল প্রতি বছর দুর্নীতি ধারণা সূচক প্রকাশ করে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "anti-corruption",
+      "bcs",
+      "cpi",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D514",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "নৈতিকতা — হুইসেল ব্লোয়ার",
+    "difficulty": "medium",
+    "question": "'হুইসেল ব্লোয়ার' বলতে কাকে বোঝায়?",
+    "options": [
+      "বাঁশি বাজানো ব্যক্তি",
+      "বিচারক",
+      "সাংবাদিক",
+      "অনিয়ম প্রকাশকারী ব্যক্তি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অনিয়ম প্রকাশকারী ব্যক্তি",
+    "explanation": "হুইসেল ব্লোয়ার হলেন সেই ব্যক্তি যিনি প্রতিষ্ঠানের অনিয়ম বা দুর্নীতি প্রকাশ করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "values",
+      "whistleblower"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D515",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "প্রশাসন — আচরণবিধি",
+    "difficulty": "hard",
+    "question": "সরকারি কর্মচারীদের আচরণবিধি কোন আইনে নির্ধারিত?",
+    "options": [
+      "দুর্নীতি দমন কমিশন আইন, ২০০৪",
+      "সরকারি কর্মচারী (আচরণ) বিধিমালা, ১৯৭৯",
+      "তথ্য অধিকার আইন, ২০০৯",
+      "সরকারি কর্মচারী আইন, ২০১৮"
+    ],
+    "correct_index": 1,
+    "correct_answer": "সরকারি কর্মচারী (আচরণ) বিধিমালা, ১৯৭৯",
+    "explanation": "সরকারি কর্মচারীদের আচরণ সরকারি কর্মচারী (আচরণ) বিধিমালা, ১৯৭৯ দ্বারা নিয়ন্ত্রিত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "civil-service",
+      "conduct-rules",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D516",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "প্রশাসন — নিরপেক্ষতা",
+    "difficulty": "medium",
+    "question": "সরকারি কর্মচারীর কাছ থেকে কী প্রত্যাশা করা হয়?",
+    "options": [
+      "দলীয় আনুগত্য",
+      "ব্যক্তিগত স্বার্থ",
+      "গোপনীয়তা",
+      "রাজনৈতিক নিরপেক্ষতা"
+    ],
+    "correct_index": 3,
+    "correct_answer": "রাজনৈতিক নিরপেক্ষতা",
+    "explanation": "সরকারি কর্মচারীকে রাজনৈতিকভাবে নিরপেক্ষ থেকে সবার সেবা করতে হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "civil-service",
+      "ethics",
+      "ethics-governance",
+      "neutrality"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D517",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "ই-গভর্ন্যান্স",
+    "difficulty": "medium",
+    "question": "'ডিজিটাল বাংলাদেশ' রূপকল্পের লক্ষ্য বছর কোনটি ছিল?",
+    "options": [
+      "২০২০",
+      "২০৪১",
+      "২০২১",
+      "২০৩০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২০২১",
+    "explanation": "ডিজিটাল বাংলাদেশ রূপকল্পের লক্ষ্য ছিল ২০২১ সালের মধ্যে ডিজিটাল বাংলাদেশ গড়া।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "digital-bangladesh",
+      "e-governance",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D518",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "তথ্য অধিকার",
+    "difficulty": "medium",
+    "question": "বাংলাদেশে তথ্য কমিশন গঠিত হয় কবে?",
+    "options": [
+      "২০০৯",
+      "২০০৪",
+      "২০০৬",
+      "২০১৩"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২০০৯",
+    "explanation": "তথ্য অধিকার আইন, ২০০৯-এর অধীনে তথ্য কমিশন গঠিত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "information-commission",
+      "rti"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D519",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "দুর্নীতি দমন",
+    "difficulty": "medium",
+    "question": "দুর্নীতি দমন কমিশনের চেয়ারম্যান নিয়োগ দেন কে?",
+    "options": [
+      "স্পিকার",
+      "প্রধানমন্ত্রী",
+      "রাষ্ট্রপতি",
+      "প্রধান বিচারপতি"
+    ],
+    "correct_index": 2,
+    "correct_answer": "রাষ্ট্রপতি",
+    "explanation": "দুর্নীতি দমন কমিশনের চেয়ারম্যান ও কমিশনারদের রাষ্ট্রপতি নিয়োগ দেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "acc-appointment",
+      "anti-corruption",
+      "bcs",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D520",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সংবিধান — ন্যায়পাল",
+    "difficulty": "hard",
+    "question": "সংবিধান অনুযায়ী ন্যায়পাল নিয়োগ দেন কে?",
+    "options": [
+      "রাষ্ট্রপতি",
+      "জাতীয় সংসদ",
+      "প্রধান বিচারপতি",
+      "প্রধানমন্ত্রী"
+    ],
+    "correct_index": 0,
+    "correct_answer": "রাষ্ট্রপতি",
+    "explanation": "সংবিধানের ৭৭ অনুচ্ছেদ অনুযায়ী রাষ্ট্রপতি ন্যায়পাল নিয়োগ দেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "constitution",
+      "ethics",
+      "ethics-governance",
+      "ombudsman"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D521",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "মানবাধিকার",
+    "difficulty": "hard",
+    "question": "সার্বজনীন মানবাধিকার ঘোষণায় মোট কতটি অনুচ্ছেদ আছে?",
+    "options": [
+      "২৫টি",
+      "৩৫টি",
+      "৩০টি",
+      "২০টি"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৩০টি",
+    "explanation": "সার্বজনীন মানবাধিকার ঘোষণায় ৩০টি অনুচ্ছেদ রয়েছে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "human-rights",
+      "udhr"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D522",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "গণতন্ত্র",
+    "difficulty": "medium",
+    "question": "গণতন্ত্রের মূল ভিত্তি কোনটি?",
+    "options": [
+      "রাজতন্ত্র",
+      "সামরিক শাসন",
+      "একদলীয় শাসন",
+      "অবাধ ও সুষ্ঠু নির্বাচন"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অবাধ ও সুষ্ঠু নির্বাচন",
+    "explanation": "অবাধ, সুষ্ঠু ও নিরপেক্ষ নির্বাচন গণতন্ত্রের মূল ভিত্তি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "democracy",
+      "election",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D523",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সংবিধান — অধিকার",
+    "difficulty": "medium",
+    "question": "সংবিধানের ৩১ নম্বর অনুচ্ছেদে কী বলা হয়েছে?",
+    "options": [
+      "ধর্মীয় স্বাধীনতা",
+      "মত প্রকাশের স্বাধীনতা",
+      "আইনের আশ্রয় লাভের অধিকার",
+      "শিক্ষার অধিকার"
+    ],
+    "correct_index": 2,
+    "correct_answer": "আইনের আশ্রয় লাভের অধিকার",
+    "explanation": "৩১ নম্বর অনুচ্ছেদে আইনের আশ্রয় লাভের অধিকার নিশ্চিত করা হয়েছে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "article-31",
+      "bcs",
+      "constitution",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D524",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "দুর্নীতি — কারণ",
+    "difficulty": "medium",
+    "question": "দুর্নীতির একটি প্রধান কারণ কোনটি?",
+    "options": [
+      "স্বচ্ছতার অভাব",
+      "শিক্ষার অভাব",
+      "দারিদ্র্য",
+      "জনসংখ্যা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "স্বচ্ছতার অভাব",
+    "explanation": "স্বচ্ছতা ও জবাবদিহির অভাব দুর্নীতির অন্যতম প্রধান কারণ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "anti-corruption",
+      "bcs",
+      "causes",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D525",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "টেকসই উন্নয়ন",
+    "difficulty": "hard",
+    "question": "টেকসই উন্নয়নের ধারণা প্রথম কোন কমিশনের প্রতিবেদনে আসে?",
+    "options": [
+      "ব্রান্ডটল্যান্ড কমিশন",
+      "বিশ্বব্যাংক কমিশন",
+      "জাতিসংঘ কমিশন",
+      "ইউনেস্কো কমিশন"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ব্রান্ডটল্যান্ড কমিশন",
+    "explanation": "১৯৮৭ সালে ব্রান্ডটল্যান্ড কমিশনের 'আওয়ার কমন ফিউচার' প্রতিবেদনে টেকসই উন্নয়নের ধারণা দেওয়া হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "brundtland",
+      "ethics",
+      "ethics-governance",
+      "sdg"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D526",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "সংবিধান — সামাজিক ন্যায়",
+    "difficulty": "hard",
+    "question": "সংবিধানের ১৯ নম্বর অনুচ্ছেদে কী নিশ্চিত করা হয়েছে?",
+    "options": [
+      "মত প্রকাশের স্বাধীনতা",
+      "সুযোগের সমতা",
+      "সম্পত্তির অধিকার",
+      "ধর্মীয় স্বাধীনতা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "সুযোগের সমতা",
+    "explanation": "১৯ নম্বর অনুচ্ছেদে সব নাগরিকের জন্য সুযোগের সমতা নিশ্চিত করা হয়েছে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "article-19",
+      "bcs",
+      "constitution",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D527",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "নৈতিকতা — মূল্যবোধের উৎস",
+    "difficulty": "easy",
+    "question": "মূল্যবোধ প্রধানত কোথা থেকে গড়ে ওঠে?",
+    "options": [
+      "পরিবার",
+      "আদালত",
+      "বাজার",
+      "ব্যাংক"
+    ],
+    "correct_index": 0,
+    "correct_answer": "পরিবার",
+    "explanation": "মূল্যবোধ প্রধানত পরিবার, শিক্ষা, ধর্ম ও সংস্কৃতি থেকে গড়ে ওঠে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bcs",
+      "ethics",
+      "ethics-governance",
+      "source",
+      "values"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D528",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Ethics, Values and Good Governance",
+    "subject_slug": "ethics-governance",
+    "topic": "জবাবদিহি — নিরীক্ষা",
+    "difficulty": "medium",
+    "question": "সরকারি হিসাব নিরীক্ষার দায়িত্বে থাকেন কে?",
+    "options": [
+      "গভর্নর",
+      "মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রক",
+      "অ্যাটর্নি জেনারেল",
+      "অর্থমন্ত্রী"
+    ],
+    "correct_index": 1,
+    "correct_answer": "মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রক",
+    "explanation": "মহা হিসাব নিরীক্ষক ও নিয়ন্ত্রক (CAG) সরকারি হিসাব নিরীক্ষা করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Constitution (1972); Right to Information Act 2009; Anti-Corruption Commission Act 2004; UNDP good-governance characteristics; standard ethics references",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "accountability",
+      "bcs",
+      "cag",
+      "ethics",
+      "ethics-governance"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs-ethics-depth-02.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

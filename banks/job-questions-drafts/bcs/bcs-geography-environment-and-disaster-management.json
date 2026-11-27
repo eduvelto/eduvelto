@@ -1,0 +1,236 @@
+[
+  {
+    "id": "JOBQ-0190",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Geography, Environment and Disaster Management",
+    "subject_slug": "geography-environment",
+    "topic": "বাংলাদেশের ভূগোল",
+    "difficulty": "easy",
+    "question": "কক্সবাজার সমুদ্র সৈকতের দৈর্ঘ্য প্রায় কত?",
+    "options": [
+      "১২০ কিলোমিটার",
+      "৬০ কিলোমিটার",
+      "৮০ কিলোমিটার",
+      "১৫০ কিলোমিটার"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১২০ কিলোমিটার",
+    "explanation": "কক্সবাজার বিশ্বের দীর্ঘতম প্রাকৃতিক সমুদ্র সৈকত, দৈর্ঘ্য প্রায় ১২০ কিলোমিটার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) — Bangladesh geography facts",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Geography, Environment and Disaster Management 10 of 200",
+    "tags": [
+      "bangladesh",
+      "bcs",
+      "geography",
+      "geography-environment"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-geography-environment-and-disaster-management.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0191",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Geography, Environment and Disaster Management",
+    "subject_slug": "geography-environment",
+    "topic": "বন",
+    "difficulty": "easy",
+    "question": "বিশ্বের বৃহত্তম ম্যানগ্রোভ বন কোনটি?",
+    "options": [
+      "আমাজন",
+      "সুন্দরবন",
+      "কঙ্গো বন",
+      "বোর্নিও বন"
+    ],
+    "correct_index": 1,
+    "correct_answer": "সুন্দরবন",
+    "explanation": "সুন্দরবন বিশ্বের বৃহত্তম ম্যানগ্রোভ বন; এর বাংলাদেশ অংশ প্রায় ৬,০০০ বর্গকিলোমিটার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) — Bangladesh geography facts",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Geography, Environment and Disaster Management 10 of 200",
+    "tags": [
+      "bcs",
+      "forest",
+      "geography",
+      "geography-environment"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-geography-environment-and-disaster-management.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0192",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Geography, Environment and Disaster Management",
+    "subject_slug": "geography-environment",
+    "topic": "হাওর",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের বৃহত্তম হাওর কোনটি?",
+    "options": [
+      "টাঙ্গুয়ার হাওর",
+      "হাকালুকি হাওর",
+      "হাইল হাওর",
+      "চলনবিল"
+    ],
+    "correct_index": 1,
+    "correct_answer": "হাকালুকি হাওর",
+    "explanation": "হাকালুকি হাওর (সিলেট ও মৌলভীবাজার) বাংলাদেশের বৃহত্তম হাওর।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) — Bangladesh geography facts",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Geography, Environment and Disaster Management 10 of 200",
+    "tags": [
+      "bcs",
+      "geography",
+      "geography-environment",
+      "haor"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-geography-environment-and-disaster-management.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0193",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Geography, Environment and Disaster Management",
+    "subject_slug": "geography-environment",
+    "topic": "নদী",
+    "difficulty": "medium",
+    "question": "ব্রহ্মপুত্র নদ বাংলাদেশে কী নামে পরিচিত?",
+    "options": [
+      "তিস্তা",
+      "পদ্মা",
+      "যমুনা",
+      "মেঘনা"
+    ],
+    "correct_index": 2,
+    "correct_answer": "যমুনা",
+    "explanation": "ব্রহ্মপুত্র নদ বাংলাদেশে প্রবেশ করে যমুনা নাম ধারণ করে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) — Bangladesh geography facts",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Geography, Environment and Disaster Management 10 of 200",
+    "tags": [
+      "bcs",
+      "geography",
+      "geography-environment",
+      "rivers"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-geography-environment-and-disaster-management.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0194",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Geography, Environment and Disaster Management",
+    "subject_slug": "geography-environment",
+    "topic": "হ্রদ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের বৃহত্তম কৃত্রিম হ্রদ কোনটি?",
+    "options": [
+      "বগাকাইন",
+      "ফয়'স লেক",
+      "ধর্মসাগর",
+      "কাপ্তাই হ্রদ"
+    ],
+    "correct_index": 3,
+    "correct_answer": "কাপ্তাই হ্রদ",
+    "explanation": "কর্ণফুলী নদীতে বাঁধ দিয়ে তৈরি কাপ্তাই হ্রদ বাংলাদেশের বৃহত্তম কৃত্রিম হ্রদ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) — Bangladesh geography facts",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Geography, Environment and Disaster Management 10 of 200",
+    "tags": [
+      "bcs",
+      "geography",
+      "geography-environment",
+      "lake"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-geography-environment-and-disaster-management.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0195",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Geography, Environment and Disaster Management",
+    "subject_slug": "geography-environment",
+    "topic": "জলবায়ু",
+    "difficulty": "easy",
+    "question": "বাংলাদেশের জলবায়ু কেমন?",
+    "options": [
+      "ক্রান্তীয় মৌসুমি",
+      "তুন্দ্রা",
+      "মরু",
+      "ভূমধ্যসাগরীয়"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ক্রান্তীয় মৌসুমি",
+    "explanation": "বাংলাদেশের জলবায়ু ক্রান্তীয় মৌসুমি; গ্রীষ্মে বৃষ্টি ও শীতে শুষ্ক আবহাওয়া থাকে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) — Bangladesh geography facts",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Geography, Environment and Disaster Management 10 of 200",
+    "tags": [
+      "bcs",
+      "climate",
+      "geography",
+      "geography-environment"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-geography-environment-and-disaster-management.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

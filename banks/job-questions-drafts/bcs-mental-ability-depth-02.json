@@ -1,0 +1,746 @@
+[
+ {
+  "id": "JOBQ-D491",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ধারা",
+  "difficulty": "easy",
+  "question": "১০০, ৯০, ৮০, ৭০, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "৫০",
+   "৪০",
+   "৬৫",
+   "৬০"
+  ],
+  "correct_index": 3,
+  "correct_answer": "৬০",
+  "explanation": "প্রতিবার ১০ করে কমছে; পরেরটি ৭০ − ১০ = ৬০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "mental-ability",
+   "series"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D492",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ধারা",
+  "difficulty": "easy",
+  "question": "২, ৪, ৮, ১৬, ৩২, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "৪৮",
+   "৬৪",
+   "৫৬",
+   "৯৬"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৬৪",
+  "explanation": "প্রতিটি সংখ্যা আগেরটির দ্বিগুণ; ৩২ × ২ = ৬৪।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "mental-ability",
+   "series"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D493",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ধারা",
+  "difficulty": "medium",
+  "question": "৫, ১১, ২৩, ৪৭, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "৯৩",
+   "৯৭",
+   "৯৫",
+   "৯৯"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৯৫",
+  "explanation": "প্রতিটি সংখ্যা = আগেরটি × ২ + ১; ৪৭ × ২ + ১ = ৯৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "mental-ability",
+   "series"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D494",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "বর্ণ ধারা",
+  "difficulty": "hard",
+  "question": "B, D, G, K, P, … ধারার পরের বর্ণটি কী?",
+  "options": [
+   "T",
+   "U",
+   "W",
+   "V"
+  ],
+  "correct_index": 3,
+  "correct_answer": "V",
+  "explanation": "পার্থক্য ২, ৩, ৪, ৫ — পরের পার্থক্য ৬; P-এর ৬ ধাপ পর V।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "letter-series",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D495",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ব্যতিক্রম নির্ণয়",
+  "difficulty": "easy",
+  "question": "কোনটি ব্যতিক্রম? ১০, ২০, ৩০, ৪০, ৫৫",
+  "options": [
+   "২০",
+   "১০",
+   "৫৫",
+   "৩০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৫৫",
+  "explanation": "১০, ২০, ৩০, ৪০ সবই ১০-এর গুণিতক; ৫৫ নয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "mental-ability",
+   "odd-one-out"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D496",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ব্যতিক্রম নির্ণয়",
+  "difficulty": "easy",
+  "question": "কোনটি ব্যতিক্রম? ঢাকা, চট্টগ্রাম, খুলনা, রাজশাহী, কলকাতা",
+  "options": [
+   "চট্টগ্রাম",
+   "ঢাকা",
+   "কলকাতা",
+   "খুলনা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "কলকাতা",
+  "explanation": "ঢাকা, চট্টগ্রাম, খুলনা, রাজশাহী বাংলাদেশের বিভাগীয় শহর; কলকাতা ভারতের শহর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "mental-ability",
+   "odd-one-out"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D497",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "সাদৃশ্য",
+  "difficulty": "easy",
+  "question": "সূর্য : চাঁদ :: দিন : ?",
+  "options": [
+   "রাত",
+   "আলো",
+   "সকাল",
+   "বিকেল"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রাত",
+  "explanation": "সূর্য দিনের সঙ্গে এবং চাঁদ রাতের সঙ্গে যুক্ত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "analogy",
+   "bcs",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D498",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "সাদৃশ্য",
+  "difficulty": "easy",
+  "question": "কলম : কালি :: তুলি : ?",
+  "options": [
+   "কাগজ",
+   "রং",
+   "ছবি",
+   "ক্যানভাস"
+  ],
+  "correct_index": 1,
+  "correct_answer": "রং",
+  "explanation": "কলমে কালি লাগে, তুলিতে রং লাগে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "analogy",
+   "bcs",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D499",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "সাদৃশ্য",
+  "difficulty": "medium",
+  "question": "২ : ৪ :: ৩ : ?",
+  "options": [
+   "৯",
+   "৮",
+   "৬",
+   "১২"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৯",
+  "explanation": "২² = ৪; তাই ৩² = ৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "analogy",
+   "bcs",
+   "mental-ability",
+   "numbers"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D500",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "সাদৃশ্য",
+  "difficulty": "medium",
+  "question": "বই : পৃষ্ঠা :: দেয়াল : ?",
+  "options": [
+   "রং",
+   "ইট",
+   "দরজা",
+   "ছাদ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ইট",
+  "explanation": "বই পৃষ্ঠা দিয়ে গঠিত, দেয়াল ইট দিয়ে গঠিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "analogy",
+   "bcs",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D501",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "সাংকেতিকরণ",
+  "difficulty": "hard",
+  "question": "A = ২৬, Z = ১ হলে (উল্টো ক্রমে) CAT-এর মান কত?",
+  "options": [
+   "২৪, ২৬, ৭",
+   "৩, ১, ২০",
+   "২৪, ১, ৭",
+   "৩, ২৬, ২০"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২৪, ২৬, ৭",
+  "explanation": "উল্টো ক্রমে C = ২৪, A = ২৬, T = ৭।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "coding",
+   "mental-ability",
+   "reverse"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D502",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "সাংকেতিকরণ",
+  "difficulty": "medium",
+  "question": "DOG-কে এক ধাপ পিছিয়ে লিখলে কী হবে?",
+  "options": [
+   "DOG",
+   "EPH",
+   "CPF",
+   "CNF"
+  ],
+  "correct_index": 3,
+  "correct_answer": "CNF",
+  "explanation": "D→C, O→N, G→F; তাই CNF।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "coding",
+   "mental-ability",
+   "shift"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D503",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "দিক নির্ণয়",
+  "difficulty": "medium",
+  "question": "একজন পশ্চিম দিকে মুখ করে দাঁড়িয়ে ডান দিকে ঘুরলে কোন দিকে মুখ করবে?",
+  "options": [
+   "দক্ষিণ",
+   "উত্তর",
+   "পূর্ব",
+   "পশ্চিম"
+  ],
+  "correct_index": 1,
+  "correct_answer": "উত্তর",
+  "explanation": "পশ্চিম দিকে মুখ করে ডানে ঘুরলে উত্তর দিকে মুখ হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "direction",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D504",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "দিক নির্ণয়",
+  "difficulty": "medium",
+  "question": "একজন পূর্ব দিকে মুখ করে দুবার বাম দিকে ঘুরলে কোন দিকে মুখ করবে?",
+  "options": [
+   "পশ্চিম",
+   "পূর্ব",
+   "উত্তর",
+   "দক্ষিণ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পশ্চিম",
+  "explanation": "পূর্ব থেকে বামে ঘুরলে উত্তর, আবার বামে ঘুরলে পশ্চিম।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "direction",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D505",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "রক্তের সম্পর্ক",
+  "difficulty": "medium",
+  "question": "A-এর মা B-এর বোন হলে B, A-এর কে?",
+  "options": [
+   "বাবা",
+   "চাচা",
+   "মামা",
+   "ভাই"
+  ],
+  "correct_index": 2,
+  "correct_answer": "মামা",
+  "explanation": "A-এর মায়ের ভাই B — তাই B, A-এর মামা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "blood-relation",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D506",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "রক্তের সম্পর্ক",
+  "difficulty": "easy",
+  "question": "রিনা করিমের স্ত্রীর মেয়ে হলে রিনা করিমের কে?",
+  "options": [
+   "স্ত্রী",
+   "বোন",
+   "ভাগ্নি",
+   "মেয়ে"
+  ],
+  "correct_index": 3,
+  "correct_answer": "মেয়ে",
+  "explanation": "করিমের স্ত্রীর মেয়ে রিনা — তাই রিনা করিমের মেয়ে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "blood-relation",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D507",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "যুক্তি",
+  "difficulty": "easy",
+  "question": "'সব কলমই লাল। এটি একটি কলম।' — তাহলে এটি কেমন?",
+  "options": [
+   "নীল",
+   "লাল",
+   "কালো",
+   "বলা যাবে না"
+  ],
+  "correct_index": 1,
+  "correct_answer": "লাল",
+  "explanation": "সব কলম লাল হলে এই কলমটিও লাল হবে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "logic",
+   "mental-ability",
+   "syllogism"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D508",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ঘড়ি",
+  "difficulty": "easy",
+  "question": "৬টার সময় ঘড়ির কাঁটা দুটির মধ্যে কত ডিগ্রি কোণ হয়?",
+  "options": [
+   "৯০°",
+   "১২০°",
+   "১৮০°",
+   "৩৬০°"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৮০°",
+  "explanation": "৬টায় ঘণ্টা ও মিনিটের কাঁটা বিপরীত দিকে থাকে; কোণ ১৮০°।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "clock",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D509",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ক্যালেন্ডার",
+  "difficulty": "easy",
+  "question": "আজ বুধবার হলে পরশু দিন কী বার হবে?",
+  "options": [
+   "শুক্রবার",
+   "বৃহস্পতিবার",
+   "শনিবার",
+   "মঙ্গলবার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "শুক্রবার",
+  "explanation": "বুধবারের পরের দিন বৃহস্পতিবার, তার পরের দিন শুক্রবার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "calendar",
+   "mental-ability"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D510",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ধারা",
+  "difficulty": "easy",
+  "question": "৬, ১১, ১৬, ২১, ২৬, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "৩০",
+   "৩৬",
+   "৩২",
+   "৩১"
+  ],
+  "correct_index": 3,
+  "correct_answer": "৩১",
+  "explanation": "প্রতিবার ৫ করে বাড়ছে; ২৬ + ৫ = ৩১।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard mental-ability / non-verbal reasoning references (series, analogy, coding, direction and blood-relation rules)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "mental-ability",
+   "series"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-mental-ability-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-12",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

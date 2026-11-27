@@ -1,0 +1,587 @@
+[
+ {
+  "id": "JOBQ-D569",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বাংলাদেশের ভূগোল",
+  "difficulty": "medium",
+  "question": "মধুপুর গড় কোন জেলায় অবস্থিত?",
+  "options": [
+   "টাঙ্গাইল",
+   "রাজশাহী",
+   "সিলেট",
+   "বরিশাল"
+  ],
+  "correct_index": 0,
+  "correct_answer": "টাঙ্গাইল",
+  "explanation": "মধুপুর গড় টাঙ্গাইল ও গাজীপুর জেলায় বিস্তৃত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangladesh",
+   "bcs",
+   "geography",
+   "geography-environment",
+   "madhupur"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D570",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বাংলাদেশের ভূগোল",
+  "difficulty": "medium",
+  "question": "বরেন্দ্র ভূমি কোন অঞ্চলে অবস্থিত?",
+  "options": [
+   "রাজশাহী",
+   "সিলেট",
+   "চট্টগ্রাম",
+   "খুলনা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রাজশাহী",
+  "explanation": "বরেন্দ্র ভূমি রাজশাহী, নওগাঁ ও চাঁপাইনবাবগঞ্জ অঞ্চলে অবস্থিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangladesh",
+   "barind",
+   "bcs",
+   "geography",
+   "geography-environment"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D571",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বাংলাদেশের ভূগোল",
+  "difficulty": "easy",
+  "question": "পার্বত্য চট্টগ্রামে কয়টি জেলা রয়েছে?",
+  "options": [
+   "৩টি",
+   "২টি",
+   "৪টি",
+   "৫টি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৩টি",
+  "explanation": "পার্বত্য চট্টগ্রামে ৩টি জেলা: রাঙামাটি, বান্দরবান ও খাগড়াছড়ি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangladesh",
+   "bcs",
+   "cht",
+   "geography",
+   "geography-environment"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D572",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বাংলাদেশের ভূগোল",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের কোন অঞ্চলে সবচেয়ে বেশি বৃষ্টিপাত হয়?",
+  "options": [
+   "সিলেট",
+   "ঢাকা",
+   "খুলনা",
+   "রাজশাহী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সিলেট",
+  "explanation": "সিলেট অঞ্চলে বাংলাদেশের সবচেয়ে বেশি বৃষ্টিপাত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangladesh",
+   "bcs",
+   "geography",
+   "geography-environment",
+   "rainfall"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D573",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বাংলাদেশের ভূগোল",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের দীর্ঘতম নদী কোনটি?",
+  "options": [
+   "ব্রহ্মপুত্র",
+   "পদ্মা",
+   "মেঘনা",
+   "যমুনা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ব্রহ্মপুত্র",
+  "explanation": "ব্রহ্মপুত্র বাংলাদেশের দীর্ঘতম নদী; বাংলাদেশে এটি যমুনা নামে প্রবাহিত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangladesh",
+   "bcs",
+   "geography",
+   "geography-environment",
+   "rivers"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D574",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বাংলাদেশের ভূগোল",
+  "difficulty": "medium",
+  "question": "বাংলাদেশে মৌসুমি বায়ু কোন দিক থেকে আসে?",
+  "options": [
+   "দক্ষিণ-পশ্চিম",
+   "উত্তর-পূর্ব",
+   "উত্তর-পশ্চিম",
+   "দক্ষিণ-পূর্ব"
+  ],
+  "correct_index": 0,
+  "correct_answer": "দক্ষিণ-পশ্চিম",
+  "explanation": "দক্ষিণ-পশ্চিম মৌসুমি বায়ু বঙ্গোপসাগর থেকে জলীয় বাষ্প নিয়ে বাংলাদেশে আসে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangladesh",
+   "bcs",
+   "climate",
+   "geography",
+   "geography-environment"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D575",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "বিশ্বের দ্বিতীয় বৃহত্তম মহাদেশ কোনটি?",
+  "options": [
+   "আফ্রিকা",
+   "ইউরোপ",
+   "এশিয়া",
+   "উত্তর আমেরিকা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "আফ্রিকা",
+  "explanation": "বিশ্বের দ্বিতীয় বৃহত্তম মহাদেশ আফ্রিকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "continents",
+   "geography",
+   "geography-environment",
+   "world"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D576",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "ওশেনিয়া মহাদেশের বৃহত্তম দেশ কোনটি?",
+  "options": [
+   "অস্ট্রেলিয়া",
+   "নিউজিল্যান্ড",
+   "ফিজি",
+   "পাপুয়া নিউগিনি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "অস্ট্রেলিয়া",
+  "explanation": "অস্ট্রেলিয়া ওশেনিয়া মহাদেশের বৃহত্তম দেশ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "continents",
+   "geography",
+   "geography-environment",
+   "world"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D577",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "বিশ্বের দ্বিতীয় বৃহত্তম দ্বীপ কোনটি?",
+  "options": [
+   "নিউগিনি",
+   "বোর্নিও",
+   "মাদাগাস্কার",
+   "সুমাত্রা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নিউগিনি",
+  "explanation": "নিউগিনি বিশ্বের দ্বিতীয় বৃহত্তম দ্বীপ; বৃহত্তম গ্রিনল্যান্ড।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "geography",
+   "geography-environment",
+   "islands",
+   "world"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D578",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "বিশ্বের বৃহত্তম ক্রান্তীয় বনভূমি কোনটি?",
+  "options": [
+   "কঙ্গো",
+   "আমাজন",
+   "সাইবেরিয়ান তাইগা",
+   "সুন্দরবন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "আমাজন",
+  "explanation": "আমাজন বিশ্বের বৃহত্তম ক্রান্তীয় বনভূমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "geography",
+   "geography-environment",
+   "mountains",
+   "world"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D579",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "বিশ্বের বৃহত্তম হ্রদ কোনটি?",
+  "options": [
+   "কাস্পিয়ান সাগর",
+   "বৈকাল হ্রদ",
+   "গ্রেট লেক",
+   "টাঙ্গানিকা হ্রদ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কাস্পিয়ান সাগর",
+  "explanation": "কাস্পিয়ান সাগর বিশ্বের বৃহত্তম হ্রদ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "geography",
+   "geography-environment",
+   "lakes",
+   "world"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D580",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "আফ্রিকার বৃহত্তম মরুভূমির নাম কী?",
+  "options": [
+   "গোবি",
+   "সাহারা",
+   "কালাহারি",
+   "আরব"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সাহারা",
+  "explanation": "সাহারা আফ্রিকার তথা বিশ্বের বৃহত্তম উষ্ণ মরুভূমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "geography",
+   "geography-environment",
+   "waterfalls",
+   "world"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D581",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের সময় গ্রিনিচ সময়ের চেয়ে কত ঘণ্টা এগিয়ে?",
+  "options": [
+   "৬ ঘণ্টা",
+   "৫ ঘণ্টা",
+   "৫.৫ ঘণ্টা",
+   "৭ ঘণ্টা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৬ ঘণ্টা",
+  "explanation": "বাংলাদেশের মান সময় GMT +৬ ঘণ্টা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "geography",
+   "geography-environment",
+   "time-zone",
+   "world"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D582",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "দুর্যোগ ব্যবস্থাপনা",
+  "difficulty": "medium",
+  "question": "ভূমিকম্পের তীব্রতা মাপার যন্ত্রের নাম কী?",
+  "options": [
+   "রিখটার স্কেল",
+   "ব্যারোমিটার",
+   "থার্মোমিটার",
+   "সিসমোগ্রাফ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রিখটার স্কেল",
+  "explanation": "ভূমিকম্পের মাত্রা রিখটার স্কেলে মাপা হয়; কম্পন রেকর্ড করে সিসমোগ্রাফ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "disaster-management",
+   "earthquake",
+   "geography",
+   "geography-environment"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D583",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Geography, Environment and Disaster Management",
+  "subject_slug": "geography-environment",
+  "topic": "পরিবেশ",
+  "difficulty": "medium",
+  "question": "গ্রিনহাউস গ্যাসের মধ্যে প্রধান কোনটি?",
+  "options": [
+   "কার্বন ডাইঅক্সাইড",
+   "অক্সিজেন",
+   "নাইট্রোজেন",
+   "হাইড্রোজেন"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কার্বন ডাইঅক্সাইড",
+  "explanation": "কার্বন ডাইঅক্সাইড প্রধান গ্রিনহাউস গ্যাস; মিথেন ও নাইট্রাস অক্সাইডও গ্রিনহাউস গ্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Geography and Environment textbook (NCTB); Bangladesh geography references",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "environment",
+   "geography",
+   "geography-environment",
+   "greenhouse"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-geography-environment-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

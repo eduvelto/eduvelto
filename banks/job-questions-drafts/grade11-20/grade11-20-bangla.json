@@ -1,0 +1,770 @@
+[
+  {
+    "id": "JOBQ-0196",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ধ্বনি",
+    "difficulty": "easy",
+    "question": "বাংলা স্বরধ্বনি কয়টি?",
+    "options": [
+      "৭টি",
+      "৫টি",
+      "৯টি",
+      "১১টি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৭টি",
+    "explanation": "বাংলা স্বরধ্বনি ৭টি: অ, আ, ই, উ, এ, ও, অ্যা। (স্বরবর্ণ ১১টি।)",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "phonetics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0197",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ধ্বনি",
+    "difficulty": "easy",
+    "question": "বাংলা ব্যঞ্জনধ্বনি কয়টি?",
+    "options": [
+      "৩৯টি",
+      "২৫টি",
+      "৩৫টি",
+      "৩০টি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৩০টি",
+    "explanation": "বাংলা ব্যঞ্জনধ্বনি ৩০টি। (ব্যঞ্জনবর্ণ ৩৯টি।)",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "phonetics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0198",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "যুক্তাক্ষর",
+    "difficulty": "easy",
+    "question": "'ক্ষ' যুক্তাক্ষরটি কোন কোন বর্ণের সমন্বয়ে গঠিত?",
+    "options": [
+      "ক্ + ষ",
+      "ক্ + স",
+      "ক + স",
+      "খ + ষ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ক্ + ষ",
+    "explanation": "'ক্ষ' = ক্ + ষ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "grammar"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0199",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — সন্ধি",
+    "difficulty": "medium",
+    "question": "'গিরীশ' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "গিরি + ঈশ",
+      "গি + রীশ",
+      "গির + ঈশ",
+      "গিরী + শ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "গিরি + ঈশ",
+    "explanation": "গিরি + ঈশ = গিরীশ (ই + ঈ = ঈ)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "grammar",
+      "sandhi"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0200",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — সমাস",
+    "difficulty": "medium",
+    "question": "'পঞ্চবটী' কোন সমাসের উদাহরণ?",
+    "options": [
+      "দ্বন্দ্ব",
+      "তৎপুরুষ",
+      "কর্মধারয়",
+      "দ্বিগু"
+    ],
+    "correct_index": 3,
+    "correct_answer": "দ্বিগু",
+    "explanation": "পঞ্চবটী = পাঁচ বটের সমাহার; সংখ্যাবাচক পূর্বপদে সমাহার বোঝালে দ্বিগু সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "grammar",
+      "samas"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0201",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — কারক",
+    "difficulty": "medium",
+    "question": "'গরু দিয়ে হাল চাষ করা হয়।' — 'গরু' কোন কারক?",
+    "options": [
+      "কর্ম কারক",
+      "কর্তৃ কারক",
+      "অপাদান কারক",
+      "করণ কারক"
+    ],
+    "correct_index": 3,
+    "correct_answer": "করণ কারক",
+    "explanation": "হাল চাষের মাধ্যম গরু; যা দিয়ে ক্রিয়া সম্পন্ন হয় তা করণ কারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "grammar",
+      "karok"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0202",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — উপসর্গ",
+    "difficulty": "easy",
+    "question": "কোনটি সংস্কৃত (তৎসম) উপসর্গ?",
+    "options": [
+      "অজ",
+      "আড়",
+      "অনা",
+      "অপ"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অপ",
+    "explanation": "'অপ' সংস্কৃত (তৎসম) উপসর্গ; অজ, অনা, আড় বাংলা উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "grammar",
+      "prefix"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0203",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'গোঁফ খেজুরে' বাগধারাটির অর্থ কী?",
+    "options": [
+      "খেজুর খাওয়া",
+      "নিষ্কর্মা",
+      "অলস বসে থাকা",
+      "গোঁফওয়ালা লোক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "নিষ্কর্মা",
+    "explanation": "'গোঁফ খেজুরে' অর্থ নিষ্কর্মা বা অলস লোক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "idiom"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0204",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — বানান",
+    "difficulty": "easy",
+    "question": "নিচের কোনটির বানান শুদ্ধ?",
+    "options": [
+      "আবিস্কার",
+      "আবিষ্কার",
+      "আবিশ্কার",
+      "আবিষকার"
+    ],
+    "correct_index": 1,
+    "correct_answer": "আবিষ্কার",
+    "explanation": "শুদ্ধ বানান 'আবিষ্কার'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "grammar",
+      "spelling"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0205",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'আকাশ' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "ধরণী",
+      "ভূমি",
+      "গগন",
+      "মাটি"
+    ],
+    "correct_index": 2,
+    "correct_answer": "গগন",
+    "explanation": "গগন অর্থ আকাশ; ধরণী অর্থ পৃথিবী।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "grammar",
+      "synonym"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0206",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'আশা' শব্দের বিপরীত শব্দ কোনটি?",
+    "options": [
+      "আকাঙ্ক্ষা",
+      "স্বপ্ন",
+      "নিরাশা",
+      "ভরসা"
+    ],
+    "correct_index": 2,
+    "correct_answer": "নিরাশা",
+    "explanation": "আশার বিপরীত নিরাশা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "antonym",
+      "bangla",
+      "grade11-20",
+      "grammar"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0207",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "এক কথায় প্রকাশ",
+    "difficulty": "medium",
+    "question": "'যা পূর্বে ছিল না' — এক কথায় কী হবে?",
+    "options": [
+      "অপূর্ব",
+      "অভূতপূর্ব",
+      "অদ্ভুত",
+      "অভিনব"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অভূতপূর্ব",
+    "explanation": "'যা পূর্বে ছিল না' = অভূতপূর্ব।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "grammar",
+      "one-word"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0208",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "'আমার ভাইয়ের রক্তে রাঙানো' গানের রচয়িতা কে?",
+    "options": [
+      "আবদুল গাফফার চৌধুরী",
+      "কাজী নজরুল ইসলাম",
+      "সুকান্ত ভট্টাচার্য",
+      "জসীমউদ্দীন"
+    ],
+    "correct_index": 0,
+    "correct_answer": "আবদুল গাফফার চৌধুরী",
+    "explanation": "'আমার ভাইয়ের রক্তে রাঙানো একুশে ফেব্রুয়ারি' গানটি আবদুল গাফফার চৌধুরীর রচনা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "literature"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0209",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "'সোনার বাংলা' গানটি প্রথম কোন পত্রিকায় প্রকাশিত হয়?",
+    "options": [
+      "সমাচার দর্পণ",
+      "বঙ্গদর্শন",
+      "তত্ত্ববোধিনী",
+      "সংবাদ প্রভাকর"
+    ],
+    "correct_index": 1,
+    "correct_answer": "বঙ্গদর্শন",
+    "explanation": "'আমার সোনার বাংলা' গানটি ১৯০৫ সালে বঙ্গদর্শন পত্রিকায় প্রকাশিত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "literature"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0210",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "'অপরাজিত' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "মানিক বন্দ্যোপাধ্যায়",
+      "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+      "তারাশঙ্কর বন্দ্যোপাধ্যায়",
+      "শরৎচন্দ্র চট্টোপাধ্যায়"
+    ],
+    "correct_index": 1,
+    "correct_answer": "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+    "explanation": "অপরাজিত (১৯৩২) বিভূতিভূষণ বন্দ্যোপাধ্যায়ের উপন্যাস; পথের পাঁচালীর ধারাবাহিকতা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "literature"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0211",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "'দেবদাস' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+      "রবীন্দ্রনাথ ঠাকুর",
+      "শরৎচন্দ্র চট্টোপাধ্যায়",
+      "বঙ্কিমচন্দ্র চট্টোপাধ্যায়"
+    ],
+    "correct_index": 2,
+    "correct_answer": "শরৎচন্দ্র চট্টোপাধ্যায়",
+    "explanation": "দেবদাস (১৯১৭) শরৎচন্দ্র চট্টোপাধ্যায়ের বিখ্যাত উপন্যাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "literature"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0212",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্যের ইতিহাস",
+    "difficulty": "medium",
+    "question": "বাংলা ভাষার প্রথম উপন্যাস কোনটি?",
+    "options": [
+      "বিষবৃক্ষ",
+      "দুর্গেশনন্দিনী",
+      "আলালের ঘরের দুলাল",
+      "কপালকুণ্ডলা"
+    ],
+    "correct_index": 2,
+    "correct_answer": "আলালের ঘরের দুলাল",
+    "explanation": "আলালের ঘরের দুলাল (১৮৫৮) প্যারীচাঁদ মিত্রের রচনা; বাংলা ভাষার প্রথম উপন্যাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "literature"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0213",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "'লালসালু' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "হুমায়ূন আহমেদ",
+      "আবু ইসহাক",
+      "শওকত ওসমান",
+      "সৈয়দ ওয়ালীউল্লাহ"
+    ],
+    "correct_index": 3,
+    "correct_answer": "সৈয়দ ওয়ালীউল্লাহ",
+    "explanation": "লালসালু (১৯৪৮) সৈয়দ ওয়ালীউল্লাহর বিখ্যাত উপন্যাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "literature"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0214",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সন",
+    "difficulty": "easy",
+    "question": "বাংলা সন প্রবর্তন করেন কে?",
+    "options": [
+      "শের শাহ",
+      "শাহজাহান",
+      "সম্রাট আকবর",
+      "বাবর"
+    ],
+    "correct_index": 2,
+    "correct_answer": "সম্রাট আকবর",
+    "explanation": "মুঘল সম্রাট আকবর বাংলা সন প্রবর্তন করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "history"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0215",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা নববর্ষ",
+    "difficulty": "easy",
+    "question": "বাংলা নববর্ষ কোন তারিখে পালিত হয়?",
+    "options": [
+      "পহেলা বৈশাখ",
+      "পহেলা মাঘ",
+      "পহেলা ফাল্গুন",
+      "পহেলা অগ্রহায়ণ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "পহেলা বৈশাখ",
+    "explanation": "পহেলা বৈশাখ (১৪ এপ্রিল) বাংলা নববর্ষ হিসেবে পালিত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar and Bangla literary history (NCTB) — standard facts",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "bangla",
+      "culture",
+      "grade11-20"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

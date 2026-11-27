@@ -1,0 +1,990 @@
+[
+ {
+  "id": "JOBQ-L291",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "কম্পিউটার পরিচিতি",
+  "difficulty": "easy",
+  "question": "CPU বলতে কী বোঝায়?",
+  "options": [
+   "Central Processing Unit",
+   "Central Program Unit",
+   "Computer Processing Unit",
+   "Central Process Unit"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Central Processing Unit",
+  "explanation": "CPU = Central Processing Unit — কম্পিউটারের মস্তিষ্ক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "CPU",
+   "grade11-20",
+   "mental-ability",
+   "হার্ডওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L292",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "কম্পিউটার পরিচিতি",
+  "difficulty": "easy",
+  "question": "কম্পিউটারের মস্তিষ্ক কাকে বলা হয়?",
+  "options": [
+   "CPU",
+   "RAM",
+   "ROM",
+   "Hard Disk"
+  ],
+  "correct_index": 0,
+  "correct_answer": "CPU",
+  "explanation": "CPU-কে কম্পিউটারের মস্তিষ্ক বলা হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "RAM",
+   "grade11-20",
+   "mental-ability",
+   "হার্ডওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L293",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "কম্পিউটার পরিচিতি",
+  "difficulty": "easy",
+  "question": "এক কিলোবাইটে কত বাইট থাকে?",
+  "options": [
+   "১০০ বাইট",
+   "৫১২ বাইট",
+   "১০০০ বাইট",
+   "১০২৪ বাইট"
+  ],
+  "correct_index": 3,
+  "correct_answer": "১০২৪ বাইট",
+  "explanation": "১ KB = ১০২৪ বাইট।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "পরিমাপ",
+   "হার্ডওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L294",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "কম্পিউটার পরিচিতি",
+  "difficulty": "easy",
+  "question": "১ গিগাবাইট (GB) সমান কত মেগাবাইট (MB)?",
+  "options": [
+   "১০০ MB",
+   "৫১২ MB",
+   "১০০০ MB",
+   "১০২৪ MB"
+  ],
+  "correct_index": 3,
+  "correct_answer": "১০২৪ MB",
+  "explanation": "১ GB = ১০২৪ MB।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "পরিমাপ",
+   "হার্ডওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L295",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ইনপুট-আউটপুট",
+  "difficulty": "easy",
+  "question": "কম্পিউটারে তথ্য প্রবেশ করাতে কোন যন্ত্রটি ব্যবহৃত হয়?",
+  "options": [
+   "মনিটর",
+   "প্রিন্টার",
+   "কিবোর্ড",
+   "স্পিকার"
+  ],
+  "correct_index": 2,
+  "correct_answer": "কিবোর্ড",
+  "explanation": "কিবোর্ড ইনপুট ডিভাইস; মনিটর, প্রিন্টার, স্পিকার আউটপুট ডিভাইস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "ডিভাইস",
+   "হার্ডওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L296",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ইনপুট-আউটপুট",
+  "difficulty": "easy",
+  "question": "কম্পিউটারের ফলাফল ছাপাতে কোন যন্ত্রটি ব্যবহৃত হয়?",
+  "options": [
+   "মাউস",
+   "স্ক্যানার",
+   "প্রিন্টার",
+   "কিবোর্ড"
+  ],
+  "correct_index": 2,
+  "correct_answer": "প্রিন্টার",
+  "explanation": "প্রিন্টার আউটপুট ডিভাইস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "ডিভাইস",
+   "হার্ডওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L297",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "MS Office",
+  "difficulty": "easy",
+  "question": "MS Word-এ তৈরি ফাইল কোন এক্সটেনশনে সংরক্ষিত হয়?",
+  "options": [
+   ".xlsx",
+   ".docx",
+   ".pptx",
+   ".txt"
+  ],
+  "correct_index": 1,
+  "correct_answer": ".docx",
+  "explanation": "MS Word ফাইলের এক্সটেনশন .docx।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Word",
+   "grade11-20",
+   "mental-ability",
+   "সফটওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L298",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "MS Office",
+  "difficulty": "easy",
+  "question": "MS Excel-এ তৈরি ফাইল কোন এক্সটেনশনে সংরক্ষিত হয়?",
+  "options": [
+   ".docx",
+   ".xlsx",
+   ".pptx",
+   ".pdf"
+  ],
+  "correct_index": 1,
+  "correct_answer": ".xlsx",
+  "explanation": "MS Excel ফাইলের এক্সটেনশন .xlsx।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Excel",
+   "grade11-20",
+   "mental-ability",
+   "সফটওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L299",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "MS Office",
+  "difficulty": "easy",
+  "question": "PowerPoint ফাইলের এক্সটেনশন কোনটি?",
+  "options": [
+   ".docx",
+   ".xlsx",
+   ".pptx",
+   ".jpg"
+  ],
+  "correct_index": 2,
+  "correct_answer": ".pptx",
+  "explanation": "PowerPoint ফাইলের এক্সটেনশন .pptx।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "PowerPoint",
+   "grade11-20",
+   "mental-ability",
+   "সফটওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L300",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "শর্টকাট",
+  "difficulty": "easy",
+  "question": "কম্পিউটারে কপি করার শর্টকাট কী?",
+  "options": [
+   "Ctrl + V",
+   "Ctrl + C",
+   "Ctrl + X",
+   "Ctrl + Z"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Ctrl + C",
+  "explanation": "Ctrl + C = Copy।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Office",
+   "grade11-20",
+   "mental-ability",
+   "শর্টকাট"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L301",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "শর্টকাট",
+  "difficulty": "easy",
+  "question": "কম্পিউটারে পেস্ট করার শর্টকাট কী?",
+  "options": [
+   "Ctrl + C",
+   "Ctrl + V",
+   "Ctrl + P",
+   "Ctrl + S"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Ctrl + V",
+  "explanation": "Ctrl + V = Paste।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Office",
+   "grade11-20",
+   "mental-ability",
+   "শর্টকাট"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L303",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "শর্টকাট",
+  "difficulty": "easy",
+  "question": "কম্পিউটারে পূর্বের কাজ বাতিল (Undo) করার শর্টকাট কী?",
+  "options": [
+   "Ctrl + Y",
+   "Ctrl + Z",
+   "Ctrl + U",
+   "Ctrl + R"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Ctrl + Z",
+  "explanation": "Ctrl + Z = Undo।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Office",
+   "grade11-20",
+   "mental-ability",
+   "শর্টকাট"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L304",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "শর্টকাট",
+  "difficulty": "easy",
+  "question": "সব কিছু নির্বাচন (Select All) করার শর্টকাট কী?",
+  "options": [
+   "Ctrl + A",
+   "Ctrl + S",
+   "Ctrl + E",
+   "Ctrl + L"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Ctrl + A",
+  "explanation": "Ctrl + A = Select All।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Office",
+   "grade11-20",
+   "mental-ability",
+   "শর্টকাট"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L305",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "শর্টকাট",
+  "difficulty": "easy",
+  "question": "প্রিন্ট করার শর্টকাট কী?",
+  "options": [
+   "Ctrl + P",
+   "Ctrl + R",
+   "Ctrl + T",
+   "Ctrl + W"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Ctrl + P",
+  "explanation": "Ctrl + P = Print।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Office",
+   "grade11-20",
+   "mental-ability",
+   "শর্টকাট"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L306",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ইন্টারনেট",
+  "difficulty": "easy",
+  "question": "WWW-এর উদ্ভাবক কে?",
+  "options": [
+   "বিল গেটস",
+   "টিম বার্নার্স-লি",
+   "স্টিভ জবস",
+   "চার্লস ব্যাবেজ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "টিম বার্নার্স-লি",
+  "explanation": "ওয়ার্ল্ড ওয়াইড ওয়েবের উদ্ভাবক টিম বার্নার্স-লি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "ইতিহাস",
+   "ইন্টারনেট"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L310",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "সংখ্যা পদ্ধতি",
+  "difficulty": "medium",
+  "question": "দশমিক ৫-এর বাইনারি মান কত?",
+  "options": [
+   "১০১",
+   "১১০",
+   "১০০",
+   "১১১"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১০১",
+  "explanation": "৫₁₀ = ১০১₂।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "বাইনারি",
+   "সংখ্যা পদ্ধতি"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L311",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "কম্পিউটার পরিচিতি",
+  "difficulty": "easy",
+  "question": "কম্পিউটারের মস্তিষ্ক বলা হয় কোনটিকে?",
+  "options": [
+   "মনিটর",
+   "কিবোর্ড",
+   "সিপিইউ",
+   "হার্ডডিস্ক"
+  ],
+  "correct_index": 2,
+  "correct_answer": "সিপিইউ",
+  "explanation": "সিপিইউ (CPU) কম্পিউটারের মস্তিষ্ক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "CPU",
+   "grade11-20",
+   "mental-ability",
+   "হার্ডওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L312",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "স্মৃতি",
+  "difficulty": "medium",
+  "question": "কম্পিউটারে তথ্যের সবচেয়ে ছোট একক কোনটি?",
+  "options": [
+   "বিট",
+   "বাইট",
+   "কিলোবাইট",
+   "মেগাবাইট"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বিট",
+  "explanation": "বিট (binary digit, ০ বা ১) কম্পিউটারে তথ্যের সবচেয়ে ছোট একক; ৮ বিটে ১ বাইট হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "স্মৃতি",
+   "হার্ডওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L313",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "অপারেটিং সিস্টেম",
+  "difficulty": "easy",
+  "question": "কম্পিউটার পরিচালনার মূল সফটওয়্যার কোনটি?",
+  "options": [
+   "MS Word",
+   "Windows",
+   "Google Chrome",
+   "MS Excel"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Windows",
+  "explanation": "Windows একটি অপারেটিং সিস্টেম।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "OS",
+   "grade11-20",
+   "mental-ability",
+   "সফটওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L314",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ইন্টারনেট",
+  "difficulty": "easy",
+  "question": "ওয়েবসাইটের প্রথম পাতাকে কী বলা হয়?",
+  "options": [
+   "Index page",
+   "Home page",
+   "Web page",
+   "Main page"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Home page",
+  "explanation": "ওয়েবসাইটের প্রথম পাতা Home page।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "ইন্টারনেট",
+   "ওয়েব"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L315",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ইমেইল",
+  "difficulty": "easy",
+  "question": "ইমেইলে CC-এর পূর্ণরূপ কী?",
+  "options": [
+   "Common Copy",
+   "Carbon Copy",
+   "Computer Copy",
+   "Central Copy"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Carbon Copy",
+  "explanation": "CC = Carbon Copy।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "ইন্টারনেট",
+   "ইমেইল"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L316",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "ইমেইল",
+  "difficulty": "easy",
+  "question": "'স্প্যাম' বলতে কী বোঝায়?",
+  "options": [
+   "গুরুত্বপূর্ণ মেইল",
+   "অবাঞ্ছিত মেইল",
+   "গোপন মেইল",
+   "জরুরি মেইল"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অবাঞ্ছিত মেইল",
+  "explanation": "স্প্যাম হলো অবাঞ্ছিত/অনাকাঙ্ক্ষিত ইমেইল।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "grade11-20",
+   "mental-ability",
+   "ইন্টারনেট",
+   "ইমেইল"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L317",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "শর্টকাট",
+  "difficulty": "easy",
+  "question": "MS Word-এ লেখা মোটা (Bold) করার শর্টকাট কী?",
+  "options": [
+   "Ctrl + I",
+   "Ctrl + U",
+   "Ctrl + B",
+   "Ctrl + L"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Ctrl + B",
+  "explanation": "Ctrl + B = Bold।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Word",
+   "grade11-20",
+   "mental-ability",
+   "শর্টকাট"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L318",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "শর্টকাট",
+  "difficulty": "easy",
+  "question": "MS Word-এ লেখার নিচে দাগ (Underline) দেওয়ার শর্টকাট কী?",
+  "options": [
+   "Ctrl + U",
+   "Ctrl + I",
+   "Ctrl + B",
+   "Ctrl + D"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Ctrl + U",
+  "explanation": "Ctrl + U = Underline।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Word",
+   "grade11-20",
+   "mental-ability",
+   "শর্টকাট"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L319",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "শর্টকাট",
+  "difficulty": "easy",
+  "question": "MS Word-এ লেখা বাঁকা (Italic) করার শর্টকাট কী?",
+  "options": [
+   "Ctrl + B",
+   "Ctrl + I",
+   "Ctrl + U",
+   "Ctrl + T"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Ctrl + I",
+  "explanation": "Ctrl + I = Italic।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Word",
+   "grade11-20",
+   "mental-ability",
+   "শর্টকাট"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-L320",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "Mental Ability",
+  "subject_slug": "mental-ability",
+  "topic": "MS Excel",
+  "difficulty": "medium",
+  "question": "MS Excel-এ C কলাম ও ৫ নম্বর সারির সেলের ঠিকানা কী?",
+  "options": [
+   "5C",
+   "C5",
+   "C-5",
+   "5-C"
+  ],
+  "correct_index": 1,
+  "correct_answer": "C5",
+  "explanation": "Excel-এ সেলের ঠিকানা কলাম + সারি: C5।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "কম্পিউটার মৌলিক তথ্য (হার্ডওয়্যার, সফটওয়্যার, MS Office, নেটওয়ার্ক, ইন্টারনেট)",
+  "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "MS Excel",
+   "grade11-20",
+   "mental-ability",
+   "সফটওয়্যার"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-ict-depth-01.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

@@ -1,0 +1,2332 @@
+[
+  {
+    "id": "JOBQ-J821",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "২৪, ৩৬, ৪৮, ৬০-এর গড় কত?",
+    "options": [
+      "৩৫",
+      "৫৬",
+      "৪৯",
+      "৪২"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৪২",
+    "explanation": "মোট ১৬৮ ÷ ৪ = ৪২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J822",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "২৭, ৫৪, ৮১-এর গড় কত?",
+    "options": [
+      "৬১",
+      "৪৭",
+      "৫৪",
+      "৬৮"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৫৪",
+    "explanation": "মোট ১৬২ ÷ ৩ = ৫৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J823",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "৩০, ৪৫, ৬০, ৭৫, ৯০-এর গড় কত?",
+    "options": [
+      "৬৭",
+      "৫৩",
+      "৬০",
+      "৭৪"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৬০",
+    "explanation": "মোট ৩০০ ÷ ৫ = ৬০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J824",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "৩৩, ৬৬, ৯৯-এর গড় কত?",
+    "options": [
+      "৭৩",
+      "৬৬",
+      "৫৯",
+      "৮০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৬৬",
+    "explanation": "মোট ১৯৮ ÷ ৩ = ৬৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J825",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "২৬, ৫২, ৭৮, ১০৪-এর গড় কত?",
+    "options": [
+      "৭৯",
+      "৫৮",
+      "৭২",
+      "৬৫"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৬৫",
+    "explanation": "মোট ২৬০ ÷ ৪ = ৬৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J826",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "৩১, ৬২, ৯৩-এর গড় কত?",
+    "options": [
+      "৭৬",
+      "৬৯",
+      "৫৫",
+      "৬২"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৬২",
+    "explanation": "মোট ১৮৬ ÷ ৩ = ৬২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J827",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "১৭ টাকা দরে ৪টি পেনসিলের দাম কত?",
+    "options": [
+      "৬৮",
+      "৫৯",
+      "৮৬",
+      "৭৭"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৬৮",
+    "explanation": "১৭ × ৪ = ৬৮ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J828",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "১৯ টাকা দরে ৫টি পেনসিলের দাম কত?",
+    "options": [
+      "১১৩",
+      "৯৫",
+      "১০৪",
+      "৮৬"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৯৫",
+    "explanation": "১৯ × ৫ = ৯৫ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J829",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "২১ টাকা দরে ৬টি পেনসিলের দাম কত?",
+    "options": [
+      "১১৭",
+      "১২৬",
+      "১৩৫",
+      "১৪৪"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১২৬",
+    "explanation": "২১ × ৬ = ১২৬ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J830",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "২৩ টাকা দরে ৩টি পেনসিলের দাম কত?",
+    "options": [
+      "৭৮",
+      "৮৭",
+      "৬০",
+      "৬৯"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৬৯",
+    "explanation": "২৩ × ৩ = ৬৯ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J831",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "২৭ টাকা দরে ৪টি পেনসিলের দাম কত?",
+    "options": [
+      "১২৬",
+      "৯৯",
+      "১০৮",
+      "১১৭"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১০৮",
+    "explanation": "২৭ × ৪ = ১০৮ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J832",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "২৯ টাকা দরে ৩টি পেনসিলের দাম কত?",
+    "options": [
+      "৮৭",
+      "৯৬",
+      "৭৮",
+      "১০৫"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৮৭",
+    "explanation": "২৯ × ৩ = ৮৭ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J833",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "২২ ও ৩৩-এর লসাগু কত?",
+    "options": [
+      "৭৭",
+      "৫৫",
+      "৬৬",
+      "৮৮"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৬৬",
+    "explanation": "২২ ও ৩৩-এর লসাগু ৬৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J834",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "২৬ ও ৩৯-এর লসাগু কত?",
+    "options": [
+      "১০০",
+      "৭৮",
+      "৬৭",
+      "৮৯"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৭৮",
+    "explanation": "২৬ ও ৩৯-এর লসাগু ৭৮।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J835",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "৩০ ও ৪৫-এর লসাগু কত?",
+    "options": [
+      "১০১",
+      "৭৯",
+      "১১২",
+      "৯০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৯০",
+    "explanation": "৩০ ও ৪৫-এর লসাগু ৯০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J836",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "৩৪ ও ৫১-এর লসাগু কত?",
+    "options": [
+      "৯১",
+      "১০২",
+      "১২৪",
+      "১১৩"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১০২",
+    "explanation": "৩৪ ও ৫১-এর লসাগু ১০২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J837",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "৩৮ ও ৫৭-এর লসাগু কত?",
+    "options": [
+      "১৩৬",
+      "১০৩",
+      "১২৫",
+      "১১৪"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১১৪",
+    "explanation": "৩৮ ও ৫৭-এর লসাগু ১১৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J838",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৪৪ ও ৬৬-এর গসাগু কত?",
+    "options": [
+      "৩২",
+      "১৭",
+      "২৭",
+      "২২"
+    ],
+    "correct_index": 3,
+    "correct_answer": "২২",
+    "explanation": "৪৪ ও ৬৬-এর গসাগু ২২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J839",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৫২ ও ৭৮-এর গসাগু কত?",
+    "options": [
+      "৩৬",
+      "২৬",
+      "২১",
+      "৩১"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২৬",
+    "explanation": "৫২ ও ৭৮-এর গসাগু ২৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J840",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৬০ ও ৯০-এর গসাগু কত?",
+    "options": [
+      "২৫",
+      "৪০",
+      "৩৫",
+      "৩০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৩০",
+    "explanation": "৬০ ও ৯০-এর গসাগু ৩০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J841",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৬৮ ও ১০২-এর গসাগু কত?",
+    "options": [
+      "৩৪",
+      "৪৪",
+      "২৯",
+      "৩৯"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৩৪",
+    "explanation": "৬৮ ও ১০২-এর গসাগু ৩৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J842",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৭৬ ও ১১৪-এর গসাগু কত?",
+    "options": [
+      "৪৮",
+      "৪৩",
+      "৩৮",
+      "৩৩"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৩৮",
+    "explanation": "৭৬ ও ১১৪-এর গসাগু ৩৮।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J843",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৭২০-এর ২৫% কত?",
+    "options": [
+      "১৮০",
+      "১৯৩",
+      "২০৬",
+      "১৬৭"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৮০",
+    "explanation": "৭২০ × ২৫/১০০ = ১৮০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J844",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৮৪০-এর ২০% কত?",
+    "options": [
+      "১৬৮",
+      "১৮১",
+      "১৯৪",
+      "১৫৫"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৬৮",
+    "explanation": "৮৪০ × ২০/১০০ = ১৬৮।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J845",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৯৬০-এর ১৫% কত?",
+    "options": [
+      "১৫৭",
+      "১৩১",
+      "১৪৪",
+      "১৭০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৪৪",
+    "explanation": "৯৬০ × ১৫/১০০ = ১৪৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J846",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "১০৮০-এর ১০% কত?",
+    "options": [
+      "১৩৪",
+      "১২১",
+      "১০৮",
+      "৯৫"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১০৮",
+    "explanation": "১০৮০ × ১০/১০০ = ১০৮।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J847",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "১২৬০-এর ২০% কত?",
+    "options": [
+      "২৬৫",
+      "২৫২",
+      "২৭৮",
+      "২৩৯"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২৫২",
+    "explanation": "১২৬০ × ২০/১০০ = ২৫২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J848",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "১৪৪০-এর ২৫% কত?",
+    "options": [
+      "৩৮৬",
+      "৩৬০",
+      "৩৪৭",
+      "৩৭৩"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৩৬০",
+    "explanation": "১৪৪০ × ২৫/১০০ = ৩৬০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J849",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "৮০০০ টাকার ৯% হারে ৩ বছরের সরল সুদ কত?",
+    "options": [
+      "২১৬০",
+      "১৯৮০",
+      "২৫২০",
+      "২৩৪০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২১৬০",
+    "explanation": "সুদ = ৮০০০ × ৯ × ৩/১০০ = ২১৬০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J850",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "১২০০০ টাকার ৬% হারে ২ বছরের সরল সুদ কত?",
+    "options": [
+      "১৪৪০",
+      "১৬২০",
+      "১৮০০",
+      "১২৬০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৪৪০",
+    "explanation": "সুদ = ১২০০০ × ৬ × ২/১০০ = ১৪৪০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J851",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "১৫০০০ টাকার ৮% হারে ২ বছরের সরল সুদ কত?",
+    "options": [
+      "২৭৬০",
+      "২২২০",
+      "২৪০০",
+      "২৫৮০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২৪০০",
+    "explanation": "সুদ = ১৫০০০ × ৮ × ২/১০০ = ২৪০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J852",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "৯০০০ টাকার ১১% হারে ২ বছরের সরল সুদ কত?",
+    "options": [
+      "২১৬০",
+      "১৮০০",
+      "২৩৪০",
+      "১৯৮০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৯৮০",
+    "explanation": "সুদ = ৯০০০ × ১১ × ২/১০০ = ১৯৮০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J853",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "২০০০০ টাকার ৫% হারে ৩ বছরের সরল সুদ কত?",
+    "options": [
+      "৩০০০",
+      "৩৩৬০",
+      "২৮২০",
+      "৩১৮০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৩০০০",
+    "explanation": "সুদ = ২০০০০ × ৫ × ৩/১০০ = ৩০০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J854",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি জামা ১১০০ টাকায় কিনে ১৩২০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "২৬%",
+      "২০%",
+      "২৩%",
+      "১৭%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ২২০ টাকা; লাভ% = ২২০×১০০/১১০০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J855",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি জামা ১২৫০ টাকায় কিনে ১৫০০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "১৭%",
+      "২৩%",
+      "২৬%",
+      "২০%"
+    ],
+    "correct_index": 3,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ২৫০ টাকা; লাভ% = ২৫০×১০০/১২৫০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J856",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি জামা ১৪০০ টাকায় কিনে ১৬৮০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "২৩%",
+      "১৭%",
+      "২০%",
+      "২৬%"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ২৮০ টাকা; লাভ% = ২৮০×১০০/১৪০০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J857",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি জামা ১৬০০ টাকায় কিনে ১৪৪০ টাকায় বিক্রি করলে শতকরা ক্ষতি কত?",
+    "options": [
+      "১০%",
+      "৭%",
+      "১৬%",
+      "১৩%"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১০%",
+    "explanation": "ক্ষতি ১৬০ টাকা; ক্ষতি% = ১৬০×১০০/১৬০০ = ১০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J858",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি জামা ১৭৫০ টাকায় কিনে ২১০০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "২৩%",
+      "২০%",
+      "১৭%",
+      "২৬%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ৩৫০ টাকা; লাভ% = ৩৫০×১০০/১৭৫০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J859",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি জামা ১৯০০ টাকায় কিনে ১৭১০ টাকায় বিক্রি করলে শতকরা ক্ষতি কত?",
+    "options": [
+      "১৩%",
+      "১০%",
+      "১৬%",
+      "৭%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১০%",
+    "explanation": "ক্ষতি ১৯০ টাকা; ক্ষতি% = ১৯০×১০০/১৯০০ = ১০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J860",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "১১০০ টাকা ৬:৫ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৬০০",
+      "৭৪০",
+      "৬৭০",
+      "৫৩০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৬০০",
+    "explanation": "মোট অনুপাত ১১; প্রথম অংশ = ১১০০ × ৬/১১ = ৬০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J861",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "১১০০ টাকা ৭:৪ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৮৪০",
+      "৭৭০",
+      "৭০০",
+      "৬৩০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৭০০",
+    "explanation": "মোট অনুপাত ১১; প্রথম অংশ = ১১০০ × ৭/১১ = ৭০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J862",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "১১০০ টাকা ৮:৩ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৮৭০",
+      "৭৩০",
+      "৯৪০",
+      "৮০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৮০০",
+    "explanation": "মোট অনুপাত ১১; প্রথম অংশ = ১১০০ × ৮/১১ = ৮০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J863",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "১১০০ টাকা ৫:৬ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৫৭০",
+      "৫০০",
+      "৪৩০",
+      "৬৪০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৫০০",
+    "explanation": "মোট অনুপাত ১১; প্রথম অংশ = ১১০০ × ৫/১১ = ৫০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J864",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "১১০০ টাকা ৯:২ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৯৭০",
+      "৮৩০",
+      "১০৪০",
+      "৯০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৯০০",
+    "explanation": "মোট অনুপাত ১১; প্রথম অংশ = ১১০০ × ৯/১১ = ৯০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J865",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১৪, b = ৬ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "৩৯০",
+      "৪২০",
+      "৪১০",
+      "৪০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৪০০",
+    "explanation": "(a + b)² = (১৪ + ৬)² = ২০² = ৪০০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J866",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১৫, b = ৭ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "৪৭৪",
+      "৪৯৪",
+      "৪৮৪",
+      "৫০৪"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৪৮৪",
+    "explanation": "(a + b)² = (১৫ + ৭)² = ২২² = ৪৮৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J867",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১৪, b = ৮ হলে a² − b²-এর মান কত?",
+    "options": [
+      "১১৭",
+      "১৪৭",
+      "১৬২",
+      "১৩২"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৩২",
+    "explanation": "a² − b² = ১৯৬ − ৬৪ = ১৩২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "বীজগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J868",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১৯, b = ১১ হলে a² − b²-এর মান কত?",
+    "options": [
+      "২৪০",
+      "২২৫",
+      "২৭০",
+      "২৫৫"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২৪০",
+    "explanation": "a² − b² = ৩৬১ − ১২১ = ২৪০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "বীজগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J869",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "উৎপাদক",
+    "difficulty": "medium",
+    "question": "x² − ১০০-এর উৎপাদক কোনটি?",
+    "options": [
+      "(x − ১১)(x + ১১)",
+      "(x − ১০)(x − ১০)",
+      "(x − ১০)(x + ১০)",
+      "(x + ১০)(x + ১০)"
+    ],
+    "correct_index": 2,
+    "correct_answer": "(x − ১০)(x + ১০)",
+    "explanation": "x² − ১০০ = x² − ১০² = (x − ১০)(x + ১০)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "উৎপাদক",
+      "বীজগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J870",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "উৎপাদক",
+    "difficulty": "medium",
+    "question": "x² − ১২১-এর উৎপাদক কোনটি?",
+    "options": [
+      "(x + ১১)(x + ১১)",
+      "(x − ১১)(x + ১১)",
+      "(x − ১১)(x − ১১)",
+      "(x − ১২)(x + ১২)"
+    ],
+    "correct_index": 1,
+    "correct_answer": "(x − ১১)(x + ১১)",
+    "explanation": "x² − ১২১ = x² − ১১² = (x − ১১)(x + ১১)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "উৎপাদক",
+      "বীজগণিত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J871",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সূচক",
+    "difficulty": "easy",
+    "question": "৭^২-এর মান কত?",
+    "options": [
+      "৪৯",
+      "৫৬",
+      "৪২",
+      "৬৩"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৪৯",
+    "explanation": "৭^২ = ৪৯।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "বীজগণিত",
+      "সূচক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J872",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সূচক",
+    "difficulty": "easy",
+    "question": "২^৭-এর মান কত?",
+    "options": [
+      "১২১",
+      "১৩৫",
+      "১৪২",
+      "১২৮"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১২৮",
+    "explanation": "২^৭ = ১২৮।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "বীজগণিত",
+      "সূচক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J873",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি ত্রিভুজের ভূমি 16 সেমি ও উচ্চতা 9 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি?",
+    "options": [
+      "১০৮",
+      "৭২",
+      "৫৪",
+      "৯০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৭২",
+    "explanation": "ত্রিভুজের ক্ষেত্রফল = ½ × ভূমি × উচ্চতা = ½ × 16 × 9 = 72 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "জ্যামিতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J874",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি আয়তক্ষেত্রের দৈর্ঘ্য 16 সেমি ও প্রস্থ 9 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি?",
+    "options": [
+      "১৭৬",
+      "১২৮",
+      "১৪৪",
+      "১৬০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৪৪",
+    "explanation": "আয়তক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ = 16 × 9 = 144 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "জ্যামিতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J875",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বর্গক্ষেত্রের এক বাহুর দৈর্ঘ্য 13 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি?",
+    "options": [
+      "১৯৫",
+      "১৮২",
+      "১৬৯",
+      "১৫৬"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৬৯",
+    "explanation": "বর্গক্ষেত্রের ক্ষেত্রফল = বাহু² = 13² = 169 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "জ্যামিতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J876",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বৃত্তের ব্যাসার্ধ 21 সেমি হলে পরিধি কত সেমি? (π = 22/7)",
+    "options": [
+      "১৩২",
+      "১১১",
+      "১৭৪",
+      "১৫৩"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৩২",
+    "explanation": "পরিধি = 2πr = 2 × 22/7 × 21 = 132 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "জ্যামিতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J877",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বৃত্তের ব্যাসার্ধ 14 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি? (π = 22/7)",
+    "options": [
+      "৬১৬",
+      "৬৬০",
+      "৫৭২",
+      "৭০৪"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৬১৬",
+    "explanation": "ক্ষেত্রফল = πr² = 22/7 × 196 = 616 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "জ্যামিতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J878",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি সমকোণী ত্রিভুজের অতিভুজ 17 সেমি ও এক বাহু 8 সেমি হলে অপর বাহু কত সেমি?",
+    "options": [
+      "৩১",
+      "২৩",
+      "১৫",
+      "৭"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৫",
+    "explanation": "পিথাগোরাসের উপপাদ্য: √(17² − 8²) = √(289 − 64) = √225 = 15 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "জ্যামিতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J879",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি সরলকোণের মান কত ডিগ্রি?",
+    "options": [
+      "১৮০",
+      "৫৪০",
+      "৯০",
+      "২৭০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৮০",
+    "explanation": "সরলকোণের মান 180°।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "জ্যামিতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J880",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বর্গক্ষেত্রের এক বাহুর দৈর্ঘ্য 15 সেমি হলে পরিসীমা কত সেমি?",
+    "options": [
+      "৪৫",
+      "৬০",
+      "৭৫",
+      "৯০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৬০",
+    "explanation": "পরিসীমা = 4 × বাহু = 4 × 15 = 60 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "grade11-20",
+      "mathematics",
+      "জ্যামিতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-math-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

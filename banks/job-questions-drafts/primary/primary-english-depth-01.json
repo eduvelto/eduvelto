@@ -1,0 +1,1066 @@
+[
+  {
+    "id": "JOBQ-P031",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Plural number",
+    "difficulty": "easy",
+    "question": "What is the plural form of 'Mouse'?",
+    "options": [
+      "Mouses",
+      "Mice",
+      "Mouse",
+      "Mices"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Mice",
+    "explanation": "Mouse-এর plural Mice (অনিয়মিত বহুবচন)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "plural",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P032",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Plural number",
+    "difficulty": "easy",
+    "question": "What is the plural form of 'Tooth'?",
+    "options": [
+      "Tooths",
+      "Teeth",
+      "Toothes",
+      "Tooth"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Teeth",
+    "explanation": "Tooth-এর plural Teeth।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "plural",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P033",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Plural number",
+    "difficulty": "medium",
+    "question": "What is the plural form of 'Knife'?",
+    "options": [
+      "Knifes",
+      "Knives",
+      "Knifves",
+      "Knife"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Knives",
+    "explanation": "Knife-এর plural Knives (f → ves)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "plural",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "VERIFIED-AFTER-FIX",
+    "review_reason": "Duplicated wrong option 'Knifes' (A and C) — C replaced with distinct plural form 'Knifves'. Fix applied 27 Nov 2026 landing; content-team spot-check still recommended.",
+    "review_batch": "landing-2026-11-27",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P034",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Tense",
+    "difficulty": "easy",
+    "question": "She ___ a letter last night.",
+    "options": [
+      "writes",
+      "wrote",
+      "writing",
+      "write"
+    ],
+    "correct_index": 1,
+    "correct_answer": "wrote",
+    "explanation": "last night অতীতের চিহ্ন — past form wrote।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "primary",
+      "tense"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P035",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Tense",
+    "difficulty": "easy",
+    "question": "I have ___ my work.",
+    "options": [
+      "finish",
+      "finishing",
+      "finished",
+      "finishes"
+    ],
+    "correct_index": 2,
+    "correct_answer": "finished",
+    "explanation": "have-এর পর past participle — finished।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "primary",
+      "tense"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P037",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Article",
+    "difficulty": "easy",
+    "question": "He is ___ honest man.",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "no article"
+    ],
+    "correct_index": 1,
+    "correct_answer": "an",
+    "explanation": "honest-এর h অনুচ্চারিত, স্বরধ্বনি দিয়ে শুরু — an।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "article",
+      "english",
+      "grammar",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P038",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Article",
+    "difficulty": "easy",
+    "question": "___ Ganges is a big river.",
+    "options": [
+      "A",
+      "An",
+      "The",
+      "No article"
+    ],
+    "correct_index": 2,
+    "correct_answer": "The",
+    "explanation": "নদীর নামের আগে The বসে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "article",
+      "english",
+      "grammar",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P039",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "easy",
+    "question": "They are fond ___ cricket.",
+    "options": [
+      "of",
+      "in",
+      "at",
+      "for"
+    ],
+    "correct_index": 0,
+    "correct_answer": "of",
+    "explanation": "\"Fond of\" is the correct collocation.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "preposition",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P040",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "easy",
+    "question": "Divide the mango ___ the two boys.",
+    "options": [
+      "among",
+      "between",
+      "in",
+      "with"
+    ],
+    "correct_index": 1,
+    "correct_answer": "between",
+    "explanation": "দুজনের মধ্যে ভাগ করতে between ব্যবহৃত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "preposition",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P041",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "medium",
+    "question": "We are proud ___ our country.",
+    "options": [
+      "of",
+      "in",
+      "at",
+      "for"
+    ],
+    "correct_index": 0,
+    "correct_answer": "of",
+    "explanation": "\"Proud of\" is the correct collocation.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "preposition",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P042",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonym",
+    "difficulty": "easy",
+    "question": "The synonym of 'Begin' is —",
+    "options": [
+      "End",
+      "Start",
+      "Finish",
+      "Close"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Start",
+    "explanation": "Begin অর্থ শুরু করা — synonym Start।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "primary",
+      "synonym",
+      "vocabulary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P043",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonym",
+    "difficulty": "easy",
+    "question": "The synonym of 'Beautiful' is —",
+    "options": [
+      "Ugly",
+      "Lovely",
+      "Bad",
+      "Plain"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Lovely",
+    "explanation": "Beautiful-এর synonym Lovely।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "primary",
+      "synonym",
+      "vocabulary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P044",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonym",
+    "difficulty": "easy",
+    "question": "The antonym of 'Success' is —",
+    "options": [
+      "Victory",
+      "Failure",
+      "Progress",
+      "Win"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Failure",
+    "explanation": "Success-এর antonym Failure।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "antonym",
+      "english",
+      "primary",
+      "vocabulary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P045",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonym",
+    "difficulty": "easy",
+    "question": "The antonym of 'Polite' is —",
+    "options": [
+      "Gentle",
+      "Rude",
+      "Kind",
+      "Humble"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Rude",
+    "explanation": "Polite-এর antonym Rude।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "antonym",
+      "english",
+      "primary",
+      "vocabulary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P046",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "easy",
+    "question": "Choose the passive form of: 'He reads a book.'",
+    "options": [
+      "A book is read by him.",
+      "A book was read by him.",
+      "A book is being read by him.",
+      "A book has been read by him."
+    ],
+    "correct_index": 0,
+    "correct_answer": "A book is read by him.",
+    "explanation": "Present indefinite-এর passive: is + past participle।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "primary",
+      "voice"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P047",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "easy",
+    "question": "Choose the passive form of: 'They built a house.'",
+    "options": [
+      "A house is built by them.",
+      "A house was built by them.",
+      "A house has been built by them.",
+      "A house is being built by them."
+    ],
+    "correct_index": 1,
+    "correct_answer": "A house was built by them.",
+    "explanation": "Past indefinite-এর passive: was + past participle।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "primary",
+      "voice"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P048",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "He said, 'I am busy.' The indirect speech is —",
+    "options": [
+      "He said that he is busy.",
+      "He said that he was busy.",
+      "He said that I was busy.",
+      "He said that he had been busy."
+    ],
+    "correct_index": 1,
+    "correct_answer": "He said that he was busy.",
+    "explanation": "Reporting verb past tense হলে reported speech-এর tense এক ধাপ পেছায়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "narration",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P049",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "easy",
+    "question": "The correct spelling of the word 'beautiful' is —",
+    "options": [
+      "Beautifull",
+      "Beautiful",
+      "Biutiful",
+      "Beautifel"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Beautiful",
+    "explanation": "সঠিক বানান Beautiful।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "primary",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P050",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "medium",
+    "question": "The correct spelling of the word 'necessary' is —",
+    "options": [
+      "Necessary",
+      "Neccessary",
+      "Necessery",
+      "Necessarry"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Necessary",
+    "explanation": "সঠিক বানান Necessary।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "primary",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P051",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Degree",
+    "difficulty": "easy",
+    "question": "He is the ___ boy in the class. (good)",
+    "options": [
+      "better",
+      "best",
+      "good",
+      "more good"
+    ],
+    "correct_index": 1,
+    "correct_answer": "best",
+    "explanation": "Superlative degree: the best।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "degree",
+      "english",
+      "grammar",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P052",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Degree",
+    "difficulty": "easy",
+    "question": "Iron is ___ than wood. (heavy)",
+    "options": [
+      "heavy",
+      "heavier",
+      "heaviest",
+      "more heavy"
+    ],
+    "correct_index": 1,
+    "correct_answer": "heavier",
+    "explanation": "Comparative degree: heavier than।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "degree",
+      "english",
+      "grammar",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P053",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right form of verbs",
+    "difficulty": "easy",
+    "question": "He ___ to school daily. (go)",
+    "options": [
+      "go",
+      "goes",
+      "going",
+      "gone"
+    ],
+    "correct_index": 1,
+    "correct_answer": "goes",
+    "explanation": "Third person singular present — goes।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "primary",
+      "right-form"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P054",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right form of verbs",
+    "difficulty": "medium",
+    "question": "Bread and butter ___ my favourite breakfast.",
+    "options": [
+      "is",
+      "are",
+      "were",
+      "have been"
+    ],
+    "correct_index": 0,
+    "correct_answer": "is",
+    "explanation": "'Bread and butter' is treated as a single item, so it takes a singular verb.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "grammar",
+      "primary",
+      "right-form"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P055",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms",
+    "difficulty": "medium",
+    "question": "'To rain cats and dogs' means —",
+    "options": [
+      "to rain lightly",
+      "to rain heavily",
+      "to rain with animals",
+      "to stop raining"
+    ],
+    "correct_index": 1,
+    "correct_answer": "to rain heavily",
+    "explanation": "To rain cats and dogs অর্থ মুষলধারে বৃষ্টি হওয়া।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "idiom",
+      "primary",
+      "vocabulary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P056",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms",
+    "difficulty": "medium",
+    "question": "'A black sheep' means —",
+    "options": [
+      "a black animal",
+      "a bad person in a family",
+      "a lucky person",
+      "a brave person"
+    ],
+    "correct_index": 1,
+    "correct_answer": "a bad person in a family",
+    "explanation": "A black sheep অর্থ পরিবারের কলঙ্ক / খারাপ লোক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "idiom",
+      "primary",
+      "vocabulary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P058",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Gender",
+    "difficulty": "easy",
+    "question": "What is the feminine form of 'Nephew'?",
+    "options": [
+      "Niece",
+      "Nephewess",
+      "Niecee",
+      "Sister"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Niece",
+    "explanation": "Nephew-এর feminine Niece।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "gender",
+      "grammar",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P059",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Gender",
+    "difficulty": "medium",
+    "question": "What is the feminine form of 'Fox'?",
+    "options": [
+      "Foxen",
+      "Vixen",
+      "She-fox",
+      "Foxx"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Vixen",
+    "explanation": "Fox-এর feminine Vixen।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "gender",
+      "grammar",
+      "primary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-P060",
+    "exam_canonical": "primary",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "One-word substitution",
+    "difficulty": "medium",
+    "question": "One who studies birds is called —",
+    "options": [
+      "Astronomer",
+      "Ornithologist",
+      "Zoologist",
+      "Botanist"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Ornithologist",
+    "explanation": "পাখি নিয়ে অধ্যয়ন করেন যিনি — Ornithologist।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar references",
+    "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+    "tags": [
+      "english",
+      "one-word",
+      "primary",
+      "vocabulary"
+    ],
+    "source_stream": "primary",
+    "source_file": "primary/primary-english-depth-01.json",
+    "applies_to": [
+      "primary"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  }
+]

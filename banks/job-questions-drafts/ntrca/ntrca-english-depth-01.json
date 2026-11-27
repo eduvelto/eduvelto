@@ -1,0 +1,876 @@
+[
+ {
+  "id": "JOBQ-N146",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "She ___ a song now. (sing)",
+  "options": [
+   "sings",
+   "is singing",
+   "sang",
+   "sung"
+  ],
+  "correct_index": 1,
+  "correct_answer": "is singing",
+  "explanation": "এখন চলমান কাজ — present continuous is singing।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "right-form"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N147",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "medium",
+  "question": "They ___ football when I arrived. (play)",
+  "options": [
+   "are playing",
+   "were playing",
+   "played",
+   "play"
+  ],
+  "correct_index": 1,
+  "correct_answer": "were playing",
+  "explanation": "অতীতে চলমান কাজ — past continuous were playing।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "right-form"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N148",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "I am waiting ___ my friend.",
+  "options": [
+   "to",
+   "for",
+   "at",
+   "with"
+  ],
+  "correct_index": 1,
+  "correct_answer": "for",
+  "explanation": "অপেক্ষা করা অর্থে wait for ব্যবহৃত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "preposition"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N149",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "He died ___ 1971.",
+  "options": [
+   "at",
+   "on",
+   "in",
+   "by"
+  ],
+  "correct_index": 2,
+  "correct_answer": "in",
+  "explanation": "সালের আগে in বসে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "preposition"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N150",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "easy",
+  "question": "He is ___ M.A.",
+  "options": [
+   "a",
+   "an",
+   "the",
+   "no article"
+  ],
+  "correct_index": 1,
+  "correct_answer": "an",
+  "explanation": "M.A. উচ্চারণে স্বরধ্বনি (এম) দিয়ে শুরু — an।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "article",
+   "english",
+   "grammar",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N151",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Wealthy' is —",
+  "options": [
+   "Poor",
+   "Rich",
+   "Healthy",
+   "Wise"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Rich",
+  "explanation": "Wealthy অর্থ ধনী — synonym Rich।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "ntrca",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N152",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Quick' is —",
+  "options": [
+   "Slow",
+   "Fast",
+   "Late",
+   "Lazy"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Fast",
+  "explanation": "Quick-এর synonym Fast।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "ntrca",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N153",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Accept' is —",
+  "options": [
+   "Receive",
+   "Reject",
+   "Agree",
+   "Take"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Reject",
+  "explanation": "Accept-এর antonym Reject।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "antonym",
+   "english",
+   "ntrca",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N154",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Bitter' is —",
+  "options": [
+   "Sour",
+   "Sweet",
+   "Salty",
+   "Hot"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Sweet",
+  "explanation": "Bitter-এর antonym Sweet।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "antonym",
+   "english",
+   "ntrca",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N155",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms",
+  "difficulty": "medium",
+  "question": "'To break the ice' means —",
+  "options": [
+   "to break something cold",
+   "to start a conversation",
+   "to feel very cold",
+   "to stop talking"
+  ],
+  "correct_index": 1,
+  "correct_answer": "to start a conversation",
+  "explanation": "To break the ice অর্থ আলাপ শুরু করা / জড়তা ভাঙা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "idiom",
+   "ntrca",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N156",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms",
+  "difficulty": "medium",
+  "question": "'At home' means —",
+  "options": [
+   "at one's house",
+   "comfortable and at ease",
+   "at work",
+   "at school"
+  ],
+  "correct_index": 1,
+  "correct_answer": "comfortable and at ease",
+  "explanation": "At home অর্থ স্বচ্ছন্দে / স্বস্তিতে থাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "idiom",
+   "ntrca",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N157",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Voice",
+  "difficulty": "easy",
+  "question": "Choose the passive form of: 'He did the work.'",
+  "options": [
+   "The work is done by him.",
+   "The work was done by him.",
+   "The work has been done by him.",
+   "The work is being done by him."
+  ],
+  "correct_index": 1,
+  "correct_answer": "The work was done by him.",
+  "explanation": "Past indefinite-এর passive: was + past participle।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "voice"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N158",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Narration",
+  "difficulty": "medium",
+  "question": "He said, 'I will go home.' The indirect speech is —",
+  "options": [
+   "He said that he will go home.",
+   "He said that he would go home.",
+   "He said that I would go home.",
+   "He said that he had gone home."
+  ],
+  "correct_index": 1,
+  "correct_answer": "He said that he would go home.",
+  "explanation": "will → would হয় indirect speech-এ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "grammar",
+   "narration",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N159",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "The correct spelling of the word 'occurrence' is —",
+  "options": [
+   "Occurence",
+   "Occurrence",
+   "Occurrance",
+   "Ocurrence"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Occurrence",
+  "explanation": "সঠিক বানান Occurrence।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "ntrca",
+   "spelling",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N160",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "One who eats both plants and animals is called —",
+  "options": [
+   "Omnivore",
+   "Herbivore",
+   "Carnivore",
+   "Frugivore"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Omnivore",
+  "explanation": "An omnivore is an animal or person that eats both plants and animals.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "ntrca",
+   "one-word",
+   "vocabulary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N162",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Degree",
+  "difficulty": "easy",
+  "question": "She is ___ than her sister. (tall)",
+  "options": [
+   "tall",
+   "taller",
+   "tallest",
+   "more tall"
+  ],
+  "correct_index": 1,
+  "correct_answer": "taller",
+  "explanation": "Comparative degree: taller than।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "degree",
+   "english",
+   "grammar",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N163",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Transformation",
+  "difficulty": "medium",
+  "question": "He is too weak to walk. (Make it complex)",
+  "options": [
+   "He is so weak that he cannot walk.",
+   "He is weak and cannot walk.",
+   "He cannot walk because he is weak.",
+   "He is very weak to walk."
+  ],
+  "correct_index": 0,
+  "correct_answer": "He is so weak that he cannot walk.",
+  "explanation": "too...to-এর complex রূপ: so...that + cannot।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "transformation"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N165",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English literature",
+  "difficulty": "medium",
+  "question": "Who wrote 'A Midsummer Night's Dream'?",
+  "options": [
+   "William Shakespeare",
+   "Christopher Marlowe",
+   "John Milton",
+   "Geoffrey Chaucer"
+  ],
+  "correct_index": 0,
+  "correct_answer": "William Shakespeare",
+  "explanation": "'A Midsummer Night's Dream' is a comedy by William Shakespeare.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "drama",
+   "english",
+   "literature",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N166",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English literature",
+  "difficulty": "easy",
+  "question": "Who wrote 'Twelfth Night'?",
+  "options": [
+   "William Shakespeare",
+   "Christopher Marlowe",
+   "Ben Jonson",
+   "John Milton"
+  ],
+  "correct_index": 0,
+  "correct_answer": "William Shakespeare",
+  "explanation": "'Twelfth Night' is a comedy by William Shakespeare.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "drama",
+   "english",
+   "literature",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N167",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English literature",
+  "difficulty": "medium",
+  "question": "The English translation of 'Gitanjali' earned the Nobel Prize for Tagore in —",
+  "options": [
+   "1910",
+   "1913",
+   "1915",
+   "1921"
+  ],
+  "correct_index": 1,
+  "correct_answer": "1913",
+  "explanation": "রবীন্দ্রনাথ ঠাকুর ১৯১৩ সালে গীতাঞ্জলির জন্য নোবেল পুরস্কার পান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "literature",
+   "ntrca",
+   "poetry"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N168",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Subject-verb agreement",
+  "difficulty": "medium",
+  "question": "He as well as I ___ present.",
+  "options": [
+   "are",
+   "is",
+   "were",
+   "am"
+  ],
+  "correct_index": 1,
+  "correct_answer": "is",
+  "explanation": "as well as-এর ক্ষেত্রে verb প্রথম subject (He) অনুযায়ী হয় — is।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "agreement",
+   "english",
+   "grammar",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N169",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Subject-verb agreement",
+  "difficulty": "medium",
+  "question": "The quality of mangoes ___ good.",
+  "options": [
+   "are",
+   "is",
+   "were",
+   "have been"
+  ],
+  "correct_index": 1,
+  "correct_answer": "is",
+  "explanation": "মূল subject The quality (singular) — verb is।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "agreement",
+   "english",
+   "grammar",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N170",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "He is weak ___ mathematics.",
+  "options": [
+   "in",
+   "at",
+   "on",
+   "of"
+  ],
+  "correct_index": 0,
+  "correct_answer": "in",
+  "explanation": "The adjective 'weak' is followed by the preposition 'in' before a subject.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "english",
+   "grammar",
+   "ntrca",
+   "preposition"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-english-depth-01.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

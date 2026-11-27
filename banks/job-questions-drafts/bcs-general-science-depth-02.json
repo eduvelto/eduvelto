@@ -1,0 +1,746 @@
+[
+ {
+  "id": "JOBQ-D529",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান — কাজ ও শক্তি",
+  "difficulty": "easy",
+  "question": "কাজের একক কোনটি?",
+  "options": [
+   "নিউটন",
+   "জুল",
+   "ওয়াট",
+   "ভোল্ট"
+  ],
+  "correct_index": 1,
+  "correct_answer": "জুল",
+  "explanation": "কাজ = বল × সরণ; কাজের SI একক জুল।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "general-science",
+   "physics",
+   "science",
+   "work"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D531",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান — চাপ",
+  "difficulty": "medium",
+  "question": "চাপের একক কোনটি?",
+  "options": [
+   "নিউটন",
+   "প্যাসকেল",
+   "জুল",
+   "ওয়াট"
+  ],
+  "correct_index": 1,
+  "correct_answer": "প্যাসকেল",
+  "explanation": "চাপ = বল / ক্ষেত্রফল; চাপের SI একক প্যাসকেল।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "general-science",
+   "physics",
+   "pressure",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D532",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান — নিউটনের সূত্র",
+  "difficulty": "medium",
+  "question": "নিউটনের কোন সূত্রে ক্রিয়া-প্রতিক্রিয়ার কথা বলা হয়েছে?",
+  "options": [
+   "প্রথম সূত্র",
+   "দ্বিতীয় সূত্র",
+   "তৃতীয় সূত্র",
+   "মহাকর্ষ সূত্র"
+  ],
+  "correct_index": 2,
+  "correct_answer": "তৃতীয় সূত্র",
+  "explanation": "নিউটনের তৃতীয় সূত্র: প্রত্যেক ক্রিয়ারই সমান ও বিপরীত প্রতিক্রিয়া আছে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "general-science",
+   "newton-laws",
+   "physics",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D533",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান — কম্পাঙ্ক",
+  "difficulty": "easy",
+  "question": "কম্পাঙ্কের একক কোনটি?",
+  "options": [
+   "হার্জ",
+   "ডেসিবেল",
+   "মিটার",
+   "সেকেন্ড"
+  ],
+  "correct_index": 0,
+  "correct_answer": "হার্জ",
+  "explanation": "কম্পাঙ্কের SI একক হার্জ (Hz)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "frequency",
+   "general-science",
+   "physics",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D534",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান — আলো",
+  "difficulty": "medium",
+  "question": "উত্তল লেন্স কেমন কাজ করে?",
+  "options": [
+   "আলোকে ছড়িয়ে দেয়",
+   "আলোকে অভিসারী করে",
+   "আলোকে শোষণ করে",
+   "আলোকে প্রতিফলিত করে"
+  ],
+  "correct_index": 1,
+  "correct_answer": "আলোকে অভিসারী করে",
+  "explanation": "উত্তল লেন্স আলোকরশ্মিকে এক বিন্দুতে মিলিত করে (অভিসারী); অবতল লেন্স ছড়িয়ে দেয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "general-science",
+   "lens",
+   "physics",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D535",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান — শব্দ",
+  "difficulty": "medium",
+  "question": "শব্দ চলাচলের জন্য কী প্রয়োজন?",
+  "options": [
+   "মাধ্যম",
+   "আলো",
+   "বিদ্যুৎ",
+   "শূন্যস্থান"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মাধ্যম",
+  "explanation": "শব্দ যান্ত্রিক তরঙ্গ; চলাচলের জন্য কঠিন, তরল বা গ্যাসীয় মাধ্যম প্রয়োজন। শূন্য মাধ্যমে শব্দ চলে না।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "general-science",
+   "physics",
+   "science",
+   "sound"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D536",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "রসায়ন — মৌল",
+  "difficulty": "medium",
+  "question": "অক্সিজেনের পারমাণবিক সংখ্যা কত?",
+  "options": [
+   "৬",
+   "৮",
+   "১৬",
+   "১০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৮",
+  "explanation": "অক্সিজেনের পারমাণবিক সংখ্যা ৮; পারমাণবিক ভর ১৬।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "atomic-number",
+   "bcs",
+   "chemistry",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D537",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "রসায়ন — অম্ল",
+  "difficulty": "medium",
+  "question": "সালফিউরিক অম্লের সংকেত কোনটি?",
+  "options": [
+   "HCl",
+   "H₂SO₄",
+   "HNO₃",
+   "H₂CO₃"
+  ],
+  "correct_index": 1,
+  "correct_answer": "H₂SO₄",
+  "explanation": "সালফিউরিক অম্লের সংকেত H₂SO₄।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "acid",
+   "bcs",
+   "chemistry",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D538",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "রসায়ন — যৌগ",
+  "difficulty": "medium",
+  "question": "খাবার সোডার রাসায়নিক নাম কী?",
+  "options": [
+   "সোডিয়াম বাইকার্বনেট",
+   "সোডিয়াম কার্বনেট",
+   "সোডিয়াম ক্লোরাইড",
+   "ক্যালসিয়াম কার্বনেট"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সোডিয়াম বাইকার্বনেট",
+  "explanation": "খাবার সোডা সোডিয়াম বাইকার্বনেট (NaHCO₃); কাপড় কাচার সোডা সোডিয়াম কার্বনেট (Na₂CO₃)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "baking-soda",
+   "bcs",
+   "chemistry",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D539",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "রসায়ন — গ্যাস",
+  "difficulty": "medium",
+  "question": "মিথেন গ্যাসের সংকেত কোনটি?",
+  "options": [
+   "CO₂",
+   "CH₄",
+   "NH₃",
+   "N₂O"
+  ],
+  "correct_index": 1,
+  "correct_answer": "CH₄",
+  "explanation": "মিথেনের সংকেত CH₄; এটি প্রাকৃতিক গ্যাসের প্রধান উপাদান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "chemistry",
+   "general-science",
+   "methane",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D540",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "রসায়ন — মরিচা",
+  "difficulty": "medium",
+  "question": "লোহায় মরিচা ধরার জন্য কী কী প্রয়োজন?",
+  "options": [
+   "বায়ু ও পানি",
+   "শুধু বায়ু",
+   "শুধু পানি",
+   "তাপ ও আলো"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বায়ু ও পানি",
+  "explanation": "লোহায় মরিচা ধরতে বায়ুর অক্সিজেন ও পানি দুটোই প্রয়োজন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "chemistry",
+   "general-science",
+   "rusting",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D541",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "রসায়ন — pH",
+  "difficulty": "medium",
+  "question": "লেবুর রসের pH মান কেমন?",
+  "options": [
+   "৭-এর বেশি",
+   "৭",
+   "৭-এর কম",
+   "০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৭-এর কম",
+  "explanation": "লেবুর রস অম্লীয়; এর pH ৭-এর কম (প্রায় ২)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "chemistry",
+   "general-science",
+   "ph",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D542",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "রসায়ন — ক্ষার",
+  "difficulty": "easy",
+  "question": "সোডিয়াম হাইড্রক্সাইডের (NaOH) প্রচলিত নাম কী?",
+  "options": [
+   "কস্টিক সোডা",
+   "খাবার সোডা",
+   "চুন",
+   "ব্লিচিং পাউডার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কস্টিক সোডা",
+  "explanation": "NaOH-এর প্রচলিত নাম কস্টিক সোডা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "base",
+   "bcs",
+   "chemistry",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D543",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "জীববিজ্ঞান — DNA",
+  "difficulty": "medium",
+  "question": "DNA-এর পূর্ণরূপ কী?",
+  "options": [
+   "Deoxyribonucleic Acid",
+   "Diribonucleic Acid",
+   "Deoxyribose Nucleic Atom",
+   "Dinucleic Acid"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Deoxyribonucleic Acid",
+  "explanation": "DNA = Deoxyribonucleic Acid — বংশগতির ধারক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "biology",
+   "dna",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D544",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "জীববিজ্ঞান — রক্ত",
+  "difficulty": "medium",
+  "question": "রক্তে অক্সিজেন বহন করে কোন কণিকা?",
+  "options": [
+   "শ্বেতকণিকা",
+   "লোহিতকণিকা",
+   "অণুচক্রিকা",
+   "প্লাজমা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "লোহিতকণিকা",
+  "explanation": "লোহিতকণিকার হিমোগ্লোবিন অক্সিজেন বহন করে; শ্বেতকণিকা রোগ প্রতিরোধ করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "biology",
+   "blood",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D545",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "জীববিজ্ঞান — ভিটামিন",
+  "difficulty": "medium",
+  "question": "ভিটামিন বি১-এর অভাবে কোন রোগ হয়?",
+  "options": [
+   "স্কার্ভি",
+   "বেরিবেরি",
+   "রিকেটস",
+   "রাতকানা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বেরিবেরি",
+  "explanation": "ভিটামিন বি১ (থায়ামিন)-এর অভাবে বেরিবেরি রোগ হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "biology",
+   "general-science",
+   "science",
+   "vitamin"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D546",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "জীববিজ্ঞান — মানবদেহ",
+  "difficulty": "medium",
+  "question": "মানুষের দেহের বৃহত্তম হাড় কোনটি?",
+  "options": [
+   "ফিমার",
+   "হিউমেরাস",
+   "টিবিয়া",
+   "রেডিয়াস"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ফিমার",
+  "explanation": "ফিমার (ঊরুর হাড়) মানুষের দেহের বৃহত্তম ও শক্তিশালী হাড়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "biology",
+   "bones",
+   "general-science",
+   "human-body",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D547",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "জীববিজ্ঞান — মানবদেহ",
+  "difficulty": "medium",
+  "question": "মানুষের দেহের ক্ষুদ্রতম হাড় কোনটি?",
+  "options": [
+   "স্টেপিস",
+   "ম্যালিয়াস",
+   "ইনকাস",
+   "ফিমার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "স্টেপিস",
+  "explanation": "কানের ভেতরের স্টেপিস মানুষের দেহের ক্ষুদ্রতম হাড়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "biology",
+   "bones",
+   "general-science",
+   "human-body",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D548",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "জীববিজ্ঞান — হরমোন",
+  "difficulty": "medium",
+  "question": "ইনসুলিন কোন গ্রন্থি থেকে নিঃসৃত হয়?",
+  "options": [
+   "যকৃৎ",
+   "অগ্ন্যাশয়",
+   "থাইরয়েড",
+   "অ্যাড্রেনাল"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অগ্ন্যাশয়",
+  "explanation": "অগ্ন্যাশয়ের বিটা কোষ থেকে ইনসুলিন নিঃসৃত হয়; এর অভাবে ডায়াবেটিস হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Science / Physics / Chemistry / Biology textbooks (NCTB) — standard facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "biology",
+   "general-science",
+   "hormone",
+   "insulin",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-general-science-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

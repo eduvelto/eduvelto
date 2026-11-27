@@ -1,0 +1,762 @@
+[
+ {
+  "id": "JOBQ-M782",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংবিধান",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের সংবিধানে মোট কয়টি তফসিল আছে?",
+  "options": [
+   "৫টি",
+   "৬টি",
+   "৭টি",
+   "৮টি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৭টি",
+  "explanation": "বাংলাদেশের সংবিধানে মোট ৭টি তফসিল আছে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "সংবিধান"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M783",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংবিধান",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের সংবিধানের প্রথম ভাগের নাম কী?",
+  "options": [
+   "প্রস্তাবনা",
+   "প্রজাতন্ত্র",
+   "মৌলিক অধিকার",
+   "রাষ্ট্র পরিচালনার মূলনীতি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "প্রজাতন্ত্র",
+  "explanation": "সংবিধানের প্রথম ভাগের নাম 'প্রজাতন্ত্র'।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "সংবিধান"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M784",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংসদ",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের জাতীয় সংসদের প্রথম অধিবেশন অনুষ্ঠিত হয় কত তারিখে?",
+  "options": [
+   "৭ এপ্রিল ১৯৭৩",
+   "৭ মার্চ ১৯৭৩",
+   "১০ এপ্রিল ১৯৭৩",
+   "১৬ ডিসেম্বর ১৯৭২"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৭ এপ্রিল ১৯৭৩",
+  "explanation": "জাতীয় সংসদের প্রথম অধিবেশন অনুষ্ঠিত হয় ৭ এপ্রিল ১৯৭৩।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "সংসদ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M785",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "শিক্ষা",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম শিক্ষা কমিশন কোনটি?",
+  "options": [
+   "কুদরত-ই-খুদা শিক্ষা কমিশন",
+   "মফিজউদ্দীন শিক্ষা কমিশন",
+   "শামসুল হক শিক্ষা কমিশন",
+   "জাতীয় শিক্ষানীতি ২০১০"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কুদরত-ই-খুদা শিক্ষা কমিশন",
+  "explanation": "বাংলাদেশের প্রথম শিক্ষা কমিশন কুদরত-ই-খুদা শিক্ষা কমিশন (১৯৭২)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "শিক্ষা"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M786",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মুক্তিযুদ্ধ",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম মন্ত্রিসভা গঠন করা হয় কত তারিখে?",
+  "options": [
+   "২৬ মার্চ ১৯৭১",
+   "১০ এপ্রিল ১৯৭১",
+   "১৭ এপ্রিল ১৯৭১",
+   "৭ মার্চ ১৯৭১"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১০ এপ্রিল ১৯৭১",
+  "explanation": "মুজিবনগর সরকার (প্রথম মন্ত্রিসভা) গঠন করা হয় ১০ এপ্রিল ১৯৭১।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "মুক্তিযুদ্ধ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M787",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "অবকাঠামো",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের দীর্ঘতম রেল সেতু কোনটি?",
+  "options": [
+   "পদ্মা সেতু",
+   "হার্ডিঞ্জ সেতু",
+   "যমুনা সেতু",
+   "লালন শাহ সেতু"
+  ],
+  "correct_index": 1,
+  "correct_answer": "হার্ডিঞ্জ সেতু",
+  "explanation": "হার্ডিঞ্জ সেতু বাংলাদেশের দীর্ঘতম রেল সেতু।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "অবকাঠামো",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M788",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "অবকাঠামো",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম রেলপথ কোনটি?",
+  "options": [
+   "ঢাকা-চট্টগ্রাম",
+   "দর্শনা-জগতি",
+   "খুলনা-যশোর",
+   "পার্বতীপুর-দিনাজপুর"
+  ],
+  "correct_index": 1,
+  "correct_answer": "দর্শনা-জগতি",
+  "explanation": "দর্শনা-জগতি (১৮৬২) বাংলাদেশের প্রথম রেলপথ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "অবকাঠামো",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M789",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিমান চলাচল",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম বিমানবন্দর কোনটি?",
+  "options": [
+   "তেজগাঁও বিমানবন্দর",
+   "শাহজালাল বিমানবন্দর",
+   "শাহ আমানত বিমানবন্দর",
+   "ওসমানী বিমানবন্দর"
+  ],
+  "correct_index": 0,
+  "correct_answer": "তেজগাঁও বিমানবন্দর",
+  "explanation": "তেজগাঁও বিমানবন্দর বাংলাদেশের প্রথম বিমানবন্দর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "বিমান"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M790",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিমান চলাচল",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের প্রথম আন্তর্জাতিক বিমানবন্দর কোনটি?",
+  "options": [
+   "শাহজালাল আন্তর্জাতিক বিমানবন্দর",
+   "শাহ আমানত আন্তর্জাতিক বিমানবন্দর",
+   "ওসমানী আন্তর্জাতিক বিমানবন্দর",
+   "সৈয়দপুর বিমানবন্দর"
+  ],
+  "correct_index": 0,
+  "correct_answer": "শাহজালাল আন্তর্জাতিক বিমানবন্দর",
+  "explanation": "ঢাকার শাহজালাল আন্তর্জাতিক বিমানবন্দর বাংলাদেশের প্রথম আন্তর্জাতিক বিমানবন্দর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "বিমান"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M791",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "গণমাধ্যম",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম স্যাটেলাইট টেলিভিশন চ্যানেল কোনটি?",
+  "options": [
+   "এটিএন বাংলা",
+   "বিটিভি",
+   "একুশে টিভি",
+   "এনটিভি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "এটিএন বাংলা",
+  "explanation": "এটিএন বাংলা (১৯৯৭) বাংলাদেশের প্রথম স্যাটেলাইট টেলিভিশন চ্যানেল।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "গণমাধ্যম",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M792",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "গণমাধ্যম",
+  "difficulty": "medium",
+  "question": "বাংলাদেশ সংবাদ সংস্থা (বাসস) প্রতিষ্ঠিত হয় কত সালে?",
+  "options": [
+   "১৯৭১",
+   "১৯৭২",
+   "১৯৭৩",
+   "১৯৭৫"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯৭২",
+  "explanation": "বাংলাদেশ সংবাদ সংস্থা (বাসস) প্রতিষ্ঠিত হয় ১৯৭২ সালে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "গণমাধ্যম",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M793",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "বিশ্বের তৃতীয় বৃহত্তম অর্থনীতির দেশ কোনটি?",
+  "options": [
+   "জার্মানি",
+   "জাপান",
+   "ভারত",
+   "যুক্তরাজ্য"
+  ],
+  "correct_index": 0,
+  "correct_answer": "জার্মানি",
+  "explanation": "বিশ্বের তৃতীয় বৃহত্তম অর্থনীতির দেশ জার্মানি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M794",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "বিশ্বের বৃহত্তম হিন্দু জনসংখ্যার দেশ কোনটি?",
+  "options": [
+   "নেপাল",
+   "ভারত",
+   "বাংলাদেশ",
+   "ইন্দোনেশিয়া"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ভারত",
+  "explanation": "বিশ্বের বৃহত্তম হিন্দু জনসংখ্যার দেশ ভারত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M795",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "বিশ্বের বৃহত্তম খ্রিস্টান জনসংখ্যার দেশ কোনটি?",
+  "options": [
+   "যুক্তরাষ্ট্র",
+   "ব্রাজিল",
+   "মেক্সিকো",
+   "রাশিয়া"
+  ],
+  "correct_index": 0,
+  "correct_answer": "যুক্তরাষ্ট্র",
+  "explanation": "বিশ্বের বৃহত্তম খ্রিস্টান জনসংখ্যার দেশ যুক্তরাষ্ট্র।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M796",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতিসংঘ",
+  "difficulty": "easy",
+  "question": "জাতিসংঘ দিবস পালিত হয় কত তারিখে?",
+  "options": [
+   "২৪ অক্টোবর",
+   "২১ ফেব্রুয়ারি",
+   "১০ ডিসেম্বর",
+   "১ জানুয়ারি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২৪ অক্টোবর",
+  "explanation": "জাতিসংঘ দিবস ২৪ অক্টোবর পালিত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "জাতিসংঘ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M797",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ক্রীড়া",
+  "difficulty": "easy",
+  "question": "অলিম্পিক গেমসের জন্মভূমি কোন দেশ?",
+  "options": [
+   "ইতালি",
+   "গ্রিস",
+   "মিসর",
+   "তুরস্ক"
+  ],
+  "correct_index": 1,
+  "correct_answer": "গ্রিস",
+  "explanation": "অলিম্পিক গেমসের জন্মভূমি গ্রিস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "ক্রীড়া"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M798",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ক্রীড়া",
+  "difficulty": "medium",
+  "question": "২০২৬ সালের ফিফা বিশ্বকাপ কোন কোন দেশে অনুষ্ঠিত হবে?",
+  "options": [
+   "যুক্তরাষ্ট্র, কানাডা ও মেক্সিকো",
+   "কাতার, সৌদি আরব ও সংযুক্ত আরব আমিরাত",
+   "ব্রাজিল, আর্জেন্টিনা ও চিলি",
+   "ইংল্যান্ড, ফ্রান্স ও জার্মানি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "যুক্তরাষ্ট্র, কানাডা ও মেক্সিকো",
+  "explanation": "২০২৬ ফিফা বিশ্বকাপ যুক্তরাষ্ট্র, কানাডা ও মেক্সিকোতে অনুষ্ঠিত হবে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "ক্রীড়া"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M799",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশের ইতিহাস",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম নোবেল পুরস্কার বিজয়ী কে?",
+  "options": [
+   "ড. মুহাম্মদ ইউনূস",
+   "বেগম রোকেয়া",
+   "অমর্ত্য সেন",
+   "মাদার তেরেসা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ড. মুহাম্মদ ইউনূস",
+  "explanation": "ড. মুহাম্মদ ইউনূস (২০০৬, শান্তি) বাংলাদেশের প্রথম নোবেল পুরস্কার বিজয়ী।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "ইতিহাস",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M800",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "অর্থনীতি",
+  "difficulty": "medium",
+  "question": "গ্রামীণ ব্যাংক প্রতিষ্ঠিত হয় কত সালে?",
+  "options": [
+   "১৯৭৬",
+   "১৯৮৩",
+   "১৯৯২",
+   "২০০৬"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯৮৩",
+  "explanation": "গ্রামীণ ব্যাংক প্রতিষ্ঠিত হয় ১৯৮৩ সালে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "অর্থনীতি",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M801",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "টেলিযোগাযোগ",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম মোবাইল ফোন অপারেটর কোনটি?",
+  "options": [
+   "সিটিসেল",
+   "গ্রামীণফোন",
+   "রবি",
+   "বাংলালিংক"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সিটিসেল",
+  "explanation": "সিটিসেল (১৯৯৩) বাংলাদেশের প্রথম মোবাইল ফোন অপারেটর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "টেলিযোগাযোগ",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

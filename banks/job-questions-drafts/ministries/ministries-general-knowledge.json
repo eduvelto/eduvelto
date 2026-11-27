@@ -1,0 +1,382 @@
+[
+ {
+  "id": "JOBQ-0373",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতীয় প্রতীক",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের জাতীয় পতাকায় লাল বৃত্তটি কী নির্দেশ করে?",
+  "options": [
+   "উদীয়মান সূর্য",
+   "চাঁদ",
+   "রক্ত",
+   "ফুল"
+  ],
+  "correct_index": 0,
+  "correct_answer": "উদীয়মান সূর্য",
+  "explanation": "লাল বৃত্ত উদীয়মান সূর্যকে নির্দেশ করে; সবুজ পটভূমি বাংলাদেশের সবুজ প্রকৃতি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "ministries",
+   "national-symbols"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0374",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশের ইতিহাস",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম অর্থমন্ত্রী কে ছিলেন?",
+  "options": [
+   "তাজউদ্দীন আহমদ",
+   "এম সাইফুর রহমান",
+   "শাহ এ এম এস কিবরিয়া",
+   "আবুল মাল আবদুল মুহিত"
+  ],
+  "correct_index": 0,
+  "correct_answer": "তাজউদ্দীন আহমদ",
+  "explanation": "তাজউদ্দীন আহমদ বাংলাদেশের প্রথম অর্থমন্ত্রী ছিলেন (এবং প্রথম প্রধানমন্ত্রীও)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "history",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0375",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "শিক্ষা",
+  "difficulty": "easy",
+  "question": "ঢাকা বিশ্ববিদ্যালয় কত সালে প্রতিষ্ঠিত হয়?",
+  "options": [
+   "১৯২১",
+   "১৯১১",
+   "১৯৪৭",
+   "১৯৫২"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯২১",
+  "explanation": "ঢাকা বিশ্ববিদ্যালয় ১৯২১ সালে প্রতিষ্ঠিত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "education",
+   "general-knowledge",
+   "gk",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0376",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাদুঘর",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম জাদুঘর কোনটি?",
+  "options": [
+   "বরেন্দ্র জাদুঘর",
+   "বাংলাদেশ জাতীয় জাদুঘর",
+   "মুক্তিযুদ্ধ জাদুঘর",
+   "লোকশিল্প জাদুঘর"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বরেন্দ্র জাদুঘর",
+  "explanation": "রাজশাহীর বরেন্দ্র জাদুঘর (১৯১০) বাংলাদেশের প্রথম জাদুঘর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "ministries",
+   "museum"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0377",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতিসংঘ",
+  "difficulty": "medium",
+  "question": "জাতিসংঘের মহাসচিবের মেয়াদ কত বছর?",
+  "options": [
+   "৪ বছর",
+   "৫ বছর",
+   "৬ বছর",
+   "৭ বছর"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৫ বছর",
+  "explanation": "জাতিসংঘের মহাসচিবের মেয়াদ ৫ বছর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "ministries",
+   "un"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0378",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "বিশ্বের দীর্ঘতম পর্বতশ্রেণি কোনটি?",
+  "options": [
+   "হিমালয়",
+   "আন্দিজ",
+   "আল্পস",
+   "রকি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "আন্দিজ",
+  "explanation": "আন্দিজ বিশ্বের দীর্ঘতম পর্বতশ্রেণি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "ministries",
+   "world-geography"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0379",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মহাকাশ",
+  "difficulty": "easy",
+  "question": "সূর্য থেকে পৃথিবীর গড় দূরত্ব প্রায় কত?",
+  "options": [
+   "১৫ কোটি কিলোমিটার",
+   "১০ কোটি কিলোমিটার",
+   "২০ কোটি কিলোমিটার",
+   "৫ কোটি কিলোমিটার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৫ কোটি কিলোমিটার",
+  "explanation": "সূর্য থেকে পৃথিবীর গড় দূরত্ব প্রায় ১৫ কোটি কিলোমিটার (১ AU)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "ministries",
+   "space"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0380",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সাধারণ জ্ঞান",
+  "difficulty": "easy",
+  "question": "কোন দেশকে 'সূর্যোদয়ের দেশ' বলা হয়?",
+  "options": [
+   "জাপান",
+   "চীন",
+   "কোরিয়া",
+   "থাইল্যান্ড"
+  ],
+  "correct_index": 0,
+  "correct_answer": "জাপান",
+  "explanation": "জাপানকে 'সূর্যোদয়ের দেশ' (Land of the Rising Sun) বলা হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "ministries",
+   "world"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0381",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ক্রীড়া",
+  "difficulty": "medium",
+  "question": "বাংলাদেশ ক্রিকেট দল টেস্ট মর্যাদা পায় কত সালে?",
+  "options": [
+   "২০০০",
+   "১৯৯৯",
+   "২০০১",
+   "১৯৯৭"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২০০০",
+  "explanation": "বাংলাদেশ ২০০০ সালের ২৬ জুন টেস্ট মর্যাদা লাভ করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "ministries",
+   "sports"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0382",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংবাদপত্র",
+  "difficulty": "medium",
+  "question": "ঢাকা থেকে প্রকাশিত প্রথম দৈনিক সংবাদপত্র কোনটি?",
+  "options": [
+   "আজাদ",
+   "ইত্তেফাক",
+   "সংবাদ",
+   "দৈনিক বাংলা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "আজাদ",
+  "explanation": "দৈনিক আজাদ (১৯৩৬) ঢাকা থেকে প্রকাশিত প্রথম দৈনিক সংবাদপত্র।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Bangladesh and Global Studies (NCTB) and standard general knowledge — standard facts",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "general-knowledge",
+   "gk",
+   "media",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-general-knowledge.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

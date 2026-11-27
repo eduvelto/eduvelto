@@ -1,0 +1,956 @@
+[
+ {
+  "id": "JOBQ-D634",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "শতকরা",
+  "difficulty": "easy",
+  "question": "৯০০-এর ৩০% কত?",
+  "options": [
+   "২৪০",
+   "২৭০",
+   "৩০০",
+   "৩৩০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৭০",
+  "explanation": "৯০০ × ৩০/১০০ = ২৭০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D635",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "easy",
+  "question": "4x − 9 = 27 হলে x-এর মান কত?",
+  "options": [
+   "৮",
+   "৯",
+   "১০",
+   "১১"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৯",
+  "explanation": "4x = 36, তাই x = 9।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "algebra",
+   "bank",
+   "equation",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D636",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লসাগু-গসাগু",
+  "difficulty": "easy",
+  "question": "১১ ও ১৩-এর লসাগু কত?",
+  "options": [
+   "১৪৩",
+   "১৩০",
+   "১৫৬",
+   "১২১"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৪৩",
+  "explanation": "১১ ও ১৩ মৌলিক সংখ্যা; লসাগু = ১১ × ১৩ = ১৪৩।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "lcm",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D637",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লসাগু-গসাগু",
+  "difficulty": "easy",
+  "question": "৪২ ও ৬৩-এর গসাগু কত?",
+  "options": [
+   "৭",
+   "১৪",
+   "২১",
+   "২৮"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২১",
+  "explanation": "৪২ = ২×৩×৭, ৬৩ = ৩²×৭; গসাগু = ৩×৭ = ২১।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D638",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "অনুপাত",
+  "difficulty": "medium",
+  "question": "দুটি সংখ্যার অনুপাত ৫ : ৭ এবং ছোট সংখ্যাটি ৩৫ হলে বড় সংখ্যাটি কত?",
+  "options": [
+   "৪২",
+   "৪৫",
+   "৪৯",
+   "৫৬"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪৯",
+  "explanation": "বড় সংখ্যা = ৩৫ × ৭/৫ = ৪৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D639",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লাভ-ক্ষতি",
+  "difficulty": "medium",
+  "question": "ক্রয়মূল্য ১৬০০ টাকা, বিক্রয়মূল্য ২০০০ টাকা হলে লাভের হার কত?",
+  "options": [
+   "২০%",
+   "২৫%",
+   "৩০%",
+   "১৫%"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৫%",
+  "explanation": "লাভ ৪০০ টাকা; ৪০০/১৬০০ × ১০০ = ২৫%।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D640",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লাভ-ক্ষতি",
+  "difficulty": "medium",
+  "question": "ক্রয়মূল্য ১২০০ টাকা, বিক্রয়মূল্য ১০২০ টাকা হলে ক্ষতির হার কত?",
+  "options": [
+   "১০%",
+   "১২%",
+   "১৫%",
+   "১৮%"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৫%",
+  "explanation": "ক্ষতি ১৮০ টাকা; ১৮০/১২০০ × ১০০ = ১৫%।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D641",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "সরল সুদ",
+  "difficulty": "medium",
+  "question": "৬০০০ টাকার ৮% হারে ৩ বছরের সরল সুদ কত?",
+  "options": [
+   "১২০০ টাকা",
+   "১৪৪০ টাকা",
+   "১৬০০ টাকা",
+   "১৮০০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৪৪০ টাকা",
+  "explanation": "সুদ = ৬০০০ × ৮ × ৩ / ১০০ = ১৪৪০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "simple-interest"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D642",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "চক্রবৃদ্ধি সুদ",
+  "difficulty": "medium",
+  "question": "৪০০০ টাকা ৫% চক্রবৃদ্ধি হারে ২ বছর পর সুদ-আসল কত হবে?",
+  "options": [
+   "৪২০০ টাকা",
+   "৪৪০০ টাকা",
+   "৪৪১০ টাকা",
+   "৪৫০০ টাকা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪৪১০ টাকা",
+  "explanation": "সুদ-আসল = ৪০০০ × (১.০৫)² = ৪৪১০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "compound-interest",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D643",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "কাজ",
+  "difficulty": "medium",
+  "question": "A একটি কাজ ৯ দিনে এবং B ১৮ দিনে করতে পারে। একত্রে কত দিনে কাজটি শেষ হবে?",
+  "options": [
+   "৫ দিন",
+   "৬ দিন",
+   "৭ দিন",
+   "৮ দিন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৬ দিন",
+  "explanation": "একদিনে করে ১/৯ + ১/১৮ = ১/৬ অংশ; তাই ৬ দিন লাগবে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "work"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D644",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গড়",
+  "difficulty": "easy",
+  "question": "৮, ১৪, ২০, ২৬, ৩২ সংখ্যাগুলোর গড় কত?",
+  "options": [
+   "১৮",
+   "২০",
+   "২২",
+   "২৪"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২০",
+  "explanation": "যোগফল ১০০; গড় = ১০০/৫ = ২০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "average",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D645",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বয়স",
+  "difficulty": "medium",
+  "question": "পিতার বয়স পুত্রের বয়সের ৫ গুণ। পুত্রের বয়স ৭ বছর হলে পিতার বয়স কত?",
+  "options": [
+   "৩০ বছর",
+   "৩৫ বছর",
+   "৪০ বছর",
+   "৪২ বছর"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩৫ বছর",
+  "explanation": "পিতার বয়স = ৭ × ৫ = ৩৫ বছর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "age",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D646",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গতি",
+  "difficulty": "easy",
+  "question": "ঘণ্টায় ৬০ কিমি বেগে চললে ৩০০ কিমি যেতে কত সময় লাগবে?",
+  "options": [
+   "৪ ঘণ্টা",
+   "৫ ঘণ্টা",
+   "৬ ঘণ্টা",
+   "৩ ঘণ্টা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৫ ঘণ্টা",
+  "explanation": "সময় = ৩০০/৬০ = ৫ ঘণ্টা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "speed"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D647",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ট্রেন",
+  "difficulty": "medium",
+  "question": "১৮০ মিটার দীর্ঘ একটি ট্রেন ঘণ্টায় ৩৬ কিমি বেগে চললে একটি খুঁটি অতিক্রম করতে কত সময় নেবে?",
+  "options": [
+   "১৫ সেকেন্ড",
+   "১৮ সেকেন্ড",
+   "২০ সেকেন্ড",
+   "১২ সেকেন্ড"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৮ সেকেন্ড",
+  "explanation": "৩৬ কিমি/ঘণ্টা = ১০ মি/সে; সময় = ১৮০/১০ = ১৮ সেকেন্ড।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "train"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D648",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ছাড়",
+  "difficulty": "easy",
+  "question": "৩০০০ টাকা মূল্যের পণ্যে ২৫% ছাড় দিলে বিক্রয়মূল্য কত?",
+  "options": [
+   "২০০০ টাকা",
+   "২২৫০ টাকা",
+   "২৫০০ টাকা",
+   "২৭৫০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২২৫০ টাকা",
+  "explanation": "ছাড় ৭৫০ টাকা; বিক্রয়মূল্য = ৩০০০ − ৭৫০ = ২২৫০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "discount",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D649",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "জ্যামিতি — বর্গ",
+  "difficulty": "easy",
+  "question": "একটি বর্গক্ষেত্রের বাহু ১৮ সেমি হলে তার ক্ষেত্রফল কত?",
+  "options": [
+   "৩২৪ বর্গসেমি",
+   "৩৬০ বর্গসেমি",
+   "২৮৮ বর্গসেমি",
+   "৩০০ বর্গসেমি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৩২৪ বর্গসেমি",
+  "explanation": "ক্ষেত্রফল = ১৮² = ৩২৪ বর্গসেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "geometry",
+   "math",
+   "mathematics",
+   "square"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D650",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "জ্যামিতি — আয়তক্ষেত্র",
+  "difficulty": "easy",
+  "question": "দৈর্ঘ্য ১৫ সেমি ও প্রস্থ ৯ সেমি হলে আয়তক্ষেত্রের ক্ষেত্রফল কত?",
+  "options": [
+   "১২০ বর্গসেমি",
+   "১৩৫ বর্গসেমি",
+   "১৪০ বর্গসেমি",
+   "১৫০ বর্গসেমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৩৫ বর্গসেমি",
+  "explanation": "ক্ষেত্রফল = ১৫ × ৯ = ১৩৫ বর্গসেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "geometry",
+   "math",
+   "mathematics",
+   "rectangle"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D651",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "জ্যামিতি — বৃত্ত",
+  "difficulty": "medium",
+  "question": "২১ সেমি ব্যাসার্ধের বৃত্তের ক্ষেত্রফল কত? (π = ২২/৭)",
+  "options": [
+   "১২৮৬ বর্গসেমি",
+   "১৩৮৬ বর্গসেমি",
+   "১৪৮৬ বর্গসেমি",
+   "১১৮৬ বর্গসেমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৩৮৬ বর্গসেমি",
+  "explanation": "ক্ষেত্রফল = ২২/৭ × ২১² = ২২ × ৬৩ = ১৩৮৬ বর্গসেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "circle",
+   "geometry",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D652",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "easy",
+  "question": "x = 3 হলে x³ − 2x-এর মান কত?",
+  "options": [
+   "১৫",
+   "১৮",
+   "২১",
+   "২৪"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২১",
+  "explanation": "২৭ − ৬ = ২১।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "algebra",
+   "bank",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D653",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ধারা",
+  "difficulty": "medium",
+  "question": "৫, ১০, ১৭, ২৬, ৩৭, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "৪৬",
+   "৪৮",
+   "৫০",
+   "৫২"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৫০",
+  "explanation": "পার্থক্য ৫, ৭, ৯, ১১ — পরের পার্থক্য ১৩; ৩৭ + ১৩ = ৫০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D654",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "সম্ভাবনা",
+  "difficulty": "medium",
+  "question": "একটি ছক্কা নিক্ষেপ করলে ৪-এর চেয়ে বড় সংখ্যা ওঠার সম্ভাবনা কত?",
+  "options": [
+   "১/২",
+   "১/৩",
+   "১/৬",
+   "২/৩"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১/৩",
+  "explanation": "৪-এর চেয়ে বড় সংখ্যা ২টি (৫, ৬); সম্ভাবনা = ২/৬ = ১/৩।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "probability"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D655",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "মিশ্রণ",
+  "difficulty": "medium",
+  "question": "চিনি ও পানির অনুপাত ১ : ৪ হলে ২৫০ গ্রাম মিশ্রণে চিনি কত গ্রাম?",
+  "options": [
+   "৪০ গ্রাম",
+   "৫০ গ্রাম",
+   "৬০ গ্রাম",
+   "৭৫ গ্রাম"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৫০ গ্রাম",
+  "explanation": "চিনি = ২৫০ × ১/৫ = ৫০ গ্রাম।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "mixture"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D656",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "অনুপাত",
+  "difficulty": "medium",
+  "question": "দুটি সংখ্যার যোগফল ৮৪ এবং অনুপাত ৩ : ৪ হলে বড় সংখ্যাটি কত?",
+  "options": [
+   "৩৬",
+   "৪২",
+   "৪৮",
+   "৫৬"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪৮",
+  "explanation": "বড় সংখ্যা = ৮৪ × ৪/৭ = ৪৮।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "ratio"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D657",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "শতকরা",
+  "difficulty": "medium",
+  "question": "২৪০-এর কত শতাংশ ৬০?",
+  "options": [
+   "২০%",
+   "২৫%",
+   "৩০%",
+   "৩৫%"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৫%",
+  "explanation": "৬০/২৪০ × ১০০ = ২৫%।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D658",
+  "exam_canonical": "bank",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বর্গমূল",
+  "difficulty": "easy",
+  "question": "√১০২৪-এর মান কত?",
+  "options": [
+   "২৮",
+   "৩০",
+   "৩২",
+   "৩৬"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৩২",
+  "explanation": "৩২² = ১০২৪, তাই √১০২৪ = ৩২।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "math",
+   "mathematics",
+   "square-root"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-math-depth-02.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

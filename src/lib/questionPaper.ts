@@ -25,8 +25,9 @@
 //   (7.1% of one full mock per main exam; 455+ missing). Full-mock
 //   generation is therefore GATED — the UI shows availability per
 //   exam/subject and refuses to invent questions to fill gaps.
-//   Academic Classes 3–12 add 2,318 verified questions (26 Nov 2026) —
-//   thirty-five subjects (Classes 3–8: Bangla, Bangla Grammar, English,
+//   Academic Classes 6–12 add 1,842 verified questions (27 Nov 2026:
+//   1,841 after the Class 1–5 deletion + C910P-018) —
+//   thirty-five subjects (Classes 6–8: Bangla, Bangla Grammar, English,
 //   Math, Math-depth, Science, Science-depth, BGS, Islam, ICT,
 //   Agriculture, Home Science; Class 9: Accounting, Bangla 1st/2nd,
 //   Biology (+depth), Business, Finance, Chemistry (+depth), Civics,
@@ -787,10 +788,10 @@ function toQpgCqQuestion(q: PublicAcademicCqQuestion): QpgQuestion {
   };
 }
 
-/** The whole verified pool: 35 BCS English MCQs + 2,318 Academic
- *  (Classes 3–12, thirty-five subjects) MCQs + 359 Academic CQs
+/** The whole verified pool: 35 BCS English MCQs + 1,842 Academic
+ *  (Classes 6–12, thirty-five subjects) MCQs + 359 Academic CQs
  *  (Classes 9–12, thirty-five subjects — 190 Class 9-10 + 169 Class
- *  11-12; CQ-1112-020 HELD, excluded) = 2,712. One bank — the Question
+ *  11-12; CQ-1112-020 HELD, excluded) = 2,236. One bank — the Question
  *  Maker and the Education Hub chapter practice draw from this same
  *  pool, so a question verified once appears in both places. BCS
  *  exam accounting counts ONLY the BCS chapter (see

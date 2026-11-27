@@ -1,0 +1,952 @@
+[
+  {
+    "id": "JOBQ-D609",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Synonym",
+    "difficulty": "medium",
+    "question": "Choose the synonym of 'eloquent'.",
+    "options": [
+      "Weak",
+      "Rude",
+      "Fluent",
+      "Silent"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Fluent",
+    "explanation": "'Eloquent' means fluent and persuasive in speech.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "synonym"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D610",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Synonym",
+    "difficulty": "medium",
+    "question": "Choose the synonym of 'hostile'.",
+    "options": [
+      "Kind",
+      "Friendly",
+      "Calm",
+      "Unfriendly"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Unfriendly",
+    "explanation": "'Hostile' means unfriendly or opposed.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "synonym"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D611",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Synonym",
+    "difficulty": "easy",
+    "question": "The word 'Honest' means —",
+    "options": [
+      "Truthful",
+      "Clever",
+      "Dishonest",
+      "Brave"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Truthful",
+    "explanation": "Honest means truthful.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "synonym"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D612",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Antonym",
+    "difficulty": "easy",
+    "question": "Who wrote 'Julius Caesar'?",
+    "options": [
+      "John Milton",
+      "Charles Dickens",
+      "Geoffrey Chaucer",
+      "William Shakespeare"
+    ],
+    "correct_index": 3,
+    "correct_answer": "William Shakespeare",
+    "explanation": "William Shakespeare wrote Julius Caesar.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "antonym",
+      "bank",
+      "english"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D613",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Antonym",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'happy'.",
+    "options": [
+      "Glad",
+      "Sad",
+      "Joyful",
+      "Cheerful"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Sad",
+    "explanation": "'Happy' means feeling pleasure; its opposite is 'sad'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "antonym",
+      "bank",
+      "english"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D614",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Idiom",
+    "difficulty": "medium",
+    "question": "'To be in hot water' means —",
+    "options": [
+      "To be in trouble",
+      "To take a bath",
+      "To be angry",
+      "To drink hot water"
+    ],
+    "correct_index": 0,
+    "correct_answer": "To be in trouble",
+    "explanation": "'To be in hot water' means to be in trouble.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "idiom"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D615",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Idiom",
+    "difficulty": "medium",
+    "question": "'To smell a rat' means —",
+    "options": [
+      "To suspect something wrong",
+      "To catch a rat",
+      "To be afraid",
+      "To smell badly"
+    ],
+    "correct_index": 0,
+    "correct_answer": "To suspect something wrong",
+    "explanation": "'To smell a rat' means to suspect that something is wrong.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "idiom"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D616",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Idiom",
+    "difficulty": "medium",
+    "question": "'To let the cat out of the bag' means —",
+    "options": [
+      "To free a cat",
+      "To tell a lie",
+      "To reveal a secret",
+      "To buy a bag"
+    ],
+    "correct_index": 2,
+    "correct_answer": "To reveal a secret",
+    "explanation": "'To let the cat out of the bag' means to reveal a secret by mistake.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "idiom"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D617",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Phrasal verb",
+    "difficulty": "medium",
+    "question": "'Break into' means —",
+    "options": [
+      "To enter by force",
+      "To interrupt",
+      "To break something",
+      "To divide"
+    ],
+    "correct_index": 0,
+    "correct_answer": "To enter by force",
+    "explanation": "'Break into' means to enter a place by force.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "phrasal-verb"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D618",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Phrasal verb",
+    "difficulty": "medium",
+    "question": "'Come across' means —",
+    "options": [
+      "To meet by chance",
+      "To come over",
+      "To cross a river",
+      "To understand"
+    ],
+    "correct_index": 0,
+    "correct_answer": "To meet by chance",
+    "explanation": "'Come across' means to meet or find someone or something by chance.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "phrasal-verb"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D619",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Phrasal verb",
+    "difficulty": "medium",
+    "question": "'Get over' means —",
+    "options": [
+      "To climb over",
+      "To get up",
+      "To recover from",
+      "To forget"
+    ],
+    "correct_index": 2,
+    "correct_answer": "To recover from",
+    "explanation": "'Get over' means to recover from an illness or difficulty.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "phrasal-verb"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D620",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'He has done the work.'",
+    "options": [
+      "The work was done by him.",
+      "The work has done by him.",
+      "The work has been done by him.",
+      "The work is done by him."
+    ],
+    "correct_index": 2,
+    "correct_answer": "The work has been done by him.",
+    "explanation": "Present perfect active becomes 'has been + past participle' in the passive.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "voice"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D621",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'They are playing football.'",
+    "options": [
+      "Football is being played by them.",
+      "Football has been played by them.",
+      "Football was played by them.",
+      "Football is played by them."
+    ],
+    "correct_index": 0,
+    "correct_answer": "Football is being played by them.",
+    "explanation": "Present continuous active becomes 'is being + past participle' in the passive.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "voice"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D622",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: He said, \"I am busy now.\"",
+    "options": [
+      "He said that he had been busy then.",
+      "He said that he was busy now.",
+      "He said that he is busy now.",
+      "He said that he was busy then."
+    ],
+    "correct_index": 3,
+    "correct_answer": "He said that he was busy then.",
+    "explanation": "'Am' becomes 'was' and 'now' becomes 'then' in indirect speech.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "narration"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D623",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Tag question",
+    "difficulty": "easy",
+    "question": "Choose the correct tag: 'She can swim, ___?'",
+    "options": [
+      "can't she",
+      "isn't she",
+      "can she",
+      "doesn't she"
+    ],
+    "correct_index": 0,
+    "correct_answer": "can't she",
+    "explanation": "A positive statement takes a negative tag: 'can't she?'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "tag-question"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D624",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Tag question",
+    "difficulty": "medium",
+    "question": "Choose the correct tag: 'They went home, ___?'",
+    "options": [
+      "did they",
+      "didn't they",
+      "don't they",
+      "weren't they"
+    ],
+    "correct_index": 1,
+    "correct_answer": "didn't they",
+    "explanation": "Past simple positive takes the negative tag 'didn't they?'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "tag-question"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D625",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Article",
+    "difficulty": "easy",
+    "question": "Fill in the blank: 'He carries ___ umbrella.'",
+    "options": [
+      "the",
+      "a",
+      "no article",
+      "an"
+    ],
+    "correct_index": 3,
+    "correct_answer": "an",
+    "explanation": "'An' is used before a vowel sound; 'umbrella' begins with a vowel sound.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "article",
+      "bank",
+      "english"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D626",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Article",
+    "difficulty": "medium",
+    "question": "Fill in the blank: 'He is ___ one-eyed man.'",
+    "options": [
+      "no article",
+      "the",
+      "a",
+      "an"
+    ],
+    "correct_index": 2,
+    "correct_answer": "a",
+    "explanation": "'One-eyed' begins with a consonant sound (w), so 'a one-eyed man'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "article",
+      "bank",
+      "english"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D627",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Conditional",
+    "difficulty": "medium",
+    "question": "Fill in the blank: 'If I were rich, I ___ travel the world.'",
+    "options": [
+      "can",
+      "would",
+      "shall",
+      "will"
+    ],
+    "correct_index": 1,
+    "correct_answer": "would",
+    "explanation": "Second conditional uses 'would + verb'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "conditional",
+      "english"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D628",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Conditional",
+    "difficulty": "hard",
+    "question": "Fill in the blank: 'Had I known, I ___ have helped you.'",
+    "options": [
+      "shall",
+      "would",
+      "will",
+      "can"
+    ],
+    "correct_index": 1,
+    "correct_answer": "would",
+    "explanation": "Third conditional in inverted form: 'Had I known, I would have helped'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "conditional",
+      "english"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D629",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — One word",
+    "difficulty": "medium",
+    "question": "A person who writes dictionaries is called —",
+    "options": [
+      "Editor",
+      "Lexicographer",
+      "Author",
+      "Librarian"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Lexicographer",
+    "explanation": "A lexicographer writes or compiles dictionaries.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "one-word"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D630",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — One word",
+    "difficulty": "medium",
+    "question": "One who is present everywhere is called —",
+    "options": [
+      "Omnipotent",
+      "Universal",
+      "Omniscient",
+      "Omnipresent"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Omnipresent",
+    "explanation": "'Omnipresent' means present everywhere.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "one-word"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D631",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — One word",
+    "difficulty": "medium",
+    "question": "Government by one person is called —",
+    "options": [
+      "Oligarchy",
+      "Monarchy",
+      "Autocracy",
+      "Democracy"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Autocracy",
+    "explanation": "'Autocracy' is government by one person with absolute power.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "one-word"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D632",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Spelling",
+    "difficulty": "easy",
+    "question": "Choose the correctly spelt word — 'restaurant'.",
+    "options": [
+      "Resturant",
+      "Restaraunt",
+      "Restaurent",
+      "Restaurant"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Restaurant",
+    "explanation": "The correct spelling is 'restaurant'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "spelling"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D633",
+    "exam_canonical": "bank",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Grammar — Spelling",
+    "difficulty": "easy",
+    "question": "Choose the correctly spelt word — 'calendar'.",
+    "options": [
+      "Calender",
+      "Calendar",
+      "Callender",
+      "Calandar"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Calendar",
+    "explanation": "The correct spelling is 'calendar'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB Class 9-10 / 11-12 English)",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "english",
+      "spelling"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-english-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

@@ -94,6 +94,15 @@ export default function BookPage() {
           {error}
         </AlertBox>
       ) : null}
+      {/* 27 Nov 2026 (landing/content, worker D spec §C): 0/609 books are
+          syllabus-verified — say so plainly until this book's fix lands
+          and it earns its own label. */}
+      <AlertBox tone="info">
+        {t({
+          bn: 'সিলেবাস যাচাই চলছে — এখনো কোনো বই সিলেবাস-যাচাইকৃত নয়। লাইব্রেরির বইগুলোর সিলেবাস যাচাই চলছে। এখনো কোনো বইকে সিলেবাস-যাচাইকৃত বলা হয় না — বইয়ের প্রশ্নগুলো অনুশীলনের জন্য ব্যবহার করুন, পরীক্ষার সিলেবাসের সঙ্গে নিজে মিলিয়ে নিন। যাচাই শেষ হলে প্রতিটি বইয়ে ‘সিলেবাস-যাচাইকৃত’ লেখা থাকবে।',
+          en: 'Syllabus review in progress — no book is syllabus-verified yet. Syllabus review of the library books is in progress. No book is labelled syllabus-verified yet — use the questions for practice and check them against your exam syllabus. Verified books will carry a ‘Syllabus-verified’ label once review is complete.',
+        })}
+      </AlertBox>
       {/* Audit m04: skeletons alone read as "not built yet" — say
           plainly that the book is loading. */}
       {book === null && !error ? (

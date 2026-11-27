@@ -63,9 +63,11 @@
 // ACAD-C8-BGS-003, ACAD-C8-BGS-005, ACAD-C8-BGS-019, ACAD-C8-BGS-020,
 // ACAD-C8-ICT-005, ACAD-C8-ICT-009, ACAD-C8-ICT-013, C8S-015,
 // C8S-029, C8S-031, C8S-033, C8S-034, ACAD-5108, ACAD-5096,
-// C910P-018, ACAD-0018, ACAD-0052, ACAD-0053, ACAD-5061, ACAD-5068,
+// ACAD-0018, ACAD-0052, ACAD-0053, ACAD-5061, ACAD-5068,
 // ACAD-3069, ACAD-8069) are NOT
-// in this pool and must never be shown to students.
+// in this pool and must never be shown to students. (C910P-018 left
+// this list 27 Nov 2026 — citation resolved, item now in the pool.
+// ACAD-5108 + ACAD-5096 stay out: teacher decision still owed.)
 
 import { PUBLIC_ACADEMIC_ENGLISH_QUESTIONS } from './publicAcademicEnglish';
 import { PUBLIC_ACADEMIC_BANGLA_QUESTIONS } from './publicAcademicBangla';
@@ -167,8 +169,8 @@ export interface PublicAcademicQuestion {
   sourceNote: string;
 }
 
-/** All verified Academic questions (Classes 3–12, thirty-five subjects), in
- *  draft order within each subject file (Class 3, then 4, then 5, then 6, then 7, then 8, then 9, then 11).
+/** All verified Academic questions (Classes 6–12, thirty-five subjects), in
+ *  draft order within each subject file (Class 6, then 7, then 8, then 9, then 11).
  *  Class 10 shares the Class 9 questions (same combined draft set) and
  *  Class 12 shares the Class 11 questions (same combined draft set) — the
  *  pool holds each question ONCE; see publicAcademicChaptersFor. */

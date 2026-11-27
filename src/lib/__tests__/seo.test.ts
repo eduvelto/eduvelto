@@ -453,17 +453,17 @@ describe('resolveRouteSeo — public routes', () => {
   it('practice hub SEO states the UNIQUE question total, not the summed rows (26 Nov 2026)', () => {
     // Class 10 shares the Class 9 pool and Class 12 shares the
     // Class 11 pool, so publicAcademicClassSubjects() repeats the same
-    // 557 + 374 questions under class-10 and class-12; summing the
-    // rows claims 2,772. The hub meta description must state the unique
-    // pool total (1,841) — the number the hub itself renders.
+    // 558 + 374 questions under class-10 and class-12; summing the
+    // rows claims 2,774. The hub meta description must state the unique
+    // pool total (1,842) — the number the hub itself renders.
     const seo = resolveRouteSeo('/learn/practice');
     expect(seo).not.toBeNull();
-    expect(seo!.description).toContain('1841টি প্রশ্ন');
-    expect(seo!.description).not.toContain('2772টি প্রশ্ন');
+    expect(seo!.description).toContain('1842টি প্রশ্ন');
+    expect(seo!.description).not.toContain('2774টি প্রশ্ন');
     const seoEn = resolveRouteSeo('/en/learn/practice', 'en');
     expect(seoEn).not.toBeNull();
-    expect(seoEn!.description).toContain('1841 questions');
-    expect(seoEn!.description).not.toContain('2772 questions');
+    expect(seoEn!.description).toContain('1842 questions');
+    expect(seoEn!.description).not.toContain('2774 questions');
   });
 
   it('every sitemap URL resolves to real SEO', () => {

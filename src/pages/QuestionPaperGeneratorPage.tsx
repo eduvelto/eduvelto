@@ -98,6 +98,7 @@ import {
   type QpgSetCode,
   type QpgStream,
 } from '../lib/questionPaper';
+import { PUBLIC_BCS_ENGLISH_QUESTIONS } from '../lib/publicBcsEnglish';
 import { qpgExercisesFor } from '../lib/qpgExercises';
 import { clearQpgDraft, loadQpgDraft, saveQpgDraft } from '../lib/questionPaperDraft';
 import { questionsForSet } from '../lib/questionPaperSets';
@@ -753,8 +754,8 @@ export default function QuestionPaperGeneratorPage() {
       sections: hasCq ? qpgSectionsForQuestions(paperQuestions) : undefined,
       isCustomVariant: false,
       kind: 'chapter-paper',
-      patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত প্রশ্ন',
-      patternLabelEn: 'Chapter-based paper — verified questions',
+      patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত অনুশীলন প্রশ্ন',
+      patternLabelEn: 'Chapter-based paper — verified practice questions',
     });
     setPaper(built);
     rememberPaperKey(built);
@@ -961,13 +962,24 @@ export default function QuestionPaperGeneratorPage() {
     setReportDetails('');
   };
 
+  // AlertBox counts are DERIVED from the verified pool, never hand-edited
+  // (landing 27 Nov 2026: the hardcoded "২,৩৫৩টি MCQ … ২,৩১৮টি একাডেমিক,
+  // Class 3–12" went stale the moment the Class 1–5 deletion landed).
+  const qpgMcqTotal = QPG_VERIFIED_POOL.filter((q) => q.type === 'mcq').length;
+  const qpgCqTotal = QPG_VERIFIED_POOL.filter((q) => q.type === 'cq').length;
+  const qpgBcsMcq = PUBLIC_BCS_ENGLISH_QUESTIONS.length;
+  const qpgAcademicMcq = qpgMcqTotal - qpgBcsMcq;
+  const toBnDigits = (n: number): string =>
+    String(n).replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]);
+
   return (
     <PageShell titleBn="প্রশ্নপত্র জেনারেটর" titleEn="Question Paper Generator" wide className="ev-qpg-theme">
       <AlertBox tone="info">
-        যাচাইকৃত প্রশ্ন: ২,৩৫৩টি MCQ (৩৫টি BCS ইংরেজি + ২,৩১৮টি একাডেমিক, Class 3–12) ও ৩৫৯টি
-        সৃজনশীল (CQ) প্রশ্ন (Class 9–12)। Class 3–8 + মাদ্রাসার বই সংগ্রহ ও যাচাই চলছে; যাচাই শেষে
-        অধ্যায়ভিত্তিক প্রশ্ন এখানে যোগ হবে। যাচাই হয়নি এমন প্রশ্ন এই জেনারেটরে কখনো দেখানো হয় না।{' '}
-        <Link to="/jobs/bcs/practice/english">যাচাইকৃত ৩৫টি BCS প্রশ্ন দেখুন</Link>
+        যাচাইকৃত অনুশীলন প্রশ্ন: {toBnDigits(qpgMcqTotal)}টি MCQ ({toBnDigits(qpgBcsMcq)}টি BCS ইংরেজি +{' '}
+        {toBnDigits(qpgAcademicMcq)}টি একাডেমিক, Class 6–12) ও {toBnDigits(qpgCqTotal)}টি সৃজনশীল (CQ) প্রশ্ন
+        (Class 9–12)। Class 6–8 + মাদ্রাসার বই সংগ্রহ ও যাচাই চলছে; যাচাই শেষে অধ্যায়ভিত্তিক প্রশ্ন এখানে
+        যোগ হবে। যাচাই হয়নি এমন প্রশ্ন এই জেনারেটরে কখনো দেখানো হয় না।{' '}
+        <Link to="/jobs/bcs/practice/english">যাচাইকৃত {toBnDigits(qpgBcsMcq)}টি BCS প্রশ্ন দেখুন</Link>
       </AlertBox>
       <p style={{ fontSize: 13, color: '#555', margin: '12px 0 4px' }}>
         ফ্রি: প্রতি মাসে {QPG_FREE_MONTHLY_LIMIT}টি পেপার (এই মাসে ব্যবহার {usage.used}/{usage.limit}

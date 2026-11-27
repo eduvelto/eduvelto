@@ -1,0 +1,1104 @@
+[
+ {
+  "id": "JOBQ-P542",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতীয় সংগীত",
+  "difficulty": "easy",
+  "question": "'চল চল চল' গানটি বাংলাদেশের কী হিসেবে পরিচিত?",
+  "options": [
+   "জাতীয় সংগীত",
+   "রণসংগীত",
+   "জাতীয় গান",
+   "দেশাত্মবোধক গান"
+  ],
+  "correct_index": 1,
+  "correct_answer": "রণসংগীত",
+  "explanation": "'চল চল চল' কাজী নজরুল ইসলামের রচনা — বাংলাদেশের রণসংগীত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "জাতীয় প্রতীক",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P544",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতীয় প্রতীক",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের জাতীয় প্রতীকের নকশা করেন কে?",
+  "options": [
+   "কামরুল হাসান",
+   "জয়নুল আবেদিন",
+   "শিব নারায়ণ দাস",
+   "হাশেম খান"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কামরুল হাসান",
+  "explanation": "বাংলাদেশের জাতীয় প্রতীকের নকশা করেন শিল্পী কামরুল হাসান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "জাতীয় প্রতীক",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P545",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংবিধান",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের সংবিধানের জনক হিসেবে কে পরিচিত?",
+  "options": [
+   "ড. কামাল হোসেন",
+   "তাজউদ্দীন আহমদ",
+   "সৈয়দ নজরুল ইসলাম",
+   "এ. এস. এম. সায়েম"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ড. কামাল হোসেন",
+  "explanation": "সংবিধান প্রণয়ন কমিটির প্রধান ড. কামাল হোসেন সংবিধানের জনক হিসেবে পরিচিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "সংবিধান"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P546",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মুক্তিযুদ্ধ",
+  "difficulty": "medium",
+  "question": "সর্বকনিষ্ঠ বীরশ্রেষ্ঠ কে?",
+  "options": [
+   "মতিউর রহমান",
+   "হামিদুর রহমান",
+   "মোস্তফা কামাল",
+   "নূর মোহাম্মদ শেখ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "হামিদুর রহমান",
+  "explanation": "সিপাহী হামিদুর রহমান সর্বকনিষ্ঠ বীরশ্রেষ্ঠ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "মুক্তিযুদ্ধ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P547",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মুক্তিযুদ্ধ",
+  "difficulty": "medium",
+  "question": "মুক্তিযুদ্ধে প্রথম শহীদ বীরশ্রেষ্ঠ কে?",
+  "options": [
+   "মোস্তফা কামাল",
+   "হামিদুর রহমান",
+   "মতিউর রহমান",
+   "রুহুল আমিন"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মোস্তফা কামাল",
+  "explanation": "সিপাহী মোস্তফা কামাল মুক্তিযুদ্ধে প্রথম শহীদ বীরশ্রেষ্ঠ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "মুক্তিযুদ্ধ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P548",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশের ইতিহাস",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম নারী পাইলট কে?",
+  "options": [
+   "কানিজ ফাতেমা রোকসানা",
+   "সৈয়দা তাহেরা",
+   "নাজমা খাতুন",
+   "ফাহমিদা হক"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কানিজ ফাতেমা রোকসানা",
+  "explanation": "কানিজ ফাতেমা রোকসানা বাংলাদেশের প্রথম নারী পাইলট।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "ইতিহাস",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P549",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "easy",
+  "question": "আয়তনের দিক থেকে বাংলাদেশের সবচেয়ে বড় বিভাগ কোনটি?",
+  "options": [
+   "ঢাকা",
+   "চট্টগ্রাম",
+   "খুলনা",
+   "রাজশাহী"
+  ],
+  "correct_index": 1,
+  "correct_answer": "চট্টগ্রাম",
+  "explanation": "আয়তনে বাংলাদেশের বৃহত্তম বিভাগ চট্টগ্রাম।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P550",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "easy",
+  "question": "পৃথিবীর বৃহত্তম উপগ্রহ কোনটি?",
+  "options": [
+   "টাইটান",
+   "গ্যানিমিড",
+   "চাঁদ",
+   "ইউরোপা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "গ্যানিমিড",
+  "explanation": "বৃহস্পতির উপগ্রহ গ্যানিমিড সৌরজগতের বৃহত্তম উপগ্রহ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P551",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের সবচেয়ে দীর্ঘ নদী কোনটি?",
+  "options": [
+   "পদ্মা",
+   "মেঘনা",
+   "যমুনা",
+   "কর্ণফুলী"
+  ],
+  "correct_index": 1,
+  "correct_answer": "মেঘনা",
+  "explanation": "বাংলাদেশের দীর্ঘতম নদী মেঘনা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P552",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "easy",
+  "question": "পৃথিবীর বৃহত্তম মরুভূমি কোনটি?",
+  "options": [
+   "গোবি মরুভূমি",
+   "সাহারা মরুভূমি",
+   "থর মরুভূমি",
+   "কালাহারি মরুভূমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সাহারা মরুভূমি",
+  "explanation": "সাহারা পৃথিবীর বৃহত্তম মরুভূমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P553",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "easy",
+  "question": "সেন্টমার্টিন দ্বীপ বাংলাদেশের কী হিসেবে পরিচিত?",
+  "options": [
+   "একমাত্র প্রবাল দ্বীপ",
+   "বৃহত্তম দ্বীপ",
+   "একমাত্র পাহাড়ি দ্বীপ",
+   "বৃহত্তম বিল"
+  ],
+  "correct_index": 0,
+  "correct_answer": "একমাত্র প্রবাল দ্বীপ",
+  "explanation": "সেন্টমার্টিন বাংলাদেশের একমাত্র প্রবাল দ্বীপ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P554",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "easy",
+  "question": "চাঁদ পৃথিবীর চারদিকে ঘুরতে কত দিন সময় নেয়?",
+  "options": [
+   "প্রায় ২৭ দিন",
+   "প্রায় ৩০ দিন",
+   "প্রায় ৩৬৫ দিন",
+   "২৪ ঘণ্টা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "প্রায় ২৭ দিন",
+  "explanation": "চাঁদ পৃথিবীর চারদিকে একবার ঘুরতে প্রায় ২৭ দিন সময় নেয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P555",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "medium",
+  "question": "বিশ্বের উষ্ণতম মহাদেশ কোনটি?",
+  "options": [
+   "এশিয়া",
+   "অস্ট্রেলিয়া",
+   "আফ্রিকা",
+   "ইউরোপ"
+  ],
+  "correct_index": 2,
+  "correct_answer": "আফ্রিকা",
+  "explanation": "আফ্রিকা বিশ্বের উষ্ণতম মহাদেশ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P556",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "medium",
+  "question": "কাপ্তাই হ্রদ বাংলাদেশের কী হিসেবে পরিচিত?",
+  "options": [
+   "বৃহত্তম প্রাকৃতিক হ্রদ",
+   "বৃহত্তম কৃত্রিম হ্রদ",
+   "গভীরতম হ্রদ",
+   "ক্ষুদ্রতম হ্রদ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বৃহত্তম কৃত্রিম হ্রদ",
+  "explanation": "কাপ্তাই হ্রদ বাংলাদেশের বৃহত্তম কৃত্রিম হ্রদ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P557",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "easy",
+  "question": "সুন্দরবনের প্রধান বৃক্ষ কোনটি?",
+  "options": [
+   "গরান",
+   "গেওয়া",
+   "সুন্দরী",
+   "কেওড়া"
+  ],
+  "correct_index": 2,
+  "correct_answer": "সুন্দরী",
+  "explanation": "সুন্দরবনের প্রধান বৃক্ষ সুন্দরী।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P558",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বন্দর",
+  "difficulty": "easy",
+  "question": "চট্টগ্রামের পর বাংলাদেশের দ্বিতীয় বৃহত্তম সমুদ্রবন্দর কোনটি?",
+  "options": [
+   "মংলা",
+   "পায়রা",
+   "কক্সবাজার",
+   "টেকনাফ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মংলা",
+  "explanation": "বাংলাদেশের দ্বিতীয় বৃহত্তম সমুদ্রবন্দর মংলা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বন্দর",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P559",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বন্দর",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের প্রথম স্থলবন্দর কোনটি?",
+  "options": [
+   "বেনাপোল",
+   "হিলি",
+   "বাংলাবান্ধা",
+   "আখাউড়া"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বেনাপোল",
+  "explanation": "বেনাপোল বাংলাদেশের প্রথম স্থলবন্দর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বন্দর",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P560",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "গণমাধ্যম",
+  "difficulty": "medium",
+  "question": "ঢাকা বেতার কেন্দ্র প্রতিষ্ঠিত হয় কত সালে?",
+  "options": [
+   "১৯৩৯",
+   "১৯৪৭",
+   "১৯৫২",
+   "১৯৬৪"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৩৯",
+  "explanation": "ঢাকা বেতার কেন্দ্র প্রতিষ্ঠিত হয় ১৯৩৯ সালে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "গণমাধ্যম",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P561",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "গণমাধ্যম",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম ইংরেজি দৈনিক সংবাদপত্র কোনটি?",
+  "options": [
+   "The Daily Star",
+   "The Bangladesh Observer",
+   "The Financial Express",
+   "New Age"
+  ],
+  "correct_index": 1,
+  "correct_answer": "The Bangladesh Observer",
+  "explanation": "The Bangladesh Observer বাংলাদেশের প্রথম ইংরেজি দৈনিক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "গণমাধ্যম",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P562",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "বর্তমানে বিশ্বের বৃহত্তম জনসংখ্যার দেশ কোনটি?",
+  "options": [
+   "চীন",
+   "ভারত",
+   "যুক্তরাষ্ট্র",
+   "ইন্দোনেশিয়া"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ভারত",
+  "explanation": "২০২৩ সাল থেকে ভারত বিশ্বের বৃহত্তম জনসংখ্যার দেশ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P563",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "জনসংখ্যায় বিশ্বের দ্বিতীয় বৃহত্তম মুসলিম দেশ কোনটি?",
+  "options": [
+   "বাংলাদেশ",
+   "পাকিস্তান",
+   "ভারত",
+   "তুরস্ক"
+  ],
+  "correct_index": 1,
+  "correct_answer": "পাকিস্তান",
+  "explanation": "জনসংখ্যায় বিশ্বের দ্বিতীয় বৃহত্তম মুসলিম দেশ পাকিস্তান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P564",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের জাতীয় পতাকার লাল বৃত্ত কী নির্দেশ করে?",
+  "options": [
+   "সবুজ প্রকৃতি",
+   "নদীমাতৃক দেশ",
+   "সোনালি ফসল",
+   "উদীয়মান সূর্য ও শহিদের রক্ত"
+  ],
+  "correct_index": 3,
+  "correct_answer": "উদীয়মান সূর্য ও শহিদের রক্ত",
+  "explanation": "পতাকার লাল বৃত্ত উদীয়মান সূর্য ও স্বাধীনতার জন্য ঝরানো রক্তের প্রতীক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P565",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মহাকাশ",
+  "difficulty": "easy",
+  "question": "পৃথিবীর একমাত্র উপগ্রহের নাম কী?",
+  "options": [
+   "চাঁদ",
+   "মঙ্গল",
+   "শুক্র",
+   "বুধ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "চাঁদ",
+  "explanation": "চাঁদ পৃথিবীর একমাত্র প্রাকৃতিক উপগ্রহ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "আন্তর্জাতিক",
+   "মহাকাশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P566",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মহাকাশ",
+  "difficulty": "medium",
+  "question": "চাঁদ থেকে পৃথিবীর দূরত্ব প্রায় কত?",
+  "options": [
+   "১,৫০,০০০ কিমি",
+   "৩,৮৪,৪০০ কিমি",
+   "৫,০০,০০০ কিমি",
+   "২,০০,০০০ কিমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩,৮৪,৪০০ কিমি",
+  "explanation": "চাঁদ থেকে পৃথিবীর গড় দূরত্ব প্রায় ৩,৮৪,৪০০ কিমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "আন্তর্জাতিক",
+   "মহাকাশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P567",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মহাকাশ",
+  "difficulty": "medium",
+  "question": "বঙ্গবন্ধু স্যাটেলাইট-১ উৎক্ষেপণ করা হয় কত তারিখে?",
+  "options": [
+   "১২ মে ২০১৮",
+   "২৫ জুন ২০২২",
+   "২৬ মার্চ ২০১৮",
+   "১৬ ডিসেম্বর ২০১৮"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১২ মে ২০১৮",
+  "explanation": "বঙ্গবন্ধু স্যাটেলাইট-১ উৎক্ষেপণ করা হয় ১২ মে ২০১৮।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "মহাকাশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P568",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "অবকাঠামো",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের প্রথম পারমাণবিক বিদ্যুৎকেন্দ্র কোনটি?",
+  "options": [
+   "রূপপুর",
+   "মাতারবাড়ী",
+   "পায়রা",
+   "রামপাল"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রূপপুর",
+  "explanation": "রূপপুর বাংলাদেশের প্রথম পারমাণবিক বিদ্যুৎকেন্দ্র।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "অবকাঠামো",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P569",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "অবকাঠামো",
+  "difficulty": "easy",
+  "question": "ঢাকায় প্রথম মেট্রোরেল চালু হয় কত তারিখে?",
+  "options": [
+   "২৮ ডিসেম্বর ২০২২",
+   "২৫ জুন ২০২২",
+   "১ জানুয়ারি ২০২৩",
+   "২৬ মার্চ ২০২২"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২৮ ডিসেম্বর ২০২২",
+  "explanation": "ঢাকা মেট্রোরেল (এমআরটি-৬) চালু হয় ২৮ ডিসেম্বর ২০২২।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "অবকাঠামো",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P570",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মুদ্রা",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের ৫ টাকার নোটে কিসের ছবি থাকে?",
+  "options": [
+   "জাতীয় স্মৃতিসৌধ",
+   "কুসুম্বা মসজিদ",
+   "আহসান মঞ্জিল",
+   "ষাট গম্বুজ মসজিদ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কুসুম্বা মসজিদ",
+  "explanation": "বাংলাদেশের ৫ টাকার নোটে কুসুম্বা মসজিদের ছবি থাকে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "বাংলাদেশ",
+   "মুদ্রা"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P571",
+  "exam_canonical": "primary",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতীয় পতাকা",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের জাতীয় পতাকার নকশা করেন কে?",
+  "options": [
+   "জয়নুল আবেদিন",
+   "কামরুল হাসান",
+   "এস এম সুলতান",
+   "কাইয়ুম চৌধুরী"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কামরুল হাসান",
+  "explanation": "বাংলাদেশের জাতীয় পতাকার নকশা করেন শিল্পী কামরুল হাসান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "general-knowledge",
+   "primary",
+   "জাতীয় প্রতীক",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-gk-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

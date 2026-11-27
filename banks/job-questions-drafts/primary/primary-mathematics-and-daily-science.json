@@ -1,0 +1,572 @@
+[
+ {
+  "id": "JOBQ-0423",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "যোগ",
+  "difficulty": "easy",
+  "question": "৭ + ৮ = কত?",
+  "options": [
+   "১৩",
+   "১৪",
+   "১৫",
+   "১৬"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৫",
+  "explanation": "৭ + ৮ = ১৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "addition",
+   "math",
+   "mathematics-daily-science",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0424",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "বিয়োগ",
+  "difficulty": "easy",
+  "question": "২০ − ৫ = কত?",
+  "options": [
+   "১০",
+   "১২",
+   "১৫",
+   "১৮"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৫",
+  "explanation": "২০ − ৫ = ১৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "math",
+   "mathematics-daily-science",
+   "primary",
+   "subtraction"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0425",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "গুণ",
+  "difficulty": "easy",
+  "question": "৬ × ৭ = কত?",
+  "options": [
+   "৩৬",
+   "৪২",
+   "৪৮",
+   "৫৪"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪২",
+  "explanation": "৬ × ৭ = ৪২।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "math",
+   "mathematics-daily-science",
+   "multiplication",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0426",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ভাগ",
+  "difficulty": "easy",
+  "question": "১০০ ÷ ৪ = কত?",
+  "options": [
+   "২০",
+   "২৫",
+   "৩০",
+   "৪০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৫",
+  "explanation": "১০০ ÷ ৪ = ২৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "division",
+   "math",
+   "mathematics-daily-science",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0427",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ভগ্নাংশ",
+  "difficulty": "easy",
+  "question": "১/২ + ১/২ = কত?",
+  "options": [
+   "১/৪",
+   "১/২",
+   "১",
+   "২"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১",
+  "explanation": "১/২ + ১/২ = ২/২ = ১।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "fraction",
+   "math",
+   "mathematics-daily-science",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0428",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "পরিসীমা",
+  "difficulty": "easy",
+  "question": "একটি বর্গক্ষেত্রের এক বাহু ৫ সেমি হলে পরিসীমা কত?",
+  "options": [
+   "১৫ সেমি",
+   "২০ সেমি",
+   "২৫ সেমি",
+   "১০ সেমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২০ সেমি",
+  "explanation": "বর্গের পরিসীমা = ৪ × বাহু = ৪ × ৫ = ২০ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "math",
+   "mathematics-daily-science",
+   "perimeter",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0429",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ক্ষেত্রফল",
+  "difficulty": "easy",
+  "question": "দৈর্ঘ্য ৬ সেমি ও প্রস্থ ৪ সেমি আয়তক্ষেত্রের ক্ষেত্রফল কত?",
+  "options": [
+   "২০ বর্গসেমি",
+   "২৪ বর্গসেমি",
+   "১০ বর্গসেমি",
+   "৩০ বর্গসেমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৪ বর্গসেমি",
+  "explanation": "ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ = ৬ × ৪ = ২৪ বর্গসেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "area",
+   "math",
+   "mathematics-daily-science",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0430",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ঘাত",
+  "difficulty": "easy",
+  "question": "২³ = কত?",
+  "options": [
+   "৬",
+   "৮",
+   "৪",
+   "৯"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৮",
+  "explanation": "২³ = ২ × ২ × ২ = ৮।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "math",
+   "mathematics-daily-science",
+   "power",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0431",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "শতকরা",
+  "difficulty": "easy",
+  "question": "৩০০-এর ১০% কত?",
+  "options": [
+   "২০",
+   "৩০",
+   "৪০",
+   "৬০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩০",
+  "explanation": "৩০০ × ১০/১০০ = ৩০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "math",
+   "mathematics-daily-science",
+   "percentage",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0432",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "সংখ্যা",
+  "difficulty": "easy",
+  "question": "১৪-এর পরের জোড় সংখ্যাটি কত?",
+  "options": [
+   "১৫",
+   "১৬",
+   "১৭",
+   "১৮"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৬",
+  "explanation": "১৪-এর পরের জোড় সংখ্যা ১৬।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "math",
+   "mathematics-daily-science",
+   "number",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0433",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "মানবদেহ",
+  "difficulty": "easy",
+  "question": "প্রাপ্তবয়স্ক মানুষের শরীরে কয়টি হাড় থাকে?",
+  "options": [
+   "১০৬টি",
+   "২০৬টি",
+   "৩০৬টি",
+   "২৫৬টি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২০৬টি",
+  "explanation": "প্রাপ্তবয়স্ক মানুষের শরীরে ২০৬টি হাড় থাকে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "human-body",
+   "mathematics-daily-science",
+   "primary",
+   "science"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0434",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "উদ্ভিদবিজ্ঞান",
+  "difficulty": "easy",
+  "question": "গাছ খাদ্য তৈরি করে কোন প্রক্রিয়ায়?",
+  "options": [
+   "সালোকসংশ্লেষণ",
+   "শ্বসন",
+   "বাষ্পীভবন",
+   "পরাগায়ণ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সালোকসংশ্লেষণ",
+  "explanation": "সবুজ উদ্ভিদ সূর্যের আলো ব্যবহার করে সালোকসংশ্লেষণ প্রক্রিয়ায় খাদ্য তৈরি করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "plants",
+   "primary",
+   "science"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0435",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "মহাকাশ",
+  "difficulty": "easy",
+  "question": "চাঁদ কী?",
+  "options": [
+   "উপগ্রহ",
+   "গ্রহ",
+   "নক্ষত্র",
+   "ধূমকেতু"
+  ],
+  "correct_index": 0,
+  "correct_answer": "উপগ্রহ",
+  "explanation": "চাঁদ পৃথিবীর একমাত্র প্রাকৃতিক উপগ্রহ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "science",
+   "space"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0436",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "তাপমাত্রা",
+  "difficulty": "easy",
+  "question": "স্বাভাবিক চাপে পানি কত ডিগ্রি সেলসিয়াসে ফোটে?",
+  "options": [
+   "৯০°",
+   "১০০°",
+   "৮০°",
+   "১২০°"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১০০°",
+  "explanation": "স্বাভাবিক বায়ুমণ্ডলীয় চাপে পানি ১০০° সেলসিয়াসে ফোটে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "physics",
+   "primary",
+   "science"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0437",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "পুষ্টি",
+  "difficulty": "easy",
+  "question": "কোন ভিটামিনের অভাবে রাতকানা রোগ হয়?",
+  "options": [
+   "ভিটামিন এ",
+   "ভিটামিন বি",
+   "ভিটামিন সি",
+   "ভিটামিন ডি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ভিটামিন এ",
+  "explanation": "ভিটামিন এ-এর অভাবে রাতকানা রোগ হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 General Mathematics and General Science (NCTB) — standard facts",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "science",
+   "vitamins"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-mathematics-and-daily-science.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

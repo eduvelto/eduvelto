@@ -1,0 +1,382 @@
+[
+ {
+  "id": "JOBQ-0353",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "She ___ a letter yesterday.",
+  "options": [
+   "write",
+   "writes",
+   "wrote",
+   "written"
+  ],
+  "correct_index": 2,
+  "correct_answer": "wrote",
+  "explanation": "With 'yesterday', past simple 'wrote' is needed.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "tense"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0354",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "I prefer tea ___ coffee.",
+  "options": [
+   "to",
+   "than",
+   "from",
+   "over"
+  ],
+  "correct_index": 0,
+  "correct_answer": "to",
+  "explanation": "'Prefer ... to ...' is the correct construction.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "preposition"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0355",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Rapid' is —",
+  "options": [
+   "Slow",
+   "Fast",
+   "Late",
+   "Weak"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Fast",
+  "explanation": "'Rapid' means fast.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "english",
+   "ministries",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0356",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Honest' is —",
+  "options": [
+   "Dishonest",
+   "Truthful",
+   "Sincere",
+   "Loyal"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Dishonest",
+  "explanation": "'Honest' means truthful; its opposite is 'dishonest'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "antonym",
+   "english",
+   "ministries",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0357",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "'At sixes and sevens' means —",
+  "options": [
+   "In confusion",
+   "In agreement",
+   "In a hurry",
+   "In danger"
+  ],
+  "correct_index": 0,
+  "correct_answer": "In confusion",
+  "explanation": "The idiom 'at sixes and sevens' means in a state of confusion or disorder.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "english",
+   "idiom",
+   "ministries",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0358",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "easy",
+  "question": "Select the correctly spelt word.",
+  "options": [
+   "Neccessary",
+   "Necessary",
+   "Necesary",
+   "Neccesary"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Necessary",
+  "explanation": "'Necessary' is the correct spelling.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "english",
+   "ministries",
+   "spelling",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0359",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Voice",
+  "difficulty": "medium",
+  "question": "Choose the passive form of: 'He gave me a pen.'",
+  "options": [
+   "A pen was given to me by him.",
+   "A pen is given to me by him.",
+   "A pen has been given to me by him.",
+   "A pen gave to me by him."
+  ],
+  "correct_index": 0,
+  "correct_answer": "A pen was given to me by him.",
+  "explanation": "Past simple active becomes past simple passive: 'was given'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "voice"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0360",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Narration",
+  "difficulty": "medium",
+  "question": "He said, 'I will come.' The indirect speech is —",
+  "options": [
+   "He said that he would come.",
+   "He said that he will come.",
+   "He said that I would come.",
+   "He said that he shall come."
+  ],
+  "correct_index": 0,
+  "correct_answer": "He said that he would come.",
+  "explanation": "'Will' shifts to 'would' in indirect speech.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "narration"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0361",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "easy",
+  "question": "Give me ___ umbrella.",
+  "options": [
+   "a",
+   "an",
+   "the",
+   "no article"
+  ],
+  "correct_index": 1,
+  "correct_answer": "an",
+  "explanation": "'Umbrella' begins with a vowel sound, so 'an' is used.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "article",
+   "english",
+   "grammar",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0362",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Plural number",
+  "difficulty": "easy",
+  "question": "What is the plural form of 'Woman'?",
+  "options": [
+   "Womans",
+   "Women",
+   "Womens",
+   "Womanses"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Women",
+  "explanation": "The plural of 'woman' is 'women'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department recruitment circulars (per-post) — common pattern DGFood Office Assistant-cum-Computer Typist (notice 20 Sep 2025): MCQ 100 (Bangla 30, English 30, Math 20, GK 20) + viva 10; 90 min",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "number"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

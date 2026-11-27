@@ -1005,15 +1005,17 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/question-maker': {
     title: 'প্রশ্নপত্র তৈরি করুন — ফ্রি প্রশ্নপত্র জেনারেটর | Eduvelto',
     description:
-      // (164 chars before — the wave-12 length test caps descriptions
-      // at 160; 'সম্পূর্ণ ' dropped, meaning unchanged.)
-      'অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরি করুন — সাধারণ (NCTB), মাদ্রাসা ও চাকরি-ভর্তি কোচিং। শুধু যাচাইকৃত প্রশ্ন দিয়ে, বিনামূল্যে (প্রতি মাসে ৩টি পেপার)। Eduvelto।',
+      // (157 chars — the wave-12 length test caps descriptions at 160;
+      // rescope 27 Nov 2026: 'যাচাইকৃত প্রশ্ন' -> 'যাচাইকৃত অনুশীলন
+      // প্রশ্ন', 'প্রতি মাসে' -> 'মাসে' to stay under the cap.)
+      'অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরি করুন — সাধারণ (NCTB), মাদ্রাসা ও চাকরি-ভর্তি কোচিং। শুধু যাচাইকৃত অনুশীলন প্রশ্ন দিয়ে, বিনামূল্যে (মাসে ৩টি পেপার)। Eduvelto।',
     crumb: 'প্রশ্নপত্র তৈরি',
     titleEn: 'Make Question Papers — Free Generator | Eduvelto',
     descriptionEn:
-      // (163 chars before — the wave-12 length test caps descriptions
-      // at 160; 'completely ' dropped, meaning unchanged.)
-      'Create chapter-based question papers — General (NCTB), Madrasah, and Job & Admission Coaching. Verified questions only, free (3 papers/month). Eduvelto.',
+      // (157 chars — rescope 27 Nov 2026: 'Verified questions only' ->
+      // 'Verified practice questions only', 'and ' dropped before 'Job'
+      // to stay under the 160 cap.)
+      'Create chapter-based question papers — General (NCTB), Madrasah, Job & Admission Coaching. Verified practice questions only, free (3 papers/month). Eduvelto.',
     crumbEn: 'Question Maker',
   },
   '/question-paper-generator': {
@@ -1021,13 +1023,13 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     // 'প্রশ্নপত্র বানান' dropped, meaning unchanged.
     title: 'প্রশ্নপত্র জেনারেটর — অধ্যায়ভিত্তিক | Eduvelto',
     description:
-      'শ্রেণি → বিষয় → অধ্যায় বেছে প্রশ্নপত্র বানান — যাচাইকৃত প্রশ্ন দিয়ে। ফ্রি ৩টি পেপার/মাস, জলছাপসহ PDF ডাউনলোড। Eduvelto।',
+      'শ্রেণি → বিষয় → অধ্যায় বেছে প্রশ্নপত্র বানান — যাচাইকৃত অনুশীলন প্রশ্ন দিয়ে। ফ্রি ৩টি পেপার/মাস, জলছাপসহ PDF ডাউনলোড। Eduvelto।',
     crumb: 'জেনারেটর',
     // EN title was 64 chars (wave-12 caps titles at 60); 'Build'
     // dropped, meaning unchanged.
     titleEn: 'Question Paper Generator — Chapter-Based Papers | Eduvelto',
     descriptionEn:
-      'Pick class → subject → chapter and build a question paper — verified questions only. Free 3 papers/month, watermarked PDF download. Eduvelto.',
+      'Pick class → subject → chapter and build a question paper — verified practice questions only. Free 3 papers/month, watermarked PDF download. Eduvelto.',
     crumbEn: 'Generator',
   },
   // Pricing (PRICING FINAL, owner 25 Nov 09:34) + OMR evaluator (Turn 32).
@@ -2231,15 +2233,15 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         // Grand total = UNIQUE questions. Do NOT sum
         // publicAcademicClassSubjects() rows: Class 10 shares the
         // Class 9 pool and Class 12 shares the Class 11 pool, so
-        // their rows repeat the same 557 + 374 questions and
-        // a sum would claim 3,249 instead of 2,318.
+        // their rows repeat the same 558 + 374 questions and
+        // a sum would claim 2,774 instead of 1,842.
         const total = PUBLIC_ACADEMIC_QUESTIONS.length;
         entry = {
           title: 'অধ্যায়ভিত্তিক অনুশীলন — যাচাইকৃত প্রশ্ন | Eduvelto',
-          description: `NCTB পাঠের যাচাইকৃত প্রশ্ন দিয়ে অধ্যায়ভিত্তিক অনুশীলন — ${total}টি প্রশ্ন। উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
+          description: `NCTB পাঠের যাচাইকৃত অনুশীলন প্রশ্ন দিয়ে অধ্যায়ভিত্তিক অনুশীলন — ${total}টি প্রশ্ন। উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
           crumb: 'অনুশীলন',
           titleEn: 'Chapter-wise Practice — Verified Questions | Eduvelto',
-          descriptionEn: `Chapter-wise practice with verified NCTB questions — ${total} questions. See the correct answer and explanation as soon as you answer. Completely free. Eduvelto.`,
+          descriptionEn: `Chapter-wise practice with verified NCTB practice questions — ${total} questions. See the correct answer and explanation as soon as you answer. Completely free. Eduvelto.`,
           crumbEn: 'Practice',
         };
         crumbs =
@@ -2257,10 +2259,10 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         if (!chapterId) {
           entry = {
             title: `${classBn} ${subjBn} অনুশীলন — ${chapters.length}টি অধ্যায়, ${total}টি যাচাইকৃত প্রশ্ন | Eduvelto`,
-            description: `${classBn} ${subjBn} — ${chapters.length}টি অধ্যায়ে মোট ${total}টি যাচাইকৃত প্রশ্ন। অধ্যায় বেছে নিন, উত্তর দিন, সাথে সাথে সঠিক উত্তর ও ব্যাখ্যা দেখুন। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
+            description: `${classBn} ${subjBn} — ${chapters.length}টি অধ্যায়ে মোট ${total}টি যাচাইকৃত অনুশীলন প্রশ্ন। অধ্যায় বেছে নিন, উত্তর দিন, সাথে সাথে সঠিক উত্তর ও ব্যাখ্যা দেখুন। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
             crumb: `${classBn} ${subjBn}`,
             titleEn: `${classEn} ${subjEn} Practice — ${chapters.length} chapters, ${total} verified questions | Eduvelto`,
-            descriptionEn: `${classEn} ${subjEn} — ${total} verified questions across ${chapters.length} chapters. Pick a chapter, answer, and see the correct answer and explanation right away. Completely free. Eduvelto.`,
+            descriptionEn: `${classEn} ${subjEn} — ${total} verified practice questions across ${chapters.length} chapters. Pick a chapter, answer, and see the correct answer and explanation right away. Completely free. Eduvelto.`,
             crumbEn: `${classEn} ${subjEn}`,
           };
           crumbs =
@@ -2272,10 +2274,10 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
           if (!ch) return null;
           entry = {
             title: `${ch.name} — অনুশীলন (${ch.questionCount}টি প্রশ্ন) | Eduvelto`,
-            description: `${classBn} ${subjBn} — ${ch.name}: ${ch.questionCount}টি যাচাইকৃত প্রশ্ন। উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
+            description: `${classBn} ${subjBn} — ${ch.name}: ${ch.questionCount}টি যাচাইকৃত অনুশীলন প্রশ্ন। উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
             crumb: ch.name,
             titleEn: `${ch.name} — Practice (${ch.questionCount} questions) | Eduvelto`,
-            descriptionEn: `${classEn} ${subjEn} — ${ch.name}: ${ch.questionCount} verified questions. See the correct answer and explanation as soon as you answer. Completely free. Eduvelto.`,
+            descriptionEn: `${classEn} ${subjEn} — ${ch.name}: ${ch.questionCount} verified practice questions. See the correct answer and explanation as soon as you answer. Completely free. Eduvelto.`,
             crumbEn: ch.name,
           };
           crumbs =

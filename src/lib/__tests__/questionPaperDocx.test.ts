@@ -68,8 +68,8 @@ async function documentXml(includeAnswerKey: boolean): Promise<string> {
     questions: QPG_VERIFIED_POOL.slice(0, 10),
     isCustomVariant: false,
     kind: 'chapter-paper',
-    patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত প্রশ্ন',
-    patternLabelEn: 'Chapter-based paper — verified questions',
+    patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত অনুশীলন প্রশ্ন',
+    patternLabelEn: 'Chapter-based paper — verified practice questions',
   });
   const doc = await buildPaperDocxDocument(paper, {
     proUnlocked: true,

@@ -1,0 +1,761 @@
+[
+ {
+  "id": "JOBQ-0216",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "I ___ a student.",
+  "options": [
+   "am",
+   "is",
+   "are",
+   "was"
+  ],
+  "correct_index": 0,
+  "correct_answer": "am",
+  "explanation": "With 'I', the verb 'be' is 'am'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "tense"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0217",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "They ___ cricket yesterday.",
+  "options": [
+   "play",
+   "plays",
+   "played",
+   "playing"
+  ],
+  "correct_index": 2,
+  "correct_answer": "played",
+  "explanation": "With 'yesterday', past simple 'played' is needed.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "tense"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0218",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "She has ___ to Dhaka.",
+  "options": [
+   "go",
+   "goes",
+   "gone",
+   "went"
+  ],
+  "correct_index": 2,
+  "correct_answer": "gone",
+  "explanation": "After 'has', the past participle 'gone' is used.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "tense"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0219",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "He was born ___ Dhaka.",
+  "options": [
+   "in",
+   "at",
+   "on",
+   "to"
+  ],
+  "correct_index": 0,
+  "correct_answer": "in",
+  "explanation": "'Born in' is used for cities and countries.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "preposition"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0220",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "easy",
+  "question": "___ earth moves round the sun.",
+  "options": [
+   "A",
+   "An",
+   "The",
+   "No article"
+  ],
+  "correct_index": 2,
+  "correct_answer": "The",
+  "explanation": "'The earth' is a unique object, so 'the' is used.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "article",
+   "english",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0221",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Kind' is —",
+  "options": [
+   "Cruel",
+   "Generous",
+   "Rude",
+   "Harsh"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Generous",
+  "explanation": "'Kind' means generous and caring.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0222",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Love' is —",
+  "options": [
+   "Hate",
+   "Like",
+   "Adore",
+   "Fondness"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Hate",
+  "explanation": "'Love' is the opposite of 'hate'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "antonym",
+   "english",
+   "grade11-20",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0223",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms and phrases",
+  "difficulty": "medium",
+  "question": "'By leaps and bounds' means —",
+  "options": [
+   "Very rapidly",
+   "Slowly",
+   "Carefully",
+   "Secretly"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Very rapidly",
+  "explanation": "The idiom 'by leaps and bounds' means very rapidly or with great progress.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "idiom",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0224",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "Find the correctly spelt word.",
+  "options": [
+   "Accomodation",
+   "Accommodation",
+   "Acommodation",
+   "Accomodetion"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Accommodation",
+  "explanation": "'Accommodation' is the correct spelling (double 'c', double 'm').",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "spelling",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0225",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Voice",
+  "difficulty": "easy",
+  "question": "Choose the passive form of: 'Rina sings a song.'",
+  "options": [
+   "A song is sung by Rina.",
+   "A song was sung by Rina.",
+   "A song has been sung by Rina.",
+   "A song is being sung by Rina."
+  ],
+  "correct_index": 0,
+  "correct_answer": "A song is sung by Rina.",
+  "explanation": "Present simple active becomes present simple passive: 'is sung'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "voice"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0226",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Narration",
+  "difficulty": "medium",
+  "question": "He said, 'I am happy.' The indirect speech is —",
+  "options": [
+   "He said that he was happy.",
+   "He said that he is happy.",
+   "He said that I was happy.",
+   "He said that he had been happy."
+  ],
+  "correct_index": 0,
+  "correct_answer": "He said that he was happy.",
+  "explanation": "Present simple shifts to past simple in indirect speech: 'was happy'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "narration"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0227",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Plural number",
+  "difficulty": "easy",
+  "question": "What is the plural form of 'Foot'?",
+  "options": [
+   "Foots",
+   "Feet",
+   "Footes",
+   "Feets"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Feet",
+  "explanation": "The plural of 'foot' is 'feet'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "number"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0228",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Gender",
+  "difficulty": "easy",
+  "question": "What is the feminine form of 'Hero'?",
+  "options": [
+   "Heroine",
+   "Heroess",
+   "Heroa",
+   "Lady hero"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Heroine",
+  "explanation": "The feminine form of 'hero' is 'heroine'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "gender",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0229",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Comparative degree",
+  "difficulty": "easy",
+  "question": "She is the ___ girl in the class. (tall)",
+  "options": [
+   "taller",
+   "tallest",
+   "tall",
+   "more tall"
+  ],
+  "correct_index": 1,
+  "correct_answer": "tallest",
+  "explanation": "With 'the' and a group ('in the class'), the superlative 'tallest' is used.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "degree",
+   "english",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0230",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Translation",
+  "difficulty": "easy",
+  "question": "Choose the correct English of: 'আমি ভাত খাই।'",
+  "options": [
+   "I eat rice.",
+   "I eats rice.",
+   "I eating rice.",
+   "I ate rice."
+  ],
+  "correct_index": 0,
+  "correct_answer": "I eat rice.",
+  "explanation": "'I eat rice' is the correct present-simple translation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "translation"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0231",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Correct sentence",
+  "difficulty": "medium",
+  "question": "Choose the correct sentence.",
+  "options": [
+   "He is senior to me.",
+   "He is senior than me.",
+   "He is senior from me.",
+   "He is more senior than me."
+  ],
+  "correct_index": 0,
+  "correct_answer": "He is senior to me.",
+  "explanation": "'Senior to' is the correct usage (senior is followed by 'to', not 'than').",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "correction",
+   "english",
+   "grade11-20",
+   "grammar"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0232",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "Success depends ___ hard work.",
+  "options": [
+   "on",
+   "in",
+   "at",
+   "for"
+  ],
+  "correct_index": 0,
+  "correct_answer": "on",
+  "explanation": "'Depend on' is the correct collocation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "preposition"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0233",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "One who writes books is called a/an —",
+  "options": [
+   "Author",
+   "Poet",
+   "Reader",
+   "Editor"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Author",
+  "explanation": "An author is a person who writes books.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "one-word",
+   "vocabulary"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0234",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English literature",
+  "difficulty": "easy",
+  "question": "Who wrote 'Romeo and Juliet'?",
+  "options": [
+   "William Shakespeare",
+   "Charles Dickens",
+   "John Milton",
+   "Jane Austen"
+  ],
+  "correct_index": 0,
+  "correct_answer": "William Shakespeare",
+  "explanation": "'Romeo and Juliet' is a tragedy by William Shakespeare.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "literature"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0235",
+  "exam_canonical": "grade11-20",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "The book is ___ the table.",
+  "options": [
+   "on",
+   "in",
+   "at",
+   "by"
+  ],
+  "correct_index": 0,
+  "correct_answer": "on",
+  "explanation": "'On the table' is the correct phrase for something resting on a surface.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+  "tags": [
+   "english",
+   "grade11-20",
+   "grammar",
+   "preposition"
+  ],
+  "source_stream": "grade11-20",
+  "source_file": "grade11-20/grade11-20-english.json",
+  "applies_to": [
+   "grade11-20"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

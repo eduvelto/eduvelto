@@ -1,0 +1,2282 @@
+[
+ {
+  "id": "JOBQ-I441",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What does CPU stand for?",
+  "options": [
+   "Central Program Unit",
+   "Computer Processing Unit",
+   "Central Processing Unit",
+   "Central Processor Utility"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Central Processing Unit",
+  "explanation": "CPU stands for Central Processing Unit.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I442",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What does RAM stand for?",
+  "options": [
+   "Rapid Access Memory",
+   "Random Access Memory",
+   "Read Access Memory",
+   "Remote Access Memory"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Random Access Memory",
+  "explanation": "RAM stands for Random Access Memory; it is volatile memory.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I443",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What does ROM stand for?",
+  "options": [
+   "Random Only Memory",
+   "Read Open Memory",
+   "Read Only Memory",
+   "Rapid Only Memory"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Read Only Memory",
+  "explanation": "ROM stands for Read Only Memory; it is non-volatile.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I444",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "How many bits are there in one byte?",
+  "options": [
+   "16",
+   "4",
+   "32",
+   "8"
+  ],
+  "correct_index": 3,
+  "correct_answer": "8",
+  "explanation": "One byte consists of 8 bits.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I445",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "How many bytes are there in one kilobyte (KB)?",
+  "options": [
+   "1000",
+   "2048",
+   "1024",
+   "512"
+  ],
+  "correct_index": 2,
+  "correct_answer": "1024",
+  "explanation": "One kilobyte equals 1024 bytes.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I446",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "Which of the following is an input device?",
+  "options": [
+   "Printer",
+   "Monitor",
+   "Speaker",
+   "Keyboard"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Keyboard",
+  "explanation": "A keyboard is an input device; monitor, printer and speaker are output devices.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I447",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "Which of the following is an output device?",
+  "options": [
+   "Monitor",
+   "Scanner",
+   "Keyboard",
+   "Mouse"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Monitor",
+  "explanation": "A monitor is an output device.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I448",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What does WWW stand for?",
+  "options": [
+   "Web World Wide",
+   "World Wide Web",
+   "World Web Wide",
+   "Wide World Web"
+  ],
+  "correct_index": 1,
+  "correct_answer": "World Wide Web",
+  "explanation": "WWW stands for World Wide Web.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I449",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What does HTTP stand for?",
+  "options": [
+   "High Text Transfer Protocol",
+   "HyperText Transfer Protocol",
+   "High Transfer Text Protocol",
+   "Hyper Transfer Text Program"
+  ],
+  "correct_index": 1,
+  "correct_answer": "HyperText Transfer Protocol",
+  "explanation": "HTTP stands for HyperText Transfer Protocol.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I450",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What does HTML stand for?",
+  "options": [
+   "Hyperlink Text Markup Language",
+   "HyperText Machine Language",
+   "HyperText Markup Language",
+   "HighText Machine Language"
+  ],
+  "correct_index": 2,
+  "correct_answer": "HyperText Markup Language",
+  "explanation": "HTML stands for HyperText Markup Language.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I451",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What does URL stand for?",
+  "options": [
+   "Universal Reference Locator",
+   "Uniform Resource Locator",
+   "Universal Resource Link",
+   "Uniform Record Locator"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Uniform Resource Locator",
+  "explanation": "URL stands for Uniform Resource Locator.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I452",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "Who is known as the father of the computer?",
+  "options": [
+   "Alan Turing",
+   "John von Neumann",
+   "Charles Babbage",
+   "Bill Gates"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Charles Babbage",
+  "explanation": "Charles Babbage is known as the father of the computer.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I453",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "Who invented the World Wide Web?",
+  "options": [
+   "Bill Gates",
+   "Tim Berners-Lee",
+   "Steve Jobs",
+   "Mark Zuckerberg"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Tim Berners-Lee",
+  "explanation": "Tim Berners-Lee invented the World Wide Web.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I454",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "Which of the following is a binary digit?",
+  "options": [
+   "0 and 1",
+   "0 and 2",
+   "0 and 9",
+   "1 and 2"
+  ],
+  "correct_index": 0,
+  "correct_answer": "0 and 1",
+  "explanation": "Binary digits are 0 and 1.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I455",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What is the full form of ICT?",
+  "options": [
+   "Information and Common Technology",
+   "Information and Communication Technology",
+   "Information and Computer Technology",
+   "Internet and Communication Technology"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Information and Communication Technology",
+  "explanation": "ICT stands for Information and Communication Technology.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I456",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "Which of the following is an operating system?",
+  "options": [
+   "Microsoft Word",
+   "Google Chrome",
+   "Windows",
+   "Adobe Photoshop"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Windows",
+  "explanation": "Windows is an operating system; the others are applications.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I457",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What is a firewall used for?",
+  "options": [
+   "Storing data",
+   "Printing documents",
+   "Increasing internet speed",
+   "Protecting a network from unauthorized access"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Protecting a network from unauthorized access",
+  "explanation": "A firewall protects a network from unauthorized access.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I458",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What is phishing?",
+  "options": [
+   "A method of speeding up a computer",
+   "A type of computer virus",
+   "A fraud attempt to steal sensitive information by pretending to be trustworthy",
+   "A way to back up data"
+  ],
+  "correct_index": 2,
+  "correct_answer": "A fraud attempt to steal sensitive information by pretending to be trustworthy",
+  "explanation": "Phishing is a fraud that tricks people into revealing passwords or bank details.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I459",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What is the full form of AI?",
+  "options": [
+   "Artificial Intelligence",
+   "Automatic Intelligence",
+   "Advanced Internet",
+   "Applied Intelligence"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Artificial Intelligence",
+  "explanation": "AI stands for Artificial Intelligence.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I460",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "Which device is used to connect a computer to the internet over a telephone line?",
+  "options": [
+   "Scanner",
+   "Modem",
+   "Speaker",
+   "Printer"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Modem",
+  "explanation": "A modem connects a computer to the internet over a telephone line.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I461",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What does LAN stand for?",
+  "options": [
+   "Long Area Network",
+   "Local Access Network",
+   "Local Area Network",
+   "Large Area Network"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Local Area Network",
+  "explanation": "LAN stands for Local Area Network.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I462",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What does WAN stand for?",
+  "options": [
+   "Wide Access Network",
+   "Wide Area Network",
+   "World Area Network",
+   "Wireless Area Network"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Wide Area Network",
+  "explanation": "WAN stands for Wide Area Network.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I463",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What is email?",
+  "options": [
+   "A computer program for typing",
+   "A type of letter posted by air",
+   "A website for shopping",
+   "Electronic mail sent over a network"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Electronic mail sent over a network",
+  "explanation": "Email is electronic mail sent over a computer network.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I464",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "Which symbol is used in every email address?",
+  "options": [
+   "#",
+   "%",
+   "@",
+   "$"
+  ],
+  "correct_index": 2,
+  "correct_answer": "@",
+  "explanation": "Every email address contains the @ symbol.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I465",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT",
+  "difficulty": "easy",
+  "question": "What is the first computer in the world generally called?",
+  "options": [
+   "ENIAC",
+   "UNIVAC",
+   "IBM PC",
+   "EDVAC"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ENIAC",
+  "explanation": "ENIAC is generally regarded as the first general-purpose electronic computer.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "gk",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I466",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 36, 49, 64, ?",
+  "options": [
+   "71",
+   "91",
+   "76",
+   "81"
+  ],
+  "correct_index": 3,
+  "correct_answer": "81",
+  "explanation": "The terms are squares of 6, 7, 8; the next is 9² = 81.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I467",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Odd one out",
+  "difficulty": "easy",
+  "question": "Find the odd one out: 11, 16, 22, 18.",
+  "options": [
+   "11",
+   "16",
+   "22",
+   "18"
+  ],
+  "correct_index": 0,
+  "correct_answer": "11",
+  "explanation": "11 is odd, while the others are even numbers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I468",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Coding",
+  "difficulty": "easy",
+  "question": "If A = 1, B = 2, C = 3 and so on, what is the value of 'C'?",
+  "options": [
+   "1",
+   "3",
+   "6",
+   "5"
+  ],
+  "correct_index": 1,
+  "correct_answer": "3",
+  "explanation": "'C' is the 3th letter of the alphabet.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "coding"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I469",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 8, 16, 32, 64, ?",
+  "options": [
+   "112",
+   "144",
+   "120",
+   "128"
+  ],
+  "correct_index": 3,
+  "correct_answer": "128",
+  "explanation": "Each term is double the previous one, so the next term is 64 × 2 = 128.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I470",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 11, 14, 17, 20, ?",
+  "options": [
+   "23",
+   "20",
+   "21",
+   "29"
+  ],
+  "correct_index": 0,
+  "correct_answer": "23",
+  "explanation": "Each term increases by 3, so the next term is 20 + 3 = 23.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I471",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 9, 16, 25, ?",
+  "options": [
+   "51",
+   "46",
+   "36",
+   "31"
+  ],
+  "correct_index": 2,
+  "correct_answer": "36",
+  "explanation": "The terms are squares of 3, 4, 5; the next is 6² = 36.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I472",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Odd one out",
+  "difficulty": "easy",
+  "question": "Find the odd one out: 10, 25, 8, 14.",
+  "options": [
+   "10",
+   "25",
+   "8",
+   "14"
+  ],
+  "correct_index": 1,
+  "correct_answer": "25",
+  "explanation": "25 is odd, while the others are even numbers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I473",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Coding",
+  "difficulty": "easy",
+  "question": "If A = 1, B = 2, C = 3 and so on, what is the value of 'U'?",
+  "options": [
+   "23",
+   "21",
+   "16",
+   "24"
+  ],
+  "correct_index": 1,
+  "correct_answer": "21",
+  "explanation": "'U' is the 21th letter of the alphabet.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "coding"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I474",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 7, 14, 28, 56, ?",
+  "options": [
+   "112",
+   "144",
+   "96",
+   "104"
+  ],
+  "correct_index": 0,
+  "correct_answer": "112",
+  "explanation": "Each term is double the previous one, so the next term is 56 × 2 = 112.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I475",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 8, 13, 18, 23, ?",
+  "options": [
+   "23",
+   "38",
+   "28",
+   "26"
+  ],
+  "correct_index": 2,
+  "correct_answer": "28",
+  "explanation": "Each term increases by 5, so the next term is 23 + 5 = 28.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I476",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 25, 36, 49, ?",
+  "options": [
+   "59",
+   "64",
+   "69",
+   "79"
+  ],
+  "correct_index": 1,
+  "correct_answer": "64",
+  "explanation": "The terms are squares of 5, 6, 7; the next is 8² = 64.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I477",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Odd one out",
+  "difficulty": "easy",
+  "question": "Find the odd one out: 14, 3, 2, 24.",
+  "options": [
+   "14",
+   "3",
+   "2",
+   "24"
+  ],
+  "correct_index": 1,
+  "correct_answer": "3",
+  "explanation": "3 is odd, while the others are even numbers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I478",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Coding",
+  "difficulty": "easy",
+  "question": "If A = 1, B = 2, C = 3 and so on, what is the value of 'P'?",
+  "options": [
+   "18",
+   "21",
+   "14",
+   "16"
+  ],
+  "correct_index": 3,
+  "correct_answer": "16",
+  "explanation": "'P' is the 16th letter of the alphabet.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "coding"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I479",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 5, 10, 20, 40, ?",
+  "options": [
+   "96",
+   "80",
+   "72",
+   "88"
+  ],
+  "correct_index": 1,
+  "correct_answer": "80",
+  "explanation": "Each term is double the previous one, so the next term is 40 × 2 = 80.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I480",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 2, 11, 20, 29, ?",
+  "options": [
+   "47",
+   "56",
+   "40",
+   "38"
+  ],
+  "correct_index": 3,
+  "correct_answer": "38",
+  "explanation": "Each term increases by 9, so the next term is 29 + 9 = 38.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I481",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Odd one out",
+  "difficulty": "easy",
+  "question": "Find the odd one out: 11, 18, 24, 6.",
+  "options": [
+   "11",
+   "18",
+   "24",
+   "6"
+  ],
+  "correct_index": 0,
+  "correct_answer": "11",
+  "explanation": "11 is odd, while the others are even numbers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I482",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Coding",
+  "difficulty": "easy",
+  "question": "If A = 1, B = 2, C = 3 and so on, what is the value of 'W'?",
+  "options": [
+   "25",
+   "23",
+   "28",
+   "18"
+  ],
+  "correct_index": 1,
+  "correct_answer": "23",
+  "explanation": "'W' is the 23th letter of the alphabet.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "coding"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I483",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 9, 18, 27, 36, ?",
+  "options": [
+   "45",
+   "47",
+   "43",
+   "63"
+  ],
+  "correct_index": 0,
+  "correct_answer": "45",
+  "explanation": "Each term increases by 9, so the next term is 36 + 9 = 45.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I484",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Odd one out",
+  "difficulty": "easy",
+  "question": "Find the odd one out: 14, 4, 22, 9.",
+  "options": [
+   "14",
+   "4",
+   "22",
+   "9"
+  ],
+  "correct_index": 3,
+  "correct_answer": "9",
+  "explanation": "9 is odd, while the others are even numbers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I485",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 6, 12, 24, 48, ?",
+  "options": [
+   "112",
+   "96",
+   "80",
+   "88"
+  ],
+  "correct_index": 1,
+  "correct_answer": "96",
+  "explanation": "Each term is double the previous one, so the next term is 48 × 2 = 96.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I486",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 9, 13, 17, 21, ?",
+  "options": [
+   "21",
+   "25",
+   "33",
+   "29"
+  ],
+  "correct_index": 1,
+  "correct_answer": "25",
+  "explanation": "Each term increases by 4, so the next term is 21 + 4 = 25.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I487",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Odd one out",
+  "difficulty": "easy",
+  "question": "Find the odd one out: 21, 24, 4, 10.",
+  "options": [
+   "21",
+   "24",
+   "4",
+   "10"
+  ],
+  "correct_index": 0,
+  "correct_answer": "21",
+  "explanation": "21 is odd, while the others are even numbers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I488",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Coding",
+  "difficulty": "easy",
+  "question": "If A = 1, B = 2, C = 3 and so on, what is the value of 'M'?",
+  "options": [
+   "15",
+   "11",
+   "8",
+   "13"
+  ],
+  "correct_index": 3,
+  "correct_answer": "13",
+  "explanation": "'M' is the 13th letter of the alphabet.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "coding"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I489",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 4, 8, 16, 32, ?",
+  "options": [
+   "64",
+   "56",
+   "80",
+   "72"
+  ],
+  "correct_index": 0,
+  "correct_answer": "64",
+  "explanation": "Each term is double the previous one, so the next term is 32 × 2 = 64.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I490",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 5, 9, 13, 17, ?",
+  "options": [
+   "25",
+   "29",
+   "19",
+   "21"
+  ],
+  "correct_index": 3,
+  "correct_answer": "21",
+  "explanation": "Each term increases by 4, so the next term is 17 + 4 = 21.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I491",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Odd one out",
+  "difficulty": "easy",
+  "question": "Find the odd one out: 15, 16, 4, 24.",
+  "options": [
+   "15",
+   "16",
+   "4",
+   "24"
+  ],
+  "correct_index": 0,
+  "correct_answer": "15",
+  "explanation": "15 is odd, while the others are even numbers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I492",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Coding",
+  "difficulty": "easy",
+  "question": "If A = 1, B = 2, C = 3 and so on, what is the value of 'I'?",
+  "options": [
+   "14",
+   "9",
+   "11",
+   "7"
+  ],
+  "correct_index": 1,
+  "correct_answer": "9",
+  "explanation": "'I' is the 9th letter of the alphabet.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "coding"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I493",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 8, 14, 20, 26, ?",
+  "options": [
+   "38",
+   "44",
+   "32",
+   "34"
+  ],
+  "correct_index": 2,
+  "correct_answer": "32",
+  "explanation": "Each term increases by 6, so the next term is 26 + 6 = 32.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I494",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 16, 25, 36, ?",
+  "options": [
+   "49",
+   "44",
+   "54",
+   "64"
+  ],
+  "correct_index": 0,
+  "correct_answer": "49",
+  "explanation": "The terms are squares of 4, 5, 6; the next is 7² = 49.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I495",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Odd one out",
+  "difficulty": "easy",
+  "question": "Find the odd one out: 6, 20, 14, 21.",
+  "options": [
+   "6",
+   "20",
+   "14",
+   "21"
+  ],
+  "correct_index": 3,
+  "correct_answer": "21",
+  "explanation": "21 is odd, while the others are even numbers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I496",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 7, 15, 23, 31, ?",
+  "options": [
+   "47",
+   "31",
+   "39",
+   "37"
+  ],
+  "correct_index": 2,
+  "correct_answer": "39",
+  "explanation": "Each term increases by 8, so the next term is 31 + 8 = 39.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I497",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Odd one out",
+  "difficulty": "easy",
+  "question": "Find the odd one out: 10, 3, 24, 14.",
+  "options": [
+   "10",
+   "3",
+   "24",
+   "14"
+  ],
+  "correct_index": 1,
+  "correct_answer": "3",
+  "explanation": "3 is odd, while the others are even numbers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I498",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Coding",
+  "difficulty": "easy",
+  "question": "If A = 1, B = 2, C = 3 and so on, what is the value of 'A'?",
+  "options": [
+   "3",
+   "4",
+   "6",
+   "1"
+  ],
+  "correct_index": 3,
+  "correct_answer": "1",
+  "explanation": "'A' is the 1th letter of the alphabet.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "coding"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I499",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 3, 6, 12, 24, ?",
+  "options": [
+   "40",
+   "48",
+   "80",
+   "64"
+  ],
+  "correct_index": 1,
+  "correct_answer": "48",
+  "explanation": "Each term is double the previous one, so the next term is 24 × 2 = 48.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I500",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Number series",
+  "difficulty": "medium",
+  "question": "What is the next number in the series: 5, 8, 11, 14, ?",
+  "options": [
+   "19",
+   "23",
+   "14",
+   "17"
+  ],
+  "correct_index": 3,
+  "correct_answer": "17",
+  "explanation": "Each term increases by 3, so the next term is 14 + 3 = 17.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-ict-analytical-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

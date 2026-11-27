@@ -1,0 +1,3042 @@
+[
+ {
+  "id": "JOBQ-I361",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "When is the Independence Day of Bangladesh observed?",
+  "options": [
+   "14 December",
+   "16 December",
+   "21 February",
+   "26 March"
+  ],
+  "correct_index": 3,
+  "correct_answer": "26 March",
+  "explanation": "Independence Day is observed on 26 March; Victory Day is 16 December.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I362",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "When is the Victory Day of Bangladesh observed?",
+  "options": [
+   "21 February",
+   "26 March",
+   "7 March",
+   "16 December"
+  ],
+  "correct_index": 3,
+  "correct_answer": "16 December",
+  "explanation": "Victory Day is observed on 16 December 1971.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I363",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Who wrote the national anthem of Bangladesh, 'Amar Sonar Bangla'?",
+  "options": [
+   "Rabindranath Tagore",
+   "Kazi Nazrul Islam",
+   "Jasimuddin",
+   "Sukanta Bhattacharya"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Rabindranath Tagore",
+  "explanation": "'Amar Sonar Bangla' was written by Rabindranath Tagore.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I364",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Who wrote the national marching song (Ran-Sangeet) of Bangladesh, 'Chol Chol Chol'?",
+  "options": [
+   "Jasimuddin",
+   "Kazi Nazrul Islam",
+   "Rabindranath Tagore",
+   "Alaol"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Kazi Nazrul Islam",
+  "explanation": "'Chol Chol Chol' was written by Kazi Nazrul Islam.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I365",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the national animal of Bangladesh?",
+  "options": [
+   "One-horned Rhinoceros",
+   "Royal Bengal Tiger",
+   "Spotted Deer",
+   "Asian Elephant"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Royal Bengal Tiger",
+  "explanation": "The Royal Bengal Tiger is the national animal of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I366",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the national bird of Bangladesh?",
+  "options": [
+   "Common Myna",
+   "Magpie Robin (Doyel)",
+   "Crow",
+   "Sparrow"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Magpie Robin (Doyel)",
+  "explanation": "The Magpie Robin (Doyel) is the national bird of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I367",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the national flower of Bangladesh?",
+  "options": [
+   "Water Lily (Shapla)",
+   "Lotus",
+   "Rose",
+   "Marigold"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Water Lily (Shapla)",
+  "explanation": "The Water Lily (Shapla) is the national flower of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I368",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the national fish of Bangladesh?",
+  "options": [
+   "Katla",
+   "Pabda",
+   "Rui",
+   "Hilsa"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Hilsa",
+  "explanation": "Hilsa is the national fish of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I369",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the national tree of Bangladesh?",
+  "options": [
+   "Neem tree",
+   "Mango tree",
+   "Jackfruit tree",
+   "Banyan tree"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Mango tree",
+  "explanation": "The Mango tree is the national tree of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I370",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which is the largest district of Bangladesh by area?",
+  "options": [
+   "Chattogram",
+   "Khulna",
+   "Sylhet",
+   "Rangamati"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Rangamati",
+  "explanation": "Rangamati is the largest district of Bangladesh by area.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I371",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which is the smallest district of Bangladesh by area?",
+  "options": [
+   "Meherpur",
+   "Jhalokati",
+   "Narayanganj",
+   "Barguna"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Narayanganj",
+  "explanation": "Narayanganj is the smallest district of Bangladesh by area.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I372",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "How many districts are there in Bangladesh?",
+  "options": [
+   "64",
+   "56",
+   "68",
+   "60"
+  ],
+  "correct_index": 0,
+  "correct_answer": "64",
+  "explanation": "There are 64 districts in Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I373",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "How many divisions are there in Bangladesh?",
+  "options": [
+   "7",
+   "8",
+   "6",
+   "9"
+  ],
+  "correct_index": 1,
+  "correct_answer": "8",
+  "explanation": "There are 8 divisions in Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I374",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which is the longest sea beach in the world, located in Bangladesh?",
+  "options": [
+   "Cox's Bazar",
+   "Kuakata",
+   "Saint Martin's",
+   "Patenga"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Cox's Bazar",
+  "explanation": "Cox's Bazar is the longest natural sea beach in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I375",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which is the only coral island of Bangladesh?",
+  "options": [
+   "Hatiya Island",
+   "Sandwip Island",
+   "Saint Martin's Island",
+   "Bhola Island"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Saint Martin's Island",
+  "explanation": "Saint Martin's Island is the only coral island of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I376",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which is the largest mangrove forest in the world?",
+  "options": [
+   "Daintree Forest",
+   "Sundarbans",
+   "Congo Forest",
+   "Amazon Rainforest"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Sundarbans",
+  "explanation": "The Sundarbans is the largest mangrove forest in the world.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I377",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which is the largest sea port of Bangladesh?",
+  "options": [
+   "Payra Port",
+   "Chattogram Port",
+   "Dhaka River Port",
+   "Mongla Port"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Chattogram Port",
+  "explanation": "Chattogram Port is the largest sea port of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I378",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Constitution",
+  "difficulty": "easy",
+  "question": "When was the Constitution of Bangladesh adopted?",
+  "options": [
+   "16 December 1972",
+   "26 March 1971",
+   "10 April 1971",
+   "4 November 1972"
+  ],
+  "correct_index": 3,
+  "correct_answer": "4 November 1972",
+  "explanation": "The Constitution was adopted on 4 November 1972 and came into effect on 16 December 1972.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "constitution",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I379",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Constitution",
+  "difficulty": "easy",
+  "question": "When did the Constitution of Bangladesh come into effect?",
+  "options": [
+   "17 April 1971",
+   "26 March 1971",
+   "16 December 1972",
+   "4 November 1972"
+  ],
+  "correct_index": 2,
+  "correct_answer": "16 December 1972",
+  "explanation": "The Constitution came into effect on 16 December 1972.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "constitution",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I380",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Constitution",
+  "difficulty": "easy",
+  "question": "How many seats are there in the National Parliament (Jatiya Sangsad) of Bangladesh?",
+  "options": [
+   "300",
+   "400",
+   "350",
+   "330"
+  ],
+  "correct_index": 2,
+  "correct_answer": "350",
+  "explanation": "There are 350 seats: 300 directly elected and 50 reserved for women.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "constitution",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I381",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "On which date was the Language Movement martyrs' day, now International Mother Language Day?",
+  "options": [
+   "11 March 1952",
+   "21 February 1952",
+   "22 February 1952",
+   "20 February 1952"
+  ],
+  "correct_index": 1,
+  "correct_answer": "21 February 1952",
+  "explanation": "Language martyrs fell on 21 February 1952; UNESCO declared it International Mother Language Day.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I382",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Liberation War",
+  "difficulty": "easy",
+  "question": "How many sectors was Bangladesh divided into during the Liberation War?",
+  "options": [
+   "13",
+   "7",
+   "11",
+   "9"
+  ],
+  "correct_index": 2,
+  "correct_answer": "11",
+  "explanation": "Bangladesh was divided into 11 sectors during the Liberation War.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "gk",
+   "liberation-war"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I383",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Liberation War",
+  "difficulty": "easy",
+  "question": "When did Operation Searchlight begin?",
+  "options": [
+   "25 March 1971",
+   "26 March 1971",
+   "7 March 1971",
+   "17 April 1971"
+  ],
+  "correct_index": 0,
+  "correct_answer": "25 March 1971",
+  "explanation": "Operation Searchlight began on the night of 25 March 1971.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "gk",
+   "liberation-war"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I384",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Where is the National Memorial (Jatiya Smriti Soudho) located?",
+  "options": [
+   "Chattogram",
+   "Rajshahi",
+   "Dhaka",
+   "Savar"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Savar",
+  "explanation": "The National Memorial is located at Savar.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I385",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Who designed the National Memorial at Savar?",
+  "options": [
+   "Muzharul Islam",
+   "Syed Mainul Hossain",
+   "Louis Kahn",
+   "Hamidur Rahman"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Syed Mainul Hossain",
+  "explanation": "The National Memorial was designed by architect Syed Mainul Hossain.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I386",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Who designed the Shaheed Minar in Dhaka?",
+  "options": [
+   "Hamidur Rahman",
+   "Syed Mainul Hossain",
+   "Muzharul Islam",
+   "Novera Ahmed"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Hamidur Rahman",
+  "explanation": "The Shaheed Minar was designed by Hamidur Rahman.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I387",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which is the widest river of Bangladesh?",
+  "options": [
+   "Jamuna",
+   "Meghna",
+   "Padma",
+   "Brahmaputra"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Meghna",
+  "explanation": "The Meghna is the widest river of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "geography",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I388",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which is the largest haor of Bangladesh?",
+  "options": [
+   "Hail Haor",
+   "Hakaluki Haor",
+   "Tanguar Haor",
+   "Chalan Beel"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Hakaluki Haor",
+  "explanation": "Hakaluki Haor is the largest haor of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "geography",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I389",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Economy",
+  "difficulty": "easy",
+  "question": "What is the currency of Bangladesh?",
+  "options": [
+   "Rupee",
+   "Dinar",
+   "Ringgit",
+   "Taka"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Taka",
+  "explanation": "The currency of Bangladesh is the Taka.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "economy",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I390",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Banking",
+  "difficulty": "easy",
+  "question": "Which bank is the central bank of Bangladesh?",
+  "options": [
+   "Bangladesh Bank",
+   "Janata Bank",
+   "Rupali Bank",
+   "Sonali Bank"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Bangladesh Bank",
+  "explanation": "Bangladesh Bank is the central bank of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I391",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Banking",
+  "difficulty": "easy",
+  "question": "When was Bangladesh Bank established?",
+  "options": [
+   "4 November 1972",
+   "26 March 1971",
+   "16 December 1971",
+   "1 January 1972"
+  ],
+  "correct_index": 2,
+  "correct_answer": "16 December 1971",
+  "explanation": "Bangladesh Bank was established on 16 December 1971.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I392",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Banking",
+  "difficulty": "easy",
+  "question": "Who was the first Governor of Bangladesh Bank?",
+  "options": [
+   "Atiur Rahman",
+   "Fakhruddin Ahmed",
+   "Mohammed Farashuddin",
+   "A. N. M. Hamidullah"
+  ],
+  "correct_index": 3,
+  "correct_answer": "A. N. M. Hamidullah",
+  "explanation": "A. N. M. Hamidullah was the first Governor of Bangladesh Bank.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I393",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which city is known as the commercial capital of Bangladesh?",
+  "options": [
+   "Sylhet",
+   "Dhaka",
+   "Chattogram",
+   "Khulna"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Chattogram",
+  "explanation": "Chattogram is known as the commercial capital of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I394",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which district is famous for tea gardens in Bangladesh?",
+  "options": [
+   "Rangpur",
+   "Sylhet",
+   "Barishal",
+   "Cumilla"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Sylhet",
+  "explanation": "Sylhet (and Moulvibazar) is famous for tea gardens.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "geography",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I395",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Economy",
+  "difficulty": "easy",
+  "question": "What is the main cash crop of Bangladesh?",
+  "options": [
+   "Tobacco",
+   "Tea",
+   "Sugarcane",
+   "Jute"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Jute",
+  "explanation": "Jute is the main cash crop of Bangladesh, known as the 'golden fibre'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "economy",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I396",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Economy",
+  "difficulty": "easy",
+  "question": "Jute is known as the golden fibre of which country?",
+  "options": [
+   "Nepal",
+   "India",
+   "Pakistan",
+   "Bangladesh"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Bangladesh",
+  "explanation": "Jute, the golden fibre, is the main cash crop of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "economy",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I397",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which is the largest division of Bangladesh by area?",
+  "options": [
+   "Chattogram",
+   "Khulna",
+   "Dhaka",
+   "Rajshahi"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Chattogram",
+  "explanation": "Chattogram is the largest division of Bangladesh by area.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "geography",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I398",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which river is known as the 'Sorrow of Bengal' in older literature?",
+  "options": [
+   "Teesta",
+   "Damodar",
+   "Meghna",
+   "Padma"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Damodar",
+  "explanation": "The Damodar was historically called the 'Sorrow of Bengal'.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "geography",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I399",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Liberation War",
+  "difficulty": "easy",
+  "question": "When was the Mujibnagar Government formed?",
+  "options": [
+   "17 April 1971",
+   "26 March 1971",
+   "10 April 1971",
+   "7 March 1971"
+  ],
+  "correct_index": 2,
+  "correct_answer": "10 April 1971",
+  "explanation": "The Mujibnagar Government was formed on 10 April 1971 and took oath on 17 April 1971.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "gk",
+   "liberation-war"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I400",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Liberation War",
+  "difficulty": "easy",
+  "question": "Who was the first Prime Minister of Bangladesh?",
+  "options": [
+   "Tajuddin Ahmad",
+   "M. Mansur Ali",
+   "Sheikh Mujibur Rahman",
+   "Syed Nazrul Islam"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Tajuddin Ahmad",
+  "explanation": "Tajuddin Ahmad was the first Prime Minister of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "gk",
+   "liberation-war"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I401",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Liberation War",
+  "difficulty": "easy",
+  "question": "Who was the first President of Bangladesh?",
+  "options": [
+   "Tajuddin Ahmad",
+   "Ziaur Rahman",
+   "Abu Sayeed Chowdhury",
+   "Sheikh Mujibur Rahman"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Sheikh Mujibur Rahman",
+  "explanation": "Sheikh Mujibur Rahman was the first President of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "gk",
+   "liberation-war"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I402",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "Which organization is the apex body of the government primary education in Bangladesh?",
+  "options": [
+   "Directorate of Primary Education",
+   "University Grants Commission",
+   "National Curriculum and Textbook Board",
+   "Ministry of Education"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Directorate of Primary Education",
+  "explanation": "The Directorate of Primary Education (DPE) runs government primary education.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I403",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "How many upazilas are there approximately in Bangladesh?",
+  "options": [
+   "495",
+   "350",
+   "560",
+   "420"
+  ],
+  "correct_index": 0,
+  "correct_answer": "495",
+  "explanation": "There are about 495 upazilas in Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I404",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "Which is the main river port of Bangladesh?",
+  "options": [
+   "Narayanganj",
+   "Chandpur",
+   "Sadarghat, Dhaka",
+   "Barishal"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Sadarghat, Dhaka",
+  "explanation": "Sadarghat in Dhaka is the main river port of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "geography",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I405",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Geography",
+  "difficulty": "easy",
+  "question": "The Sundarbans is famous for which animal?",
+  "options": [
+   "Royal Bengal Tiger",
+   "One-horned Rhinoceros",
+   "Asian Elephant",
+   "Gaur"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Royal Bengal Tiger",
+  "explanation": "The Sundarbans is famous for the Royal Bengal Tiger.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "general-knowledge",
+   "geography",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I406",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Economy",
+  "difficulty": "easy",
+  "question": "Which gas field is the largest in Bangladesh?",
+  "options": [
+   "Rashidpur",
+   "Bibiyana",
+   "Habiganj",
+   "Titas"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Titas",
+  "explanation": "Titas is the largest gas field of Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "economy",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I407",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the full form of DPE?",
+  "options": [
+   "Directorate of Public Education",
+   "Department of Primary Education",
+   "Department of Primary Examination",
+   "Directorate of Primary Education"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Directorate of Primary Education",
+  "explanation": "DPE stands for Directorate of Primary Education.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I408",
+  "exam_canonical": "bank",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "Bangladesh affairs",
+  "difficulty": "easy",
+  "question": "What is the full form of NCTB?",
+  "options": [
+   "National Curriculum and Textbook Board",
+   "National Committee of Textbook Board",
+   "National Curriculum and Teaching Board",
+   "National Council of Textbook Bangladesh"
+  ],
+  "correct_index": 0,
+  "correct_answer": "National Curriculum and Textbook Board",
+  "explanation": "NCTB stands for National Curriculum and Textbook Board.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangladesh-affairs",
+   "bank",
+   "general-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I409",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What does CRR stand for in banking?",
+  "options": [
+   "Central Reserve Rate",
+   "Cash Return Ratio",
+   "Cash Reserve Ratio",
+   "Credit Reserve Ratio"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Cash Reserve Ratio",
+  "explanation": "CRR stands for Cash Reserve Ratio — the share of deposits banks keep with the central bank.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I410",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What does SLR stand for in banking?",
+  "options": [
+   "Statutory Loan Ratio",
+   "Statutory Liquidity Ratio",
+   "Standard Liquidity Rate",
+   "State Liquidity Reserve"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Statutory Liquidity Ratio",
+  "explanation": "SLR stands for Statutory Liquidity Ratio.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I411",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is the repo rate?",
+  "options": [
+   "The rate at which banks lend to customers",
+   "The rate on savings deposits",
+   "The rate on fixed deposits",
+   "The rate at which the central bank lends to commercial banks"
+  ],
+  "correct_index": 3,
+  "correct_answer": "The rate at which the central bank lends to commercial banks",
+  "explanation": "The repo rate is the rate at which the central bank lends short-term funds to commercial banks.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I412",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is a Letter of Credit (LC)?",
+  "options": [
+   "A deposit receipt",
+   "A type of cheque",
+   "A letter asking for a loan",
+   "A bank guarantee for payment in international trade"
+  ],
+  "correct_index": 3,
+  "correct_answer": "A bank guarantee for payment in international trade",
+  "explanation": "An LC is a bank's guarantee that payment will be made to the exporter if the terms are met.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I413",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What does KYC stand for?",
+  "options": [
+   "Know Your Customer",
+   "Keep Your Cash",
+   "Key Customer Check",
+   "Know Your Credit"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Know Your Customer",
+  "explanation": "KYC stands for Know Your Customer.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I414",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is a crossed cheque?",
+  "options": [
+   "A cheque payable in cash over the counter",
+   "A cheque signed by two people",
+   "A cheque without a date",
+   "A cheque that must be deposited into a bank account"
+  ],
+  "correct_index": 3,
+  "correct_answer": "A cheque that must be deposited into a bank account",
+  "explanation": "A crossed cheque cannot be encashed over the counter; it must be deposited into an account.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I415",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is a demand draft?",
+  "options": [
+   "A fixed deposit receipt",
+   "A type of savings account",
+   "A payment order issued by a bank on behalf of a customer",
+   "A loan document"
+  ],
+  "correct_index": 2,
+  "correct_answer": "A payment order issued by a bank on behalf of a customer",
+  "explanation": "A demand draft is a bank-issued instrument for transferring money.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I416",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What does NPL stand for in banking?",
+  "options": [
+   "Non-Performing Loan",
+   "National Payment Limit",
+   "New Private Loan",
+   "Net Profit Loss"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Non-Performing Loan",
+  "explanation": "NPL stands for Non-Performing Loan — a loan on which repayment is overdue.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I417",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is RTGS?",
+  "options": [
+   "Real Time Gross Settlement",
+   "Real Time General Settlement",
+   "Rapid Transfer Gross System",
+   "Ready Transfer Guarantee System"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Real Time Gross Settlement",
+  "explanation": "RTGS stands for Real Time Gross Settlement — instant large-value fund transfer.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I418",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is the main function of a central bank?",
+  "options": [
+   "Collecting income tax",
+   "Controlling monetary policy and issuing currency",
+   "Giving loans to farmers only",
+   "Running commercial branches"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Controlling monetary policy and issuing currency",
+  "explanation": "A central bank issues currency and controls monetary policy.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I419",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is a fixed deposit account?",
+  "options": [
+   "A loan account",
+   "An account with no interest",
+   "A deposit kept for a fixed period at a fixed interest rate",
+   "An account for daily transactions"
+  ],
+  "correct_index": 2,
+  "correct_answer": "A deposit kept for a fixed period at a fixed interest rate",
+  "explanation": "A fixed deposit is kept for a fixed term and earns a fixed rate of interest.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I420",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is a current account mainly used for?",
+  "options": [
+   "Frequent business transactions",
+   "Foreign remittance only",
+   "Long-term savings",
+   "Fixed deposits"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Frequent business transactions",
+  "explanation": "A current account is used for frequent business transactions and usually pays no interest.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I421",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is mobile banking?",
+  "options": [
+   "Banking by post",
+   "Banking only at mobile branches",
+   "Banking through agents only",
+   "Banking services through a mobile phone"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Banking services through a mobile phone",
+  "explanation": "Mobile banking means banking services accessed through a mobile phone.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I422",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What does SWIFT stand for?",
+  "options": [
+   "Standard Worldwide Interbank Fund Transfer",
+   "System for Worldwide International Finance and Trade",
+   "Society for World Interbank Fund Transfer",
+   "Society for Worldwide Interbank Financial Telecommunication"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Society for Worldwide Interbank Financial Telecommunication",
+  "explanation": "SWIFT stands for Society for Worldwide Interbank Financial Telecommunication.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I423",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is the difference between a savings account and a current account?",
+  "options": [
+   "Savings accounts cannot be opened by individuals",
+   "Current accounts earn more interest",
+   "Savings accounts earn interest; current accounts are for frequent transactions",
+   "There is no difference"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Savings accounts earn interest; current accounts are for frequent transactions",
+  "explanation": "Savings accounts earn interest and are for individuals; current accounts suit frequent business transactions.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I424",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is interest in Islamic banking usually called?",
+  "options": [
+   "Dividend",
+   "Fee",
+   "Rent",
+   "Profit"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Profit",
+  "explanation": "Islamic banking avoids interest and uses profit-sharing instead.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I425",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is a cheque book used for?",
+  "options": [
+   "Paying income tax",
+   "Applying for a loan",
+   "Opening a fixed deposit",
+   "Withdrawing money or making payments from an account"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Withdrawing money or making payments from an account",
+  "explanation": "A cheque book is used to withdraw money or pay from a bank account.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I426",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is the full form of ATM?",
+  "options": [
+   "Automatic Transfer Machine",
+   "Account Teller Machine",
+   "Automated Teller Machine",
+   "Automated Transaction Mode"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Automated Teller Machine",
+  "explanation": "ATM stands for Automated Teller Machine.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I427",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is BEFTN?",
+  "options": [
+   "Bank Electronic Fund Transfer Network",
+   "Bangladesh External Funds Transfer Network",
+   "Bangladesh Electronic Funds Transfer Network",
+   "Bangladesh Electronic Finance Transfer Number"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Bangladesh Electronic Funds Transfer Network",
+  "explanation": "BEFTN is the Bangladesh Electronic Funds Transfer Network for electronic fund transfers.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I428",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What does NPSB stand for?",
+  "options": [
+   "National Private Switch Bank",
+   "National Payment Service Bangladesh",
+   "National Payment System Board",
+   "National Payment Switch Bangladesh"
+  ],
+  "correct_index": 3,
+  "correct_answer": "National Payment Switch Bangladesh",
+  "explanation": "NPSB stands for National Payment Switch Bangladesh.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I429",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "Which type of bank deals mainly with foreign trade finance?",
+  "options": [
+   "Commercial bank",
+   "Cooperative bank",
+   "Central bank",
+   "Development bank"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Commercial bank",
+  "explanation": "Commercial banks handle trade finance, including LCs and foreign exchange.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I430",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is a loan?",
+  "options": [
+   "Money deposited for safekeeping",
+   "Money borrowed that must be repaid with interest",
+   "Money paid as tax",
+   "Money given as a gift"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Money borrowed that must be repaid with interest",
+  "explanation": "A loan is money borrowed that must be repaid, usually with interest.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I431",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is collateral in banking?",
+  "options": [
+   "An asset pledged as security for a loan",
+   "A loan application form",
+   "A bank charge",
+   "A type of deposit"
+  ],
+  "correct_index": 0,
+  "correct_answer": "An asset pledged as security for a loan",
+  "explanation": "Collateral is an asset pledged as security against a loan.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I432",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is the main purpose of a bank's savings account?",
+  "options": [
+   "To issue currency",
+   "To encourage saving and earn interest",
+   "To collect taxes",
+   "To give business loans"
+  ],
+  "correct_index": 1,
+  "correct_answer": "To encourage saving and earn interest",
+  "explanation": "A savings account encourages saving and pays interest on deposits.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I433",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is a bank draft?",
+  "options": [
+   "A deposit slip",
+   "A draft of a bank's annual report",
+   "A loan sanction letter",
+   "A payment instrument issued by a bank guaranteeing payment"
+  ],
+  "correct_index": 3,
+  "correct_answer": "A payment instrument issued by a bank guaranteeing payment",
+  "explanation": "A bank draft is a bank-issued payment instrument guaranteeing payment.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I434",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is overdraft?",
+  "options": [
+   "Depositing extra money",
+   "Withdrawing more money than the account balance with bank permission",
+   "A type of fixed deposit",
+   "A loan without security"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Withdrawing more money than the account balance with bank permission",
+  "explanation": "An overdraft allows withdrawing more than the balance, up to an agreed limit.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I435",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is the money market?",
+  "options": [
+   "A market for shares",
+   "A market for foreign currency only",
+   "A market for short-term borrowing and lending",
+   "A market for gold"
+  ],
+  "correct_index": 2,
+  "correct_answer": "A market for short-term borrowing and lending",
+  "explanation": "The money market deals in short-term borrowing and lending.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I436",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is the capital market?",
+  "options": [
+   "A market for currency exchange",
+   "A market for long-term funds such as shares and bonds",
+   "A market for short-term loans",
+   "A market for daily goods"
+  ],
+  "correct_index": 1,
+  "correct_answer": "A market for long-term funds such as shares and bonds",
+  "explanation": "The capital market deals in long-term securities such as shares and bonds.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I437",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is inflation?",
+  "options": [
+   "A general rise in prices over time",
+   "A rise in unemployment only",
+   "A fall in prices",
+   "A fall in the money supply"
+  ],
+  "correct_index": 0,
+  "correct_answer": "A general rise in prices over time",
+  "explanation": "Inflation is a sustained general rise in the prices of goods and services.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I438",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is the function of a bank's locker service?",
+  "options": [
+   "Keeping valuables safe for customers",
+   "Storing loan documents",
+   "Keeping cheque books",
+   "Keeping cash for the bank"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Keeping valuables safe for customers",
+  "explanation": "A locker service keeps customers' valuables safe.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I439",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What is a pay order?",
+  "options": [
+   "A loan agreement",
+   "A savings passbook",
+   "A bank-issued instrument guaranteeing payment to a named person",
+   "A personal cheque"
+  ],
+  "correct_index": 2,
+  "correct_answer": "A bank-issued instrument guaranteeing payment to a named person",
+  "explanation": "A pay order is a bank-issued instrument guaranteeing payment to the named payee.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I440",
+  "exam_canonical": "bank",
+  "subject_canonical": "Banking and Financial Knowledge",
+  "subject_slug": "banking-financial",
+  "topic": "Banking knowledge",
+  "difficulty": "medium",
+  "question": "What does BACH stand for in Bangladesh banking?",
+  "options": [
+   "Bangladesh Association of Clearing Houses",
+   "Bangladesh Automated Credit House",
+   "Bangladesh Automated Clearing House",
+   "Bangladesh Automated Cheque House"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Bangladesh Automated Clearing House",
+  "explanation": "BACH stands for Bangladesh Automated Clearing House.",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bank",
+   "banking-financial",
+   "banking-knowledge",
+   "gk"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-gk-banking-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

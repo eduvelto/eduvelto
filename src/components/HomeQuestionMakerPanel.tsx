@@ -30,8 +30,8 @@ export default function HomeQuestionMakerPanel() {
       </div>
       <p className="ev-rd-sub">
         {t({
-          bn: 'Eduvelto প্রশ্নপত্র জেনারেটর — শিক্ষক ও কোচিং সেন্টারের জন্য অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরির ফ্রি টুল। সাধারণ (NCTB), মাদ্রাসা এবং চাকরি ও ভর্তি কোচিং — তিন ধারাতেই প্রশ্নপত্র বানানো যায়। শুধু যাচাইকৃত প্রশ্ন দিয়ে — যাচাই হয়নি এমন প্রশ্ন কখনো দেখানো হয় না।',
-          en: 'Eduvelto Question Paper Generator — a free tool for teachers and coaching centres to build chapter-wise question papers. General (NCTB), Madrasa, and job & admission coaching — all three streams. Only verified questions — unverified questions are never shown.',
+          bn: 'Eduvelto প্রশ্নপত্র জেনারেটর — শিক্ষক ও কোচিং সেন্টারের জন্য অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরির ফ্রি টুল। সাধারণ (NCTB), মাদ্রাসা এবং চাকরি ও ভর্তি কোচিং — তিন ধারাতেই প্রশ্নপত্র বানানো যায়। শুধু যাচাইকৃত অনুশীলন প্রশ্ন দিয়ে — যাচাই হয়নি এমন প্রশ্ন এই জেনারেটরে কখনো দেখানো হয় না।',
+          en: 'Eduvelto Question Paper Generator — a free tool for teachers and coaching centres to build chapter-wise question papers. General (NCTB), Madrasa, and job & admission coaching — all three streams. Only verified practice questions — unverified questions are never shown in this generator.',
         })}
       </p>
       <ul style={{ fontSize: 14, lineHeight: 1.9, margin: '0 0 4px', paddingLeft: 20 }}>

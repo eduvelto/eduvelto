@@ -1,0 +1,1180 @@
+[
+  {
+    "id": "JOBQ-L351",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সন্ধি",
+    "difficulty": "medium",
+    "question": "'নীরব' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "নিঃ + রব",
+      "নী + রব",
+      "নির + অব",
+      "নিঃ + অরব"
+    ],
+    "correct_index": 0,
+    "correct_answer": "নিঃ + রব",
+    "explanation": "নিঃ + রব = নীরব (বিসর্গ সন্ধি)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সন্ধি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L352",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সন্ধি",
+    "difficulty": "medium",
+    "question": "'বহিষ্কার' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "বহিঃ + কার",
+      "বহি + কার",
+      "বহিষ্ + কার",
+      "বহিঃ + অকার"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বহিঃ + কার",
+    "explanation": "বহিঃ + কার = বহিষ্কার (বিসর্গ সন্ধি)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সন্ধি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L353",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সন্ধি",
+    "difficulty": "medium",
+    "question": "'ষষ্ঠ' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "ষষ্ + থ",
+      "ষ + ষ্ঠ",
+      "ষষ্ঠ + অ",
+      "ষষ্ + ষ্ঠ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ষষ্ + থ",
+    "explanation": "ষষ্ + থ = ষষ্ঠ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সন্ধি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L354",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'পঞ্চানন' কোন সমাসের উদাহরণ?",
+    "options": [
+      "বহুব্রীহি",
+      "কর্মধারয়",
+      "দ্বন্দ্ব",
+      "তৎপুরুষ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বহুব্রীহি",
+    "explanation": "'পঞ্চানন' = পঞ্চ আনন যার, তাই এটি বহুব্রীহি সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L355",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'পদ্মলোচন' কোন সমাসের উদাহরণ?",
+    "options": [
+      "কর্মধারয়",
+      "বহুব্রীহি",
+      "দ্বিগু",
+      "তৎপুরুষ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "বহুব্রীহি",
+    "explanation": "পদ্মের ন্যায় লোচন যার — অন্য অর্থ বোঝায় বলে বহুব্রীহি সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L356",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'রাজর্ষি' কোন সমাসের উদাহরণ?",
+    "options": [
+      "দ্বন্দ্ব",
+      "কর্মধারয়",
+      "দ্বিগু",
+      "তৎপুরুষ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "কর্মধারয়",
+    "explanation": "যিনি রাজা তিনিই ঋষি — কর্মধারয় সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L357",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমাস",
+    "difficulty": "medium",
+    "question": "'অনাচার' কোন সমাসের উদাহরণ?",
+    "options": [
+      "দ্বন্দ্ব",
+      "নঞ তৎপুরুষ",
+      "অব্যয়ীভাব",
+      "দ্বিগু"
+    ],
+    "correct_index": 1,
+    "correct_answer": "নঞ তৎপুরুষ",
+    "explanation": "ন আচার = অনাচার — নঞ তৎপুরুষ সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L358",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "কারক",
+    "difficulty": "easy",
+    "question": "'সাপে কাটলে ওঝা ডাকো' — 'সাপে' কোন কারক?",
+    "options": [
+      "কর্তৃ",
+      "কর্ম",
+      "করণ",
+      "অপাদান"
+    ],
+    "correct_index": 0,
+    "correct_answer": "কর্তৃ",
+    "explanation": "কাটার কাজটি সাপ করেছে — কর্তৃকারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কারক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L359",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "কারক",
+    "difficulty": "medium",
+    "question": "'তিনি চট্টগ্রাম থেকে এসেছেন' — 'চট্টগ্রাম থেকে' কোন কারক?",
+    "options": [
+      "করণ",
+      "অপাদান",
+      "অধিকরণ",
+      "সম্প্রদান"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অপাদান",
+    "explanation": "চট্টগ্রাম থেকে আসা — বিচ্ছিন্নতা অর্থে অপাদান কারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কারক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L360",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "কারক",
+    "difficulty": "easy",
+    "question": "'সে হাতে লিখে' — 'হাতে' কোন কারক?",
+    "options": [
+      "কর্তৃ",
+      "করণ",
+      "অধিকরণ",
+      "কর্ম"
+    ],
+    "correct_index": 1,
+    "correct_answer": "করণ",
+    "explanation": "লেখার উপায় হাত — করণ কারক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কারক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L361",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'কাঁচা পয়সা' বাগধারাটির অর্থ কী?",
+    "options": [
+      "নগদ অর্থ",
+      "অল্প টাকা",
+      "ভেজাল টাকা",
+      "ধার করা টাকা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "নগদ অর্থ",
+    "explanation": "'কাঁচা পয়সা' বলতে নগদ অর্থ বোঝায়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাগধারা",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L362",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'ইঁদুর কপালে' বাগধারাটির অর্থ কী?",
+    "options": [
+      "সৌভাগ্য",
+      "মন্দ ভাগ্য",
+      "চতুরতা",
+      "সাহস"
+    ],
+    "correct_index": 1,
+    "correct_answer": "মন্দ ভাগ্য",
+    "explanation": "ইঁদুর কপালে অর্থ মন্দ ভাগ্য।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাগধারা",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L363",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "medium",
+    "question": "'গড্ডলিকা প্রবাহ' বাগধারাটির অর্থ কী?",
+    "options": [
+      "স্রোতের টান",
+      "অন্ধ অনুকরণ",
+      "দলবদ্ধ কাজ",
+      "দ্রুত গতি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অন্ধ অনুকরণ",
+    "explanation": "গড্ডলিকা প্রবাহ অর্থ অন্ধ অনুকরণ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বাগধারা",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L364",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বানান",
+    "difficulty": "medium",
+    "question": "'ইতোমধ্যে' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "ইতিমধ্যে",
+      "ইতোমধ্যে",
+      "ইতমধ্যে",
+      "ইতোমধ্য"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ইতোমধ্যে",
+    "explanation": "শুদ্ধ বানান 'ইতোমধ্যে'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L365",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বানান",
+    "difficulty": "easy",
+    "question": "'পুরস্কার' শব্দের শুদ্ধ বানান কোনটি?",
+    "options": [
+      "পুরষ্কার",
+      "পুরস্কার",
+      "পূরস্কার",
+      "পূরষ্কার"
+    ],
+    "correct_index": 1,
+    "correct_answer": "পুরস্কার",
+    "explanation": "শুদ্ধ বানান 'পুরস্কার'।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বানান",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED-AFTER-FIX",
+    "review_reason": "Duplicated wrong option 'পুরষ্কার' (A and D) — D replaced with distinct misspelling 'পূরষ্কার'. Fix applied 27 Nov 2026 landing; content-team spot-check still recommended.",
+    "review_batch": "landing-2026-11-27",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L366",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'বন' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "উদ্যান",
+      "অরণ্য",
+      "বাগান",
+      "ক্ষেত"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অরণ্য",
+    "explanation": "বনের সমার্থক: অরণ্য, কানন, জঙ্গল।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমার্থক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L367",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'বৃষ্টি' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "বর্ষণ",
+      "মেঘ",
+      "ঝড়",
+      "বাতাস"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বর্ষণ",
+    "explanation": "'বৃষ্টি'-এর সমার্থক শব্দ বর্ষণ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমার্থক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L368",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "medium",
+    "question": "'বানর' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "কপি",
+      "বাঘ",
+      "সিংহ",
+      "হরিণ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "কপি",
+    "explanation": "'বানর'-এর সমার্থক শব্দ কপি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ব্যাকরণ",
+      "সমার্থক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L369",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'অন্ত' শব্দের বিপরীত শব্দ কোনটি?",
+    "options": [
+      "শেষ",
+      "আদি",
+      "মধ্য",
+      "বহি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "আদি",
+    "explanation": "অন্তের বিপরীত আদি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L370",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'স্বর্গ' শব্দের বিপরীত শব্দ কোনটি?",
+    "options": [
+      "মর্ত্য",
+      "নরক",
+      "পাতাল",
+      "দোজখ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "নরক",
+    "explanation": "স্বর্গের বিপরীত নরক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L371",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "medium",
+    "question": "'স্থাবর' শব্দের বিপরীত শব্দ কোনটি?",
+    "options": [
+      "অস্থাবর",
+      "জঙ্গম",
+      "চলমান",
+      "স্থির"
+    ],
+    "correct_index": 1,
+    "correct_answer": "জঙ্গম",
+    "explanation": "স্থাবরের বিপরীত জঙ্গম।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "বিপরীতার্থক",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L372",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "এক কথায় প্রকাশ",
+    "difficulty": "easy",
+    "question": "'যা বলা হয়েছে' — এক কথায় কী হবে?",
+    "options": [
+      "অনুক্ত",
+      "উক্ত",
+      "কথিত",
+      "ভাষিত"
+    ],
+    "correct_index": 1,
+    "correct_answer": "উক্ত",
+    "explanation": "যা বলা হয়েছে — উক্ত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "এককথায়",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L373",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "এক কথায় প্রকাশ",
+    "difficulty": "medium",
+    "question": "'যা দেখা যায়' — এক কথায় কী হবে?",
+    "options": [
+      "অদৃশ্য",
+      "দৃশ্য",
+      "দর্শনীয়",
+      "প্রত্যক্ষ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "দৃশ্য",
+    "explanation": "যা দেখা যায় — দৃশ্য।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "এককথায়",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L374",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "এক কথায় প্রকাশ",
+    "difficulty": "medium",
+    "question": "'ইতিহাস জানেন যিনি' — এক কথায় কী হবে?",
+    "options": [
+      "ইতিহাসবিদ",
+      "ঐতিহাসিক",
+      "প্রত্নতাত্ত্বিক",
+      "গবেষক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ঐতিহাসিক",
+    "explanation": "ইতিহাস জানেন যিনি — ঐতিহাসিক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "এককথায়",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L375",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "easy",
+    "question": "'পল্লীকবি' উপাধি কার?",
+    "options": [
+      "রবীন্দ্রনাথ ঠাকুর",
+      "জসীমউদ্দীন",
+      "কাজী নজরুল ইসলাম",
+      "সুকান্ত ভট্টাচার্য"
+    ],
+    "correct_index": 1,
+    "correct_answer": "জসীমউদ্দীন",
+    "explanation": "জসীমউদ্দীন 'পল্লীকবি' নামে পরিচিত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কবি",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L376",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "easy",
+    "question": "রবীন্দ্রনাথ ঠাকুরের প্রথম উপন্যাস কোনটি?",
+    "options": [
+      "গোরা",
+      "বৌ-ঠাকুরাণীর হাট",
+      "চোখের বালি",
+      "ঘরে বাইরে"
+    ],
+    "correct_index": 1,
+    "correct_answer": "বৌ-ঠাকুরাণীর হাট",
+    "explanation": "রবীন্দ্রনাথের প্রথম উপন্যাস 'বৌ-ঠাকুরাণীর হাট' (১৮৮৩)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "উপন্যাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L377",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "রবীন্দ্রনাথ ঠাকুরের প্রথম কাব্যগ্রন্থ কোনটি?",
+    "options": [
+      "গীতাঞ্জলি",
+      "বনফুল",
+      "সোনার তরী",
+      "চিত্রা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "বনফুল",
+    "explanation": "রবীন্দ্রনাথের প্রথম কাব্যগ্রন্থ 'বনফুল' (১৮৮০)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কাব্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L378",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "'গীতাঞ্জলি'-র ইংরেজি অনুবাদের নাম কী?",
+    "options": [
+      "Song Offerings",
+      "Gitanjali",
+      "The Gardener",
+      "Fruit-Gathering"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Song Offerings",
+    "explanation": "'গীতাঞ্জলি'-র ইংরেজি অনুবাদ 'Song Offerings' (১৯১২)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "কাব্য",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L379",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "মঙ্গলকাব্যের শ্রেষ্ঠ কবি কে?",
+    "options": [
+      "মুকুন্দরাম চক্রবর্তী",
+      "ভারতচন্দ্র রায়গুণাকর",
+      "বিদ্যাপতি",
+      "চণ্ডীদাস"
+    ],
+    "correct_index": 0,
+    "correct_answer": "মুকুন্দরাম চক্রবর্তী",
+    "explanation": "মুকুন্দরাম চক্রবর্তী (কবিকঙ্কণ) মঙ্গলকাব্যের শ্রেষ্ঠ কবি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ইতিহাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L380",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "চর্যাপদ কোন সালে আবিষ্কৃত হয়?",
+    "options": [
+      "১৯১৬ সালে",
+      "১৯২৬ সালে",
+      "১৯০৭ সালে",
+      "১৮৮২ সালে"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৯০৭ সালে",
+    "explanation": "হরপ্রসাদ শাস্ত্রী ১৯০৭ সালে নেপালের রাজদরবারের গ্রন্থাগার থেকে চর্যাপদ আবিষ্কার করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ইতিহাস",
+      "সাহিত্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-L381",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "ধ্বনি",
+    "difficulty": "medium",
+    "question": "বাংলা বর্ণমালায় মাত্রাহীন বর্ণ কয়টি?",
+    "options": [
+      "৮টি",
+      "১০টি",
+      "১২টি",
+      "৭টি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১০টি",
+    "explanation": "বাংলা বর্ণমালায় মাত্রাহীন বর্ণ ১০টি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars — written/MCQ 70-80: Bangla 20, English 20, Mathematics 20, GK & ICT 10-20; practical (typing/MS Office) + viva 20 (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+    "tags": [
+      "bangla",
+      "grade11-20",
+      "ধ্বনি",
+      "ব্যাকরণ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-bangla-depth-02.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  }
+]

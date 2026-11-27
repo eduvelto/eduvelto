@@ -1,0 +1,762 @@
+[
+ {
+  "id": "JOBQ-M762",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "শতকরা",
+  "difficulty": "easy",
+  "question": "৫০০-এর ২২% কত?",
+  "options": [
+   "১০০",
+   "১১০",
+   "১২০",
+   "৯০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১১০",
+  "explanation": "৫০০ × ২২/১০০ = ১১০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "পাটিগণিত",
+   "শতকরা"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M763",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লসাগু",
+  "difficulty": "easy",
+  "question": "১২ ও ২০-এর লসাগু কত?",
+  "options": [
+   "৩০",
+   "৬০",
+   "১২০",
+   "৪০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৬০",
+  "explanation": "১২ ও ২০-এর লসাগু ৬০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "পাটিগণিত",
+   "লসাগু"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M764",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গসাগু",
+  "difficulty": "easy",
+  "question": "২০ ও ৩২-এর গসাগু কত?",
+  "options": [
+   "২",
+   "৪",
+   "৮",
+   "১৬"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪",
+  "explanation": "২০ ও ৩২-এর গসাগু ৪।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "গসাগু",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M765",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গড়",
+  "difficulty": "easy",
+  "question": "১০, ২০, ৩০, ৪০, ৫০-এর গড় কত?",
+  "options": [
+   "২০",
+   "২৫",
+   "৩০",
+   "৩৫"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৩০",
+  "explanation": "যোগফল ১৫০; গড় = ১৫০ ÷ ৫ = ৩০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "গড়",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M766",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "সরল সুদ",
+  "difficulty": "easy",
+  "question": "১২,০০০ টাকার ৫% হারে ২ বছরের সরল সুদ কত?",
+  "options": [
+   "১০০০ টাকা",
+   "১২০০ টাকা",
+   "১৫০০ টাকা",
+   "৬০০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১২০০ টাকা",
+  "explanation": "সুদ = ১২,০০০ × ৫/১০০ × ২ = ১২০০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "পাটিগণিত",
+   "সুদ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M767",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লাভ-ক্ষতি",
+  "difficulty": "easy",
+  "question": "৭৫০ টাকায় কিনে ৯০০ টাকায় বিক্রি করলে লাভের হার কত?",
+  "options": [
+   "১৫%",
+   "২০%",
+   "২৫%",
+   "১০%"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২০%",
+  "explanation": "লাভ ১৫০ টাকা; হার = ১৫০/৭৫০ × ১০০ = ২০%।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "পাটিগণিত",
+   "লাভ-ক্ষতি"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M768",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "easy",
+  "question": "6x + ৫ = ২৯ হলে x-এর মান কত?",
+  "options": [
+   "৩",
+   "৪",
+   "৫",
+   "৬"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪",
+  "explanation": "6x = ২৪; x = ৪।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "বীজগণিত",
+   "সমীকরণ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M769",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বর্গমূল",
+  "difficulty": "easy",
+  "question": "√৩৬১ = কত?",
+  "options": [
+   "১৭",
+   "১৮",
+   "১৯",
+   "২১"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৯",
+  "explanation": "১৯ × ১৯ = ৩৬১, তাই √৩৬১ = ১৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "বর্গমূল",
+   "বীজগণিত"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M770",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "medium",
+  "question": "a = ৪, b = ৩ হলে (a + b)²-এর মান কত?",
+  "options": [
+   "২৫",
+   "৩৬",
+   "৪৯",
+   "১৬"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪৯",
+  "explanation": "(৪ + ৩)² = ৭² = ৪৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "বীজগণিত",
+   "মান নির্ণয়"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M771",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ভগ্নাংশ",
+  "difficulty": "easy",
+  "question": "২৪০-এর ৫/৬ অংশ কত?",
+  "options": [
+   "১৫০",
+   "১৮০",
+   "২০০",
+   "২২০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২০০",
+  "explanation": "২৪০ × ৫/৬ = ২০০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "পাটিগণিত",
+   "ভগ্নাংশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M772",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ভগ্নাংশ",
+  "difficulty": "easy",
+  "question": "০.৪-কে সাধারণ ভগ্নাংশে প্রকাশ করলে কত হবে?",
+  "options": [
+   "১/৪",
+   "২/৫",
+   "৩/৫",
+   "১/২"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২/৫",
+  "explanation": "০.৪ = ৪/১০ = ২/৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "পাটিগণিত",
+   "ভগ্নাংশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M773",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গতি",
+  "difficulty": "easy",
+  "question": "একটি গাড়ি ৬ ঘণ্টায় ৩৬০ কিমি গেলে গতিবেগ কত?",
+  "options": [
+   "৫০ কিমি/ঘণ্টা",
+   "৬০ কিমি/ঘণ্টা",
+   "৭০ কিমি/ঘণ্টা",
+   "৫৫ কিমি/ঘণ্টা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৬০ কিমি/ঘণ্টা",
+  "explanation": "গতিবেগ = ৩৬০ ÷ ৬ = ৬০ কিমি/ঘণ্টা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "গতি",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M774",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "কাজ ও সময়",
+  "difficulty": "medium",
+  "question": "A একটি কাজ ১২ দিনে এবং B একই কাজ ৪ দিনে করতে পারে। একসঙ্গে কাজটি কত দিনে শেষ হবে?",
+  "options": [
+   "২ দিন",
+   "৩ দিন",
+   "৪ দিন",
+   "৬ দিন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩ দিন",
+  "explanation": "১/১২ + ১/৪ = ৪/১২ = ১/৩; সময় = ৩ দিন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "কাজ ও সময়",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M775",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বয়স",
+  "difficulty": "medium",
+  "question": "দুই ভাইয়ের বর্তমান বয়সের অনুপাত ৩ : ১ এবং যোগফল ৪০ হলে ছোট ভাইয়ের বয়স কত?",
+  "options": [
+   "৮ বছর",
+   "১০ বছর",
+   "১২ বছর",
+   "১৫ বছর"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১০ বছর",
+  "explanation": "৩ + ১ = ৪ ভাগ; এক ভাগ ১০; ছোট ভাইয়ের বয়স ১০ বছর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "পাটিগণিত",
+   "বয়স"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M776",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ছাড়",
+  "difficulty": "easy",
+  "question": "২৫০০ টাকার পণ্যে ১০% ছাড় দিলে দাম কত হবে?",
+  "options": [
+   "২০০০ টাকা",
+   "২২৫০ টাকা",
+   "২৩০০ টাকা",
+   "২৪০০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২২৫০ টাকা",
+  "explanation": "ছাড় ২৫০ টাকা; দাম ২৫০০ − ২৫০ = ২২৫০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "ছাড়",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M777",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "অনুপাত",
+  "difficulty": "medium",
+  "question": "দুটি সংখ্যার অনুপাত ৩ : ৪ এবং যোগফল ৬৩ হলে বড় সংখ্যাটি কত?",
+  "options": [
+   "২৭",
+   "৩০",
+   "৩৬",
+   "৪০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৩৬",
+  "explanation": "৩ + ৪ = ৭ ভাগ; এক ভাগ ৯; বড় সংখ্যা ৪ × ৯ = ৩৬।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "অনুপাত",
+   "পাটিগণিত"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M778",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ক্ষেত্রফল",
+  "difficulty": "easy",
+  "question": "এক বাহু ১৩ সেমি বর্গক্ষেত্রের ক্ষেত্রফল কত?",
+  "options": [
+   "১৩০ বর্গ সেমি",
+   "১৬৯ বর্গ সেমি",
+   "১৫৬ বর্গ সেমি",
+   "১৮২ বর্গ সেমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৬৯ বর্গ সেমি",
+  "explanation": "ক্ষেত্রফল = ১৩ × ১৩ = ১৬৯ বর্গ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "ক্ষেত্রফল",
+   "পরিমিতি"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M779",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ক্ষেত্রফল",
+  "difficulty": "easy",
+  "question": "ভূমি ২৪ সেমি ও উচ্চতা ১০ সেমি ত্রিভুজের ক্ষেত্রফল কত?",
+  "options": [
+   "১২০ বর্গ সেমি",
+   "২৪০ বর্গ সেমি",
+   "১০০ বর্গ সেমি",
+   "১৪০ বর্গ সেমি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১২০ বর্গ সেমি",
+  "explanation": "ক্ষেত্রফল = ½ × ২৪ × ১০ = ১২০ বর্গ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "ক্ষেত্রফল",
+   "পরিমিতি"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M780",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ঘাত",
+  "difficulty": "easy",
+  "question": "৭³ = কত?",
+  "options": [
+   "৪৯",
+   "৩৪৩",
+   "২১",
+   "২৪০১"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩৪৩",
+  "explanation": "৭³ = ৭ × ৭ × ৭ = ৩৪৩।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "ঘাত",
+   "বীজগণিত"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M781",
+  "exam_canonical": "ministries",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "যোগফল",
+  "difficulty": "medium",
+  "question": "প্রথম ১০টি জোড় সংখ্যার যোগফল কত?",
+  "options": [
+   "৯০",
+   "১০০",
+   "১১০",
+   "১২০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১১০",
+  "explanation": "২+৪+…+২০ = ১১০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি)",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "mathematics",
+   "ministries",
+   "পাটিগণিত",
+   "যোগফল"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-math-depth-02.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

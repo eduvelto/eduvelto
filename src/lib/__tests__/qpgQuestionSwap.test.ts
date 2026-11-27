@@ -260,8 +260,8 @@ describe('swap end-to-end: replace in place + rebuild', () => {
       questions: QPG_VERIFIED_POOL.slice(0, 15),
       isCustomVariant: false,
       kind: 'chapter-paper',
-      patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত প্রশ্ন',
-      patternLabelEn: 'Chapter-based paper — verified questions',
+      patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত অনুশীলন প্রশ্ন',
+      patternLabelEn: 'Chapter-based paper — verified practice questions',
     });
     const nextIds = replaceQpgQuestion(
       before.questions.map((q) => q.id),
@@ -334,7 +334,7 @@ describe('swap candidates: verified-only, same-chapter, not already in the paper
   });
 
   it('Academic chapter swap candidates are Academic-only — no BCS leak from the grown pool', () => {
-    // The pool is 2,235 (35 BCS + 1,841 Academic MCQ + 359
+    // The pool is 2,236 (35 BCS + 1,842 Academic MCQ + 359
     // Academic CQ, 27 Nov 2026 — Classes 3–5 removed). A Class 6
     // paper's swap picker must offer only its own chapter's questions.
     // Production passes the full chapter selection as `available` and the
@@ -357,8 +357,8 @@ describe('swap candidates: verified-only, same-chapter, not already in the paper
     expect(candidates.every((c) => c.chapterId === 'acad-class-6-mat-chapter-1')).toBe(true);
     expect(candidates.every((c) => c.verified === true)).toBe(true);
     const allAcad = QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'));
-    expect(allAcad).toHaveLength(2200); // 1,841 MCQ + 359 CQ
-    expect(allAcad.filter((q) => q.type === 'mcq')).toHaveLength(1841);
+    expect(allAcad).toHaveLength(2201); // 1,842 MCQ + 359 CQ
+    expect(allAcad.filter((q) => q.type === 'mcq')).toHaveLength(1842);
     expect(allAcad.filter((q) => q.type === 'cq')).toHaveLength(359);
   });
 

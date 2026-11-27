@@ -1,11 +1,18 @@
 // Eduvelto — Academic Physics (Depth) practice questions (Class 9),
 // verified against the Dakhil NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 31 questions are the
+// Static data ONLY — zero Firestore reads. The 32 questions are the
 // Academic Class 9 Physics (Depth) drafts AFTER review (see
 // review-academic-c9-physics-depth-verdicts.json and
 // review-academic-c9-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
+//
+// C910P-018 joined 27 Nov 2026 (landing/content): its citation was
+// RESOLVED by worker D (c9-citation-pending-resolution.md) — the
+// book's Chapter 6 is "বস্তুর ওপর তাপের প্রভাব", not the depth
+// file's "তাপের প্রভাবে পদার্থের পরিবর্তন". The corrected citation
+// is in that item's sourceNote; chapterName keeps the depth file's
+// Chapter 6 title so the chapter still renders as one chapter.
 //
 // CAVEAT: the Class 9 review was verified against DAKHIL editions —
 // no general NCTB Class 9-10 book set exists in the workspace. The
@@ -20,7 +27,8 @@
 // The draft files' `status` field still says NEEDS-REVIEW — the
 // verdict files are the review record, and this file contains ONLY
 // the verified questions (VERIFIED as-is + NEEDS-FIX items with
-// their fixes applied). The one NEEDS-FIX item left out (C910P-018) is NOT here — its citation is unresolved and a teacher decision is owed.
+// their fixes applied). C910P-018 joined 27 Nov 2026 with its
+// citation corrected (see the file header).
 //
 // HOW NEW BATCHES JOIN: append the next verified batch's questions
 // to PUBLIC_ACADEMIC_PHYSICS_DEPTH_QUESTIONS below (same shape, same generation
@@ -339,6 +347,29 @@ export const PUBLIC_ACADEMIC_PHYSICS_DEPTH_QUESTIONS: PublicAcademicQuestion[] =
     explanation: "পানির আপেক্ষিক তাপ ৪২০০ J/kg·K — অন্যান্য পদার্থের তুলনায় বেশি।",
     difficulty: "medium",
     sourceNote: "NCTB পদার্থবিজ্ঞান, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৬: তাপের প্রভাবে পদার্থের পরিবর্তন",
+  },
+  {
+    // C910P-018 — citation RESOLVED 27 Nov 2026 (worker D): the book's
+    // Chapter 6 is "বস্তুর ওপর তাপের প্রভাব"; the depth file's title
+    // is recorded as its alias, not the chapter title.
+    id: "C910P-018",
+    classId: "class-9",
+    subjectId: "physics-depth",
+    chapterId: "acad-class-9-phy-depth-chapter-6",
+    chapterName: "অধ্যায় ৬: তাপের প্রভাবে পদার্থের পরিবর্তন",
+    unitNumber: 6,
+    topicId: "chapter-6",
+    questionText: "তাপ সঞ্চালনের কোন পদ্ধতিতে মাধ্যমের প্রয়োজন হয় না?",
+    options: [
+      { letter: "A", text: "পরিচলন" },
+      { letter: "B", text: "ঘনীভবন" },
+      { letter: "C", text: "পরিবহন" },
+      { letter: "D", text: "বিকিরণ" }
+    ],
+    correctLetter: "D",
+    explanation: "বিকিরণে তাপ তড়িৎচুম্বকীয় তরঙ্গের মাধ্যমে শূন্যস্থানেও ছড়ায়; সূর্যের তাপ এভাবে আসে।",
+    difficulty: "medium",
+    sourceNote: "NCTB পদার্থবিজ্ঞান, ৯ম-১০ম শ্রেণি — অধ্যায় ৬: বস্তুর ওপর তাপের প্রভাব (তাপ সঞ্চালন অংশ)",
   },
   {
     id: "C910P-019",

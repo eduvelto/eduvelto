@@ -1,0 +1,952 @@
+[
+  {
+    "id": "JOBQ-0236",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৪০০-এর ১৫% কত?",
+    "options": [
+      "৪৫",
+      "৬০",
+      "৭৫",
+      "৯০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৬০",
+    "explanation": "৪০০ × ১৫/১০০ = ৬০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "percentage"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0237",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "৯ ও ১২-এর লসাগু কত?",
+    "options": [
+      "২৪",
+      "৩৬",
+      "৪৮",
+      "১৮"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৩৬",
+    "explanation": "৯ ও ১২ উভয়ের গুণিতকগুলোর মধ্যে ক্ষুদ্রতম ৩৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "lcm",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0238",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "২০ ও ৩০-এর গসাগু কত?",
+    "options": [
+      "৫",
+      "১০",
+      "১৫",
+      "২০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১০",
+    "explanation": "২০ ও ৩০ উভয়কে ভাগ করে এমন বৃহত্তম সংখ্যা ১০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "hcf",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0239",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "৫, ১৫, ২৫-এর গড় কত?",
+    "options": [
+      "১০",
+      "১৫",
+      "২০",
+      "২৫"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৫",
+    "explanation": "যোগফল ৪৫; ৪৫ ÷ ৩ = ১৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "average",
+      "grade11-20",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0240",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "৩০০০ টাকার ১০% হারে ৩ বছরের সরল সুদ কত?",
+    "options": [
+      "৬০০ টাকা",
+      "৯০০ টাকা",
+      "১২০০ টাকা",
+      "৩০০ টাকা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৯০০ টাকা",
+    "explanation": "সুদ = ৩০০০ × ১০ × ৩ ÷ ১০০ = ৯০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "interest",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0241",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "easy",
+    "question": "3x = ২৭ হলে x-এর মান কত?",
+    "options": [
+      "৭",
+      "৮",
+      "৯",
+      "১০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৯",
+    "explanation": "x = ২৭ ÷ ৩ = ৯।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "algebra",
+      "grade11-20",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0242",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "দুটি সংখ্যার অনুপাত ৪ : ৫ এবং যোগফল ৮১ হলে বড় সংখ্যাটি কত?",
+    "options": [
+      "৩৬",
+      "৪০",
+      "৪৫",
+      "৫০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৪৫",
+    "explanation": "মোট অংশ ৯; এক অংশ = ৮১ ÷ ৯ = ৯; বড় সংখ্যা = ৫ × ৯ = ৪৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "ratio"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0243",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "easy",
+    "question": "৪০০ টাকায় কিনে ৫০০ টাকায় বিক্রি করলে লাভের হার কত?",
+    "options": [
+      "২০%",
+      "২৫%",
+      "৩০%",
+      "১৫%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২৫%",
+    "explanation": "লাভ ১০০ টাকা; হার = ১০০/৪০০ × ১০০% = ২৫%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "profit-loss"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0244",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "easy",
+    "question": "৫০০ টাকায় কিনে ৪৫০ টাকায় বিক্রি করলে ক্ষতির হার কত?",
+    "options": [
+      "৫%",
+      "১০%",
+      "১৫%",
+      "২০%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১০%",
+    "explanation": "ক্ষতি ৫০ টাকা; হার = ৫০/৫০০ × ১০০% = ১০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "profit-loss"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0245",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গতি",
+    "difficulty": "easy",
+    "question": "একটি গাড়ি ২.৫ ঘণ্টায় ১৫০ কিমি যায়। গাড়ির গতিবেগ কত?",
+    "options": [
+      "৫০ কিমি/ঘণ্টা",
+      "৬০ কিমি/ঘণ্টা",
+      "৭০ কিমি/ঘণ্টা",
+      "৪০ কিমি/ঘণ্টা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৬০ কিমি/ঘণ্টা",
+    "explanation": "গতিবেগ = ১৫০ ÷ ২.৫ = ৬০ কিমি/ঘণ্টা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "speed"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0246",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বর্গমূল",
+    "difficulty": "easy",
+    "question": "√২২৫ = কত?",
+    "options": [
+      "১৩",
+      "১৪",
+      "১৫",
+      "১৬"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৫",
+    "explanation": "১৫ × ১৫ = ২২৫, তাই √২২৫ = ১৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "square-root"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0247",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ত্রিকোণমিতি",
+    "difficulty": "medium",
+    "question": "সমকোণী ত্রিভুজের লম্ব ৫ ও ভূমি ১২ হলে অতিভুজ কত?",
+    "options": [
+      "১৩",
+      "১৪",
+      "১৫",
+      "১৭"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৩",
+    "explanation": "অতিভুজ² = ৫² + ১২² = ২৫ + ১৪৪ = ১৬৯; অতিভুজ = ১৩।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "trigonometry"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0248",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ধারা",
+    "difficulty": "easy",
+    "question": "৩, ৬, ৯, ১২, … ধারার পরের সংখ্যাটি কত?",
+    "options": [
+      "১৩",
+      "১৪",
+      "১৫",
+      "১৬"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৫",
+    "explanation": "প্রতিটি সংখ্যা আগেরটির চেয়ে ৩ বেশি; ১২ + ৩ = ১৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "series"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0249",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ছাড়",
+    "difficulty": "easy",
+    "question": "২৫০০ টাকার একটি পণ্যে ২০% ছাড় দিলে দাম কত হবে?",
+    "options": [
+      "১৮০০ টাকা",
+      "২০০০ টাকা",
+      "২২০০ টাকা",
+      "২১০০ টাকা"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২০০০ টাকা",
+    "explanation": "ছাড় = ২৫০০ × ২০% = ৫০০ টাকা; দাম = ২৫০০ − ৫০০ = ২০০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "discount",
+      "grade11-20",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0250",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ভগ্নাংশ",
+    "difficulty": "easy",
+    "question": "২০০-এর ৩/৪ অংশ কত?",
+    "options": [
+      "১০০",
+      "১২০",
+      "১৫০",
+      "১৮০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৫০",
+    "explanation": "২০০ × ৩/৪ = ১৫০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "fraction",
+      "grade11-20",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0251",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ভগ্নাংশ",
+    "difficulty": "easy",
+    "question": "২/৩ + ১/৩ = কত?",
+    "options": [
+      "১/৩",
+      "২/৩",
+      "১",
+      "৩/৬"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১",
+    "explanation": "২/৩ + ১/৩ = ৩/৩ = ১।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "fraction",
+      "grade11-20",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED-AFTER-FIX",
+    "review_reason": "Two correct options: '১' and '৩/৩' are both 1 — '৩/৩' replaced with '৩/৬' (the standard add-numerators-and-denominators error). Fix applied 27 Nov 2026 landing; content-team spot-check still recommended.",
+    "review_batch": "landing-2026-11-27",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0252",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "পরিসীমা",
+    "difficulty": "easy",
+    "question": "দৈর্ঘ্য ১২ সেমি ও প্রস্থ ৮ সেমি আয়তক্ষেত্রের পরিসীমা কত?",
+    "options": [
+      "২০ সেমি",
+      "৪০ সেমি",
+      "৯৬ সেমি",
+      "৩০ সেমি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৪০ সেমি",
+    "explanation": "পরিসীমা = ২ × (১২ + ৮) = ৪০ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "perimeter"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0253",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ক্ষেত্রফল",
+    "difficulty": "easy",
+    "question": "এক বাহু ৯ সেমি বর্গক্ষেত্রের ক্ষেত্রফল কত?",
+    "options": [
+      "৩৬ বর্গসেমি",
+      "৮১ বর্গসেমি",
+      "৭২ বর্গসেমি",
+      "৯০ বর্গসেমি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৮১ বর্গসেমি",
+    "explanation": "ক্ষেত্রফল = বাহু² = ৯ × ৯ = ৮১ বর্গসেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "area",
+      "grade11-20",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0254",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঘাত",
+    "difficulty": "easy",
+    "question": "৪³ = কত?",
+    "options": [
+      "১২",
+      "১৬",
+      "৬৪",
+      "৪৮"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৬৪",
+    "explanation": "৪³ = ৪ × ৪ × ৪ = ৬৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "power"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0255",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সংখ্যা",
+    "difficulty": "easy",
+    "question": "১ থেকে ৫০ পর্যন্ত বিজোড় সংখ্যা কয়টি?",
+    "options": [
+      "২০টি",
+      "২৪টি",
+      "২৫টি",
+      "২৬টি"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২৫টি",
+    "explanation": "১ থেকে ৫০ পর্যন্ত বিজোড় সংখ্যা ২৫টি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "number"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0256",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "দশমিক",
+    "difficulty": "easy",
+    "question": "০.৫ × ২০০ = কত?",
+    "options": [
+      "৫০",
+      "১০০",
+      "১৫০",
+      "২০০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১০০",
+    "explanation": "০.৫ × ২০০ = ১০০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "decimal",
+      "grade11-20",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0257",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সময়",
+    "difficulty": "easy",
+    "question": "১ ঘণ্টা সমান কত মিনিট?",
+    "options": [
+      "৩০ মিনিট",
+      "৬০ মিনিট",
+      "৯০ মিনিট",
+      "১২০ মিনিট"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৬০ মিনিট",
+    "explanation": "১ ঘণ্টা = ৬০ মিনিট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "time"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0258",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "পরিমাপ",
+    "difficulty": "easy",
+    "question": "১ কিলোমিটার সমান কত মিটার?",
+    "options": [
+      "১০০ মিটার",
+      "৫০০ মিটার",
+      "১০০০ মিটার",
+      "১০০০০ মিটার"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১০০০ মিটার",
+    "explanation": "১ কিলোমিটার = ১০০০ মিটার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "measurement"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0259",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "পরিমাপ",
+    "difficulty": "easy",
+    "question": "৫০০ গ্রাম সমান কত কিলোগ্রাম?",
+    "options": [
+      "০.৫ কেজি",
+      "৫ কেজি",
+      "০.০৫ কেজি",
+      "৫০ কেজি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "০.৫ কেজি",
+    "explanation": "১০০০ গ্রাম = ১ কেজি; ৫০০ গ্রাম = ০.৫ কেজি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "grade11-20",
+      "math",
+      "mathematics",
+      "measurement"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  },
+  {
+    "id": "JOBQ-0260",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "দুটি সংখ্যার যোগফল ৬০ ও বিয়োগফল ২০ হলে বড় সংখ্যাটি কত?",
+    "options": [
+      "৩০",
+      "৪০",
+      "৫০",
+      "২০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৪০",
+    "explanation": "বড় সংখ্যা = (যোগফল + বিয়োগফল) ÷ ২ = (৬০ + ২০) ÷ ২ = ৪০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+    "syllabus_source": "Ministry/Department 11-20 grade recruitment circulars (per-post; Teletalk) — common written pattern: Bangla, English, Mathematics, General Knowledge (e.g. DGFood Office Assistant-cum-Computer Typist MCQ 100: Bangla 30, English 30, Math 20, GK 20 + viva 10); practical typing test for computer posts",
+    "tags": [
+      "algebra",
+      "grade11-20",
+      "math",
+      "mathematics"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-general-mathematics.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null
+  }
+]

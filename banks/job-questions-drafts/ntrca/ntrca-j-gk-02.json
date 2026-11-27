@@ -1,0 +1,1446 @@
+[
+  {
+    "id": "JOBQ-J361",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশ ক্রিকেট দল টেস্ট মর্যাদা লাভ করে কত সালে?",
+    "options": [
+      "১৯৯৯",
+      "২০০০",
+      "১৯৯৭",
+      "২০০২"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২০০০",
+    "explanation": "বাংলাদেশ ২০০০ সালে টেস্ট মর্যাদা লাভ করে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "খেলাধুলা"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J362",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের প্রথম নোবেল বিজয়ী কে?",
+    "options": [
+      "ড. মুহাম্মদ ইউনূস",
+      "শেখ মুজিবুর রহমান",
+      "রবীন্দ্রনাথ ঠাকুর",
+      "অমর্ত্য সেন"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ড. মুহাম্মদ ইউনূস",
+    "explanation": "ড. মুহাম্মদ ইউনূস ২০০৬ সালে শান্তিতে নোবেল পুরস্কার পান।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "নোবেল"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J363",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "জাতিসংঘ প্রতিষ্ঠিত হয় কত সালে?",
+    "options": [
+      "১৯১৯",
+      "১৯৫০",
+      "১৯৪৫",
+      "১৯৩৯"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৯৪৫",
+    "explanation": "জাতিসংঘ প্রতিষ্ঠিত হয় ১৯৪৫ সালে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জাতিসংঘ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J364",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "জাতিসংঘের সদর দপ্তর কোথায়?",
+    "options": [
+      "জেনেভা",
+      "নিউইয়র্ক",
+      "লন্ডন",
+      "প্যারিস"
+    ],
+    "correct_index": 1,
+    "correct_answer": "নিউইয়র্ক",
+    "explanation": "জাতিসংঘের সদর দপ্তর নিউইয়র্কে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জাতিসংঘ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J365",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "জাতিসংঘের বর্তমান সদস্য দেশ কয়টি?",
+    "options": [
+      "২০০টি",
+      "১৮৫টি",
+      "১৯৩টি",
+      "১৯৫টি"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৯৩টি",
+    "explanation": "জাতিসংঘের সদস্য দেশ ১৯৩টি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জাতিসংঘ"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J367",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "সার্কের সদর দপ্তর কোথায়?",
+    "options": [
+      "ঢাকা",
+      "কাঠমান্ডু",
+      "ইসলামাবাদ",
+      "নয়াদিল্লি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "কাঠমান্ডু",
+    "explanation": "সার্কের সদর দপ্তর নেপালের কাঠমান্ডুতে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "আঞ্চলিক সংস্থা"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J369",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "ইউনেস্কোর সদর দপ্তর কোথায়?",
+    "options": [
+      "নিউইয়র্ক",
+      "জেনেভা",
+      "প্যারিস",
+      "লন্ডন"
+    ],
+    "correct_index": 2,
+    "correct_answer": "প্যারিস",
+    "explanation": "ইউনেস্কোর সদর দপ্তর প্যারিসে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "আন্তর্জাতিক সংস্থা"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J370",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "ওপেক (OPEC)-এর সদর দপ্তর কোথায় অবস্থিত?",
+    "options": [
+      "জেনেভা",
+      "ভিয়েনা",
+      "লন্ডন",
+      "নিউইয়র্ক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ভিয়েনা",
+    "explanation": "ওপেকের সদর দপ্তর অস্ট্রিয়ার ভিয়েনায় অবস্থিত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "আন্তর্জাতিক সংস্থা"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J371",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "ভারতের রাজধানী কোনটি?",
+    "options": [
+      "কলকাতা",
+      "মুম্বাই",
+      "নয়াদিল্লি",
+      "চেন্নাই"
+    ],
+    "correct_index": 2,
+    "correct_answer": "নয়াদিল্লি",
+    "explanation": "ভারতের রাজধানী নয়াদিল্লি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "রাজধানী"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J372",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "নেপালের রাজধানী কোনটি?",
+    "options": [
+      "ললিতপুর",
+      "থিম্পু",
+      "পোখরা",
+      "কাঠমান্ডু"
+    ],
+    "correct_index": 3,
+    "correct_answer": "কাঠমান্ডু",
+    "explanation": "নেপালের রাজধানী কাঠমান্ডু।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "রাজধানী"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J373",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "ভুটানের রাজধানী কোনটি?",
+    "options": [
+      "থিম্পু",
+      "দিল্লি",
+      "কাঠমান্ডু",
+      "পারো"
+    ],
+    "correct_index": 0,
+    "correct_answer": "থিম্পু",
+    "explanation": "ভুটানের রাজধানী থিম্পু।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "রাজধানী"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J374",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "পাকিস্তানের রাজধানী কোনটি?",
+    "options": [
+      "লাহোর",
+      "করাচি",
+      "রাওয়ালপিন্ডি",
+      "ইসলামাবাদ"
+    ],
+    "correct_index": 3,
+    "correct_answer": "ইসলামাবাদ",
+    "explanation": "পাকিস্তানের রাজধানী ইসলামাবাদ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "রাজধানী"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J375",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "অস্ট্রেলিয়ার রাজধানী কোনটি?",
+    "options": [
+      "মেলবোর্ন",
+      "সিডনি",
+      "পার্থ",
+      "ক্যানবেরা"
+    ],
+    "correct_index": 3,
+    "correct_answer": "ক্যানবেরা",
+    "explanation": "অস্ট্রেলিয়ার রাজধানী ক্যানবেরা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "রাজধানী"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J376",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "কানাডার রাজধানী কোনটি?",
+    "options": [
+      "অটোয়া",
+      "ভ্যাঙ্কুভার",
+      "টরন্টো",
+      "মন্ট্রিল"
+    ],
+    "correct_index": 0,
+    "correct_answer": "অটোয়া",
+    "explanation": "কানাডার রাজধানী অটোয়া।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "রাজধানী"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J377",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "বিশ্বের বৃহত্তম দেশ কোনটি?",
+    "options": [
+      "রাশিয়া",
+      "চীন",
+      "যুক্তরাষ্ট্র",
+      "কানাডা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "রাশিয়া",
+    "explanation": "আয়তনে বিশ্বের বৃহত্তম দেশ রাশিয়া।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J378",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "বিশ্বের শীতলতম মরুভূমি কোনটি?",
+    "options": [
+      "আরব মরুভূমি",
+      "সাহারা মরুভূমি",
+      "অ্যান্টার্কটিক মরুভূমি",
+      "গোবি মরুভূমি"
+    ],
+    "correct_index": 2,
+    "correct_answer": "অ্যান্টার্কটিক মরুভূমি",
+    "explanation": "বিশ্বের শীতলতম মরুভূমি অ্যান্টার্কটিক মরুভূমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J379",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "বিশ্বের উচ্চতম জলপ্রপাত কোনটি?",
+    "options": [
+      "ভিক্টোরিয়া জলপ্রপাত",
+      "ইগুয়াসু জলপ্রপাত",
+      "নায়াগ্রা জলপ্রপাত",
+      "অ্যাঞ্জেল জলপ্রপাত"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অ্যাঞ্জেল জলপ্রপাত",
+    "explanation": "বিশ্বের উচ্চতম জলপ্রপাত ভেনেজুয়েলার অ্যাঞ্জেল জলপ্রপাত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J380",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "বিশ্বের সর্বোচ্চ পর্বতশৃঙ্গ কোনটি?",
+    "options": [
+      "কাঞ্চনজঙ্ঘা",
+      "মাকালু",
+      "এভারেস্ট",
+      "কে-টু"
+    ],
+    "correct_index": 2,
+    "correct_answer": "এভারেস্ট",
+    "explanation": "বিশ্বের সর্বোচ্চ পর্বতশৃঙ্গ এভারেস্ট (৮,৮৪৮ মিটার)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J381",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "নোবেল পুরস্কার প্রদান শুরু হয় কত সালে?",
+    "options": [
+      "১৯১০",
+      "১৯০১",
+      "১৮৯৫",
+      "১৯০৫"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৯০১",
+    "explanation": "নোবেল পুরস্কার প্রদান শুরু হয় ১৯০১ সালে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "নোবেল"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J382",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "easy",
+    "question": "অক্সিজেনের রাসায়নিক প্রতীক কোনটি?",
+    "options": [
+      "O2",
+      "O",
+      "Og",
+      "Ox"
+    ],
+    "correct_index": 1,
+    "correct_answer": "O",
+    "explanation": "অক্সিজেনের রাসায়নিক প্রতীক O।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "রসায়ন"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J383",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "easy",
+    "question": "তামার রাসায়নিক প্রতীক কোনটি?",
+    "options": [
+      "Ca",
+      "Cu",
+      "Co",
+      "Tm"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Cu",
+    "explanation": "তামার রাসায়নিক প্রতীক Cu।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "রসায়ন"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J384",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "easy",
+    "question": "লোহার রাসায়নিক প্রতীক কোনটি?",
+    "options": [
+      "Al",
+      "Fe",
+      "Cu",
+      "Zn"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Fe",
+    "explanation": "লোহার রাসায়নিক প্রতীক Fe।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "রসায়ন"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J385",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "মানবদেহে প্রাপ্তবয়স্ক মানুষের হাড়ের সংখ্যা কতটি?",
+    "options": [
+      "২০৬টি",
+      "২১০টি",
+      "২০০টি",
+      "১৯৬টি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২০৬টি",
+    "explanation": "প্রাপ্তবয়স্ক মানুষের দেহে হাড় ২০৬টি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J386",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "easy",
+    "question": "মানবদেহের স্বাভাবিক তাপমাত্রা কত?",
+    "options": [
+      "১০০° ফারেনহাইট",
+      "৯৬.৪° ফারেনহাইট",
+      "৯৮.৪° ফারেনহাইট",
+      "৯৮.৬° সেলসিয়াস"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৯৮.৪° ফারেনহাইট",
+    "explanation": "মানবদেহের স্বাভাবিক তাপমাত্রা ৯৮.৪° ফারেনহাইট (৩৭° সেলসিয়াস)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J387",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "বিদ্যুৎ বাল্ব আবিষ্কার করেন কে?",
+    "options": [
+      "টমাস আলভা এডিসন",
+      "মাইকেল ফ্যারাডে",
+      "আইজাক নিউটন",
+      "গ্যালিলিও গ্যালিলি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "টমাস আলভা এডিসন",
+    "explanation": "বিদ্যুৎ বাল্ব আবিষ্কার করেন টমাস আলভা এডিসন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J388",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "পেনিসিলিন আবিষ্কার করেন কে?",
+    "options": [
+      "লুই পাস্তুর",
+      "আলেকজান্ডার ফ্লেমিং",
+      "জোসেফ লিস্টার",
+      "রবার্ট কখ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "আলেকজান্ডার ফ্লেমিং",
+    "explanation": "পেনিসিলিন আবিষ্কার করেন আলেকজান্ডার ফ্লেমিং।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J389",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "টেলিফোন আবিষ্কার করেন কে?",
+    "options": [
+      "টমাস এডিসন",
+      "আলেকজান্ডার ফ্লেমিং",
+      "মাইকেল ফ্যারাডে",
+      "আলেকজান্ডার গ্রাহাম বেল"
+    ],
+    "correct_index": 3,
+    "correct_answer": "আলেকজান্ডার গ্রাহাম বেল",
+    "explanation": "টেলিফোন আবিষ্কার করেন আলেকজান্ডার গ্রাহাম বেল।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "আবিষ্কার"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J390",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "বৈদ্যুতিক বাতি আবিষ্কার করেন কে?",
+    "options": [
+      "মাইকেল ফ্যারাডে",
+      "আলেকজান্ডার গ্রাহাম বেল",
+      "নিকোলা টেসলা",
+      "টমাস এডিসন"
+    ],
+    "correct_index": 3,
+    "correct_answer": "টমাস এডিসন",
+    "explanation": "বৈদ্যুতিক বাতি আবিষ্কার করেন টমাস এডিসন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "আবিষ্কার"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J391",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "easy",
+    "question": "সূর্যের নিকটতম নক্ষত্র কোনটি?",
+    "options": [
+      "প্রক্সিমা সেন্টরাই",
+      "সিরিয়াস",
+      "আলফা সেন্টরাই",
+      "ভেগা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "প্রক্সিমা সেন্টরাই",
+    "explanation": "সূর্যের নিকটতম নক্ষত্র প্রক্সিমা সেন্টরাই।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জ্যোতির্বিজ্ঞান"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J392",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "easy",
+    "question": "সৌরজগতের বৃহত্তম গ্রহ কোনটি?",
+    "options": [
+      "বৃহস্পতি",
+      "শনি",
+      "মঙ্গল",
+      "পৃথিবী"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বৃহস্পতি",
+    "explanation": "সৌরজগতের বৃহত্তম গ্রহ বৃহস্পতি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জ্যোতির্বিজ্ঞান"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J393",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "চাঁদে প্রথম অবতরণকারী মানুষ কে?",
+    "options": [
+      "ইউরি গ্যাগারিন",
+      "মাইকেল কলিন্স",
+      "নীল আর্মস্ট্রং",
+      "বাজ অলড্রিন"
+    ],
+    "correct_index": 2,
+    "correct_answer": "নীল আর্মস্ট্রং",
+    "explanation": "চাঁদে প্রথম অবতরণকারী মানুষ নীল আর্মস্ট্রং (১৯৬৯)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "জ্যোতির্বিজ্ঞান"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J394",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "ভিটামিন 'ডি'-এর প্রধান উৎস কী?",
+    "options": [
+      "লেবু",
+      "ডিম",
+      "দুধ",
+      "সূর্যের আলো"
+    ],
+    "correct_index": 3,
+    "correct_answer": "সূর্যের আলো",
+    "explanation": "ভিটামিন ডি-এর প্রধান উৎস সূর্যের আলো।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "স্বাস্থ্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J395",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "আয়োডিনের অভাবে কোন রোগ হয়?",
+    "options": [
+      "রাতকানা",
+      "স্কার্ভি",
+      "গলগণ্ড",
+      "রিকেট"
+    ],
+    "correct_index": 2,
+    "correct_answer": "গলগণ্ড",
+    "explanation": "আয়োডিনের অভাবে গলগণ্ড রোগ হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "স্বাস্থ্য"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J396",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "কম্পিউটারের জনক কে?",
+    "options": [
+      "চার্লস ব্যাবেজ",
+      "বিল গেটস",
+      "অ্যালান টুরিং",
+      "টিম বার্নার্স-লি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "চার্লস ব্যাবেজ",
+    "explanation": "কম্পিউটারের জনক চার্লস ব্যাবেজ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "কম্পিউটার"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J397",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "MODEM-এর পূর্ণরূপ কী?",
+    "options": [
+      "Modern Demodulator",
+      "Modulator-Demodulator",
+      "Modulator Device",
+      "Modem Device"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Modulator-Demodulator",
+    "explanation": "MODEM-এর পূর্ণরূপ Modulator-Demodulator।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "কম্পিউটার"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J398",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "RAM-এর পূর্ণরূপ কী?",
+    "options": [
+      "Read And Memory",
+      "Read Access Memory",
+      "Random And Memory",
+      "Random Access Memory"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Random Access Memory",
+    "explanation": "RAM = Random Access Memory।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "কম্পিউটার"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J399",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "1 কিলোবাইট (KB) সমান কত বাইট?",
+    "options": [
+      "৫১২ বাইট",
+      "১০০০ বাইট",
+      "২০৪৮ বাইট",
+      "১০২৪ বাইট"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১০২৪ বাইট",
+    "explanation": "1 KB = 1024 বাইট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "কম্পিউটার"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J400",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "medium",
+    "question": "ওয়ার্ল্ড ওয়াইড ওয়েব (WWW)-এর উদ্ভাবক কে?",
+    "options": [
+      "টিম বার্নার্স-লি",
+      "বিল গেটস",
+      "স্টিভ জবস",
+      "ভিন্টন সার্ফ"
+    ],
+    "correct_index": 0,
+    "correct_answer": "টিম বার্নার্স-লি",
+    "explanation": "WWW-এর উদ্ভাবক টিম বার্নার্স-লি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Knowledge 25: Bangladesh-related topics, international topics and current events, science, technology, environment and diseases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "general-knowledge",
+      "ntrca",
+      "কম্পিউটার"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-gk-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

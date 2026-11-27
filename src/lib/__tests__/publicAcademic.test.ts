@@ -3,9 +3,9 @@
 //
 // The combined pool (Classes 6–12, thirty-five subjects) is the SINGLE
 // verified source for both the Question Maker and the Education Hub
-// chapter practice. These tests pin that it holds ONLY the 1,841
+// chapter practice. These tests pin that it holds ONLY the 1,842
 // reviewed questions (Class 6: 333, Class 7: 325, Class 8: 252,
-// Class 9: 557, Class 11: 374
+// Class 9: 558, Class 11: 374
 // — Class 10 shares the Class 9 pool and Class 12 shares the Class 11
 // pool, so no questions are stored under class-10 or class-12),
 // that the REJECTED items with no complete replacement
@@ -80,7 +80,7 @@ const PER_CLASS_SUBJECT: Record<string, { questions: number; chapters: number }>
   'class-9/math': { questions: 22, chapters: 14 },
   'class-9/math-depth': { questions: 35, chapters: 17 },
   'class-9/physics': { questions: 23, chapters: 11 },
-  'class-9/physics-depth': { questions: 31, chapters: 13 },
+  'class-9/physics-depth': { questions: 32, chapters: 13 },
   'class-11/accounting': { questions: 22, chapters: 12 },
   'class-11/bangla': { questions: 21, chapters: 20 },
   'class-11/biology': { questions: 24, chapters: 12 },
@@ -101,15 +101,15 @@ const PER_CLASS_SUBJECT: Record<string, { questions: number; chapters: number }>
 };
 
 describe('combined verified Academic pool (Classes 6–12, thirty-five subjects)', () => {
-  it('holds exactly the 1,841 reviewed questions (333 + 325 + 252 + 557 + 374)', () => {
-    expect(PUBLIC_ACADEMIC_QUESTIONS).toHaveLength(1841);
-    expect(new Set(PUBLIC_ACADEMIC_QUESTIONS.map((q) => q.id)).size).toBe(1841);
+  it('holds exactly the 1,842 reviewed questions (333 + 325 + 252 + 558 + 374)', () => {
+    expect(PUBLIC_ACADEMIC_QUESTIONS).toHaveLength(1842);
+    expect(new Set(PUBLIC_ACADEMIC_QUESTIONS.map((q) => q.id)).size).toBe(1842);
     const byClass = (classId: string) =>
       PUBLIC_ACADEMIC_QUESTIONS.filter((q) => q.classId === classId);
     expect(byClass('class-6')).toHaveLength(333);
     expect(byClass('class-7')).toHaveLength(325);
     expect(byClass('class-8')).toHaveLength(252);
-    expect(byClass('class-9')).toHaveLength(557);
+    expect(byClass('class-9')).toHaveLength(558);
     // Class 10 shares the Class 9 pool — no questions are stored
     // under class-10 (the lookup helpers map it to class-9).
     expect(byClass('class-10')).toHaveLength(0);
@@ -149,7 +149,7 @@ describe('combined verified Academic pool (Classes 6–12, thirty-five subjects)
     expect(bySubject('higher-math')).toHaveLength(40);
     expect(bySubject('higher-math-depth')).toHaveLength(19);
     expect(bySubject('physics')).toHaveLength(47);
-    expect(bySubject('physics-depth')).toHaveLength(31);
+    expect(bySubject('physics-depth')).toHaveLength(32);
     expect(bySubject('islamic-history')).toHaveLength(20);
     expect(bySubject('logic')).toHaveLength(22);
     expect(bySubject('psychology')).toHaveLength(22);
@@ -262,7 +262,6 @@ describe('combined verified Academic pool (Classes 6–12, thirty-five subjects)
     expect(ids.has('C8S-034')).toBe(false); // science-depth — rebuild has no explanation
     expect(ids.has('ACAD-5108')).toBe(false); // biology malaria — keep-as-WHO vs drop decision open
     expect(ids.has('ACAD-5096')).toBe(false); // chemistry — placeholder citation, teacher input needed
-    expect(ids.has('C910P-018')).toBe(false); // physics-depth heat transfer — teacher decision needed
     expect(ids.has('ACAD-0018')).toBe(false); // bangla-2nd ণত্ব-ষত্ব — REJECTED, no replacement
     expect(ids.has('ACAD-0052')).toBe(false); // math coin-toss probability — REJECTED, no probability chapter
     expect(ids.has('ACAD-0053')).toBe(false); // higher-math matrix determinant — REJECTED, HSC-level
@@ -270,6 +269,16 @@ describe('combined verified Academic pool (Classes 6–12, thirty-five subjects)
     expect(ids.has('ACAD-5068')).toBe(false); // higher-math midpoint formula — REJECTED, not in Ch 11
     expect(ids.has('ACAD-3069')).toBe(false); // islamic-history Ottoman founder — REJECTED, off-syllabus; replacement is new text, spot-check owed
     expect(ids.has('ACAD-8069')).toBe(false); // islamic-history Mehmed II / Constantinople — REJECTED, off-syllabus; replacement is new text, spot-check owed
+  });
+
+  it('C910P-018 is present with its citation corrected (landing 27 Nov 2026)', () => {
+    // Worker D resolved the citation: the book's Chapter 6 is
+    // "বস্তুর ওপর তাপের প্রভাব" — the depth file's title is its alias.
+    const q = PUBLIC_ACADEMIC_QUESTIONS.find((x) => x.id === 'C910P-018');
+    expect(q).toBeDefined();
+    expect(q!.correctLetter).toBe('D');
+    expect(q!.sourceNote).toContain('বস্তুর ওপর তাপের প্রভাব');
+    expect(q!.chapterName).toBe('অধ্যায় ৬: তাপের প্রভাবে পদার্থের পরিবর্তন');
   });
 
   it('the thirty-four hard questions keep their reviewed difficulty (never silently downgraded)', () => {
@@ -408,7 +417,7 @@ describe('combined verified Academic pool (Classes 6–12, thirty-five subjects)
     expect(rows).toContainEqual({
       classId: 'class-9',
       subjectId: 'physics-depth',
-      questionCount: 31,
+      questionCount: 32,
       chapterCount: 13,
     });
     // Class 10 shares the Class 9 pool — same rows, same counts.
@@ -427,7 +436,7 @@ describe('combined verified Academic pool (Classes 6–12, thirty-five subjects)
     expect(rows).toContainEqual({
       classId: 'class-10',
       subjectId: 'physics-depth',
-      questionCount: 31,
+      questionCount: 32,
       chapterCount: 13,
     });
     // Class 11 is live now (26 Nov 2026) — 374 questions, 210 chapters.

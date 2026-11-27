@@ -197,7 +197,7 @@ describe('Academic practice first paint (renderToString)', () => {
     expect(html).toContain('/learn/practice/class-11/physics');
     expect(html).toContain('/learn/practice/class-11/islamic-history');
     expect(html).toContain('/learn/practice/class-12/physics');
-    expect(html).toContain('যাচাইকৃত প্রশ্ন');
+    expect(html).toContain('যাচাইকৃত অনুশীলন প্রশ্ন');
   });
 
   it('subject page lists its units with counts', async () => {

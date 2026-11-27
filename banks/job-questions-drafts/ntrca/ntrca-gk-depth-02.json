@@ -1,0 +1,1294 @@
+[
+ {
+  "id": "JOBQ-N687",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংবিধান",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের সংবিধানের প্রস্তাবনা কোন শব্দ দিয়ে শুরু হয়?",
+  "options": [
+   "আমরা",
+   "বাংলাদেশের",
+   "জনগণ",
+   "প্রজাতন্ত্র"
+  ],
+  "correct_index": 0,
+  "correct_answer": "আমরা",
+  "explanation": "সংবিধানের প্রস্তাবনা 'আমরা, বাংলাদেশের জনগণ' দিয়ে শুরু হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "সংবিধান"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N688",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংবিধান",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের সংবিধানের কোন অনুচ্ছেদে রাষ্ট্রধর্ম ইসলাম নির্ধারণ করা হয়েছে?",
+  "options": [
+   "২ক",
+   "৩",
+   "৪",
+   "৭"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২ক",
+  "explanation": "সংবিধানের ২ক অনুচ্ছেদে রাষ্ট্রধর্ম ইসলাম নির্ধারণ করা হয়েছে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "সংবিধান"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N689",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংবিধান",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের সংবিধানের মোট অনুচ্ছেদ কয়টি?",
+  "options": [
+   "১৫৩",
+   "১৫০",
+   "১৫৫",
+   "১৬০"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৫৩",
+  "explanation": "বাংলাদেশের সংবিধানে মোট ১৫৩টি অনুচ্ছেদ রয়েছে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "সংবিধান"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N690",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সংবিধান",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের সংবিধানের কত নম্বর অনুচ্ছেদে রাষ্ট্রের মূলনীতিসমূহ বর্ণিত হয়েছে?",
+  "options": [
+   "৮",
+   "৭",
+   "৯",
+   "১০"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৮",
+  "explanation": "সংবিধানের ৮ নম্বর অনুচ্ছেদে রাষ্ট্রের চার মূলনীতি — জাতীয়তাবাদ, সমাজতন্ত্র, গণতন্ত্র ও ধর্মনিরপেক্ষতা — বর্ণিত হয়েছে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "সংবিধান"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N691",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মুক্তিযুদ্ধ",
+  "difficulty": "medium",
+  "question": "মুক্তিযুদ্ধের সময় প্রবাসী সরকারের রাষ্ট্রপতি কে ছিলেন?",
+  "options": [
+   "তাজউদ্দীন আহমদ",
+   "বঙ্গবন্ধু শেখ মুজিবুর রহমান",
+   "সৈয়দ নজরুল ইসলাম",
+   "এম. এ. জি. ওসমানী"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বঙ্গবন্ধু শেখ মুজিবুর রহমান",
+  "explanation": "প্রবাসী সরকারের রাষ্ট্রপতি ছিলেন বঙ্গবন্ধু শেখ মুজিবুর রহমান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "মুক্তিযুদ্ধ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N692",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মুক্তিযুদ্ধ",
+  "difficulty": "medium",
+  "question": "মুক্তিযুদ্ধের সময় প্রবাসী সরকারের উপ-রাষ্ট্রপতি কে ছিলেন?",
+  "options": [
+   "তাজউদ্দীন আহমদ",
+   "সৈয়দ নজরুল ইসলাম",
+   "বঙ্গবন্ধু শেখ মুজিবুর রহমান",
+   "খন্দকার মোশতাক আহমদ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সৈয়দ নজরুল ইসলাম",
+  "explanation": "প্রবাসী সরকারের উপ-রাষ্ট্রপতি ছিলেন সৈয়দ নজরুল ইসলাম।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "মুক্তিযুদ্ধ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N693",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "মুক্তিযুদ্ধ",
+  "difficulty": "medium",
+  "question": "বঙ্গবন্ধু শেখ মুজিবুর রহমানের ঐতিহাসিক ৭ মার্চের ভাষণ কত মিনিটের ছিল?",
+  "options": [
+   "১৯ মিনিট",
+   "১০ মিনিট",
+   "৩০ মিনিট",
+   "৪৫ মিনিট"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯ মিনিট",
+  "explanation": "বঙ্গবন্ধুর ৭ মার্চের ভাষণ প্রায় ১৯ মিনিটের ছিল; এটি ১৯৭১ সালের ৭ মার্চ ঢাকার রেসকোর্স ময়দানে দেওয়া হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "মুক্তিযুদ্ধ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N694",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশের ইতিহাস",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম পররাষ্ট্রমন্ত্রী কে ছিলেন?",
+  "options": [
+   "আবদুস সামাদ আজাদ",
+   "তাজউদ্দীন আহমদ",
+   "কামাল হোসেন",
+   "সৈয়দ নজরুল ইসলাম"
+  ],
+  "correct_index": 0,
+  "correct_answer": "আবদুস সামাদ আজাদ",
+  "explanation": "বাংলাদেশের প্রথম পররাষ্ট্রমন্ত্রী ছিলেন আবদুস সামাদ আজাদ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "ইতিহাস",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N695",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সামরিক",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম বিমান বাহিনী প্রধান কে ছিলেন?",
+  "options": [
+   "এ. কে. খন্দকার",
+   "কে. এম. শফিউল্লাহ",
+   "জিয়াউর রহমান",
+   "খালেদ মোশাররফ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "এ. কে. খন্দকার",
+  "explanation": "এয়ার ভাইস মার্শাল এ. কে. খন্দকার বাংলাদেশের প্রথম বিমান বাহিনী প্রধান ছিলেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "সামরিক"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N696",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সামরিক",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম নৌবাহিনী প্রধান কে ছিলেন?",
+  "options": [
+   "ক্যাপ্টেন নুরুল হক",
+   "এ. কে. খন্দকার",
+   "কে. এম. শফিউল্লাহ",
+   "খালেদ মোশাররফ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ক্যাপ্টেন নুরুল হক",
+  "explanation": "ক্যাপ্টেন নুরুল হক বাংলাদেশের প্রথম নৌবাহিনী প্রধান ছিলেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "সামরিক"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N697",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের দ্বিতীয় বৃহত্তম শহর কোনটি?",
+  "options": [
+   "খুলনা",
+   "চট্টগ্রাম",
+   "রাজশাহী",
+   "সিলেট"
+  ],
+  "correct_index": 1,
+  "correct_answer": "চট্টগ্রাম",
+  "explanation": "বাংলাদেশের দ্বিতীয় বৃহত্তম শহর চট্টগ্রাম।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N698",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রাচীনতম শহর কোনটি?",
+  "options": [
+   "মহাস্থানগড়",
+   "সোনারগাঁও",
+   "পাহাড়পুর",
+   "গৌড়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মহাস্থানগড়",
+  "explanation": "মহাস্থানগড় (পুণ্ড্রনগর) বাংলাদেশের প্রাচীনতম শহর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N699",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "medium",
+  "question": "পাহাড়পুর বৌদ্ধ বিহার কে নির্মাণ করেন?",
+  "options": [
+   "ধর্মপাল",
+   "গোপাল",
+   "দেবপাল",
+   "মহীপাল"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ধর্মপাল",
+  "explanation": "পাল রাজা ধর্মপাল অষ্টম শতাব্দীতে পাহাড়পুর বৌদ্ধ বিহার (সোমপুর মহাবিহার) নির্মাণ করেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N700",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "medium",
+  "question": "মহাস্থানগড়ের প্রাচীন নাম কী?",
+  "options": [
+   "পুণ্ড্রনগর",
+   "সুবর্ণগ্রাম",
+   "গৌড়",
+   "বিক্রমপুর"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পুণ্ড্রনগর",
+  "explanation": "মহাস্থানগড়ের প্রাচীন নাম পুণ্ড্রনগর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N701",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "medium",
+  "question": "ষাট গম্বুজ মসজিদ কোন জেলায় অবস্থিত?",
+  "options": [
+   "খুলনা",
+   "বাগেরহাট",
+   "সাতক্ষীরা",
+   "যশোর"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বাগেরহাট",
+  "explanation": "ষাট গম্বুজ মসজিদ বাগেরহাট জেলায় অবস্থিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N702",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের কোন মসজিদ ইউনেস্কোর বিশ্ব ঐতিহ্য তালিকায় আছে?",
+  "options": [
+   "ষাট গম্বুজ মসজিদ",
+   "তারা মসজিদ",
+   "বায়তুল মুকাররম",
+   "খানকা মসজিদ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ষাট গম্বুজ মসজিদ",
+  "explanation": "বাগেরহাটের ষাট গম্বুজ মসজিদ ইউনেস্কোর বিশ্ব ঐতিহ্য তালিকায় আছে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N703",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাদুঘর",
+  "difficulty": "medium",
+  "question": "বরেন্দ্র জাদুঘর কোন জেলায় অবস্থিত?",
+  "options": [
+   "ঢাকা",
+   "রাজশাহী",
+   "বগুড়া",
+   "রংপুর"
+  ],
+  "correct_index": 1,
+  "correct_answer": "রাজশাহী",
+  "explanation": "বরেন্দ্র জাদুঘর রাজশাহীতে অবস্থিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "জাদুঘর",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N704",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "শিক্ষা",
+  "difficulty": "medium",
+  "question": "ক্যাম্পাসের আয়তনে বাংলাদেশের বৃহত্তম বিশ্ববিদ্যালয় কোনটি?",
+  "options": [
+   "ঢাকা বিশ্ববিদ্যালয়",
+   "চট্টগ্রাম বিশ্ববিদ্যালয়",
+   "জাহাঙ্গীরনগর বিশ্ববিদ্যালয়",
+   "রাজশাহী বিশ্ববিদ্যালয়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "চট্টগ্রাম বিশ্ববিদ্যালয়",
+  "explanation": "ক্যাম্পাসের আয়তনে বাংলাদেশের বৃহত্তম বিশ্ববিদ্যালয় চট্টগ্রাম বিশ্ববিদ্যালয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "শিক্ষা"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N705",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "শিক্ষা",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম বেসরকারি বিশ্ববিদ্যালয় কোনটি?",
+  "options": [
+   "নর্থ সাউথ বিশ্ববিদ্যালয়",
+   "ব্র্যাক বিশ্ববিদ্যালয়",
+   "ইস্ট ওয়েস্ট বিশ্ববিদ্যালয়",
+   "আমেরিকান ইন্টারন্যাশনাল ইউনিভার্সিটি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নর্থ সাউথ বিশ্ববিদ্যালয়",
+  "explanation": "নর্থ সাউথ বিশ্ববিদ্যালয় (১৯৯২) বাংলাদেশের প্রথম বেসরকারি বিশ্ববিদ্যালয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "শিক্ষা"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N706",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "শিক্ষা",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম মেডিকেল কলেজ কোনটি?",
+  "options": [
+   "ঢাকা মেডিকেল কলেজ",
+   "চট্টগ্রাম মেডিকেল কলেজ",
+   "স্যার সলিমুল্লাহ মেডিকেল কলেজ",
+   "রাজশাহী মেডিকেল কলেজ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ঢাকা মেডিকেল কলেজ",
+  "explanation": "ঢাকা মেডিকেল কলেজ (১৯৪৬) বাংলাদেশের প্রথম মেডিকেল কলেজ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "শিক্ষা"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N707",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "শিক্ষা",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম প্রকৌশল বিশ্ববিদ্যালয় কোনটি?",
+  "options": [
+   "বুয়েট",
+   "রুয়েট",
+   "চুয়েট",
+   "কুয়েট"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বুয়েট",
+  "explanation": "বুয়েট (১৯৬২ সালে প্রকৌশল বিশ্ববিদ্যালয় হিসেবে প্রতিষ্ঠা) বাংলাদেশের প্রথম প্রকৌশল বিশ্ববিদ্যালয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "শিক্ষা"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N708",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "জনসংখ্যায় বিশ্বের দ্বিতীয় বৃহত্তম দেশ কোনটি?",
+  "options": [
+   "ভারত",
+   "চীন",
+   "যুক্তরাষ্ট্র",
+   "ইন্দোনেশিয়া"
+  ],
+  "correct_index": 1,
+  "correct_answer": "চীন",
+  "explanation": "জনসংখ্যায় বিশ্বের দ্বিতীয় বৃহত্তম দেশ চীন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N709",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "পৃথিবীর দীর্ঘতম পর্বতমালাটি কোন মহাদেশে অবস্থিত?",
+  "options": [
+   "দক্ষিণ আমেরিকা",
+   "এশিয়া",
+   "উত্তর আমেরিকা",
+   "আফ্রিকা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "দক্ষিণ আমেরিকা",
+  "explanation": "পৃথিবীর দীর্ঘতম পর্বতমালা আন্দিজ দক্ষিণ আমেরিকা মহাদেশে অবস্থিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N710",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "গ্রিনল্যান্ড কোন মহাসাগরে অবস্থিত?",
+  "options": [
+   "উত্তর আটলান্টিক মহাসাগর",
+   "প্রশান্ত মহাসাগর",
+   "ভারত মহাসাগর",
+   "দক্ষিণ মহাসাগর"
+  ],
+  "correct_index": 0,
+  "correct_answer": "উত্তর আটলান্টিক মহাসাগর",
+  "explanation": "গ্রিনল্যান্ড উত্তর আটলান্টিক মহাসাগরে অবস্থিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N711",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "বিশ্বের বৃহত্তম দ্বীপপুঞ্জ কোনটি?",
+  "options": [
+   "ফিলিপাইন",
+   "ইন্দোনেশিয়া",
+   "জাপান",
+   "মালদ্বীপ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ইন্দোনেশিয়া",
+  "explanation": "বিশ্বের বৃহত্তম দ্বীপপুঞ্জ ইন্দোনেশিয়া।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "বিশ্ব ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N713",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতিসংঘ",
+  "difficulty": "medium",
+  "question": "জাতিসংঘের সাধারণ পরিষদের সদস্য কারা?",
+  "options": [
+   "শুধু নিরাপত্তা পরিষদের সদস্য",
+   "সব সদস্য দেশ",
+   "শুধু স্থায়ী সদস্য",
+   "শুধু উন্নত দেশ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সব সদস্য দেশ",
+  "explanation": "জাতিসংঘের সাধারণ পরিষদে সব সদস্য দেশের প্রতিনিধি থাকেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "জাতিসংঘ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N714",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "আন্তর্জাতিক সংস্থা",
+  "difficulty": "medium",
+  "question": "আইএমএফ-এর হিসাবের এককের নাম কী?",
+  "options": [
+   "SDR",
+   "ডলার",
+   "ইউরো",
+   "পাউন্ড"
+  ],
+  "correct_index": 0,
+  "correct_answer": "SDR",
+  "explanation": "আইএমএফ-এর হিসাবের একক বিশেষ উত্তোলন অধিকার (SDR)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "সংস্থা"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N715",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "শিক্ষা",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের দ্বিতীয় প্রাচীনতম বিশ্ববিদ্যালয় কোনটি?",
+  "options": [
+   "রাজশাহী বিশ্ববিদ্যালয়",
+   "চট্টগ্রাম বিশ্ববিদ্যালয়",
+   "জাহাঙ্গীরনগর বিশ্ববিদ্যালয়",
+   "খুলনা বিশ্ববিদ্যালয়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রাজশাহী বিশ্ববিদ্যালয়",
+  "explanation": "রাজশাহী বিশ্ববিদ্যালয় ১৯৫৩ সালে প্রতিষ্ঠিত হয়; ঢাকা বিশ্ববিদ্যালয়ের (১৯২১) পর এটি দেশের দ্বিতীয় প্রাচীনতম বিশ্ববিদ্যালয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "শিক্ষা"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N716",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ক্রীড়া",
+  "difficulty": "easy",
+  "question": "অলিম্পিক গেমসের প্রতীকে কয়টি বৃত্ত আছে?",
+  "options": [
+   "৫টি",
+   "৪টি",
+   "৬টি",
+   "৭টি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৫টি",
+  "explanation": "অলিম্পিক প্রতীকে পাঁচটি বৃত্ত আছে, যা বিশ্বের পাঁচটি মহাদেশের প্রতীক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "ক্রীড়া"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N717",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ক্রীড়া",
+  "difficulty": "medium",
+  "question": "ফুটবল বিশ্বকাপ প্রথম অনুষ্ঠিত হয় কত সালে?",
+  "options": [
+   "১৯৩০",
+   "১৯৩৪",
+   "১৯৫০",
+   "১৯৬৬"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৩০",
+  "explanation": "প্রথম ফুটবল বিশ্বকাপ অনুষ্ঠিত হয় ১৯৩০ সালে, উরুগুয়েতে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "ক্রীড়া"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N718",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ক্রীড়া",
+  "difficulty": "medium",
+  "question": "ক্রিকেট বিশ্বকাপ প্রথম অনুষ্ঠিত হয় কত সালে?",
+  "options": [
+   "১৯৭৫",
+   "১৯৭৯",
+   "১৯৮৩",
+   "১৯৮৭"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৭৫",
+  "explanation": "প্রথম ক্রিকেট বিশ্বকাপ অনুষ্ঠিত হয় ১৯৭৫ সালে, ইংল্যান্ডে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "আন্তর্জাতিক",
+   "ক্রীড়া"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N719",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ক্রীড়া",
+  "difficulty": "medium",
+  "question": "বাংলাদেশ প্রথম একদিনের আন্তর্জাতিক (ওয়ানডে) ম্যাচ খেলে কত সালে?",
+  "options": [
+   "১৯৮৬",
+   "১৯৯৭",
+   "২০০০",
+   "১৯৯০"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৮৬",
+  "explanation": "বাংলাদেশ প্রথম ওয়ানডে খেলে ১৯৮৬ সালে (এশিয়া কাপ, পাকিস্তানের বিপক্ষে)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "ক্রীড়া",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N720",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "easy",
+  "question": "বাংলাদেশের বৃহত্তম শহর কোনটি?",
+  "options": [
+   "ঢাকা",
+   "চট্টগ্রাম",
+   "খুলনা",
+   "রাজশাহী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ঢাকা",
+  "explanation": "বাংলাদেশের বৃহত্তম শহর ঢাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-N721",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশের ইতিহাস",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম জাতীয় সংসদ নির্বাচন অনুষ্ঠিত হয় কত সালে?",
+  "options": [
+   "১৯৭২",
+   "১৯৭৩",
+   "১৯৭৪",
+   "১৯৭৫"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯৭৩",
+  "explanation": "বাংলাদেশের প্রথম জাতীয় সংসদ নির্বাচন অনুষ্ঠিত হয় ৭ মার্চ ১৯৭৩।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — Bangla 25, English 25, General Mathematics 25, General Knowledge 25; total 100 MCQ, 1 hr, pass 40%; written 100 + viva 20",
+  "tags": [
+   "general-knowledge",
+   "ntrca",
+   "ইতিহাস",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-gk-depth-02.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

@@ -1,0 +1,795 @@
+[
+ {
+  "id": "JOBQ-D089",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "জাতিসংঘ",
+  "difficulty": "medium",
+  "question": "জাতিসংঘের বর্তমান মহাসচিব কে?",
+  "options": [
+   "আন্তোনিও গুতেরেস",
+   "বান কি মুন",
+   "কোফি আনান",
+   "বুট্রোস বুট্রোস-ঘালি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "আন্তোনিও গুতেরেস",
+  "explanation": "পর্তুগালের আন্তোনিও গুতেরেস ২০১৭ সাল থেকে জাতিসংঘের মহাসচিব।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "secretary-general",
+   "un"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D090",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "জাতিসংঘ",
+  "difficulty": "medium",
+  "question": "জাতিসংঘের সাধারণ পরিষদের সভাপতি কত বছরের জন্য নির্বাচিত হন?",
+  "options": [
+   "১ বছর",
+   "২ বছর",
+   "৫ বছর",
+   "১০ বছর"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১ বছর",
+  "explanation": "জাতিসংঘের সাধারণ পরিষদের সভাপতি এক বছরের জন্য নির্বাচিত হন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "members",
+   "un"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D091",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "জাতিসংঘ",
+  "difficulty": "medium",
+  "question": "জাতিসংঘের নিরাপত্তা পরিষদের অস্থায়ী সদস্যদের মেয়াদ কত বছর?",
+  "options": [
+   "২ বছর",
+   "১ বছর",
+   "৫ বছর",
+   "৪ বছর"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২ বছর",
+  "explanation": "নিরাপত্তা পরিষদের অস্থায়ী সদস্যরা ২ বছরের মেয়াদে নির্বাচিত হন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "security-council",
+   "un"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D092",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "জাতিসংঘ",
+  "difficulty": "hard",
+  "question": "আন্তর্জাতিক আদালতের (ICJ) বিচারক কতজন?",
+  "options": [
+   "৯ জন",
+   "১২ জন",
+   "১৫ জন",
+   "২১ জন"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৫ জন",
+  "explanation": "আন্তর্জাতিক বিচার আদালতে ১৫ জন বিচারক থাকেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "icj",
+   "international-affairs",
+   "un"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D093",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "জাতিসংঘ",
+  "difficulty": "medium",
+  "question": "বাংলাদেশ জাতিসংঘের সদস্যপদ লাভ করে কবে?",
+  "options": [
+   "১৭ সেপ্টেম্বর ১৯৭৪",
+   "১৬ ডিসেম্বর ১৯৭২",
+   "২৫ সেপ্টেম্বর ১৯৭৪",
+   "১ জানুয়ারি ১৯৭৫"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৭ সেপ্টেম্বর ১৯৭৪",
+  "explanation": "বাংলাদেশ ১৯৭৪ সালের ১৭ সেপ্টেম্বর জাতিসংঘের ১৩৬তম সদস্য হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangladesh",
+   "bcs",
+   "international-affairs",
+   "un"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D095",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "জাতিসংঘ সংস্থা",
+  "difficulty": "medium",
+  "question": "জাতিসংঘের শিশু তহবিলের সংক্ষিপ্ত নাম কী?",
+  "options": [
+   "ইউনেস্কো",
+   "ইউনিসেফ",
+   "ইউএনডিপি",
+   "ইউএনএইচসিআর"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ইউনিসেফ",
+  "explanation": "জাতিসংঘের শিশু তহবিলের সংক্ষিপ্ত নাম ইউনিসেফ (UNICEF)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "un-agencies",
+   "unesco"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D096",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "জাতিসংঘ সংস্থা",
+  "difficulty": "medium",
+  "question": "আন্তর্জাতিক মুদ্রা তহবিলের (IMF) বর্তমান ব্যবস্থাপনা পরিচালক কে?",
+  "options": [
+   "ক্রিস্টালিনা জর্জিয়েভা",
+   "ডেভিড ম্যালপাস",
+   "এনগোজি ওকোনজো-ইওয়েলা",
+   "অজয় বঙ্গা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ক্রিস্টালিনা জর্জিয়েভা",
+  "explanation": "আন্তর্জাতিক মুদ্রা তহবিলের বর্তমান ব্যবস্থাপনা পরিচালক ক্রিস্টালিনা জর্জিয়েভা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "fao",
+   "international-affairs",
+   "un-agencies"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D100",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "আঞ্চলিক সংস্থা",
+  "difficulty": "medium",
+  "question": "সার্কের সদস্য রাষ্ট্র কয়টি?",
+  "options": [
+   "৮টি",
+   "৭টি",
+   "১০টি",
+   "৬টি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৮টি",
+  "explanation": "সার্কের সদস্য ৮টি দেশ: বাংলাদেশ, ভারত, পাকিস্তান, শ্রীলঙ্কা, নেপাল, ভুটান, মালদ্বীপ ও আফগানিস্তান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "members",
+   "saarc"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D101",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "আঞ্চলিক সংস্থা",
+  "difficulty": "medium",
+  "question": "বিমসটেকের সদর দপ্তর কোথায়?",
+  "options": [
+   "ঢাকা",
+   "কাঠমান্ডু",
+   "ব্যাংকক",
+   "কলম্বো"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ঢাকা",
+  "explanation": "বিমসটেকের সদর দপ্তর ঢাকায়; প্রতিষ্ঠা ১৯৯৭ সালে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "bimstec",
+   "international-affairs"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D103",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "আঞ্চলিক সংস্থা",
+  "difficulty": "medium",
+  "question": "আসিয়ান প্রতিষ্ঠিত হয় কত সালে?",
+  "options": [
+   "১৯৪৫ সালে",
+   "১৯৬৭ সালে",
+   "১৯৮৫ সালে",
+   "১৯৯৭ সালে"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯৬৭ সালে",
+  "explanation": "আসিয়ান ১৯৬৭ সালের ৮ আগস্ট প্রতিষ্ঠিত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "eu",
+   "international-affairs"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D104",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "আঞ্চলিক সংস্থা",
+  "difficulty": "medium",
+  "question": "ন্যাটো কত সালে প্রতিষ্ঠিত হয়?",
+  "options": [
+   "১৯৪৯",
+   "১৯৪৫",
+   "১৯৫৫",
+   "১৯৬১"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৪৯",
+  "explanation": "উত্তর আটলান্টিক চুক্তি সংস্থা (ন্যাটো) ১৯৪৯ সালে প্রতিষ্ঠিত হয়; সদর দপ্তর ব্রাসেলসে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "nato"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D105",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "আঞ্চলিক সংস্থা",
+  "difficulty": "hard",
+  "question": "ওআইসির সদর দপ্তর কোথায়?",
+  "options": [
+   "জেদ্দা",
+   "রিয়াদ",
+   "কায়রো",
+   "আঙ্কারা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "জেদ্দা",
+  "explanation": "ইসলামি সহযোগিতা সংস্থার (ওআইসি) সদর দপ্তর সৌদি আরবের জেদ্দায়; প্রতিষ্ঠা ১৯৬৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "oic"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D106",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "বিশ্ব ইতিহাস",
+  "difficulty": "easy",
+  "question": "দ্বিতীয় বিশ্বযুদ্ধে জাপান আত্মসমর্পণ করে কত সালে?",
+  "options": [
+   "১৯৪৩ সালে",
+   "১৯৪৪ সালে",
+   "১৯৪৫ সালে",
+   "১৯৪৬ সালে"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৯৪৫ সালে",
+  "explanation": "জাপান ১৯৪৫ সালে আত্মসমর্পণ করে, যার মাধ্যমে দ্বিতীয় বিশ্বযুদ্ধ শেষ হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "world-history",
+   "ww1"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D108",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "বিশ্ব ইতিহাস",
+  "difficulty": "medium",
+  "question": "বার্লিন প্রাচীরের পতন ঘটে কত সালে?",
+  "options": [
+   "১৯৮৯",
+   "১৯৭৯",
+   "১৯৯১",
+   "১৯৮৫"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৮৯",
+  "explanation": "বার্লিন প্রাচীরের পতন ঘটে ১৯৮৯ সালে; সোভিয়েত ইউনিয়ন ভেঙে যায় ১৯৯১ সালে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "berlin-wall",
+   "international-affairs",
+   "world-history"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D109",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "আয়তনে বিশ্বের দ্বিতীয় ক্ষুদ্রতম দেশ কোনটি?",
+  "options": [
+   "মোনাকো",
+   "মালদ্বীপ",
+   "সান মারিনো",
+   "লিখটেনস্টাইন"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মোনাকো",
+  "explanation": "আয়তনে বিশ্বের দ্বিতীয় ক্ষুদ্রতম দেশ মোনাকো; ক্ষুদ্রতম ভ্যাটিকান সিটি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "largest-country",
+   "world-geography"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D110",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "এশিয়ার ক্ষুদ্রতম দেশ কোনটি?",
+  "options": [
+   "মালদ্বীপ",
+   "সিঙ্গাপুর",
+   "বাহরাইন",
+   "ভুটান"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মালদ্বীপ",
+  "explanation": "মালদ্বীপ আয়তনে এশিয়ার ক্ষুদ্রতম দেশ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "smallest-country",
+   "world-geography"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D111",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "medium",
+  "question": "বিশ্বের দীর্ঘতম নদী নীল নদ কোন মহাদেশে অবস্থিত?",
+  "options": [
+   "আফ্রিকা",
+   "এশিয়া",
+   "দক্ষিণ আমেরিকা",
+   "ইউরোপ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "আফ্রিকা",
+  "explanation": "নীল নদ আফ্রিকা মহাদেশে অবস্থিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "rivers",
+   "world-geography"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D112",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "বিশ্ব ভূগোল",
+  "difficulty": "easy",
+  "question": "বিশ্বের তৃতীয় সর্বোচ্চ পর্বতশৃঙ্গ কোনটি?",
+  "options": [
+   "কাঞ্চনজঙ্ঘা",
+   "লোৎসে",
+   "মাকালু",
+   "চো ওইয়ু"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কাঞ্চনজঙ্ঘা",
+  "explanation": "কাঞ্চনজঙ্ঘা বিশ্বের তৃতীয় সর্বোচ্চ পর্বতশৃঙ্গ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "mountains",
+   "world-geography"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D114",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "আন্তর্জাতিক চুক্তি",
+  "difficulty": "hard",
+  "question": "কিয়োটো প্রটোকল কত সালে গৃহীত হয়?",
+  "options": [
+   "১৯৯৭",
+   "১৯৯২",
+   "২০০৫",
+   "২০১৫"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৯৭",
+  "explanation": "কিয়োটো প্রটোকল ১৯৯৭ সালে গৃহীত হয়; জলবায়ু পরিবর্তন রোধে এটি একটি আন্তর্জাতিক চুক্তি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "kyoto",
+   "treaties"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D115",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "নোবেল পুরস্কার",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের কোন ব্যক্তি শান্তিতে নোবেল পুরস্কার পেয়েছেন?",
+  "options": [
+   "ড. মুহাম্মদ ইউনূস",
+   "বঙ্গবন্ধু শেখ মুজিবুর রহমান",
+   "অমর্ত্য সেন",
+   "ফজলে হাসান আবেদ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ড. মুহাম্মদ ইউনূস",
+  "explanation": "ড. মুহাম্মদ ইউনূস ২০০৬ সালে গ্রামীণ ব্যাংকের সঙ্গে যৌথভাবে শান্তিতে নোবেল পুরস্কার পান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "nobel",
+   "yunus"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D116",
+  "exam_canonical": "bcs",
+  "subject_canonical": "International Affairs",
+  "subject_slug": "international-affairs",
+  "topic": "আন্তর্জাতিক দিবস",
+  "difficulty": "easy",
+  "question": "আন্তর্জাতিক নারী দিবস কবে পালিত হয়?",
+  "options": [
+   "৮ মার্চ",
+   "৮ এপ্রিল",
+   "১০ ডিসেম্বর",
+   "২৪ অক্টোবর"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৮ মার্চ",
+  "explanation": "আন্তর্জাতিক নারী দিবস প্রতি বছর ৮ মার্চ পালিত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard international affairs references (UN Charter and UN system facts; SAARC/BIMSTEC/ASEAN/EU charters; standard world history references)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "international-affairs",
+   "international-days"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-international-affairs-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

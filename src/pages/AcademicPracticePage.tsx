@@ -55,8 +55,33 @@ function subjectLabel(classId: string, subjectId: string, lang: 'bn' | 'en'): st
   return subjectId;
 }
 
-const VERIFIED_BADGE_BN = 'যাচাইকৃত প্রশ্ন — NCTB পাঠভিত্তিক';
-const VERIFIED_BADGE_EN = 'Verified questions — NCTB lesson-based';
+const VERIFIED_BADGE_BN = 'যাচাইকৃত অনুশীলন প্রশ্ন — NCTB পাঠভিত্তিক (বোর্ড প্রশ্ন নয়)';
+const VERIFIED_BADGE_EN = 'Verified practice questions — NCTB lesson-based (not board questions)';
+
+/** Pool-truth caveat: Class 9 was verified against the Dakhil editions
+ *  and Class 11–12 against standard references + syllabus (no HSC book
+ *  in the workspace). Shown on the class subject pages (landing 27 Nov 2026). */
+function VerificationCaveat({ classId, lang }: { classId: string; lang: 'bn' | 'en' }) {
+  if (classId === 'class-9' || classId === 'class-10') {
+    return (
+      <p style={{ fontSize: 14, lineHeight: 1.7, margin: '0 0 16px', color: 'var(--muted)' }}>
+        {lang === 'bn'
+          ? 'নবম–দশম শ্রেণির প্রশ্ন দাখিল সংস্করণের বই অনুযায়ী যাচাই করা।'
+          : 'Class 9–10 questions verified against the Dakhil edition of the NCTB books.'}
+      </p>
+    );
+  }
+  if (classId === 'class-11' || classId === 'class-12') {
+    return (
+      <p style={{ fontSize: 14, lineHeight: 1.7, margin: '0 0 16px', color: 'var(--muted)' }}>
+        {lang === 'bn'
+          ? 'একাদশ–দ্বাদশ শ্রেণির প্রশ্ন মানসম্মত তথ্যসূত্র ও সিলেবাস অনুযায়ী যাচাই করা; এইচএসসি বইয়ের সঙ্গে মিলিয়ে দেখা হয়নি।'
+          : 'Class 11–12 questions verified against standard references and the syllabus; not yet checked against the HSC textbooks.'}
+      </p>
+    );
+  }
+  return null;
+}
 
 function VerifiedNote({ lang }: { lang: 'bn' | 'en' }) {
   return (
@@ -81,8 +106,8 @@ function PracticeHub() {
       />
       <p style={{ fontSize: 16, lineHeight: 1.75 }}>
         {lang === 'bn'
-          ? 'প্রতিটি অধ্যায়ের (Unit) যাচাইকৃত প্রশ্ন দিয়ে অনুশীলন করুন — উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা দেখতে পাবেন। প্রশ্নগুলো NCTB বইয়ের পাঠের সাথে মিলিয়ে যাচাই করা। লগইন ছাড়াই অনুশীলন করা যায়।'
-          : 'Practise with verified questions for every chapter (Unit) — see the correct answer and explanation as soon as you answer. Every question was verified against its NCTB book lesson. No login needed.'}
+          ? 'প্রতিটি অধ্যায়ের (Unit) যাচাইকৃত অনুশীলন প্রশ্ন দিয়ে অনুশীলন করুন — উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা দেখতে পাবেন। প্রশ্নগুলো NCTB বইয়ের পাঠের সাথে মিলিয়ে যাচাই করা। লগইন ছাড়াই অনুশীলন করা যায়।'
+          : 'Practise with verified practice questions for every chapter (Unit) — see the correct answer and explanation as soon as you answer. Every question was verified against its NCTB book lesson. No login needed.'}
       </p>
       <p style={{ margin: '0 0 16px' }}>
         <Chip tone="gold">{lang === 'bn' ? VERIFIED_BADGE_BN : VERIFIED_BADGE_EN}</Chip>
@@ -99,8 +124,8 @@ function PracticeHub() {
           </h3>
           <p style={{ fontSize: 15, lineHeight: 1.75, margin: '0 0 10px' }}>
             {lang === 'bn'
-              ? `${toBnDigits(r.chapterCount)}টি অধ্যায় • ${toBnDigits(r.questionCount)}টি যাচাইকৃত প্রশ্ন`
-              : `${r.chapterCount} chapters • ${r.questionCount} verified questions`}
+              ? `${toBnDigits(r.chapterCount)}টি অধ্যায় • ${toBnDigits(r.questionCount)}টি যাচাইকৃত অনুশীলন প্রশ্ন`
+              : `${r.chapterCount} chapters • ${r.questionCount} verified practice questions`}
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
             {publicAcademicChaptersFor(r.classId, r.subjectId).map((c) => (
@@ -162,12 +187,13 @@ function SubjectPage({ classId, subjectId }: { classId: string; subjectId: strin
       />
       <p style={{ fontSize: 16, lineHeight: 1.75 }}>
         {lang === 'bn'
-          ? `${classLabel(classId, 'bn')} ${subjectLabel(classId, subjectId, 'bn')} — ${toBnDigits(chapters.length)}টি অধ্যায়ে মোট ${toBnDigits(total)}টি যাচাইকৃত প্রশ্ন। অধ্যায় বেছে নিন, উত্তর দিন, সাথে সাথে সঠিক উত্তর ও ব্যাখ্যা দেখুন।`
-          : `${classLabel(classId, 'en')} ${subjectLabel(classId, subjectId, 'en')} — ${total} verified questions across ${chapters.length} chapters. Pick a chapter, answer, and see the correct answer and explanation right away.`}
+          ? `${classLabel(classId, 'bn')} ${subjectLabel(classId, subjectId, 'bn')} — ${toBnDigits(chapters.length)}টি অধ্যায়ে মোট ${toBnDigits(total)}টি যাচাইকৃত অনুশীলন প্রশ্ন। অধ্যায় বেছে নিন, উত্তর দিন, সাথে সাথে সঠিক উত্তর ও ব্যাখ্যা দেখুন।`
+          : `${classLabel(classId, 'en')} ${subjectLabel(classId, subjectId, 'en')} — ${total} verified practice questions across ${chapters.length} chapters. Pick a chapter, answer, and see the correct answer and explanation right away.`}
       </p>
       <p style={{ margin: '0 0 16px' }}>
         <Chip tone="gold">{lang === 'bn' ? VERIFIED_BADGE_BN : VERIFIED_BADGE_EN}</Chip>
       </p>
+      <VerificationCaveat classId={classId} lang={lang} />
       <div style={{ display: 'grid', gap: 12 }}>
         {chapters.map((c: PublicAcademicChapter) => (
           <Card key={c.id}>

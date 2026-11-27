@@ -1,0 +1,2927 @@
+[
+  {
+    "id": "JOBQ-J476",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Faithful'.",
+    "options": [
+      "Faithless",
+      "Loyal",
+      "False",
+      "Disloyal"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Loyal",
+    "explanation": "'Faithful' means loyal.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J477",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Generous'.",
+    "options": [
+      "Greedy",
+      "Miserly",
+      "Kind",
+      "Selfish"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Kind",
+    "explanation": "'Generous' means kind and giving.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J478",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Humble'.",
+    "options": [
+      "Vain",
+      "Proud",
+      "Arrogant",
+      "Modest"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Modest",
+    "explanation": "'Humble' means modest.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J479",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Diligent'.",
+    "options": [
+      "Industrious",
+      "Lazy",
+      "Idle",
+      "Careless"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Industrious",
+    "explanation": "'Diligent' means industrious — hard-working.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J480",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Silent'.",
+    "options": [
+      "Quiet",
+      "Noisy",
+      "Loud",
+      "Talkative"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Quiet",
+    "explanation": "'Silent' means quiet.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J481",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Wise'.",
+    "options": [
+      "Dull",
+      "Ignorant",
+      "Sagacious",
+      "Foolish"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Sagacious",
+    "explanation": "'Wise' means sagacious — having good judgement.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J482",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Polite'.",
+    "options": [
+      "Impudent",
+      "Harsh",
+      "Courteous",
+      "Rude"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Courteous",
+    "explanation": "'Polite' means courteous.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J483",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Famous'.",
+    "options": [
+      "Renowned",
+      "Hidden",
+      "Unknown",
+      "Obscure"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Renowned",
+    "explanation": "'Famous' means renowned.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J484",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Empty'.",
+    "options": [
+      "Full",
+      "Crowded",
+      "Vacant",
+      "Loaded"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Vacant",
+    "explanation": "'Empty' means vacant.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J485",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Synonyms",
+    "difficulty": "easy",
+    "question": "Choose the synonym of 'Safe'.",
+    "options": [
+      "Risky",
+      "Dangerous",
+      "Unsafe",
+      "Secure"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Secure",
+    "explanation": "'Safe' means secure.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "synonyms",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J486",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Generous'.",
+    "options": [
+      "Liberal",
+      "Miserly",
+      "Kind",
+      "Charitable"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Miserly",
+    "explanation": "The antonym of 'generous' is 'miserly'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J487",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Humble'.",
+    "options": [
+      "Submissive",
+      "Modest",
+      "Meek",
+      "Proud"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Proud",
+    "explanation": "The antonym of 'humble' is 'proud'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J488",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Silent'.",
+    "options": [
+      "Noisy",
+      "Quiet",
+      "Still",
+      "Calm"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Noisy",
+    "explanation": "The antonym of 'silent' is 'noisy'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J489",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Wise'.",
+    "options": [
+      "Foolish",
+      "Learned",
+      "Prudent",
+      "Sagacious"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Foolish",
+    "explanation": "The antonym of 'wise' is 'foolish'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J490",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Polite'.",
+    "options": [
+      "Civil",
+      "Courteous",
+      "Gentle",
+      "Rude"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Rude",
+    "explanation": "The antonym of 'polite' is 'rude'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J491",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Famous'.",
+    "options": [
+      "Noted",
+      "Unknown",
+      "Renowned",
+      "Celebrated"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Unknown",
+    "explanation": "The antonym of 'famous' is 'unknown'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J492",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Safe'.",
+    "options": [
+      "Harmless",
+      "Dangerous",
+      "Protected",
+      "Secure"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Dangerous",
+    "explanation": "The antonym of 'safe' is 'dangerous'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J493",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Diligent'.",
+    "options": [
+      "Hard-working",
+      "Lazy",
+      "Industrious",
+      "Active"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Lazy",
+    "explanation": "The antonym of 'diligent' is 'lazy'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J494",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Faithful'.",
+    "options": [
+      "True",
+      "Devoted",
+      "Loyal",
+      "Disloyal"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Disloyal",
+    "explanation": "The antonym of 'faithful' is 'disloyal'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J495",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Antonyms",
+    "difficulty": "easy",
+    "question": "Choose the antonym of 'Empty'.",
+    "options": [
+      "Full",
+      "Blank",
+      "Vacant",
+      "Hollow"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Full",
+    "explanation": "The antonym of 'empty' is 'full'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "antonyms",
+      "english",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J496",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "medium",
+    "question": "Choose the correctly spelt word — 'millennium'.",
+    "options": [
+      "Millenniam",
+      "Millennium",
+      "Millenium",
+      "Milennium"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Millennium",
+    "explanation": "The correct spelling is 'millennium'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J497",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "medium",
+    "question": "Choose the correctly spelt word — 'harassment'.",
+    "options": [
+      "Harrassment",
+      "Harassmant",
+      "Harassment",
+      "Harrasment"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Harassment",
+    "explanation": "The correct spelling is 'harassment'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J498",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "medium",
+    "question": "Choose the correctly spelt word — 'possession'.",
+    "options": [
+      "Possesion",
+      "Posession",
+      "Possession",
+      "Possesson"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Possession",
+    "explanation": "The correct spelling is 'possession'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J499",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "medium",
+    "question": "Choose the correctly spelt word — 'questionnaire'.",
+    "options": [
+      "Questionaire",
+      "Questionnair",
+      "Questionnare",
+      "Questionnaire"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Questionnaire",
+    "explanation": "The correct spelling is 'questionnaire'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J500",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "medium",
+    "question": "Choose the correctly spelt word — 'rhythm'.",
+    "options": [
+      "Rhythm",
+      "Rhythem",
+      "Rhytm",
+      "Rythm"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Rhythm",
+    "explanation": "The correct spelling is 'rhythm'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J501",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "medium",
+    "question": "Choose the correctly spelt word — 'threshold'.",
+    "options": [
+      "Thresold",
+      "Threshold",
+      "Threshould",
+      "Threshhold"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Threshold",
+    "explanation": "The correct spelling is 'threshold'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J502",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "medium",
+    "question": "Choose the correctly spelt word — 'vacuum'.",
+    "options": [
+      "Vacume",
+      "Vacuume",
+      "Vacuum",
+      "Vaccum"
+    ],
+    "correct_index": 2,
+    "correct_answer": "Vacuum",
+    "explanation": "The correct spelling is 'vacuum'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J503",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Spelling",
+    "difficulty": "medium",
+    "question": "Choose the correctly spelt word — 'conscious'.",
+    "options": [
+      "Concious",
+      "Conscious",
+      "Consious",
+      "Consciouse"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Conscious",
+    "explanation": "The correct spelling is 'conscious'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "ministries",
+      "spelling",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J504",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "medium",
+    "question": "I am tired ___ walking.",
+    "options": [
+      "by",
+      "of",
+      "in",
+      "from"
+    ],
+    "correct_index": 1,
+    "correct_answer": "of",
+    "explanation": "'Tired of' is the correct use.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "preposition"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J505",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "medium",
+    "question": "She is angry ___ me.",
+    "options": [
+      "on",
+      "with",
+      "to",
+      "at"
+    ],
+    "correct_index": 1,
+    "correct_answer": "with",
+    "explanation": "'Angry with' a person.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "preposition"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J506",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "medium",
+    "question": "He is angry ___ my conduct.",
+    "options": [
+      "on",
+      "in",
+      "at",
+      "with"
+    ],
+    "correct_index": 2,
+    "correct_answer": "at",
+    "explanation": "'Angry at' a thing or conduct.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "preposition"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J507",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "medium",
+    "question": "I am pleased ___ you.",
+    "options": [
+      "at",
+      "to",
+      "on",
+      "with"
+    ],
+    "correct_index": 3,
+    "correct_answer": "with",
+    "explanation": "'Pleased with' is the correct use.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "preposition"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J508",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "medium",
+    "question": "He is satisfied ___ his result.",
+    "options": [
+      "in",
+      "on",
+      "to",
+      "with"
+    ],
+    "correct_index": 3,
+    "correct_answer": "with",
+    "explanation": "'Satisfied with' is the correct use.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "preposition"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J509",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "medium",
+    "question": "She is engaged ___ her studies.",
+    "options": [
+      "with",
+      "at",
+      "on",
+      "in"
+    ],
+    "correct_index": 3,
+    "correct_answer": "in",
+    "explanation": "'Engaged in' is the correct use.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "preposition"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J510",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "medium",
+    "question": "I am grateful ___ you.",
+    "options": [
+      "on",
+      "with",
+      "for",
+      "to"
+    ],
+    "correct_index": 3,
+    "correct_answer": "to",
+    "explanation": "'Grateful to' a person; 'grateful for' a thing.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "preposition"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J511",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Preposition",
+    "difficulty": "medium",
+    "question": "He is responsible ___ the work.",
+    "options": [
+      "for",
+      "in",
+      "to",
+      "of"
+    ],
+    "correct_index": 0,
+    "correct_answer": "for",
+    "explanation": "'Responsible for' is the correct use.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "preposition"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J512",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "She ___ (sing) a song every morning.",
+    "options": [
+      "sang",
+      "sings",
+      "singing",
+      "sing"
+    ],
+    "correct_index": 1,
+    "correct_answer": "sings",
+    "explanation": "Habitual present — 'sings'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "verb"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J513",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "We ___ (watch) TV at this moment.",
+    "options": [
+      "are watching",
+      "have watched",
+      "watched",
+      "watch"
+    ],
+    "correct_index": 0,
+    "correct_answer": "are watching",
+    "explanation": "'At this moment' signals present continuous — 'are watching'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "verb"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J514",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "He ___ (leave) Dhaka two days ago.",
+    "options": [
+      "leaves",
+      "has left",
+      "left",
+      "leave"
+    ],
+    "correct_index": 2,
+    "correct_answer": "left",
+    "explanation": "'Two days ago' signals past indefinite — 'left'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "verb"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J515",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "I ___ (read) the book already.",
+    "options": [
+      "read",
+      "am reading",
+      "have read",
+      "reads"
+    ],
+    "correct_index": 2,
+    "correct_answer": "have read",
+    "explanation": "'Already' signals present perfect — 'have read'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "verb"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J516",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "She ___ (go) to school before the rain started.",
+    "options": [
+      "had gone",
+      "goes",
+      "has gone",
+      "went"
+    ],
+    "correct_index": 0,
+    "correct_answer": "had gone",
+    "explanation": "Earlier past action — past perfect 'had gone'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "verb"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J517",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "If I ___ (be) rich, I would help the poor.",
+    "options": [
+      "will be",
+      "am",
+      "was",
+      "were"
+    ],
+    "correct_index": 3,
+    "correct_answer": "were",
+    "explanation": "Second conditional — 'if I were rich'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "verb"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J518",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "He ___ (work) here since 2015.",
+    "options": [
+      "worked",
+      "works",
+      "is working",
+      "has been working"
+    ],
+    "correct_index": 3,
+    "correct_answer": "has been working",
+    "explanation": "'Since 2015' signals present perfect continuous — 'has been working'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "verb"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J519",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "The train ___ (leave) before we reached the station.",
+    "options": [
+      "leaves",
+      "had left",
+      "left",
+      "has left"
+    ],
+    "correct_index": 1,
+    "correct_answer": "had left",
+    "explanation": "Earlier past action — past perfect 'had left'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "verb"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J520",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'He gave me a book.'",
+    "options": [
+      "I was given a book by him.",
+      "A book is given to me by him.",
+      "I have been given a book by him.",
+      "I am given a book by him."
+    ],
+    "correct_index": 0,
+    "correct_answer": "I was given a book by him.",
+    "explanation": "Past indefinite passive: 'I was given a book by him.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "voice"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J521",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'The boys are playing cricket.'",
+    "options": [
+      "Cricket is played by the boys.",
+      "Cricket is being played by the boys.",
+      "Cricket was played by the boys.",
+      "Cricket has been played by the boys."
+    ],
+    "correct_index": 1,
+    "correct_answer": "Cricket is being played by the boys.",
+    "explanation": "Present continuous passive: is being + past participle.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "voice"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J522",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'She has finished the work.'",
+    "options": [
+      "The work is finished by her.",
+      "The work is being finished by her.",
+      "The work has been finished by her.",
+      "The work was finished by her."
+    ],
+    "correct_index": 2,
+    "correct_answer": "The work has been finished by her.",
+    "explanation": "Present perfect passive: has been + past participle.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "voice"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J523",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'Do the work.'",
+    "options": [
+      "Let the work be done.",
+      "The work be done.",
+      "Let the work done.",
+      "The work is done."
+    ],
+    "correct_index": 0,
+    "correct_answer": "Let the work be done.",
+    "explanation": "Imperative passive: 'Let the work be done.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "voice"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J524",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'He will write a letter.'",
+    "options": [
+      "A letter was written by him.",
+      "A letter is written by him.",
+      "A letter will be written by him.",
+      "A letter will have been written by him."
+    ],
+    "correct_index": 2,
+    "correct_answer": "A letter will be written by him.",
+    "explanation": "Future indefinite passive: will be + past participle.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "voice"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J525",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: He said, \"I can do it.\"",
+    "options": [
+      "He said that he can do it.",
+      "He said that he could do it.",
+      "He said that he can did it.",
+      "He said that I could do it."
+    ],
+    "correct_index": 1,
+    "correct_answer": "He said that he could do it.",
+    "explanation": "'Can' becomes 'could' in indirect speech.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "narration"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J526",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: She said, \"I was reading.\"",
+    "options": [
+      "She said that she has been reading.",
+      "She said that she is reading.",
+      "She said that she was reading.",
+      "She said that she had been reading."
+    ],
+    "correct_index": 3,
+    "correct_answer": "She said that she had been reading.",
+    "explanation": "Past continuous becomes past perfect continuous.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "narration"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J527",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: He said to me, \"Where do you live?\"",
+    "options": [
+      "He asked me where do I live.",
+      "He asked me that where I lived.",
+      "He said to me where I live.",
+      "He asked me where I lived."
+    ],
+    "correct_index": 3,
+    "correct_answer": "He asked me where I lived.",
+    "explanation": "Wh-question — 'asked ... where I lived'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "narration"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J528",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: The boy said, \"Let us play.\"",
+    "options": [
+      "The boy proposed that they should play.",
+      "The boy proposed to play.",
+      "The boy said that they played.",
+      "The boy said that let us play."
+    ],
+    "correct_index": 0,
+    "correct_answer": "The boy proposed that they should play.",
+    "explanation": "'Let us' in a proposal becomes 'proposed that they should play'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "narration"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J529",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: He said, \"May you live long.\"",
+    "options": [
+      "He said that may you live long.",
+      "He prayed that you live long.",
+      "He wished that I may live long.",
+      "He wished that I might live long."
+    ],
+    "correct_index": 3,
+    "correct_answer": "He wished that I might live long.",
+    "explanation": "Optative sentence — 'wished that I might live long'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "narration"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J530",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'at a loss' mean?",
+    "options": [
+      "Puzzled",
+      "Without money",
+      "In loss",
+      "In debt"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Puzzled",
+    "explanation": "'At a loss' means puzzled.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "idioms",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J531",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'in black and white' mean?",
+    "options": [
+      "In writing",
+      "In dark colour",
+      "In print",
+      "In secret"
+    ],
+    "correct_index": 0,
+    "correct_answer": "In writing",
+    "explanation": "'In black and white' means in writing.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "idioms",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J532",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'by hook or by crook' mean?",
+    "options": [
+      "By a hook",
+      "By any means",
+      "By trick",
+      "By force"
+    ],
+    "correct_index": 1,
+    "correct_answer": "By any means",
+    "explanation": "'By hook or by crook' means by any means.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "idioms",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J533",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to make both ends meet' mean?",
+    "options": [
+      "To join two ends",
+      "To earn a lot",
+      "To meet two people",
+      "To live within one's income"
+    ],
+    "correct_index": 3,
+    "correct_answer": "To live within one's income",
+    "explanation": "'To make both ends meet' means to live within one's income.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "idioms",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J534",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to beat about the bush' mean?",
+    "options": [
+      "To walk around",
+      "To hide in a bush",
+      "To avoid the main point",
+      "To beat a bush"
+    ],
+    "correct_index": 2,
+    "correct_answer": "To avoid the main point",
+    "explanation": "'To beat about the bush' means to avoid the main point.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "idioms",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J535",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to carry the day' mean?",
+    "options": [
+      "To pass a day",
+      "To carry a flag",
+      "To win",
+      "To lead a team"
+    ],
+    "correct_index": 2,
+    "correct_answer": "To win",
+    "explanation": "'To carry the day' means to win.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "idioms",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J536",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to fall flat' mean?",
+    "options": [
+      "To fall down",
+      "To be tired",
+      "To fail completely",
+      "To lie flat"
+    ],
+    "correct_index": 2,
+    "correct_answer": "To fail completely",
+    "explanation": "'To fall flat' means to fail completely.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "idioms",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J537",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to give up the ghost' mean?",
+    "options": [
+      "To faint",
+      "To die",
+      "To leave a place",
+      "To surrender"
+    ],
+    "correct_index": 1,
+    "correct_answer": "To die",
+    "explanation": "'To give up the ghost' means to die.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "idioms",
+      "ministries",
+      "vocabulary"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J538",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ honesty is the best policy.",
+    "options": [
+      "An",
+      "A",
+      "The",
+      "No article"
+    ],
+    "correct_index": 3,
+    "correct_answer": "No article",
+    "explanation": "No article before an abstract noun used generally.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ministries"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J539",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: He is ___ M.A.",
+    "options": [
+      "a",
+      "the",
+      "an",
+      "No article"
+    ],
+    "correct_index": 2,
+    "correct_answer": "an",
+    "explanation": "'An' before 'M.A.' — it begins with a vowel sound (em).",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ministries"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J540",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ poor are not always unhappy.",
+    "options": [
+      "A",
+      "An",
+      "The",
+      "No article"
+    ],
+    "correct_index": 2,
+    "correct_answer": "The",
+    "explanation": "'The' before an adjective used as a noun — the poor.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ministries"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J541",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: He went to ___ school.",
+    "options": [
+      "a",
+      "an",
+      "the",
+      "No article"
+    ],
+    "correct_index": 3,
+    "correct_answer": "No article",
+    "explanation": "No article when 'school' means its purpose (to study).",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ministries"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J542",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ more you read, ___ more you learn.",
+    "options": [
+      "A, a",
+      "An, an",
+      "The, the",
+      "No article, no article"
+    ],
+    "correct_index": 2,
+    "correct_answer": "The, the",
+    "explanation": "'The more ... the more' — comparative correlative.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ministries"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J543",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the interrogative form: 'Nobody can do it.'",
+    "options": [
+      "Can anybody do it?",
+      "Can nobody do it?",
+      "Can everyone do it?",
+      "Who can do it?"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Can anybody do it?",
+    "explanation": "'Nobody can do it' becomes 'Can anybody do it?'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "transformation"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J544",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the exclamatory form: 'It is a very beautiful flower.'",
+    "options": [
+      "What a beautiful flower it is!",
+      "How a beautiful flower it is!",
+      "What beautiful flower it is!",
+      "How beautiful flower it is!"
+    ],
+    "correct_index": 0,
+    "correct_answer": "What a beautiful flower it is!",
+    "explanation": "'Very beautiful' becomes 'What a beautiful flower it is!'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "transformation"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J545",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the complex sentence: 'He saw the thief and ran away.'",
+    "options": [
+      "When he saw the thief, he ran away.",
+      "He saw the thief, he ran away.",
+      "Seeing the thief, he ran away.",
+      "He saw the thief but ran away."
+    ],
+    "correct_index": 0,
+    "correct_answer": "When he saw the thief, he ran away.",
+    "explanation": "Simple to complex: 'When he saw the thief, he ran away.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "transformation"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J546",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the simple sentence: 'He is so weak that he cannot walk.'",
+    "options": [
+      "He is weak and cannot walk.",
+      "He cannot walk because he is weak.",
+      "He is too weak to walk.",
+      "He is weak so he cannot walk."
+    ],
+    "correct_index": 2,
+    "correct_answer": "He is too weak to walk.",
+    "explanation": "Complex to simple: 'He is too weak to walk.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "transformation"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J547",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'আমি একজন ছাত্র।'",
+    "options": [
+      "I am an student.",
+      "I am a student.",
+      "I student.",
+      "I am student."
+    ],
+    "correct_index": 1,
+    "correct_answer": "I am a student.",
+    "explanation": "'আমি একজন ছাত্র।' = 'I am a student.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "translation"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J548",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'সে স্কুলে যায়।'",
+    "options": [
+      "He going to school.",
+      "He goes to school.",
+      "He goes school.",
+      "He go to school."
+    ],
+    "correct_index": 1,
+    "correct_answer": "He goes to school.",
+    "explanation": "'সে স্কুলে যায়।' = 'He goes to school.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "translation"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J549",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'আমি তাকে চিনি।'",
+    "options": [
+      "I am know him.",
+      "I know him.",
+      "I knows him.",
+      "I know he."
+    ],
+    "correct_index": 1,
+    "correct_answer": "I know him.",
+    "explanation": "'আমি তাকে চিনি।' = 'I know him.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "translation"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J550",
+    "exam_canonical": "ministries",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'আজ বৃষ্টি হচ্ছে।'",
+    "options": [
+      "It is raining today.",
+      "It rains today.",
+      "It is rain today.",
+      "It raining today."
+    ],
+    "correct_index": 0,
+    "correct_answer": "It is raining today.",
+    "explanation": "'আজ বৃষ্টি হচ্ছে।' = 'It is raining today.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "english",
+      "grammar",
+      "ministries",
+      "translation"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-english-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

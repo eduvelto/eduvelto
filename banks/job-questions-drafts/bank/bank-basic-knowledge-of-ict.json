@@ -1,0 +1,344 @@
+[
+ {
+  "id": "JOBQ-0058",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "সফটওয়্যার",
+  "difficulty": "easy",
+  "question": "MS Word কী ধরনের সফটওয়্যার?",
+  "options": [
+   "ওয়ার্ড প্রসেসর",
+   "স্প্রেডশিট",
+   "ডাটাবেস",
+   "অপারেটিং সিস্টেম"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ওয়ার্ড প্রসেসর",
+  "explanation": "MS Word একটি ওয়ার্ড প্রসেসিং সফটওয়্যার; লেখালেখি ও নথি তৈরির কাজে ব্যবহৃত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "ict",
+   "ict-computer",
+   "software"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank/bank-basic-knowledge-of-ict.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0059",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ইন্টারনেট",
+  "difficulty": "medium",
+  "question": "ইন্টারনেটের জনক হিসেবে কে পরিচিত?",
+  "options": [
+   "ভিন্টন সার্ফ",
+   "টিম বার্নার্স-লি",
+   "বিল গেটস",
+   "স্টিভ জবস"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ভিন্টন সার্ফ",
+  "explanation": "ভিন্টন সার্ফ TCP/IP প্রোটোকলের অন্যতম উদ্ভাবক; তাঁকে 'ইন্টারনেটের জনক' বলা হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "ict",
+   "ict-computer",
+   "internet"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank/bank-basic-knowledge-of-ict.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0060",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ইমেইল",
+  "difficulty": "easy",
+  "question": "E-mail-এর পূর্ণরূপ কী?",
+  "options": [
+   "Electronic Mail",
+   "Express Mail",
+   "Electric Mail",
+   "Easy Mail"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Electronic Mail",
+  "explanation": "E-mail = Electronic Mail।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "email",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank/bank-basic-knowledge-of-ict.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0061",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "কম্পিউটারের ইতিহাস",
+  "difficulty": "medium",
+  "question": "আধুনিক কম্পিউটারের জনক কে?",
+  "options": [
+   "চার্লস ব্যাবেজ",
+   "অ্যালান টুরিং",
+   "জন ভন নিউম্যান",
+   "বিল গেটস"
+  ],
+  "correct_index": 0,
+  "correct_answer": "চার্লস ব্যাবেজ",
+  "explanation": "চার্লস ব্যাবেজ অ্যানালিটিক্যাল ইঞ্জিনের নকশা করেন; তাঁকে আধুনিক কম্পিউটারের জনক বলা হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "history",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank/bank-basic-knowledge-of-ict.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0062",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "হার্ডওয়্যার",
+  "difficulty": "medium",
+  "question": "মডেমের কাজ কী?",
+  "options": [
+   "ডিজিটাল সংকেতকে অ্যানালগ ও অ্যানালগকে ডিজিটাল সংকেতে রূপান্তর করা",
+   "তথ্য সংরক্ষণ করা",
+   "তথ্য ছাপানো",
+   "তথ্য মুছে ফেলা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ডিজিটাল সংকেতকে অ্যানালগ ও অ্যানালগকে ডিজিটাল সংকেতে রূপান্তর করা",
+  "explanation": "মডেম (Modulator-Demodulator) ডিজিটাল ও অ্যানালগ সংকেতের মধ্যে রূপান্তর করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "hardware",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank/bank-basic-knowledge-of-ict.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0063",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "হার্ডওয়্যার",
+  "difficulty": "easy",
+  "question": "USB-এর পূর্ণরূপ কী?",
+  "options": [
+   "Universal Serial Bus",
+   "United Serial Bus",
+   "Universal System Bus",
+   "Unified Serial Bus"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Universal Serial Bus",
+  "explanation": "USB = Universal Serial Bus।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "hardware",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank/bank-basic-knowledge-of-ict.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0064",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "সফটওয়্যার",
+  "difficulty": "easy",
+  "question": "সফটওয়্যার প্রধানত কয় প্রকার?",
+  "options": [
+   "২ প্রকার",
+   "৩ প্রকার",
+   "৪ প্রকার",
+   "৫ প্রকার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২ প্রকার",
+  "explanation": "সফটওয়্যার প্রধানত ২ প্রকার: সিস্টেম সফটওয়্যার ও অ্যাপ্লিকেশন সফটওয়্যার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "ict",
+   "ict-computer",
+   "software"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank/bank-basic-knowledge-of-ict.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0065",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ইন্টারনেট",
+  "difficulty": "easy",
+  "question": "গুগল (Google) কত সালে প্রতিষ্ঠিত হয়?",
+  "options": [
+   "১৯৯৫",
+   "১৯৯৮",
+   "২০০০",
+   "২০০৪"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯৯৮",
+  "explanation": "গুগল ১৯৯৮ সালে ল্যারি পেজ ও সের্গেই ব্রিন প্রতিষ্ঠা করেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "ict",
+   "ict-computer",
+   "internet"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank/bank-basic-knowledge-of-ict.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0075",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "হার্ডওয়্যার",
+  "difficulty": "easy",
+  "question": "কম্পিউটারের 'মস্তিষ্ক' হিসেবে কোনটি পরিচিত?",
+  "options": [
+   "CPU",
+   "RAM",
+   "মনিটর",
+   "হার্ডডিস্ক"
+  ],
+  "correct_index": 0,
+  "correct_answer": "CPU",
+  "explanation": "CPU (Central Processing Unit) কম্পিউটারের যাবতীয় প্রক্রিয়াকরণ করে বলে একে কম্পিউটারের মস্তিষ্ক বলা হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 Information and Communication Technology (NCTB) — standard ICT facts",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "hardware",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank/bank-basic-knowledge-of-ict.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

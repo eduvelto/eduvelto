@@ -1,0 +1,345 @@
+[
+ {
+  "id": "JOBQ-0154",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "রসায়ন",
+  "difficulty": "easy",
+  "question": "পানির রাসায়নিক সংকেত কোনটি?",
+  "options": [
+   "H₂O",
+   "CO₂",
+   "O₂",
+   "NaCl"
+  ],
+  "correct_index": 0,
+  "correct_answer": "H₂O",
+  "explanation": "পানির অণুতে দুটি হাইড্রোজেন ও একটি অক্সিজেন পরমাণু থাকে: H₂O।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Science / Physics / Chemistry (NCTB) — standard science facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — General Science 15 of 200",
+  "tags": [
+   "bcs",
+   "chemistry",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-general-science.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0155",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "জীববিজ্ঞান",
+  "difficulty": "easy",
+  "question": "সালোকসংশ্লেষণ উদ্ভিদের কোন অংশে হয়?",
+  "options": [
+   "পাতা",
+   "মূল",
+   "কাণ্ড",
+   "ফুল"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পাতা",
+  "explanation": "পাতার ক্লোরোফিল সূর্যের আলো শোষণ করে সালোকসংশ্লেষণ ঘটায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Science / Physics / Chemistry (NCTB) — standard science facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — General Science 15 of 200",
+  "tags": [
+   "bcs",
+   "biology",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-general-science.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0156",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান",
+  "difficulty": "medium",
+  "question": "শূন্য মাধ্যমে আলোর গতিবেগ কত?",
+  "options": [
+   "৩ × ১০⁸ মিটার/সেকেন্ড",
+   "৩ × ১০⁶ মিটার/সেকেন্ড",
+   "৩ × ১০⁵ মিটার/সেকেন্ড",
+   "৩ × ১০⁷ মিটার/সেকেন্ড"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৩ × ১০⁸ মিটার/সেকেন্ড",
+  "explanation": "শূন্য মাধ্যমে আলোর গতিবেগ প্রায় ৩ × ১০⁸ মিটার/সেকেন্ড।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Science / Physics / Chemistry (NCTB) — standard science facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — General Science 15 of 200",
+  "tags": [
+   "bcs",
+   "general-science",
+   "physics",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-general-science.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0157",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পুষ্টি",
+  "difficulty": "easy",
+  "question": "ভিটামিন সি-এর অভাবে কোন রোগ হয়?",
+  "options": [
+   "স্কার্ভি",
+   "রাতকানা",
+   "রিকেটস",
+   "বেরিবেরি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "স্কার্ভি",
+  "explanation": "ভিটামিন সি-এর অভাবে স্কার্ভি রোগ হয়; রাতকানা ভিটামিন এ-এর, রিকেটস ভিটামিন ডি-এর অভাবে হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Science / Physics / Chemistry (NCTB) — standard science facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — General Science 15 of 200",
+  "tags": [
+   "bcs",
+   "biology",
+   "general-science",
+   "science",
+   "vitamins"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-general-science.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0158",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান",
+  "difficulty": "medium",
+  "question": "নিউটনের দ্বিতীয় সূত্র অনুযায়ী বল (F) = ?",
+  "options": [
+   "ভর × ত্বরণ",
+   "ভর ÷ ত্বরণ",
+   "ভর + ত্বরণ",
+   "ভর − ত্বরণ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ভর × ত্বরণ",
+  "explanation": "নিউটনের দ্বিতীয় সূত্র: F = ma (বল = ভর × ত্বরণ)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Science / Physics / Chemistry (NCTB) — standard science facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — General Science 15 of 200",
+  "tags": [
+   "bcs",
+   "general-science",
+   "physics",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-general-science.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0159",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান",
+  "difficulty": "easy",
+  "question": "সমুদ্রপৃষ্ঠে পানির স্ফুটনাঙ্ক কত?",
+  "options": [
+   "১০০° সেলসিয়াস",
+   "৯০° সেলসিয়াস",
+   "৮০° সেলসিয়াস",
+   "১২০° সেলসিয়াস"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১০০° সেলসিয়াস",
+  "explanation": "স্বাভাবিক বায়ুমণ্ডলীয় চাপে পানি ১০০° সেলসিয়াসে ফোটে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Science / Physics / Chemistry (NCTB) — standard science facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — General Science 15 of 200",
+  "tags": [
+   "bcs",
+   "general-science",
+   "physics",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-general-science.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0160",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "জীববিজ্ঞান",
+  "difficulty": "easy",
+  "question": "মানুষের হৃৎপিণ্ডে কয়টি প্রকোষ্ঠ থাকে?",
+  "options": [
+   "২টি",
+   "৩টি",
+   "৪টি",
+   "৫টি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪টি",
+  "explanation": "মানুষের হৃৎপিণ্ডে ৪টি প্রকোষ্ঠ থাকে: দুটি অলিন্দ ও দুটি নিলয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Science / Physics / Chemistry (NCTB) — standard science facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — General Science 15 of 200",
+  "tags": [
+   "bcs",
+   "biology",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-general-science.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0161",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "পদার্থবিজ্ঞান",
+  "difficulty": "easy",
+  "question": "বলের এসআই একক কোনটি?",
+  "options": [
+   "নিউটন",
+   "জুল",
+   "ওয়াট",
+   "প্যাসকেল"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নিউটন",
+  "explanation": "বলের এসআই একক নিউটন; জুল শক্তির, ওয়াট ক্ষমতার একক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Science / Physics / Chemistry (NCTB) — standard science facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — General Science 15 of 200",
+  "tags": [
+   "bcs",
+   "general-science",
+   "physics",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-general-science.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0162",
+  "exam_canonical": "bcs",
+  "subject_canonical": "General Science",
+  "subject_slug": "general-science",
+  "topic": "রসায়ন",
+  "difficulty": "easy",
+  "question": "সোনার রাসায়নিক প্রতীক কোনটি?",
+  "options": [
+   "Au",
+   "Ag",
+   "Fe",
+   "Cu"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Au",
+  "explanation": "সোনার প্রতীক Au (ল্যাটিন Aurum থেকে); Ag রূপা, Fe লোহা, Cu তামা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Science / Physics / Chemistry (NCTB) — standard science facts",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — General Science 15 of 200",
+  "tags": [
+   "bcs",
+   "chemistry",
+   "general-science",
+   "science"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs/bcs-general-science.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

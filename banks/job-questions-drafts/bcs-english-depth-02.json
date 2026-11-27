@@ -1,0 +1,1092 @@
+[
+ {
+  "id": "JOBQ-D380",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Poetry",
+  "difficulty": "medium",
+  "question": "Who wrote 'Paradise Lost'?",
+  "options": [
+   "Edmund Spenser",
+   "Geoffrey Chaucer",
+   "John Milton",
+   "John Donne"
+  ],
+  "correct_index": 2,
+  "correct_answer": "John Milton",
+  "explanation": "'Paradise Lost' (1667) is an epic poem by John Milton.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "milton",
+   "poetry"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D381",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Poetry",
+  "difficulty": "medium",
+  "question": "Who wrote 'The Canterbury Tales'?",
+  "options": [
+   "Geoffrey Chaucer",
+   "William Shakespeare",
+   "John Milton",
+   "Edmund Spenser"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Geoffrey Chaucer",
+  "explanation": "'The Canterbury Tales' was written by Geoffrey Chaucer, the father of English poetry.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "chaucer",
+   "english",
+   "poetry"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D382",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Poetry",
+  "difficulty": "medium",
+  "question": "'Daffodils' (I Wandered Lonely as a Cloud) was written by whom?",
+  "options": [
+   "S. T. Coleridge",
+   "William Wordsworth",
+   "John Keats",
+   "P. B. Shelley"
+  ],
+  "correct_index": 1,
+  "correct_answer": "William Wordsworth",
+  "explanation": "'Daffodils' was written by William Wordsworth.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "poetry",
+   "wordsworth"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D383",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Poetry",
+  "difficulty": "medium",
+  "question": "Who wrote 'Don Juan'?",
+  "options": [
+   "John Keats",
+   "P. B. Shelley",
+   "Lord Byron",
+   "Alfred Tennyson"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Lord Byron",
+  "explanation": "'Don Juan' is a satirical epic poem by Lord Byron.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "byron",
+   "english",
+   "poetry"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D384",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Poetry",
+  "difficulty": "medium",
+  "question": "Who wrote 'In Memoriam'?",
+  "options": [
+   "Alfred Tennyson",
+   "Robert Browning",
+   "Matthew Arnold",
+   "Thomas Hardy"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Alfred Tennyson",
+  "explanation": "'In Memoriam' (1850) was written by Alfred Tennyson.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "poetry",
+   "tennyson"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D385",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Novel",
+  "difficulty": "medium",
+  "question": "Who wrote 'Gulliver's Travels'?",
+  "options": [
+   "Henry Fielding",
+   "Daniel Defoe",
+   "Jonathan Swift",
+   "Samuel Richardson"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Jonathan Swift",
+  "explanation": "'Gulliver's Travels' (1726) was written by Jonathan Swift.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "novel",
+   "swift"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D386",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Novel",
+  "difficulty": "medium",
+  "question": "Who wrote 'Tom Jones'?",
+  "options": [
+   "Jonathan Swift",
+   "Samuel Richardson",
+   "Daniel Defoe",
+   "Henry Fielding"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Henry Fielding",
+  "explanation": "'Tom Jones' (1749) was written by Henry Fielding.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "fielding",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D387",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Novel",
+  "difficulty": "medium",
+  "question": "Who wrote 'Wuthering Heights'?",
+  "options": [
+   "Mary Shelley",
+   "Charlotte Bronte",
+   "Jane Austen",
+   "Emily Bronte"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Emily Bronte",
+  "explanation": "'Wuthering Heights' (1847) was written by Emily Bronte.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "bronte",
+   "english",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D388",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Novel",
+  "difficulty": "medium",
+  "question": "Who wrote 'Great Expectations'?",
+  "options": [
+   "George Eliot",
+   "William Thackeray",
+   "Thomas Hardy",
+   "Charles Dickens"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Charles Dickens",
+  "explanation": "'Great Expectations' (1861) was written by Charles Dickens.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "dickens",
+   "english",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D389",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Novel",
+  "difficulty": "medium",
+  "question": "Who wrote 'Mrs Dalloway'?",
+  "options": [
+   "Charlotte Bronte",
+   "Jane Austen",
+   "Virginia Woolf",
+   "Katherine Mansfield"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Virginia Woolf",
+  "explanation": "'Mrs Dalloway' (1925) was written by Virginia Woolf.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "novel",
+   "woolf"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D390",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Novel",
+  "difficulty": "hard",
+  "question": "Who wrote 'Ulysses'?",
+  "options": [
+   "E. M. Forster",
+   "T. S. Eliot",
+   "D. H. Lawrence",
+   "James Joyce"
+  ],
+  "correct_index": 3,
+  "correct_answer": "James Joyce",
+  "explanation": "'Ulysses' (1922) was written by James Joyce.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "joyce",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D391",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Novel",
+  "difficulty": "medium",
+  "question": "Who wrote 'Lord of the Flies'?",
+  "options": [
+   "George Orwell",
+   "William Golding",
+   "Aldous Huxley",
+   "Graham Greene"
+  ],
+  "correct_index": 1,
+  "correct_answer": "William Golding",
+  "explanation": "'Lord of the Flies' (1954) was written by William Golding.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "golding",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D392",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Novel",
+  "difficulty": "medium",
+  "question": "Who wrote 'The Old Man and the Sea'?",
+  "options": [
+   "Ernest Hemingway",
+   "John Steinbeck",
+   "William Faulkner",
+   "F. Scott Fitzgerald"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Ernest Hemingway",
+  "explanation": "'The Old Man and the Sea' (1952) was written by Ernest Hemingway.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "hemingway",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D393",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Drama",
+  "difficulty": "medium",
+  "question": "Who wrote 'Doctor Faustus'?",
+  "options": [
+   "Ben Jonson",
+   "William Shakespeare",
+   "Christopher Marlowe",
+   "John Webster"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Christopher Marlowe",
+  "explanation": "'Doctor Faustus' was written by Christopher Marlowe.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "drama",
+   "english",
+   "marlowe"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D394",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Drama",
+  "difficulty": "medium",
+  "question": "Who wrote 'The Duchess of Malfi'?",
+  "options": [
+   "Ben Jonson",
+   "John Webster",
+   "Christopher Marlowe",
+   "Thomas Kyd"
+  ],
+  "correct_index": 1,
+  "correct_answer": "John Webster",
+  "explanation": "'The Duchess of Malfi' was written by John Webster.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "drama",
+   "english",
+   "webster"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D395",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Drama",
+  "difficulty": "medium",
+  "question": "Who wrote 'Volpone'?",
+  "options": [
+   "Christopher Marlowe",
+   "William Shakespeare",
+   "Ben Jonson",
+   "John Webster"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Ben Jonson",
+  "explanation": "'Volpone' was written by Ben Jonson.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "drama",
+   "english",
+   "jonson"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D396",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English Literature — Drama",
+  "difficulty": "medium",
+  "question": "Who wrote 'The School for Scandal'?",
+  "options": [
+   "George Bernard Shaw",
+   "Oliver Goldsmith",
+   "Richard Sheridan",
+   "Oscar Wilde"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Richard Sheridan",
+  "explanation": "'The School for Scandal' was written by Richard Brinsley Sheridan.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "drama",
+   "english",
+   "sheridan"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D397",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Synonym",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'obscure'.",
+  "options": [
+   "Clear",
+   "Vague",
+   "Famous",
+   "Bright"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Vague",
+  "explanation": "'Obscure' means not clear or not well known; 'vague' is its synonym.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "synonym"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D398",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Synonym",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'meticulous'.",
+  "options": [
+   "Hasty",
+   "Careless",
+   "Careful",
+   "Rough"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Careful",
+  "explanation": "'Meticulous' means showing great attention to detail; 'careful' is its synonym.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "synonym"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D399",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Synonym",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'pragmatic'.",
+  "options": [
+   "Theoretical",
+   "Idealistic",
+   "Practical",
+   "Emotional"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Practical",
+  "explanation": "'Pragmatic' means practical rather than idealistic.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "synonym"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D400",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Antonym",
+  "difficulty": "easy",
+  "question": "What is the antonym of 'strong'?",
+  "options": [
+   "Brave",
+   "Mighty",
+   "Firm",
+   "Weak"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Weak",
+  "explanation": "The antonym of 'strong' is 'weak'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "antonym",
+   "bcs",
+   "english"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D401",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Antonym",
+  "difficulty": "easy",
+  "question": "What is the antonym of 'happy'?",
+  "options": [
+   "Sad",
+   "Glad",
+   "Joyful",
+   "Pleased"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Sad",
+  "explanation": "The antonym of 'happy' is 'sad'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "antonym",
+   "bcs",
+   "english"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D402",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Idiom",
+  "difficulty": "medium",
+  "question": "'To call a spade a spade' means —",
+  "options": [
+   "To insult someone",
+   "To dig a hole",
+   "To speak plainly",
+   "To work in a garden"
+  ],
+  "correct_index": 2,
+  "correct_answer": "To speak plainly",
+  "explanation": "'To call a spade a spade' means to speak plainly and frankly.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D403",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Idiom",
+  "difficulty": "medium",
+  "question": "'Through thick and thin' means —",
+  "options": [
+   "Through thick walls",
+   "Through a forest",
+   "Through good times and bad",
+   "Through danger only"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Through good times and bad",
+  "explanation": "'Through thick and thin' means through good times and bad times.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D404",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Phrasal verb",
+  "difficulty": "medium",
+  "question": "'Run out of' means —",
+  "options": [
+   "Exhaust the supply",
+   "Run away",
+   "Run fast",
+   "Run after"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Exhaust the supply",
+  "explanation": "'Run out of' means to have no more of something left.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "phrasal-verb"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D405",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Phrasal verb",
+  "difficulty": "easy",
+  "question": "'Call on' means —",
+  "options": [
+   "To call by phone",
+   "To visit someone",
+   "To shout",
+   "To invite"
+  ],
+  "correct_index": 1,
+  "correct_answer": "To visit someone",
+  "explanation": "'Call on' means to visit someone.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "phrasal-verb"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D407",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Narration",
+  "difficulty": "medium",
+  "question": "Choose the indirect speech: He said, \"I have finished my work.\"",
+  "options": [
+   "He said that he has finished his work.",
+   "He said that he had finished his work.",
+   "He said that he finished his work.",
+   "He said that he will finish his work."
+  ],
+  "correct_index": 1,
+  "correct_answer": "He said that he had finished his work.",
+  "explanation": "Present perfect in reported speech shifts to past perfect.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "narration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D408",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — One word",
+  "difficulty": "medium",
+  "question": "One who hates mankind is called —",
+  "options": [
+   "Misanthropist",
+   "Philanthropist",
+   "Humanist",
+   "Altruist"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Misanthropist",
+  "explanation": "A misanthropist hates mankind.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED-AFTER-FIX",
+  "review_reason": "Reviewed NEEDS-FIX 26 Nov 2026; fix applied + re-verified 26 Nov 2026 (review-bcs-fixes-applied.md). Replacement text is new — content-team spot-check still recommended before treating as fully VERIFIED.",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D409",
+  "exam_canonical": "bcs",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — One word",
+  "difficulty": "medium",
+  "question": "One who is new to a profession is called —",
+  "options": [
+   "Expert",
+   "Novice",
+   "Veteran",
+   "Master"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Novice",
+  "explanation": "A novice is a person new to a profession or activity.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English; standard reference works on English literature)",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-english-depth-02.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-04",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

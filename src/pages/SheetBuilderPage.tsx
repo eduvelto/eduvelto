@@ -213,7 +213,7 @@ export default function SheetBuilderPage() {
   return (
     <PageShell titleBn="শিট বিল্ডার" titleEn="Sheet Builder" wide className="ev-qpg-theme">
       <AlertBox tone="info">
-        অধ্যায় থেকে অনুশীলনী বেছে শিট বানান — শুধু যাচাইকৃত প্রশ্ন দিয়ে। অনুশীলনীভিত্তিক শিটের জন্য Phase B
+        অধ্যায় থেকে অনুশীলনী বেছে শিট বানান — শুধু যাচাইকৃত অনুশীলন প্রশ্ন দিয়ে। অনুশীলনীভিত্তিক শিটের জন্য Phase B
         যাচাই (অধ্যায় → অনুশীলনী ম্যাপিং) এখনো চলছে; যাচাই হয়নি এমন প্রশ্ন এখানে কখনো দেখানো হয় না।
       </AlertBox>
       <p style={{ fontSize: 13, margin: '12px 0' }}>
@@ -286,7 +286,7 @@ export default function SheetBuilderPage() {
                     </Button>
                   ) : chapter.verifiedCount > 0 ? (
                     <Button variant="outline" onClick={() => void buildSheet('whole-chapter')}>
-                      পুরো অধ্যায়ের শিট (যাচাইকৃত প্রশ্ন)
+                      পুরো অধ্যায়ের শিট (যাচাইকৃত অনুশীলন প্রশ্ন)
                     </Button>
                   ) : null}
                 </div>

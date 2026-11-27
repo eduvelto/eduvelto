@@ -1,0 +1,572 @@
+[
+ {
+  "id": "JOBQ-0313",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গড়",
+  "difficulty": "easy",
+  "question": "১০, ২০, ৩০-এর গড় কত?",
+  "options": [
+   "১৫",
+   "২০",
+   "২৫",
+   "৩০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২০",
+  "explanation": "যোগফল ৬০; ৬০ ÷ ৩ = ২০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "average",
+   "math",
+   "mathematics",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0314",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ঐকিক নিয়ম",
+  "difficulty": "easy",
+  "question": "৫টি কলমের দাম ২৫ টাকা হলে ৮টি কলমের দাম কত?",
+  "options": [
+   "৩০ টাকা",
+   "৩৫ টাকা",
+   "৪০ টাকা",
+   "৪৫ টাকা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪০ টাকা",
+  "explanation": "১টি কলমের দাম ২৫ ÷ ৫ = ৫ টাকা; ৮টির দাম ৮ × ৫ = ৪০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "math",
+   "mathematics",
+   "ntrca",
+   "unitary"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0315",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লসাগু",
+  "difficulty": "easy",
+  "question": "৬ ও ৮-এর লসাগু কত?",
+  "options": [
+   "১২",
+   "২৪",
+   "৩৬",
+   "৪৮"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৪",
+  "explanation": "৬ ও ৮ উভয়ের গুণিতকগুলোর মধ্যে ক্ষুদ্রতম ২৪।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "lcm",
+   "math",
+   "mathematics",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0316",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গসাগু",
+  "difficulty": "easy",
+  "question": "১৫ ও ২৫-এর গসাগু কত?",
+  "options": [
+   "৩",
+   "৫",
+   "১০",
+   "১৫"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৫",
+  "explanation": "১৫ ও ২৫ উভয়কে ভাগ করে এমন বৃহত্তম সংখ্যা ৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "hcf",
+   "math",
+   "mathematics",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0317",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "শতকরা",
+  "difficulty": "easy",
+  "question": "২০০-এর ২৫% কত?",
+  "options": [
+   "২৫",
+   "৪০",
+   "৫০",
+   "৭৫"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৫০",
+  "explanation": "২০০ × ২৫/১০০ = ৫০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "math",
+   "mathematics",
+   "ntrca",
+   "percentage"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0318",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "সরল সুদ",
+  "difficulty": "medium",
+  "question": "২০০০ টাকার ৬% হারে ২ বছরের সরল সুদ কত?",
+  "options": [
+   "১২০ টাকা",
+   "২৪০ টাকা",
+   "৩৬০ টাকা",
+   "৪৮০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৪০ টাকা",
+  "explanation": "সুদ = ২০০০ × ৬ × ২ ÷ ১০০ = ২৪০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "interest",
+   "math",
+   "mathematics",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0319",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লাভ-ক্ষতি",
+  "difficulty": "easy",
+  "question": "১০০ টাকায় কিনে ১২০ টাকায় বিক্রি করলে লাভের হার কত?",
+  "options": [
+   "১০%",
+   "১৫%",
+   "২০%",
+   "২৫%"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২০%",
+  "explanation": "লাভ ২০ টাকা; হার = ২০/১০০ × ১০০% = ২০%।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "math",
+   "mathematics",
+   "ntrca",
+   "profit-loss"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0320",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "easy",
+  "question": "2x + ৩ = ১১ হলে x-এর মান কত?",
+  "options": [
+   "৩",
+   "৪",
+   "৫",
+   "৬"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪",
+  "explanation": "2x = ১১ − ৩ = ৮; x = ৪।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "algebra",
+   "math",
+   "mathematics",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0321",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "জ্যামিতি",
+  "difficulty": "easy",
+  "question": "ত্রিভুজের তিন কোণের সমষ্টি কত?",
+  "options": [
+   "৯০°",
+   "১৮০°",
+   "২৭০°",
+   "৩৬০°"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৮০°",
+  "explanation": "ত্রিভুজের তিনটি অন্তঃকোণের সমষ্টি ১৮০°।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "geometry",
+   "math",
+   "mathematics",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0322",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "পরিমিতি",
+  "difficulty": "easy",
+  "question": "দৈর্ঘ্য ১০ সেমি ও প্রস্থ ৬ সেমি আয়তক্ষেত্রের পরিসীমা কত?",
+  "options": [
+   "১৬ সেমি",
+   "৩২ সেমি",
+   "৬০ সেমি",
+   "৩০ সেমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩২ সেমি",
+  "explanation": "পরিসীমা = ২ × (দৈর্ঘ্য + প্রস্থ) = ২ × ১৬ = ৩২ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "math",
+   "mathematics",
+   "ntrca",
+   "perimeter"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0323",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "পরিমিতি",
+  "difficulty": "medium",
+  "question": "ভূমি ৮ সেমি ও উচ্চতা ৫ সেমি ত্রিভুজের ক্ষেত্রফল কত?",
+  "options": [
+   "২০ বর্গসেমি",
+   "৪০ বর্গসেমি",
+   "১৩ বর্গসেমি",
+   "৩০ বর্গসেমি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২০ বর্গসেমি",
+  "explanation": "ক্ষেত্রফল = ১/২ × ভূমি × উচ্চতা = ১/২ × ৮ × ৫ = ২০ বর্গসেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "area",
+   "math",
+   "mathematics",
+   "ntrca"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0324",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বর্গমূল",
+  "difficulty": "easy",
+  "question": "√৮১ = কত?",
+  "options": [
+   "৭",
+   "৮",
+   "৯",
+   "১১"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৯",
+  "explanation": "৯ × ৯ = ৮১, তাই √৮১ = ৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "math",
+   "mathematics",
+   "ntrca",
+   "square-root"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0325",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ত্রিকোণমিতি",
+  "difficulty": "medium",
+  "question": "সমকোণী ত্রিভুজের এক বাহু ৩ ও অন্য বাহু ৪ হলে অতিভুজ কত?",
+  "options": [
+   "৫",
+   "৬",
+   "৭",
+   "৮"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৫",
+  "explanation": "পিথাগোরাসের উপপাদ্য: অতিভুজ² = ৩² + ৪² = ২৫; অতিভুজ = ৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "math",
+   "mathematics",
+   "ntrca",
+   "trigonometry"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0326",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "ধারা",
+  "difficulty": "easy",
+  "question": "১০, ২০, ৩০, ৪০, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "৪৫",
+   "৫০",
+   "৬০",
+   "৪০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৫০",
+  "explanation": "প্রতিটি সংখ্যা আগেরটির চেয়ে ১০ বেশি; ৪০ + ১০ = ৫০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "math",
+   "mathematics",
+   "ntrca",
+   "series"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0327",
+  "exam_canonical": "ntrca",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "মৌলিক সংখ্যা",
+  "difficulty": "easy",
+  "question": "১ থেকে ১০ পর্যন্ত মৌলিক সংখ্যা কয়টি?",
+  "options": [
+   "৩টি",
+   "৪টি",
+   "৫টি",
+   "৬টি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪টি",
+  "explanation": "১ থেকে ১০ পর্যন্ত মৌলিক সংখ্যা ২, ৩, ৫, ৭ — মোট ৪টি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra, geometry rules",
+  "syllabus_source": "NTRCA 18th Teacher Registration Preliminary Syllabus (ntrca.gov.bd) — 100 MCQ, 1 hr: Bangla 25, English 25, General Mathematics 25, General Knowledge 25; pass 40%",
+  "tags": [
+   "math",
+   "mathematics",
+   "ntrca",
+   "prime"
+  ],
+  "source_stream": "ntrca",
+  "source_file": "ntrca/ntrca-general-mathematics.json",
+  "applies_to": [
+   "ntrca"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

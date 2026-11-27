@@ -1,0 +1,2282 @@
+[
+  {
+    "id": "JOBQ-J881",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের জাতীয় পতাকায় বৃত্তের রং কী?",
+    "options": [
+      "সাদা",
+      "সবুজ",
+      "হলুদ",
+      "লাল"
+    ],
+    "correct_index": 3,
+    "correct_answer": "লাল",
+    "explanation": "জাতীয় পতাকা সবুজ আয়তক্ষেত্রের মধ্যে লাল বৃত্ত।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জাতীয় পতাকা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J882",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের জাতীয় পতাকার দৈর্ঘ্য ও প্রস্থের অনুপাত কত?",
+    "options": [
+      "৫:৩",
+      "২:১",
+      "৫:৪",
+      "৩:২"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৫:৩",
+    "explanation": "জাতীয় পতাকার দৈর্ঘ্য ও প্রস্থের অনুপাত ৫:৩।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জাতীয় পতাকা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J883",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের জাতীয় সংগীতের কত চরণ গ্রহণ করা হয়েছে?",
+    "options": [
+      "প্রথম ৫ চরণ",
+      "প্রথম ১০ চরণ",
+      "প্রথম ১৫ চরণ",
+      "সম্পূর্ণ গান"
+    ],
+    "correct_index": 1,
+    "correct_answer": "প্রথম ১০ চরণ",
+    "explanation": "জাতীয় সংগীত হিসেবে 'আমার সোনার বাংলা' গানের প্রথম ১০ চরণ গ্রহণ করা হয়েছে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জাতীয় সংগীত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J884",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের জাতীয় প্রতীকে কী আছে?",
+    "options": [
+      "শাপলা ফুল",
+      "রয়েল বেঙ্গল টাইগার",
+      "কাঁঠাল",
+      "দোয়েল পাখি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "শাপলা ফুল",
+    "explanation": "বাংলাদেশের জাতীয় প্রতীকে শাপলা ফুল আছে (উভয় পাশে ধানের শীষ, উপরে পাট পাতা)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জাতীয় প্রতীক"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J885",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "'আমার সোনার বাংলা' গানটি রবীন্দ্রনাথ ঠাকুর কত সালে রচনা করেন?",
+    "options": [
+      "১৯১১ সালে",
+      "১৯০৫ সালে",
+      "১৯৪৭ সালে",
+      "১৯৭১ সালে"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৯০৫ সালে",
+    "explanation": "রবীন্দ্রনাথ ঠাকুর 'আমার সোনার বাংলা' গানটি ১৯০৫ সালে রচনা করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জাতীয় সংগীত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J886",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "'আমার সোনার বাংলা' গানটি প্রথম প্রকাশিত হয় কত সালে?",
+    "options": [
+      "১৯০৫",
+      "১৯৪৭",
+      "১৯৫২",
+      "১৯৭১"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৯০৫",
+    "explanation": "'আমার সোনার বাংলা' ১৯০৫ সালে বঙ্গদর্শন পত্রিকায় প্রকাশিত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জাতীয় সংগীত"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J887",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "আয়তনে বাংলাদেশের দ্বিতীয় বৃহত্তম বিভাগ কোনটি?",
+    "options": [
+      "খুলনা",
+      "রাজশাহী",
+      "রংপুর",
+      "ঢাকা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "খুলনা",
+    "explanation": "খুলনা আয়তনে বাংলাদেশের দ্বিতীয় বৃহত্তম বিভাগ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J888",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "আয়তনে বাংলাদেশের ক্ষুদ্রতম বিভাগ কোনটি?",
+    "options": [
+      "বরিশাল",
+      "সিলেট",
+      "ময়মনসিংহ",
+      "রংপুর"
+    ],
+    "correct_index": 2,
+    "correct_answer": "ময়মনসিংহ",
+    "explanation": "আয়তনে ক্ষুদ্রতম বিভাগ ময়মনসিংহ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J889",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের দীর্ঘতম সেতু কোনটি?",
+    "options": [
+      "লালন শাহ সেতু",
+      "পদ্মা সেতু",
+      "যমুনা সেতু",
+      "হার্ডিঞ্জ ব্রিজ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "পদ্মা সেতু",
+    "explanation": "বাংলাদেশের দীর্ঘতম সেতু পদ্মা সেতু (৬.১৫ কিলোমিটার)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "উন্নয়ন"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J890",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের বৃহত্তম দ্বীপ কোনটি?",
+    "options": [
+      "সন্দ্বীপ",
+      "হাতিয়া",
+      "ভোলা",
+      "সেন্টমার্টিন"
+    ],
+    "correct_index": 2,
+    "correct_answer": "ভোলা",
+    "explanation": "বাংলাদেশের বৃহত্তম দ্বীপ ভোলা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J891",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "কাপ্তাই হ্রদ কোন নদীতে বাঁধ দিয়ে তৈরি করা হয়েছে?",
+    "options": [
+      "মেঘনা নদী",
+      "যমুনা নদী",
+      "কর্ণফুলী নদী",
+      "পদ্মা নদী"
+    ],
+    "correct_index": 2,
+    "correct_answer": "কর্ণফুলী নদী",
+    "explanation": "কর্ণফুলী নদীতে বাঁধ দিয়ে কাপ্তাই হ্রদ তৈরি করা হয়েছে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J892",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের বৃহত্তম বিল কোনটি?",
+    "options": [
+      "চলনবিল",
+      "আড়িয়াল বিল",
+      "বিল ডাকাতিয়া",
+      "বিল ভেলামিয়া"
+    ],
+    "correct_index": 0,
+    "correct_answer": "চলনবিল",
+    "explanation": "বাংলাদেশের বৃহত্তম বিল চলনবিল।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J893",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের উচ্চতম পাহাড় কোনটি?",
+    "options": [
+      "কেওক্রাডং",
+      "সাকা হাফং",
+      "চিম্বুক",
+      "তাজিংডং"
+    ],
+    "correct_index": 3,
+    "correct_answer": "তাজিংডং",
+    "explanation": "বাংলাদেশের উচ্চতম পাহাড় তাজিংডং (বিজয়)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J894",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের বৃহত্তম জলপ্রপাত কোনটি?",
+    "options": [
+      "শুভলং",
+      "মাধবকুণ্ড",
+      "রিছাং",
+      "হামহাম"
+    ],
+    "correct_index": 1,
+    "correct_answer": "মাধবকুণ্ড",
+    "explanation": "বাংলাদেশের বৃহত্তম জলপ্রপাত মাধবকুণ্ড।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J895",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের প্রথম নারী প্রধানমন্ত্রী কে?",
+    "options": [
+      "শেখ হাসিনা",
+      "সাজেদা চৌধুরী",
+      "শিরীন শারমিন চৌধুরী",
+      "বেগম খালেদা জিয়া"
+    ],
+    "correct_index": 3,
+    "correct_answer": "বেগম খালেদা জিয়া",
+    "explanation": "বাংলাদেশের প্রথম নারী প্রধানমন্ত্রী বেগম খালেদা জিয়া।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ইতিহাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J896",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের প্রথম নারী স্পিকার কে?",
+    "options": [
+      "মতিয়া চৌধুরী",
+      "বেগম খালেদা জিয়া",
+      "সাজেদা চৌধুরী",
+      "শিরীন শারমিন চৌধুরী"
+    ],
+    "correct_index": 3,
+    "correct_answer": "শিরীন শারমিন চৌধুরী",
+    "explanation": "বাংলাদেশের প্রথম নারী স্পিকার শিরীন শারমিন চৌধুরী।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "সংসদ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J897",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "স্বাধীন বাংলাদেশের প্রথম প্রধান বিচারপতি কে ছিলেন?",
+    "options": [
+      "আবু সাঈদ চৌধুরী",
+      "মোহাম্মদ উল্লাহ",
+      "কামাল হোসেন",
+      "এ এস এম সায়েম"
+    ],
+    "correct_index": 3,
+    "correct_answer": "এ এস এম সায়েম",
+    "explanation": "বাংলাদেশের প্রথম প্রধান বিচারপতি ছিলেন এ এস এম সায়েম।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ইতিহাস"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J898",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "মুক্তিযুদ্ধে যৌথ বাহিনীর প্রধান কে ছিলেন?",
+    "options": [
+      "স্যাম মানেকশ",
+      "জিয়াউর রহমান",
+      "জগজিৎ সিং অরোরা",
+      "এম এ জি ওসমানী"
+    ],
+    "correct_index": 2,
+    "correct_answer": "জগজিৎ সিং অরোরা",
+    "explanation": "মুক্তিযুদ্ধে যৌথ বাহিনীর প্রধান ছিলেন লেফটেন্যান্ট জেনারেল জগজিৎ সিং অরোরা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "মুক্তিযুদ্ধ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J899",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "পাকিস্তানি বাহিনী আত্মসমর্পণ করে কত তারিখে?",
+    "options": [
+      "২৬ মার্চ ১৯৭১",
+      "১৭ এপ্রিল ১৯৭১",
+      "১৪ ডিসেম্বর ১৯৭১",
+      "১৬ ডিসেম্বর ১৯৭১"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৬ ডিসেম্বর ১৯৭১",
+    "explanation": "পাকিস্তানি বাহিনী ১৬ ডিসেম্বর ১৯৭১ আত্মসমর্পণ করে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "মুক্তিযুদ্ধ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J900",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "পাকিস্তানি বাহিনীর আত্মসমর্পণ অনুষ্ঠানে পাকিস্তানের পক্ষে কে স্বাক্ষর করেন?",
+    "options": [
+      "টিক্কা খান",
+      "এ এ কে নিয়াজি",
+      "রাও ফরমান আলী",
+      "ইয়াহিয়া খান"
+    ],
+    "correct_index": 1,
+    "correct_answer": "এ এ কে নিয়াজি",
+    "explanation": "আত্মসমর্পণ দলিলে পাকিস্তানের পক্ষে স্বাক্ষর করেন লেফটেন্যান্ট জেনারেল এ এ কে নিয়াজি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "মুক্তিযুদ্ধ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J901",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের প্রথম জাতীয় পতাকা উত্তোলন করা হয় কত তারিখে?",
+    "options": [
+      "৭ মার্চ ১৯৭১",
+      "২৩ মার্চ ১৯৭১",
+      "২ মার্চ ১৯৭১",
+      "২৬ মার্চ ১৯৭১"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২ মার্চ ১৯৭১",
+    "explanation": "প্রথম জাতীয় পতাকা উত্তোলন করা হয় ২ মার্চ ১৯৭১ ঢাকা বিশ্ববিদ্যালয়ে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "মুক্তিযুদ্ধ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J902",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের স্বাধীনতার ঘোষণাপত্র মুজিবনগরে পাঠ করেন কে?",
+    "options": [
+      "অধ্যাপক এম ইউসুফ আলী",
+      "কামাল হোসেন",
+      "তাজউদ্দীন আহমদ",
+      "সৈয়দ নজরুল ইসলাম"
+    ],
+    "correct_index": 0,
+    "correct_answer": "অধ্যাপক এম ইউসুফ আলী",
+    "explanation": "স্বাধীনতার ঘোষণাপত্র পাঠ করেন অধ্যাপক এম ইউসুফ আলী।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "মুক্তিযুদ্ধ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J903",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "easy",
+    "question": "বাংলাদেশের প্রধান খাদ্যশস্য কোনটি?",
+    "options": [
+      "ধান",
+      "গম",
+      "আলু",
+      "ভুট্টা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ধান",
+    "explanation": "বাংলাদেশের প্রধান খাদ্যশস্য ধান।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "অর্থনীতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J904",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "easy",
+    "question": "বাংলাদেশের প্রধান অর্থকরী ফসল কোনটি?",
+    "options": [
+      "পাট",
+      "চা",
+      "আখ",
+      "ধান"
+    ],
+    "correct_index": 0,
+    "correct_answer": "পাট",
+    "explanation": "বাংলাদেশের প্রধান অর্থকরী ফসল পাট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "অর্থনীতি"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J905",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের প্রথম শহীদ মিনার নির্মিত হয় কত সালে?",
+    "options": [
+      "১৯৫২",
+      "১৯৭২",
+      "১৯৫৪",
+      "১৯৫৬"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৯৫২",
+    "explanation": "প্রথম শহীদ মিনার নির্মিত হয় ১৯৫২ সালের ২৩ ফেব্রুয়ারি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "ভাষা আন্দোলন"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J906",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "ঢাকা বিশ্ববিদ্যালয়ের প্রথম উপাচার্য কে ছিলেন?",
+    "options": [
+      "স্যার এ এফ রহমান",
+      "ড. মুহম্মদ শহীদুল্লাহ",
+      "স্যার পি জে হার্টগ",
+      "ড. আর সি মজুমদার"
+    ],
+    "correct_index": 2,
+    "correct_answer": "স্যার পি জে হার্টগ",
+    "explanation": "ঢাকা বিশ্ববিদ্যালয়ের প্রথম উপাচার্য ছিলেন স্যার পি জে হার্টগ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "শিক্ষা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J907",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বাংলাদেশ",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের জাতীয় বিশ্ববিদ্যালয় প্রতিষ্ঠিত হয় কত সালে?",
+    "options": [
+      "২০০০",
+      "১৯৭২",
+      "১৯৯২",
+      "১৯৮৫"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৯৯২",
+    "explanation": "জাতীয় বিশ্ববিদ্যালয় প্রতিষ্ঠিত হয় ১৯৯২ সালে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "শিক্ষা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J908",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "জাতিসংঘের নিরাপত্তা পরিষদের স্থায়ী সদস্য কয়টি দেশ?",
+    "options": [
+      "১৫টি",
+      "৩টি",
+      "৫টি",
+      "১০টি"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৫টি",
+    "explanation": "নিরাপত্তা পরিষদের স্থায়ী সদস্য ৫টি দেশ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জাতিসংঘ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J909",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "জাতিসংঘের প্রথম মহাসচিব কে ছিলেন?",
+    "options": [
+      "কফি আনান",
+      "ট্রিগভে লি",
+      "বান কি মুন",
+      "উ থান্ট"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ট্রিগভে লি",
+    "explanation": "জাতিসংঘের প্রথম মহাসচিব ছিলেন ট্রিগভে লি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জাতিসংঘ"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J910",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "বিশ্বের বৃহত্তম মহাদেশ কোনটি?",
+    "options": [
+      "আফ্রিকা",
+      "উত্তর আমেরিকা",
+      "এশিয়া",
+      "ইউরোপ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "এশিয়া",
+    "explanation": "বিশ্বের বৃহত্তম মহাদেশ এশিয়া।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J911",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "বিশ্বের বৃহত্তম মহাসাগর কোনটি?",
+    "options": [
+      "আটলান্টিক মহাসাগর",
+      "প্রশান্ত মহাসাগর",
+      "ভারত মহাসাগর",
+      "উত্তর মেরু মহাসাগর"
+    ],
+    "correct_index": 1,
+    "correct_answer": "প্রশান্ত মহাসাগর",
+    "explanation": "বিশ্বের বৃহত্তম মহাসাগর প্রশান্ত মহাসাগর।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J912",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "বিশ্বের বৃহত্তম মরুভূমি কোনটি?",
+    "options": [
+      "থর",
+      "গোবি",
+      "সাহারা",
+      "আরব"
+    ],
+    "correct_index": 2,
+    "correct_answer": "সাহারা",
+    "explanation": "বিশ্বের বৃহত্তম উষ্ণ মরুভূমি সাহারা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J913",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "বিশ্বের দীর্ঘতম প্রাচীর কোনটি?",
+    "options": [
+      "চীনের মহাপ্রাচীর",
+      "লাল কেল্লা",
+      "বার্লিন প্রাচীর",
+      "হ্যাড্রিয়ান প্রাচীর"
+    ],
+    "correct_index": 0,
+    "correct_answer": "চীনের মহাপ্রাচীর",
+    "explanation": "বিশ্বের দীর্ঘতম প্রাচীর চীনের মহাপ্রাচীর।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J914",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "বিশ্বের বৃহত্তম দ্বীপ কোনটি?",
+    "options": [
+      "সুমাত্রা",
+      "মাদাগাস্কার",
+      "বোর্নিও",
+      "গ্রিনল্যান্ড"
+    ],
+    "correct_index": 3,
+    "correct_answer": "গ্রিনল্যান্ড",
+    "explanation": "বিশ্বের বৃহত্তম দ্বীপ গ্রিনল্যান্ড।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J915",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "আয়তনে বিশ্বের দ্বিতীয় বৃহত্তম দেশ কোনটি?",
+    "options": [
+      "চীন",
+      "যুক্তরাষ্ট্র",
+      "ব্রাজিল",
+      "কানাডা"
+    ],
+    "correct_index": 3,
+    "correct_answer": "কানাডা",
+    "explanation": "আয়তনে বিশ্বের দ্বিতীয় বৃহত্তম দেশ কানাডা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "বিশ্ব ভূগোল"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J916",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "মিয়ানমারের রাজধানী কোনটি?",
+    "options": [
+      "মান্দালয়",
+      "নেপিডো",
+      "ইয়াঙ্গুন",
+      "বাগান"
+    ],
+    "correct_index": 1,
+    "correct_answer": "নেপিডো",
+    "explanation": "মিয়ানমারের রাজধানী নেপিডো।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "রাজধানী"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J917",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "থাইল্যান্ডের রাজধানী কোনটি?",
+    "options": [
+      "পাতায়া",
+      "চিয়াং মাই",
+      "ব্যাংকক",
+      "ফুকেট"
+    ],
+    "correct_index": 2,
+    "correct_answer": "ব্যাংকক",
+    "explanation": "থাইল্যান্ডের রাজধানী ব্যাংকক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "রাজধানী"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J918",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "ভিয়েতনামের রাজধানী কোনটি?",
+    "options": [
+      "হুয়ে",
+      "দা নাং",
+      "হো চি মিন সিটি",
+      "হ্যানয়"
+    ],
+    "correct_index": 3,
+    "correct_answer": "হ্যানয়",
+    "explanation": "ভিয়েতনামের রাজধানী হ্যানয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "রাজধানী"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J919",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "ইন্দোনেশিয়ার রাজধানী কোনটি?",
+    "options": [
+      "মেদান",
+      "জাকার্তা",
+      "সুরাবায়া",
+      "বালি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "জাকার্তা",
+    "explanation": "ইন্দোনেশিয়ার রাজধানী জাকার্তা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "রাজধানী"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J920",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "মালয়েশিয়ার রাজধানী কোনটি?",
+    "options": [
+      "মালাক্কা",
+      "পেনাং",
+      "জোহর বাহরু",
+      "কুয়ালালামপুর"
+    ],
+    "correct_index": 3,
+    "correct_answer": "কুয়ালালামপুর",
+    "explanation": "মালয়েশিয়ার রাজধানী কুয়ালালামপুর।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "রাজধানী"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J921",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "easy",
+    "question": "আফগানিস্তানের রাজধানী কোনটি?",
+    "options": [
+      "হেরাত",
+      "মাজার-ই-শরিফ",
+      "কাবুল",
+      "কান্দাহার"
+    ],
+    "correct_index": 2,
+    "correct_answer": "কাবুল",
+    "explanation": "আফগানিস্তানের রাজধানী কাবুল।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "রাজধানী"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J922",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "আন্তর্জাতিক",
+    "difficulty": "medium",
+    "question": "ইউরোপীয় ইউনিয়নের সদর দপ্তর কোথায়?",
+    "options": [
+      "ব্রাসেলস",
+      "প্যারিস",
+      "লন্ডন",
+      "বার্লিন"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ব্রাসেলস",
+    "explanation": "ইউরোপীয় ইউনিয়নের সদর দপ্তর ব্রাসেলসে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "আন্তর্জাতিক সংস্থা"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J923",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "মানবদেহের সবচেয়ে ছোট হাড় কোনটি?",
+    "options": [
+      "ইনকাস",
+      "স্টেপিস",
+      "ফিমার",
+      "ম্যালিয়াস"
+    ],
+    "correct_index": 1,
+    "correct_answer": "স্টেপিস",
+    "explanation": "মানবদেহের সবচেয়ে ছোট হাড় স্টেপিস (কানের হাড়)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J924",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "রক্তের লাল কণিকা কোথায় তৈরি হয়?",
+    "options": [
+      "ফুসফুসে",
+      "হৃৎপিণ্ডে",
+      "যকৃতে",
+      "অস্থিমজ্জায়"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অস্থিমজ্জায়",
+    "explanation": "রক্তের লাল কণিকা অস্থিমজ্জায় তৈরি হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J925",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "প্রাপ্তবয়স্ক মানুষের দেহে রক্তের পরিমাণ প্রায় কত?",
+    "options": [
+      "৫-৬ লিটার",
+      "১০-১২ লিটার",
+      "৩-৪ লিটার",
+      "৮-৯ লিটার"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৫-৬ লিটার",
+    "explanation": "প্রাপ্তবয়স্ক মানুষের দেহে রক্তের পরিমাণ প্রায় ৫-৬ লিটার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J926",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "মানব হৃৎপিণ্ড প্রতি মিনিটে প্রায় কতবার স্পন্দিত হয়?",
+    "options": [
+      "৯০ বার",
+      "৭২ বার",
+      "১০০ বার",
+      "৬০ বার"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৭২ বার",
+    "explanation": "মানব হৃৎপিণ্ড প্রতি মিনিটে প্রায় ৭২ বার স্পন্দিত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J927",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "মস্তিষ্কের কোন অংশ দেহের তাপমাত্রা নিয়ন্ত্রণ করে?",
+    "options": [
+      "মেডুলা",
+      "সেরিব্রাম",
+      "হাইপোথ্যালামাস",
+      "সেরিবেলাম"
+    ],
+    "correct_index": 2,
+    "correct_answer": "হাইপোথ্যালামাস",
+    "explanation": "হাইপোথ্যালামাস দেহের তাপমাত্রা নিয়ন্ত্রণ করে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J928",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "easy",
+    "question": "উদ্ভিদ খাদ্য তৈরি করে কোন প্রক্রিয়ায়?",
+    "options": [
+      "পরাগায়ণ",
+      "শ্বসন",
+      "সালোকসংশ্লেষণ",
+      "বাষ্পোৎসর্জন"
+    ],
+    "correct_index": 2,
+    "correct_answer": "সালোকসংশ্লেষণ",
+    "explanation": "উদ্ভিদ সালোকসংশ্লেষণ প্রক্রিয়ায় খাদ্য তৈরি করে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J929",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "easy",
+    "question": "উদ্ভিদের সবুজ রঙের জন্য দায়ী কী?",
+    "options": [
+      "ক্লোরোফিল",
+      "ক্যারোটিন",
+      "মেলানিন",
+      "জ্যান্থোফিল"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ক্লোরোফিল",
+    "explanation": "উদ্ভিদের সবুজ রঙের জন্য দায়ী ক্লোরোফিল।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "জীববিজ্ঞান"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J930",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "ভিটামিন 'বি'-এর অভাবে কোন রোগ হয়?",
+    "options": [
+      "রিকেট",
+      "রাতকানা",
+      "স্কার্ভি",
+      "বেরিবেরি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "বেরিবেরি",
+    "explanation": "ভিটামিন বি-এর অভাবে বেরিবেরি রোগ হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "স্বাস্থ্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J931",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "গাজরে কোন ভিটামিন বেশি থাকে?",
+    "options": [
+      "ভিটামিন এ",
+      "ভিটামিন সি",
+      "ভিটামিন বি",
+      "ভিটামিন ডি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ভিটামিন এ",
+    "explanation": "গাজরে ভিটামিন এ বেশি থাকে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "স্বাস্থ্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J932",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "বিজ্ঞান",
+    "difficulty": "medium",
+    "question": "কোন ভিটামিন পানিতে দ্রবণীয়?",
+    "options": [
+      "ভিটামিন এ ও কে",
+      "ভিটামিন বি ও সি",
+      "ভিটামিন এ ও ডি",
+      "ভিটামিন ডি ও ই"
+    ],
+    "correct_index": 1,
+    "correct_answer": "ভিটামিন বি ও সি",
+    "explanation": "ভিটামিন বি ও সি পানিতে দ্রবণীয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "স্বাস্থ্য"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J933",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "কম্পিউটারের অস্থায়ী স্মৃতি কোনটি?",
+    "options": [
+      "রম (ROM)",
+      "র‍্যাম (RAM)",
+      "সিডি",
+      "হার্ড ডিস্ক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "র‍্যাম (RAM)",
+    "explanation": "র‍্যাম (RAM) কম্পিউটারের অস্থায়ী স্মৃতি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J934",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "MS Excel কী ধরনের সফটওয়্যার?",
+    "options": [
+      "ওয়ার্ড প্রসেসিং",
+      "ডেটাবেজ",
+      "প্রেজেন্টেশন",
+      "স্প্রেডশিট"
+    ],
+    "correct_index": 3,
+    "correct_answer": "স্প্রেডশিট",
+    "explanation": "MS Excel একটি স্প্রেডশিট সফটওয়্যার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J935",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "MS PowerPoint কীসের জন্য ব্যবহৃত হয়?",
+    "options": [
+      "ছবি আঁকা",
+      "চিঠি লেখা",
+      "হিসাব-নিকাশ",
+      "প্রেজেন্টেশন"
+    ],
+    "correct_index": 3,
+    "correct_answer": "প্রেজেন্টেশন",
+    "explanation": "MS PowerPoint প্রেজেন্টেশন তৈরির জন্য ব্যবহৃত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J936",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "ইন্টারনেটে তথ্য খোঁজার জন্য কী ব্যবহৃত হয়?",
+    "options": [
+      "ই-মেইল",
+      "সার্চ ইঞ্জিন",
+      "সোশ্যাল মিডিয়া",
+      "ব্রাউজার"
+    ],
+    "correct_index": 1,
+    "correct_answer": "সার্চ ইঞ্জিন",
+    "explanation": "ইন্টারনেটে তথ্য খোঁজার জন্য সার্চ ইঞ্জিন ব্যবহৃত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J937",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "কম্পিউটারে ডেটা সংরক্ষণের একক কী?",
+    "options": [
+      "ভোল্ট",
+      "বিট",
+      "বাইট",
+      "হার্টজ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "বাইট",
+    "explanation": "কম্পিউটারে ডেটা সংরক্ষণের একক বাইট।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J938",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "কিবোর্ড কী ধরনের ডিভাইস?",
+    "options": [
+      "ইনপুট ডিভাইস",
+      "প্রসেসিং ডিভাইস",
+      "স্টোরেজ ডিভাইস",
+      "আউটপুট ডিভাইস"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ইনপুট ডিভাইস",
+    "explanation": "কিবোর্ড একটি ইনপুট ডিভাইস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J939",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "মনিটর কী ধরনের ডিভাইস?",
+    "options": [
+      "প্রসেসিং ডিভাইস",
+      "স্টোরেজ ডিভাইস",
+      "ইনপুট ডিভাইস",
+      "আউটপুট ডিভাইস"
+    ],
+    "correct_index": 3,
+    "correct_answer": "আউটপুট ডিভাইস",
+    "explanation": "মনিটর একটি আউটপুট ডিভাইস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J940",
+    "exam_canonical": "grade11-20",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "প্রযুক্তি",
+    "difficulty": "easy",
+    "question": "প্রিন্টার কী ধরনের ডিভাইস?",
+    "options": [
+      "স্টোরেজ ডিভাইস",
+      "আউটপুট ডিভাইস",
+      "প্রসেসিং ডিভাইস",
+      "ইনপুট ডিভাইস"
+    ],
+    "correct_index": 1,
+    "correct_answer": "আউটপুট ডিভাইস",
+    "explanation": "প্রিন্টার একটি আউটপুট ডিভাইস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "বাংলাদেশের সংবিধান, বাংলাদেশের ইতিহাস (মুক্তিযুদ্ধ, ভাষা আন্দোলন), NCTB সাধারণ জ্ঞান ও প্রমিত বিশ্বকোষীয় তথ্য",
+    "syllabus_source": "11-20 grade recruitment circulars (official ministry/department websites & teletalk portals) — common pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical/typing test + viva 20. Pattern, grades and typing speeds vary by post/circular — check the specific circular.",
+    "tags": [
+      "general-knowledge",
+      "grade11-20",
+      "কম্পিউটার"
+    ],
+    "source_stream": "grade11-20",
+    "source_file": "grade11-20/grade11-20-j-gk-01.json",
+    "applies_to": [
+      "grade11-20"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

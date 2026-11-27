@@ -1,0 +1,231 @@
+[
+ {
+  "id": "JOBQ-D719",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "শতকরা",
+  "difficulty": "easy",
+  "question": "৬৫০-এর ৪০% কত?",
+  "options": [
+   "২৪০",
+   "২৫০",
+   "২৬০",
+   "২৮০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২৬০",
+  "explanation": "৬৫০ × ৪০/১০০ = ২৬০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "math",
+   "mathematics",
+   "percentage"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-math-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-10",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D720",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "বীজগণিত",
+  "difficulty": "easy",
+  "question": "7x + 4 = 53 হলে x-এর মান কত?",
+  "options": [
+   "৭",
+   "৬",
+   "৮",
+   "৯"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৭",
+  "explanation": "7x = 49, তাই x = 7।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "algebra",
+   "bcs",
+   "equation",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-math-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-10",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D721",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লসাগু-গসাগু",
+  "difficulty": "easy",
+  "question": "১৩ ও ১৭-এর লসাগু কত?",
+  "options": [
+   "১৮৭",
+   "২০৪",
+   "২৩৮",
+   "২২১"
+  ],
+  "correct_index": 3,
+  "correct_answer": "২২১",
+  "explanation": "১৩ ও ১৭ মৌলিক সংখ্যা; লসাগু = ১৩ × ১৭ = ২২১।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "lcm",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-math-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-10",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D722",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লসাগু-গসাগু",
+  "difficulty": "easy",
+  "question": "৭২ ও ১২০-এর গসাগু কত?",
+  "options": [
+   "১২",
+   "৩৬",
+   "২৪",
+   "৪৮"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২৪",
+  "explanation": "৭২ ও ১২০-এর গসাগু ২৪।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "hcf",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-math-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-10",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D723",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "লাভ-ক্ষতি",
+  "difficulty": "medium",
+  "question": "ক্রয়মূল্য ২৫০০ টাকা হলে ১২% লাভে বিক্রয়মূল্য কত?",
+  "options": [
+   "২৭০০ টাকা",
+   "২৯০০ টাকা",
+   "২৮০০ টাকা",
+   "২৬০০ টাকা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২৮০০ টাকা",
+  "explanation": "বিক্রয়মূল্য = ২৫০০ × ১১২/১০০ = ২৮০০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bcs",
+   "math",
+   "mathematics",
+   "profit-loss"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-math-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-10",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D724",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Mathematics",
+  "subject_slug": "mathematics",
+  "topic": "গড়",
+  "difficulty": "easy",
+  "question": "২০, ৩০, ৪০, ৫০, ৬০ সংখ্যাগুলোর গড় কত?",
+  "options": [
+   "৩৫",
+   "৫০",
+   "৪৫",
+   "৪০"
+  ],
+  "correct_index": 3,
+  "correct_answer": "৪০",
+  "explanation": "যোগফল ২০০; গড় = ২০০/৫ = ৪০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 General Mathematics (NCTB) — arithmetic, algebra and geometry rules",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "average",
+   "bcs",
+   "math",
+   "mathematics"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-math-depth-03.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-10",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

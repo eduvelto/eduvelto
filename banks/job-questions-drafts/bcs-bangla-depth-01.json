@@ -1,0 +1,1028 @@
+[
+ {
+  "id": "JOBQ-D001",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — আধুনিক উপন্যাস",
+  "difficulty": "easy",
+  "question": "'পথের পাঁচালী' উপন্যাসটি কত সালে প্রকাশিত হয়?",
+  "options": [
+   "১৯২৯",
+   "১৯৩২",
+   "১৯২৫",
+   "১৯৩৯"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯২৯",
+  "explanation": "'পথের পাঁচালী' ১৯২৯ সালে প্রকাশিত হয়; লেখক বিভূতিভূষণ বন্দ্যোপাধ্যায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "bibhutibhushan",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D003",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — উপন্যাস",
+  "difficulty": "medium",
+  "question": "'আগুনের পরশমণি' উপন্যাসের লেখক কে?",
+  "options": [
+   "সেলিনা হোসেন",
+   "জহির রায়হান",
+   "সৈয়দ শামসুল হক",
+   "হুমায়ূন আহমেদ"
+  ],
+  "correct_index": 3,
+  "correct_answer": "হুমায়ূন আহমেদ",
+  "explanation": "'আগুনের পরশমণি' (১৯৮৬) হুমায়ূন আহমেদের উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "novel",
+   "zahir-raihan"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED-AFTER-FIX",
+  "review_reason": "Reviewed NEEDS-FIX 26 Nov 2026; fix applied + re-verified 26 Nov 2026 (review-bcs-fixes-applied.md). Replacement text is new — content-team spot-check still recommended before treating as fully VERIFIED.",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D004",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — উপন্যাস",
+  "difficulty": "medium",
+  "question": "'তিতাস একটি নদীর নাম' উপন্যাসের রচয়িতা কে?",
+  "options": [
+   "জহির রায়হান",
+   "মানিক বন্দ্যোপাধ্যায়",
+   "অদ্বৈত মল্লবর্মণ",
+   "আবু ইসহাক"
+  ],
+  "correct_index": 2,
+  "correct_answer": "অদ্বৈত মল্লবর্মণ",
+  "explanation": "'তিতাস একটি নদীর নাম' (১৯৫৬) অদ্বৈত মল্লবর্মণের একমাত্র উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "advaita",
+   "bangla",
+   "bcs",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D005",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — উপন্যাস",
+  "difficulty": "medium",
+  "question": "'সূর্য দীঘল বাড়ী' উপন্যাসটি কার রচনা?",
+  "options": [
+   "সৈয়দ ওয়ালীউল্লাহ",
+   "শওকত ওসমান",
+   "আবু ইসহাক",
+   "শহীদুল্লা কায়সার"
+  ],
+  "correct_index": 2,
+  "correct_answer": "আবু ইসহাক",
+  "explanation": "'সূর্য দীঘল বাড়ী' (১৯৫৫) আবু ইসহাকের বিখ্যাত উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "abu-ishaque",
+   "bangla",
+   "bcs",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D006",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — উপন্যাস",
+  "difficulty": "medium",
+  "question": "'পুতুলনাচের ইতিকথা' উপন্যাসের লেখক কে?",
+  "options": [
+   "মানিক বন্দ্যোপাধ্যায়",
+   "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+   "তারাশঙ্কর বন্দ্যোপাধ্যায়",
+   "শরৎচন্দ্র চট্টোপাধ্যায়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মানিক বন্দ্যোপাধ্যায়",
+  "explanation": "'পুতুলনাচের ইতিকথা' (১৯৩৬) মানিক বন্দ্যোপাধ্যায়ের উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "manik",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D007",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — উপন্যাস",
+  "difficulty": "medium",
+  "question": "'গণদেবতা' উপন্যাসের রচয়িতা কে?",
+  "options": [
+   "তারাশঙ্কর বন্দ্যোপাধ্যায়",
+   "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+   "মানিক বন্দ্যোপাধ্যায়",
+   "জহির রায়হান"
+  ],
+  "correct_index": 0,
+  "correct_answer": "তারাশঙ্কর বন্দ্যোপাধ্যায়",
+  "explanation": "'গণদেবতা' (১৯৪২) তারাশঙ্কর বন্দ্যোপাধ্যায়ের উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "novel",
+   "tarashankar"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D008",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — উপন্যাস",
+  "difficulty": "hard",
+  "question": "'দোজখের ওম' উপন্যাসের লেখক কে?",
+  "options": [
+   "শহীদুল্লা কায়সার",
+   "শওকত ওসমান",
+   "সৈয়দ শামসুল হক",
+   "হুমায়ূন আহমেদ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "শওকত ওসমান",
+  "explanation": "'দোজখের ওম' শওকত ওসমানের উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "elias",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED-AFTER-FIX",
+  "review_reason": "Reviewed NEEDS-FIX 26 Nov 2026; fix applied + re-verified 26 Nov 2026 (review-bcs-fixes-applied.md). Replacement text is new — content-team spot-check still recommended before treating as fully VERIFIED.",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D009",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — উপন্যাস",
+  "difficulty": "easy",
+  "question": "'নন্দিত নরকে' উপন্যাসের লেখক কে?",
+  "options": [
+   "জহির রায়হান",
+   "হুমায়ূন আহমেদ",
+   "সেলিনা হোসেন",
+   "আহমদ ছফা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "হুমায়ূন আহমেদ",
+  "explanation": "'নন্দিত নরকে' (১৯৭২) হুমায়ূন আহমেদের প্রথম উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "humayun",
+   "novel"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D010",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — উপন্যাস",
+  "difficulty": "medium",
+  "question": "'হাঙর নদী গ্রেনেড' উপন্যাসের লেখক কে?",
+  "options": [
+   "মাহমুদুল হক",
+   "সেলিনা হোসেন",
+   "শওকত ওসমান",
+   "রাবেয়া খাতুন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সেলিনা হোসেন",
+  "explanation": "'হাঙর নদী গ্রেনেড' (১৯৭৬) সেলিনা হোসেনের মুক্তিযুদ্ধভিত্তিক উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "novel",
+   "selina"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D011",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — কবিতা",
+  "difficulty": "easy",
+  "question": "'বিদ্রোহী' কবিতাটি প্রথম কোন পত্রিকায় প্রকাশিত হয়?",
+  "options": [
+   "কল্লোল",
+   "ধূমকেতু",
+   "সওগাত",
+   "বিজলী"
+  ],
+  "correct_index": 3,
+  "correct_answer": "বিজলী",
+  "explanation": "নজরুলের 'বিদ্রোহী' কবিতা ১৯২২ সালে 'বিজলী' পত্রিকায় প্রকাশিত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "nazrul",
+   "poetry"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D012",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — কবিতা",
+  "difficulty": "medium",
+  "question": "'ধূসর পাণ্ডুলিপি' কাব্যগ্রন্থের কবি কে?",
+  "options": [
+   "রবীন্দ্রনাথ ঠাকুর",
+   "জীবনানন্দ দাশ",
+   "কাজী নজরুল ইসলাম",
+   "জসীমউদ্দীন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "জীবনানন্দ দাশ",
+  "explanation": "'ধূসর পাণ্ডুলিপি' (১৯৩৬) জীবনানন্দ দাশের কাব্যগ্রন্থ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "poetry",
+   "tagore"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED-AFTER-FIX",
+  "review_reason": "Reviewed NEEDS-FIX 26 Nov 2026; fix applied + re-verified 26 Nov 2026 (review-bcs-fixes-applied.md). Replacement text is new — content-team spot-check still recommended before treating as fully VERIFIED.",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D013",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — কবিতা",
+  "difficulty": "medium",
+  "question": "'বনলতা সেন' কাব্যগ্রন্থের কবি কে?",
+  "options": [
+   "সুধীন্দ্রনাথ দত্ত",
+   "জীবনানন্দ দাশ",
+   "বিষ্ণু দে",
+   "বুদ্ধদেব বসু"
+  ],
+  "correct_index": 1,
+  "correct_answer": "জীবনানন্দ দাশ",
+  "explanation": "'বনলতা সেন' (১৯৪২) জীবনানন্দ দাশের কাব্যগ্রন্থ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "jibanananda",
+   "poetry"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D015",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — কবিতা",
+  "difficulty": "medium",
+  "question": "'সাত সাগরের মাঝি' কাব্যগ্রন্থের কবি কে?",
+  "options": [
+   "আল মাহমুদ",
+   "আহসান হাবীব",
+   "শামসুর রাহমান",
+   "ফররুখ আহমদ"
+  ],
+  "correct_index": 3,
+  "correct_answer": "ফররুখ আহমদ",
+  "explanation": "'সাত সাগরের মাঝি' (১৯৪৪) ফররুখ আহমদের কাব্যগ্রন্থ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "farrukh",
+   "poetry"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D016",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — কবিতা",
+  "difficulty": "easy",
+  "question": "'ছাড়পত্র' কাব্যগ্রন্থের কবি কে?",
+  "options": [
+   "নির্মলেন্দু গুণ",
+   "শামসুর রাহমান",
+   "আল মাহমুদ",
+   "সুকান্ত ভট্টাচার্য"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সুকান্ত ভট্টাচার্য",
+  "explanation": "'ছাড়পত্র' সুকান্ত ভট্টাচার্যের মরণোত্তর কাব্যগ্রন্থ (১৯৪৮)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "poetry",
+   "sukanta"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D017",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — নাটক",
+  "difficulty": "medium",
+  "question": "'নীলদর্পণ' নাটকের ইংরেজি অনুবাদ কে করেন?",
+  "options": [
+   "মাইকেল মধুসূদন দত্ত",
+   "ঈশ্বরচন্দ্র বিদ্যাসাগর",
+   "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+   "দীনবন্ধু মিত্র"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মাইকেল মধুসূদন দত্ত",
+  "explanation": "'নীলদর্পণ'-এর ইংরেজি অনুবাদ করেন মাইকেল মধুসূদন দত্ত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "dinabandhu",
+   "drama"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D018",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — নাটক",
+  "difficulty": "medium",
+  "question": "'রক্তকরবী' নাটকের রচয়িতা কে?",
+  "options": [
+   "দ্বিজেন্দ্রলাল রায়",
+   "শরৎচন্দ্র চট্টোপাধ্যায়",
+   "রবীন্দ্রনাথ ঠাকুর",
+   "জ্যোতিরিন্দ্রনাথ ঠাকুর"
+  ],
+  "correct_index": 2,
+  "correct_answer": "রবীন্দ্রনাথ ঠাকুর",
+  "explanation": "'রক্তকরবী' (১৯২৬) রবীন্দ্রনাথ ঠাকুরের রূপক নাটক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "drama",
+   "tagore"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D019",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — ছদ্মনাম",
+  "difficulty": "medium",
+  "question": "'বীরবল' কার ছদ্মনাম?",
+  "options": [
+   "বলাইচাঁদ মুখোপাধ্যায়",
+   "রাজশেখর বসু",
+   "প্রমথ চৌধুরী",
+   "বিনয়কৃষ্ণ মুখোপাধ্যায়"
+  ],
+  "correct_index": 2,
+  "correct_answer": "প্রমথ চৌধুরী",
+  "explanation": "প্রমথ চৌধুরী 'বীরবল' ছদ্মনামে লিখতেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "pen-name",
+   "pramatha"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D020",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — ছদ্মনাম",
+  "difficulty": "medium",
+  "question": "'নীললোহিত' কার ছদ্মনাম?",
+  "options": [
+   "শীর্ষেন্দু মুখোপাধ্যায়",
+   "সমরেশ মজুমদার",
+   "সুনীল গঙ্গোপাধ্যায়",
+   "সঞ্জীব চট্টোপাধ্যায়"
+  ],
+  "correct_index": 2,
+  "correct_answer": "সুনীল গঙ্গোপাধ্যায়",
+  "explanation": "সুনীল গঙ্গোপাধ্যায় 'নীললোহিত' ছদ্মনামে লিখতেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "pen-name",
+   "sunil"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D021",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — ছদ্মনাম",
+  "difficulty": "medium",
+  "question": "'বনফুল' কার ছদ্মনাম?",
+  "options": [
+   "বলাইচাঁদ মুখোপাধ্যায়",
+   "বিনয়কৃষ্ণ মুখোপাধ্যায়",
+   "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+   "তারাশঙ্কর বন্দ্যোপাধ্যায়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বলাইচাঁদ মুখোপাধ্যায়",
+  "explanation": "বলাইচাঁদ মুখোপাধ্যায় 'বনফুল' ছদ্মনামে লিখতেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "banaphool",
+   "bangla",
+   "bcs",
+   "pen-name"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D022",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — পত্রিকা",
+  "difficulty": "medium",
+  "question": "'সবুজপত্র' পত্রিকার সম্পাদক কে ছিলেন?",
+  "options": [
+   "প্রমথ চৌধুরী",
+   "রবীন্দ্রনাথ ঠাকুর",
+   "কাজী নজরুল ইসলাম",
+   "বঙ্কিমচন্দ্র চট্টোপাধ্যায়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "প্রমথ চৌধুরী",
+  "explanation": "'সবুজপত্র' (১৯১৪) পত্রিকার সম্পাদক ছিলেন প্রমথ চৌধুরী।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "journal",
+   "sabujpatra"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D023",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য — পত্রিকা",
+  "difficulty": "medium",
+  "question": "'বঙ্গদর্শন' পত্রিকার প্রতিষ্ঠাতা সম্পাদক কে?",
+  "options": [
+   "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+   "ঈশ্বরচন্দ্র বিদ্যাসাগর",
+   "দেবেন্দ্রনাথ ঠাকুর",
+   "অক্ষয়কুমার দত্ত"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+  "explanation": "'বঙ্গদর্শন' (১৮৭২) পত্রিকার প্রতিষ্ঠাতা সম্পাদক বঙ্কিমচন্দ্র চট্টোপাধ্যায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangadarshan",
+   "bangla",
+   "bcs",
+   "journal"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D024",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "ব্যাকরণ — সন্ধি",
+  "difficulty": "medium",
+  "question": "'নরাধম' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "নর + অধম",
+   "নরা + ধম",
+   "নর + ধম",
+   "ন + রাধম"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নর + অধম",
+  "explanation": "নর + অধম = নরাধম (অ + অ = আ)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "grammar",
+   "sandhi"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D025",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "ব্যাকরণ — সন্ধি",
+  "difficulty": "medium",
+  "question": "'গঙ্গা' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "গং + গা",
+   "গন্ + গা",
+   "গ + ঙ্গা",
+   "গম্ + গা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "গম্ + গা",
+  "explanation": "‘গঙ্গা’ শব্দের সন্ধি বিচ্ছেদ গম্ + গা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "grammar",
+   "sandhi"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D026",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "ব্যাকরণ — সমাস",
+  "difficulty": "medium",
+  "question": "'সিংহপুরুষ' কোন সমাস?",
+  "options": [
+   "বহুব্রীহি",
+   "দ্বিগু",
+   "তৎপুরুষ",
+   "উপমিত কর্মধারয়"
+  ],
+  "correct_index": 3,
+  "correct_answer": "উপমিত কর্মধারয়",
+  "explanation": "'সিংহপুরুষ' = সিংহের মতো পুরুষ — উপমিত কর্মধারয় সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "grammar",
+   "samas"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED-AFTER-FIX",
+  "review_reason": "Reviewed NEEDS-FIX 26 Nov 2026; fix applied + re-verified 26 Nov 2026 (review-bcs-fixes-applied.md). Replacement text is new — content-team spot-check still recommended before treating as fully VERIFIED.",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D027",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "ব্যাকরণ — সমাস",
+  "difficulty": "medium",
+  "question": "'সপ্তাহ' কোন সমাস?",
+  "options": [
+   "অব্যয়ীভাব",
+   "বহুব্রীহি",
+   "দ্বন্দ্ব",
+   "দ্বিগু"
+  ],
+  "correct_index": 3,
+  "correct_answer": "দ্বিগু",
+  "explanation": "'সপ্তাহ' = সাত দিনের সমাহার — সংখ্যাবাচক পূর্বপদযুক্ত দ্বিগু সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "grammar",
+   "samas"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED-AFTER-FIX",
+  "review_reason": "Reviewed NEEDS-FIX 26 Nov 2026; fix applied + re-verified 26 Nov 2026 (review-bcs-fixes-applied.md). Replacement text is new — content-team spot-check still recommended before treating as fully VERIFIED.",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D028",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "ব্যাকরণ — সমাস",
+  "difficulty": "medium",
+  "question": "'যথার্থ' কোন সমাস?",
+  "options": [
+   "তৎপুরুষ",
+   "কর্মধারয়",
+   "অব্যয়ীভাব",
+   "দ্বন্দ্ব"
+  ],
+  "correct_index": 2,
+  "correct_answer": "অব্যয়ীভাব",
+  "explanation": "'যথার্থ' = অর্থ অনুসারে — অব্যয়ীভাব সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "grammar",
+   "samas"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED-AFTER-FIX",
+  "review_reason": "Reviewed NEEDS-FIX 26 Nov 2026; fix applied + re-verified 26 Nov 2026 (review-bcs-fixes-applied.md). Replacement text is new — content-team spot-check still recommended before treating as fully VERIFIED.",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D030",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "ব্যাকরণ — এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "'যিনি বক্তৃতা দানে পটু' — এক কথায় কী হবে?",
+  "options": [
+   "বাচাল",
+   "বক্তা",
+   "প্রবক্তা",
+   "বাগ্মী"
+  ],
+  "correct_index": 3,
+  "correct_answer": "বাগ্মী",
+  "explanation": "বক্তৃতা দানে পটু ব্যক্তিকে এক কথায় 'বাগ্মী' বলে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — grammar and literary history; standard Bangla literary histories",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "bangla",
+   "bcs",
+   "grammar",
+   "one-word"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-bangla-depth-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively reviewed 26 Nov 2026 (BCS review program, methodology v1).",
+  "review_batch": "BATCH-08",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

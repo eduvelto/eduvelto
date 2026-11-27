@@ -1,0 +1,724 @@
+[
+ {
+  "id": "JOBQ-M241",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Right form of verbs",
+  "difficulty": "easy",
+  "question": "He ___ here yesterday. (come)",
+  "options": [
+   "comes",
+   "came",
+   "coming",
+   "come"
+  ],
+  "correct_index": 1,
+  "correct_answer": "came",
+  "explanation": "yesterday অতীতের চিহ্ন — came।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "right-form"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M243",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "He is senior ___ me.",
+  "options": [
+   "than",
+   "to",
+   "from",
+   "of"
+  ],
+  "correct_index": 1,
+  "correct_answer": "to",
+  "explanation": "Senior to ব্যবহৃত হয় (senior than নয়)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "preposition"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M244",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "The cow lives ___ grass.",
+  "options": [
+   "in",
+   "on",
+   "with",
+   "by"
+  ],
+  "correct_index": 1,
+  "correct_answer": "on",
+  "explanation": "খাদ্য হিসেবে grass-এর আগে on বসে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "preposition"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M245",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Small' is —",
+  "options": [
+   "Big",
+   "Little",
+   "Large",
+   "Huge"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Little",
+  "explanation": "Small-এর synonym Little।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "ministries",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M246",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Permit' is —",
+  "options": [
+   "Forbid",
+   "Allow",
+   "Prevent",
+   "Refuse"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Allow",
+  "explanation": "Permit-এর synonym Allow।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "ministries",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M247",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Arrogant' is —",
+  "options": [
+   "Proud",
+   "Humble",
+   "Rude",
+   "Haughty"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Humble",
+  "explanation": "Arrogant-এর antonym Humble।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "antonym",
+   "english",
+   "ministries",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M248",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Scarce' is —",
+  "options": [
+   "Rare",
+   "Abundant",
+   "Short",
+   "Little"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Abundant",
+  "explanation": "Scarce-এর antonym Abundant।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "antonym",
+   "english",
+   "ministries",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M249",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms",
+  "difficulty": "medium",
+  "question": "'To take to task' means —",
+  "options": [
+   "to assign work",
+   "to scold or rebuke",
+   "to take a test",
+   "to do a task"
+  ],
+  "correct_index": 1,
+  "correct_answer": "to scold or rebuke",
+  "explanation": "To take to task অর্থ তিরস্কার করা / দোষ ধরা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "idiom",
+   "ministries",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M250",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Idioms",
+  "difficulty": "medium",
+  "question": "'In cold blood' means —",
+  "options": [
+   "in winter",
+   "deliberately and without emotion",
+   "with fever",
+   "in fear"
+  ],
+  "correct_index": 1,
+  "correct_answer": "deliberately and without emotion",
+  "explanation": "In cold blood অর্থ ঠান্ডা মাথায়, নির্দয়ভাবে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "idiom",
+   "ministries",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M251",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Voice",
+  "difficulty": "medium",
+  "question": "Choose the passive form of: 'Open the door.'",
+  "options": [
+   "Let the door be opened.",
+   "The door is opened.",
+   "Let the door open.",
+   "The door was opened."
+  ],
+  "correct_index": 0,
+  "correct_answer": "Let the door be opened.",
+  "explanation": "Imperative sentence-এর passive: Let + object + be + past participle।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "voice"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M252",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Narration",
+  "difficulty": "medium",
+  "question": "She said, 'I am reading.' The indirect speech is —",
+  "options": [
+   "She said that she is reading.",
+   "She said that she was reading.",
+   "She said that I was reading.",
+   "She said that she had read."
+  ],
+  "correct_index": 1,
+  "correct_answer": "She said that she was reading.",
+  "explanation": "Reporting verb past tense হলে am → was হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "narration"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M253",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "easy",
+  "question": "___ water is essential for life.",
+  "options": [
+   "A",
+   "An",
+   "The",
+   "No article"
+  ],
+  "correct_index": 3,
+  "correct_answer": "No article",
+  "explanation": "সাধারণ অর্থে water-এর আগে কোনো article বসে না।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "article",
+   "english",
+   "grammar",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M254",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Plural number",
+  "difficulty": "medium",
+  "question": "What is the plural form of 'Crisis'?",
+  "options": [
+   "Crisises",
+   "Crises",
+   "Crisis",
+   "Crisiss"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Crises",
+  "explanation": "Crisis-এর plural Crises।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "plural"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M255",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "medium",
+  "question": "The correct spelling of the word 'separate' is —",
+  "options": [
+   "Seperate",
+   "Separate",
+   "Saperate",
+   "Seperete"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Separate",
+  "explanation": "সঠিক বানান Separate।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "ministries",
+   "spelling",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M256",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Degree",
+  "difficulty": "easy",
+  "question": "Gold is ___ than silver. (precious)",
+  "options": [
+   "precious",
+   "more precious",
+   "most precious",
+   "preciouser"
+  ],
+  "correct_index": 1,
+  "correct_answer": "more precious",
+  "explanation": "দুই সিলেবলের বেশি adjective-এ more ব্যবহৃত হয়: more precious।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "degree",
+   "english",
+   "grammar",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M257",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Subject-verb agreement",
+  "difficulty": "medium",
+  "question": "Neither of the two boys ___ come.",
+  "options": [
+   "have",
+   "has",
+   "are",
+   "were"
+  ],
+  "correct_index": 1,
+  "correct_answer": "has",
+  "explanation": "Neither of-এর পর singular verb — has।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "agreement",
+   "english",
+   "grammar",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M258",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "One-word substitution",
+  "difficulty": "medium",
+  "question": "One who hates women is called —",
+  "options": [
+   "Philanthropist",
+   "Misanthrope",
+   "Misogynist",
+   "Humanist"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Misogynist",
+  "explanation": "Misogynist অর্থ নারীবিদ্বেষী।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "ministries",
+   "one-word",
+   "vocabulary"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M259",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Translation",
+  "difficulty": "easy",
+  "question": "Choose the correct English of: 'তিনি একজন ভালো শিক্ষক।'",
+  "options": [
+   "He is a good teacher.",
+   "He is good teacher.",
+   "He are a good teacher.",
+   "He is an good teacher."
+  ],
+  "correct_index": 0,
+  "correct_answer": "He is a good teacher.",
+  "explanation": "সঠিক অনুবাদ: He is a good teacher।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "english",
+   "grammar",
+   "ministries",
+   "translation"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M260",
+  "exam_canonical": "ministries",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "English literature",
+  "difficulty": "medium",
+  "question": "Who wrote 'Of Mice and Men'?",
+  "options": [
+   "John Steinbeck",
+   "Harper Lee",
+   "Truman Capote",
+   "J. D. Salinger"
+  ],
+  "correct_index": 0,
+  "correct_answer": "John Steinbeck",
+  "explanation": "'Of Mice and Men' is a novella by John Steinbeck.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB English Grammar (Class 9-10) + standard English grammar and literature references",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "drama",
+   "english",
+   "literature",
+   "ministries"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-english-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

@@ -1,0 +1,903 @@
+{
+  "header": {
+    "status": "NEEDS-REVIEW — DRAFT ONLY. Not verified, not published, not imported.",
+    "level": "Class 9-10",
+    "subject": "Bangla 2nd Paper / English 2nd Paper (written types)",
+    "question_count": 33,
+    "rule": "NCTB-first: every question cites its NCTB book lesson; no invented questions, graphs, or sources.",
+    "source": "Worker D (CONTENT GAPS), 27 Nov 2026 — see fast-program/D-content/."
+  },
+  "questions": [
+    {
+      "correct_index": 2,
+      "difficulty": "easy",
+      "explanation": "অনুচ্ছেদে সব সময় একটি ভাব বা একটি বিষয় থাকে; একটি অনুচ্ছেদের মধ্যে একাধিক ভাব বা বিষয়ের অবতারণা করা ঠিক নয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৪: অনুচ্ছেদ, পৃ. ১২৬",
+      "id": "ACAD-8101",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "দুটি ভাব",
+        "তিনটি বিষয়",
+        "একটি ভাব বা একটি বিষয়",
+        "যত বেশি ভাব থাকে তত ভালো"
+      ],
+      "question": "একটি ভালো অনুচ্ছেদে কয়টি ভাব বা বিষয় থাকে?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৪: অনুচ্ছেদ, পৃ. ১২৬",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "paragraph"
+      ],
+      "topic": "অনুচ্ছেদ",
+      "original_id": "GAP3-B2-01",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 0,
+      "difficulty": "easy",
+      "explanation": "একটি বাক্য দিয়েও একটি অনুচ্ছেদ হয়, তবে দশ থেকে পনেরো বাক্যের অনুচ্ছেদই আদর্শ অনুচ্ছেদ।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৪: অনুচ্ছেদ, পৃ. ১২৬",
+      "id": "ACAD-8102",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "দশ থেকে পনেরোটি",
+        "দুই থেকে তিনটি",
+        "ত্রিশ থেকে চল্লিশটি",
+        "পঞ্চাশটির বেশি"
+      ],
+      "question": "আদর্শ অনুচ্ছেদে সাধারণত কয়টি বাক্য থাকে?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৪: অনুচ্ছেদ, পৃ. ১২৬",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "paragraph"
+      ],
+      "topic": "অনুচ্ছেদ",
+      "original_id": "GAP3-B2-02",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "অনুচ্ছেদের প্রথম বাক্যে মূল ভাব বা বিষয়ের উল্লেখ করা হয়, পরের বাক্যগুলোতে তার বিস্তার ঘটানো হয়, আর শেষ বাক্যে থাকে ভাব বা বিষয়ের সমাপ্তির ইঙ্গিত।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৪: অনুচ্ছেদ, পৃ. ১২৬",
+      "id": "ACAD-8103",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "প্রথম বাক্যে সমাপ্তির ইঙ্গিত থাকে",
+        "পরের বাক্যগুলোতে মূল ভাবের উল্লেখ থাকে",
+        "শেষ বাক্যে নতুন ভাব যোগ করা হয়",
+        "প্রথম বাক্যে মূল ভাব বা বিষয়ের উল্লেখ করা হয়, শেষ বাক্যে সমাপ্তির ইঙ্গিত থাকে"
+      ],
+      "question": "অনুচ্ছেদের প্রথম ও শেষ বাক্য সম্পর্কে কোনটি সঠিক?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৪: অনুচ্ছেদ, পৃ. ১২৬",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "paragraph"
+      ],
+      "topic": "অনুচ্ছেদ",
+      "original_id": "GAP3-B2-03",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 1,
+      "difficulty": "easy",
+      "explanation": "সাধারণত গদ্যরচনার অন্তর্নিহিত বক্তব্যকে সংক্ষেপে লেখার নাম সারাংশ; সারাংশকে সারসংক্ষেপও বলা হয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৫: সারাংশ ও সারমর্ম, পৃ. ১৩৩",
+      "id": "ACAD-8104",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "সারমর্ম",
+        "সারাংশ",
+        "ভাবসম্প্রসারণ",
+        "প্রবন্ধ"
+      ],
+      "question": "গদ্যরচনার অন্তর্নিহিত বক্তব্য সংক্ষেপে লিখলে তাকে কী বলে?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৫: সারাংশ ও সারমর্ম, পৃ. ১৩৩",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "summary"
+      ],
+      "topic": "সারাংশ",
+      "original_id": "GAP3-B2-04",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "বইয়ের নিয়ম অনুযায়ী সারাংশ ও সারমর্ম চার বাক্য বা চল্লিশ শব্দের মধ্যে সীমিত রাখা দরকার।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৫: সারাংশ ও সারমর্ম, পৃ. ১৩৩",
+      "id": "ACAD-8105",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "দশ বাক্য বা একশ শব্দের মধ্যে",
+        "এক বাক্য বা দশ শব্দের মধ্যে",
+        "বিশ বাক্য বা দুইশ শব্দের মধ্যে",
+        "চার বাক্য বা চল্লিশ শব্দের মধ্যে"
+      ],
+      "question": "সারাংশ ও সারমর্ম সাধারণত কতটুকুর মধ্যে সীমিত রাখতে হয়?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৫: সারাংশ ও সারমর্ম, পৃ. ১৩৩",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "summary"
+      ],
+      "topic": "সারাংশ ও সারমর্ম",
+      "original_id": "GAP3-B2-05",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 0,
+      "difficulty": "easy",
+      "explanation": "কাব্যভাষায় লেখা কোনো রচনার মূলভাবকে সংক্ষেপে লেখার নাম সারমর্ম; সারমর্মকে মর্মার্থও বলা হয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৫: সারাংশ ও সারমর্ম, পৃ. ১৩৩",
+      "id": "ACAD-8106",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "সারমর্ম",
+        "সারাংশ",
+        "অনুচ্ছেদ",
+        "প্রতিবেদন"
+      ],
+      "question": "কাব্যভাষায় লেখা কোনো রচনার মূলভাব সংক্ষেপে লিখলে তাকে কী বলে?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৫: সারাংশ ও সারমর্ম, পৃ. ১৩৩",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "summary"
+      ],
+      "topic": "সারমর্ম",
+      "original_id": "GAP3-B2-06",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 2,
+      "difficulty": "medium",
+      "explanation": "সারমর্ম বা সারাংশ লেখার সময় উদাহরণ, উদ্ধৃতি, পরিসংখ্যান, তথ্য-উপাত্ত পুরোপুরি বাদ দিতে হয়; নিজের বক্তব্য বা মত প্রকাশের কোনো সুযোগ নেই এবং পুনরাবৃত্তি বর্জনীয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৫: সারাংশ ও সারমর্ম, পৃ. ১৩৩",
+      "id": "ACAD-8107",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "মূল কথা",
+        "সহজ ও সরল ভাষা",
+        "উদাহরণ, উদ্ধৃতি, পরিসংখ্যান ও তথ্য-উপাত্ত",
+        "সংক্ষিপ্ত বাক্য"
+      ],
+      "question": "সারাংশ বা সারমর্ম লেখার সময় কোনটি পুরোপুরি বাদ দিতে হয়?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৫: সারাংশ ও সারমর্ম, পৃ. ১৩৩",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "summary"
+      ],
+      "topic": "সারাংশ ও সারমর্ম",
+      "original_id": "GAP3-B2-07",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 1,
+      "difficulty": "medium",
+      "explanation": "ভাব-সম্প্রসারণকে প্রধানত তিনটি অংশে বিভক্ত করা যায়: প্রথম অংশে ভাবের অর্থ, দ্বিতীয় অংশে ভাবের ব্যাখ্যা এবং তৃতীয় অংশে ভাবের তাৎপর্য; অংশগুলোকে আলাদা তিনটি অনুচ্ছেদে উপস্থাপন করা যায়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৬: ভাব-সম্প্রসারণ, পৃ. ১৪২",
+      "id": "ACAD-8108",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "ভূমিকা, মূল অংশ, উপসংহার",
+        "ভাবের অর্থ, ভাবের ব্যাখ্যা, ভাবের তাৎপর্য",
+        "সারাংশ, সারমর্ম, মর্মার্থ",
+        "প্রশ্ন, উত্তর, মন্তব্য"
+      ],
+      "question": "ভাব-সম্প্রসারণের প্রধান তিনটি অংশ কোনগুলো?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৬: ভাব-সম্প্রসারণ, পৃ. ১৪২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "expansion"
+      ],
+      "topic": "ভাবসম্প্রসারণ",
+      "original_id": "GAP3-B2-08",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "বইয়ের নিয়ম অনুযায়ী কমবেশি ২০০ শব্দ অথবা অনধিক ২০টি বাক্যের মধ্যে ভাব-সম্প্রসারণ সীমিত থাকা উচিত।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৬: ভাব-সম্প্রসারণ, পৃ. ১৪২",
+      "id": "ACAD-8109",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "৫০ শব্দ বা ৫ বাক্যের মধ্যে",
+        "৫০০ শব্দ বা ৫০ বাক্যের মধ্যে",
+        "১০০০ শব্দ বা ১০০ বাক্যের মধ্যে",
+        "কমবেশি ২০০ শব্দ অথবা অনধিক ২০টি বাক্যের মধ্যে"
+      ],
+      "question": "ভাব-সম্প্রসারণ সাধারণত কতটুকুর মধ্যে সীমিত থাকা উচিত?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৬: ভাব-সম্প্রসারণ, পৃ. ১৪২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "expansion"
+      ],
+      "topic": "ভাবসম্প্রসারণ",
+      "original_id": "GAP3-B2-09",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 0,
+      "difficulty": "medium",
+      "explanation": "ভাব-সম্প্রসারণে আলাদা কোনো শিরোনামের দরকার হয় না, আর প্রদত্ত অংশের রচয়িতার নাম উল্লেখ করতে হয় না। ভাবের ব্যাখ্যায় যুক্তি দেখাতে হয়, উদাহরণ দিতে হয় ও তুলনা করতে হয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৬: ভাব-সম্প্রসারণ, পৃ. ১৪২",
+      "id": "ACAD-8110",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "প্রদত্ত অংশের রচয়িতার নাম উল্লেখ করতে হয় না এবং আলাদা কোনো শিরোনামের দরকার হয় না",
+        "প্রদত্ত অংশের রচয়িতার নাম অবশ্যই উল্লেখ করতে হয়",
+        "আলাদা শিরোনাম দিতেই হয়",
+        "মূল ভাবের বাইরে নতুন ভাব যোগ করা যায়"
+      ],
+      "question": "ভাব-সম্প্রসারণ করার সময় কোনটি সঠিক?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৬: ভাব-সম্প্রসারণ, পৃ. ১৪২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "expansion"
+      ],
+      "topic": "ভাবসম্প্রসারণ",
+      "original_id": "GAP3-B2-10",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 2,
+      "difficulty": "easy",
+      "explanation": "ব্যক্তিগত চিঠি লেখার ক্ষেত্রে পত্রের শুরুতে পত্ররচনার তারিখ ও স্থানের নাম উল্লেখ করতে হয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৭: চিঠিপত্র (ব্যক্তিগত পত্র), পৃ. ১৫২",
+      "id": "ACAD-8111",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "শুধু প্রাপকের নাম",
+        "শুধু পত্রের বিষয়",
+        "পত্ররচনার তারিখ ও স্থানের নাম",
+        "শুধু খামের ঠিকানা"
+      ],
+      "question": "ব্যক্তিগত পত্রের শুরুতে কী উল্লেখ করতে হয়?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৭: চিঠিপত্র (ব্যক্তিগত পত্র), পৃ. ১৫২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "letter"
+      ],
+      "topic": "ব্যক্তিগত পত্র",
+      "original_id": "GAP3-B2-11",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 1,
+      "difficulty": "medium",
+      "explanation": "সাধারণত গুরুজনকে শ্রদ্ধেয়, মাননীয় ইত্যাদি সম্বোধন করা হয়; বয়সে ছোটো কাউকে লিখলে স্নেহের, কল্যাণীয় ইত্যাদি, আর বন্ধু বা প্রিয়জনকে প্রিয়, প্রীতিভাজনেষু দিয়ে সম্বোধন করা হয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৭: চিঠিপত্র (ব্যক্তিগত পত্র), পৃ. ১৫২",
+      "id": "ACAD-8112",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "স্নেহের",
+        "শ্রদ্ধেয় বা মাননীয়",
+        "প্রিয়",
+        "কল্যাণীয়"
+      ],
+      "question": "গুরুজনকে চিঠি লিখলে তাঁকে কীভাবে সম্বোধন করা হয়?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৭: চিঠিপত্র (ব্যক্তিগত পত্র), পৃ. ১৫২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "letter"
+      ],
+      "topic": "ব্যক্তিগত পত্র",
+      "original_id": "GAP3-B2-12",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "পত্রের শেষে 'ইতি' লেখার একটি রেওয়াজ বাংলায় প্রচলিত আছে; এরপর সম্পর্ক অনুযায়ী বিনয় সম্ভাষণ লিখে চিঠির শেষে নাম লিখতে হয়। আর চিঠি ডাকযোগে গেলে খামের উপরে নাম-ঠিকানা লিখতে হয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৭: চিঠিপত্র (ব্যক্তিগত পত্র), পৃ. ১৫২",
+      "id": "ACAD-8113",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "শেষে শুধু তারিখ লিখতে হয়",
+        "শেষে প্রাপকের ঠিকানা লিখতে হয়",
+        "শেষে নতুন বিষয় শুরু করতে হয়",
+        "শেষে 'ইতি' লিখে সম্পর্ক অনুযায়ী বিনয় সম্ভাষণ ও নাম লিখতে হয়"
+      ],
+      "question": "ব্যক্তিগত পত্রের শেষাংশ সম্পর্কে কোনটি সঠিক?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৭: চিঠিপত্র (ব্যক্তিগত পত্র), পৃ. ১৫২",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "letter"
+      ],
+      "topic": "ব্যক্তিগত পত্র",
+      "original_id": "GAP3-B2-13",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 0,
+      "difficulty": "easy",
+      "explanation": "পরিচ্ছেদ ৪৭-এর সূচিতে ছয় ধরনের চিঠি আছে: ব্যক্তিগত পত্র, আমন্ত্রণপত্র, সংবাদপত্রে প্রকাশের জন্য চিঠি, মানপত্র, আবেদনপত্র ও ব্যবসায়িক পত্র। যেমন আবেদনপত্রের নমুনায় কর্তৃপক্ষের কাছে দাবি জানিয়ে লেখা হয়, আর সংবাদপত্রের চিঠি সম্পাদককে 'মহোদয়' সম্বোধনে লেখা হয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৭: চিঠিপত্র, সূচিপত্র ও পৃ. ১৫২–১৬৯",
+      "id": "ACAD-8114",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "ব্যক্তিগত পত্র, আমন্ত্রণপত্র, সংবাদপত্রে প্রকাশের চিঠি, মানপত্র, আবেদনপত্র ও ব্যবসায়িক পত্র — মোট ছয় ধরন",
+        "শুধু ব্যক্তিগত পত্র — এক ধরন",
+        "ব্যক্তিগত পত্র ও আবেদনপত্র — দুই ধরন",
+        "ব্যক্তিগত পত্র, আমন্ত্রণপত্র ও আবেদনপত্র — তিন ধরন"
+      ],
+      "question": "এই বইয়ের চিঠিপত্র পরিচ্ছেদে কয় ধরনের চিঠির নমুনা দেওয়া আছে?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৭: চিঠিপত্র, সূচিপত্র ও পৃ. ১৫২–১৬৯ (আবেদনপত্রের নমুনা পৃ. ১৬০)",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "letter"
+      ],
+      "topic": "চিঠিপত্রের প্রকার",
+      "original_id": "GAP3-B2-14",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 1,
+      "difficulty": "medium",
+      "explanation": "প্রচারমাধ্যমে প্রচারের লক্ষ্যে সুনির্দিষ্ট বিষয়ে প্রয়োজনীয় তথ্য সংবলিত বিবরণীকে সংবাদ প্রতিবেদন বলে। প্রতিবেদককে গভীর মনোযোগের সঙ্গে ঘটনা প্রত্যক্ষ করতে হয় এবং ঘটনার পক্ষপাতহীন বিবরণ তৈরি করতে হয়; শুরুতে একটি শিরোনাম থাকে, এরপর প্রতিবেদকের নাম, ঘটনার স্থান ও তারিখ উল্লেখ করতে হয়।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৮: সংবাদ প্রতিবেদন, পৃ. ১৭০",
+      "id": "ACAD-8115",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "প্রতিবেদনে নিজের মতামতই প্রধান",
+        "প্রতিবেদনের শুরুতে শিরোনাম, তারপর প্রতিবেদকের নাম, ঘটনার স্থান ও তারিখ উল্লেখ করতে হয়",
+        "প্রতিবেদনে ঘটনা নিজের মতো করে বদলে লেখা যায়",
+        "প্রতিবেদকের নাম গোপন রাখতেই হয়"
+      ],
+      "question": "সংবাদ প্রতিবেদন সম্পর্কে কোনটি সঠিক?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৮: সংবাদ প্রতিবেদন, পৃ. ১৭০",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "report"
+      ],
+      "topic": "সংবাদ প্রতিবেদন",
+      "original_id": "GAP3-B2-15",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 2,
+      "difficulty": "medium",
+      "explanation": "প্রবন্ধ এক প্রকার গদ্য রচনা; সব ধরনের প্রবন্ধকে অন্তত তিনটি শ্রেণিতে ভাগ করা যায় — বর্ণনামূলক প্রবন্ধ, চিন্তামূলক প্রবন্ধ ও ব্যক্তি অনুভূতিমূলক প্রবন্ধ। প্রবন্ধের নির্দিষ্ট কোনো আয়তন নেই, তবে নবম-দশম শ্রেণির শিক্ষার্থীদের জন্য শব্দসংখ্যা কমবেশি এক হাজার হতে পারে।",
+      "fact_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৯: প্রবন্ধ, পৃ. ১৭৪",
+      "id": "ACAD-8116",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "প্রবন্ধ মাত্র এক শ্রেণির হয়",
+        "প্রবন্ধের শব্দসংখ্যা সব সময় ঠিক ৫০০ হতে হয়",
+        "প্রবন্ধ তিন শ্রেণির — বর্ণনামূলক, চিন্তামূলক ও ব্যক্তি অনুভূতিমূলক; নবম-দশম শ্রেণির জন্য শব্দসংখ্যা কমবেশি এক হাজার হতে পারে",
+        "প্রবন্ধে শুধু উদ্ধৃতিই লিখতে হয়"
+      ],
+      "question": "প্রবন্ধ সম্পর্কে কোনটি সঠিক?",
+      "source_reference": "NCTB বাংলা ভাষার ব্যাকরণ ও নির্মিতি, দাখিল নবম ও দশম শ্রেণি (2026) — পরিচ্ছেদ ৪৯: প্রবন্ধ, পৃ. ১৭৪",
+      "status": "NEEDS-REVIEW",
+      "subject": "Bangla 2nd Paper",
+      "tags": [
+        "bangla-2nd",
+        "written",
+        "essay"
+      ],
+      "topic": "প্রবন্ধ",
+      "original_id": "GAP3-B2-16",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 1,
+      "difficulty": "easy",
+      "explanation": "Informal communication takes place in intimate circles, usually among friends and family, and formal communication takes place among people whose relationship is formal.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 14: Letters, 14/1 Informal Letters, p. 209",
+      "id": "ACAD-8117",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Informal communication is only spoken, and formal communication is only written",
+        "Informal communication takes place among friends and family, and formal communication takes place among people whose relationship is formal",
+        "Informal letters are always short, and formal letters are always long",
+        "Formal letters never have a greeting"
+      ],
+      "question": "According to the book, what is the main difference between informal and formal communication?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 14: Letters, 14/1 Informal Letters, p. 209",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "letters"
+      ],
+      "topic": "Letters",
+      "original_id": "GAP3-E2-01",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "Informal writing uses contractions such as I'm, you're, I've and I'd, idiomatic expressions or phrasal verbs, exclamation, repetition and tag questions. The book's review of informal letters lists: colloquial words, conversational tone, contractions, two-word verbs and slang (in a very intimate circle).",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 14: Letters, pp. 209, 211",
+      "id": "ACAD-8118",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Long formal sentences with no contractions",
+        "Only official and difficult words",
+        "No greeting and no closing",
+        "Contractions such as I'm and you're, idioms, phrasal verbs, exclamation and tag questions"
+      ],
+      "question": "Which of these is a feature of informal writing?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 14: Letters, pp. 209, 211",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "letters"
+      ],
+      "topic": "Letters",
+      "original_id": "GAP3-E2-02",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 0,
+      "difficulty": "medium",
+      "explanation": "The degree of informality varies: a letter to parents may be a little less informal in its choice of words and tone than a letter to a very close friend. Contractions and group verbs can be used with parents and other seniors, but highly emotional words and expressions and slang should not be used in such personal letters.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 14: Letters, Review, p. 211",
+      "id": "ACAD-8119",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Be a little less informal — contractions and group verbs may be used, but highly emotional words and slang should not be used",
+        "Use slang freely",
+        "Write exactly as you would to a very close friend",
+        "Never use contractions"
+      ],
+      "question": "All personal letters are informal, but what does the book say about writing to parents?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 14: Letters, Review, p. 211",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "letters"
+      ],
+      "topic": "Letters",
+      "original_id": "GAP3-E2-03",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 2,
+      "difficulty": "easy",
+      "explanation": "The CV is meant to introduce you and your background to somebody who does not know you. It should present you in the best possible light, in a concise way.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 15: CV and Cover Letter, 15/1 Writing CV, p. 223",
+      "id": "ACAD-8120",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Tell a story",
+        "Describe a graph",
+        "Introduce you and your background to somebody who does not know you",
+        "Write a summary"
+      ],
+      "question": "What is a CV meant to do?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 15: CV and Cover Letter, 15/1 Writing CV, p. 223",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "cv"
+      ],
+      "topic": "Composition — CV",
+      "original_id": "GAP3-E2-04",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 0,
+      "difficulty": "easy",
+      "explanation": "A CV should be concise and not go over one A4 size page. If one wants to use it for academic purposes and not for a job, the CV can pass that limit, and the additional space is used to describe academic activities.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 15: CV and Cover Letter, 15/1 Writing CV, p. 223",
+      "id": "ACAD-8121",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Not over one A4 size page",
+        "At least ten pages",
+        "Exactly five pages",
+        "As long as possible"
+      ],
+      "question": "For a job, how long should a CV be?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 15: CV and Cover Letter, 15/1 Writing CV, p. 223",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "cv"
+      ],
+      "topic": "Composition — CV",
+      "original_id": "GAP3-E2-05",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "Personal details should include your date of birth, contact address, telephone number and nationality. In case you have a permanent address different from your temporary address, include both.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 15: CV and Cover Letter, 15/1 Writing CV, p. 223",
+      "id": "ACAD-8122",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Only your name",
+        "Only your hobbies",
+        "Only your school name",
+        "Date of birth, contact address, telephone number and nationality"
+      ],
+      "question": "Which details should the personal details section of a CV include?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 15: CV and Cover Letter, 15/1 Writing CV, p. 223",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "cv"
+      ],
+      "topic": "Composition — CV",
+      "original_id": "GAP3-E2-06",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 1,
+      "difficulty": "medium",
+      "explanation": "Use the subject line wisely: take the time to select a meaningful, straightforward subject line that tells the reason for the e-mail clearly.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 16: E-mails, 16/1 How to Write E-mails, p. 232",
+      "id": "ACAD-8123",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "It should be left blank",
+        "It should be a meaningful, straightforward line that tells the reason for the e-mail clearly",
+        "It should hide the purpose of the e-mail",
+        "It should be as long as possible"
+      ],
+      "question": "Why is the subject line important in an e-mail?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 16: E-mails, 16/1 How to Write E-mails, p. 232",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "emails"
+      ],
+      "topic": "E-mails",
+      "original_id": "GAP3-E2-07",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 2,
+      "difficulty": "medium",
+      "explanation": "Make sure of your identity: many e-mails are ignored because the receiver is not familiar with the sender. Place your full name as the sender. Avoid using initials or nicknames, as many people tend to ignore e-mails that are not sent with whole names which they can recognise.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 16: E-mails, 16/1 How to Write E-mails, p. 232",
+      "id": "ACAD-8124",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Use only initials",
+        "Use a nickname",
+        "Use your full name so the receiver knows who you are",
+        "Do not give any name"
+      ],
+      "question": "What does the book advise about the sender's name in an e-mail?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 16: E-mails, 16/1 How to Write E-mails, p. 232",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "emails"
+      ],
+      "topic": "E-mails",
+      "original_id": "GAP3-E2-08",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 0,
+      "difficulty": "easy",
+      "explanation": "The first tip is a clear purpose: it is important to know the purpose of your e-mail, and the receiver should be sure about the point. The fourth tip is to get to the point — make sure your e-mails are concise, so the reader knows what the e-mail is about as soon as they open it.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 16: E-mails, 16/1 How to Write E-mails, p. 232",
+      "id": "ACAD-8125",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Know the purpose of your e-mail clearly, and get to the point concisely",
+        "Write as long as possible",
+        "Use difficult words",
+        "Repeat the same point many times"
+      ],
+      "question": "What is the first tip for writing an effective e-mail?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 16: E-mails, 16/1 How to Write E-mails, p. 232",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "emails"
+      ],
+      "topic": "E-mails",
+      "original_id": "GAP3-E2-09",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "A paragraph is a unit of written discourse. The main idea of a paragraph is stated in a topic sentence, and then the idea is developed sentence by sentence.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 17: Short Composition: Paragraphs, 17/1 Characteristics and Types of Paragraphs, p. 237",
+      "id": "ACAD-8126",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Only in the last sentence",
+        "Nowhere — a paragraph has no main idea",
+        "Only in the title",
+        "In a topic sentence, developed sentence by sentence"
+      ],
+      "question": "In a paragraph, where is the main idea usually stated?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 17: Short Composition: Paragraphs, 17/1 Characteristics and Types of Paragraphs, p. 237",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "paragraph"
+      ],
+      "topic": "Composition — Paragraph",
+      "original_id": "GAP3-E2-10",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 1,
+      "difficulty": "easy",
+      "explanation": "A paragraph is a unit of written discourse (it may be spoken discourse also). It may be self-contained, i.e. complete in itself, or may be used as part of a longer discourse such as an essay or other assignments.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 17: Short Composition: Paragraphs, 17/1 Characteristics and Types of Paragraphs, p. 237",
+      "id": "ACAD-8127",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "A single word",
+        "A unit of written discourse, complete in itself or part of a longer discourse such as an essay",
+        "Only a list of words",
+        "A kind of letter"
+      ],
+      "question": "What is a paragraph?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 17: Short Composition: Paragraphs, 17/1 Characteristics and Types of Paragraphs, p. 237",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "paragraph"
+      ],
+      "topic": "Composition — Paragraph",
+      "original_id": "GAP3-E2-11",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 2,
+      "difficulty": "medium",
+      "explanation": "A short composition is made up of three essential parts: the introduction, which presents the idea or ideas going to be discussed; the body, which develops the ideas presented in the introduction; and the conclusion, which summarises what is discussed in brief, with no inclusion of new ideas.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 18: Short Composition, 18/1 Narrative Writing, p. 263",
+      "id": "ACAD-8128",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Title, picture, signature",
+        "Question, answer, marks",
+        "Introduction, body, conclusion",
+        "Beginning, middle, middle"
+      ],
+      "question": "What are the three essential parts of a short composition?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 18: Short Composition, 18/1 Narrative Writing, p. 263",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "composition"
+      ],
+      "topic": "Short Composition",
+      "original_id": "GAP3-E2-12",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 0,
+      "difficulty": "easy",
+      "explanation": "A short composition or a brief essay is a composition of several closely related paragraphs. It is different from a paragraph in length, but quite similar to a paragraph in structure.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 18: Short Composition, 18/1 Narrative Writing, p. 263",
+      "id": "ACAD-8129",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "It is a composition of several closely related paragraphs — different from a paragraph in length, but quite similar to a paragraph in structure",
+        "It has no structure at all",
+        "It is always a single sentence",
+        "It never has a conclusion"
+      ],
+      "question": "How is a short composition different from a paragraph?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 18: Short Composition, 18/1 Narrative Writing, p. 263",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "composition"
+      ],
+      "topic": "Short Composition",
+      "original_id": "GAP3-E2-13",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 3,
+      "difficulty": "medium",
+      "explanation": "Writing a story well requires a lot of planning and organization in building up the plot and the characters. Before you start to write a story, you must have the whole plot clear in your mind, and the main points arranged in their proper order.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 19: Completing Stories, p. 273",
+      "id": "ACAD-8130",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Start writing at once with no plan",
+        "Write the ending first and never plan",
+        "Copy another story",
+        "Have the whole plot clear in your mind, and the main points arranged in their proper order"
+      ],
+      "question": "What must you do before you start writing a story?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 19: Completing Stories, p. 273",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "story"
+      ],
+      "topic": "Completing Stories",
+      "original_id": "GAP3-E2-14",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 1,
+      "difficulty": "easy",
+      "explanation": "A completed story ends with its moral in the right place — for example 'In unity there is strength' in the Seven Sticks story, or 'where there's a will, there's a way' in the activity story.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 19: Completing Stories, p. 273",
+      "id": "ACAD-8131",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "It should be left out",
+        "It should be used in the right place of the story",
+        "It should come before the title only",
+        "It should contradict the story"
+      ],
+      "question": "When you complete a story, where should the moral go?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 19: Completing Stories, p. 273",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "story"
+      ],
+      "topic": "Completing Stories",
+      "original_id": "GAP3-E2-15",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 2,
+      "difficulty": "medium",
+      "explanation": "For all types of summary, the writer is responsible for generally stating, in his or her own words, the main information or argument of another writer. Summaries offer a concise, general version of the original information and show that you have understood the general point of a text. Quote only when the author expresses a point in a particularly telling or interesting language — otherwise, simply summarize.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 20: Writing Summaries, p. 277",
+      "id": "ACAD-8132",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "Copying the whole text word for word",
+        "Writing only quotations",
+        "Stating, in your own words, the main information or argument of another writer",
+        "Adding your own new story to the text"
+      ],
+      "question": "What is a summary?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 20: Writing Summaries, p. 277",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "summary"
+      ],
+      "topic": "Writing Summaries",
+      "original_id": "GAP3-E2-16",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    },
+    {
+      "correct_index": 1,
+      "difficulty": "medium",
+      "explanation": "Do not copy information from the question paper — use your own words, describe the most important information, keep your figures accurate, paraphrase, and give an overview of the most important trends. For future or predicted data, the simple future is a little too certain; use 'are/is (un)likely to', 'are/is predicted to' or 'are/is expected to'. To emphasise a difference, use many, much, far and significantly.",
+      "fact_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 21: Describing Graphs and Charts, p. 287",
+      "id": "ACAD-8133",
+      "level": "Class 9-10 (SSC)",
+      "options": [
+        "\"The population will double by 2030.\" (simple future)",
+        "\"The population is expected to double by 2030.\"",
+        "\"The population doubled by 2030.\" (past tense)",
+        "Copy the exact words from the question paper"
+      ],
+      "question": "When describing predicted data in a graph, which expression should you use?",
+      "source_reference": "NCTB English Grammar and Composition, Classes IX–X (Revised Edition, October 2025) — Unit 21: Describing Graphs and Charts, p. 287",
+      "status": "NEEDS-REVIEW",
+      "subject": "English 2nd Paper",
+      "tags": [
+        "english-2nd",
+        "written",
+        "graphs"
+      ],
+      "topic": "Describing Graphs and Charts",
+      "original_id": "GAP3-E2-17",
+      "review_verdict": "NEEDS-REVIEW",
+      "review_reason": "Landing 27 Nov 2026 — NEEDS-REVIEW; teacher review required before any use. Not verified; NOT in the verified TS pool."
+    }
+  ]
+}

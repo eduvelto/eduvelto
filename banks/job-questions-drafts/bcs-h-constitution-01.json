@@ -1,0 +1,4030 @@
+[
+ {
+  "id": "JOBQ-H923",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সুযোগের সমতা",
+   "প্রজাতন্ত্র",
+   "মন্ত্রিসভা",
+   "নাগরিকের কর্তব্য"
+  ],
+  "correct_index": 1,
+  "correct_answer": "প্রজাতন্ত্র",
+  "explanation": "সংবিধানের ১ নং অনুচ্ছেদের বিষয় প্রজাতন্ত্র।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H924",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'প্রজাতন্ত্র' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১",
+   "৪৩",
+   "৮",
+   "১৪১ক"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১",
+  "explanation": "'প্রজাতন্ত্র' সংবিধানের ১ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H925",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ২ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "রাষ্ট্রপতি",
+   "জাতীয় সংগীত, পতাকা ও প্রতীক",
+   "গণতন্ত্র",
+   "প্রজাতন্ত্রের এলাকা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "প্রজাতন্ত্রের এলাকা",
+  "explanation": "সংবিধানের ২ নং অনুচ্ছেদের বিষয় প্রজাতন্ত্রের এলাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H926",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'প্রজাতন্ত্রের এলাকা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১০২",
+   "৩১",
+   "২",
+   "১০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২",
+  "explanation": "'প্রজাতন্ত্রের এলাকা' সংবিধানের ২ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H927",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ২ক নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "জরুরি অবস্থা ঘোষণা",
+   "রাষ্ট্রধর্ম ইসলাম",
+   "স্থানীয় শাসন",
+   "রাষ্ট্রপতি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "রাষ্ট্রধর্ম ইসলাম",
+  "explanation": "সংবিধানের ২ক নং অনুচ্ছেদের বিষয় রাষ্ট্রধর্ম ইসলাম।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H928",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'রাষ্ট্রধর্ম ইসলাম' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "২ক",
+   "৪২",
+   "৯৪",
+   "১২৭"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২ক",
+  "explanation": "'রাষ্ট্রধর্ম ইসলাম' সংবিধানের ২ক নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H929",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৩ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "মৌলিক প্রয়োজনের ব্যবস্থা",
+   "নির্বাচন কমিশন",
+   "সংবিধান সংশোধন",
+   "রাষ্ট্রভাষা বাংলা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "রাষ্ট্রভাষা বাংলা",
+  "explanation": "সংবিধানের ৩ নং অনুচ্ছেদের বিষয় রাষ্ট্রভাষা বাংলা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H930",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'রাষ্ট্রভাষা বাংলা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৪৮",
+   "২",
+   "৩",
+   "৭"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৩",
+  "explanation": "'রাষ্ট্রভাষা বাংলা' সংবিধানের ৩ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H931",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৪ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "গণতন্ত্র",
+   "জাতীয় সংগীত, পতাকা ও প্রতীক",
+   "জরুরি অবস্থা ঘোষণা",
+   "মৌলিক প্রয়োজনের ব্যবস্থা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "জাতীয় সংগীত, পতাকা ও প্রতীক",
+  "explanation": "সংবিধানের ৪ নং অনুচ্ছেদের বিষয় জাতীয় সংগীত, পতাকা ও প্রতীক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H932",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'জাতীয় সংগীত, পতাকা ও প্রতীক' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৪",
+   "২৭",
+   "৫৯",
+   "৩৩"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৪",
+  "explanation": "'জাতীয় সংগীত, পতাকা ও প্রতীক' সংবিধানের ৪ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H933",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৫ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "নিজ গৃহে নিরাপত্তা",
+   "ধর্মনিরপেক্ষতা",
+   "রাষ্ট্রধর্ম ইসলাম",
+   "রাজধানী ঢাকা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "রাজধানী ঢাকা",
+  "explanation": "সংবিধানের ৫ নং অনুচ্ছেদের বিষয় রাজধানী ঢাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H934",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'রাজধানী ঢাকা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৩৯",
+   "১৩৩",
+   "৫",
+   "৩৩"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৫",
+  "explanation": "'রাজধানী ঢাকা' সংবিধানের ৫ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H935",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৬ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "নিজ গৃহে নিরাপত্তা",
+   "নাগরিকত্ব",
+   "সরকারি নিয়োগলাভে সুযোগের সমতা",
+   "জনস্বাস্থ্য ও নৈতিকতা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "নাগরিকত্ব",
+  "explanation": "সংবিধানের ৬ নং অনুচ্ছেদের বিষয় নাগরিকত্ব।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H936",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'নাগরিকত্ব' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৬",
+   "৫৯",
+   "৩৭",
+   "৪৮"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৬",
+  "explanation": "'নাগরিকত্ব' সংবিধানের ৬ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H937",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৭ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সুপ্রিম কোর্ট প্রতিষ্ঠা",
+   "সরকারি কর্ম কমিশন",
+   "মৌলিক অধিকার বলবৎকরণ",
+   "সংবিধানের প্রাধান্য"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সংবিধানের প্রাধান্য",
+  "explanation": "সংবিধানের ৭ নং অনুচ্ছেদের বিষয় সংবিধানের প্রাধান্য।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H938",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সংবিধানের প্রাধান্য' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১০২",
+   "৬",
+   "৭",
+   "৯৪"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৭",
+  "explanation": "'সংবিধানের প্রাধান্য' সংবিধানের ৭ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H939",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৮ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "রাষ্ট্রপতি",
+   "রাষ্ট্র পরিচালনার মূলনীতিসমূহ",
+   "মৌলিক প্রয়োজনের ব্যবস্থা",
+   "চিন্তা ও বিবেকের স্বাধীনতা এবং বাক-স্বাধীনতা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "রাষ্ট্র পরিচালনার মূলনীতিসমূহ",
+  "explanation": "সংবিধানের ৮ নং অনুচ্ছেদের বিষয় রাষ্ট্র পরিচালনার মূলনীতিসমূহ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H940",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'রাষ্ট্র পরিচালনার মূলনীতিসমূহ' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৮",
+   "৩৮",
+   "৯",
+   "৭০"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৮",
+  "explanation": "'রাষ্ট্র পরিচালনার মূলনীতিসমূহ' সংবিধানের ৮ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H941",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৯ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "গণতন্ত্র",
+   "সরকারি কর্ম কমিশন",
+   "সুপ্রিম কোর্ট প্রতিষ্ঠা",
+   "জাতীয়তাবাদ"
+  ],
+  "correct_index": 3,
+  "correct_answer": "জাতীয়তাবাদ",
+  "explanation": "সংবিধানের ৯ নং অনুচ্ছেদের বিষয় জাতীয়তাবাদ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H942",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'জাতীয়তাবাদ' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৪৮",
+   "৩২",
+   "৯",
+   "৩৯"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৯",
+  "explanation": "'জাতীয়তাবাদ' সংবিধানের ৯ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H943",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১০ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "নিজ গৃহে নিরাপত্তা",
+   "সমাজতন্ত্র",
+   "জাতীয় সংগীত, পতাকা ও প্রতীক",
+   "জাতীয়তাবাদ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সমাজতন্ত্র",
+  "explanation": "সংবিধানের ১০ নং অনুচ্ছেদের বিষয় সমাজতন্ত্র।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H944",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সমাজতন্ত্র' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১০",
+   "৪৩",
+   "১০২",
+   "৩৭"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১০",
+  "explanation": "'সমাজতন্ত্র' সংবিধানের ১০ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H945",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১১ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "মৌলিক অধিকার বলবৎকরণ",
+   "নির্বাচন কমিশন",
+   "আইনের দৃষ্টিতে সমতা",
+   "গণতন্ত্র"
+  ],
+  "correct_index": 3,
+  "correct_answer": "গণতন্ত্র",
+  "explanation": "সংবিধানের ১১ নং অনুচ্ছেদের বিষয় গণতন্ত্র।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H946",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'গণতন্ত্র' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৮",
+   "১০",
+   "১১",
+   "৩১"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১১",
+  "explanation": "'গণতন্ত্র' সংবিধানের ১১ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H947",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১২ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "চলাফেরার স্বাধীনতা",
+   "ধর্মনিরপেক্ষতা",
+   "ধর্মীয় স্বাধীনতা",
+   "সুপ্রিম কোর্ট প্রতিষ্ঠা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ধর্মনিরপেক্ষতা",
+  "explanation": "সংবিধানের ১২ নং অনুচ্ছেদের বিষয় ধর্মনিরপেক্ষতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H948",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'ধর্মনিরপেক্ষতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১২",
+   "৩১",
+   "৩",
+   "৬৫"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১২",
+  "explanation": "'ধর্মনিরপেক্ষতা' সংবিধানের ১২ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H949",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১৫ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "প্রজাতন্ত্র",
+   "নাগরিকের কর্তব্য",
+   "সরকারি কর্মচারীদের নিয়োগ",
+   "মৌলিক প্রয়োজনের ব্যবস্থা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "মৌলিক প্রয়োজনের ব্যবস্থা",
+  "explanation": "সংবিধানের ১৫ নং অনুচ্ছেদের বিষয় মৌলিক প্রয়োজনের ব্যবস্থা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H950",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'মৌলিক প্রয়োজনের ব্যবস্থা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৩২",
+   "৭৭",
+   "১৫",
+   "৫৯"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৫",
+  "explanation": "'মৌলিক প্রয়োজনের ব্যবস্থা' সংবিধানের ১৫ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H951",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১৭ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সংবিধান সংশোধন",
+   "অবৈতনিক ও বাধ্যতামূলক শিক্ষা",
+   "রাজধানী ঢাকা",
+   "সরকারি কর্ম কমিশন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অবৈতনিক ও বাধ্যতামূলক শিক্ষা",
+  "explanation": "সংবিধানের ১৭ নং অনুচ্ছেদের বিষয় অবৈতনিক ও বাধ্যতামূলক শিক্ষা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H952",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'অবৈতনিক ও বাধ্যতামূলক শিক্ষা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৭",
+   "২",
+   "১৩৩",
+   "৯৪"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৭",
+  "explanation": "'অবৈতনিক ও বাধ্যতামূলক শিক্ষা' সংবিধানের ১৭ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H953",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১৮ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সংসদ প্রতিষ্ঠা",
+   "ধর্ম প্রভৃতি কারণে বৈষম্য",
+   "সম্পত্তির অধিকার",
+   "জনস্বাস্থ্য ও নৈতিকতা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "জনস্বাস্থ্য ও নৈতিকতা",
+  "explanation": "সংবিধানের ১৮ নং অনুচ্ছেদের বিষয় জনস্বাস্থ্য ও নৈতিকতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H954",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'জনস্বাস্থ্য ও নৈতিকতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৫৫",
+   "১২৭",
+   "১৮",
+   "৭০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৮",
+  "explanation": "'জনস্বাস্থ্য ও নৈতিকতা' সংবিধানের ১৮ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H955",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১৯ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সরকারি কর্মচারীদের নিয়োগ",
+   "সুযোগের সমতা",
+   "রাষ্ট্রধর্ম ইসলাম",
+   "সংসদ প্রতিষ্ঠা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সুযোগের সমতা",
+  "explanation": "সংবিধানের ১৯ নং অনুচ্ছেদের বিষয় সুযোগের সমতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H956",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সুযোগের সমতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৯",
+   "১০২",
+   "১",
+   "৪৪"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯",
+  "explanation": "'সুযোগের সমতা' সংবিধানের ১৯ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H957",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ২১ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "প্রজাতন্ত্রের এলাকা",
+   "সরকারি নিয়োগলাভে সুযোগের সমতা",
+   "রাজনৈতিক দলের বিরুদ্ধে ভোটদানে আসন শূন্য",
+   "নাগরিকের কর্তব্য"
+  ],
+  "correct_index": 3,
+  "correct_answer": "নাগরিকের কর্তব্য",
+  "explanation": "সংবিধানের ২১ নং অনুচ্ছেদের বিষয় নাগরিকের কর্তব্য।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H958",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'নাগরিকের কর্তব্য' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "২ক",
+   "৫৯",
+   "২১",
+   "৫"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২১",
+  "explanation": "'নাগরিকের কর্তব্য' সংবিধানের ২১ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H959",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ২২ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সরকারি কর্ম কমিশন",
+   "বিচার বিভাগের পৃথকীকরণ",
+   "নির্বাচন কমিশন",
+   "গ্রেফতার ও আটক সম্পর্কে রক্ষাকবচ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বিচার বিভাগের পৃথকীকরণ",
+  "explanation": "সংবিধানের ২২ নং অনুচ্ছেদের বিষয় বিচার বিভাগের পৃথকীকরণ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H960",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'বিচার বিভাগের পৃথকীকরণ' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "২২",
+   "৪৩",
+   "১৩৩",
+   "৬৫"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২২",
+  "explanation": "'বিচার বিভাগের পৃথকীকরণ' সংবিধানের ২২ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H961",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ২৭ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সরকারি কর্ম কমিশন",
+   "সংবিধানের প্রাধান্য",
+   "জরুরি অবস্থা ঘোষণা",
+   "আইনের দৃষ্টিতে সমতা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "আইনের দৃষ্টিতে সমতা",
+  "explanation": "সংবিধানের ২৭ নং অনুচ্ছেদের বিষয় আইনের দৃষ্টিতে সমতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H962",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'আইনের দৃষ্টিতে সমতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৩৯",
+   "১৭",
+   "২৭",
+   "৩৭"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২৭",
+  "explanation": "'আইনের দৃষ্টিতে সমতা' সংবিধানের ২৭ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H963",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ২৮ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সুযোগের সমতা",
+   "ধর্ম প্রভৃতি কারণে বৈষম্য",
+   "রাজধানী ঢাকা",
+   "গণতন্ত্র"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ধর্ম প্রভৃতি কারণে বৈষম্য",
+  "explanation": "সংবিধানের ২৮ নং অনুচ্ছেদের বিষয় ধর্ম প্রভৃতি কারণে বৈষম্য।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H964",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'ধর্ম প্রভৃতি কারণে বৈষম্য' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "২৮",
+   "১১",
+   "১২৭",
+   "৪২"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২৮",
+  "explanation": "'ধর্ম প্রভৃতি কারণে বৈষম্য' সংবিধানের ২৮ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H965",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ২৯ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "গণতন্ত্র",
+   "রাজধানী ঢাকা",
+   "জনস্বাস্থ্য ও নৈতিকতা",
+   "সরকারি নিয়োগলাভে সুযোগের সমতা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সরকারি নিয়োগলাভে সুযোগের সমতা",
+  "explanation": "সংবিধানের ২৯ নং অনুচ্ছেদের বিষয় সরকারি নিয়োগলাভে সুযোগের সমতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H966",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সরকারি নিয়োগলাভে সুযোগের সমতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৭",
+   "১৮",
+   "২৯",
+   "৭৭"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২৯",
+  "explanation": "'সরকারি নিয়োগলাভে সুযোগের সমতা' সংবিধানের ২৯ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H967",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৩১ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সরকারি কর্মচারীদের নিয়োগ",
+   "আইনের আশ্রয় লাভের অধিকার",
+   "সমাজতন্ত্র",
+   "সংবিধান সংশোধন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "আইনের আশ্রয় লাভের অধিকার",
+  "explanation": "সংবিধানের ৩১ নং অনুচ্ছেদের বিষয় আইনের আশ্রয় লাভের অধিকার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H968",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'আইনের আশ্রয় লাভের অধিকার' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৩১",
+   "৫৯",
+   "৩৮",
+   "৩৬"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৩১",
+  "explanation": "'আইনের আশ্রয় লাভের অধিকার' সংবিধানের ৩১ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H969",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৩২ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "জনস্বাস্থ্য ও নৈতিকতা",
+   "রাষ্ট্রধর্ম ইসলাম",
+   "গণতন্ত্র",
+   "জীবন ও ব্যক্তি-স্বাধীনতার অধিকার রক্ষণ"
+  ],
+  "correct_index": 3,
+  "correct_answer": "জীবন ও ব্যক্তি-স্বাধীনতার অধিকার রক্ষণ",
+  "explanation": "সংবিধানের ৩২ নং অনুচ্ছেদের বিষয় জীবন ও ব্যক্তি-স্বাধীনতার অধিকার রক্ষণ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H970",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'জীবন ও ব্যক্তি-স্বাধীনতার অধিকার রক্ষণ' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "২ক",
+   "৯৪",
+   "৩২",
+   "১৮"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৩২",
+  "explanation": "'জীবন ও ব্যক্তি-স্বাধীনতার অধিকার রক্ষণ' সংবিধানের ৩২ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H971",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৩৩ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সরকারি কর্ম কমিশন",
+   "গ্রেফতার ও আটক সম্পর্কে রক্ষাকবচ",
+   "ধর্মনিরপেক্ষতা",
+   "মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক"
+  ],
+  "correct_index": 1,
+  "correct_answer": "গ্রেফতার ও আটক সম্পর্কে রক্ষাকবচ",
+  "explanation": "সংবিধানের ৩৩ নং অনুচ্ছেদের বিষয় গ্রেফতার ও আটক সম্পর্কে রক্ষাকবচ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H972",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'গ্রেফতার ও আটক সম্পর্কে রক্ষাকবচ' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৩৩",
+   "১৭",
+   "৮",
+   "১৯"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৩৩",
+  "explanation": "'গ্রেফতার ও আটক সম্পর্কে রক্ষাকবচ' সংবিধানের ৩৩ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H973",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৩৬ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সমাজতন্ত্র",
+   "গণতন্ত্র",
+   "রাষ্ট্র পরিচালনার মূলনীতিসমূহ",
+   "চলাফেরার স্বাধীনতা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "চলাফেরার স্বাধীনতা",
+  "explanation": "সংবিধানের ৩৬ নং অনুচ্ছেদের বিষয় চলাফেরার স্বাধীনতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H974",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'চলাফেরার স্বাধীনতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৮",
+   "৪৪",
+   "৩৬",
+   "১৫"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৩৬",
+  "explanation": "'চলাফেরার স্বাধীনতা' সংবিধানের ৩৬ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H975",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৩৭ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "স্থানীয় শাসন",
+   "সমাবেশের স্বাধীনতা",
+   "আইনের দৃষ্টিতে সমতা",
+   "সুপ্রিম কোর্ট প্রতিষ্ঠা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সমাবেশের স্বাধীনতা",
+  "explanation": "সংবিধানের ৩৭ নং অনুচ্ছেদের বিষয় সমাবেশের স্বাধীনতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H976",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সমাবেশের স্বাধীনতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৩৭",
+   "১২৭",
+   "২৮",
+   "৪"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৩৭",
+  "explanation": "'সমাবেশের স্বাধীনতা' সংবিধানের ৩৭ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H977",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৩৮ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "আইনের আশ্রয় লাভের অধিকার",
+   "চিন্তা ও বিবেকের স্বাধীনতা এবং বাক-স্বাধীনতা",
+   "নিজ গৃহে নিরাপত্তা",
+   "সংগঠনের স্বাধীনতা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সংগঠনের স্বাধীনতা",
+  "explanation": "সংবিধানের ৩৮ নং অনুচ্ছেদের বিষয় সংগঠনের স্বাধীনতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H978",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সংগঠনের স্বাধীনতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৪২",
+   "৯",
+   "৩৮",
+   "৩৬"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৩৮",
+  "explanation": "'সংগঠনের স্বাধীনতা' সংবিধানের ৩৮ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H979",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৩৯ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "স্থানীয় শাসন",
+   "চিন্তা ও বিবেকের স্বাধীনতা এবং বাক-স্বাধীনতা",
+   "সুযোগের সমতা",
+   "বিচার বিভাগের পৃথকীকরণ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "চিন্তা ও বিবেকের স্বাধীনতা এবং বাক-স্বাধীনতা",
+  "explanation": "সংবিধানের ৩৯ নং অনুচ্ছেদের বিষয় চিন্তা ও বিবেকের স্বাধীনতা এবং বাক-স্বাধীনতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H980",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'চিন্তা ও বিবেকের স্বাধীনতা এবং বাক-স্বাধীনতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৩৯",
+   "১২৭",
+   "৭০",
+   "২৭"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৩৯",
+  "explanation": "'চিন্তা ও বিবেকের স্বাধীনতা এবং বাক-স্বাধীনতা' সংবিধানের ৩৯ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H981",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৪১ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সংবিধান সংশোধন",
+   "ধর্ম প্রভৃতি কারণে বৈষম্য",
+   "রাষ্ট্র পরিচালনার মূলনীতিসমূহ",
+   "ধর্মীয় স্বাধীনতা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "ধর্মীয় স্বাধীনতা",
+  "explanation": "সংবিধানের ৪১ নং অনুচ্ছেদের বিষয় ধর্মীয় স্বাধীনতা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H982",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'ধর্মীয় স্বাধীনতা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৩৩",
+   "৭৭",
+   "৪১",
+   "১০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪১",
+  "explanation": "'ধর্মীয় স্বাধীনতা' সংবিধানের ৪১ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H983",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৪২ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "রাষ্ট্র পরিচালনার মূলনীতিসমূহ",
+   "সম্পত্তির অধিকার",
+   "রাষ্ট্রধর্ম ইসলাম",
+   "চলাফেরার স্বাধীনতা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সম্পত্তির অধিকার",
+  "explanation": "সংবিধানের ৪২ নং অনুচ্ছেদের বিষয় সম্পত্তির অধিকার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H984",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সম্পত্তির অধিকার' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৪২",
+   "৯৪",
+   "৬",
+   "৩"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৪২",
+  "explanation": "'সম্পত্তির অধিকার' সংবিধানের ৪২ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H985",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৪৩ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "ধর্মীয় স্বাধীনতা",
+   "মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক",
+   "প্রজাতন্ত্রের এলাকা",
+   "নিজ গৃহে নিরাপত্তা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "নিজ গৃহে নিরাপত্তা",
+  "explanation": "সংবিধানের ৪৩ নং অনুচ্ছেদের বিষয় নিজ গৃহে নিরাপত্তা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H986",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'নিজ গৃহে নিরাপত্তা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৩৩",
+   "১৪১ক",
+   "৪৩",
+   "১"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪৩",
+  "explanation": "'নিজ গৃহে নিরাপত্তা' সংবিধানের ৪৩ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H987",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৪৪ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "ন্যায়পাল",
+   "মৌলিক অধিকার বলবৎকরণ",
+   "সরকারি কর্মচারীদের নিয়োগ",
+   "আইনের আশ্রয় লাভের অধিকার"
+  ],
+  "correct_index": 1,
+  "correct_answer": "মৌলিক অধিকার বলবৎকরণ",
+  "explanation": "সংবিধানের ৪৪ নং অনুচ্ছেদের বিষয় মৌলিক অধিকার বলবৎকরণ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H988",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'মৌলিক অধিকার বলবৎকরণ' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৪৪",
+   "৫",
+   "২",
+   "১৯"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৪৪",
+  "explanation": "'মৌলিক অধিকার বলবৎকরণ' সংবিধানের ৪৪ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H989",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৪৮ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "রাষ্ট্র পরিচালনার মূলনীতিসমূহ",
+   "প্রজাতন্ত্র",
+   "রাষ্ট্রভাষা বাংলা",
+   "রাষ্ট্রপতি"
+  ],
+  "correct_index": 3,
+  "correct_answer": "রাষ্ট্রপতি",
+  "explanation": "সংবিধানের ৪৮ নং অনুচ্ছেদের বিষয় রাষ্ট্রপতি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H990",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'রাষ্ট্রপতি' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৩৩",
+   "২৯",
+   "৪৮",
+   "১৯"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪৮",
+  "explanation": "'রাষ্ট্রপতি' সংবিধানের ৪৮ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H991",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৫৫ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "প্রজাতন্ত্রের এলাকা",
+   "মন্ত্রিসভা",
+   "সমাবেশের স্বাধীনতা",
+   "রাষ্ট্রপতি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "মন্ত্রিসভা",
+  "explanation": "সংবিধানের ৫৫ নং অনুচ্ছেদের বিষয় মন্ত্রিসভা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H992",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'মন্ত্রিসভা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৫৫",
+   "৩৭",
+   "৩৬",
+   "৮"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৫৫",
+  "explanation": "'মন্ত্রিসভা' সংবিধানের ৫৫ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H993",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৫৯ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "নিজ গৃহে নিরাপত্তা",
+   "সরকারি নিয়োগলাভে সুযোগের সমতা",
+   "প্রজাতন্ত্র",
+   "স্থানীয় শাসন"
+  ],
+  "correct_index": 3,
+  "correct_answer": "স্থানীয় শাসন",
+  "explanation": "সংবিধানের ৫৯ নং অনুচ্ছেদের বিষয় স্থানীয় শাসন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H994",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'স্থানীয় শাসন' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৪২",
+   "৩৯",
+   "৫৯",
+   "১১"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৫৯",
+  "explanation": "'স্থানীয় শাসন' সংবিধানের ৫৯ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H995",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৬৫ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "ধর্মনিরপেক্ষতা",
+   "সংসদ প্রতিষ্ঠা",
+   "রাজনৈতিক দলের বিরুদ্ধে ভোটদানে আসন শূন্য",
+   "সংবিধানের প্রাধান্য"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সংসদ প্রতিষ্ঠা",
+  "explanation": "সংবিধানের ৬৫ নং অনুচ্ছেদের বিষয় সংসদ প্রতিষ্ঠা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H996",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সংসদ প্রতিষ্ঠা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৬৫",
+   "২২",
+   "৪৩",
+   "১২৭"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৬৫",
+  "explanation": "'সংসদ প্রতিষ্ঠা' সংবিধানের ৬৫ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H997",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৭০ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "গ্রেফতার ও আটক সম্পর্কে রক্ষাকবচ",
+   "মৌলিক প্রয়োজনের ব্যবস্থা",
+   "হাইকোর্টের রিট এখতিয়ার",
+   "রাজনৈতিক দলের বিরুদ্ধে ভোটদানে আসন শূন্য"
+  ],
+  "correct_index": 3,
+  "correct_answer": "রাজনৈতিক দলের বিরুদ্ধে ভোটদানে আসন শূন্য",
+  "explanation": "সংবিধানের ৭০ নং অনুচ্ছেদের বিষয় রাজনৈতিক দলের বিরুদ্ধে ভোটদানে আসন শূন্য।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H998",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'রাজনৈতিক দলের বিরুদ্ধে ভোটদানে আসন শূন্য' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৬৫",
+   "৪৮",
+   "৭০",
+   "১৭"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৭০",
+  "explanation": "'রাজনৈতিক দলের বিরুদ্ধে ভোটদানে আসন শূন্য' সংবিধানের ৭০ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H999",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৭৭ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "গ্রেফতার ও আটক সম্পর্কে রক্ষাকবচ",
+   "ন্যায়পাল",
+   "অবৈতনিক ও বাধ্যতামূলক শিক্ষা",
+   "জাতীয়তাবাদ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ন্যায়পাল",
+  "explanation": "সংবিধানের ৭৭ নং অনুচ্ছেদের বিষয় ন্যায়পাল।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1000",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'ন্যায়পাল' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৭৭",
+   "৪২",
+   "৫৯",
+   "৪৮"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৭৭",
+  "explanation": "'ন্যায়পাল' সংবিধানের ৭৭ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1001",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ৯৪ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "ধর্মনিরপেক্ষতা",
+   "সমাবেশের স্বাধীনতা",
+   "ধর্ম প্রভৃতি কারণে বৈষম্য",
+   "সুপ্রিম কোর্ট প্রতিষ্ঠা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সুপ্রিম কোর্ট প্রতিষ্ঠা",
+  "explanation": "সংবিধানের ৯৪ নং অনুচ্ছেদের বিষয় সুপ্রিম কোর্ট প্রতিষ্ঠা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1002",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সুপ্রিম কোর্ট প্রতিষ্ঠা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৮",
+   "১৪১ক",
+   "৯৪",
+   "১০২"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৯৪",
+  "explanation": "'সুপ্রিম কোর্ট প্রতিষ্ঠা' সংবিধানের ৯৪ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1003",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১০২ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সংবিধান সংশোধন",
+   "হাইকোর্টের রিট এখতিয়ার",
+   "নির্বাচন কমিশন",
+   "চলাফেরার স্বাধীনতা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "হাইকোর্টের রিট এখতিয়ার",
+  "explanation": "সংবিধানের ১০২ নং অনুচ্ছেদের বিষয় হাইকোর্টের রিট এখতিয়ার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1004",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'হাইকোর্টের রিট এখতিয়ার' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১০২",
+   "৩৬",
+   "১৪২",
+   "৩৭"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১০২",
+  "explanation": "'হাইকোর্টের রিট এখতিয়ার' সংবিধানের ১০২ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1005",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১১৮ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "গ্রেফতার ও আটক সম্পর্কে রক্ষাকবচ",
+   "প্রজাতন্ত্র",
+   "মৌলিক অধিকার বলবৎকরণ",
+   "নির্বাচন কমিশন"
+  ],
+  "correct_index": 3,
+  "correct_answer": "নির্বাচন কমিশন",
+  "explanation": "সংবিধানের ১১৮ নং অনুচ্ছেদের বিষয় নির্বাচন কমিশন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1006",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'নির্বাচন কমিশন' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "৫৫",
+   "৭৭",
+   "১১৮",
+   "৯"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১১৮",
+  "explanation": "'নির্বাচন কমিশন' সংবিধানের ১১৮ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1007",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১২৭ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "চলাফেরার স্বাধীনতা",
+   "মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক",
+   "সংগঠনের স্বাধীনতা",
+   "ধর্ম প্রভৃতি কারণে বৈষম্য"
+  ],
+  "correct_index": 1,
+  "correct_answer": "মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক",
+  "explanation": "সংবিধানের ১২৭ নং অনুচ্ছেদের বিষয় মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1008",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১২৭",
+   "৬",
+   "৬৫",
+   "৫"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১২৭",
+  "explanation": "'মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক' সংবিধানের ১২৭ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1009",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১৩৩ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "মৌলিক অধিকার বলবৎকরণ",
+   "সুযোগের সমতা",
+   "হাইকোর্টের রিট এখতিয়ার",
+   "সরকারি কর্মচারীদের নিয়োগ"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সরকারি কর্মচারীদের নিয়োগ",
+  "explanation": "সংবিধানের ১৩৩ নং অনুচ্ছেদের বিষয় সরকারি কর্মচারীদের নিয়োগ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1010",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সরকারি কর্মচারীদের নিয়োগ' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৯",
+   "১৫",
+   "১৩৩",
+   "৫৯"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৩৩",
+  "explanation": "'সরকারি কর্মচারীদের নিয়োগ' সংবিধানের ১৩৩ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1011",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১৩৭ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "সংবিধানের প্রাধান্য",
+   "সরকারি কর্ম কমিশন",
+   "মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক",
+   "প্রজাতন্ত্রের এলাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সরকারি কর্ম কমিশন",
+  "explanation": "সংবিধানের ১৩৭ নং অনুচ্ছেদের বিষয় সরকারি কর্ম কমিশন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1012",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সরকারি কর্ম কমিশন' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৩৭",
+   "১৯",
+   "৩",
+   "৫৯"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৩৭",
+  "explanation": "'সরকারি কর্ম কমিশন' সংবিধানের ১৩৭ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1013",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১৪১ক নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "জনস্বাস্থ্য ও নৈতিকতা",
+   "সরকারি কর্ম কমিশন",
+   "অবৈতনিক ও বাধ্যতামূলক শিক্ষা",
+   "জরুরি অবস্থা ঘোষণা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "জরুরি অবস্থা ঘোষণা",
+  "explanation": "সংবিধানের ১৪১ক নং অনুচ্ছেদের বিষয় জরুরি অবস্থা ঘোষণা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1014",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'জরুরি অবস্থা ঘোষণা' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "২৮",
+   "৩৮",
+   "১৪১ক",
+   "১৫"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৪১ক",
+  "explanation": "'জরুরি অবস্থা ঘোষণা' সংবিধানের ১৪১ক নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1015",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "medium",
+  "question": "সংবিধানের ১৪২ নং অনুচ্ছেদের বিষয় কী?",
+  "options": [
+   "মন্ত্রিসভা",
+   "সংবিধান সংশোধন",
+   "ধর্মনিরপেক্ষতা",
+   "জরুরি অবস্থা ঘোষণা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সংবিধান সংশোধন",
+  "explanation": "সংবিধানের ১৪২ নং অনুচ্ছেদের বিষয় সংবিধান সংশোধন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1016",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — অনুচ্ছেদ",
+  "difficulty": "hard",
+  "question": "'সংবিধান সংশোধন' সংবিধানের কত নং অনুচ্ছেদের বিষয়?",
+  "options": [
+   "১৪২",
+   "৯৪",
+   "৩৭",
+   "৬৫"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৪২",
+  "explanation": "'সংবিধান সংশোধন' সংবিধানের ১৪২ নং অনুচ্ছেদের বিষয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "article",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1017",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের প্রথম সংশোধনী কত সালে হয়?",
+  "options": [
+   "১৯৮৮",
+   "২০১৪",
+   "১৯৭৯",
+   "১৯৭৩"
+  ],
+  "correct_index": 3,
+  "correct_answer": "১৯৭৩",
+  "explanation": "প্রথম সংশোধনী (১৯৭৩) যুদ্ধাপরাধীদের বিচারের বিধান করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1018",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের দ্বিতীয় সংশোধনী কত সালে হয়?",
+  "options": [
+   "১৯৭৪",
+   "২০১১",
+   "১৯৭৩",
+   "১৯৮৮"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৯৭৩",
+  "explanation": "দ্বিতীয় সংশোধনী (১৯৭৩) জরুরি অবস্থা ঘোষণার ক্ষমতা দেয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1019",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের তৃতীয় সংশোধনী কত সালে হয়?",
+  "options": [
+   "২০১৪",
+   "১৯৭৪",
+   "১৯৮৮",
+   "১৯৭৫"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯৭৪",
+  "explanation": "তৃতীয় সংশোধনী (১৯৭৪) ভারত-বাংলাদেশ সীমান্ত চুক্তি বৈধ করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1020",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের চতুর্থ সংশোধনী কত সালে হয়?",
+  "options": [
+   "১৯৭৫",
+   "১৯৮৮",
+   "২০১১",
+   "১৯৭৯"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৭৫",
+  "explanation": "চতুর্থ সংশোধনী (১৯৭৫) রাষ্ট্রপতি শাসিত সরকার প্রবর্তন করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1021",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের পঞ্চম সংশোধনী কত সালে হয়?",
+  "options": [
+   "১৯৭৪",
+   "১৯৭৩",
+   "১৯৮৮",
+   "১৯৭৯"
+  ],
+  "correct_index": 3,
+  "correct_answer": "১৯৭৯",
+  "explanation": "পঞ্চম সংশোধনী (১৯৭৯) সামরিক শাসনামলের কার্যাবলি বৈধ করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1022",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের অষ্টম সংশোধনী কত সালে হয়?",
+  "options": [
+   "১৯৭৩",
+   "১৯৯৬",
+   "১৯৮৮",
+   "২০১৪"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৯৮৮",
+  "explanation": "অষ্টম সংশোধনী (১৯৮৮) ইসলামকে রাষ্ট্রধর্ম ঘোষণা করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1023",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের দ্বাদশ সংশোধনী কত সালে হয়?",
+  "options": [
+   "১৯৯৬",
+   "১৯৯১",
+   "১৯৭৩",
+   "১৯৭৫"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯৯১",
+  "explanation": "দ্বাদশ সংশোধনী (১৯৯১) সংসদীয় সরকার ব্যবস্থা পুনঃপ্রবর্তন করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1024",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের ত্রয়োদশ সংশোধনী কত সালে হয়?",
+  "options": [
+   "১৯৯৬",
+   "১৯৭৫",
+   "২০১৪",
+   "১৯৭৩"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৯৯৬",
+  "explanation": "ত্রয়োদশ সংশোধনী (১৯৯৬) নির্দলীয় তত্ত্বাবধায়ক সরকারের বিধান করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1025",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের পঞ্চদশ সংশোধনী কত সালে হয়?",
+  "options": [
+   "১৯৭৪",
+   "১৯৮৮",
+   "১৯৭৯",
+   "২০১১"
+  ],
+  "correct_index": 3,
+  "correct_answer": "২০১১",
+  "explanation": "পঞ্চদশ সংশোধনী (২০১১) তত্ত্বাবধায়ক সরকারের বিধান বাতিল করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1026",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের ষোড়শ সংশোধনী কত সালে হয়?",
+  "options": [
+   "১৯৭৩",
+   "১৯৮৮",
+   "২০১৪",
+   "১৯৯১"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২০১৪",
+  "explanation": "ষোড়শ সংশোধনী (২০১৪) বিচারপতি অপসারণের ক্ষমতা সংসদের হাতে দেয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1027",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধান সংশোধনে সংসদের কত অংশের ভোট প্রয়োজন?",
+  "options": [
+   "তিন-চতুর্থাংশ",
+   "দুই-তৃতীয়াংশ",
+   "এক-তৃতীয়াংশ",
+   "সাধারণ সংখ্যাগরিষ্ঠতা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "দুই-তৃতীয়াংশ",
+  "explanation": "১৪২ অনুচ্ছেদ অনুযায়ী সংবিধান সংশোধনে সংসদের মোট সদস্যের দুই-তৃতীয়াংশের ভোট প্রয়োজন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-H1028",
+  "exam_canonical": "bcs",
+  "subject_canonical": "Constitution and Administration",
+  "subject_slug": "constitution-administration",
+  "topic": "সংবিধান — সংশোধনী",
+  "difficulty": "medium",
+  "question": "সংবিধানের কোন অনুচ্ছেদে সংশোধনের বিধান আছে?",
+  "options": [
+   "১৪২ নং অনুচ্ছেদ",
+   "১৪১ নং অনুচ্ছেদ",
+   "১৩৭ নং অনুচ্ছেদ",
+   "১১৮ নং অনুচ্ছেদ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১৪২ নং অনুচ্ছেদ",
+  "explanation": "১৪২ নং অনুচ্ছেদে সংবিধান সংশোধনের বিধান আছে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Constitution of the People's Republic of Bangladesh (bdlaws.minlaw.gov.bd, Ministry of Law) — adopted 4 Nov 1972, in force 16 Dec 1972",
+  "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography 10, General Science 15, ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics 15; total 200, MCQ 2 hrs, -0.5 per wrong answer",
+  "tags": [
+   "amendment",
+   "bcs",
+   "constitution",
+   "constitution-administration"
+  ],
+  "source_stream": "bcs",
+  "source_file": "bcs-h-constitution-01.json",
+  "applies_to": [
+   "bcs"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

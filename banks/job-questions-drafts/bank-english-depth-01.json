@@ -1,0 +1,853 @@
+[
+ {
+  "id": "JOBQ-D260",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Synonym",
+  "difficulty": "easy",
+  "question": "Choose the synonym of 'abandon'.",
+  "options": [
+   "Forsake",
+   "Keep",
+   "Hold",
+   "Protect"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Forsake",
+  "explanation": "'Abandon' means to leave completely; 'forsake' is its synonym.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D261",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Synonym",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'Vast'.",
+  "options": [
+   "Small",
+   "Huge",
+   "Narrow",
+   "Tiny"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Huge",
+  "explanation": "Vast means huge.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D262",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Synonym",
+  "difficulty": "medium",
+  "question": "Choose the synonym of 'frugal'.",
+  "options": [
+   "Thrifty",
+   "Wasteful",
+   "Rich",
+   "Greedy"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Thrifty",
+  "explanation": "'Frugal' means careful with money; 'thrifty' is its synonym.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D263",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Antonym",
+  "difficulty": "easy",
+  "question": "Choose the antonym of 'Humility'.",
+  "options": [
+   "Modesty",
+   "Meekness",
+   "Pride",
+   "Shyness"
+  ],
+  "correct_index": 2,
+  "correct_answer": "Pride",
+  "explanation": "Humility means modesty, so its antonym is pride.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "antonym",
+   "bank",
+   "english"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D264",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Antonym",
+  "difficulty": "medium",
+  "question": "Choose the antonym of 'optimistic'.",
+  "options": [
+   "Pessimistic",
+   "Hopeful",
+   "Cheerful",
+   "Confident"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Pessimistic",
+  "explanation": "'Optimistic' means hopeful; its opposite is 'pessimistic'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "antonym",
+   "bank",
+   "english"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D265",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Idiom",
+  "difficulty": "medium",
+  "question": "'A blessing in disguise' means —",
+  "options": [
+   "A good thing that seems bad at first",
+   "A hidden curse",
+   "A lucky charm",
+   "A secret gift"
+  ],
+  "correct_index": 0,
+  "correct_answer": "A good thing that seems bad at first",
+  "explanation": "'A blessing in disguise' is a good thing that at first seems bad.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D266",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Idiom",
+  "difficulty": "medium",
+  "question": "'To hit the nail on the head' means —",
+  "options": [
+   "To say exactly the right thing",
+   "To hammer a nail",
+   "To hurt someone",
+   "To win a prize"
+  ],
+  "correct_index": 0,
+  "correct_answer": "To say exactly the right thing",
+  "explanation": "The idiom means to describe exactly what is causing a situation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D267",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Idiom",
+  "difficulty": "easy",
+  "question": "'To bite the dust' means —",
+  "options": [
+   "To fail or be defeated",
+   "To eat dust",
+   "To work hard",
+   "To hide"
+  ],
+  "correct_index": 0,
+  "correct_answer": "To fail or be defeated",
+  "explanation": "The idiom 'to bite the dust' means to fail or be defeated.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "idiom"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D268",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Phrasal verb",
+  "difficulty": "easy",
+  "question": "'Call off' means —",
+  "options": [
+   "Cancel",
+   "Call back",
+   "Shout",
+   "Invite"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Cancel",
+  "explanation": "'Call off' means to cancel something planned.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "phrasal-verb"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D269",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Phrasal verb",
+  "difficulty": "medium",
+  "question": "'Take after' means —",
+  "options": [
+   "Resemble",
+   "Follow",
+   "Take away",
+   "Look after"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Resemble",
+  "explanation": "'Take after' means to resemble an older relative.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "phrasal-verb"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D270",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Voice",
+  "difficulty": "medium",
+  "question": "Choose the passive form: 'He is building a house.'",
+  "options": [
+   "A house is being built by him.",
+   "A house is built by him.",
+   "A house was built by him.",
+   "A house has been built by him."
+  ],
+  "correct_index": 0,
+  "correct_answer": "A house is being built by him.",
+  "explanation": "Present continuous active becomes 'is being + past participle' in the passive.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "voice"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D271",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Voice",
+  "difficulty": "medium",
+  "question": "Choose the passive form: 'Who broke the window?'",
+  "options": [
+   "By whom was the window broken?",
+   "Who was the window broken by?",
+   "By whom is the window broken?",
+   "Whom was the window broken by?"
+  ],
+  "correct_index": 0,
+  "correct_answer": "By whom was the window broken?",
+  "explanation": "In passive questions, 'who' becomes 'by whom' and the verb takes 'was + past participle'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "voice"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D272",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Narration",
+  "difficulty": "medium",
+  "question": "Choose the indirect speech: She said, \"I will come tomorrow.\"",
+  "options": [
+   "She said that she would come the next day.",
+   "She said that she will come tomorrow.",
+   "She said that she would come tomorrow.",
+   "She said that she comes the next day."
+  ],
+  "correct_index": 0,
+  "correct_answer": "She said that she would come the next day.",
+  "explanation": "'Will' becomes 'would' and 'tomorrow' becomes 'the next day' in indirect speech.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "narration"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D273",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Tag question",
+  "difficulty": "easy",
+  "question": "Choose the correct tag: 'You are coming, ___?'",
+  "options": [
+   "aren't you",
+   "are you",
+   "isn't you",
+   "don't you"
+  ],
+  "correct_index": 0,
+  "correct_answer": "aren't you",
+  "explanation": "A positive statement takes a negative tag: 'aren't you?'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "tag-question"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D274",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Article",
+  "difficulty": "easy",
+  "question": "Fill in the blank: 'He is ___ honest man.'",
+  "options": [
+   "an",
+   "a",
+   "the",
+   "no article"
+  ],
+  "correct_index": 0,
+  "correct_answer": "an",
+  "explanation": "'An' is used before a vowel sound; 'honest' begins with a silent h, so 'an honest man'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "article",
+   "bank",
+   "english"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D275",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Article",
+  "difficulty": "easy",
+  "question": "Fill in the blank: 'He is ___ university student.'",
+  "options": [
+   "a",
+   "an",
+   "the",
+   "no article"
+  ],
+  "correct_index": 0,
+  "correct_answer": "a",
+  "explanation": "'University' begins with a consonant sound (yu), so 'a university student'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "article",
+   "bank",
+   "english"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D276",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Conditional",
+  "difficulty": "medium",
+  "question": "Fill in the blank: 'If I had known, I ___ have come.'",
+  "options": [
+   "would",
+   "will",
+   "shall",
+   "can"
+  ],
+  "correct_index": 0,
+  "correct_answer": "would",
+  "explanation": "Third conditional uses 'would have + past participle'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "conditional",
+   "english"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D277",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Conditional",
+  "difficulty": "easy",
+  "question": "Fill in the blank: 'If it rains, we ___ stay at home.'",
+  "options": [
+   "will",
+   "would",
+   "would have",
+   "shall have"
+  ],
+  "correct_index": 0,
+  "correct_answer": "will",
+  "explanation": "First conditional: 'If + present simple, will + verb'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "conditional",
+   "english"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D278",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — One word",
+  "difficulty": "medium",
+  "question": "One who hates mankind is called —",
+  "options": [
+   "Misanthrope",
+   "Philanthropist",
+   "Misanthropist",
+   "Humanist"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Misanthrope",
+  "explanation": "A misanthrope hates mankind; a philanthropist loves mankind.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D280",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — One word",
+  "difficulty": "medium",
+  "question": "A speech made without preparation is called —",
+  "options": [
+   "Extempore",
+   "Eloquent",
+   "Verbose",
+   "Oration"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Extempore",
+  "explanation": "An extempore speech is made without preparation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D282",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Preposition",
+  "difficulty": "medium",
+  "question": "She is keen ___ travelling.",
+  "options": [
+   "on",
+   "in",
+   "at",
+   "to"
+  ],
+  "correct_index": 0,
+  "correct_answer": "on",
+  "explanation": "\"Keen on\" is the correct collocation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "preposition"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D283",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Correct sentence",
+  "difficulty": "medium",
+  "question": "Which sentence is grammatically correct?",
+  "options": [
+   "He does not know nothing.",
+   "He knows nothing.",
+   "He do not know anything.",
+   "He does not knows anything."
+  ],
+  "correct_index": 1,
+  "correct_answer": "He knows nothing.",
+  "explanation": "'He knows nothing.' is correct; double negatives are wrong in standard English.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "correct-sentence",
+   "english"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D284",
+  "exam_canonical": "bank",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Grammar — Spelling",
+  "difficulty": "easy",
+  "question": "Select the correctly spelt word from the list.",
+  "options": [
+   "Millenium",
+   "Milennium",
+   "Millennuim",
+   "Millennium"
+  ],
+  "correct_index": 3,
+  "correct_answer": "Millennium",
+  "explanation": "The correct spelling is Millennium.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "Standard English grammar and English literary history (NCTB Class 9-10 / 11-12 English)",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "english",
+   "spelling"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-english-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

@@ -1,0 +1,762 @@
+[
+ {
+  "id": "JOBQ-0403",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Parts of speech",
+  "difficulty": "easy",
+  "question": "Which one is a verb?",
+  "options": [
+   "Run",
+   "Beauty",
+   "Quick",
+   "Table"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Run",
+  "explanation": "'Run' is an action word, so it is a verb; 'beauty' is a noun, 'quick' an adjective, 'table' a noun.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "parts-of-speech",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0404",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Plural number",
+  "difficulty": "easy",
+  "question": "What is the plural form of 'Child'?",
+  "options": [
+   "Childs",
+   "Children",
+   "Childes",
+   "Childrens"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Children",
+  "explanation": "The plural of 'child' is 'children' (irregular plural).",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "number",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0405",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Plural number",
+  "difficulty": "easy",
+  "question": "What is the plural form of 'Ox'?",
+  "options": [
+   "Oxes",
+   "Oxen",
+   "Oxs",
+   "Oxens"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Oxen",
+  "explanation": "The plural of 'ox' is 'oxen'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "number",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0406",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Tense",
+  "difficulty": "easy",
+  "question": "He ___ to school every day.",
+  "options": [
+   "go",
+   "goes",
+   "went",
+   "going"
+  ],
+  "correct_index": 1,
+  "correct_answer": "goes",
+  "explanation": "With third-person singular 'he' in present simple, the verb takes -es: 'goes'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "primary",
+   "tense"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0407",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Tense",
+  "difficulty": "easy",
+  "question": "What is the past form of 'Go'?",
+  "options": [
+   "Goed",
+   "Went",
+   "Gone",
+   "Going"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Went",
+  "explanation": "The past form of 'go' is 'went'; 'gone' is the past participle.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "primary",
+   "tense"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0408",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Tense",
+  "difficulty": "easy",
+  "question": "I ___ reading a book now.",
+  "options": [
+   "am",
+   "is",
+   "are",
+   "was"
+  ],
+  "correct_index": 0,
+  "correct_answer": "am",
+  "explanation": "With 'I' in present continuous, the auxiliary is 'am'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "primary",
+   "tense"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0409",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "The sun rises ___ the east.",
+  "options": [
+   "in",
+   "at",
+   "on",
+   "to"
+  ],
+  "correct_index": 0,
+  "correct_answer": "in",
+  "explanation": "'In the east' is the correct prepositional phrase for direction.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "preposition",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0410",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "easy",
+  "question": "He goes to school ___ the morning.",
+  "options": [
+   "in",
+   "at",
+   "on",
+   "by"
+  ],
+  "correct_index": 0,
+  "correct_answer": "in",
+  "explanation": "'In the morning' is the correct phrase (in + part of the day).",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "preposition",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0411",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Article",
+  "difficulty": "easy",
+  "question": "___ sun rises in the east.",
+  "options": [
+   "A",
+   "An",
+   "The",
+   "No article"
+  ],
+  "correct_index": 2,
+  "correct_answer": "The",
+  "explanation": "'The sun' is a unique object, so the definite article 'the' is used.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "article",
+   "english",
+   "grammar",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0412",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Happy' is —",
+  "options": [
+   "Glad",
+   "Sad",
+   "Angry",
+   "Tired"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Glad",
+  "explanation": "'Happy' and 'glad' both mean feeling pleased.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "primary",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0413",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Antonym",
+  "difficulty": "easy",
+  "question": "The antonym of 'Rich' is —",
+  "options": [
+   "Poor",
+   "Wealthy",
+   "Strong",
+   "Brave"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Poor",
+  "explanation": "'Rich' means having much money; its opposite is 'poor'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "antonym",
+   "english",
+   "primary",
+   "vocabulary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0414",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Spelling",
+  "difficulty": "easy",
+  "question": "Which of these words is spelt correctly?",
+  "options": [
+   "Beautiful",
+   "Beautifull",
+   "Beutiful",
+   "Beautifel"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Beautiful",
+  "explanation": "'Beautiful' is the correct spelling.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "primary",
+   "spelling",
+   "vocabulary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0415",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Gender",
+  "difficulty": "easy",
+  "question": "What is the feminine form of 'King'?",
+  "options": [
+   "Queen",
+   "Princess",
+   "Lady",
+   "Mistress"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Queen",
+  "explanation": "The feminine form of 'king' is 'queen'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "gender",
+   "grammar",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0416",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Voice",
+  "difficulty": "easy",
+  "question": "Choose the passive form of: 'He eats rice.'",
+  "options": [
+   "Rice is eaten by him.",
+   "Rice was eaten by him.",
+   "Rice is eating by him.",
+   "Rice eats by him."
+  ],
+  "correct_index": 0,
+  "correct_answer": "Rice is eaten by him.",
+  "explanation": "Present simple active becomes present simple passive: 'is eaten'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "primary",
+   "voice"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0417",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Translation",
+  "difficulty": "easy",
+  "question": "Choose the correct English of: 'আমি একজন শিক্ষক।'",
+  "options": [
+   "I am a teacher.",
+   "I is a teacher.",
+   "I am teacher.",
+   "I are a teacher."
+  ],
+  "correct_index": 0,
+  "correct_answer": "I am a teacher.",
+  "explanation": "'I am a teacher' is the correct translation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "primary",
+   "translation"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0418",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Comparative degree",
+  "difficulty": "easy",
+  "question": "Dhaka is ___ than Chittagong in population.",
+  "options": [
+   "bigger",
+   "big",
+   "biggest",
+   "more big"
+  ],
+  "correct_index": 0,
+  "correct_answer": "bigger",
+  "explanation": "With 'than', the comparative form 'bigger' is needed.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "degree",
+   "english",
+   "grammar",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0419",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Preposition",
+  "difficulty": "medium",
+  "question": "She is afraid ___ the dark.",
+  "options": [
+   "of",
+   "from",
+   "by",
+   "with"
+  ],
+  "correct_index": 0,
+  "correct_answer": "of",
+  "explanation": "'Afraid of' is the correct collocation.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "preposition",
+   "primary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0420",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Question word",
+  "difficulty": "easy",
+  "question": "___ is your father? — He is a teacher.",
+  "options": [
+   "What",
+   "Who",
+   "Where",
+   "When"
+  ],
+  "correct_index": 1,
+  "correct_answer": "Who",
+  "explanation": "The answer is a person, so the question word is 'who'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "primary",
+   "wh-question"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0421",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Synonym",
+  "difficulty": "easy",
+  "question": "The synonym of 'Big' is —",
+  "options": [
+   "Large",
+   "Small",
+   "Tiny",
+   "Little"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Large",
+  "explanation": "'Big' and 'large' both mean of great size.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "primary",
+   "synonym",
+   "vocabulary"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-0422",
+  "exam_canonical": "primary",
+  "subject_canonical": "English",
+  "subject_slug": "english",
+  "topic": "Tense",
+  "difficulty": "medium",
+  "question": "They ___ playing football now.",
+  "options": [
+   "is",
+   "are",
+   "was",
+   "has"
+  ],
+  "correct_index": 1,
+  "correct_answer": "are",
+  "explanation": "With plural 'they' in present continuous, the auxiliary is 'are'.",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 6-10 English Grammar / English For Today (NCTB) — standard grammar rules",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "english",
+   "grammar",
+   "primary",
+   "tense"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-english.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

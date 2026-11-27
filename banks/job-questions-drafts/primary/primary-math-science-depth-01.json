@@ -1,0 +1,1104 @@
+[
+ {
+  "id": "JOBQ-P061",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "শতকরা",
+  "difficulty": "easy",
+  "question": "৩২০-এর ১৫% কত?",
+  "options": [
+   "৪০",
+   "৪৮",
+   "৫০",
+   "৬০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪৮",
+  "explanation": "৩২০ × ১৫/১০০ = ৪৮।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পাটিগণিত",
+   "শতকরা"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P062",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "লসাগু",
+  "difficulty": "easy",
+  "question": "১০ ও ১৪-এর লসাগু কত?",
+  "options": [
+   "২৮",
+   "৩৫",
+   "৭০",
+   "১৪০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৭০",
+  "explanation": "১০ ও ১৪-এর লসাগু ৭০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পাটিগণিত",
+   "লসাগু"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P063",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "গসাগু",
+  "difficulty": "easy",
+  "question": "১৪ ও ২১-এর গসাগু কত?",
+  "options": [
+   "৩",
+   "৭",
+   "১৪",
+   "২১"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৭",
+  "explanation": "১৪ ও ২১-এর গসাগু ৭।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "গসাগু",
+   "পাটিগণিত"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P064",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "সরল সুদ",
+  "difficulty": "easy",
+  "question": "৫০০০ টাকার ৬% হারে ৩ বছরের সরল সুদ কত?",
+  "options": [
+   "৬০০ টাকা",
+   "৯০০ টাকা",
+   "১২০০ টাকা",
+   "১৫০০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৯০০ টাকা",
+  "explanation": "সরল সুদ = (৫০০০ × ৬ × ৩) ÷ ১০০ = ৯০০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পাটিগণিত",
+   "সুদ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P065",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "লাভ-ক্ষতি",
+  "difficulty": "easy",
+  "question": "৪০০ টাকায় কিনে ৪৬০ টাকায় বিক্রি করলে লাভের হার কত?",
+  "options": [
+   "১০%",
+   "১৫%",
+   "২০%",
+   "১২%"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৫%",
+  "explanation": "লাভ ৬০ টাকা; হার = ৬০/৪০০ × ১০০ = ১৫%।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পাটিগণিত",
+   "লাভ-ক্ষতি"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P067",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "অনুপাত",
+  "difficulty": "easy",
+  "question": "দুটি সংখ্যার অনুপাত ৩ : ৫ এবং যোগফল ৪০ হলে ছোট সংখ্যাটি কত?",
+  "options": [
+   "১০",
+   "১৫",
+   "২০",
+   "২৫"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৫",
+  "explanation": "৩ + ৫ = ৮ ভাগ; এক ভাগ ৫; ছোট সংখ্যা ৩ × ৫ = ১৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "অনুপাত",
+   "পাটিগণিত"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P068",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "বীজগণিত",
+  "difficulty": "easy",
+  "question": "2x − ৩ = ৭ হলে x-এর মান কত?",
+  "options": [
+   "৪",
+   "৫",
+   "৬",
+   "৭"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৫",
+  "explanation": "2x = ১০; x = ৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "বীজগণিত",
+   "সমীকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P069",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ঘাত",
+  "difficulty": "easy",
+  "question": "২⁵ = কত?",
+  "options": [
+   "১০",
+   "১৬",
+   "৩২",
+   "৬৪"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৩২",
+  "explanation": "২⁵ = ২×২×২×২×২ = ৩২।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "ঘাত",
+   "বীজগণিত"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P070",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "বর্গমূল",
+  "difficulty": "easy",
+  "question": "√৪০০ = কত?",
+  "options": [
+   "১৮",
+   "২০",
+   "২২",
+   "৪০"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২০",
+  "explanation": "২০ × ২০ = ৪০০, তাই √৪০০ = ২০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "বর্গমূল",
+   "বীজগণিত"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P071",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ক্ষেত্রফল",
+  "difficulty": "easy",
+  "question": "দৈর্ঘ্য ১২ সেমি ও প্রস্থ ৮ সেমি আয়তক্ষেত্রের ক্ষেত্রফল কত?",
+  "options": [
+   "৪০ বর্গ সেমি",
+   "৯৬ বর্গ সেমি",
+   "২০ বর্গ সেমি",
+   "৮০ বর্গ সেমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৯৬ বর্গ সেমি",
+  "explanation": "ক্ষেত্রফল = ১২ × ৮ = ৯৬ বর্গ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "ক্ষেত্রফল",
+   "পরিমিতি"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P072",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ক্ষেত্রফল",
+  "difficulty": "easy",
+  "question": "ভূমি ১০ সেমি ও উচ্চতা ৬ সেমি ত্রিভুজের ক্ষেত্রফল কত?",
+  "options": [
+   "৩০ বর্গ সেমি",
+   "৬০ বর্গ সেমি",
+   "২০ বর্গ সেমি",
+   "৪০ বর্গ সেমি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৩০ বর্গ সেমি",
+  "explanation": "ক্ষেত্রফল = ½ × ১০ × ৬ = ৩০ বর্গ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "ক্ষেত্রফল",
+   "পরিমিতি"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P073",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ভগ্নাংশ",
+  "difficulty": "easy",
+  "question": "৮০-এর ৩/৪ অংশ কত?",
+  "options": [
+   "৪০",
+   "৫০",
+   "৬০",
+   "৭০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৬০",
+  "explanation": "৮০ × ৩/৪ = ৬০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পাটিগণিত",
+   "ভগ্নাংশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P074",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ভগ্নাংশ",
+  "difficulty": "easy",
+  "question": "০.২৫-কে সাধারণ ভগ্নাংশে প্রকাশ করলে কত হবে?",
+  "options": [
+   "১/২",
+   "১/৩",
+   "১/৪",
+   "১/৫"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১/৪",
+  "explanation": "০.২৫ = ২৫/১০০ = ১/৪।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পাটিগণিত",
+   "ভগ্নাংশ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P075",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "গতি",
+  "difficulty": "easy",
+  "question": "একটি গাড়ি ঘণ্টায় ৬০ কিমি বেগে ২.৫ ঘণ্টা চললে কত কিমি যাবে?",
+  "options": [
+   "১২০ কিমি",
+   "১৫০ কিমি",
+   "১৮০ কিমি",
+   "১০০ কিমি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৫০ কিমি",
+  "explanation": "দূরত্ব = ৬০ × ২.৫ = ১৫০ কিমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "গতি",
+   "পাটিগণিত"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P076",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "বীজগণিত",
+  "difficulty": "medium",
+  "question": "x² − ৯-এর উৎপাদক কোনটি?",
+  "options": [
+   "(x − ৩)(x + ৩)",
+   "(x − ৯)(x + ৯)",
+   "(x − ৩)²",
+   "(x + ৩)²"
+  ],
+  "correct_index": 0,
+  "correct_answer": "(x − ৩)(x + ৩)",
+  "explanation": "a² − b² = (a − b)(a + b); x² − ৯ = (x − ৩)(x + ৩)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "উৎপাদক",
+   "বীজগণিত"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P077",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "সরলীকরণ",
+  "difficulty": "easy",
+  "question": "৭ + ৩ × ৪ = কত?",
+  "options": [
+   "৪০",
+   "২৮",
+   "১৯",
+   "১০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৯",
+  "explanation": "গুণ আগে: ৩ × ৪ = ১২; ৭ + ১২ = ১৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পাটিগণিত",
+   "সরলীকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P078",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ধারা",
+  "difficulty": "easy",
+  "question": "৫, ২৫, ১২৫, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "২৫০",
+   "৬২৫",
+   "৫০০",
+   "৩৭৫"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৬২৫",
+  "explanation": "প্রতিটি সংখ্যা আগেরটির ৫ গুণ; ১২৫ × ৫ = ৬২৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "ধারা",
+   "পাটিগণিত"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P079",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "শতকরা",
+  "difficulty": "easy",
+  "question": "২০০-এর ৪৫% কত?",
+  "options": [
+   "৪৫",
+   "৬০",
+   "৯০",
+   "১০০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৯০",
+  "explanation": "২০০ × ৪৫/১০০ = ৯০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পাটিগণিত",
+   "শতকরা"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P080",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ছাড়",
+  "difficulty": "easy",
+  "question": "৫০০ টাকার পণ্যে ২০% ছাড় দিলে দাম কত হবে?",
+  "options": [
+   "৩০০ টাকা",
+   "৪০০ টাকা",
+   "৪৫০ টাকা",
+   "৩৫০ টাকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪০০ টাকা",
+  "explanation": "ছাড় ১০০ টাকা; দাম ৫০০ − ১০০ = ৪০০ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "ছাড়",
+   "পাটিগণিত"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P081",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "পরিসীমা",
+  "difficulty": "easy",
+  "question": "এক বাহু ৯ সেমি বর্গক্ষেত্রের পরিসীমা কত?",
+  "options": [
+   "১৮ সেমি",
+   "২৭ সেমি",
+   "৩৬ সেমি",
+   "৮১ সেমি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৩৬ সেমি",
+  "explanation": "পরিসীমা = ৪ × ৯ = ৩৬ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পরিমিতি",
+   "পরিসীমা"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P082",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "পরিমিতি",
+  "difficulty": "medium",
+  "question": "ব্যাসার্ধ ৭ সেমি বৃত্তের পরিধি কত? (π = ২২/৭)",
+  "options": [
+   "২২ সেমি",
+   "৩৩ সেমি",
+   "৪৪ সেমি",
+   "৪৯ সেমি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৪৪ সেমি",
+  "explanation": "পরিধি = ২πr = ২ × ২২/৭ × ৭ = ৪৪ সেমি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "জ্যামিতি",
+   "পরিমিতি"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P083",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "যোগফল",
+  "difficulty": "easy",
+  "question": "১ থেকে ১০ পর্যন্ত সংখ্যাগুলোর যোগফল কত?",
+  "options": [
+   "৪৫",
+   "৫০",
+   "৫৫",
+   "৬০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "৫৫",
+  "explanation": "১+২+…+১০ = ৫৫।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "পাটিগণিত",
+   "যোগফল"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P084",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "ঐকিক নিয়ম",
+  "difficulty": "easy",
+  "question": "৫টি কলমের দাম ৭৫ টাকা হলে ১টি কলমের দাম কত?",
+  "options": [
+   "১০ টাকা",
+   "১২ টাকা",
+   "১৫ টাকা",
+   "২০ টাকা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৫ টাকা",
+  "explanation": "৭৫ ÷ ৫ = ১৫ টাকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "ঐকিক নিয়ম",
+   "পাটিগণিত"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P085",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "রসায়ন",
+  "difficulty": "easy",
+  "question": "অক্সিজেনের রাসায়নিক সংকেত কোনটি?",
+  "options": [
+   "CO₂",
+   "H₂O",
+   "O₂",
+   "N₂"
+  ],
+  "correct_index": 2,
+  "correct_answer": "O₂",
+  "explanation": "অক্সিজেনের সংকেত O₂।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "দৈনন্দিন বিজ্ঞান",
+   "রসায়ন"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P086",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "উদ্ভিদবিজ্ঞান",
+  "difficulty": "easy",
+  "question": "সালোকসংশ্লেষণে গাছ বাতাস থেকে কোন গ্যাস শোষণ করে?",
+  "options": [
+   "অক্সিজেন",
+   "নাইট্রোজেন",
+   "কার্বন ডাই-অক্সাইড",
+   "হাইড্রোজেন"
+  ],
+  "correct_index": 2,
+  "correct_answer": "কার্বন ডাই-অক্সাইড",
+  "explanation": "সালোকসংশ্লেষণে গাছ CO₂ শোষণ করে ও অক্সিজেন ত্যাগ করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "উদ্ভিদবিজ্ঞান",
+   "দৈনন্দিন বিজ্ঞান"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P087",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "মানবদেহ",
+  "difficulty": "easy",
+  "question": "মানবদেহে হাড়ের সংখ্যা কত?",
+  "options": [
+   "১০৬টি",
+   "২০৬টি",
+   "৩০৬টি",
+   "৪০৬টি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২০৬টি",
+  "explanation": "প্রাপ্তবয়স্ক মানবদেহে হাড়ের সংখ্যা ২০৬টি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "দৈনন্দিন বিজ্ঞান",
+   "মানবদেহ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P088",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "মানবদেহ",
+  "difficulty": "medium",
+  "question": "রক্তে অক্সিজেন বহন করে কোনটি?",
+  "options": [
+   "শ্বেতকণিকা",
+   "অণুচক্রিকা",
+   "হিমোগ্লোবিন",
+   "প্লাজমা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "হিমোগ্লোবিন",
+  "explanation": "লোহিত রক্তকণিকার হিমোগ্লোবিন অক্সিজেন বহন করে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "দৈনন্দিন বিজ্ঞান",
+   "মানবদেহ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P089",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "পুষ্টি",
+  "difficulty": "easy",
+  "question": "কোন ভিটামিনের অভাবে স্কার্ভি রোগ হয়?",
+  "options": [
+   "ভিটামিন এ",
+   "ভিটামিন বি",
+   "ভিটামিন সি",
+   "ভিটামিন ডি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "ভিটামিন সি",
+  "explanation": "ভিটামিন সি-এর অভাবে স্কার্ভি রোগ হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "দৈনন্দিন বিজ্ঞান",
+   "পুষ্টি"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P090",
+  "exam_canonical": "primary",
+  "subject_canonical": "Mathematics and Daily Science",
+  "subject_slug": "mathematics-daily-science",
+  "topic": "পদার্থবিজ্ঞান",
+  "difficulty": "medium",
+  "question": "তড়িৎ প্রবাহের একক কোনটি?",
+  "options": [
+   "ভোল্ট",
+   "ওয়াট",
+   "অ্যাম্পিয়ার",
+   "ওহম"
+  ],
+  "correct_index": 2,
+  "correct_answer": "অ্যাম্পিয়ার",
+  "explanation": "তড়িৎ প্রবাহের একক অ্যাম্পিয়ার; ভোল্ট বিভবের একক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB গণিত (নবম-দশম শ্রেণি) — পাটিগণিত, বীজগণিত, জ্যামিতি, পরিমিতি; NCTB সাধারণ বিজ্ঞান (ষষ্ঠ-দশম শ্রেণি)",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "mathematics-daily-science",
+   "primary",
+   "দৈনন্দিন বিজ্ঞান",
+   "পদার্থবিজ্ঞান"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-math-science-depth-01.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

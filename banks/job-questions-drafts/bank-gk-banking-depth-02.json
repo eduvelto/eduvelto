@@ -1,0 +1,802 @@
+[
+  {
+    "id": "JOBQ-D659",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "ব্যাংকিং — লেনদেন",
+    "difficulty": "hard",
+    "question": "BEFTN-এর পূর্ণরূপ কী?",
+    "options": [
+      "Bangladesh Electronic Funds Transfer Network",
+      "Bangladesh Electronic Financial Transfer Network",
+      "Bangladesh Efficient Funds Transfer Network",
+      "Bangladesh Electronic Fund Transaction Network"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Bangladesh Electronic Funds Transfer Network",
+    "explanation": "BEFTN = Bangladesh Electronic Funds Transfer Network — ইলেকট্রনিক তহবিল স্থানান্তর ব্যবস্থা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking",
+      "banking-financial",
+      "beftn",
+      "gk"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D660",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "ব্যাংকিং — লেনদেন",
+    "difficulty": "hard",
+    "question": "SWIFT-এর পূর্ণরূপ কী?",
+    "options": [
+      "System for World Interbank Financial Transaction",
+      "Society for World Interbank Financial Telecommunication",
+      "System for Worldwide Interbank Financial Transfer",
+      "Society for Worldwide Interbank Financial Telecommunication"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Society for Worldwide Interbank Financial Telecommunication",
+    "explanation": "SWIFT = Society for Worldwide Interbank Financial Telecommunication।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking",
+      "banking-financial",
+      "gk",
+      "swift"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D661",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "ব্যাংকিং — মোবাইল ব্যাংকিং",
+    "difficulty": "medium",
+    "question": "নগদ (Nagad) ডিজিটাল আর্থিক সেবা চালু হয় কবে?",
+    "options": [
+      "২০১৫",
+      "২০১৯",
+      "২০১১",
+      "২০২১"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২০১৯",
+    "explanation": "ডাক বিভাগের ডিজিটাল আর্থিক সেবা নগদ ২০১৯ সালে চালু হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking",
+      "banking-financial",
+      "gk",
+      "mobile-banking"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D662",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "ব্যাংকিং — তফসিলি ব্যাংক",
+    "difficulty": "medium",
+    "question": "তফসিলি ব্যাংক বলতে কী বোঝায়?",
+    "options": [
+      "সরকারি ব্যাংক",
+      "বিদেশি ব্যাংক",
+      "বাংলাদেশ ব্যাংক অর্ডারের তফসিলভুক্ত ব্যাংক",
+      "বেসরকারি ব্যাংক"
+    ],
+    "correct_index": 2,
+    "correct_answer": "বাংলাদেশ ব্যাংক অর্ডারের তফসিলভুক্ত ব্যাংক",
+    "explanation": "বাংলাদেশ ব্যাংক অর্ডার, ১৯৭২-এর তফসিলে অন্তর্ভুক্ত ব্যাংকগুলোকে তফসিলি ব্যাংক বলে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking",
+      "banking-financial",
+      "gk",
+      "scheduled-banks"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D663",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "অর্থনীতি — বাজেট",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের প্রথম বাজেট কে পেশ করেন?",
+    "options": [
+      "তাজউদ্দীন আহমদ",
+      "এম সাইফুর রহমান",
+      "আবুল মাল আবদুল মুহিত",
+      "শাহ এ এম এস কিবরিয়া"
+    ],
+    "correct_index": 0,
+    "correct_answer": "তাজউদ্দীন আহমদ",
+    "explanation": "বাংলাদেশের প্রথম বাজেট (১৯৭২–৭৩) পেশ করেন অর্থমন্ত্রী তাজউদ্দীন আহমদ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking-financial",
+      "budget",
+      "economy",
+      "gk"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D664",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "অর্থনীতি — কর",
+    "difficulty": "medium",
+    "question": "বাংলাদেশে ভ্যাট (VAT) চালু হয় কবে?",
+    "options": [
+      "১ জুলাই ১৯৭২",
+      "১ জুলাই ১৯৮৫",
+      "১ জানুয়ারি ২০০০",
+      "১ জুলাই ১৯৯১"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১ জুলাই ১৯৯১",
+    "explanation": "বাংলাদেশে মূল্য সংযোজন কর (ভ্যাট) ১৯৯১ সালের ১ জুলাই চালু হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking-financial",
+      "economy",
+      "gk",
+      "vat"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D665",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "অর্থনীতি — মুদ্রানীতি",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের মুদ্রানীতির মূল লক্ষ্য কী?",
+    "options": [
+      "রপ্তানি বৃদ্ধি",
+      "কর আদায় বৃদ্ধি",
+      "বৈদেশিক ঋণ গ্রহণ",
+      "মূল্যস্ফীতি নিয়ন্ত্রণ ও অর্থনৈতিক প্রবৃদ্ধি"
+    ],
+    "correct_index": 3,
+    "correct_answer": "মূল্যস্ফীতি নিয়ন্ত্রণ ও অর্থনৈতিক প্রবৃদ্ধি",
+    "explanation": "মুদ্রানীতির মূল লক্ষ্য মূল্যস্ফীতি নিয়ন্ত্রণে রেখে অর্থনৈতিক প্রবৃদ্ধি সমর্থন করা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking-financial",
+      "economy",
+      "gk",
+      "monetary-policy"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D666",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "ব্যাংকিং — বাণিজ্যিক ব্যাংক",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের বৃহত্তম বাণিজ্যিক ব্যাংক কোনটি?",
+    "options": [
+      "রূপালী ব্যাংক",
+      "সোনালী ব্যাংক",
+      "অগ্রণী ব্যাংক",
+      "জনতা ব্যাংক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "সোনালী ব্যাংক",
+    "explanation": "সোনালী ব্যাংক বাংলাদেশের বৃহত্তম বাণিজ্যিক ব্যাংক।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking",
+      "banking-financial",
+      "gk",
+      "sonali-bank"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D667",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "ব্যাংকিং — রাষ্ট্রায়ত্ত ব্যাংক",
+    "difficulty": "medium",
+    "question": "সোনালী ব্যাংক কত সালে প্রতিষ্ঠিত হয়?",
+    "options": [
+      "১৯৭১",
+      "১৯৭৫",
+      "১৯৭২",
+      "১৯৮০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৯৭২",
+    "explanation": "সোনালী ব্যাংক ১৯৭২ সালে প্রতিষ্ঠিত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking",
+      "banking-financial",
+      "gk",
+      "sonali-bank"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D668",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "ব্যাংকিং — বেসরকারি ব্যাংক",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের প্রথম বেসরকারি ব্যাংক হিসেবে এবি ব্যাংক কোন নামে যাত্রা শুরু করে?",
+    "options": [
+      "আরব বাংলাদেশ ইসলামী ব্যাংক",
+      "আরব বাংলাদেশ ব্যাংক",
+      "আরব বাংলা ব্যাংক",
+      "এশিয়া বাংলাদেশ ব্যাংক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "আরব বাংলাদেশ ব্যাংক",
+    "explanation": "এবি ব্যাংক ১৯৮২ সালে আরব বাংলাদেশ ব্যাংক নামে যাত্রা শুরু করে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "ab-bank",
+      "bank",
+      "banking",
+      "banking-financial",
+      "gk"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D669",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "ব্যাংকিং — ইসলামী ব্যাংক",
+    "difficulty": "medium",
+    "question": "ইসলামী ব্যাংক বাংলাদেশ কত সালে প্রতিষ্ঠিত হয়?",
+    "options": [
+      "১৯৯০",
+      "১৯৭২",
+      "২০০০",
+      "১৯৮৩"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৯৮৩",
+    "explanation": "ইসলামী ব্যাংক বাংলাদেশ ১৯৮৩ সালে প্রতিষ্ঠিত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking",
+      "banking-financial",
+      "gk",
+      "islami-bank"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D670",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "অর্থনীতি — EPZ",
+    "difficulty": "hard",
+    "question": "বেপজা (BEPZA) কত সালে প্রতিষ্ঠিত হয়?",
+    "options": [
+      "১৯৭২",
+      "১৯৮৩",
+      "১৯৯০",
+      "১৯৮০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৯৮০",
+    "explanation": "বাংলাদেশ রপ্তানি প্রক্রিয়াকরণ অঞ্চল কর্তৃপক্ষ (বেপজা) ১৯৮০ সালে প্রতিষ্ঠিত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking-financial",
+      "bepza",
+      "economy",
+      "gk"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D671",
+    "exam_canonical": "bank",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "স্থাপত্য",
+    "difficulty": "medium",
+    "question": "জাতীয় সংসদ ভবন কত সালে উদ্বোধন করা হয়?",
+    "options": [
+      "১৯৯০",
+      "১৯৭৫",
+      "১৯৮২",
+      "১৯৭২"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৯৮২",
+    "explanation": "জাতীয় সংসদ ভবন ১৯৮২ সালে উদ্বোধন করা হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "architecture",
+      "bank",
+      "general-knowledge",
+      "gk",
+      "parliament"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D672",
+    "exam_canonical": "bank",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "স্থাপত্য",
+    "difficulty": "medium",
+    "question": "কেন্দ্রীয় শহীদ মিনারের উচ্চতা প্রায় কত?",
+    "options": [
+      "১৪ মিটার",
+      "২০ মিটার",
+      "৭ মিটার",
+      "১০ মিটার"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৪ মিটার",
+    "explanation": "কেন্দ্রীয় শহীদ মিনারের উচ্চতা প্রায় ১৪ মিটার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "architecture",
+      "bank",
+      "general-knowledge",
+      "gk",
+      "shaheed-minar"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D673",
+    "exam_canonical": "bank",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "স্থাপত্য",
+    "difficulty": "hard",
+    "question": "জাতীয় স্মৃতিসৌধের উচ্চতা কত?",
+    "options": [
+      "৫৬.৫ মিটার",
+      "৪৬.৫ মিটার",
+      "২৬.৫ মিটার",
+      "৩৬.৫ মিটার"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৪৬.৫ মিটার",
+    "explanation": "সাভারের জাতীয় স্মৃতিসৌধের উচ্চতা ৪৬.৫ মিটার।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "architecture",
+      "bank",
+      "general-knowledge",
+      "gk",
+      "national-memorial"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D674",
+    "exam_canonical": "bank",
+    "subject_canonical": "General Knowledge",
+    "subject_slug": "general-knowledge",
+    "topic": "অবকাঠামো",
+    "difficulty": "medium",
+    "question": "পদ্মা সেতুর মূল সেতুর দৈর্ঘ্য কত?",
+    "options": [
+      "৫.৫ কিমি",
+      "৬.১৫ কিমি",
+      "৭.২ কিমি",
+      "৪.৮ কিমি"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৬.১৫ কিমি",
+    "explanation": "পদ্মা সেতুর মূল সেতুর দৈর্ঘ্য ৬.১৫ কিমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "general-knowledge",
+      "gk",
+      "infrastructure",
+      "padma-bridge"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D675",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "অর্থনীতি — বন্দর",
+    "difficulty": "medium",
+    "question": "বাংলাদেশের বৃহত্তম স্থলবন্দর কোনটি?",
+    "options": [
+      "বেনাপোল",
+      "সোনা মসজিদ",
+      "হিলি",
+      "বুড়িমারী"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বেনাপোল",
+    "explanation": "বেনাপোল বাংলাদেশের বৃহত্তম স্থলবন্দর।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking-financial",
+      "economy",
+      "gk",
+      "ports"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D676",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "আন্তর্জাতিক অর্থনীতি",
+    "difficulty": "medium",
+    "question": "বিশ্বব্যাংকের প্রথম প্রেসিডেন্ট কে ছিলেন?",
+    "options": [
+      "ইউজিন মেয়ার",
+      "রবার্ট ম্যাকনামারা",
+      "জিম ইয়ং কিম",
+      "অজয় বাঙ্গা"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ইউজিন মেয়ার",
+    "explanation": "ইউজিন মেয়ার বিশ্বব্যাংকের প্রথম প্রেসিডেন্ট ছিলেন (১৯৪৬)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking-financial",
+      "gk",
+      "international-economy",
+      "world-bank"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D677",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "আন্তর্জাতিক অর্থনীতি",
+    "difficulty": "medium",
+    "question": "IMF-এর প্রথম ব্যবস্থাপনা পরিচালক কে ছিলেন?",
+    "options": [
+      "ডোমিনিক স্ট্রস-কান",
+      "হর্স্ট কোহলার",
+      "ক্যামিল গুট",
+      "ক্রিস্টিন লাগার্দ"
+    ],
+    "correct_index": 2,
+    "correct_answer": "ক্যামিল গুট",
+    "explanation": "ক্যামিল গুট IMF-এর প্রথম ব্যবস্থাপনা পরিচালক ছিলেন (১৯৪৬–১৯৫১)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bank",
+      "banking-financial",
+      "gk",
+      "imf",
+      "international-economy"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-D678",
+    "exam_canonical": "bank",
+    "subject_canonical": "Banking and Financial Knowledge",
+    "subject_slug": "banking-financial",
+    "topic": "ব্যাংকিং — কেন্দ্রীয় ব্যাংক",
+    "difficulty": "medium",
+    "question": "বাংলাদেশ ব্যাংক অর্ডার কত সালে জারি করা হয়?",
+    "options": [
+      "১৯৭৩",
+      "১৯৭৫",
+      "১৯৭২",
+      "১৯৭১"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৯৭২",
+    "explanation": "বাংলাদেশ ব্যাংক অর্ডার, ১৯৭২ জারি করা হয়; এর অধীনে কেন্দ্রীয় ব্যাংক প্রতিষ্ঠিত হয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangladesh Bank and BSCS recruitment circulars; standard Bangladesh banking and economy references",
+    "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+    "tags": [
+      "bangladesh-bank",
+      "bank",
+      "banking-financial",
+      "gk",
+      "order"
+    ],
+    "source_stream": "bank",
+    "source_file": "bank-gk-banking-depth-02.json",
+    "applies_to": [
+      "bank"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

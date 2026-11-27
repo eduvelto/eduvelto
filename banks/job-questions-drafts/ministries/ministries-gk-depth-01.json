@@ -1,0 +1,496 @@
+[
+ {
+  "id": "JOBQ-M276",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিচার বিভাগ",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম প্রধান নির্বাচন কমিশনার কে ছিলেন?",
+  "options": [
+   "বিচারপতি এম ইদ্রিস",
+   "বিচারপতি এম এ সাঈদ",
+   "বিচারপতি আবদুর রউফ",
+   "বিচারপতি কে এম নূরুল হুদা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বিচারপতি এম ইদ্রিস",
+  "explanation": "বাংলাদেশের প্রথম প্রধান নির্বাচন কমিশনার ছিলেন বিচারপতি এম ইদ্রিস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "বিচার বিভাগ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M277",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিচার বিভাগ",
+  "difficulty": "hard",
+  "question": "বাংলাদেশের প্রথম অ্যাটর্নি জেনারেল কে ছিলেন?",
+  "options": [
+   "এম. এইচ. খন্দকার",
+   "তাজউদ্দীন আহমদ",
+   "কামাল হোসেন",
+   "সৈয়দ ইশতিয়াক আহমেদ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "এম. এইচ. খন্দকার",
+  "explanation": "বাংলাদেশের প্রথম অ্যাটর্নি জেনারেল এম. এইচ. খন্দকার।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "বিচার বিভাগ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M278",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বিচার বিভাগ",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের প্রথম নারী বিচারপতি কে ছিলেন?",
+  "options": [
+   "নাজমুন আরা সুলতানা",
+   "তাহমিনা আহমেদ",
+   "জিনাত আরা",
+   "সালমা মাসুদ চৌধুরী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নাজমুন আরা সুলতানা",
+  "explanation": "বিচারপতি নাজমুন আরা সুলতানা বাংলাদেশের প্রথম নারী বিচারপতি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "বিচার বিভাগ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M279",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাদুঘর",
+  "difficulty": "medium",
+  "question": "বাংলাদেশ জাতীয় জাদুঘর (ঢাকা জাদুঘর) কত সালে প্রতিষ্ঠিত হয়?",
+  "options": [
+   "১৯০১",
+   "১৯১৩",
+   "১৯২১",
+   "১৯৪৭"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯১৩",
+  "explanation": "ঢাকা জাদুঘর (বর্তমানে বাংলাদেশ জাতীয় জাদুঘর) প্রতিষ্ঠিত হয় ১৯১৩ সালে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "জাদুঘর",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M280",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ভূগোল",
+  "difficulty": "medium",
+  "question": "পদ্মা ও মেঘনার মিলিত ধারা কোন নামে পরিচিত?",
+  "options": [
+   "পদ্মা",
+   "যমুনা",
+   "মেঘনা",
+   "ব্রহ্মপুত্র"
+  ],
+  "correct_index": 2,
+  "correct_answer": "মেঘনা",
+  "explanation": "চাঁদপুরের কাছে পদ্মা ও মেঘনার মিলিত ধারা মেঘনা নামে বঙ্গোপসাগরে পতিত হয়েছে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "ভূগোল"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M281",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "সামরিক",
+  "difficulty": "medium",
+  "question": "স্বাধীনতার পর বাংলাদেশ সেনাবাহিনীর প্রথম প্রধান কে ছিলেন?",
+  "options": [
+   "এম. এ. জি. ওসমানী",
+   "কে. এম. শফিউল্লাহ",
+   "জিয়াউর রহমান",
+   "খালেদ মোশাররফ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কে. এম. শফিউল্লাহ",
+  "explanation": "মেজর জেনারেল কে. এম. শফিউল্লাহ স্বাধীন বাংলাদেশ সেনাবাহিনীর প্রথম প্রধান ছিলেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "বাংলাদেশ",
+   "সামরিক"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M283",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "জাতিসংঘ",
+  "difficulty": "medium",
+  "question": "জাতিসংঘের নিরাপত্তা পরিষদের মোট সদস্য সংখ্যা কত?",
+  "options": [
+   "১০",
+   "১২",
+   "১৫",
+   "২০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৫",
+  "explanation": "নিরাপত্তা পরিষদে ৫টি স্থায়ী ও ১০টি অস্থায়ী — মোট ১৫টি সদস্য দেশ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "জাতিসংঘ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M284",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "আন্তর্জাতিক সংস্থা",
+  "difficulty": "medium",
+  "question": "আন্তর্জাতিক মুদ্রা তহবিলের প্রধান কার্যালয় কোন শহরে অবস্থিত?",
+  "options": [
+   "নিউইয়র্ক",
+   "জেনেভা",
+   "ওয়াশিংটন ডিসি",
+   "লন্ডন"
+  ],
+  "correct_index": 2,
+  "correct_answer": "ওয়াশিংটন ডিসি",
+  "explanation": "IMF-এর সদর দপ্তর যুক্তরাষ্ট্রের ওয়াশিংটন ডিসিতে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "সংস্থা"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M285",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "আন্তর্জাতিক সংস্থা",
+  "difficulty": "medium",
+  "question": "বিশ্ব বাণিজ্য সংস্থার (WTO) বর্তমান মহাপরিচালক কে?",
+  "options": [
+   "এনগোজি ওকোনজো-ইওয়েলা",
+   "রবার্তো আজেভেদো",
+   "প্যাসকেল ল্যামি",
+   "ক্রিস্টালিনা জর্জিয়েভা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "এনগোজি ওকোনজো-ইওয়েলা",
+  "explanation": "বিশ্ব বাণিজ্য সংস্থার বর্তমান মহাপরিচালক এনগোজি ওকোনজো-ইওয়েলা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "সংস্থা"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M286",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "আন্তর্জাতিক সংস্থা",
+  "difficulty": "medium",
+  "question": "বাংলাদেশ বিশ্ব বাণিজ্য সংস্থার (WTO) সদস্য হয় কত সালে?",
+  "options": [
+   "১৯৭৪",
+   "১৯৯৫",
+   "২০০০",
+   "১৯৮৫"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১৯৯৫",
+  "explanation": "বাংলাদেশ ১৯৯৫ সালে WTO-এর সদস্য হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "আন্তর্জাতিক",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M287",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ক্রীড়া",
+  "difficulty": "medium",
+  "question": "বাংলাদেশ ক্রিকেট দলের প্রথম টেস্ট অধিনায়ক কে ছিলেন?",
+  "options": [
+   "হাবিবুল বাশার",
+   "নাইমুর রহমান দুর্জয়",
+   "আমিনুল ইসলাম বুলবুল",
+   "খালেদ মাসুদ পাইলট"
+  ],
+  "correct_index": 1,
+  "correct_answer": "নাইমুর রহমান দুর্জয়",
+  "explanation": "নাইমুর রহমান দুর্জয় বাংলাদেশের প্রথম টেস্ট অধিনায়ক ছিলেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "ক্রীড়া",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M288",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "ক্রীড়া",
+  "difficulty": "medium",
+  "question": "বাংলাদেশ ক্রিকেট দলের প্রথম ওয়ানডে অধিনায়ক কে ছিলেন?",
+  "options": [
+   "গাজী আশরাফ হোসেন লিপু",
+   "আমিনুল ইসলাম বুলবুল",
+   "হাবিবুল বাশার",
+   "আকরাম খান"
+  ],
+  "correct_index": 0,
+  "correct_answer": "গাজী আশরাফ হোসেন লিপু",
+  "explanation": "গাজী আশরাফ হোসেন লিপু বাংলাদেশের প্রথম ওয়ানডে অধিনায়ক ছিলেন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "ক্রীড়া",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-M289",
+  "exam_canonical": "ministries",
+  "subject_canonical": "General Knowledge",
+  "subject_slug": "general-knowledge",
+  "topic": "বাংলাদেশের ইতিহাস",
+  "difficulty": "medium",
+  "question": "বাংলাদেশের জাতীয় পতাকার নকশা প্রথম তৈরি করেন কে?",
+  "options": [
+   "শিব নারায়ণ দাস",
+   "কামরুল হাসান",
+   "জয়নুল আবেদিন",
+   "হাশেম খান"
+  ],
+  "correct_index": 0,
+  "correct_answer": "শিব নারায়ণ দাস",
+  "explanation": "বাংলাদেশের প্রথম জাতীয় পতাকার নকশা করেন শিব নারায়ণ দাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "বাংলাদেশের সংবিধান, মুক্তিযুদ্ধের প্রমিত ইতিহাস ও সাধারণ জ্ঞানের প্রমিত তথ্য",
+  "syllabus_source": "Ministry/department recruitment circulars (11-20 grade) — written/MCQ: Bangla, English, Mathematics, General Knowledge; practical typing test + viva per circular (ICT Division circular Mar 2026; Ministry of Defence circular 8 Nov 2026; BPATC circular 2026)",
+  "tags": [
+   "general-knowledge",
+   "ministries",
+   "ইতিহাস",
+   "বাংলাদেশ"
+  ],
+  "source_stream": "ministries",
+  "source_file": "ministries/ministries-gk-depth-01.json",
+  "applies_to": [
+   "ministries"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

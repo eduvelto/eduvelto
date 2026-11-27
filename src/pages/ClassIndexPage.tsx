@@ -156,8 +156,8 @@ export default function ClassIndexPage() {
           </h2>
           <p style={{ fontSize: 15, lineHeight: 1.75, margin: '0 0 12px' }}>
             {t({
-              bn: `যাচাইকৃত প্রশ্ন দিয়ে অধ্যায়ভিত্তিক অনুশীলন করুন — উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা দেখতে পাবেন। এখন আছে ${academicPracticeSummary('bn')}।`,
-              en: `Practise chapter by chapter with verified questions — see the correct answer and explanation as soon as you answer. Available now: ${academicPracticeSummary('en')}.`,
+              bn: `এই শ্রেণির যাচাইকৃত অনুশীলন প্রশ্ন দিয়ে অধ্যায়ভিত্তিক অনুশীলন করুন — উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা দেখতে পাবেন। এখন আছে ${academicPracticeSummary('bn')}।`,
+              en: `Practise chapter by chapter with this class's verified practice questions — see the correct answer and explanation as soon as you answer. Available now: ${academicPracticeSummary('en')}.`,
             })}
           </p>
           <Link to="/learn/practice" style={{ fontWeight: 600 }}>

@@ -1,0 +1,1548 @@
+[
+  {
+    "id": "JOBQ-J281",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি বই ৬০০ টাকায় কিনে ৫৪০ টাকায় বিক্রি করলে শতকরা ক্ষতি কত?",
+    "options": [
+      "৫%",
+      "১০%",
+      "২০%",
+      "১৫%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১০%",
+    "explanation": "ক্ষতি ৬০ টাকা; ক্ষতি% = ৬০×১০০/৬০০ = ১০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J282",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি বই ৭৫০ টাকায় কিনে ৯০০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "১৫%",
+      "৩০%",
+      "২০%",
+      "২৫%"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ১৫০ টাকা; লাভ% = ১৫০×১০০/৭৫০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J283",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি বই ৩০০ টাকায় কিনে ৩৬০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "১৫%",
+      "২০%",
+      "৩০%",
+      "২৫%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ৬০ টাকা; লাভ% = ৬০×১০০/৩০০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J284",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি বই ১২০০ টাকায় কিনে ১০৮০ টাকায় বিক্রি করলে শতকরা ক্ষতি কত?",
+    "options": [
+      "৫%",
+      "২০%",
+      "১০%",
+      "১৫%"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১০%",
+    "explanation": "ক্ষতি ১২০ টাকা; ক্ষতি% = ১২০×১০০/১২০০ = ১০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J285",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "৫০০ টাকা ২:৩ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "২০০",
+      "১৫০",
+      "৩০০",
+      "২৫০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২০০",
+    "explanation": "মোট অনুপাত ৫; প্রথম অংশ = ৫০০ × ২/৫ = ২০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J286",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "৮০০ টাকা ৩:৫ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৪০০",
+      "৩৫০",
+      "২৫০",
+      "৩০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৩০০",
+    "explanation": "মোট অনুপাত ৮; প্রথম অংশ = ৮০০ × ৩/৮ = ৩০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J287",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "১০০০ টাকা ১:৪ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "২৫০",
+      "১৫০",
+      "৩০০",
+      "২০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "২০০",
+    "explanation": "মোট অনুপাত ৫; প্রথম অংশ = ১০০০ × ১/৫ = ২০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J288",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "৭০০ টাকা ২:৫ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "১৫০",
+      "৩০০",
+      "২৫০",
+      "২০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "২০০",
+    "explanation": "মোট অনুপাত ৭; প্রথম অংশ = ৭০০ × ২/৭ = ২০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J289",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "১০০০ টাকা ৩:৭ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৩০০",
+      "৪০০",
+      "২৫০",
+      "৩৫০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৩০০",
+    "explanation": "মোট অনুপাত ১০; প্রথম অংশ = ১০০০ × ৩/১০ = ৩০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J290",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "৯০০ টাকা ৪:৫ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৫০০",
+      "৩৫০",
+      "৪০০",
+      "৪৫০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৪০০",
+    "explanation": "মোট অনুপাত ৯; প্রথম অংশ = ৯০০ × ৪/৯ = ৪০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J291",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ৫, b = ৩ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "৫৬",
+      "৬৪",
+      "৮০",
+      "৭২"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৬৪",
+    "explanation": "(a + b)² = (৫ + ৩)² = ৮² = ৬৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J292",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ৭, b = ২ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "৭৩",
+      "৯৭",
+      "৮১",
+      "৮৯"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৮১",
+    "explanation": "(a + b)² = (৭ + ২)² = ৯² = ৮১।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J293",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ৬, b = ৪ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "১১৬",
+      "১০৮",
+      "৯২",
+      "১০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১০০",
+    "explanation": "(a + b)² = (৬ + ৪)² = ১০² = ১০০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J294",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ৯, b = ৩ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "১৩৬",
+      "১৫২",
+      "১৬০",
+      "১৪৪"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৪৪",
+    "explanation": "(a + b)² = (৯ + ৩)² = ১২² = ১৪৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J295",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ৮, b = ৫ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "১৮৫",
+      "১৭৭",
+      "১৬৯",
+      "১৬১"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৬৯",
+    "explanation": "(a + b)² = (৮ + ৫)² = ১৩² = ১৬৯।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J296",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১০, b = ৪ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "২০৪",
+      "২১২",
+      "১৯৬",
+      "১৮৮"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৯৬",
+    "explanation": "(a + b)² = (১০ + ৪)² = ১৪² = ১৯৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J297",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ৯, b = ৪ হলে a² − b²-এর মান কত?",
+    "options": [
+      "৭৫",
+      "৮৫",
+      "৫৫",
+      "৬৫"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৬৫",
+    "explanation": "a² − b² = ৮১ − ১৬ = ৬৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J298",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১২, b = ৫ হলে a² − b²-এর মান কত?",
+    "options": [
+      "১২৯",
+      "১১৯",
+      "১০৯",
+      "১৩৯"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১১৯",
+    "explanation": "a² − b² = ১৪৪ − ২৫ = ১১৯।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J299",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১৫, b = ৬ হলে a² − b²-এর মান কত?",
+    "options": [
+      "১৯৯",
+      "২০৯",
+      "১৮৯",
+      "১৭৯"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৮৯",
+    "explanation": "a² − b² = ২২৫ − ৩৬ = ১৮৯।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J300",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১১, b = ৩ হলে a² − b²-এর মান কত?",
+    "options": [
+      "১১২",
+      "১৩২",
+      "১২২",
+      "১০২"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১১২",
+    "explanation": "a² − b² = ১২১ − ৯ = ১১২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J301",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "উৎপাদক",
+    "difficulty": "medium",
+    "question": "x² − ১৬-এর উৎপাদক কোনটি?",
+    "options": [
+      "(x − ৪)(x − ৪)",
+      "(x − ৫)(x + ৫)",
+      "(x + ৪)(x + ৪)",
+      "(x − ৪)(x + ৪)"
+    ],
+    "correct_index": 3,
+    "correct_answer": "(x − ৪)(x + ৪)",
+    "explanation": "x² − ১৬ = x² − ৪² = (x − ৪)(x + ৪)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "উৎপাদক",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J302",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "উৎপাদক",
+    "difficulty": "medium",
+    "question": "x² − ২৫-এর উৎপাদক কোনটি?",
+    "options": [
+      "(x − ৬)(x + ৬)",
+      "(x + ৫)(x + ৫)",
+      "(x − ৫)(x + ৫)",
+      "(x − ৫)(x − ৫)"
+    ],
+    "correct_index": 2,
+    "correct_answer": "(x − ৫)(x + ৫)",
+    "explanation": "x² − ২৫ = x² − ৫² = (x − ৫)(x + ৫)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "উৎপাদক",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J303",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "উৎপাদক",
+    "difficulty": "medium",
+    "question": "x² − ৩৬-এর উৎপাদক কোনটি?",
+    "options": [
+      "(x − ৭)(x + ৭)",
+      "(x − ৬)(x + ৬)",
+      "(x + ৬)(x + ৬)",
+      "(x − ৬)(x − ৬)"
+    ],
+    "correct_index": 1,
+    "correct_answer": "(x − ৬)(x + ৬)",
+    "explanation": "x² − ৩৬ = x² − ৬² = (x − ৬)(x + ৬)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "উৎপাদক",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J304",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "উৎপাদক",
+    "difficulty": "medium",
+    "question": "x² − ৪৯-এর উৎপাদক কোনটি?",
+    "options": [
+      "(x − ৭)(x + ৭)",
+      "(x − ৭)(x − ৭)",
+      "(x + ৭)(x + ৭)",
+      "(x − ৮)(x + ৮)"
+    ],
+    "correct_index": 0,
+    "correct_answer": "(x − ৭)(x + ৭)",
+    "explanation": "x² − ৪৯ = x² − ৭² = (x − ৭)(x + ৭)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "উৎপাদক",
+      "বীজগণিত"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J305",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সূচক",
+    "difficulty": "easy",
+    "question": "২^৫-এর মান কত?",
+    "options": [
+      "৩২",
+      "৪৮",
+      "৪০",
+      "২৪"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৩২",
+    "explanation": "২^৫ = ৩২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত",
+      "সূচক"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J306",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সূচক",
+    "difficulty": "easy",
+    "question": "৩^৩-এর মান কত?",
+    "options": [
+      "২৭",
+      "১৯",
+      "৩৫",
+      "৪৩"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২৭",
+    "explanation": "৩^৩ = ২৭।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত",
+      "সূচক"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J307",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সূচক",
+    "difficulty": "easy",
+    "question": "৫^২-এর মান কত?",
+    "options": [
+      "১৭",
+      "৩৩",
+      "২৫",
+      "৪১"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২৫",
+    "explanation": "৫^২ = ২৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত",
+      "সূচক"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J308",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সূচক",
+    "difficulty": "easy",
+    "question": "২^৬-এর মান কত?",
+    "options": [
+      "৬৪",
+      "৭২",
+      "৫৬",
+      "৮০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৬৪",
+    "explanation": "২^৬ = ৬৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত",
+      "সূচক"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J309",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লগারিদম",
+    "difficulty": "medium",
+    "question": "log₁₀ 1000-এর মান কত?",
+    "options": [
+      "৫",
+      "৩",
+      "২",
+      "৪"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৩",
+    "explanation": "10³ = 1000, তাই log₁₀ 1000 = 3।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত",
+      "লগারিদম"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J310",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লগারিদম",
+    "difficulty": "medium",
+    "question": "log₂ 16-এর মান কত?",
+    "options": [
+      "৩",
+      "৬",
+      "৫",
+      "৪"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৪",
+    "explanation": "2⁴ = 16, তাই log₂ 16 = 4।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "বীজগণিত",
+      "লগারিদম"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J311",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি ত্রিভুজের ভূমি 10 সেমি ও উচ্চতা 6 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি?",
+    "options": [
+      "৩০",
+      "৫০",
+      "৪০",
+      "২০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৩০",
+    "explanation": "ত্রিভুজের ক্ষেত্রফল = ½ × ভূমি × উচ্চতা = ½ × 10 × 6 = 30 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J312",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি আয়তক্ষেত্রের দৈর্ঘ্য 12 সেমি ও প্রস্থ 5 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি?",
+    "options": [
+      "৮৪",
+      "৪৮",
+      "৭২",
+      "৬০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৬০",
+    "explanation": "আয়তক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ = 12 × 5 = 60 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J313",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বর্গক্ষেত্রের এক বাহুর দৈর্ঘ্য 9 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি?",
+    "options": [
+      "৮১",
+      "৯০",
+      "৭২",
+      "৯৯"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৮১",
+    "explanation": "বর্গক্ষেত্রের ক্ষেত্রফল = বাহু² = 9² = 81 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J314",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বৃত্তের ব্যাসার্ধ 7 সেমি হলে পরিধি কত সেমি? (π = 22/7)",
+    "options": [
+      "৫৮",
+      "৩৭",
+      "৪৪",
+      "৫১"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৪৪",
+    "explanation": "পরিধি = 2πr = 2 × 22/7 × 7 = 44 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J315",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বৃত্তের ব্যাসার্ধ 7 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি? (π = 22/7)",
+    "options": [
+      "১৭৬",
+      "১৫৪",
+      "১৩২",
+      "১৯৮"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৫৪",
+    "explanation": "ক্ষেত্রফল = πr² = 22/7 × 49 = 154 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J316",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি সমকোণী ত্রিভুজের অতিভুজ 13 সেমি ও এক বাহু 5 সেমি হলে অপর বাহু কত সেমি?",
+    "options": [
+      "২২",
+      "১২",
+      "১৭",
+      "৭"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১২",
+    "explanation": "পিথাগোরাসের উপপাদ্য: √(13² − 5²) = √(169 − 25) = √144 = 12 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J317",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি ত্রিভুজের তিন কোণের সমষ্টি কত ডিগ্রি?",
+    "options": [
+      "৯০",
+      "১৮০",
+      "৫৪০",
+      "২৭০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৮০",
+    "explanation": "ত্রিভুজের তিন কোণের সমষ্টি 180°।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J318",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বর্গক্ষেত্রের এক বাহুর দৈর্ঘ্য 8 সেমি হলে পরিসীমা কত সেমি?",
+    "options": [
+      "২৪",
+      "৩২",
+      "৪৮",
+      "৪০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৩২",
+    "explanation": "পরিসীমা = 4 × বাহু = 4 × 8 = 32 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J319",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি আয়তক্ষেত্রের দৈর্ঘ্য 15 সেমি ও প্রস্থ 8 সেমি হলে পরিসীমা কত সেমি?",
+    "options": [
+      "৬৬",
+      "৩৬",
+      "৫৬",
+      "৪৬"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৪৬",
+    "explanation": "পরিসীমা = 2 × (দৈর্ঘ্য + প্রস্থ) = 2 × 23 = 46 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J320",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি সমবাহু ত্রিভুজের প্রতিটি কোণের মান কত ডিগ্রি?",
+    "options": [
+      "৬০",
+      "১৫০",
+      "৯০",
+      "৩০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৬০",
+    "explanation": "সমবাহু ত্রিভুজের প্রতিটি কোণ 60°।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — General Mathematics 25: arithmetic (average, unitary method, LCM, HCF, percent, interest, profit-loss, ratio-proportion), algebra (factors, square/cube formulas, indices, logarithms), geometry (lines, angles, triangles, quadrilaterals, area, circle). Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "mathematics",
+      "ntrca",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-math-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

@@ -54,7 +54,7 @@ describe('HomeQuestionMakerPanel (owner 25 Nov 18:26)', () => {
     const html = await renderPanel('bn');
     expect(html).toContain('প্রশ্নপত্র তৈরি');
     expect(html).toContain('অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরির ফ্রি টুল');
-    expect(html).toContain('শুধু যাচাইকৃত প্রশ্ন দিয়ে');
+    expect(html).toContain('শুধু যাচাইকৃত অনুশীলন প্রশ্ন দিয়ে');
     expect(html).toContain('মাসে ৩টা ফ্রি পেপার (জলছাপসহ)');
     expect(html).toContain('সব প্রশ্নপত্রে ৭০% ছাড়ে');
     expect(html).toContain('OMR চেক সম্পূর্ণ ফ্রি');
@@ -66,7 +66,7 @@ describe('HomeQuestionMakerPanel (owner 25 Nov 18:26)', () => {
     const html = await renderPanel('en');
     expect(html).toContain('Question Maker');
     expect(html).toContain('free tool for teachers and coaching centres');
-    expect(html).toContain('Only verified questions');
+    expect(html).toContain('Only verified practice questions');
     expect(html).toContain('3 free papers a month (watermarked)');
     expect(html).toContain('70% off all question papers');
     expect(html).toContain('OMR checking completely free');

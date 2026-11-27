@@ -1,0 +1,2916 @@
+[
+  {
+    "id": "JOBQ-J551",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "১৩, ২৬, ৩৯, ৫২, ৬৫-এর গড় কত?",
+    "options": [
+      "৩৩",
+      "৩৯",
+      "৪৫",
+      "৫১"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৩৯",
+    "explanation": "মোট ১৯৫ ÷ ৫ = ৩৯।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J552",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "১৬, ৩২, ৪৮, ৬৪-এর গড় কত?",
+    "options": [
+      "৩৪",
+      "৪০",
+      "৪৬",
+      "৫২"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৪০",
+    "explanation": "মোট ১৬০ ÷ ৪ = ৪০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J553",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "১৮, ৩৬, ৫৪, ৭২-এর গড় কত?",
+    "options": [
+      "৫৭",
+      "৪৫",
+      "৩৯",
+      "৫১"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৪৫",
+    "explanation": "মোট ১৮০ ÷ ৪ = ৪৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J554",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "২১, ৪২, ৬৩, ৮৪, ১০৫-এর গড় কত?",
+    "options": [
+      "৬৯",
+      "৫৭",
+      "৬৩",
+      "৭৫"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৬৩",
+    "explanation": "মোট ৩১৫ ÷ ৫ = ৬৩।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J555",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "১৪, ২৮, ৪২, ৫৬, ৭০-এর গড় কত?",
+    "options": [
+      "৩৬",
+      "৪২",
+      "৫৪",
+      "৪৮"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৪২",
+    "explanation": "মোট ২১০ ÷ ৫ = ৪২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J556",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "১৯, ৩৮, ৫৭, ৭৬, ৯৫-এর গড় কত?",
+    "options": [
+      "৫৭",
+      "৬৯",
+      "৫১",
+      "৬৩"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৫৭",
+    "explanation": "মোট ২৮৫ ÷ ৫ = ৫৭।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J557",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "১৭, ৩৪, ৫১, ৬৮, ৮৫-এর গড় কত?",
+    "options": [
+      "৫১",
+      "৬৩",
+      "৫৭",
+      "৪৫"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৫১",
+    "explanation": "মোট ২৫৫ ÷ ৫ = ৫১।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J558",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গড়",
+    "difficulty": "easy",
+    "question": "২৩, ৪৬, ৬৯-এর গড় কত?",
+    "options": [
+      "৫৮",
+      "৫২",
+      "৪০",
+      "৪৬"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৪৬",
+    "explanation": "মোট ১৩৮ ÷ ৩ = ৪৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গড়",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J559",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "১৪ টাকা দরে ৬টি খাতার দাম কত?",
+    "options": [
+      "৯৬",
+      "৭২",
+      "১০৮",
+      "৮৪"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৮৪",
+    "explanation": "১৪ × ৬ = ৮৪ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J560",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "২২ টাকা দরে ৫টি খাতার দাম কত?",
+    "options": [
+      "১২২",
+      "১৩৪",
+      "৯৮",
+      "১১০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১১০",
+    "explanation": "২২ × ৫ = ১১০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J561",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "১৬ টাকা দরে ৮টি খাতার দাম কত?",
+    "options": [
+      "১১৬",
+      "১৫২",
+      "১৪০",
+      "১২৮"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১২৮",
+    "explanation": "১৬ × ৮ = ১২৮ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J562",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "২৮ টাকা দরে ৪টি খাতার দাম কত?",
+    "options": [
+      "১৩৬",
+      "১২৪",
+      "১১২",
+      "১০০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১১২",
+    "explanation": "২৮ × ৪ = ১১২ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J563",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "৩৫ টাকা দরে ৩টি খাতার দাম কত?",
+    "options": [
+      "১২৯",
+      "১০৫",
+      "৯৩",
+      "১১৭"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১০৫",
+    "explanation": "৩৫ × ৩ = ১০৫ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J564",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "৪৫ টাকা দরে ২টি খাতার দাম কত?",
+    "options": [
+      "১০২",
+      "৭৮",
+      "৯০",
+      "১১৪"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৯০",
+    "explanation": "৪৫ × ২ = ৯০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J565",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "১৩ টাকা দরে ৯টি খাতার দাম কত?",
+    "options": [
+      "১০৫",
+      "১১৭",
+      "১২৯",
+      "১৪১"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১১৭",
+    "explanation": "১৩ × ৯ = ১১৭ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J566",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "ঐকিক নিয়ম",
+    "difficulty": "easy",
+    "question": "২৬ টাকা দরে ৬টি খাতার দাম কত?",
+    "options": [
+      "১৫৬",
+      "১৪৪",
+      "১৬৮",
+      "১৮০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৫৬",
+    "explanation": "২৬ × ৬ = ১৫৬ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "ঐকিক নিয়ম",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J567",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "১২ ও ১৫-এর লসাগু কত?",
+    "options": [
+      "৬০",
+      "৩০",
+      "৪৫",
+      "১৮০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৬০",
+    "explanation": "১২ ও ১৫-এর লসাগু ৬০; ৬০ হলো উভয়ের দ্বারা বিভাজ্য ক্ষুদ্রতম সংখ্যা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J568",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "২০ ও ৩০-এর লসাগু কত?",
+    "options": [
+      "৫২",
+      "৭৬",
+      "৬০",
+      "৬৮"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৬০",
+    "explanation": "২০ ও ৩০-এর লসাগু ৬০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J569",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "২৪ ও ৩৬-এর লসাগু কত?",
+    "options": [
+      "৬৪",
+      "৭২",
+      "৮৮",
+      "৮০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৭২",
+    "explanation": "২৪ ও ৩৬-এর লসাগু ৭২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J570",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "১৫ ও ২৫-এর লসাগু কত?",
+    "options": [
+      "৬৭",
+      "৮৩",
+      "৭৫",
+      "৯১"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৭৫",
+    "explanation": "১৫ ও ২৫-এর লসাগু ৭৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J571",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "২৮ ও ৩৫-এর লসাগু কত?",
+    "options": [
+      "১৫৬",
+      "১৪৮",
+      "১৩২",
+      "১৪০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৪০",
+    "explanation": "২৮ ও ৩৫-এর লসাগু ১৪০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J572",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লসাগু",
+    "difficulty": "easy",
+    "question": "৩২ ও ৪৮-এর লসাগু কত?",
+    "options": [
+      "১০৪",
+      "১১২",
+      "৮৮",
+      "৯৬"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৯৬",
+    "explanation": "৩২ ও ৪৮-এর লসাগু ৯৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লসাগু"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J573",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৩০ ও ৪৫-এর গসাগু কত?",
+    "options": [
+      "১৯",
+      "১৫",
+      "১১",
+      "২৩"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৫",
+    "explanation": "৩০ ও ৪৫-এর গসাগু ১৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J574",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৪৮ ও ৬০-এর গসাগু কত?",
+    "options": [
+      "৮",
+      "১৬",
+      "২০",
+      "১২"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১২",
+    "explanation": "৪৮ ও ৬০-এর গসাগু ১২।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J575",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৫৬ ও ৭০-এর গসাগু কত?",
+    "options": [
+      "১৪",
+      "২২",
+      "১৮",
+      "১০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৪",
+    "explanation": "৫৬ ও ৭০-এর গসাগু ১৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J576",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৬৪ ও ৮০-এর গসাগু কত?",
+    "options": [
+      "১৬",
+      "২০",
+      "২৪",
+      "১২"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৬",
+    "explanation": "৬৪ ও ৮০-এর গসাগু ১৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J577",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৭২ ও ৯০-এর গসাগু কত?",
+    "options": [
+      "২৬",
+      "১৮",
+      "২২",
+      "১৪"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৮",
+    "explanation": "৭২ ও ৯০-এর গসাগু ১৮।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J578",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "গসাগু",
+    "difficulty": "easy",
+    "question": "৪০ ও ৬০-এর গসাগু কত?",
+    "options": [
+      "২০",
+      "২৪",
+      "১৬",
+      "২৮"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২০",
+    "explanation": "৪০ ও ৬০-এর গসাগু ২০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "গসাগু",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J579",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৫৫০-এর ২০% কত?",
+    "options": [
+      "১১০",
+      "১৩২",
+      "৯৯",
+      "১২১"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১১০",
+    "explanation": "৫৫০ × ২০/১০০ = ১১০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J580",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৭৫০-এর ১৬% কত?",
+    "options": [
+      "১২০",
+      "১৩১",
+      "১৪২",
+      "১০৯"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১২০",
+    "explanation": "৭৫০ × ১৬/১০০ = ১২০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J581",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৮৫০-এর ১০% কত?",
+    "options": [
+      "৯৬",
+      "৭৪",
+      "১০৭",
+      "৮৫"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৮৫",
+    "explanation": "৮৫০ × ১০/১০০ = ৮৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J582",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৯৫০-এর ৩০% কত?",
+    "options": [
+      "৩০৭",
+      "২৮৫",
+      "২৯৬",
+      "২৭৪"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২৮৫",
+    "explanation": "৯৫০ × ৩০/১০০ = ২৮৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J583",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৬৫০-এর ১২% কত?",
+    "options": [
+      "৮৯",
+      "৬৭",
+      "৭৮",
+      "১০০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৭৮",
+    "explanation": "৬৫০ × ১২/১০০ = ৭৮।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J584",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "১১০০-এর ১৫% কত?",
+    "options": [
+      "১৮৭",
+      "১৭৬",
+      "১৫৪",
+      "১৬৫"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৬৫",
+    "explanation": "১১০০ × ১৫/১০০ = ১৬৫।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J585",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "৪৫০-এর ৪০% কত?",
+    "options": [
+      "২০২",
+      "১৮০",
+      "১৯১",
+      "১৬৯"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৮০",
+    "explanation": "৪৫০ × ৪০/১০০ = ১৮০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J586",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "শতকরা",
+    "difficulty": "easy",
+    "question": "১৩০০-এর ১০% কত?",
+    "options": [
+      "১১৯",
+      "১৫২",
+      "১৪১",
+      "১৩০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৩০",
+    "explanation": "১৩০০ × ১০/১০০ = ১৩০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "শতকরা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J587",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "৭০০০ টাকার ৯% হারে ২ বছরের সরল সুদ কত?",
+    "options": [
+      "১২৬০",
+      "১১১০",
+      "১৫৬০",
+      "১৪১০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১২৬০",
+    "explanation": "সুদ = ৭০০০ × ৯ × ২/১০০ = ১২৬০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J588",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "৫৫০০ টাকার ৬% হারে ৩ বছরের সরল সুদ কত?",
+    "options": [
+      "৮৪০",
+      "১১৪০",
+      "১২৯০",
+      "৯৯০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৯৯০",
+    "explanation": "সুদ = ৫৫০০ × ৬ × ৩/১০০ = ৯৯০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J589",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "৭৫০০ টাকার ৮% হারে ২ বছরের সরল সুদ কত?",
+    "options": [
+      "১০৫০",
+      "১২০০",
+      "১৫০০",
+      "১৩৫০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১২০০",
+    "explanation": "সুদ = ৭৫০০ × ৮ × ২/১০০ = ১২০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J590",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "৪৫০০ টাকার ১২% হারে ৩ বছরের সরল সুদ কত?",
+    "options": [
+      "১৬২০",
+      "১৪৭০",
+      "১৯২০",
+      "১৭৭০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৬২০",
+    "explanation": "সুদ = ৪৫০০ × ১২ × ৩/১০০ = ১৬২০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J591",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "১১০০০ টাকার ৫% হারে ৪ বছরের সরল সুদ কত?",
+    "options": [
+      "২৩৫০",
+      "২৫০০",
+      "২২০০",
+      "২০৫০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২২০০",
+    "explanation": "সুদ = ১১০০০ × ৫ × ৪/১০০ = ২২০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J592",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সরল সুদ",
+    "difficulty": "medium",
+    "question": "৬৫০০ টাকার ১০% হারে ২ বছরের সরল সুদ কত?",
+    "options": [
+      "১১৫০",
+      "১৩০০",
+      "১৬০০",
+      "১৪৫০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১৩০০",
+    "explanation": "সুদ = ৬৫০০ × ১০ × ২/১০০ = ১৩০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "সুদকষা"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J593",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি কলম ৭০০ টাকায় কিনে ৮৪০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "২০%",
+      "২৪%",
+      "১৬%",
+      "২৮%"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ১৪০ টাকা; লাভ% = ১৪০×১০০/৭০০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J594",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি কলম ৯০০ টাকায় কিনে ১০৮০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "২০%",
+      "১৬%",
+      "২৮%",
+      "২৪%"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ১৮০ টাকা; লাভ% = ১৮০×১০০/৯০০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J595",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি কলম ৫৫০ টাকায় কিনে ৬৬০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "১৬%",
+      "২০%",
+      "২৮%",
+      "২৪%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ১১০ টাকা; লাভ% = ১১০×১০০/৫৫০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J596",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি কলম ৬৫০ টাকায় কিনে ৭৮০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "২৪%",
+      "২৮%",
+      "২০%",
+      "১৬%"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ১৩০ টাকা; লাভ% = ১৩০×১০০/৬৫০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J597",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি কলম ৮৫০ টাকায় কিনে ৭৬৫ টাকায় বিক্রি করলে শতকরা ক্ষতি কত?",
+    "options": [
+      "৬%",
+      "১৮%",
+      "১৪%",
+      "১০%"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১০%",
+    "explanation": "ক্ষতি ৮৫ টাকা; ক্ষতি% = ৮৫×১০০/৮৫০ = ১০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J598",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি কলম ৯৫০ টাকায় কিনে ১১৪০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "২৪%",
+      "১৬%",
+      "২৮%",
+      "২০%"
+    ],
+    "correct_index": 3,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ১৯০ টাকা; লাভ% = ১৯০×১০০/৯৫০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J599",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি কলম ৪৫০ টাকায় কিনে ৫৪০ টাকায় বিক্রি করলে শতকরা লাভ কত?",
+    "options": [
+      "২৮%",
+      "২০%",
+      "২৪%",
+      "১৬%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২০%",
+    "explanation": "লাভ ৯০ টাকা; লাভ% = ৯০×১০০/৪৫০ = ২০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J600",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "লাভ-ক্ষতি",
+    "difficulty": "medium",
+    "question": "একটি কলম ১০৫০ টাকায় কিনে ৯৪৫ টাকায় বিক্রি করলে শতকরা ক্ষতি কত?",
+    "options": [
+      "১৮%",
+      "১০%",
+      "৬%",
+      "১৪%"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১০%",
+    "explanation": "ক্ষতি ১০৫ টাকা; ক্ষতি% = ১০৫×১০০/১০৫০ = ১০%।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "পাটিগণিত",
+      "লাভ-ক্ষতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J601",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "৭০০ টাকা ৩:৪ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৪২০",
+      "৩০০",
+      "৩৬০",
+      "২৪০"
+    ],
+    "correct_index": 1,
+    "correct_answer": "৩০০",
+    "explanation": "মোট অনুপাত ৭; প্রথম অংশ = ৭০০ × ৩/৭ = ৩০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J602",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "৮০০ টাকা ৫:৩ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৫৬০",
+      "৬২০",
+      "৪৪০",
+      "৫০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৫০০",
+    "explanation": "মোট অনুপাত ৮; প্রথম অংশ = ৮০০ × ৫/৮ = ৫০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J603",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "৯০০ টাকা ২:৭ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "২০০",
+      "২৬০",
+      "৩২০",
+      "১৪০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২০০",
+    "explanation": "মোট অনুপাত ৯; প্রথম অংশ = ৯০০ × ২/৯ = ২০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J604",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "৭০০ টাকা ৪:৩ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৩৪০",
+      "৪৬০",
+      "৫২০",
+      "৪০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৪০০",
+    "explanation": "মোট অনুপাত ৭; প্রথম অংশ = ৭০০ × ৪/৭ = ৪০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J605",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "১২০০ টাকা ৫:৭ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "৫৬০",
+      "৪৪০",
+      "৬২০",
+      "৫০০"
+    ],
+    "correct_index": 3,
+    "correct_answer": "৫০০",
+    "explanation": "মোট অনুপাত ১২; প্রথম অংশ = ১২০০ × ৫/১২ = ৫০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J606",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "অনুপাত",
+    "difficulty": "medium",
+    "question": "৬০০ টাকা ১:৫ অনুপাতে ভাগ করলে প্রথম অংশ কত টাকা?",
+    "options": [
+      "১০০",
+      "২২০",
+      "১৬০",
+      "৪০"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১০০",
+    "explanation": "মোট অনুপাত ৬; প্রথম অংশ = ৬০০ × ১/৬ = ১০০ টাকা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "অনুপাত",
+      "পাটিগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J607",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১১, b = ৫ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "২৫৬",
+      "২৬৫",
+      "২৭৪",
+      "২৪৭"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২৫৬",
+    "explanation": "(a + b)² = (১১ + ৫)² = ১৬² = ২৫৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J608",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১৩, b = ৪ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "২৮০",
+      "২৮৯",
+      "৩০৭",
+      "২৯৮"
+    ],
+    "correct_index": 1,
+    "correct_answer": "২৮৯",
+    "explanation": "(a + b)² = (১৩ + ৪)² = ১৭² = ২৮৯।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J609",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১২, b = ৬ হলে (a + b)²-এর মান কত?",
+    "options": [
+      "৩৪২",
+      "৩৩৩",
+      "৩২৪",
+      "৩১৫"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৩২৪",
+    "explanation": "(a + b)² = (১২ + ৬)² = ১৮² = ৩২৪।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "বর্গ সূত্র",
+      "বীজগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J610",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১৩, b = ৭ হলে a² − b²-এর মান কত?",
+    "options": [
+      "১০৮",
+      "১৪৪",
+      "১২০",
+      "১৩২"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১২০",
+    "explanation": "a² − b² = ১৬৯ − ৪৯ = ১২০।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "বীজগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J611",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "বীজগণিত",
+    "difficulty": "medium",
+    "question": "a = ১৭, b = ৯ হলে a² − b²-এর মান কত?",
+    "options": [
+      "২২০",
+      "১৯৬",
+      "২০৮",
+      "২৩২"
+    ],
+    "correct_index": 2,
+    "correct_answer": "২০৮",
+    "explanation": "a² − b² = ২৮৯ − ৮১ = ২০৮।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "বীজগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J612",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "উৎপাদক",
+    "difficulty": "medium",
+    "question": "x² − ৬৪-এর উৎপাদক কোনটি?",
+    "options": [
+      "(x + ৮)(x + ৮)",
+      "(x − ৯)(x + ৯)",
+      "(x − ৮)(x + ৮)",
+      "(x − ৮)(x − ৮)"
+    ],
+    "correct_index": 2,
+    "correct_answer": "(x − ৮)(x + ৮)",
+    "explanation": "x² − ৬৪ = x² − ৮² = (x − ৮)(x + ৮)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "উৎপাদক",
+      "বীজগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J613",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "উৎপাদক",
+    "difficulty": "medium",
+    "question": "x² − ৮১-এর উৎপাদক কোনটি?",
+    "options": [
+      "(x − ১০)(x + ১০)",
+      "(x − ৯)(x − ৯)",
+      "(x + ৯)(x + ৯)",
+      "(x − ৯)(x + ৯)"
+    ],
+    "correct_index": 3,
+    "correct_answer": "(x − ৯)(x + ৯)",
+    "explanation": "x² − ৮১ = x² − ৯² = (x − ৯)(x + ৯)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "উৎপাদক",
+      "বীজগণিত"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J614",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সূচক",
+    "difficulty": "easy",
+    "question": "৪^২-এর মান কত?",
+    "options": [
+      "১০",
+      "২৮",
+      "২২",
+      "১৬"
+    ],
+    "correct_index": 3,
+    "correct_answer": "১৬",
+    "explanation": "৪^২ = ১৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "বীজগণিত",
+      "সূচক"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J615",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সূচক",
+    "difficulty": "easy",
+    "question": "৩^৪-এর মান কত?",
+    "options": [
+      "৮১",
+      "৭৫",
+      "৯৩",
+      "৮৭"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৮১",
+    "explanation": "৩^৪ = ৮১।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "বীজগণিত",
+      "সূচক"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J616",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "সূচক",
+    "difficulty": "easy",
+    "question": "৬^২-এর মান কত?",
+    "options": [
+      "৪২",
+      "৩০",
+      "৩৬",
+      "৪৮"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৩৬",
+    "explanation": "৬^২ = ৩৬।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "বীজগণিত",
+      "সূচক"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J617",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি ত্রিভুজের ভূমি 12 সেমি ও উচ্চতা 8 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি?",
+    "options": [
+      "৭২",
+      "৩৬",
+      "৪৮",
+      "৬০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৪৮",
+    "explanation": "ত্রিভুজের ক্ষেত্রফল = ½ × ভূমি × উচ্চতা = ½ × 12 × 8 = 48 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J618",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি আয়তক্ষেত্রের দৈর্ঘ্য 14 সেমি ও প্রস্থ 6 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি?",
+    "options": [
+      "১১২",
+      "৭০",
+      "৮৪",
+      "৯৮"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৮৪",
+    "explanation": "আয়তক্ষেত্রের ক্ষেত্রফল = দৈর্ঘ্য × প্রস্থ = 14 × 6 = 84 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J619",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বর্গক্ষেত্রের এক বাহুর দৈর্ঘ্য 11 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি?",
+    "options": [
+      "১১০",
+      "১২১",
+      "১৩২",
+      "১৪৩"
+    ],
+    "correct_index": 1,
+    "correct_answer": "১২১",
+    "explanation": "বর্গক্ষেত্রের ক্ষেত্রফল = বাহু² = 11² = 121 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J620",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বৃত্তের ব্যাসার্ধ 14 সেমি হলে পরিধি কত সেমি? (π = 22/7)",
+    "options": [
+      "৮৮",
+      "১১৬",
+      "৭৪",
+      "১০২"
+    ],
+    "correct_index": 0,
+    "correct_answer": "৮৮",
+    "explanation": "পরিধি = 2πr = 2 × 22/7 × 14 = 88 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J621",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বৃত্তের ব্যাস 14 সেমি হলে ক্ষেত্রফল কত বর্গ সেমি? (π = 22/7)",
+    "options": [
+      "১৯৮",
+      "১৩২",
+      "১৫৪",
+      "১৭৬"
+    ],
+    "correct_index": 2,
+    "correct_answer": "১৫৪",
+    "explanation": "ব্যাসার্ধ 7 সেমি; ক্ষেত্রফল = πr² = 22/7 × 49 = 154 বর্গ সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J622",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি সমকোণী ত্রিভুজের অতিভুজ 25 সেমি ও এক বাহু 7 সেমি হলে অপর বাহু কত সেমি?",
+    "options": [
+      "২৪",
+      "১৭",
+      "৩১",
+      "৩৮"
+    ],
+    "correct_index": 0,
+    "correct_answer": "২৪",
+    "explanation": "পিথাগোরাসের উপপাদ্য: √(25² − 7²) = √(625 − 49) = √576 = 24 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J623",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি চতুর্ভুজের চার কোণের সমষ্টি কত ডিগ্রি?",
+    "options": [
+      "১৮০",
+      "৪৫০",
+      "৩৬০",
+      "৫৪০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৩৬০",
+    "explanation": "চতুর্ভুজের চার কোণের সমষ্টি 360°।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J624",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি বর্গক্ষেত্রের এক বাহুর দৈর্ঘ্য 12 সেমি হলে পরিসীমা কত সেমি?",
+    "options": [
+      "৩৬",
+      "৭২",
+      "৪৮",
+      "৬০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৪৮",
+    "explanation": "পরিসীমা = 4 × বাহু = 4 × 12 = 48 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J625",
+    "exam_canonical": "ministries",
+    "subject_canonical": "Mathematics",
+    "subject_slug": "mathematics",
+    "topic": "জ্যামিতি",
+    "difficulty": "medium",
+    "question": "একটি আয়তক্ষেত্রের দৈর্ঘ্য 18 সেমি ও প্রস্থ 7 সেমি হলে পরিসীমা কত সেমি?",
+    "options": [
+      "৪০",
+      "৭০",
+      "৫০",
+      "৬০"
+    ],
+    "correct_index": 2,
+    "correct_answer": "৫০",
+    "explanation": "পরিসীমা = 2 × (দৈর্ঘ্য + প্রস্থ) = 2 × 25 = 50 সেমি।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB গণিত (ষষ্ঠ–দশম শ্রেণি) — সূত্র ও নিয়মাবলি",
+    "syllabus_source": "Ministry/department recruitment circulars (official ministry websites & teletalk portals) — common 11-20 grade pattern: written/MCQ 70-80 marks (Bangla 20, English 20, Math 20, GK+ICT 10-20), practical test + viva. Pattern varies by ministry/circular — check the specific circular.",
+    "tags": [
+      "mathematics",
+      "ministries",
+      "জ্যামিতি"
+    ],
+    "source_stream": "ministries",
+    "source_file": "ministries/ministries-j-math-01.json",
+    "applies_to": [
+      "ministries"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

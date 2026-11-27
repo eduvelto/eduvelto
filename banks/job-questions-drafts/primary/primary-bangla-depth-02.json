@@ -1,0 +1,1294 @@
+[
+ {
+  "id": "JOBQ-P442",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'পরিষ্কার' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "পরি + কার",
+   "পরী + কার",
+   "পর + ষ্কার",
+   "পরি + ষ্কার"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পরি + কার",
+  "explanation": "পরি + কার = পরিষ্কার (ষ-ত্ব বিধান অনুযায়ী)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P443",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'নিরাপদ' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "নির্ + আপদ",
+   "নি + রাপদ",
+   "নিরা + পদ",
+   "নীর + আপদ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নির্ + আপদ",
+  "explanation": "নির্ + আপদ = নিরাপদ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P444",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'বনৌষধি' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "বন + ঔষধি",
+   "বনো + ঔষধি",
+   "বন + ওষধি",
+   "বনৌ + ষধি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বন + ঔষধি",
+  "explanation": "বন + ঔষধি = বনৌষধি (অ + ঔ = ঔ)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P445",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'উল্লেখ' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+  "options": [
+   "উৎ + লেখ",
+   "উল্ + লেখ",
+   "উ + ল্লেখ",
+   "উৎ + ল্যাখ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "উৎ + লেখ",
+  "explanation": "উৎ + লেখ = উল্লেখ।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সন্ধি"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P446",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'সিংহপুরুষ' কোন সমাসের উদাহরণ?",
+  "options": [
+   "দ্বিগু",
+   "উপমান কর্মধারয়",
+   "বহুব্রীহি",
+   "তৎপুরুষ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "উপমান কর্মধারয়",
+  "explanation": "সিংহের ন্যায় পুরুষ — উপমান কর্মধারয় সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P447",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'মহাজন' কোন সমাসের উদাহরণ?",
+  "options": [
+   "দ্বন্দ্ব",
+   "কর্মধারয়",
+   "দ্বিগু",
+   "তৎপুরুষ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কর্মধারয়",
+  "explanation": "মহান যে জন — কর্মধারয় সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P448",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'অনাদর' কোন সমাসের উদাহরণ?",
+  "options": [
+   "দ্বন্দ্ব",
+   "নঞ তৎপুরুষ",
+   "অব্যয়ীভাব",
+   "দ্বিগু"
+  ],
+  "correct_index": 1,
+  "correct_answer": "নঞ তৎপুরুষ",
+  "explanation": "ন আদর = অনাদর — নঞ তৎপুরুষ সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P449",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'কাঁচামিঠা' কোন সমাসের উদাহরণ?",
+  "options": [
+   "দ্বন্দ্ব",
+   "কর্মধারয়",
+   "দ্বিগু",
+   "বহুব্রীহি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কর্মধারয়",
+  "explanation": "কাঁচা অথচ মিঠা — কর্মধারয় সমাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সমাস"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P450",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "easy",
+  "question": "'মা শিশুকে দুধ খাওয়ান' — 'শিশুকে' কোন কারক?",
+  "options": [
+   "কর্তৃ",
+   "কর্ম",
+   "করণ",
+   "সম্প্রদান"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কর্ম",
+  "explanation": "খাওয়ানোর কাজের বিষয় শিশু — কর্মকারক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "কারক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P451",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "medium",
+  "question": "'আমি ঢাকা যাব' — 'ঢাকা' কোন কারক?",
+  "options": [
+   "অধিকরণ",
+   "কর্ম",
+   "করণ",
+   "অপাদান"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কর্ম",
+  "explanation": "গন্তব্য স্থান কর্মকারক হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "কারক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P452",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "easy",
+  "question": "'গাছে ফুল ফুটেছে' — 'গাছে' কোন কারক?",
+  "options": [
+   "করণ",
+   "অধিকরণ",
+   "অপাদান",
+   "সম্প্রদান"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অধিকরণ",
+  "explanation": "ফোটার স্থান গাছ — অধিকরণ কারক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "কারক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P453",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'তিলকে তাল করা' বাগধারাটির অর্থ কী?",
+  "options": [
+   "সামান্য বিষয়কে বড় করা",
+   "তিল চাষ করা",
+   "তাল গাছ লাগানো",
+   "ছোট কাজ করা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সামান্য বিষয়কে বড় করা",
+  "explanation": "তিলকে তাল করা অর্থ সামান্য বিষয়কে বড় করে দেখানো।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "বাগধারা",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P454",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'আকাশ পাতাল' বাগধারাটির অর্থ কী?",
+  "options": [
+   "অনেক দূর",
+   "বিস্তর ব্যবধান",
+   "উঁচু-নিচু",
+   "আকাশ ও মাটি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বিস্তর ব্যবধান",
+  "explanation": "আকাশ পাতাল অর্থ বিস্তর ব্যবধান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "বাগধারা",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P455",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'চিনির বলদ' বাগধারাটির অর্থ কী?",
+  "options": [
+   "অন্যের জন্য পরিশ্রম করা",
+   "মিষ্টি খেতে ভালোবাসা",
+   "অলস বসে থাকা",
+   "ধনী হওয়া"
+  ],
+  "correct_index": 0,
+  "correct_answer": "অন্যের জন্য পরিশ্রম করা",
+  "explanation": "'চিনির বলদ' বলতে অন্যের জন্য পরিশ্রম করা বোঝায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "বাগধারা",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P456",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বানান",
+  "difficulty": "medium",
+  "question": "'দূরদর্শী' শব্দের শুদ্ধ বানান কোনটি?",
+  "options": [
+   "দূরদর্শী",
+   "দুরদর্শী",
+   "দূরদরশী",
+   "দূরদর্শি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "দূরদর্শী",
+  "explanation": "'দূরদর্শী' শব্দের শুদ্ধ বানান দূরদর্শী।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "বানান",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P457",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বানান",
+  "difficulty": "medium",
+  "question": "'বিভীষিকা' শব্দের শুদ্ধ বানান কোনটি?",
+  "options": [
+   "বিভীষিকা",
+   "বিভিষিকা",
+   "বিবীষিকা",
+   "বিভীষীকা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বিভীষিকা",
+  "explanation": "'বিভীষিকা' শব্দের শুদ্ধ বানান বিভীষিকা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "বানান",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P458",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "'তারা' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "নক্ষত্র",
+   "চাঁদ",
+   "সূর্য",
+   "মেঘ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নক্ষত্র",
+  "explanation": "'তারা'-এর সমার্থক শব্দ নক্ষত্র।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সমার্থক"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P459",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "'পাতা' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "পল্লব",
+   "ফুল",
+   "ডাল",
+   "গাছ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পল্লব",
+  "explanation": "'পাতা'-এর সমার্থক শব্দ পল্লব।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সমার্থক"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P460",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "'দুপুর' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "মধ্যাহ্ন",
+   "সকাল",
+   "রাত",
+   "সন্ধ্যা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মধ্যাহ্ন",
+  "explanation": "'দুপুর'-এর সমার্থক শব্দ মধ্যাহ্ন।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "সমার্থক"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P461",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীতার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "'মিলন' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "বিচ্ছেদ",
+   "সাক্ষাৎ",
+   "সংযোগ",
+   "একতা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বিচ্ছেদ",
+  "explanation": "'মিলন'-এর বিপরীত শব্দ 'বিচ্ছেদ'।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "বিপরীতার্থক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P462",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীতার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "'ঘৃণা' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "ভালোবাসা",
+   "রাগ",
+   "ভয়",
+   "দুঃখ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ভালোবাসা",
+  "explanation": "'ঘৃণা'-এর বিপরীত শব্দ ভালোবাসা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "বিপরীতার্থক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P463",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীতার্থক শব্দ",
+  "difficulty": "easy",
+  "question": "'সকাল' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "দুপুর",
+   "সন্ধ্যা",
+   "রাত",
+   "বিকেল"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সন্ধ্যা",
+  "explanation": "সকালের বিপরীত সন্ধ্যা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "বিপরীতার্থক",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P464",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "'যা সহজে ভাঙা যায়' — এক কথায় কী হবে?",
+  "options": [
+   "অভঙ্গুর",
+   "ভঙ্গুর",
+   "ভগ্ন",
+   "নমনীয়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ভঙ্গুর",
+  "explanation": "যা সহজে ভাঙা যায় — ভঙ্গুর।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "এককথায়",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P465",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "'যা চোখে দেখা যায়' — এক কথায় কী হবে?",
+  "options": [
+   "দৃশ্যমান",
+   "অদৃশ্য",
+   "অস্পষ্ট",
+   "দূরবর্তী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "দৃশ্যমান",
+  "explanation": "যা চোখে দেখা যায় তাকে দৃশ্যমান বলে।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "এককথায়",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P466",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "easy",
+  "question": "'বিদ্রোহী কবি' উপাধি কার?",
+  "options": [
+   "রবীন্দ্রনাথ ঠাকুর",
+   "কাজী নজরুল ইসলাম",
+   "জসীমউদ্দীন",
+   "সুকান্ত ভট্টাচার্য"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কাজী নজরুল ইসলাম",
+  "explanation": "কাজী নজরুল ইসলাম 'বিদ্রোহী কবি' নামে পরিচিত।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "কবি",
+   "সাহিত্য"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P467",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "medium",
+  "question": "সুকান্ত ভট্টাচার্যের 'ছাড়পত্র' কাব্য প্রকাশিত হয় কত সালে?",
+  "options": [
+   "১৯৪৫",
+   "১৯৪৭",
+   "১৯৪৮",
+   "১৯৫০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৯৪৮",
+  "explanation": "'ছাড়পত্র' সুকান্তের মৃত্যুর পর ১৯৪৮ সালে প্রকাশিত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "কাব্য",
+   "সাহিত্য"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P468",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "medium",
+  "question": "'ইন্দিরা' উপন্যাসের রচয়িতা কে?",
+  "options": [
+   "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+   "দীনবন্ধু মিত্র",
+   "মীর মশাররফ হোসেন",
+   "প্যারীচাঁদ মিত্র"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+  "explanation": "'ইন্দিরা' উপন্যাসের রচয়িতা বঙ্কিমচন্দ্র চট্টোপাধ্যায়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "উপন্যাস",
+   "সাহিত্য"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P470",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাংলা সাহিত্য",
+  "difficulty": "medium",
+  "question": "'আলালের ঘরের দুলাল' উপন্যাসের রচয়িতা কে?",
+  "options": [
+   "বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
+   "প্যারীচাঁদ মিত্র",
+   "শরৎচন্দ্র চট্টোপাধ্যায়",
+   "বিভূতিভূষণ বন্দ্যোপাধ্যায়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "প্যারীচাঁদ মিত্র",
+  "explanation": "'আলালের ঘরের দুলাল' (১৮৫৮) প্যারীচাঁদ মিত্রের উপন্যাস।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "উপন্যাস",
+   "সাহিত্য"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P471",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "ধ্বনি",
+  "difficulty": "medium",
+  "question": "বাংলা বর্ণমালায় মাত্রাযুক্ত বর্ণ কয়টি?",
+  "options": [
+   "১০টি",
+   "২৬টি",
+   "৩২টি",
+   "৮টি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৬টি",
+  "explanation": "বাংলা বর্ণমালায় মাত্রাযুক্ত বর্ণ ২৬টি, অর্ধমাত্রাযুক্ত ৮টি ও মাত্রাহীন ১০টি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ধ্বনি",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P472",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "ধ্বনি",
+  "difficulty": "medium",
+  "question": "বাংলা ভাষায় স্পর্শধ্বনি কয়টি?",
+  "options": [
+   "২০টি",
+   "২৫টি",
+   "৩০টি",
+   "১৬টি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "২৫টি",
+  "explanation": "বাংলা ভাষায় স্পর্শধ্বনি ২৫টি (ক থেকে ম পর্যন্ত)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ধ্বনি",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P473",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "ধ্বনি",
+  "difficulty": "medium",
+  "question": "বাংলা ভাষায় যৌগিক স্বরধ্বনি কয়টি?",
+  "options": [
+   "১১টি",
+   "১৫টি",
+   "২৫টি",
+   "৭টি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "২৫টি",
+  "explanation": "বাংলা ভাষায় যৌগিক স্বরধ্বনি ২৫টি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ধ্বনি",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P474",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "উপসর্গ",
+  "difficulty": "easy",
+  "question": "'পরাজয়' শব্দে কোন উপসর্গ যুক্ত হয়েছে?",
+  "options": [
+   "পর",
+   "পরা",
+   "অ",
+   "জয়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "পরা",
+  "explanation": "পরা + জয় = পরাজয় (পরা উপসর্গ)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "উপসর্গ",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P475",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "প্রত্যয়",
+  "difficulty": "medium",
+  "question": "'মানবী' শব্দে কোন প্রত্যয় যুক্ত হয়েছে?",
+  "options": [
+   "ই",
+   "ঈ",
+   "আ",
+   "অ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ঈ",
+  "explanation": "মানব + ঈ = মানবী (ঈ প্রত্যয়)।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "প্রত্যয়",
+   "ব্যাকরণ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-P476",
+  "exam_canonical": "primary",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "লিঙ্গ",
+  "difficulty": "easy",
+  "question": "'পুত্র' শব্দের স্ত্রীলিঙ্গ কোনটি?",
+  "options": [
+   "পুত্রী",
+   "কন্যা",
+   "মেয়ে",
+   "বালিকা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কন্যা",
+  "explanation": "পুত্রের স্ত্রীলিঙ্গ কন্যা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB বাংলা ব্যাকরণ (নবম-দশম শ্রেণি) + বাংলা সাহিত্যের প্রমিত তথ্য",
+  "syllabus_source": "Government Primary School Teacher Recruitment Rules 2025, DPE (Schedule 2) — written 90: Bangla 25, English 25, Mathematics & Daily Science 20, General Knowledge 20; viva 10",
+  "tags": [
+   "bangla",
+   "primary",
+   "ব্যাকরণ",
+   "লিঙ্গ"
+  ],
+  "source_stream": "primary",
+  "source_file": "primary/primary-bangla-depth-02.json",
+  "applies_to": [
+   "primary"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

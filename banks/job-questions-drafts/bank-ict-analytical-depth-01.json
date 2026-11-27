@@ -1,0 +1,768 @@
+[
+ {
+  "id": "JOBQ-D330",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — একক",
+  "difficulty": "easy",
+  "question": "১ গিগাবাইট (GB) সমান কত মেগাবাইট?",
+  "options": [
+   "১০২৪ মেগাবাইট",
+   "১০০০ মেগাবাইট",
+   "৫১২ মেগাবাইট",
+   "২০৪৮ মেগাবাইট"
+  ],
+  "correct_index": 0,
+  "correct_answer": "১০২৪ মেগাবাইট",
+  "explanation": "১ GB = ১০২৪ MB।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "ict",
+   "ict-computer",
+   "units"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D331",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — সংখ্যা পদ্ধতি",
+  "difficulty": "medium",
+  "question": "বাইনারি সংখ্যা ১০১০-এর দশমিক মান কত?",
+  "options": [
+   "৮",
+   "১০",
+   "১২",
+   "৫"
+  ],
+  "correct_index": 1,
+  "correct_answer": "১০",
+  "explanation": "১০১০₂ = ৮ + ২ = ১০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "binary",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D332",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — HTML",
+  "difficulty": "medium",
+  "question": "ওয়েবপেজ তৈরির মূল ভাষা কোনটি?",
+  "options": [
+   "HTML",
+   "HTTP",
+   "FTP",
+   "TCP"
+  ],
+  "correct_index": 0,
+  "correct_answer": "HTML",
+  "explanation": "HTML দিয়ে ওয়েবপেজের কাঠামো তৈরি করা হয়; HTTP তথ্য আদান-প্রদানের প্রটোকল।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "html",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D333",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — ইন্টারনেট",
+  "difficulty": "medium",
+  "question": "ইন্টারনেটের পূর্ণরূপ কী?",
+  "options": [
+   "Interconnected Network",
+   "International Network",
+   "Internal Network",
+   "Intercontinental Network"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Interconnected Network",
+  "explanation": "Internet শব্দটি Interconnected Network থেকে এসেছে; এটি বিশ্বব্যাপী সংযুক্ত কম্পিউটার নেটওয়ার্ক।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "ict",
+   "ict-computer",
+   "url"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D334",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — ইমেইল",
+  "difficulty": "hard",
+  "question": "ই-মেইল পাঠাতে কোন প্রটোকল ব্যবহৃত হয়?",
+  "options": [
+   "SMTP",
+   "HTTP",
+   "FTP",
+   "TCP"
+  ],
+  "correct_index": 0,
+  "correct_answer": "SMTP",
+  "explanation": "SMTP (Simple Mail Transfer Protocol) ই-মেইল পাঠাতে ব্যবহৃত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "email",
+   "ict",
+   "ict-computer",
+   "smtp"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D335",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — ফাইল",
+  "difficulty": "easy",
+  "question": "MS Word-এ নতুন ফাইল তৈরি করতে কোন শর্টকাট ব্যবহৃত হয়?",
+  "options": [
+   "Ctrl + N",
+   "Ctrl + O",
+   "Ctrl + S",
+   "Ctrl + P"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Ctrl + N",
+  "explanation": "MS Word-এ নতুন ফাইল তৈরি করতে Ctrl + N ব্যবহৃত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "file-extension",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D336",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — ফাইল",
+  "difficulty": "easy",
+  "question": "MS Excel-এ ফাইল সংরক্ষণ করতে কোন শর্টকাট ব্যবহৃত হয়?",
+  "options": [
+   "Ctrl + S",
+   "Ctrl + N",
+   "Ctrl + O",
+   "Ctrl + P"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Ctrl + S",
+  "explanation": "MS Excel-এ ফাইল সংরক্ষণ করতে Ctrl + S ব্যবহৃত হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "excel",
+   "file-extension",
+   "ict",
+   "ict-computer"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D337",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — শর্টকাট",
+  "difficulty": "easy",
+  "question": "কম্পিউটারে সংরক্ষণ (Save) করার শর্টকাট কী?",
+  "options": [
+   "Ctrl + S",
+   "Ctrl + C",
+   "Ctrl + V",
+   "Ctrl + P"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Ctrl + S",
+  "explanation": "Ctrl + S দিয়ে ফাইল সংরক্ষণ করা হয়; Ctrl + C কপি, Ctrl + V পেস্ট।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "ict",
+   "ict-computer",
+   "shortcut"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D338",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — IP",
+  "difficulty": "hard",
+  "question": "IPv4 ঠিকানা কত বিটের হয়?",
+  "options": [
+   "৩২ বিট",
+   "৬৪ বিট",
+   "১২৮ বিট",
+   "১৬ বিট"
+  ],
+  "correct_index": 0,
+  "correct_answer": "৩২ বিট",
+  "explanation": "IPv4 ঠিকানা ৩২ বিটের; IPv6 ঠিকানা ১২৮ বিটের।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "ict",
+   "ict-computer",
+   "ip-address"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D339",
+  "exam_canonical": "bank",
+  "subject_canonical": "ICT and Computer",
+  "subject_slug": "ict-computer",
+  "topic": "ICT — নেটওয়ার্ক",
+  "difficulty": "medium",
+  "question": "কোনটি ওয়্যারলেস নেটওয়ার্ক প্রযুক্তি?",
+  "options": [
+   "Wi-Fi",
+   "ইথারনেট কেবল",
+   "ফাইবার অপটিক",
+   "HDMI"
+  ],
+  "correct_index": 0,
+  "correct_answer": "Wi-Fi",
+  "explanation": "Wi-Fi একটি ওয়্যারলেস নেটওয়ার্ক প্রযুক্তি।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "bank",
+   "ict",
+   "ict-computer",
+   "network",
+   "wifi"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D340",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — ধারা",
+  "difficulty": "easy",
+  "question": "১০, ২০, ৪০, ৮০, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "১২০",
+   "১৪০",
+   "১৬০",
+   "২০০"
+  ],
+  "correct_index": 2,
+  "correct_answer": "১৬০",
+  "explanation": "প্রতিটি সংখ্যা আগেরটির দ্বিগুণ; ৮০ × ২ = ১৬০।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D341",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — ধারা",
+  "difficulty": "medium",
+  "question": "২, ৫, ১০, ১৭, ২৬, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "৩৫",
+   "৩৭",
+   "৩৯",
+   "৪১"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩৭",
+  "explanation": "পার্থক্য ৩, ৫, ৭, ৯ — পরের পার্থক্য ১১; ২৬ + ১১ = ৩৭।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D342",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — ধারা",
+  "difficulty": "medium",
+  "question": "৪, ৯, ১৬, ২৫, ৩৬, … ধারার পরের সংখ্যাটি কত?",
+  "options": [
+   "৪২",
+   "৪৯",
+   "৪৫",
+   "৬৪"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৪৯",
+  "explanation": "এটি বর্গ সংখ্যার ধারা; পরেরটি ৭² = ৪৯।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "series",
+   "squares"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D343",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — ব্যতিক্রম",
+  "difficulty": "medium",
+  "question": "কোনটি ব্যতিক্রম? ৮, ২৭, ৬৪, ১২৫, ২০০",
+  "options": [
+   "২০০",
+   "৮",
+   "২৭",
+   "৬৪"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২০০",
+  "explanation": "৮ = ২³, ২৭ = ৩³, ৬৪ = ৪³, ১২৫ = ৫³; ২০০ কোনো সংখ্যার ঘন নয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "odd-one-out"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D344",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — সাদৃশ্য",
+  "difficulty": "easy",
+  "question": "কলম : লেখা :: ছুরি : ?",
+  "options": [
+   "কাটা",
+   "রান্না",
+   "ধোয়া",
+   "মাপা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কাটা",
+  "explanation": "কলম দিয়ে লেখা হয়, ছুরি দিয়ে কাটা হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analogy",
+   "analytical",
+   "analytical-skills",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D345",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — সাদৃশ্য",
+  "difficulty": "medium",
+  "question": "৫ : ২৫ :: ৬ : ?",
+  "options": [
+   "৩০",
+   "৩৬",
+   "৪২",
+   "১২"
+  ],
+  "correct_index": 1,
+  "correct_answer": "৩৬",
+  "explanation": "৫² = ২৫; তাই ৬² = ৩৬।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analogy",
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "numbers"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D346",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — সাংকেতিকরণ",
+  "difficulty": "medium",
+  "question": "A = ১ হলে CAT-এর সংখ্যাগত মান কত?",
+  "options": [
+   "২৪",
+   "২৩",
+   "২৫",
+   "২৬"
+  ],
+  "correct_index": 0,
+  "correct_answer": "২৪",
+  "explanation": "C=৩, A=১, T=২০; যোগফল ২৪।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "coding"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D347",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — দিক",
+  "difficulty": "easy",
+  "question": "একজন দক্ষিণ দিকে মুখ করে দাঁড়িয়ে ডান দিকে ঘুরলে কোন দিকে মুখ করবে?",
+  "options": [
+   "পশ্চিম",
+   "পূর্ব",
+   "উত্তর",
+   "দক্ষিণ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পশ্চিম",
+  "explanation": "দক্ষিণ দিকে মুখ করে ডানে ঘুরলে পশ্চিম দিকে মুখ হয়।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "direction"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D348",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — সম্পর্ক",
+  "difficulty": "medium",
+  "question": "করিম রহিমের বাবা এবং রহিম সালমার ভাই হলে করিম সালমার কে?",
+  "options": [
+   "বাবা",
+   "চাচা",
+   "মামা",
+   "দাদা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "বাবা",
+  "explanation": "রহিম ও সালমা ভাই-বোন; করিম রহিমের বাবা, তাই সালমারও বাবা।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "blood-relation"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-D349",
+  "exam_canonical": "bank",
+  "subject_canonical": "Analytical Skills",
+  "subject_slug": "analytical-skills",
+  "topic": "Analytical — যুক্তি",
+  "difficulty": "medium",
+  "question": "'সব ব্যাংকই প্রতিষ্ঠান। X একটি ব্যাংক।' — তাহলে X সম্পর্কে কী বলা যায়?",
+  "options": [
+   "X একটি প্রতিষ্ঠান",
+   "X একটি ব্যাংক নয়",
+   "X একটি সরকারি অফিস",
+   "কিছুই বলা যায় না"
+  ],
+  "correct_index": 0,
+  "correct_answer": "X একটি প্রতিষ্ঠান",
+  "explanation": "সব ব্যাংক প্রতিষ্ঠান হলে এবং X ব্যাংক হলে X অবশ্যই একটি প্রতিষ্ঠান।",
+  "source_status": "generic-textbook-mention-only",
+  "source_detail": "NCTB Class 9-10 / 11-12 ICT textbooks (NCTB); standard analytical-reasoning references",
+  "syllabus_source": "BSCS Combined Bank Senior Officer (General) MCQ, Circular 348/2026 (exam 13 Nov 2026) — English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10; total 100, 1 hr, -0.25 per wrong answer",
+  "tags": [
+   "analytical",
+   "analytical-skills",
+   "bank",
+   "logic",
+   "syllogism"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-ict-analytical-depth-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]

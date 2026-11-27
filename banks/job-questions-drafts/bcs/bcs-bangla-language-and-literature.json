@@ -1,0 +1,698 @@
+[
+  {
+    "id": "JOBQ-0076",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্যের ইতিহাস",
+    "difficulty": "easy",
+    "question": "বাংলা ভাষার আদি নিদর্শন কোনটি?",
+    "options": [
+      "শ্রীকৃষ্ণকীর্তন",
+      "বৈষ্ণব পদাবলি",
+      "চর্যাপদ",
+      "মঙ্গলকাব্য"
+    ],
+    "correct_index": 2,
+    "correct_answer": "চর্যাপদ",
+    "explanation": "চর্যাপদ বাংলা ভাষার প্রাচীনতম নিদর্শন; হরপ্রসাদ শাস্ত্রী ১৯০৭ সালে নেপাল থেকে এটি আবিষ্কার করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangla literary history as in NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — authors, works, dates",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "charyapada",
+      "literature-history"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0077",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্যের ইতিহাস",
+    "difficulty": "easy",
+    "question": "চর্যাপদ কে আবিষ্কার করেন?",
+    "options": [
+      "সুনীতিকুমার চট্টোপাধ্যায়",
+      "হরপ্রসাদ শাস্ত্রী",
+      "দীনেশচন্দ্র সেন",
+      "মুহম্মদ শহীদুল্লাহ"
+    ],
+    "correct_index": 1,
+    "correct_answer": "হরপ্রসাদ শাস্ত্রী",
+    "explanation": "হরপ্রসাদ শাস্ত্রী ১৯০৭ সালে নেপালের রাজদরবার থেকে চর্যাপদ আবিষ্কার করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangla literary history as in NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — authors, works, dates",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "literature-history"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0078",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা সাহিত্যের ইতিহাস",
+    "difficulty": "medium",
+    "question": "শ্রীকৃষ্ণকীর্তন কাব্যের আবিষ্কারক কে?",
+    "options": [
+      "বসন্তরঞ্জন রায় বিদ্বদ্বল্লভ",
+      "হরপ্রসাদ শাস্ত্রী",
+      "দীনেশচন্দ্র সেন",
+      "রামগতি ন্যায়রত্ন"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বসন্তরঞ্জন রায় বিদ্বদ্বল্লভ",
+    "explanation": "বসন্তরঞ্জন রায় বিদ্বদ্বল্লভ ১৯০৯ সালে বাঁকুড়া থেকে শ্রীকৃষ্ণকীর্তন আবিষ্কার করেন; রচয়িতা বড়ু চণ্ডীদাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangla literary history as in NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — authors, works, dates",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "literature-history"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0079",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "আধুনিক বাংলা সাহিত্য",
+    "difficulty": "easy",
+    "question": "মাইকেল মধুসূদন দত্তের 'মেঘনাদবধ কাব্য' কত সালে প্রকাশিত হয়?",
+    "options": [
+      "১৮৬১",
+      "১৮৬৬",
+      "১৮৫৮",
+      "১৮৭৩"
+    ],
+    "correct_index": 0,
+    "correct_answer": "১৮৬১",
+    "explanation": "মেঘনাদবধ কাব্য ১৮৬১ সালে প্রকাশিত হয়; এটি বাংলা সাহিত্যের প্রথম সার্থক মহাকাব্য।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangla literary history as in NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — authors, works, dates",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "modern-literature"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0080",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "আধুনিক বাংলা সাহিত্য",
+    "difficulty": "easy",
+    "question": "রবীন্দ্রনাথ ঠাকুর কোন গ্রন্থের জন্য নোবেল পুরস্কার পান?",
+    "options": [
+      "সোনার তরী",
+      "গীতবিতান",
+      "গীতাঞ্জলি",
+      "চিত্রা"
+    ],
+    "correct_index": 2,
+    "correct_answer": "গীতাঞ্জলি",
+    "explanation": "রবীন্দ্রনাথ ঠাকুর ১৯১৩ সালে গীতাঞ্জলির ইংরেজি অনুবাদ (Song Offerings)-এর জন্য সাহিত্যে নোবেল পুরস্কার পান।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangla literary history as in NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — authors, works, dates",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "modern-literature",
+      "rabindranath"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0081",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "আধুনিক বাংলা সাহিত্য",
+    "difficulty": "easy",
+    "question": "কাজী নজরুল ইসলামের প্রথম কাব্যগ্রন্থ কোনটি?",
+    "options": [
+      "সাম্যবাদী",
+      "বিষের বাঁশী",
+      "দোলনচাঁপা",
+      "অগ্নিবীণা"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অগ্নিবীণা",
+    "explanation": "অগ্নিবীণা (১৯২২) কাজী নজরুল ইসলামের প্রথম প্রকাশিত কাব্যগ্রন্থ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangla literary history as in NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — authors, works, dates",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "modern-literature",
+      "nazrul"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0082",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — সন্ধি",
+    "difficulty": "easy",
+    "question": "'বিদ্যালয়' শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    "options": [
+      "বিদ্যা + লয়",
+      "বিদ্য + আলয়",
+      "বি + দ্যালয়",
+      "বিদ্যা + আলয়"
+    ],
+    "correct_index": 3,
+    "correct_answer": "বিদ্যা + আলয়",
+    "explanation": "বিদ্যা + আলয় = বিদ্যালয়; আ + আ মিলে 'আ' হয়েছে (স্বরসন্ধি)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "grammar",
+      "sandhi"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0083",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — সমাস",
+    "difficulty": "medium",
+    "question": "'নীলকণ্ঠ' কোন সমাসের উদাহরণ?",
+    "options": [
+      "কর্মধারয়",
+      "বহুব্রীহি",
+      "তৎপুরুষ",
+      "দ্বন্দ্ব"
+    ],
+    "correct_index": 1,
+    "correct_answer": "বহুব্রীহি",
+    "explanation": "নীল কণ্ঠ যার (শিব) — পূর্বপদ বা পরপদ কোনোটিই প্রধান নয়, অন্য অর্থ প্রধান; তাই বহুব্রীহি সমাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "grammar",
+      "samas"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0084",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — কারক",
+    "difficulty": "medium",
+    "question": "'বইটি টেবিলের উপর আছে।' — 'উপর' কোন কারকের উদাহরণ?",
+    "options": [
+      "কর্ম কারক",
+      "অধিকরণ কারক",
+      "করণ কারক",
+      "অপাদান কারক"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অধিকরণ কারক",
+    "explanation": "যেখানে ক্রিয়া সম্পন্ন হয় বা যা আধার, তা অধিকরণ কারক; 'টেবিলের উপর' স্থান বোঝাচ্ছে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "grammar",
+      "karok"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0085",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — উপসর্গ",
+    "difficulty": "easy",
+    "question": "নিচের কোনটি বাংলা উপসর্গ?",
+    "options": [
+      "অভি",
+      "অজ",
+      "প্র",
+      "নির"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অজ",
+    "explanation": "বাংলা উপসর্গ ২১টি; 'অজ' (যেমন অজপাড়াগাঁ) বাংলা উপসর্গ, আর প্র, নির, অভি সংস্কৃত উপসর্গ।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "grammar",
+      "prefix"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0086",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — বানান",
+    "difficulty": "medium",
+    "question": "শুদ্ধ বানান কোনটি?",
+    "options": [
+      "মূমূর্ষু",
+      "মূমুর্ষু",
+      "মুমূর্ষু",
+      "মুমুর্ষু"
+    ],
+    "correct_index": 2,
+    "correct_answer": "মুমূর্ষু",
+    "explanation": "শুদ্ধ বানান 'মুমূর্ষু' (মুমূর্ষু = মরণোন্মুখ)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "grammar",
+      "spelling"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0087",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাগধারা",
+    "difficulty": "easy",
+    "question": "'অন্ধের যষ্টি' বাগধারাটির অর্থ কী?",
+    "options": [
+      "অন্ধ মানুষের লাঠি",
+      "অন্ধ অনুকরণ",
+      "অসহায় অবস্থা",
+      "একমাত্র অবলম্বন"
+    ],
+    "correct_index": 3,
+    "correct_answer": "একমাত্র অবলম্বন",
+    "explanation": "'অন্ধের যষ্টি' অর্থ একমাত্র অবলম্বন; অন্ধের কাছে যষ্টিই যেমন একমাত্র ভরসা।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "idiom"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0088",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বিপরীতার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'ঐহিক' শব্দের বিপরীত শব্দ কোনটি?",
+    "options": [
+      "পারত্রিক",
+      "জাগতিক",
+      "পার্থিব",
+      "সাংসারিক"
+    ],
+    "correct_index": 0,
+    "correct_answer": "পারত্রিক",
+    "explanation": "ঐহিক অর্থ ইহলোক-সংক্রান্ত; এর বিপরীত পারত্রিক (পরলোক-সংক্রান্ত)।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "antonym",
+      "bangla",
+      "bcs",
+      "grammar"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0089",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "সমার্থক শব্দ",
+    "difficulty": "easy",
+    "question": "'অগ্নি' শব্দের সমার্থক শব্দ কোনটি?",
+    "options": [
+      "অনিল",
+      "অনল",
+      "মারুত",
+      "সলিল"
+    ],
+    "correct_index": 1,
+    "correct_answer": "অনল",
+    "explanation": "অনল অর্থ আগুন; অনিল ও মারুত অর্থ বায়ু, সলিল অর্থ জল।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "grammar",
+      "synonym"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0090",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "এক কথায় প্রকাশ",
+    "difficulty": "medium",
+    "question": "'যা বলা যায় না' — এক কথায় কী হবে?",
+    "options": [
+      "অবর্ণনীয়",
+      "দুর্বোধ্য",
+      "অকথ্য",
+      "অনির্বচনীয়"
+    ],
+    "correct_index": 3,
+    "correct_answer": "অনির্বচনীয়",
+    "explanation": "'যা বলা যায় না' = অনির্বচনীয়; অবর্ণনীয় অর্থ যা বর্ণনা করা যায় না, অকথ্য অর্থ যা বলা উচিত নয়।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "grammar",
+      "one-word"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0091",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ভাষার ইতিহাস",
+    "difficulty": "medium",
+    "question": "বাংলা ভাষার প্রথম ব্যাকরণ রচনা করেন কে?",
+    "options": [
+      "ম্যানোএল দ্য আসসুম্পসাঁউ",
+      "রামমোহন রায়",
+      "ঈশ্বরচন্দ্র বিদ্যাসাগর",
+      "উইলিয়াম কেরি"
+    ],
+    "correct_index": 0,
+    "correct_answer": "ম্যানোএল দ্য আসসুম্পসাঁউ",
+    "explanation": "পর্তুগিজ ধর্মযাজক ম্যানোএল দ্য আসসুম্পসাঁউ ১৭৪৩ সালে বাংলা ভাষার প্রথম ব্যাকরণ রচনা করেন।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangla literary history as in NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — authors, works, dates",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "language-history"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0092",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "আধুনিক বাংলা সাহিত্য",
+    "difficulty": "medium",
+    "question": "'পথের পাঁচালী' উপন্যাসের রচয়িতা কে?",
+    "options": [
+      "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+      "তারাশঙ্কর বন্দ্যোপাধ্যায়",
+      "মানিক বন্দ্যোপাধ্যায়",
+      "শরৎচন্দ্র চট্টোপাধ্যায়"
+    ],
+    "correct_index": 0,
+    "correct_answer": "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+    "explanation": "পথের পাঁচালী (১৯২৯) বিভূতিভূষণ বন্দ্যোপাধ্যায়ের প্রথম উপন্যাস।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Bangla literary history as in NCTB Class 9-10 / 11-12 Bangla textbooks (NCTB) — authors, works, dates",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "modern-literature"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-0093",
+    "exam_canonical": "bcs",
+    "subject_canonical": "Bangla",
+    "subject_slug": "bangla",
+    "topic": "বাংলা ব্যাকরণ — প্রকৃতি ও প্রত্যয়",
+    "difficulty": "medium",
+    "question": "'দর্শন' শব্দের প্রকৃতি-প্রত্যয় কোনটি?",
+    "options": [
+      "দরশ + অন",
+      "দর্শ + ন",
+      "দৃশ্ + অন",
+      "দৃশ + অন"
+    ],
+    "correct_index": 2,
+    "correct_answer": "দৃশ্ + অন",
+    "explanation": "দৃশ্ ধাতুর সঙ্গে অন প্রত্যয় যুক্ত হয়ে 'দর্শন' শব্দ গঠিত হয়েছে।",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "NCTB Class 9-10 Bangla Grammar (বাংলা ভাষার ব্যাকরণ), NCTB 2026 — standard grammar rules",
+    "syllabus_source": "BPSC 50th BCS Preliminary Syllabus (notice 9 Dec 2025), BPSC — Bangla Language & Literature 30 / English Language & Literature 30 of 200; MCQ 2 hrs, -0.5 per wrong answer",
+    "tags": [
+      "bangla",
+      "bcs",
+      "grammar",
+      "pratyay"
+    ],
+    "source_stream": "bcs",
+    "source_file": "bcs/bcs-bangla-language-and-literature.json",
+    "applies_to": [
+      "bcs"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

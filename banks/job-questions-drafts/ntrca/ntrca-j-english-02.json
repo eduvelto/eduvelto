@@ -1,0 +1,2303 @@
+[
+  {
+    "id": "JOBQ-J181",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "She ___ (live) here for ten years.",
+    "options": [
+      "has lived",
+      "is living",
+      "lived",
+      "lives"
+    ],
+    "correct_index": 0,
+    "correct_answer": "has lived",
+    "explanation": "'For ten years' signals present perfect — 'has lived'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "verb"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J182",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "If he ___ (come), I shall go.",
+    "options": [
+      "came",
+      "will come",
+      "comes",
+      "come"
+    ],
+    "correct_index": 2,
+    "correct_answer": "comes",
+    "explanation": "First conditional — 'if he comes, I shall go'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "verb"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J183",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "He ___ (finish) the work before I came.",
+    "options": [
+      "finishes",
+      "has finished",
+      "finished",
+      "had finished"
+    ],
+    "correct_index": 3,
+    "correct_answer": "had finished",
+    "explanation": "Earlier past action — past perfect 'had finished'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "verb"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J184",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "The sun ___ (rise) in the east.",
+    "options": [
+      "rose",
+      "rise",
+      "rising",
+      "rises"
+    ],
+    "correct_index": 3,
+    "correct_answer": "rises",
+    "explanation": "Universal truth — present indefinite 'rises'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "verb"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J185",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "He ___ (be) ill yesterday.",
+    "options": [
+      "is",
+      "were",
+      "has been",
+      "was"
+    ],
+    "correct_index": 3,
+    "correct_answer": "was",
+    "explanation": "'Yesterday' signals past — 'was'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "verb"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J186",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Right forms of verb",
+    "difficulty": "medium",
+    "question": "They ___ (go) to Dhaka next week.",
+    "options": [
+      "go",
+      "will go",
+      "have gone",
+      "went"
+    ],
+    "correct_index": 1,
+    "correct_answer": "will go",
+    "explanation": "'Next week' signals future — 'will go'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "verb"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J187",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'He writes a letter.'",
+    "options": [
+      "A letter is being written by him.",
+      "A letter has been written by him.",
+      "A letter is written by him.",
+      "A letter was written by him."
+    ],
+    "correct_index": 2,
+    "correct_answer": "A letter is written by him.",
+    "explanation": "Present indefinite passive: is + past participle.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "voice"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J188",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'She cooks rice.'",
+    "options": [
+      "Rice is cooked by her.",
+      "Rice was cooked by her.",
+      "Rice has been cooked by her.",
+      "Rice is being cooked by her."
+    ],
+    "correct_index": 0,
+    "correct_answer": "Rice is cooked by her.",
+    "explanation": "Present indefinite passive: is + past participle.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "voice"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J189",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'They play football.'",
+    "options": [
+      "Football has been played by them.",
+      "Football is played by them.",
+      "Football was played by them.",
+      "Football is being played by them."
+    ],
+    "correct_index": 1,
+    "correct_answer": "Football is played by them.",
+    "explanation": "Present indefinite passive: is + past participle.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "voice"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J190",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'He did the work.'",
+    "options": [
+      "The work has been done by him.",
+      "The work is done by him.",
+      "The work is being done by him.",
+      "The work was done by him."
+    ],
+    "correct_index": 3,
+    "correct_answer": "The work was done by him.",
+    "explanation": "Past indefinite passive: was + past participle.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "voice"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J191",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'She is reading a book.'",
+    "options": [
+      "A book is read by her.",
+      "A book is being read by her.",
+      "A book has been read by her.",
+      "A book was read by her."
+    ],
+    "correct_index": 1,
+    "correct_answer": "A book is being read by her.",
+    "explanation": "Present continuous passive: is being + past participle.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "voice"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J192",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'He has eaten rice.'",
+    "options": [
+      "Rice is eaten by him.",
+      "Rice was eaten by him.",
+      "Rice is being eaten by him.",
+      "Rice has been eaten by him."
+    ],
+    "correct_index": 3,
+    "correct_answer": "Rice has been eaten by him.",
+    "explanation": "Present perfect passive: has been + past participle.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "voice"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J193",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'Open the door.'",
+    "options": [
+      "The door is opened.",
+      "Let the door be opened.",
+      "The door be opened.",
+      "Let the door open."
+    ],
+    "correct_index": 1,
+    "correct_answer": "Let the door be opened.",
+    "explanation": "Imperative passive: 'Let the door be opened.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "voice"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J194",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Voice",
+    "difficulty": "medium",
+    "question": "Choose the passive form: 'Who broke the glass?'",
+    "options": [
+      "Who was the glass broken by?",
+      "Whom was the glass broken by?",
+      "By whom was the glass broken?",
+      "By whom is the glass broken?"
+    ],
+    "correct_index": 2,
+    "correct_answer": "By whom was the glass broken?",
+    "explanation": "Interrogative passive: 'By whom was the glass broken?'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "voice"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J195",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: He said, \"I am ill.\"",
+    "options": [
+      "He said that he is ill.",
+      "He said that I was ill.",
+      "He said that he had been ill.",
+      "He said that he was ill."
+    ],
+    "correct_index": 3,
+    "correct_answer": "He said that he was ill.",
+    "explanation": "Present becomes past in indirect speech.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "narration",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J196",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: She said, \"I will go.\"",
+    "options": [
+      "She said that she would go.",
+      "She said that she will go.",
+      "She said that she goes.",
+      "She said that she shall go."
+    ],
+    "correct_index": 0,
+    "correct_answer": "She said that she would go.",
+    "explanation": "'Will' becomes 'would' in indirect speech.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "narration",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J197",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: He said to me, \"You are wrong.\"",
+    "options": [
+      "He said to me that you are wrong.",
+      "He told me that I was wrong.",
+      "He said me that I am wrong.",
+      "He told me that you were wrong."
+    ],
+    "correct_index": 1,
+    "correct_answer": "He told me that I was wrong.",
+    "explanation": "'Said to' becomes 'told'; 'you' becomes 'I'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "narration",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J198",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: She said, \"I have done it.\"",
+    "options": [
+      "She said that she had done it.",
+      "She said that she does it.",
+      "She said that she has done it.",
+      "She said that she did it."
+    ],
+    "correct_index": 0,
+    "correct_answer": "She said that she had done it.",
+    "explanation": "Present perfect becomes past perfect.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "narration",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J199",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: The teacher said, \"The earth moves round the sun.\"",
+    "options": [
+      "The teacher said that the earth moved round the sun.",
+      "The teacher said that the earth move round the sun.",
+      "The teacher said that the earth moves round the sun.",
+      "The teacher said that the earth had moved round the sun."
+    ],
+    "correct_index": 2,
+    "correct_answer": "The teacher said that the earth moves round the sun.",
+    "explanation": "Universal truth — tense does not change.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "narration",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J200",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: He said to her, \"Are you well?\"",
+    "options": [
+      "He said to her if she is well.",
+      "He asked her are you well.",
+      "He asked her that she was well.",
+      "He asked her if she was well."
+    ],
+    "correct_index": 3,
+    "correct_answer": "He asked her if she was well.",
+    "explanation": "Yes/no question — 'if' + assertive, past tense.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "narration",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J201",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: She said, \"Please help me.\"",
+    "options": [
+      "She requested me to help her.",
+      "She said me to help her.",
+      "She ordered me to help her.",
+      "She requested me that help her."
+    ],
+    "correct_index": 0,
+    "correct_answer": "She requested me to help her.",
+    "explanation": "'Please' signals a request — 'requested ... to'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "narration",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J202",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Narration",
+    "difficulty": "medium",
+    "question": "Choose the indirect speech: He said, \"I am going home.\"",
+    "options": [
+      "He said that he was going home.",
+      "He said that he had gone home.",
+      "He said that he is going home.",
+      "He said that he goes home."
+    ],
+    "correct_index": 0,
+    "correct_answer": "He said that he was going home.",
+    "explanation": "Present continuous becomes past continuous.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "narration",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J203",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to cry for the moon' mean?",
+    "options": [
+      "To ask for something impossible",
+      "To weep at night",
+      "To wish for the moon",
+      "To cry loudly"
+    ],
+    "correct_index": 0,
+    "correct_answer": "To ask for something impossible",
+    "explanation": "'To cry for the moon' means to ask for something impossible.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J204",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to call a spade a spade' mean?",
+    "options": [
+      "To speak plainly",
+      "To name a tool",
+      "To insult someone",
+      "To dig a hole"
+    ],
+    "correct_index": 0,
+    "correct_answer": "To speak plainly",
+    "explanation": "'To call a spade a spade' means to speak plainly.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J205",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to take to one's heels' mean?",
+    "options": [
+      "To stand firm",
+      "To wear shoes",
+      "To run away",
+      "To walk slowly"
+    ],
+    "correct_index": 2,
+    "correct_answer": "To run away",
+    "explanation": "'To take to one's heels' means to run away.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J206",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to look down upon' mean?",
+    "options": [
+      "To fall down",
+      "To despise",
+      "To look below",
+      "To watch carefully"
+    ],
+    "correct_index": 1,
+    "correct_answer": "To despise",
+    "explanation": "'To look down upon' means to despise.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J207",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to bring to light' mean?",
+    "options": [
+      "To switch on a lamp",
+      "To publish a book",
+      "To make bright",
+      "To reveal"
+    ],
+    "correct_index": 3,
+    "correct_answer": "To reveal",
+    "explanation": "'To bring to light' means to reveal.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J208",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to take after' mean?",
+    "options": [
+      "To follow behind",
+      "To resemble",
+      "To adopt a child",
+      "To chase"
+    ],
+    "correct_index": 1,
+    "correct_answer": "To resemble",
+    "explanation": "'To take after' means to resemble (a parent).",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J209",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to put up with' mean?",
+    "options": [
+      "To accept a gift",
+      "To tolerate",
+      "To build a house",
+      "To hang up"
+    ],
+    "correct_index": 1,
+    "correct_answer": "To tolerate",
+    "explanation": "'To put up with' means to tolerate.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J210",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to get rid of' mean?",
+    "options": [
+      "To throw away",
+      "To be free from",
+      "To remove a stain",
+      "To buy something"
+    ],
+    "correct_index": 1,
+    "correct_answer": "To be free from",
+    "explanation": "'To get rid of' means to be free from.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J211",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to break down' mean?",
+    "options": [
+      "To fall asleep",
+      "To break a wall",
+      "To collapse",
+      "To divide into parts"
+    ],
+    "correct_index": 2,
+    "correct_answer": "To collapse",
+    "explanation": "'To break down' means to collapse or fail.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J212",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Idioms and phrases",
+    "difficulty": "medium",
+    "question": "What does 'to come to light' mean?",
+    "options": [
+      "To become famous",
+      "To appear in the morning",
+      "To be revealed",
+      "To shine brightly"
+    ],
+    "correct_index": 2,
+    "correct_answer": "To be revealed",
+    "explanation": "'To come to light' means to be revealed.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "idioms",
+      "ntrca",
+      "vocabulary"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J213",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ honest man",
+    "options": [
+      "No article",
+      "A",
+      "The",
+      "An"
+    ],
+    "correct_index": 3,
+    "correct_answer": "An",
+    "explanation": "'An' before a vowel sound — 'honest' begins with a vowel sound.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J214",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ university",
+    "options": [
+      "The",
+      "No article",
+      "A",
+      "An"
+    ],
+    "correct_index": 2,
+    "correct_answer": "A",
+    "explanation": "'A' before 'university' — it begins with a consonant sound (yu).",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J215",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ hour",
+    "options": [
+      "No article",
+      "An",
+      "A",
+      "The"
+    ],
+    "correct_index": 1,
+    "correct_answer": "An",
+    "explanation": "'An' before 'hour' — the 'h' is silent, vowel sound.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J216",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ one-eyed man",
+    "options": [
+      "No article",
+      "The",
+      "A",
+      "An"
+    ],
+    "correct_index": 2,
+    "correct_answer": "A",
+    "explanation": "'A' before 'one-eyed' — it begins with a consonant sound (w).",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J217",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ European",
+    "options": [
+      "A",
+      "An",
+      "No article",
+      "The"
+    ],
+    "correct_index": 0,
+    "correct_answer": "A",
+    "explanation": "'A' before 'European' — begins with a consonant sound (yu).",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J218",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ umbrella",
+    "options": [
+      "A",
+      "An",
+      "The",
+      "No article"
+    ],
+    "correct_index": 1,
+    "correct_answer": "An",
+    "explanation": "'An' before a vowel sound.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J219",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ sun rises in the east.",
+    "options": [
+      "A",
+      "An",
+      "No article",
+      "The"
+    ],
+    "correct_index": 3,
+    "correct_answer": "The",
+    "explanation": "'The' before unique natural objects — the sun.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J220",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Articles",
+    "difficulty": "easy",
+    "question": "Fill in the blank: ___ Ganges is a river.",
+    "options": [
+      "No article",
+      "An",
+      "The",
+      "A"
+    ],
+    "correct_index": 2,
+    "correct_answer": "The",
+    "explanation": "'The' before river names.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "articles",
+      "english",
+      "grammar",
+      "ntrca"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J221",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the negative form: 'He is too weak to walk.'",
+    "options": [
+      "He is not too weak to walk.",
+      "He is so weak that he cannot walk.",
+      "He is so weak that he can walk.",
+      "He is weak and cannot walk."
+    ],
+    "correct_index": 1,
+    "correct_answer": "He is so weak that he cannot walk.",
+    "explanation": "'Too ... to' becomes 'so ... that ... cannot'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "transformation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J222",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the negative form: 'Everybody loves him.'",
+    "options": [
+      "There is nobody who does not love him.",
+      "Everybody hates him.",
+      "Everybody does not love him.",
+      "Nobody loves him."
+    ],
+    "correct_index": 0,
+    "correct_answer": "There is nobody who does not love him.",
+    "explanation": "'Everybody loves him' = 'There is nobody who does not love him.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "transformation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J223",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the positive degree: 'He is the best boy.'",
+    "options": [
+      "No boy is better than he.",
+      "He is good as any boy.",
+      "No other boy is as good as he.",
+      "He is better than any other boy."
+    ],
+    "correct_index": 2,
+    "correct_answer": "No other boy is as good as he.",
+    "explanation": "Superlative to positive: 'No other boy is as good as he.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "transformation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J224",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the comparative degree: 'Iron is the most useful metal.'",
+    "options": [
+      "Iron is the more useful metal.",
+      "Iron is more useful than all metals.",
+      "Iron is useful than any metal.",
+      "Iron is more useful than any other metal."
+    ],
+    "correct_index": 3,
+    "correct_answer": "Iron is more useful than any other metal.",
+    "explanation": "Superlative to comparative: 'more useful than any other metal'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "transformation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J225",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the negative form: 'He is honest.'",
+    "options": [
+      "He is dishonest.",
+      "He is not honest.",
+      "He is not dishonest.",
+      "He is never honest."
+    ],
+    "correct_index": 2,
+    "correct_answer": "He is not dishonest.",
+    "explanation": "'Honest' becomes 'not dishonest'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "transformation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J226",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the negative form: 'Only he can do it.'",
+    "options": [
+      "None but he can do it.",
+      "He alone can do it.",
+      "Nobody can do it.",
+      "Only he cannot do it."
+    ],
+    "correct_index": 0,
+    "correct_answer": "None but he can do it.",
+    "explanation": "'Only' becomes 'none but'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "transformation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J227",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the negative form: 'As soon as he came, I left.'",
+    "options": [
+      "As soon as he came, I did not leave.",
+      "No sooner he came than I left.",
+      "No sooner had he come than I left.",
+      "As soon as he did not come, I left."
+    ],
+    "correct_index": 2,
+    "correct_answer": "No sooner had he come than I left.",
+    "explanation": "'As soon as' becomes 'no sooner ... than'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "transformation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J228",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Transformation",
+    "difficulty": "medium",
+    "question": "Choose the comparative degree: 'She is as tall as her sister.'",
+    "options": [
+      "Her sister is not taller than she.",
+      "Her sister is taller than she.",
+      "Her sister is as tall as she.",
+      "She is taller than her sister."
+    ],
+    "correct_index": 0,
+    "correct_answer": "Her sister is not taller than she.",
+    "explanation": "Positive 'as tall as' — the comparative negative form is 'not taller than'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "transformation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J229",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'সে গান গায়।'",
+    "options": [
+      "He sings songs.",
+      "He sings song.",
+      "He sing songs.",
+      "He singing songs."
+    ],
+    "correct_index": 0,
+    "correct_answer": "He sings songs.",
+    "explanation": "Third person singular takes 'sings', so 'He sings songs.' is correct.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "translation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "VERIFIED",
+    "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+    "review_batch": "C-job spot sample 27 Nov 2026",
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J230",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'আমি বই পড়ি।'",
+    "options": [
+      "I reading books.",
+      "I read book.",
+      "I reads books.",
+      "I read books."
+    ],
+    "correct_index": 3,
+    "correct_answer": "I read books.",
+    "explanation": "With 'I', the verb is 'read' and the plural object is 'books'.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "translation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J231",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'সে একজন শিক্ষক।'",
+    "options": [
+      "He a teacher.",
+      "He is an teacher.",
+      "He is a teacher.",
+      "He is teacher."
+    ],
+    "correct_index": 2,
+    "correct_answer": "He is a teacher.",
+    "explanation": "'সে একজন শিক্ষক।' = 'He is a teacher.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "translation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J232",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'আমি গতকাল স্কুলে গিয়েছিলাম।'",
+    "options": [
+      "I have gone to school yesterday.",
+      "I go to school yesterday.",
+      "I went to school yesterday.",
+      "I went school yesterday."
+    ],
+    "correct_index": 2,
+    "correct_answer": "I went to school yesterday.",
+    "explanation": "'আমি গতকাল স্কুলে গিয়েছিলাম।' = 'I went to school yesterday.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "translation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J233",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'সূর্য পূর্বদিকে ওঠে।'",
+    "options": [
+      "The sun rises in the east.",
+      "The sun rise in the east.",
+      "The sun rises at the east.",
+      "Sun rises in east."
+    ],
+    "correct_index": 0,
+    "correct_answer": "The sun rises in the east.",
+    "explanation": "'সূর্য পূর্বদিকে ওঠে।' = 'The sun rises in the east.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "translation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J234",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Translation",
+    "difficulty": "easy",
+    "question": "Choose the correct English of: 'সে প্রতিদিন সকালে হাঁটে।'",
+    "options": [
+      "He walk every morning.",
+      "He is walks every morning.",
+      "He walking every morning.",
+      "He walks every morning."
+    ],
+    "correct_index": 3,
+    "correct_answer": "He walks every morning.",
+    "explanation": "'সে প্রতিদিন সকালে হাঁটে।' = 'He walks every morning.'",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "translation"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J235",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Parts of speech",
+    "difficulty": "easy",
+    "question": "The word 'beauty' is a —",
+    "options": [
+      "Noun",
+      "Verb",
+      "Adjective",
+      "Adverb"
+    ],
+    "correct_index": 0,
+    "correct_answer": "Noun",
+    "explanation": "'Beauty' is a noun.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "parts of speech"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J237",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Parts of speech",
+    "difficulty": "easy",
+    "question": "The word 'quickly' is an —",
+    "options": [
+      "Verb",
+      "Adverb",
+      "Noun",
+      "Adjective"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Adverb",
+    "explanation": "'Quickly' is an adverb.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "parts of speech"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J238",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Parts of speech",
+    "difficulty": "easy",
+    "question": "The word 'honestly' is an —",
+    "options": [
+      "Adjective",
+      "Adverb",
+      "Pronoun",
+      "Noun"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Adverb",
+    "explanation": "'Honestly' is an adverb.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "parts of speech"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J239",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Parts of speech",
+    "difficulty": "easy",
+    "question": "The word 'he' is a —",
+    "options": [
+      "Adjective",
+      "Pronoun",
+      "Verb",
+      "Noun"
+    ],
+    "correct_index": 1,
+    "correct_answer": "Pronoun",
+    "explanation": "'He' is a pronoun.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "parts of speech"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  },
+  {
+    "id": "JOBQ-J240",
+    "exam_canonical": "ntrca",
+    "subject_canonical": "English",
+    "subject_slug": "english",
+    "topic": "Parts of speech",
+    "difficulty": "easy",
+    "question": "The word 'and' is a —",
+    "options": [
+      "Interjection",
+      "Adverb",
+      "Preposition",
+      "Conjunction"
+    ],
+    "correct_index": 3,
+    "correct_answer": "Conjunction",
+    "explanation": "'And' is a conjunction.",
+    "source_status": "generic-textbook-mention-only",
+    "source_detail": "Standard English grammar (NCTB English Grammar / Wren & Martin) and standard dictionaries",
+    "syllabus_source": "NTRCA Preliminary Test syllabus (ntrca.gov.bd) — English 25: Errors in composition, fill in the blanks with appropriate preposition, uses of article, verbs, translation from Bengali to English, transformation of sentences, synonyms and antonyms, completing sentences, idioms and phrases. Total prelim 100 MCQ, 1 hr, pass 40%. 19th 200-mark pattern UNVERIFIED — not used.",
+    "tags": [
+      "english",
+      "grammar",
+      "ntrca",
+      "parts of speech"
+    ],
+    "source_stream": "ntrca",
+    "source_file": "ntrca/ntrca-j-english-02.json",
+    "applies_to": [
+      "ntrca"
+    ],
+    "review_verdict": "NEEDS-REVIEW",
+    "review_reason": "Answer-position bias fixed by seeded shuffle (landing 27 Nov 2026, seed eduvelto-landing-2026-11-27-v1); options now ~25% per position. Content not yet substantively reviewed.",
+    "review_batch": null,
+    "shuffle_required": false,
+    "is_previous_year": false,
+    "exam_year": null,
+    "_landing_shuffled": "eduvelto-landing-2026-11-27-v1"
+  }
+]

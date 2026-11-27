@@ -1,0 +1,4405 @@
+[
+ {
+  "id": "JOBQ-I001",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'তরঙ্গ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "পাহাড়",
+   "ঢেউ",
+   "নদী",
+   "বাতাস"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ঢেউ",
+  "explanation": "তরঙ্গের সমার্থক শব্দ ঢেউ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I002",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'জল' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "আগুন",
+   "জীবন",
+   "ছোট",
+   "পানি"
+  ],
+  "correct_index": 3,
+  "correct_answer": "পানি",
+  "explanation": "'জল' শব্দের সমার্থক শব্দ হলো 'পানি'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I003",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'রবি' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "চাঁদ",
+   "তারা",
+   "সূর্য",
+   "মেঘ"
+  ],
+  "correct_index": 2,
+  "correct_answer": "সূর্য",
+  "explanation": "রবি সূর্যের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I004",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'শশী' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "চাঁদ",
+   "সূর্য",
+   "তারা",
+   "আকাশ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "চাঁদ",
+  "explanation": "শশী চাঁদের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I005",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'ধরা' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "আকাশ",
+   "সাগর",
+   "পাহাড়",
+   "পৃথিবী"
+  ],
+  "correct_index": 3,
+  "correct_answer": "পৃথিবী",
+  "explanation": "ধরা পৃথিবীর সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I006",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'গগন' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "মাটি",
+   "আকাশ",
+   "পানি",
+   "বাতাস"
+  ],
+  "correct_index": 1,
+  "correct_answer": "আকাশ",
+  "explanation": "গগন আকাশের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I007",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "নিচের কোনটি ‘জল’ শব্দের সমার্থক?",
+  "options": [
+   "অগ্নি",
+   "বায়ু",
+   "পানি",
+   "মাটি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "পানি",
+  "explanation": "'পানি' জলের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I008",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'তরু' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "লতা",
+   "ফুল",
+   "বৃক্ষ",
+   "পাতা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "বৃক্ষ",
+  "explanation": "তরু বৃক্ষের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I009",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'তটিনী' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "সাগর",
+   "পুকুর",
+   "খাল",
+   "নদী"
+  ],
+  "correct_index": 3,
+  "correct_answer": "নদী",
+  "explanation": "তটিনী নদীর সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I010",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'সমুদ্র' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "সাগর",
+   "সড়ক",
+   "নিশি",
+   "শান্তি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সাগর",
+  "explanation": "'সমুদ্র' শব্দের সমার্থক শব্দ হলো 'সাগর'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I011",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'শৈল' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "পর্বত",
+   "নদী",
+   "বন",
+   "মাঠ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পর্বত",
+  "explanation": "শৈল পর্বতের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I012",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'কুসুম' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "পাতা",
+   "ফুল",
+   "ফল",
+   "ডাল"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ফুল",
+  "explanation": "কুসুম ফুলের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I013",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'বিহগ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "মাছ",
+   "হাতি",
+   "ঘোড়া",
+   "পাখি"
+  ],
+  "correct_index": 3,
+  "correct_answer": "পাখি",
+  "explanation": "বিহগ পাখির সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I014",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'জলদ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "বৃষ্টি",
+   "মেঘ",
+   "বিদ্যুৎ",
+   "ঝড়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "মেঘ",
+  "explanation": "জলদ মেঘের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I015",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'নিশা' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "দিন",
+   "সকাল",
+   "রাত",
+   "সন্ধ্যা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "রাত",
+  "explanation": "নিশা রাতের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I016",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'দিন' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "দিবস",
+   "নয়ন",
+   "কর্ণ",
+   "গগন"
+  ],
+  "correct_index": 0,
+  "correct_answer": "দিবস",
+  "explanation": "'দিন' শব্দের সমার্থক শব্দ হলো 'দিবস'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I017",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'জননী' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "বোন",
+   "মাসি",
+   "মা",
+   "দিদি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "মা",
+  "explanation": "জননী মায়ের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I018",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'সখা' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "শত্রু",
+   "বন্ধু",
+   "ভাই",
+   "পিতা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বন্ধু",
+  "explanation": "সখা বন্ধুর সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I019",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "নিচের কোনটি ‘চাঁদ’ শব্দের সমার্থক?",
+  "options": [
+   "সূর্য",
+   "রবি",
+   "শশী",
+   "দিবাকর"
+  ],
+  "correct_index": 2,
+  "correct_answer": "শশী",
+  "explanation": "'শশী' চাঁদের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I020",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'বিদ্যা' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "দরিদ্র",
+   "জ্ঞান",
+   "শশী",
+   "অশান্তি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "জ্ঞান",
+  "explanation": "'বিদ্যা' শব্দের সমার্থক শব্দ হলো 'জ্ঞান'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I021",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'অর্থ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "গরিব",
+   "ঋণ",
+   "ধন",
+   "ক্ষতি"
+  ],
+  "correct_index": 2,
+  "correct_answer": "ধন",
+  "explanation": "অর্থ ধনের সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I022",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'সুখ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "পাহাড়",
+   "অর্থ",
+   "আনন্দ",
+   "জলদ"
+  ],
+  "correct_index": 2,
+  "correct_answer": "আনন্দ",
+  "explanation": "'সুখ' শব্দের সমার্থক শব্দ হলো 'আনন্দ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I023",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'জ্যোতি' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "অন্ধকার",
+   "ছায়া",
+   "আগুন",
+   "আলো"
+  ],
+  "correct_index": 3,
+  "correct_answer": "আলো",
+  "explanation": "জ্যোতি আলোর সমার্থক শব্দ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I024",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'ঘর' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "অশান্তি",
+   "সুখ",
+   "ভয়",
+   "গৃহ"
+  ],
+  "correct_index": 3,
+  "correct_answer": "গৃহ",
+  "explanation": "'ঘর' শব্দের সমার্থক শব্দ হলো 'গৃহ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I025",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'পথ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "আনন্দ",
+   "সড়ক",
+   "সখা",
+   "সুখ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সড়ক",
+  "explanation": "'পথ' শব্দের সমার্থক শব্দ হলো 'সড়ক'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I026",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'মন' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "দিবস",
+   "স্রোতস্বিনী",
+   "চিত্ত",
+   "নাসিকা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "চিত্ত",
+  "explanation": "'মন' শব্দের সমার্থক শব্দ হলো 'চিত্ত'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I027",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'চোখ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "নয়ন",
+   "জ্ঞান",
+   "জীবন",
+   "শান্তি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নয়ন",
+  "explanation": "'চোখ' শব্দের সমার্থক শব্দ হলো 'নয়ন'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I028",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'মুখ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "গগন",
+   "বদন",
+   "জলদ",
+   "দিবস"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বদন",
+  "explanation": "'মুখ' শব্দের সমার্থক শব্দ হলো 'বদন'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I029",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'হাত' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "কর",
+   "নাসিকা",
+   "গৃহ",
+   "নতুন"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কর",
+  "explanation": "'হাত' শব্দের সমার্থক শব্দ হলো 'কর'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I030",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'কান' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "কর্ণ",
+   "নয়ন",
+   "জ্ঞান",
+   "আলো"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কর্ণ",
+  "explanation": "'কান' শব্দের সমার্থক শব্দ হলো 'কর্ণ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I031",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'নাক' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "পাহাড়",
+   "জ্যোতি",
+   "নাসিকা",
+   "বিহঙ্গ"
+  ],
+  "correct_index": 2,
+  "correct_answer": "নাসিকা",
+  "explanation": "'নাক' শব্দের সমার্থক শব্দ হলো 'নাসিকা'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I032",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'দাঁত' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "পুরনো",
+   "দন্ত",
+   "জননী",
+   "দরিদ্র"
+  ],
+  "correct_index": 1,
+  "correct_answer": "দন্ত",
+  "explanation": "'দাঁত' শব্দের সমার্থক শব্দ হলো 'দন্ত'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I033",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'চুল' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "কেশ",
+   "শান্তি",
+   "শির",
+   "দন্ত"
+  ],
+  "correct_index": 0,
+  "correct_answer": "কেশ",
+  "explanation": "'চুল' শব্দের সমার্থক শব্দ হলো 'কেশ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I034",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'মাথা' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "সখা",
+   "শির",
+   "বিহঙ্গ",
+   "কুসুম"
+  ],
+  "correct_index": 1,
+  "correct_answer": "শির",
+  "explanation": "'মাথা' শব্দের সমার্থক শব্দ হলো 'শির'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I035",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'গাছ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "কর",
+   "তমসা",
+   "বৃক্ষ",
+   "দন্ত"
+  ],
+  "correct_index": 2,
+  "correct_answer": "বৃক্ষ",
+  "explanation": "'গাছ' শব্দের সমার্থক শব্দ হলো 'বৃক্ষ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I036",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'ফল' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "ফলমূল",
+   "গৃহ",
+   "মন্দ",
+   "ধরিত্রী"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ফলমূল",
+  "explanation": "'ফল' শব্দের সমার্থক শব্দ হলো 'ফলমূল'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I037",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'সৈনিক' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "জীবন",
+   "মরণ",
+   "যোদ্ধা",
+   "সুখ"
+  ],
+  "correct_index": 2,
+  "correct_answer": "যোদ্ধা",
+  "explanation": "'সৈনিক' শব্দের সমার্থক শব্দ হলো 'যোদ্ধা'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I038",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'অন্ধকার' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "সত্য",
+   "তমসা",
+   "সখা",
+   "আগুন"
+  ],
+  "correct_index": 1,
+  "correct_answer": "তমসা",
+  "explanation": "'অন্ধকার' শব্দের সমার্থক শব্দ হলো 'তমসা'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I039",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'দুঃখ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "জীবন",
+   "কষ্ট",
+   "পানি",
+   "আলো"
+  ],
+  "correct_index": 1,
+  "correct_answer": "কষ্ট",
+  "explanation": "'দুঃখ' শব্দের সমার্থক শব্দ হলো 'কষ্ট'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I040",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমার্থক ও বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'কিরণ' শব্দের সমার্থক শব্দ কোনটি?",
+  "options": [
+   "শির",
+   "নিশি",
+   "বৃক্ষ",
+   "রশ্মি"
+  ],
+  "correct_index": 3,
+  "correct_answer": "রশ্মি",
+  "explanation": "'কিরণ' শব্দের সমার্থক শব্দ হলো 'রশ্মি'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "synonym"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I041",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'ভালো' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "মন্দ",
+   "সহজ",
+   "পুরনো",
+   "জীবন"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মন্দ",
+  "explanation": "'ভালো' শব্দের বিপরীত শব্দ হলো 'মন্দ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I042",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'জ্ঞানী' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "বুদ্ধিমান",
+   "পণ্ডিত",
+   "মূর্খ",
+   "শিক্ষিত"
+  ],
+  "correct_index": 2,
+  "correct_answer": "মূর্খ",
+  "explanation": "জ্ঞানীর বিপরীত শব্দ মূর্খ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I043",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'কৃপণ' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "লোভী",
+   "কঞ্জুস",
+   "দানশীল",
+   "অর্থলোভী"
+  ],
+  "correct_index": 2,
+  "correct_answer": "দানশীল",
+  "explanation": "কৃপণের বিপরীত শব্দ দানশীল।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I044",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'ধনী' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "অন্ধকার",
+   "অন্যায়",
+   "মরণ",
+   "দরিদ্র"
+  ],
+  "correct_index": 3,
+  "correct_answer": "দরিদ্র",
+  "explanation": "'ধনী' শব্দের বিপরীত শব্দ হলো 'দরিদ্র'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I045",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'জীবন' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "মরণ",
+   "দরিদ্র",
+   "অন্যায়",
+   "নরম"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মরণ",
+  "explanation": "'জীবন' শব্দের বিপরীত শব্দ হলো 'মরণ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I046",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'সত্য' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "মিথ্যা",
+   "শেষ",
+   "শান্তি",
+   "রাত"
+  ],
+  "correct_index": 0,
+  "correct_answer": "মিথ্যা",
+  "explanation": "'সত্য' শব্দের বিপরীত শব্দ হলো 'মিথ্যা'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I047",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'জয়' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "মরণ",
+   "পরাজয়",
+   "মৃত্যু",
+   "রাত"
+  ],
+  "correct_index": 1,
+  "correct_answer": "পরাজয়",
+  "explanation": "'জয়' শব্দের বিপরীত শব্দ হলো 'পরাজয়'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I048",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'শুরু' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "ধনী",
+   "মিথ্যা",
+   "সাহস",
+   "শেষ"
+  ],
+  "correct_index": 3,
+  "correct_answer": "শেষ",
+  "explanation": "'শুরু' শব্দের বিপরীত শব্দ হলো 'শেষ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I049",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'উঁচু' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "দরিদ্র",
+   "সত্য",
+   "ছোট",
+   "নিচু"
+  ],
+  "correct_index": 3,
+  "correct_answer": "নিচু",
+  "explanation": "'উঁচু' শব্দের বিপরীত শব্দ হলো 'নিচু'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I050",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'গরম' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "ঠান্ডা",
+   "খাটো",
+   "নরম",
+   "শান্তি"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ঠান্ডা",
+  "explanation": "'গরম' শব্দের বিপরীত শব্দ হলো 'ঠান্ডা'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I051",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'দিন' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "রাত",
+   "অধর্ম",
+   "পরাধীন",
+   "মন্দ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রাত",
+  "explanation": "'দিন' শব্দের বিপরীত শব্দ হলো 'রাত'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I052",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'সাদা' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "অন্যায়",
+   "সাহস",
+   "সুখ",
+   "কালো"
+  ],
+  "correct_index": 3,
+  "correct_answer": "কালো",
+  "explanation": "'সাদা' শব্দের বিপরীত শব্দ হলো 'কালো'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I053",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'বড়' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "অন্ধকার",
+   "সত্য",
+   "দরিদ্র",
+   "ছোট"
+  ],
+  "correct_index": 3,
+  "correct_answer": "ছোট",
+  "explanation": "'বড়' শব্দের বিপরীত শব্দ হলো 'ছোট'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I054",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'লম্বা' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "খাটো",
+   "মন্দ",
+   "দুঃখ",
+   "নিচু"
+  ],
+  "correct_index": 0,
+  "correct_answer": "খাটো",
+  "explanation": "'লম্বা' শব্দের বিপরীত শব্দ হলো 'খাটো'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I055",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'মোটা' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "মন্দ",
+   "বড়",
+   "পাতলা",
+   "দরিদ্র"
+  ],
+  "correct_index": 2,
+  "correct_answer": "পাতলা",
+  "explanation": "'মোটা' শব্দের বিপরীত শব্দ হলো 'পাতলা'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I056",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'শক্ত' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "নরম",
+   "বড়",
+   "সুখ",
+   "কালো"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নরম",
+  "explanation": "'শক্ত' শব্দের বিপরীত শব্দ হলো 'নরম'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I057",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'কঠিন' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "অজ্ঞতা",
+   "সহজ",
+   "মরণ",
+   "শান্তি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সহজ",
+  "explanation": "'কঠিন' শব্দের বিপরীত শব্দ হলো 'সহজ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I058",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'নতুন' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "পুরনো",
+   "পরাজয়",
+   "দরিদ্র",
+   "পাতলা"
+  ],
+  "correct_index": 0,
+  "correct_answer": "পুরনো",
+  "explanation": "'নতুন' শব্দের বিপরীত শব্দ হলো 'পুরনো'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I059",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'আসা' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "নতুন",
+   "মিথ্যা",
+   "খাটো",
+   "যাওয়া"
+  ],
+  "correct_index": 3,
+  "correct_answer": "যাওয়া",
+  "explanation": "'আসা' শব্দের বিপরীত শব্দ হলো 'যাওয়া'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I060",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'হাসি' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "সাহস",
+   "দরিদ্র",
+   "ধনী",
+   "কান্না"
+  ],
+  "correct_index": 3,
+  "correct_answer": "কান্না",
+  "explanation": "'হাসি' শব্দের বিপরীত শব্দ হলো 'কান্না'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I061",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'প্রেম' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "ছোট",
+   "যাওয়া",
+   "ঘৃণা",
+   "ধনী"
+  ],
+  "correct_index": 2,
+  "correct_answer": "ঘৃণা",
+  "explanation": "'প্রেম' শব্দের বিপরীত শব্দ হলো 'ঘৃণা'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I062",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'শান্তি' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "সুখ",
+   "অশান্তি",
+   "অবনতি",
+   "রাত"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অশান্তি",
+  "explanation": "'শান্তি' শব্দের বিপরীত শব্দ হলো 'অশান্তি'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I063",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'স্বাধীন' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "আলো",
+   "সাহস",
+   "পরাধীন",
+   "অন্ধকার"
+  ],
+  "correct_index": 2,
+  "correct_answer": "পরাধীন",
+  "explanation": "'স্বাধীন' শব্দের বিপরীত শব্দ হলো 'পরাধীন'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I064",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'উন্নতি' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "প্রস্থান",
+   "অবনতি",
+   "নিচু",
+   "কালো"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অবনতি",
+  "explanation": "'উন্নতি' শব্দের বিপরীত শব্দ হলো 'অবনতি'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I065",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'আগমন' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "অন্ধকার",
+   "মরণ",
+   "নতুন",
+   "প্রস্থান"
+  ],
+  "correct_index": 3,
+  "correct_answer": "প্রস্থান",
+  "explanation": "'আগমন' শব্দের বিপরীত শব্দ হলো 'প্রস্থান'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I066",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'অলস' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "অকর্মণ্য",
+   "নিষ্ক্রিয়",
+   "পরিশ্রমী",
+   "ঘুমন্ত"
+  ],
+  "correct_index": 2,
+  "correct_answer": "পরিশ্রমী",
+  "explanation": "অলসের বিপরীত শব্দ পরিশ্রমী।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I067",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'সাহস' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "ভয়",
+   "দুঃখ",
+   "অশান্তি",
+   "শেষ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ভয়",
+  "explanation": "'সাহস' শব্দের বিপরীত শব্দ হলো 'ভয়'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I068",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'জ্ঞান' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "শেষ",
+   "অজ্ঞতা",
+   "সহজ",
+   "ঠান্ডা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অজ্ঞতা",
+  "explanation": "'জ্ঞান' শব্দের বিপরীত শব্দ হলো 'অজ্ঞতা'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I069",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'ন্যায়' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "কালো",
+   "নরম",
+   "শেষ",
+   "অন্যায়"
+  ],
+  "correct_index": 3,
+  "correct_answer": "অন্যায়",
+  "explanation": "'ন্যায়' শব্দের বিপরীত শব্দ হলো 'অন্যায়'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I070",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বিপরীত শব্দ",
+  "difficulty": "medium",
+  "question": "'ধর্ম' শব্দের বিপরীত শব্দ কোনটি?",
+  "options": [
+   "রাত",
+   "অধর্ম",
+   "অন্ধকার",
+   "অন্যায়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অধর্ম",
+  "explanation": "'ধর্ম' শব্দের বিপরীত শব্দ হলো 'অধর্ম'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "antonym",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I071",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'অন্ধকারে ঢিল ছোঁড়া' বাগধারাটির অর্থ কী?",
+  "options": [
+   "গভীর বন্ধুত্ব",
+   "আন্দাজে কাজ করা",
+   "সম্পূর্ণভাবে",
+   "কঠোর পরিশ্রম করা"
+  ],
+  "correct_index": 1,
+  "correct_answer": "আন্দাজে কাজ করা",
+  "explanation": "'অন্ধকারে ঢিল ছোঁড়া' বাগধারার অর্থ: আন্দাজে কাজ করা।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I072",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'কাঁটা দিয়ে কাঁটা তোলা' বাগধারাটির অর্থ কী?",
+  "options": [
+   "নিজের কাজ নিজে করা",
+   "শত্রু দিয়ে শত্রু দমন করা",
+   "কাঁটা দিয়ে ফুল তোলা",
+   "বিপদে পড়ে সাহায্য চাওয়া"
+  ],
+  "correct_index": 1,
+  "correct_answer": "শত্রু দিয়ে শত্রু দমন করা",
+  "explanation": "‘কাঁটা দিয়ে কাঁটা তোলা’ অর্থ শত্রু দিয়ে শত্রু দমন করা।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I073",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'গোড়ায় গলদ' বাগধারাটির অর্থ কী?",
+  "options": [
+   "অগ্রিম আশা করা",
+   "শুরুতেই ভুল",
+   "গভীর বন্ধুত্ব",
+   "বিড়াল"
+  ],
+  "correct_index": 1,
+  "correct_answer": "শুরুতেই ভুল",
+  "explanation": "'গোড়ায় গলদ' বাগধারার অর্থ: শুরুতেই ভুল।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I075",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'মাথার ঘাম পায়ে ফেলা' বাগধারাটির অর্থ কী?",
+  "options": [
+   "শেষ সম্বল",
+   "বিড়াল",
+   "দুর্লভ বস্তু",
+   "কঠোর পরিশ্রম করা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "কঠোর পরিশ্রম করা",
+  "explanation": "'মাথার ঘাম পায়ে ফেলা' বাগধারার অর্থ: কঠোর পরিশ্রম করা।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I076",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'বিড়াল তপস্বী' বাগধারাটির অর্থ কী?",
+  "options": [
+   "সত্যিকারের সাধু",
+   "বিড়াল পোষা লোক",
+   "তপস্যা করা ব্যক্তি",
+   "ভণ্ড সাধু"
+  ],
+  "correct_index": 3,
+  "correct_answer": "ভণ্ড সাধু",
+  "explanation": "‘বিড়াল তপস্বী’ অর্থ ভণ্ড সাধু।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I077",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'কান পাতলা' বাগধারাটির অর্থ কী?",
+  "options": [
+   "সহজে অন্যের কথায় প্রভাবিত হওয়া",
+   "অপ্রিয় ব্যক্তি",
+   "সতর্ক দৃষ্টি রাখা",
+   "নিরহংকারী মানুষ"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সহজে অন্যের কথায় প্রভাবিত হওয়া",
+  "explanation": "'কান পাতলা' বাগধারার অর্থ: সহজে অন্যের কথায় প্রভাবিত হওয়া।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I078",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'পাকা ধানে মই দেওয়া' বাগধারাটির অর্থ কী?",
+  "options": [
+   "সহজে অন্যের কথায় প্রভাবিত হওয়া",
+   "কঠোর পরিশ্রম করা",
+   "সতর্ক দৃষ্টি রাখা",
+   "কারও ক্ষতি করা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "কারও ক্ষতি করা",
+  "explanation": "'পাকা ধানে মই দেওয়া' বাগধারার অর্থ: কারও ক্ষতি করা।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I079",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'দা-কুমড়া সম্পর্ক' বাগধারাটির অর্থ কী?",
+  "options": [
+   "ভীষণ শত্রুতা",
+   "ঘনিষ্ঠ বন্ধুত্ব",
+   "পারিবারিক সম্পর্ক",
+   "সাধারণ পরিচয়"
+  ],
+  "correct_index": 0,
+  "correct_answer": "ভীষণ শত্রুতা",
+  "explanation": "‘দা-কুমড়া সম্পর্ক’ অর্থ ভীষণ শত্রুতা।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I080",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'অকূল পাথার' বাগধারাটির অর্থ কী?",
+  "options": [
+   "নিরহংকারী মানুষ",
+   "অনভিজ্ঞতা",
+   "গভীর সংকট",
+   "দুর্ভাগ্য"
+  ],
+  "correct_index": 2,
+  "correct_answer": "গভীর সংকট",
+  "explanation": "'অকূল পাথার' বাগধারার অর্থ: গভীর সংকট।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I081",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'কপাল পোড়া' বাগধারাটির অর্থ কী?",
+  "options": [
+   "খুব কাছে",
+   "কঠোর পরিশ্রম করা",
+   "দুর্লভ বস্তু",
+   "দুর্ভাগ্য"
+  ],
+  "correct_index": 3,
+  "correct_answer": "দুর্ভাগ্য",
+  "explanation": "'কপাল পোড়া' বাগধারার অর্থ: দুর্ভাগ্য।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I082",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'নাকের ডগায়' বাগধারাটির অর্থ কী?",
+  "options": [
+   "দুর্ভাগ্য",
+   "অগ্রিম আশা করা",
+   "খুব কাছে",
+   "সম্পূর্ণভাবে"
+  ],
+  "correct_index": 2,
+  "correct_answer": "খুব কাছে",
+  "explanation": "'নাকের ডগায়' বাগধারার অর্থ: খুব কাছে।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I083",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'মাটির মানুষ' বাগধারাটির অর্থ কী?",
+  "options": [
+   "নিরহংকারী মানুষ",
+   "শুরুতেই ভুল",
+   "কঠোর পরিশ্রম করা",
+   "সম্পূর্ণভাবে"
+  ],
+  "correct_index": 0,
+  "correct_answer": "নিরহংকারী মানুষ",
+  "explanation": "'মাটির মানুষ' বাগধারার অর্থ: নিরহংকারী মানুষ।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I084",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'সোনার হরিণ' বাগধারাটির অর্থ কী?",
+  "options": [
+   "আনন্দের সমাবেশ",
+   "দুর্লভ বস্তু",
+   "সতর্ক দৃষ্টি রাখা",
+   "শুরুতেই ভুল"
+  ],
+  "correct_index": 1,
+  "correct_answer": "দুর্লভ বস্তু",
+  "explanation": "'সোনার হরিণ' বাগধারার অর্থ: দুর্লভ বস্তু।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I085",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'পাকা ধানে মই' বাগধারাটির অর্থ কী?",
+  "options": [
+   "ধান কাটা",
+   "ফসল তোলা",
+   "সর্বনাশ করা",
+   "জমি চাষ করা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "সর্বনাশ করা",
+  "explanation": "‘পাকা ধানে মই’ অর্থ সর্বনাশ করা।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I086",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'বাঘের মাসি' বাগধারাটির অর্থ কী?",
+  "options": [
+   "গভীর সংকট",
+   "বিড়াল",
+   "সহজে অন্যের কথায় প্রভাবিত হওয়া",
+   "গভীর বন্ধুত্ব"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বিড়াল",
+  "explanation": "'বাঘের মাসি' বাগধারার অর্থ: বিড়াল।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I087",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'হাড়ে হাড়ে' বাগধারাটির অর্থ কী?",
+  "options": [
+   "অনভিজ্ঞতা",
+   "সম্পূর্ণভাবে",
+   "শুরুতেই ভুল",
+   "বিড়াল"
+  ],
+  "correct_index": 1,
+  "correct_answer": "সম্পূর্ণভাবে",
+  "explanation": "'হাড়ে হাড়ে' বাগধারার অর্থ: সম্পূর্ণভাবে।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I088",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'গলায় গলায়' বাগধারাটির অর্থ কী?",
+  "options": [
+   "গভীর বন্ধুত্ব",
+   "সতর্ক দৃষ্টি রাখা",
+   "কারও ক্ষতি করা",
+   "সহজে অন্যের কথায় প্রভাবিত হওয়া"
+  ],
+  "correct_index": 0,
+  "correct_answer": "গভীর বন্ধুত্ব",
+  "explanation": "'গলায় গলায়' বাগধারার অর্থ: গভীর বন্ধুত্ব।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I089",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'চোখে চোখে রাখা' বাগধারাটির অর্থ কী?",
+  "options": [
+   "দুর্ভাগ্য",
+   "আন্দাজে কাজ করা",
+   "বিড়াল",
+   "সতর্ক দৃষ্টি রাখা"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সতর্ক দৃষ্টি রাখা",
+  "explanation": "'চোখে চোখে রাখা' বাগধারার অর্থ: সতর্ক দৃষ্টি রাখা।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I090",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "বাগধারা",
+  "difficulty": "medium",
+  "question": "'মুখে মুখে' বাগধারাটির অর্থ কী?",
+  "options": [
+   "আন্দাজে কাজ করা",
+   "গভীর সংকট",
+   "কথায় কথায়",
+   "কঠোর পরিশ্রম করা"
+  ],
+  "correct_index": 2,
+  "correct_answer": "কথায় কথায়",
+  "explanation": "'মুখে মুখে' বাগধারার অর্থ: কথায় কথায়।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bagdhara",
+   "bangla",
+   "bank"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I091",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যা বলা যায় না — এক কথায় কী বলে?",
+  "options": [
+   "অসম্ভব",
+   "অনির্বচনীয়",
+   "ভূতপূর্ব",
+   "অজ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অনির্বচনীয়",
+  "explanation": "এক কথায় প্রকাশ: 'অনির্বচনীয়'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I092",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যা দেখা যায় না — এক কথায় কী বলে?",
+  "options": [
+   "অনন্ত",
+   "অদৃশ্য",
+   "শাশ্বত",
+   "বহুজ্ঞ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "অদৃশ্য",
+  "explanation": "এক কথায় প্রকাশ: 'অদৃশ্য'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I093",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যার তুলনা নেই — এক কথায় কী বলে?",
+  "options": [
+   "অতুলনীয়",
+   "নিরুপায়",
+   "অজ",
+   "শাশ্বত"
+  ],
+  "correct_index": 0,
+  "correct_answer": "অতুলনীয়",
+  "explanation": "এক কথায় প্রকাশ: 'অতুলনীয়'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I094",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যা পূর্বে ছিল — এক কথায় কী বলে?",
+  "options": [
+   "অতুলনীয়",
+   "ভূতপূর্ব",
+   "অনন্ত",
+   "শাশ্বত"
+  ],
+  "correct_index": 1,
+  "correct_answer": "ভূতপূর্ব",
+  "explanation": "এক কথায় প্রকাশ: 'ভূতপূর্ব'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I095",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যার শেষ নেই — এক কথায় কী বলে?",
+  "options": [
+   "দুর্ভেদ্য",
+   "শাশ্বত",
+   "বহুজ্ঞ",
+   "অনন্ত"
+  ],
+  "correct_index": 3,
+  "correct_answer": "অনন্ত",
+  "explanation": "এক কথায় প্রকাশ: 'অনন্ত'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I096",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যা চিরকাল থাকে — এক কথায় কী বলে?",
+  "options": [
+   "শাশ্বত",
+   "নিরুপায়",
+   "অতুলনীয়",
+   "দুর্ভেদ্য"
+  ],
+  "correct_index": 0,
+  "correct_answer": "শাশ্বত",
+  "explanation": "এক কথায় প্রকাশ: 'শাশ্বত'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I097",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যিনি অনেক জানেন — এক কথায় কী বলে?",
+  "options": [
+   "ভূতপূর্ব",
+   "বহুজ্ঞ",
+   "দুর্ভেদ্য",
+   "অসম্ভব"
+  ],
+  "correct_index": 1,
+  "correct_answer": "বহুজ্ঞ",
+  "explanation": "এক কথায় প্রকাশ: 'বহুজ্ঞ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I098",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যার জন্ম হয়নি — এক কথায় কী বলে?",
+  "options": [
+   "অজ",
+   "দুর্ভেদ্য",
+   "ভূতপূর্ব",
+   "অদৃশ্য"
+  ],
+  "correct_index": 0,
+  "correct_answer": "অজ",
+  "explanation": "এক কথায় প্রকাশ: 'অজ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I099",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যা সহজে ভাঙে না — এক কথায় কী বলে?",
+  "options": [
+   "নিরুপায়",
+   "দুর্ভেদ্য",
+   "অতুলনীয়",
+   "বহুজ্ঞ"
+  ],
+  "correct_index": 1,
+  "correct_answer": "দুর্ভেদ্য",
+  "explanation": "এক কথায় প্রকাশ: 'দুর্ভেদ্য'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I100",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যে নিজের ইচ্ছায় চলে — এক কথায় কী বলে?",
+  "options": [
+   "ভূতপূর্ব",
+   "শাশ্বত",
+   "অদৃশ্য",
+   "স্বেচ্ছাচারী"
+  ],
+  "correct_index": 3,
+  "correct_answer": "স্বেচ্ছাচারী",
+  "explanation": "এক কথায় প্রকাশ: 'স্বেচ্ছাচারী'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I101",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যা কখনো হয় না — এক কথায় কী বলে?",
+  "options": [
+   "অনন্ত",
+   "স্বেচ্ছাচারী",
+   "অসম্ভব",
+   "অদৃশ্য"
+  ],
+  "correct_index": 2,
+  "correct_answer": "অসম্ভব",
+  "explanation": "এক কথায় প্রকাশ: 'অসম্ভব'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I102",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "এক কথায় প্রকাশ",
+  "difficulty": "medium",
+  "question": "যার কোনো উপায় নেই — এক কথায় কী বলে?",
+  "options": [
+   "অসম্ভব",
+   "নিরুপায়",
+   "শাশ্বত",
+   "অনির্বচনীয়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "নিরুপায়",
+  "explanation": "এক কথায় প্রকাশ: 'নিরুপায়'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "one-word"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I103",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'বিদ্যা + আলয়' — সন্ধি বিচ্ছেদে সঠিক রূপ কোনটি?",
+  "options": [
+   "পরমেশ্বর",
+   "রাজর্ষি",
+   "নবান্ন",
+   "বিদ্যালয়"
+  ],
+  "correct_index": 3,
+  "correct_answer": "বিদ্যালয়",
+  "explanation": "'বিদ্যা + আলয়' সন্ধিতে হয় 'বিদ্যালয়'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "sandhi"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I104",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'মহা + ঈশ' — সন্ধি বিচ্ছেদে সঠিক রূপ কোনটি?",
+  "options": [
+   "পরমেশ্বর",
+   "নীরব",
+   "বিদ্যালয়",
+   "মহেশ"
+  ],
+  "correct_index": 3,
+  "correct_answer": "মহেশ",
+  "explanation": "'মহা + ঈশ' সন্ধিতে হয় 'মহেশ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "sandhi"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I105",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'নব + অন্ন' — সন্ধি বিচ্ছেদে সঠিক রূপ কোনটি?",
+  "options": [
+   "সজ্জন",
+   "নবান্ন",
+   "বিদ্যালয়",
+   "রাজর্ষি"
+  ],
+  "correct_index": 1,
+  "correct_answer": "নবান্ন",
+  "explanation": "'নব + অন্ন' সন্ধিতে হয় 'নবান্ন'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "sandhi"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I106",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'রাজা + ঋষি' — সন্ধি বিচ্ছেদে সঠিক রূপ কোনটি?",
+  "options": [
+   "সজ্জন",
+   "রাজর্ষি",
+   "পরমেশ্বর",
+   "বিদ্যালয়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "রাজর্ষি",
+  "explanation": "'রাজা + ঋষি' সন্ধিতে হয় 'রাজর্ষি'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "sandhi"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I107",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'পরম + ঈশ্বর' — সন্ধি বিচ্ছেদে সঠিক রূপ কোনটি?",
+  "options": [
+   "সজ্জন",
+   "নীরব",
+   "মহেশ",
+   "পরমেশ্বর"
+  ],
+  "correct_index": 3,
+  "correct_answer": "পরমেশ্বর",
+  "explanation": "'পরম + ঈশ্বর' সন্ধিতে হয় 'পরমেশ্বর'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "sandhi"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I108",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'সৎ + জন' — সন্ধি বিচ্ছেদে সঠিক রূপ কোনটি?",
+  "options": [
+   "সজ্জন",
+   "পরমেশ্বর",
+   "নবান্ন",
+   "নীরব"
+  ],
+  "correct_index": 0,
+  "correct_answer": "সজ্জন",
+  "explanation": "'সৎ + জন' সন্ধিতে হয় 'সজ্জন'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "sandhi"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I109",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'নিঃ + রব' — সন্ধি বিচ্ছেদে সঠিক রূপ কোনটি?",
+  "options": [
+   "পরমেশ্বর",
+   "বিদ্যালয়",
+   "নীরব",
+   "মহেশ"
+  ],
+  "correct_index": 2,
+  "correct_answer": "নীরব",
+  "explanation": "'নিঃ + রব' সন্ধিতে হয় 'নীরব'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "sandhi"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I110",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সন্ধি",
+  "difficulty": "medium",
+  "question": "'মনঃ + যোগ' — সন্ধি বিচ্ছেদে সঠিক রূপ কোনটি?",
+  "options": [
+   "বিদ্যালয়",
+   "রাজর্ষি",
+   "মনোযোগ",
+   "পরমেশ্বর"
+  ],
+  "correct_index": 2,
+  "correct_answer": "মনোযোগ",
+  "explanation": "'মনঃ + যোগ' সন্ধিতে হয় 'মনোযোগ'।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "sandhi"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "VERIFIED",
+  "review_reason": "Substantively spot-checked 27 Nov 2026 (C-job stratified sample, n=174); marked answer verified correct.",
+  "review_batch": "C-job spot sample 27 Nov 2026",
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I111",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'রাজপুত্র' — কোন সমাসের উদাহরণ ও ব্যাসবাক্য কোনটি?",
+  "options": [
+   "রাজার পুত্র — তৎপুরুষ সমাস",
+   "নীল কণ্ঠ যার — বহুব্রীহি সমাস",
+   "পাঁচটি বটের সমাহার — দ্বিগু সমাস",
+   "জায়া ও পতি — দ্বন্দ্ব সমাস"
+  ],
+  "correct_index": 0,
+  "correct_answer": "রাজার পুত্র — তৎপুরুষ সমাস",
+  "explanation": "'রাজপুত্র' হলো: রাজার পুত্র — তৎপুরুষ সমাস।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "samas"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I112",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'নীলকণ্ঠ' — কোন সমাসের উদাহরণ ও ব্যাসবাক্য কোনটি?",
+  "options": [
+   "পাঁচটি বটের সমাহার — দ্বিগু সমাস",
+   "চন্দ্রের ন্যায় মুখ — উপমিত কর্মধারয়",
+   "রাজার পুত্র — তৎপুরুষ সমাস",
+   "নীল কণ্ঠ যার — বহুব্রীহি সমাস"
+  ],
+  "correct_index": 3,
+  "correct_answer": "নীল কণ্ঠ যার — বহুব্রীহি সমাস",
+  "explanation": "'নীলকণ্ঠ' হলো: নীল কণ্ঠ যার — বহুব্রীহি সমাস।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "samas"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I113",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'দম্পতি' — কোন সমাসের উদাহরণ ও ব্যাসবাক্য কোনটি?",
+  "options": [
+   "পাঁচটি বটের সমাহার — দ্বিগু সমাস",
+   "জায়া ও পতি — দ্বন্দ্ব সমাস",
+   "রাজার পুত্র — তৎপুরুষ সমাস",
+   "চন্দ্রের ন্যায় মুখ — উপমিত কর্মধারয়"
+  ],
+  "correct_index": 1,
+  "correct_answer": "জায়া ও পতি — দ্বন্দ্ব সমাস",
+  "explanation": "'দম্পতি' হলো: জায়া ও পতি — দ্বন্দ্ব সমাস।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "samas"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I114",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'চন্দ্রমুখ' — কোন সমাসের উদাহরণ ও ব্যাসবাক্য কোনটি?",
+  "options": [
+   "চন্দ্রের ন্যায় মুখ — উপমিত কর্মধারয়",
+   "জায়া ও পতি — দ্বন্দ্ব সমাস",
+   "রাজার পুত্র — তৎপুরুষ সমাস",
+   "পাঁচটি বটের সমাহার — দ্বিগু সমাস"
+  ],
+  "correct_index": 0,
+  "correct_answer": "চন্দ্রের ন্যায় মুখ — উপমিত কর্মধারয়",
+  "explanation": "'চন্দ্রমুখ' হলো: চন্দ্রের ন্যায় মুখ — উপমিত কর্মধারয়।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "samas"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I115",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "সমাস",
+  "difficulty": "medium",
+  "question": "'পঞ্চবটী' — কোন সমাসের উদাহরণ ও ব্যাসবাক্য কোনটি?",
+  "options": [
+   "নীল কণ্ঠ যার — বহুব্রীহি সমাস",
+   "জায়া ও পতি — দ্বন্দ্ব সমাস",
+   "পাঁচটি বটের সমাহার — দ্বিগু সমাস",
+   "চন্দ্রের ন্যায় মুখ — উপমিত কর্মধারয়"
+  ],
+  "correct_index": 2,
+  "correct_answer": "পাঁচটি বটের সমাহার — দ্বিগু সমাস",
+  "explanation": "'পঞ্চবটী' হলো: পাঁচটি বটের সমাহার — দ্বিগু সমাস।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "samas"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I116",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "medium",
+  "question": "'সে চোখে দেখে।' — 'চোখে' কোন কারক?",
+  "options": [
+   "কর্ম কারক",
+   "করণ কারক",
+   "অপাদান কারক",
+   "অধিকরণ কারক"
+  ],
+  "correct_index": 1,
+  "correct_answer": "করণ কারক",
+  "explanation": "যে উপায়ে কাজ সম্পন্ন হয় তা করণ কারক; এখানে চোখ দেখার উপায়।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "karak"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I117",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "medium",
+  "question": "'তিনি ঢাকা থেকে এলেন।' — 'ঢাকা থেকে' কোন কারক?",
+  "options": [
+   "করণ কারক",
+   "সম্প্রদান কারক",
+   "অপাদান কারক",
+   "কর্তৃকারক"
+  ],
+  "correct_index": 2,
+  "correct_answer": "অপাদান কারক",
+  "explanation": "যেখান থেকে কিছু আসে বা বিচ্যুত হয় তা অপাদান কারক।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "karak"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I118",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "medium",
+  "question": "'রাজা প্রজাকে দান করলেন।' — 'প্রজাকে' কোন কারক?",
+  "options": [
+   "কর্ম কারক",
+   "করণ কারক",
+   "অপাদান কারক",
+   "সম্প্রদান কারক"
+  ],
+  "correct_index": 3,
+  "correct_answer": "সম্প্রদান কারক",
+  "explanation": "দান গ্রহণকারী সম্প্রদান কারক হয়।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "karak"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I119",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "medium",
+  "question": "'সে স্কুলে যায়।' — 'স্কুলে' কোন কারক?",
+  "options": [
+   "অধিকরণ কারক",
+   "করণ কারক",
+   "অপাদান কারক",
+   "কর্ম কারক"
+  ],
+  "correct_index": 0,
+  "correct_answer": "অধিকরণ কারক",
+  "explanation": "স্থান বোঝালে অধিকরণ কারক হয়।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "karak"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ },
+ {
+  "id": "JOBQ-I120",
+  "exam_canonical": "bank",
+  "subject_canonical": "Bangla",
+  "subject_slug": "bangla",
+  "topic": "কারক",
+  "difficulty": "medium",
+  "question": "'মা শিশুকে ভাত খাওয়ান।' — 'শিশুকে' কোন কারক?",
+  "options": [
+   "অপাদান কারক",
+   "অধিকরণ কারক",
+   "করণ কারক",
+   "কর্ম কারক"
+  ],
+  "correct_index": 3,
+  "correct_answer": "কর্ম কারক",
+  "explanation": "ক্রিয়ার কাজ যার ওপর পড়ে তা কর্ম কারক।",
+  "source_status": "circular-citation-only",
+  "source_detail": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "syllabus_source": "BSCS Circular 348/2026 — Senior Officer (General), Job ID 26101; Preliminary MCQ syllabus (English 20, Bangla 20, Math 20, Banking 10, Analytical 20, ICT 10), erecruitment.bb.org.bd",
+  "tags": [
+   "bangla",
+   "bank",
+   "karak"
+  ],
+  "source_stream": "bank",
+  "source_file": "bank-i-bangla-01.json",
+  "applies_to": [
+   "bank"
+  ],
+  "review_verdict": "NEEDS-REVIEW",
+  "review_reason": "Not yet substantively reviewed; generic textbook mention only, no per-question source, not a previous-year question.",
+  "review_batch": null,
+  "shuffle_required": false,
+  "is_previous_year": false,
+  "exam_year": null
+ }
+]
