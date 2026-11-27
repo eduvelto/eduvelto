@@ -235,6 +235,30 @@ import { PermutationCombinationCalculatorTool } from './tools/PermutationCombina
 import { ProbabilityCalculatorTool } from './tools/ProbabilityCalculatorTool';
 import { BinaryHexOctalCalculatorTool } from './tools/BinaryHexOctalCalculatorTool';
 import { MatrixCalculatorTool } from './tools/MatrixCalculatorTool';
+import { RandomWordGeneratorTool } from './tools/RandomWordGeneratorTool';
+import { ZalgoTextGeneratorTool } from './tools/ZalgoTextGeneratorTool';
+import { SmallTextGeneratorTool } from './tools/SmallTextGeneratorTool';
+import { PrefixSuffixAdderTool } from './tools/PrefixSuffixAdderTool';
+import { ListToCsvConverterTool } from './tools/ListToCsvConverterTool';
+import { TextToBinaryConverterTool } from './tools/TextToBinaryConverterTool';
+import { BinaryToTextConverterTool } from './tools/BinaryToTextConverterTool';
+import { MorseCodeConverterTool } from './tools/MorseCodeConverterTool';
+import { AsciiArtGeneratorTool } from './tools/AsciiArtGeneratorTool';
+import { EmojiPickerTool } from './tools/EmojiPickerTool';
+import { InvisibleCharacterGeneratorTool } from './tools/InvisibleCharacterGeneratorTool';
+import { PalindromeCheckerTool } from './tools/PalindromeCheckerTool';
+import { AnagramSolverTool } from './tools/AnagramSolverTool';
+import { EssayThesisGeneratorTool } from './tools/EssayThesisGeneratorTool';
+import { KeywordDensityCheckerTool } from './tools/KeywordDensityCheckerTool';
+import { SlugGeneratorTool } from './tools/SlugGeneratorTool';
+import { ReadabilityScoreCheckerTool } from './tools/ReadabilityScoreCheckerTool';
+import { BioUsernameGeneratorTool } from './tools/BioUsernameGeneratorTool';
+import { HashtagGeneratorTool } from './tools/HashtagGeneratorTool';
+import { YoutubeTitleDescriptionCheckerTool } from './tools/YoutubeTitleDescriptionCheckerTool';
+import { LineNumberAdderTool } from './tools/LineNumberAdderTool';
+import { WheelSpinnerTool } from './tools/WheelSpinnerTool';
+import { CoinFlipDiceRollerTool } from './tools/CoinFlipDiceRollerTool';
+import { WordsToNumberConverterTool } from './tools/WordsToNumberConverterTool';
 import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
@@ -450,6 +474,31 @@ const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'probability-calculator': ProbabilityCalculatorTool,
   'binary-hex-octal-calculator': BinaryHexOctalCalculatorTool,
   'matrix-calculator': MatrixCalculatorTool,
+  // Text batch, 27 Nov 2026 (93-tools build)
+  'random-word-generator': RandomWordGeneratorTool,
+  'zalgo-text-generator': ZalgoTextGeneratorTool,
+  'small-text-generator': SmallTextGeneratorTool,
+  'prefix-suffix-adder': PrefixSuffixAdderTool,
+  'list-to-csv-converter': ListToCsvConverterTool,
+  'text-to-binary-converter': TextToBinaryConverterTool,
+  'binary-to-text-converter': BinaryToTextConverterTool,
+  'morse-code-converter': MorseCodeConverterTool,
+  'ascii-art-generator': AsciiArtGeneratorTool,
+  'emoji-picker': EmojiPickerTool,
+  'invisible-character-generator': InvisibleCharacterGeneratorTool,
+  'palindrome-checker': PalindromeCheckerTool,
+  'anagram-solver': AnagramSolverTool,
+  'essay-thesis-generator': EssayThesisGeneratorTool,
+  'keyword-density-checker': KeywordDensityCheckerTool,
+  'slug-generator': SlugGeneratorTool,
+  'readability-score-checker': ReadabilityScoreCheckerTool,
+  'bio-username-generator': BioUsernameGeneratorTool,
+  'hashtag-generator': HashtagGeneratorTool,
+  'youtube-title-description-checker': YoutubeTitleDescriptionCheckerTool,
+  'line-number-adder': LineNumberAdderTool,
+  'wheel-spinner': WheelSpinnerTool,
+  'coin-flip-dice-roller': CoinFlipDiceRollerTool,
+  'words-to-number-converter': WordsToNumberConverterTool,
 };
 
 const gridStyle: CSSProperties = {
