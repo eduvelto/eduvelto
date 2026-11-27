@@ -46,6 +46,17 @@ export default defineConfig(({ isSsrBuild }) => ({
       // revisit if the entry chunk approaches it.
       injectManifest: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+        // Precache glob (27 Nov 2026, A-tools ONNX): workbox-build's
+        // DEFAULT glob is '**/*.{js,wasm,css,html}' — it includes
+        // .wasm, and the onnxruntime-web wasm (29.5 MB) then exceeds
+        // the 5 MB limit and fails the build. The repo's workbox
+        // globPatterns above is NOT passed to injectManifest by
+        // vite-plugin-pwa (buildSW passes only injectManifest), so
+        // the set must be stated here too. Wasm is deliberately NOT
+        // precached: the ONNX + qpdf wasm files are fetched on demand
+        // when their tool runs, and 29.5 MB on service-worker install
+        // would be unacceptable.
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],

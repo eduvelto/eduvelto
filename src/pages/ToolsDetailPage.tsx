@@ -175,6 +175,39 @@ import { GovtServiceLinksTool } from './tools/GovtServiceLinksTool';
 import { ResultsHubTool } from './tools/ResultsHubTool';
 import { NotesTodoTool } from './tools/NotesTodoTool';
 import { TasbihCounterTool } from './tools/TasbihCounterTool';
+import { CharacterCounterTool } from './tools/CharacterCounterTool';
+import { ReadingTimeTool } from './tools/ReadingTimeTool';
+import { StopwatchTool } from './tools/StopwatchTool';
+import { WorldClockTool } from './tools/WorldClockTool';
+import { IdealWeightTool } from './tools/IdealWeightTool';
+import { ProfitMarginTool } from './tools/ProfitMarginTool';
+import { SimpleInterestTool } from './tools/SimpleInterestTool';
+import { SavingsGoalTool } from './tools/SavingsGoalTool';
+import { FuelCostTool } from './tools/FuelCostTool';
+import { UnixTimestampTool } from './tools/UnixTimestampTool';
+import { DateDifferenceTool } from './tools/DateDifferenceTool';
+import { TimeDurationTool } from './tools/TimeDurationTool';
+import { TextSorterTool } from './tools/TextSorterTool';
+import { CsvToExcelTool } from './tools/CsvToExcelTool';
+import { ExcelToCsvTool } from './tools/ExcelToCsvTool';
+import { JsonToCsvTool } from './tools/JsonToCsvTool';
+import { XmlFormatterTool } from './tools/XmlFormatterTool';
+import { MarkdownToHtmlTool } from './tools/MarkdownToHtmlTool';
+import { HtmlToMarkdownTool } from './tools/HtmlToMarkdownTool';
+import { QrCodeGeneratorTool } from './tools/QrCodeGeneratorTool';
+import { QrCodeReaderTool } from './tools/QrCodeReaderTool';
+import { BarcodeGeneratorTool } from './tools/BarcodeGeneratorTool';
+import { PasswordGeneratorTool } from './tools/PasswordGeneratorTool';
+import { PasswordStrengthTool } from './tools/PasswordStrengthTool';
+import { RandomNumberTool } from './tools/RandomNumberTool';
+import { RandomNamePickerTool } from './tools/RandomNamePickerTool';
+import { PdfMergerTool } from './tools/PdfMergerTool';
+import { PdfRotateTool } from './tools/PdfRotateTool';
+import { PdfPageNumberTool } from './tools/PdfPageNumberTool';
+import { FlashcardMakerTool } from './tools/FlashcardMakerTool';
+import { AgeCalculatorTool } from './tools/AgeCalculatorTool';
+import { PercentageConverterTool } from './tools/PercentageConverterTool';
+import { LoanEmiCalculatorTool } from './tools/LoanEmiCalculatorTool';
 import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
@@ -326,6 +359,43 @@ const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'results-hub': ResultsHubTool,
   'notes-todo': NotesTodoTool,
   'tasbih-counter': TasbihCounterTool,
+  // A-tools batch, wired 27 Nov 2026 (landing/tools). The 4 remaining
+  // alias slugs (typing-speed-test, cv-builder, cover-letter-builder,
+  // unit-converter) still render their hub pages.
+  'character-counter': CharacterCounterTool,
+  'reading-time-calculator': ReadingTimeTool,
+  'text-sorter': TextSorterTool,
+  'stopwatch': StopwatchTool,
+  'world-clock': WorldClockTool,
+  'time-zone-converter': WorldDateConverterTool,
+  'date-difference-calculator': DateDifferenceTool,
+  'time-duration-calculator': TimeDurationTool,
+  'unix-timestamp-converter': UnixTimestampTool,
+  'ideal-weight-calculator': IdealWeightTool,
+  'flashcard-maker': FlashcardMakerTool,
+  'random-name-picker': RandomNamePickerTool,
+  'profit-margin-calculator': ProfitMarginTool,
+  'simple-interest-calculator': SimpleInterestTool,
+  'savings-goal-calculator': SavingsGoalTool,
+  'fuel-cost-calculator': FuelCostTool,
+  'pdf-rotate': PdfRotateTool,
+  'pdf-page-number-adder': PdfPageNumberTool,
+  'csv-to-excel': CsvToExcelTool,
+  'excel-to-csv': ExcelToCsvTool,
+  'json-to-csv': JsonToCsvTool,
+  'xml-formatter': XmlFormatterTool,
+  'markdown-to-html': MarkdownToHtmlTool,
+  'html-to-markdown': HtmlToMarkdownTool,
+  'qr-code-generator': QrCodeGeneratorTool,
+  'qr-code-reader': QrCodeReaderTool,
+  'barcode-generator': BarcodeGeneratorTool,
+  'password-generator': PasswordGeneratorTool,
+  'password-strength-checker': PasswordStrengthTool,
+  'random-number-generator': RandomNumberTool,
+  'pdf-merger': PdfMergerTool,
+  'age-calculator': AgeCalculatorTool,
+  'percentage-converter': PercentageConverterTool,
+  'loan-emi-calculator': LoanEmiCalculatorTool,
 };
 
 const gridStyle: CSSProperties = {

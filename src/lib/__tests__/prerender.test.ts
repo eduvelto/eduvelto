@@ -687,7 +687,7 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
 });
 
 describe('getToolPaths — 100-tools project (26 Nov 2026)', () => {
-  it('derives the hub + one path per tool from toolsMeta.ts (142: /tools + 141 live tools)', () => {
+  it('derives the hub + one path per tool from toolsMeta.ts (172: /tools + 171 live tools)', () => {
     // Same source the prerender script reads. A future tool adds its
     // path here automatically — no prerender-list edit per tool.
     // 27 Nov 2026: 141 slugs in toolsMeta.ts, INCLUDING the Lab Test
@@ -696,7 +696,7 @@ describe('getToolPaths — 100-tools project (26 Nov 2026)', () => {
     // prerenders + sitemaps like every other tool.
     const source = readFileSync(join(process.cwd(), 'src', 'lib', 'toolsMeta.ts'), 'utf8');
     const paths = getToolPaths(source);
-    expect(paths).toHaveLength(142);
+    expect(paths).toHaveLength(172);
     expect(paths[0]).toBe('/tools');
     expect(paths).toContain('/tools/lab-test-result-checker');
     expect(new Set(paths).size).toBe(paths.length);

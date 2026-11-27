@@ -5,9 +5,9 @@
 // no network. Convert a date + time from one zone to another, with
 // a "Load example" (15:00 Dhaka) button.
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
-import { COMMON_TIME_ZONES, convertBetweenZones } from '../../lib/tools/timeZones';
+import { COMMON_TIME_ZONES, convertBetweenZones, formatInZone } from '../../lib/tools/timeZones';
 import {
   inputStyle, labelStyle, gridStyle, cardStyle, resultStyle, headlineStyle,
   headlineLabelStyle, tileGridStyle, noteStyle, buttonRowStyle, ToolHero, CopyButton, Tile,
@@ -24,6 +24,13 @@ export function WorldDateConverterTool() {
   const [time, setTime] = useState('15:00');
   const [fromZone, setFromZone] = useState('Asia/Dhaka');
   const [toZone, setToZone] = useState('Europe/London');
+  // Live "current time in each zone" line (A-tools, landed 27 Nov 2026):
+  // ticks once a second so the two zones can be compared right now.
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(new Date()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
 
   const result = useMemo(
     () => convertBetweenZones(date, time, fromZone, toZone),
@@ -134,6 +141,12 @@ export function WorldDateConverterTool() {
           {t({ bn: 'সঠিক তারিখ ও সময় দিন।', en: 'Enter a valid date and time.' })}
         </p>
       )}
+      <p style={noteStyle}>
+        {t({
+          bn: `এখন: ${zoneName(fromZone)}-এ ${formatInZone(now, fromZone, lang)} • ${zoneName(toZone)}-এ ${formatInZone(now, toZone, lang)}।`,
+          en: `Now: ${formatInZone(now, fromZone, lang)} in ${zoneName(fromZone)} • ${formatInZone(now, toZone, lang)} in ${zoneName(toZone)}.`,
+        })}
+      </p>
     </section>
   );
 }

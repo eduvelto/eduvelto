@@ -747,7 +747,7 @@ export const TOOL_ICON_NAMES: ToolIconName[] = Object.keys(ICON_PATHS) as ToolIc
 // a letter or an empty tile.
 // ---------------------------------------------------------------------------
 export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
-  // PDF & Document (12)
+  // PDF & Document (14)
   'pdf-merger': 'docMerge',
   'pdf-splitter': 'docSplit',
   'pdf-compressor': 'docCompress',
@@ -760,6 +760,8 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'text-to-pdf': 'doc',
   'pdf-password-protector': 'docLock',
   'pdf-page-remover': 'docX',
+  'pdf-rotate': 'reverseArrows',
+  'pdf-page-number-adder': 'hash',
   // Image & Graphics (17)
   'image-compressor': 'imageCompress',
   'image-resizer': 'resize',
@@ -778,7 +780,7 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'image-filter': 'filter',
   'youtube-thumbnail-downloader': 'play',
   'background-remover': 'scissors',
-  // Finance & Loan (16)
+  // Finance & Loan (20)
   'mortgage-calculator': 'home',
   'compound-interest-calculator': 'growth',
   'loan-emi-calculator': 'calendarCoin',
@@ -795,7 +797,11 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'expense-splitter': 'users',
   'break-even-calculator': 'growth',
   'bkash-nagad-calculator': 'phoneCoin',
-  // Health & Fitness (11)
+  'profit-margin-calculator': 'tagPercent',
+  'simple-interest-calculator': 'calculator',
+  'savings-goal-calculator': 'vault',
+  'fuel-cost-calculator': 'droplet',
+  // Health & Fitness (12)
   'bmi-calculator': 'scale',
   'calorie-tdee-calculator': 'flame',
   'macro-nutrient-calculator': 'apple',
@@ -808,7 +814,8 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'pace-speed-calculator': 'stopwatch',
   'ovulation-calculator': 'calendarHeart',
   'lab-test-result-checker': 'flask',
-  // Education & Student (10)
+  'ideal-weight-calculator': 'scale',
+  // Education & Student (11)
   'ssc-hsc-gpa-calculator': 'gradCap',
   'nu-cgpa-calculator': 'openBook',
   'international-gpa-calculator': 'globe',
@@ -819,6 +826,7 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'grade-analyzer': 'chartCheck',
   'attendance-calculator': 'clipboardCheck',
   'scientific-calculator': 'calculator',
+  'flashcard-maker': 'flashcard',
   // Job & Career (10)
   'govt-job-age-calculator': 'idCard',
   'bcs-marks-calculator': 'trophy',
@@ -830,7 +838,7 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'cover-letter-builder': 'envelope',
   'application-fee-calculator': 'receipt',
   'admit-card-checklist': 'clipboardCheck',
-  // Teacher & Institution (10)
+  // Teacher & Institution (11)
   'exam-seat-plan-generator': 'seatGrid',
   'merit-rank-result-sheet': 'medal',
   'pass-fail-analyzer': 'chartCheck',
@@ -841,7 +849,8 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'certificate-maker': 'certificate',
   'assignment-cover-generator': 'bookStar',
   'percentage-converter': 'convert',
-  // Text, Language & Writing (16)
+  'random-name-picker': 'users',
+  // Text, Language & Writing (19)
   'bijoy-to-unicode-converter': 'translate',
   'unicode-to-bijoy-converter': 'translate',
   'word-counter': 'countDoc',
@@ -858,7 +867,10 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'speech-to-text': 'mic',
   'fancy-text-generator': 'sparkles',
   'reverse-text-generator': 'reverseArrows',
-  // Developer & Web (14)
+  'character-counter': 'countDoc',
+  'reading-time-calculator': 'openBook',
+  'text-sorter': 'reorder',
+  // Developer & Web (23)
   'json-formatter': 'braces',
   'code-minifier-beautifier': 'code',
   'base64-encoder-decoder': 'code',
@@ -873,7 +885,16 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'roman-numeral-converter': 'convert',
   'jwt-token-decoder': 'key',
   'html-table-generator': 'tableGrid',
-  // Daily Life, Islamic & Utility (19)
+  'unix-timestamp-converter': 'code',
+  'csv-to-excel': 'tableGrid',
+  'excel-to-csv': 'convert',
+  'json-to-csv': 'braces',
+  'xml-formatter': 'code',
+  'markdown-to-html': 'paragraph',
+  'html-to-markdown': 'diffDocs',
+  'password-generator': 'key',
+  'password-strength-checker': 'docLock',
+  // Daily Life, Islamic & Utility (28)
   'prayer-times': 'mosque',
   'hijri-date-converter': 'moonCalendar',
   'daily-quran-verse': 'openBook',
@@ -893,6 +914,15 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'tasbih-counter': 'beads',
   'whatsapp-link-generator': 'chatPhone',
   'screen-resolution-checker': 'resize',
+  'stopwatch': 'stopwatch',
+  'world-clock': 'globe',
+  'time-zone-converter': 'clock',
+  'date-difference-calculator': 'calendarCheck',
+  'time-duration-calculator': 'hourglass',
+  'random-number-generator': 'sparkles',
+  'qr-code-generator': 'gridPaper',
+  'qr-code-reader': 'imageSearch',
+  'barcode-generator': 'tag',
   // Video & Music (5)
   'video-compressor': 'filmCompress',
   'video-trimmer': 'scissors',

@@ -68,8 +68,10 @@ describe('ToolsDetailPage guide rendering', () => {
   });
 
   it('renders no guide section for a tool with no guide at all', () => {
+    // unit-converter is an alias slug (no structured or prose guide):
+    // it renders its alias page, never ToolsDetailPage's guide section.
     mockLangState.lang = 'bn';
-    const html = renderTool('/bn/tools/certificate-maker');
+    const html = renderTool('/bn/tools/unit-converter');
     expect(html).not.toContain('বিস্তারিত গাইড');
     expect(html).not.toContain('কীভাবে ব্যবহার করবেন');
     expect(html).not.toContain('সচরাচর প্রশ্ন');

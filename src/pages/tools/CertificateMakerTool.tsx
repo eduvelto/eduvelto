@@ -10,9 +10,12 @@
 // import), so it stays out of the main bundle. Pure shaping /
 // validation / filename logic lives in src/lib/tools/certificateMaker.ts.
 //
-// NOTE: the PDF uses jspdf's built-in Latin font, so Bangla script in
-// a name renders on the on-screen preview but not in the PDF itself —
-// the note under the preview says so honestly.
+// NOTE (fixed 27 Nov 2026, A-tools spec-08): the PDF no longer uses
+// jspdf's built-in Latin font for the certificate text. The certificate
+// is drawn onto a canvas first (the browser renders Bangla via system
+// fonts), then embedded as an image in the PDF — so Bangla names now
+// render in the downloaded PDF exactly as in the on-screen preview.
+// Same pattern as textToPdfBengali in LifePdfToolsPage.
 
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
@@ -106,8 +109,9 @@ const copyButtonStyle: CSSProperties = {
 
 /**
  * BD school occasion presets. The value fills the course / event
- * title in English (Latin script) so it also renders inside the PDF,
- * whose font has no Bangla glyphs; the label is bn/en via t().
+ * title. Since 27 Nov 2026 the PDF renders Bangla (canvas → image),
+ * so a Bangla title works in the PDF too; presets stay in English
+ * because schools usually print the event title in Latin script.
  */
 const OCCASION_PRESETS: readonly { value: string; bn: string; en: string }[] = [
   { value: 'Annual Examination — Merit Position', bn: 'বার্ষিক পরীক্ষা — মেধা', en: 'Annual Exam — Merit' },
@@ -157,6 +161,69 @@ export function CertificateMakerTool() {
   const style = getCertificateTemplateStyle(template);
   const filename = buildCertificateFilename(recipient);
 
+  /**
+   * Canvas-rendered PDF (A-tools spec-08, landed 27 Nov 2026): the
+   * certificate is drawn onto an A4-landscape canvas at 200 DPI, so
+   * the browser shapes Bangla text with system fonts, then embedded
+   * as a full-page image in jsPDF. The downloaded PDF now shows Bangla
+   * names exactly as the on-screen preview does.
+   */
+  function drawCertificateCanvas(): HTMLCanvasElement {
+    const canvas = document.createElement('canvas');
+    // A4 landscape at 200 DPI: 297 mm x 210 mm -> 2338 x 1654 px.
+    const W = 2338;
+    const H = 1654;
+    canvas.width = W;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Canvas is unavailable in this browser');
+    const mm = W / 297; // px per mm
+    const cx = W / 2;
+    ctx.fillStyle = style.backgroundColor;
+    ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = style.borderColor;
+    ctx.lineWidth = 1.2 * mm;
+    ctx.strokeRect(10 * mm, 10 * mm, W - 20 * mm, H - 20 * mm);
+    ctx.lineWidth = 0.4 * mm;
+    ctx.strokeRect(13 * mm, 13 * mm, W - 26 * mm, H - 26 * mm);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const font = (px: number, bold: boolean): string =>
+      `${bold ? '700' : '400'} ${px}px "Noto Sans Bengali", "Hind Siliguri", sans-serif`;
+    // Title
+    ctx.fillStyle = style.accentColor;
+    ctx.font = font(74, true);
+    ctx.fillText(t({ bn: 'সার্টিফিকেট', en: 'Certificate' }), cx, 45 * mm);
+    // Divider
+    ctx.strokeStyle = style.accentColor;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx - 36 * mm, 58 * mm);
+    ctx.lineTo(cx + 36 * mm, 58 * mm);
+    ctx.stroke();
+    // Presented-to line
+    ctx.fillStyle = '#666666';
+    ctx.font = font(34, false);
+    ctx.fillText(t({ bn: 'এই সার্টিফিকেটটি দেওয়া হচ্ছে', en: 'This certificate is proudly presented to' }), cx, 68 * mm);
+    // Recipient name
+    ctx.fillStyle = style.nameColor;
+    ctx.font = font(78, true);
+    ctx.fillText(recipient.trim(), cx, 88 * mm);
+    // Course line
+    ctx.fillStyle = '#666666';
+    ctx.font = font(34, false);
+    ctx.fillText(t({ bn: 'সফলভাবে সম্পন্ন করেছেন', en: 'for successfully completing' }), cx, 106 * mm);
+    ctx.fillStyle = style.accentColor;
+    ctx.font = font(48, true);
+    ctx.fillText(courseTitle.trim(), cx, 120 * mm);
+    // Date + issuer
+    ctx.fillStyle = '#1a1a1a';
+    ctx.font = font(34, false);
+    ctx.fillText(formatCertificateDate(date), cx, 156 * mm);
+    ctx.fillText(issuer.trim(), cx, 172 * mm);
+    return canvas;
+  }
+
   async function handleDownload(): Promise<void> {
     if (!ready || busy) return;
     setBusy(true);
@@ -165,38 +232,9 @@ export function CertificateMakerTool() {
     try {
       // Dynamic import only — jspdf stays out of the main bundle.
       const { jsPDF } = await import('jspdf');
+      const canvas = drawCertificateCanvas();
       const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-      const W = 297;
-      const H = 210;
-      doc.setFillColor(style.backgroundColor);
-      doc.rect(0, 0, W, H, 'F');
-      doc.setDrawColor(style.borderColor);
-      doc.setLineWidth(1.2);
-      doc.rect(10, 10, W - 20, H - 20);
-      doc.setLineWidth(0.4);
-      doc.rect(13, 13, W - 26, H - 26);
-      doc.setTextColor(style.accentColor);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(28);
-      doc.text('Certificate', W / 2, 45, { align: 'center' });
-      doc.setFontSize(13);
-      doc.setFont('helvetica', 'normal');
-      doc.text('This certificate is proudly presented to', W / 2, 62, { align: 'center' });
-      doc.setTextColor(style.nameColor);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(26);
-      doc.text(recipient.trim(), W / 2, 82, { align: 'center' });
-      doc.setTextColor(style.accentColor);
-      doc.setFontSize(14);
-      doc.setFont('helvetica', 'normal');
-      doc.text('for successfully completing', W / 2, 98, { align: 'center' });
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(18);
-      doc.text(courseTitle.trim(), W / 2, 112, { align: 'center' });
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(13);
-      doc.text(formatCertificateDate(date), W / 2, 150, { align: 'center' });
-      doc.text(issuer.trim(), W / 2, 168, { align: 'center' });
+      doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 297, 210);
       doc.save(filename);
       setDownloaded(true);
     } catch {
@@ -354,8 +392,8 @@ export function CertificateMakerTool() {
           </div>
           <p style={noteStyle}>
             {t({
-              bn: 'পিডিএফে বাংলা অক্ষর দেখা যায় না (পিডিএফের ফন্টে বাংলা নেই) — বাংলা নাম প্রিভিউতেই ঠিকভাবে দেখাবে। ফাইলের নাম: ',
-              en: 'Bangla script does not render inside the PDF (the PDF font has no Bangla glyphs) — a Bangla name shows correctly in the preview above. File name: ',
+              bn: 'পিডিএফে বাংলা নাম প্রিভিউয়ের মতোই দেখাবে — সার্টিফিকেটটি ক্যানভাসে আঁকা হয়, তারপর পিডিএফে বসানো হয়। ফাইলের নাম: ',
+              en: 'Bangla names render in the PDF just as in the preview — the certificate is drawn on a canvas, then placed in the PDF. File name: ',
             })}
             {filename}
           </p>

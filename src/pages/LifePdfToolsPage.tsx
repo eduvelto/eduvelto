@@ -3,6 +3,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { downloadBlobInApp } from '../lib/nativeFileDownload';
+import { mergePdfs } from '../lib/tools/pdfPageOps';
 
 // Eduvelto PDF Tools (§3C) — genuinely working client-side PDF tools.
 // No server is involved: text-to-PDF and merge-PDF both run entirely in
@@ -21,15 +22,11 @@ const BENGALI_RE = /[\u0980-\u09FF]/;
 // tool — never on page visit. The page itself is already route-lazy
 // (App.tsx), so neither library was ever in the entry chunk; this
 // removes both from the page chunk too. pdf-lib loads only when the
-// user clicks Merge (loadPdfLib, same pattern as loadJsPdf below).
+// user clicks Merge — inside mergePdfs() (src/lib/tools/pdfPageOps.ts),
+// the same shared engine the standalone PDF Merger tool uses.
 async function loadJsPdf() {
   const { jsPDF } = await import('jspdf');
   return jsPDF;
-}
-
-async function loadPdfLib() {
-  const { PDFDocument } = await import('pdf-lib');
-  return PDFDocument;
 }
 
 // IN-APP (audit, 24 Nov 2026): a stock Android WebView does not
@@ -223,16 +220,10 @@ export default function LifePdfToolsPage() {
     }
     setMergeBusy(true);
     try {
-      const PDFDocument = await loadPdfLib();
-      const merged = await PDFDocument.create();
-      for (const file of files) {
-        const bytes = await file.arrayBuffer();
-        const src = await PDFDocument.load(bytes, { ignoreEncryption: false });
-        const pages = await merged.copyPages(src, src.getPageIndices());
-        pages.forEach((page) => merged.addPage(page));
-      }
-      const out = await merged.save();
-      await downloadBlob(new Blob([out.buffer as ArrayBuffer], { type: 'application/pdf' }), 'eduvelto-merged.pdf');
+      // Shared engine (27 Nov 2026): the hub merge now calls the same
+      // mergePdfs() the standalone PDF Merger tool uses.
+      const result = await mergePdfs(files.map((file) => ({ blob: file, name: file.name })));
+      await downloadBlob(result.blob, 'eduvelto-merged.pdf');
       setMergeMsg(
         t({ bn: `${files.length}টি PDF একত্র করে ডাউনলোড হয়েছে।`, en: `${files.length} PDFs merged and downloaded.` }),
       );

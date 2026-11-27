@@ -25,16 +25,22 @@
     "firebase": "11.10.0",
     "heic2any": "0.0.4",
     "html2canvas": "^1.4.1",
+    "jsbarcode": "^3.12.3",
     "jspdf": "^4.2.1",
+    "jsqr": "^1.4.0",
+    "onnxruntime-web": "^1.31.1",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "5.4.624",
+    "qrcode": "^1.5.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^4.0.1",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
