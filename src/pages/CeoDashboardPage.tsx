@@ -14,6 +14,7 @@ import { getCeoCounts, LAST_VERIFIED_INVENTORY, type CeoCounts } from '../lib/ce
 import { formatBnNumber } from '../lib/admin';
 import { useLanguage } from '../i18n/LanguageContext';
 import { CeoEmpty, CeoSectionHead, CeoStatTile, CEO_ICON } from '../components/CeoShared';
+import OwnerSummarySection from '../components/OwnerSummarySection';
 
 type Period = '30d' | '3m' | '1y';
 
@@ -115,6 +116,8 @@ export default function CeoDashboardPage() {
         nextBn="ব্যবহারকারী বাড়লে এখানে আসল মাসিক সংখ্যা দেখা যাবে।"
         nextEn="Real monthly numbers will appear here as users grow."
       />
+
+      <OwnerSummarySection />
 
       <div style={{ marginTop: 16 }} className="ev-ceo-card">
         <strong>
