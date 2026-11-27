@@ -40,6 +40,15 @@ export function useRewardedAd(): RewardedAdState {
 export const REWARDED_AD_COPY = {
   freeDownload: { bn: 'ফ্রি ডাউনলোড', en: 'Free Download' },
   unlock: { bn: 'আনলক করুন (৩০ সেকেন্ডের বিজ্ঞাপন দেখুন)', en: 'Unlock (Watch 30s Ad)' },
+  /**
+   * 15-second variant for lighter outputs (image downloads, small
+   * text/data exports — ads rollout, 27 Nov 2026). Durations are
+   * COPY-LEVEL ONLY until the real rewarded API lands: the placeholder
+   * never triggers an ad and never uses a timer; the real AdSense/GPT
+   * Rewarded Ad API enforces the real duration later. The intended
+   * duration per place is recorded in fast-program/ads-rollout-audit.md.
+   */
+  unlock15: { bn: 'আনলক করুন (১৫ সেকেন্ডের বিজ্ঞাপন দেখুন)', en: 'Unlock (Watch 15s Ad)' },
   comingSoon: {
     bn: 'AdSense review-এ আছে — approve হলে চালু হবে',
     en: 'AdSense is under review — unlock will be available after approval',
@@ -47,3 +56,12 @@ export const REWARDED_AD_COPY = {
 } as const;
 
 export type RewardedAdLang = 'bn' | 'en';
+
+/**
+ * Intended rewarded-ad duration for a download action (ads rollout,
+ * 27 Nov 2026): 30s for high-value take-away files (PDF / video /
+ * audio / .docx), 15s for lighter outputs (image downloads, small
+ * text/data exports). Copy-level only until the real rewarded API
+ * lands — see REWARDED_AD_COPY.unlock15.
+ */
+export type RewardedAdDuration = 15 | 30;

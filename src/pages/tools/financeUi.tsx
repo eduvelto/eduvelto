@@ -13,6 +13,7 @@
 import { useCallback, useState, type CSSProperties, type ReactNode } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import RewardedAdButton from '../../components/RewardedAdButton';
+import type { RewardedAdDuration } from '../../lib/rewardedAd';
 
 export const inputStyle: CSSProperties = {
   width: '100%',
@@ -266,19 +267,25 @@ export function FinanceHero({
  * Free summary download via the existing RewardedAdButton (the Unlock
  * option stays disabled until AdSense approval — never a fake timer).
  * Renders nothing when `text` is null (no result yet).
+ * `durationSeconds` is the intended rewarded-ad duration for this
+ * summary (ads rollout, 27 Nov 2026): finance summaries are small
+ * .txt exports, so call sites pass 15; default 30 keeps the old copy
+ * for any caller that does not set it.
  */
 export function SummaryDownload({
   filename,
   text,
+  durationSeconds = 30,
 }: {
   filename: string;
   text: string | null;
+  durationSeconds?: RewardedAdDuration;
 }): ReactNode {
   const { lang } = useLanguage();
   if (text === null) return null;
   return (
     <div style={{ marginTop: 14 }}>
-      <RewardedAdButton lang={lang} onFreeDownload={() => downloadTextFile(filename, text)} />
+      <RewardedAdButton lang={lang} durationSeconds={durationSeconds} onFreeDownload={() => downloadTextFile(filename, text)} />
     </div>
   );
 }

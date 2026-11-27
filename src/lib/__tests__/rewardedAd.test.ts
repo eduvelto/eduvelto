@@ -54,4 +54,36 @@ describe('rewardedAd placeholder', () => {
       }
     }
   });
+
+  it('durationSeconds=15 renders the 15s unlock copy (bn and en), not the 30s copy', () => {
+    for (const lang of ['bn', 'en'] as const) {
+      const html = renderToString(
+        React.createElement(RewardedAdButton, { lang, durationSeconds: 15, onFreeDownload: () => {} }),
+      );
+      expect(html).toContain(REWARDED_AD_COPY.unlock15[lang]);
+      expect(html).not.toContain(REWARDED_AD_COPY.unlock[lang]);
+      expect(html).toContain(REWARDED_AD_COPY.freeDownload[lang]);
+    }
+  });
+
+  it('default duration is 30s: the 15s copy never appears without the prop', () => {
+    for (const lang of ['bn', 'en'] as const) {
+      const html = renderToString(
+        React.createElement(RewardedAdButton, { lang, onFreeDownload: () => {} }),
+      );
+      expect(html).toContain(REWARDED_AD_COPY.unlock[lang]);
+      expect(html).not.toContain(REWARDED_AD_COPY.unlock15[lang]);
+    }
+  });
+
+  it('disabled=true disables the Free Download button; by default it stays live', () => {
+    const disabledHtml = renderToString(
+      React.createElement(RewardedAdButton, { lang: 'en', disabled: true, onFreeDownload: () => {} }),
+    );
+    expect(disabledHtml).toMatch(/<button[^>]*disabled[^>]*>Free Download</);
+    const liveHtml = renderToString(
+      React.createElement(RewardedAdButton, { lang: 'en', onFreeDownload: () => {} }),
+    );
+    expect(liveHtml).not.toMatch(/<button[^>]*disabled[^>]*>Free Download</);
+  });
 });
