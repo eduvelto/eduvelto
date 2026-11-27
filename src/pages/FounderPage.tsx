@@ -273,7 +273,7 @@ export default function FounderPage() {
         )}
 
         {/* Eduvelto showcase — three-way status, owner decision 21 Nov 07:24 (5) */}
-        <h2 style={sectionH2}>{t({ bn: 'Eduvelto — কী আছে, কী আসছে', en: 'What Eduvelto offers' })}</h2>
+        <h2 style={sectionH2}>{t({ bn: 'Eduvelto — কী আছে, কী পরিকল্পিত', en: 'What Eduvelto offers' })}</h2>
         <p style={bodyP}>
           {t({
             bn: 'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও পড়ার পরিকল্পনা — শ্রেণি ৯ থেকে অনার্স পর্যন্ত, মাদ্রাসা ও কারিগরি ধারাসহ। শিক্ষার্থী, শিক্ষক ও অভিভাবকদের জন্য সম্পূর্ণ বিনামূল্যে: কোনো রেজিস্ট্রেশন ফি নেই, কোনো যাচাই ফি নেই, কখনোই না।',

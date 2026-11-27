@@ -380,7 +380,7 @@ export default function LibraryPage() {
           {levelEmpty && selectedLevel ? (
             <Card>
               <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
-                {t({ bn: `${selectedLevel.bn} — শীঘ্রই আসছে!`, en: `${selectedLevel.en} — Coming soon!` })}
+                {t({ bn: `${selectedLevel.bn}`, en: `${selectedLevel.en}` })}
               </div>
               <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 15, lineHeight: 1.7 }}>
                 {t({ bn: `${selectedLevel.bn}-এর বই এখনো লাইব্রেরিতে প্রকাশিত হয়নি — বই, পাঠ ও প্রশ্ন তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে।`, en: `No books for ${selectedLevel.en} are published yet — books, lessons and questions are being prepared.` })}

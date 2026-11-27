@@ -108,14 +108,6 @@ function DocIcon({ size = 30 }: { size?: number }) {
     </svg>
   );
 }
-function SkillsIcon({ size = 30 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M3 3v18h18" />
-      <path d="M7 15l4-6 4 3 5-8" />
-    </svg>
-  );
-}
 function GlobeIcon({ size = 30 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -224,21 +216,9 @@ const SECTIONS = [
     ctaBn: 'পড়া শুরু করুন',
     ctaEn: 'Start Learning',
   },
-  {
-    id: 'skills',
-    to: '/skills',
-    tint: 'ev-home-card-skills',
-    icon: <SkillsIcon />,
-    badgeBn: '',
-    badgeEn: '',
-    badgeMobileOnly: false,
-    titleBn: 'দক্ষতা উন্নয়ন',
-    titleEn: 'Professional Skills',
-    descBn: 'English, Computer, Digital Skills ও আরও অনেক কিছু',
-    descEn: 'English, Computer, Digital Skills & More',
-    ctaBn: 'দক্ষতা বাড়ান',
-    ctaEn: 'Build Skills',
-  },
+  // 28 Nov 2026 (completeness audit): the Professional Skills card
+  // is hidden — the /skills section does not exist yet and the card
+  // led to the "coming soon" page.
 ];
 
 // The six hubs (owner brief §4 + mockups). Every destination is

@@ -835,7 +835,7 @@ export function BackgroundRemoverTool() {
                   disabled
                   title={t({ bn: 'HD আউটপুট ৩০ সেকেন্ডের Rewarded Ad দেখার পর চালু হবে — AdSense অনুমোদনের পর।', en: 'HD output unlocks after a 30-second Rewarded Ad — after AdSense approval.' })}
                 >
-                  {t({ bn: 'HD ডাউনলোড (শীঘ্রই)', en: 'HD download (coming soon)' })}
+                  {t({ bn: 'HD ডাউনলোড', en: 'HD download' })}
                 </button>
               </div>
               <p style={noteStyle}>

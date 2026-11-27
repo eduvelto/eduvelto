@@ -293,7 +293,7 @@ export default function NuHubPage() {
           <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', marginTop: 12 }}>
             <Card>
               <strong>{t({ bn: 'সাপ্তাহিক পূর্ণ মক', en: 'Weekly full mock' })}</strong>
-              <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>                {t({ bn: '১০০ MCQ · ১ ঘণ্টা · নেগেটিভ মার্কিং নেই · পাস ৩৫ (তুলনার জন্য) — শীঘ্রই আসছে।', en: '100 MCQ · 1 hour · no negative marking · pass 35 (for comparison) — coming soon.' })}
+              <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>                {t({ bn: '১০০ MCQ · ১ ঘণ্টা · নেগেটিভ মার্কিং নেই · পাস ৩৫ (তুলনার জন্য)।', en: '100 MCQ · 1 hour · no negative marking · pass 35 (for comparison).' })}
               </p>
             </Card>
             <Card>

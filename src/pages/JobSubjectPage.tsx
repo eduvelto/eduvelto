@@ -15,7 +15,7 @@
 
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { Card, Chip, Reveal } from '../components/ui';
+import { Card, Reveal } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import { jobExamBySlug } from '../lib/jobExams';
 import { jobSubjectById } from '../lib/jobContent';
@@ -114,7 +114,6 @@ export default function JobSubjectPage() {
               <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
                 {t({ bn: 'এই বিষয়ের টপিক তৈরি হচ্ছে — অফিসিয়াল সিলেবাস থেকে যাচাই করে প্রকাশিত হবে।', en: 'Topics for this subject are being prepared — they will be published after verification against the official syllabus.' })}
               </p>
-              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
             </Card>
           </Reveal>
         </div>

@@ -134,12 +134,11 @@ export default function ProgressPage() {
                 <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'কুইজ দিন — ফলাফল এখানে যোগ হবে।', en: 'Take quizzes — results will appear here.' })}</p>
               </Card>
             </Reveal>
-            <Reveal delayMs={160}>
-              <Card hover>
-                <Link to="/routine" style={{ fontWeight: 700, color: 'var(--heading)' }}>{t({ bn: 'রুটিন', en: 'Routine' })}</Link>
-                <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'পড়ার পরিকল্পনা — শীঘ্রই আসছে।', en: 'Study plan — coming soon.' })}</p>
-              </Card>
-            </Reveal>
+            {/* 28 Nov 2026 (completeness audit): the Routine card is
+                hidden — the study-plan feature is not built yet and the
+                card only showed a "coming soon" note. It returns when
+                the feature exists. The /routine route itself stays
+                (linked from the header nav) with honest wording. */}
           </div>
 
           <Reveal>

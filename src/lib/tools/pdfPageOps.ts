@@ -1,7 +1,7 @@
 /**
  * PDF page operations — shared pdf-lib engine (Batch 3, 27 Nov 2026).
  *
- * Shared by pdf-page-extractor, pdf-page-reorder, pdf-page-remover,
+ * Shared by pdf-page-reorder, pdf-page-remover,
  * pdf-watermark, pdf-merger, pdf-rotate and pdf-page-number-adder
  * (page-count only) pdf-to-jpg. `pdf-lib` is loaded
  * with a dynamic `import()` INSIDE each function only (never a static

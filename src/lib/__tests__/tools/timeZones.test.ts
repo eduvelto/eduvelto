@@ -11,8 +11,17 @@ import {
   convertBetweenZones,
   wallClockInZoneToDate,
 } from '../../tools/timeZones';
+import { WORLD_CLOCK_PRESETS } from '../../tools/worldClock';
 
 describe('time-zone engine', () => {
+  it('every listed zone is a real IANA zone (28 Nov 2026: Asia/Doha is not a zone — it crashed the world-clock page with RangeError, caught live by the tool sweep)', () => {
+    for (const z of COMMON_TIME_ZONES) {
+      expect(() => new Intl.DateTimeFormat('en', { timeZone: z.zone }), z.zone).not.toThrow();
+    }
+    for (const z of WORLD_CLOCK_PRESETS) {
+      expect(() => new Intl.DateTimeFormat('en', { timeZone: z.zone }), z.zone).not.toThrow();
+    }
+  });
   it('lists Dhaka first and includes the common zones', () => {
     expect(COMMON_TIME_ZONES[0].zone).toBe('Asia/Dhaka');
     const zones = COMMON_TIME_ZONES.map((z) => z.zone);

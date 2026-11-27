@@ -5,6 +5,11 @@
 // a disabled "coming soon" placeholder, and NO Rokomari URL may
 // ever be invented or hardcoded — the real affiliate link arrives
 // later as a prop from the call site.
+//
+// 28 Nov 2026 (completeness audit): BookPage no longer renders the
+// slot at all — the placeholder box on every book page is removed
+// until a real affiliate URL exists. The component file stays on
+// disk (unused) and its own state tests below still apply.
 
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -52,8 +57,9 @@ describe('affiliate slot — no invented link', () => {
     expect(src).toContain('data-hardcopy-affiliate="placeholder"');
   });
 
-  it('BookPage renders the slot', () => {
+  it('BookPage does NOT render the slot (placeholder removed 28 Nov 2026)', () => {
     const src = readFileSync(resolve(__dirname, '../../pages/BookPage.tsx'), 'utf8');
-    expect(src).toContain('<HardcopyAffiliateSlot />');
+    expect(src).not.toContain('<HardcopyAffiliateSlot />');
+    expect(src).not.toContain('HardcopyAffiliateSlot');
   });
 });

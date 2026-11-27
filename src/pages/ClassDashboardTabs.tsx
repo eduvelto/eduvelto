@@ -19,7 +19,6 @@ import { loginState } from '../lib/loginReturn';
 import { Button, Card, Chip, LinkButton, ProgressBar, SkeletonCards } from '../components/ui';
 import { EmptyState } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
-import { ComingSoonCompact } from '../components/ComingSoon';
 import type { Book } from '../lib/content';
 import { bookTitleOf, type Quiz, type QuizAttempt } from '../lib/exams';
 import type { ClassSubjectStats } from '../lib/classStats';
@@ -135,7 +134,14 @@ export function BooksTab({ data }: { data: ClassTabData }) {
     else setClientPage(n);
   };
   if (data.bookTotal === 0) {
-    return <ComingSoonCompact def={data.def} whatBn="বই" whatEn="Books" />;
+    // 28 Nov 2026 (completeness audit): honest empty state — no
+    // "coming soon" variant.
+    return (
+      <EmptyState
+        bn="এই শ্রেণির কোনো বই এখনো প্রকাশিত হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
+        en="No books for this class are published yet. Content will appear here once it is published."
+      />
+    );
   }
   return (
     <>
@@ -169,7 +175,14 @@ export function BooksTab({ data }: { data: ClassTabData }) {
 export function SubjectsTab({ data }: { data: ClassTabData }) {
   const { t } = useLanguage();
   if (data.subjects.length === 0) {
-    return <ComingSoonCompact def={data.def} whatBn="বিষয়" whatEn="Subjects" />;
+    // 28 Nov 2026 (completeness audit): honest empty state — no
+    // "coming soon" variant.
+    return (
+      <EmptyState
+        bn="এই শ্রেণির কোনো বিষয় এখনো নেই। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
+        en="No subjects for this class yet. Content will appear here once it is published."
+      />
+    );
   }
   // STATS mode: per-subject counts come from the stats doc — no book list
   // needed. FALLBACK mode: computed from the loaded books, as before.
@@ -216,7 +229,14 @@ export function SubjectsTab({ data }: { data: ClassTabData }) {
 export function PracticeTab({ data }: { data: ClassTabData }) {
   const { t } = useLanguage();
   if (data.bookTotal === 0) {
-    return <ComingSoonCompact def={data.def} whatBn="অনুশীলন প্রশ্ন" whatEn="Practice questions" />;
+    // 28 Nov 2026 (completeness audit): honest empty state — no
+    // "coming soon" variant.
+    return (
+      <EmptyState
+        bn="এই শ্রেণির কোনো অনুশীলন প্রশ্ন এখনো তৈরি হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
+        en="No practice questions for this class yet. Content will appear here once it is published."
+      />
+    );
   }
   return (
     <>
@@ -258,12 +278,12 @@ export function TestsTab({ data }: { data: ClassTabData }) {
   // empty "no tests" state for a class that has tests.
   if (!data.signedIn && data.serverPaged) {
     if (data.quizTotal === 0) {
-      return data.bookTotal === 0 ? (
-        <ComingSoonCompact def={data.def} whatBn="পরীক্ষা" whatEn="Tests" />
-      ) : (
+      // 28 Nov 2026 (completeness audit): one honest empty state —
+      // no "coming soon" variant for classes without books.
+      return (
         <EmptyState
-          bn="এই শ্রেণির কোনো পরীক্ষা এখনো তৈরি হয়নি — শীঘ্রই আসছে।"
-          en="No tests for this class yet — coming soon."
+          bn="এই শ্রেণির কোনো পরীক্ষা এখনো তৈরি হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
+          en="No tests for this class yet. Content will appear here once it is published."
         />
       );
     }
@@ -281,15 +301,12 @@ export function TestsTab({ data }: { data: ClassTabData }) {
     return <SkeletonCards count={3} />;
   }
   if (data.quizTotal === 0) {
-    // Class with no books at all → the friendly Coming Soon state.
-    // Class WITH books but no quizzes yet → the plain "no tests yet" state.
-    if (data.bookTotal === 0) {
-      return <ComingSoonCompact def={data.def} whatBn="পরীক্ষা" whatEn="Tests" />;
-    }
+    // 28 Nov 2026 (completeness audit): one honest empty state —
+    // no "coming soon" variant for classes without books.
     return (
       <EmptyState
-        bn="এই শ্রেণির কোনো পরীক্ষা এখনো তৈরি হয়নি — শীঘ্রই আসছে।"
-        en="No tests for this class yet — coming soon."
+        bn="এই শ্রেণির কোনো পরীক্ষা এখনো তৈরি হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
+        en="No tests for this class yet. Content will appear here once it is published."
       />
     );
   }

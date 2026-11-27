@@ -56,12 +56,12 @@ function guideWords(content: {
 }
 
 describe('TOOL_GUIDE_SECTIONS (top 20)', () => {
-  it('still covers the 20 chosen slugs — and 261 structured guides in total (27 Nov 2026: J guides + A-tools + PDF to Word + 25 Math + 12 prose conversions + 23 Text + 20 Converters + 15 Finance/Health + 10 Main tables)', () => {
+  it('still covers the 20 chosen slugs — and 259 structured guides in total (27 Nov 2026: J guides + A-tools + PDF to Word + 25 Math + 12 prose conversions + 23 Text + 20 Converters + 15 Finance/Health + 10 Main tables; 28 Nov 2026: the 2 owner-approved duplicate tools, pdf-page-extractor and jpg-to-pdf, were removed with their guides, 261 -> 259)', () => {
     for (const slug of EXPECTED_GUIDE_SLUGS) {
       expect(TOOL_GUIDE_SECTIONS, slug).toHaveProperty(slug);
     }
-    // 261 structured guides here + 12 prose guides in TOOLS_GUIDES =
-    // 261 guided of 267 tools in toolsMeta (172 live + 25 Math + 23 Text
+    // 259 structured guides here + 12 prose guides in TOOLS_GUIDES =
+    // 259 guided of 265 tools in toolsMeta (170 live + 25 Math + 23 Text
     // + 20 Converters + 15 Finance/Health + 10 Main tables + 1 words-to-number + 1 bangla-date). The 6 unguided
     // slugs are the 4 aliases (typing-speed-test, cv-builder,
     // cover-letter-builder, unit-converter) which render their alias page,
@@ -70,7 +70,7 @@ describe('TOOL_GUIDE_SECTIONS (top 20)', () => {
     // The 12 prose entries remain as a fallback; their structured versions
     // now take precedence. (All held guides are now merged — the Main
     // tables 10 landed with this batch.)
-    expect(Object.keys(TOOL_GUIDE_SECTIONS)).toHaveLength(261);
+    expect(Object.keys(TOOL_GUIDE_SECTIONS)).toHaveLength(259);
   });
 
   it.each([...EXPECTED_GUIDE_SLUGS])('has a complete structured guide for %s', (slug) => {

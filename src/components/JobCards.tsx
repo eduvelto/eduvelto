@@ -2,10 +2,12 @@
 //
 // One card per job exam (same visual language as the class cards:
 // colour identity, inline SVG icon only — no photos, no paid assets —
-// exam name, recruiting body, exam stages). Every card carries an
-// honest "Coming soon" chip and a "View structure" button — no exam
-// has runnable practice/mock on live yet, so nothing is shown as
-// working. The common-preparation card links to /jobs/common.
+// exam name, recruiting body, exam stages). No card carries a
+// "coming soon" chip (28 Nov 2026 completeness audit) — every card
+// has a "View structure" button; the structure page behind it is
+// real. No exam has runnable practice/mock on live yet, so nothing
+// is shown as working. The common-preparation card links to
+// /jobs/common, where the daily + weekly mocks are live.
 //
 // HONESTY: no question counts, no mock counts, no "most popular"
 // badge — no usage data exists, and the live hub has no practice UI
@@ -47,8 +49,9 @@ export function JobNonAffiliationNote() {
  * The 10 category groups (Step 5 — Step 2 §0.4/§2.1): /jobs and the
  * homepage Jobs section group exam cards BY CATEGORY (1–10), not by
  * tier. Driven by the canonical jobCategoryGroups() — one source of
- * truth; the cards themselves still carry the tier-2/3 "Coming soon"
- * chip. Group headings use the canonical category name with its
+ * truth; the cards carry no "Coming soon" chip any more (28 Nov 2026
+ * completeness audit) — every card just says "View structure".
+ * Group headings use the canonical category name with its
  * number ("১ · BCS ও BPSC").
  */
 export function JobCategoryGroups() {
@@ -212,10 +215,12 @@ function ExamIcon({ slug }: { slug: string }) {
 
 export function JobCard({ def, delayMs = 0 }: { def: JobExamDef; delayMs?: number }) {
   const { lang, t } = useLanguage();
-  // No exam has runnable practice/mock on live yet, so every card
-  // says "View structure" + "Coming soon" instead of a fake "start"
-  // promise. Restore "প্রস্তুতি শুরু করুন" per exam once that exam
-  // has runnable practice/mock.
+  // 28 Nov 2026 (completeness audit): every card says "View
+  // structure" only — the old "Coming soon" chip is removed. No
+  // exam has runnable practice/mock on live yet, so the card never
+  // promises a start; the structure page behind it is real.
+  // Restore "প্রস্তুতি শুরু করুন" per exam once that exam has
+  // runnable practice/mock.
   return (
     <Reveal delayMs={delayMs}>
       <Link
@@ -254,21 +259,6 @@ export function JobCard({ def, delayMs = 0 }: { def: JobExamDef; delayMs?: numbe
           {lang === 'bn' ? def.stepsBn : def.stepsEn}
         </p>
         <div style={{ marginTop: 'auto' }}>
-          <p style={{ margin: '0 0 10px' }}>
-            <span
-              style={{
-                display: 'inline-block',
-                background: 'rgba(0,0,0,0.28)',
-                color: '#fff',
-                fontSize: 13,
-                fontWeight: 600,
-                padding: '4px 10px',
-                borderRadius: 999,
-              }}
-            >
-              {t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
-            </span>
-          </p>
           <span
             aria-hidden="true"
             style={{
@@ -337,21 +327,6 @@ export function CommonPrepCard({ delayMs = 0 }: { delayMs?: number }) {
           {t({ bn: 'প্রতিদিনের ছোট মক + সাপ্তাহিক পূর্ণ মক', en: 'Daily short mock + weekly full mock' })}
         </p>
         <div style={{ marginTop: 'auto' }}>
-          <p style={{ margin: '0 0 10px' }}>
-            <span
-              style={{
-                display: 'inline-block',
-                background: 'rgba(0,0,0,0.28)',
-                color: '#fff',
-                fontSize: 13,
-                fontWeight: 600,
-                padding: '4px 10px',
-                borderRadius: 999,
-              }}
-            >
-              {t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
-            </span>
-          </p>
           <span
             aria-hidden="true"
             style={{

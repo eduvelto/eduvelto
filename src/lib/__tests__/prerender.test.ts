@@ -51,7 +51,7 @@ describe('PRERENDER_STATIC_PATHS', () => {
     const sitemapPaths = readSitemapPaths();
     // 27 Nov 2026: the committed sitemap is the PRERENDER-GENERATED
     // one (bn canonicals, 2,747 locs), not the old hand-maintained
-    // 285-URL static list. Derive the expected set the same way
+    // 283-URL static list. Derive the expected set the same way
     // scripts/prerender.mjs builds it: static paths + academic
     // practice paths + tool paths, plus one page per book.
     // Tool paths are DERIVED from toolsMeta.ts (like the Academic
@@ -694,17 +694,19 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
 });
 
 describe('getToolPaths — 100-tools project (26 Nov 2026)', () => {
-  it('derives the hub + one path per tool from toolsMeta.ts (268: /tools + 267 live tools)', () => {
+  it('derives the hub + one path per tool from toolsMeta.ts (266: /tools + 265 live tools)', () => {
     // Same source the prerender script reads. A future tool adds its
     // path here automatically — no prerender-list edit per tool.
-    // 27 Nov 2026: 267 slugs in toolsMeta.ts (172 original + 25 Math +
+    // 28 Nov 2026: 265 slugs in toolsMeta.ts (170 original + 25 Math +
     // 24 Text + 21 Converters + 15 Finance/Health + 10 Main tables batches), INCLUDING the Lab Test Result Checker — owner
     // lifted the MBBS-review gate 12:13, so PRERENDER_EXCLUDED_TOOL_SLUGS
     // is empty and the checker prerenders + sitemaps like every other
     // tool — and PDF to Word, the 172nd tool, added the same day.
+    // (The 2 owner-approved duplicate tools, pdf-page-extractor and
+    // jpg-to-pdf, were removed 28 Nov 2026: 267 -> 265.)
     const source = readFileSync(join(process.cwd(), 'src', 'lib', 'toolsMeta.ts'), 'utf8');
     const paths = getToolPaths(source);
-    expect(paths).toHaveLength(268);
+    expect(paths).toHaveLength(266);
     expect(paths[0]).toBe('/tools');
     expect(paths).toContain('/tools/lab-test-result-checker');
     expect(new Set(paths).size).toBe(paths.length);

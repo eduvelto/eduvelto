@@ -99,7 +99,7 @@ export default function WhyEduveltoPage() {
       </div>
 
       <h2 style={{ fontSize: 20, color: NAVY, margin: '28px 0 12px' }}>
-        {t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
+        {t({ bn: 'যা এখনো তৈরি হয়নি', en: 'Not built yet' })}
       </h2>
       <p style={{ lineHeight: 1.8 }}>
         {t({

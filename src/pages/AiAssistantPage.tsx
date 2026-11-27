@@ -146,7 +146,7 @@ export default function AiAssistantPage() {
       <Card>
         <h2 style={{ marginTop: 0 }}>
           {t({ bn: 'প্রশ্ন করুন', en: 'Ask a question' })}{' '}
-          <Chip tone="gold">{connected ? t({ bn: 'লাইভ', en: 'Live' }) : t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+          <Chip tone="gold">{connected ? t({ bn: 'লাইভ', en: 'Live' }) : t({ bn: 'সংযুক্ত নয়', en: 'Not connected' })}</Chip>
         </h2>
         {messages.length === 0 ? (
           <p style={{ color: 'var(--muted, #5b6472)' }}>
@@ -243,8 +243,8 @@ export default function AiAssistantPage() {
       <div style={{ marginTop: 28 }}>
         <AlertBox tone="info">
           {t({
-            bn: 'AI শিক্ষক (পড়াশোনার জন্য) আলাদা পাতায় আসছে — ',
-            en: 'The AI Teacher (for study) is coming on a separate page — ',
+            bn: 'AI শিক্ষক (পড়াশোনার জন্য) আলাদা পাতায় আছে — ',
+            en: 'The AI Teacher (for study) is on a separate page — ',
           })}
           <Link to="/ai-teacher">{t({ bn: 'AI শিক্ষক দেখুন', en: 'See the AI Teacher' })}</Link>
         </AlertBox>

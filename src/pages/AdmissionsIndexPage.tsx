@@ -3,10 +3,12 @@
 //
 // /admissions is now the hub INDEX, not Coming Soon: National
 // University first (the owner's priority — with the "অগ্রাধিকার"
-// badge), the other institutions as honest "শীঘ্রই আসছে" cards. No
-// card carries a question count — content is still being built, so
-// the NU card says "কনটেন্ট তৈরি হচ্ছে" instead of a number. The
-// dashboard button goes to /admissions/dashboard (NU-Q6, final).
+// badge), the other institutions as honest cards that say plainly
+// their preparation is not built yet (28 Nov 2026 completeness
+// audit: no "coming soon" chip on any card). No card carries a
+// question count — content is still being built, so the NU card
+// says "কনটেন্ট তৈরি হচ্ছে" instead of a number. The dashboard
+// button goes to /admissions/dashboard (NU-Q6, final).
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
@@ -16,7 +18,7 @@ import AdmissionModeSwitch from '../components/AdmissionModeSwitch';
 import SuggestionPdfCard from '../components/SuggestionPdfCard';
 import { NU_DASHBOARD_ROUTE, NU_HUB_ROUTE } from '../lib/nuStructure';
 
-const COMING_SOON_INSTITUTIONS: { bn: string; en: string }[] = [
+const LATER_INSTITUTIONS: { bn: string; en: string }[] = [
   { bn: 'ঢাকা বিশ্ববিদ্যালয়', en: 'University of Dhaka' },
   { bn: 'GST (গুচ্ছ)', en: 'GST (Cluster)' },
   { bn: 'মেডিকেল ও ডেন্টাল', en: 'Medical and Dental' },
@@ -79,11 +81,10 @@ export default function AdmissionsIndexPage() {
             {t({ bn: 'প্রস্তুতি শুরু করুন', en: 'Start preparing' })} →
           </LinkButton>
         </Card>
-        {COMING_SOON_INSTITUTIONS.map((inst) => (
+        {LATER_INSTITUTIONS.map((inst) => (
           <Card key={inst.bn} style={{ opacity: 0.85 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
               <strong style={{ fontSize: 16, color: 'var(--heading)' }}>{t({ bn: inst.bn, en: inst.en })}</strong>
-              <Chip tone="outline">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
             </div>
             <p style={{ color: 'var(--muted-ivory)', lineHeight: 1.8, margin: '8px 0 0', fontSize: 14 }}>
               {t({

@@ -17,7 +17,7 @@
 
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { Card, Chip, Reveal } from '../components/ui';
+import { Card, Reveal } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import { jobExamBySlug } from '../lib/jobExams';
 import { jobSubjectById } from '../lib/jobContent';
@@ -109,7 +109,6 @@ export default function JobTopicPage() {
               <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
                 {t({ bn: 'এই টপিকটি এখনো তৈরি হয়নি — অফিসিয়াল সিলেবাস থেকে যাচাই করে প্রকাশিত হবে।', en: 'This topic has not been created yet — it will be published after verification against the official syllabus.' })}
               </p>
-              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
             </Card>
           </Reveal>
 
@@ -121,7 +120,6 @@ export default function JobTopicPage() {
               <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
                 {t({ bn: 'প্রশ্ন তৈরি হলে এখানে অনুশীলন শুরু করা যাবে — এখনো কোনো প্রশ্ন তৈরি হয়নি।', en: 'Once questions are ready, practice will start here — no questions have been created yet.' })}
               </p>
-              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
             </Card>
           </Reveal>
         </>
@@ -134,7 +132,6 @@ export default function JobTopicPage() {
             <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: 'এই টপিকের পাঠ ও অনুশীলন এখানে প্রকাশিত হবে।', en: 'Lessons and practice for this topic will be published here.' })}
             </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
           </Card>
         </Reveal>
       )}

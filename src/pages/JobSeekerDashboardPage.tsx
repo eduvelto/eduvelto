@@ -1268,8 +1268,9 @@ export default function JobSeekerDashboardPage() {
       </Reveal>
 
       {/* Syllabus state (design §5.1, P3): syllabus completion
-          is MISSING and unmeasurable today (0 subjects live) —
-          the card says "আসছে" and never shows a %. */}
+          is MISSING and unmeasurable today (0 subjects live) — the
+          card says so plainly and never shows a % (28 Nov 2026
+          completeness audit: the old "coming soon" chip is removed). */}
       <Reveal>
         <Card style={{ marginTop: 12 }}>
           <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
@@ -1277,11 +1278,10 @@ export default function JobSeekerDashboardPage() {
           </div>
           <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
             {t({
-              bn: 'সিলেবাসের তথ্য আসছে — কোনো বিষয়/টপিক এখনো যাচাই করে প্রকাশিত হয়নি, তাই অগ্রগতির শতাংশ দেখানো হচ্ছে না।',
-              en: 'Syllabus information is coming — no subject/topic has been verified and published yet, so no progress percentage is shown.',
+              bn: 'সিলেবাসের তথ্য এখনো যাচাই করে প্রকাশিত হয়নি, তাই অগ্রগতির শতাংশ দেখানো হচ্ছে না।',
+              en: 'Syllabus information has not been verified and published yet, so no progress percentage is shown.',
             })}
           </p>
-          <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
         </Card>
       </Reveal>
 
@@ -1334,41 +1334,10 @@ export default function JobSeekerDashboardPage() {
           </Card>
         </Reveal>
 
-        {/* Favourites (design #12) — NOT built in Step 13 (the
-            step built the notebook only); needs its own step +
-            storage decision. */}
-        <Reveal delayMs={80}>
-          <Card>
-            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
-              {t({ bn: 'ফেভারিট', en: 'Favourites' })}
-            </div>
-            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'প্রশ্ন, টপিক ও মক ফেভারিট করে রাখা যাবে — শীঘ্রই আসছে।',
-                en: 'You will be able to favourite questions, topics and mocks — coming soon.',
-              })}
-            </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
-          </Card>
-        </Reveal>
-
-        {/* Written preparation (design §5.5, P4): written
-            progress is MISSING — a placeholder card only, no
-            counts, no %, no fake zero. */}
-        <Reveal delayMs={120}>
-          <Card>
-            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
-              {t({ bn: 'লিখিত প্রস্তুতি', en: 'Written preparation' })}
-            </div>
-            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'লিখিত প্রস্তুতি আসছে — লিখিত পরীক্ষার প্রস্তুতি (বাংলা রচনা, ইংরেজি লেখা, অনুবাদ, গণিত সমাধান) এখনো তৈরি হয়নি।',
-                en: 'Written preparation is coming — written exam preparation (Bangla composition, English writing, translation, math solutions) is not built yet.',
-              })}
-            </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
-          </Card>
-        </Reveal>
+        {/* 28 Nov 2026 (completeness audit): the Favourites and
+            Written preparation placeholder cards are hidden — neither
+            feature exists yet and both only showed a "coming soon"
+            chip. They return when the features are built. */}
 
         {/* Revision schedule (design #13) — Step 12 wires it to
             the real planner: the next due revision + the count

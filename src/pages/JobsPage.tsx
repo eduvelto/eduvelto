@@ -190,7 +190,7 @@ export default function JobsPage() {
           <Card>
             <span className="ev-step-num" aria-hidden="true">{t({ bn: '৩', en: '3' })}</span>
             <div style={{ fontWeight: 700, color: 'var(--heading)', marginTop: 10 }}>
-              {t({ bn: 'কনটেন্ট আসছে', en: 'Content is coming' })}
+              {t({ bn: 'যাচাইয়ের পর প্রকাশ', en: 'Published after verification' })}
             </div>
             <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>
               {t({ bn: 'সিলেবাস, প্রশ্ন ও মক টেস্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে — তখন এখানেই অনুশীলন করতে পারবেন।', en: 'Syllabus, questions and mock tests will be published after teacher review — then you can practise right here.' })}

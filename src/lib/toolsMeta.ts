@@ -52,6 +52,8 @@ export const TOOLS_META: ToolMeta[] = [
     relatedSlugs: ['pdf-splitter', 'pdf-compressor', 'pdf-to-word'],
   },
   {
+    // 28 Nov 2026 (owner-approved duplicate removal): pdf-page-extractor
+    // 301-redirects here (see public/_redirects).
     slug: 'pdf-splitter',
     category: 'pdf',
     titleBn: 'পিডিএফ স্প্লিটার',
@@ -60,7 +62,7 @@ export const TOOLS_META: ToolMeta[] = [
     descriptionEn: 'Split a PDF and save selected pages as a new PDF.',
     crumbBn: 'পিডিএফ স্প্লিটার',
     crumbEn: 'PDF Splitter',
-    relatedSlugs: ['pdf-merger', 'pdf-page-extractor', 'pdf-compressor'],
+    relatedSlugs: ['pdf-merger', 'pdf-page-remover', 'pdf-compressor'],
   },
   {
     slug: 'pdf-compressor',
@@ -82,7 +84,7 @@ export const TOOLS_META: ToolMeta[] = [
     descriptionEn: 'Convert PDF pages into JPG images.',
     crumbBn: 'পিডিএফ থেকে জেপিজি',
     crumbEn: 'PDF to JPG',
-    relatedSlugs: ['jpg-to-pdf', 'image-to-pdf', 'pdf-to-word'],
+    relatedSlugs: ['pdf-merger', 'image-to-pdf', 'pdf-to-word'],
   },
   {
     slug: 'pdf-to-word',
@@ -93,29 +95,7 @@ export const TOOLS_META: ToolMeta[] = [
     descriptionEn: 'Convert a PDF’s text into an editable Word (.docx) file — choose your own Bangla and English fonts.',
     crumbBn: 'পিডিএফ থেকে ওয়ার্ড',
     crumbEn: 'PDF to Word',
-    relatedSlugs: ['pdf-to-jpg', 'jpg-to-pdf', 'pdf-merger'],
-  },
-  {
-    slug: 'jpg-to-pdf',
-    category: 'pdf',
-    titleBn: 'জেপিজি থেকে পিডিএফ',
-    titleEn: 'JPG to PDF',
-    descriptionBn: 'JPG ছবি থেকে PDF ফাইল তৈরি করুন।',
-    descriptionEn: 'Create a PDF file from JPG images.',
-    crumbBn: 'জেপিজি থেকে পিডিএফ',
-    crumbEn: 'JPG to PDF',
-    relatedSlugs: ['pdf-to-jpg', 'image-to-pdf', 'pdf-to-word'],
-  },
-  {
-    slug: 'pdf-page-extractor',
-    category: 'pdf',
-    titleBn: 'পিডিএফ পাতা এক্সট্রাক্টর',
-    titleEn: 'PDF Page Extractor',
-    descriptionBn: 'PDF থেকে একটি বা একাধিক পাতা বেছে আলাদা PDF হিসেবে সংরক্ষণ করুন।',
-    descriptionEn: 'Pick one or more pages from a PDF and save them as a separate PDF.',
-    crumbBn: 'পিডিএফ পাতা এক্সট্রাক্টর',
-    crumbEn: 'PDF Page Extractor',
-    relatedSlugs: ['pdf-splitter', 'pdf-page-reorder', 'pdf-merger'],
+    relatedSlugs: ['pdf-to-jpg', 'image-to-pdf', 'pdf-merger'],
   },
   {
     slug: 'pdf-page-reorder',
@@ -126,7 +106,7 @@ export const TOOLS_META: ToolMeta[] = [
     descriptionEn: 'Rearrange or rotate the pages of a PDF into a new order.',
     crumbBn: 'পিডিএফ পাতা সাজানো',
     crumbEn: 'PDF Page Reorder',
-    relatedSlugs: ['pdf-page-extractor', 'pdf-splitter', 'pdf-merger'],
+    relatedSlugs: ['pdf-page-remover', 'pdf-splitter', 'pdf-merger'],
   },
   {
     slug: 'pdf-watermark',
@@ -140,6 +120,8 @@ export const TOOLS_META: ToolMeta[] = [
     relatedSlugs: ['pdf-merger', 'image-watermark-maker', 'pdf-compressor'],
   },
   {
+    // 28 Nov 2026 (owner-approved duplicate removal): jpg-to-pdf
+    // 301-redirects here (see public/_redirects).
     slug: 'image-to-pdf',
     category: 'pdf',
     titleBn: 'ছবি থেকে পিডিএফ',
@@ -148,7 +130,7 @@ export const TOOLS_META: ToolMeta[] = [
     descriptionEn: 'Turn one or more images into a PDF file.',
     crumbBn: 'ছবি থেকে পিডিএফ',
     crumbEn: 'Image to PDF',
-    relatedSlugs: ['jpg-to-pdf', 'pdf-merger', 'pdf-to-jpg'],
+    relatedSlugs: ['pdf-to-jpg', 'pdf-merger', 'text-to-pdf'],
   },
   {
     slug: 'text-to-pdf',
@@ -1472,7 +1454,7 @@ export const TOOLS_META: ToolMeta[] = [
     descriptionEn: 'Remove unwanted pages from a PDF and save a new PDF.',
     crumbBn: 'পিডিএফ পাতা রিমুভার',
     crumbEn: 'PDF Page Remover',
-    relatedSlugs: ['pdf-splitter', 'pdf-page-extractor', 'pdf-password-protector'],
+    relatedSlugs: ['pdf-splitter', 'pdf-page-reorder', 'pdf-password-protector'],
   },
   {
     slug: 'remove-extra-spaces',

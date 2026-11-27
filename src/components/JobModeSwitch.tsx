@@ -22,8 +22,8 @@ export const MODE_COPY: Record<JobMode, { bn: string; en: string; descBn: string
   advanced: {
     bn: 'অভিজ্ঞদের জন্য',
     en: 'Advanced',
-    descBn: 'অভিজ্ঞ পরীক্ষার্থীদের জন্য — আসছে: কঠিন প্রশ্ন, সময়ভিত্তিক পরীক্ষা, পূর্ণাঙ্গ মডেল টেস্ট ও প্রতিযোগিতামূলক প্রস্তুতি।',
-    descEn: 'For experienced candidates — coming soon: hard questions, timed exams, full model tests and competitive preparation.',
+    descBn: 'অভিজ্ঞ পরীক্ষার্থীদের জন্য — কঠিন প্রশ্ন, সময়ভিত্তিক মক ও পূর্ণাঙ্গ মডেল টেস্টের পথ; যা প্রকাশিত হয়েছে তা-ই এখানে দেখা যাবে।',
+    descEn: 'For experienced candidates — hard questions, timed mocks and full model tests; only published content appears here.',
   },
 };
 

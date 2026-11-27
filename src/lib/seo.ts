@@ -377,7 +377,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'চাকরি প্রস্তুতি',
     titleEn: 'Job Preparation — BCS, Bank, NTRCA | Eduvelto',
     descriptionEn:
-      'BCS, Bank, Primary Teacher, NTRCA preparation — patterns, syllabuses, subject-wise study. BCS English is live; full mocks coming soon. Free on Eduvelto.',
+      'BCS, Bank, Primary Teacher, NTRCA preparation — patterns, syllabuses, subject-wise study. BCS English is live; full mocks are not live yet. Free on Eduvelto.',
     crumbEn: 'Job Preparation',
   },
   '/jobs/common': {
@@ -607,7 +607,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'শ্রেণি ৬–৮',
     titleEn: 'Classes 6–8 — Lower Secondary | Eduvelto',
     descriptionEn:
-      'Classes 6–8 (Lower Secondary) — books, lessons and exams have not reached the library yet; coming soon. Eduvelto — the free education platform of Bangladesh.',
+      'Classes 6–8 (Lower Secondary) — books, lessons and exams have not reached the library yet. Eduvelto — the free education platform of Bangladesh.',
     crumbEn: 'Classes 6–8',
   },
   '/class/class-9-10': {
@@ -715,17 +715,17 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   },
   // 7-day sprint, Day 6 (26 Nov 2026): /suggestions is a real page
   // now — the Suggestion PDF Store (see langRouting.ts +
-  // firebase.json). HONEST coming-soon entry: no verified
-  // suggestion PDF exists yet, so it promises no PDF for sale —
-  // only that verified PDFs will appear here once ready.
+  // firebase.json). Honest entry (28 Nov 2026 completeness audit):
+  // no verified suggestion PDF exists yet, so it promises no PDF
+  // for sale — only that verified PDFs will appear here once ready.
   '/suggestions': {
     title: 'সাজেশন PDF — Eduvelto',
     description:
-      'পরীক্ষার সাজেশন ও মডেল টেস্ট PDF — শীঘ্রই আসছে। এখনো কোনো PDF বিক্রির জন্য তৈরি নয়; বিষয়বস্তু যাচাই শেষ হলে এখান থেকেই অর্ডার করা যাবে।',
+      'পরীক্ষার সাজেশন ও মডেল টেস্ট PDF — বিষয়বস্তু যাচাই চলছে; এখনো কোনো PDF বিক্রির জন্য তৈরি নয়। যাচাই শেষ হলে এখান থেকেই অর্ডার করা যাবে।',
     crumb: 'সাজেশন PDF',
     titleEn: 'Suggestion PDFs — Eduvelto',
     descriptionEn:
-      'Exam suggestion and model test PDFs — coming soon. No PDF is for sale yet; once content verification is done you will be able to order from here.',
+      'Exam suggestion and model test PDFs — content verification is in progress. No PDF is for sale yet; once verified, you will be able to order from here.',
     crumbEn: 'Suggestion PDFs',
   },
   // Phase 2 (25 Nov 2026): canonical URL is /privacy-policy; the old
@@ -963,14 +963,17 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Government services, health, education, jobs, finance, travel and everyday needs — official portals and Eduvelto’s tools in one place. Eduvelto.',
     crumbEn: 'Services Directory',
   },
+  // 28 Nov 2026 (completeness audit): /ai-teacher is a scripted
+  // demonstration, not live AI — the title/description say so
+  // plainly instead of "coming soon".
   '/ai-teacher': {
-    title: 'AI শিক্ষক — শীঘ্রই আসছে | Eduvelto',
+    title: 'AI শিক্ষক — নমুনা প্রদর্শন | Eduvelto',
     description:
-      'Eduvelto-র ব্যক্তিগত AI শিক্ষক শীঘ্রই আসছে। আপাতত বিনামূল্যে MCQ পরীক্ষা, লাইব্রেরি ও চাকরি-ভর্তি প্রস্তুতি ব্যবহার করুন।',
+      'Eduvelto-র ব্যক্তিগত AI শিক্ষকের স্ক্রিপ্ট করা নমুনা প্রদর্শন — আসল এআই নয়। লাইভ AI উত্তরের জন্য AI সহায়ক ব্যবহার করুন।',
     crumb: 'AI শিক্ষক',
-    titleEn: 'AI Teacher — Coming Soon | Eduvelto',
+    titleEn: 'AI Teacher — Sample Demonstration | Eduvelto',
     descriptionEn:
-      'Eduvelto’s personal AI teacher is coming soon. Until then, use the free MCQ exams, library and job and admission preparation.',
+      'A scripted sample demonstration of Eduvelto’s personal AI teacher — not live AI. For live AI answers, use the AI Assistant.',
     crumbEn: 'AI Teacher',
   },
   '/ai-assistant': {
@@ -983,16 +986,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Eduvelto\'s AI Assistant — calculations, converters, budget, planning and letters — free to use now. Live AI answers are on. Do not share personal information.',
     crumbEn: 'AI Assistant',
   },
-  '/skills': {
-    title: 'পেশাগত দক্ষতা — শীঘ্রই আসছে | Eduvelto',
-    description:
-      'Eduvelto-র পেশাগত দক্ষতা বিভাগ শীঘ্রই আসছে। আপাতত চাকরি ও ভর্তি প্রস্তুতি ব্যবহার করুন — সম্পূর্ণ বিনামূল্যে।',
-    crumb: 'পেশাগত দক্ষতা',
-    titleEn: 'Professional Skills — Coming Soon | Eduvelto',
-    descriptionEn:
-      'Eduvelto’s professional skills section is coming soon. Until then, use the job and admission preparation — completely free.',
-    crumbEn: 'Professional Skills',
-  },
+  // 28 Nov 2026 (completeness audit): the '/skills' entry is
+  // removed — the route now 301-redirects to /tools (the section
+  // does not exist) and the nav no longer lists it.
   // BCS English practice + lessons (23 Nov 2026, AdSense Part 1):
   // the first live practice on the site — ৩৫টি যাচাইকৃত প্রশ্ন
   // (hub copy) — and the first two public BCS English lessons.
@@ -1894,7 +1890,8 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   const tabSuffixEn = tabEn ? ` — ${tabEn}` : '';
 
   // Honest per-exam description (22 Nov 2026, current plan): practice
-  // and mocks are NOT live — the UI says "শীঘ্রই আসছে" — so no
+  // and mocks are NOT live — the descriptions say so plainly
+  // ("এখনো চালু হয়নি", 28 Nov 2026 completeness audit) — so no
   // description may present them as available. Verified pattern facts
   // come from jobRulesConfig; anything unverified says so plainly.
   const cfg = jobRulesConfig(slug);
@@ -1960,16 +1957,18 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   }
   // AdSense Part 1 (integration): BCS English practice is live — say
   // so for the BCS hub only; every other exam keeps the honest
-  // coming-soon wording. The "শীঘ্রই আসছে" phrase stays, pinned by
-  // seo.test.ts ("never presents practice as live").
+  // "not live yet" wording (28 Nov 2026 completeness audit — the
+  // old "শীঘ্রই আসছে" phrase is removed; the guard in seo.test.ts
+  // now pins "এখনো চালু হয়নি", same intent: never presents
+  // practice as live).
   const practiceNote =
     slug === 'bcs'
-      ? 'BCS English অনুশীলন চালু; বাকি MCQ ও মক টেস্ট শীঘ্রই আসছে।'
-      : 'MCQ ও মক টেস্ট শীঘ্রই আসছে।';
+      ? 'BCS English অনুশীলন চালু; বাকি মক টেস্ট এখনো চালু হয়নি।'
+      : 'MCQ ও মক টেস্ট এখনো চালু হয়নি।';
   const practiceNoteEn =
     slug === 'bcs'
-      ? 'BCS English MCQ practice is live; other MCQ and mock tests coming soon.'
-      : 'MCQ and mock tests coming soon.';
+      ? 'BCS English MCQ practice is live; other MCQ and mock tests are not live yet.'
+      : 'MCQ and mock tests are not live yet.';
   // Brand-SEO wave 12: titles must fit search-result length (<=60).
   // Keep the full exam name when it fits (BCS/Bank keep their pinned
   // full names); otherwise drop the middle full-name segment, and if
@@ -2032,15 +2031,16 @@ function jobSubjectEntry(examSlug: string, subjectSlug: string): RouteSeoEntry |
   if (subj.marks === null) return null;
   // AdSense Part 1 (integration): BCS English practice is live — the
   // subject description says so for this subject only. "৩৫ নম্বর"
-  // (via bnDigits) and "শীঘ্রই আসছে" (mocks) stay, pinned by
-  // seo.test.ts for all 23 subject pages.
+  // (via bnDigits) and "এখনো চালু হয়নি" (mocks) stay, pinned by
+  // seo.test.ts for all 23 subject pages (28 Nov 2026 completeness
+  // audit — was "শীঘ্রই আসছে" before).
   if (examSlug === 'bcs' && subjectSlug === 'english') {
     return {
       title: `${subj.nameBn} — ${exam.bn} প্রস্তুতি | Eduvelto`,
-      description: `${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। MCQ অনুশীলন চালু আছে; মক টেস্ট শীঘ্রই আসছে। Eduvelto-তে ফ্রি।`,
+      description: `${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। MCQ অনুশীলন চালু আছে; মক টেস্ট এখনো চালু হয়নি। Eduvelto-তে ফ্রি।`,
       crumb: subj.nameBn,
       titleEn: `${subj.nameEn} — ${exam.en} Preparation | Eduvelto`,
-      descriptionEn: `${subj.nameEn} — ${subj.marks} marks in the verified syllabus. MCQ practice is live; mock tests coming soon. Free on Eduvelto.`,
+      descriptionEn: `${subj.nameEn} — ${subj.marks} marks in the verified syllabus. MCQ practice is live; mock tests are not live yet. Free on Eduvelto.`,
       crumbEn: subj.nameEn,
     };
   }
@@ -2071,10 +2071,10 @@ function jobSubjectEntry(examSlug: string, subjectSlug: string): RouteSeoEntry |
   const titleEn = titleEnCandidates.find((t) => t.length <= 60) ?? titleEnCandidates[3];
   return {
     title: titleBn,
-    description: `${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। টপিক ও অনুশীলন শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
+    description: `${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। টপিক ও অনুশীলন এখনো চালু হয়নি। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
     crumb: subj.nameBn,
     titleEn,
-    descriptionEn: `${subj.nameEn} — ${subj.marks} marks in the verified syllabus. Topics and practice are coming soon. Free on Eduvelto.`,
+    descriptionEn: `${subj.nameEn} — ${subj.marks} marks in the verified syllabus. Topics and practice are not live yet. Free on Eduvelto.`,
     crumbEn: subj.nameEn,
   };
 }

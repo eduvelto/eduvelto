@@ -73,8 +73,6 @@ import { MusicPlayerTool } from './tools/MusicPlayerTool';
 import { LabTestResultCheckerTool } from './tools/LabTestResultCheckerTool';
 import { PdfToJpgTool } from './tools/PdfToJpgTool';
 import { PdfToWordTool } from './tools/PdfToWordTool';
-import { JpgToPdfTool } from './tools/JpgToPdfTool';
-import { PdfPageExtractorTool } from './tools/PdfPageExtractorTool';
 import { PdfPageReorderTool } from './tools/PdfPageReorderTool';
 import { PdfWatermarkTool } from './tools/PdfWatermarkTool';
 import { ImageToPdfTool } from './tools/ImageToPdfTool';
@@ -353,8 +351,6 @@ const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'lab-test-result-checker': LabTestResultCheckerTool,
   'pdf-to-jpg': PdfToJpgTool,
   'pdf-to-word': PdfToWordTool,
-  'jpg-to-pdf': JpgToPdfTool,
-  'pdf-page-extractor': PdfPageExtractorTool,
   'pdf-page-reorder': PdfPageReorderTool,
   'pdf-watermark': PdfWatermarkTool,
   'image-to-pdf': ImageToPdfTool,
@@ -689,8 +685,8 @@ export default function ToolsDetailPage() {
       ) : (
         <AlertBox tone="info">
           {t({
-            bn: 'এই টুলটি এখনো তৈরি হচ্ছে — শীঘ্রই আসছে।',
-            en: 'This tool is still being built — coming soon.',
+            bn: 'এই টুলটি এখনো তৈরি হয়নি।',
+            en: 'This tool is not built yet.',
           })}
         </AlertBox>
       )}

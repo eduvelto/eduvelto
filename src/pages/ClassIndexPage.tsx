@@ -5,7 +5,8 @@
 // honest per-class book/subject counts) used to live on the homepage
 // itself and now live here, so the homepage stays a 4-section overview
 // as the owner-approved mockups show. Counts are counted from the live
-// published library; empty classes show "শীঘ্রই আসছে" honestly.
+// published library; levels with no books yet are hidden (28 Nov
+// 2026 completeness audit) and reappear once books are published.
 
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';

@@ -1,11 +1,14 @@
 // Eduvelto — class-wise cards (stage 3: class-wise homepage + mobile app).
 //
-// One card per level (Class 1–5, Class 6–8, Class 9–10, HSC, Honours &
-// Masters). Each card carries its class-wise colour identity (see
-// lib/classLevels.ts for the AA-checked accents), a CSS/SVG illustration
-// only — no photos, no paid assets — the class name, the REAL live book
-// count (or an honest "coming soon" state for levels with no books), and
-// an Explore button to that level's dashboard (/class/<slug>).
+// One card per level (Class 6–8, Class 9–10, HSC, Honours &
+// Masters, Technical, Madrasa). Each card carries its class-wise
+// colour identity (see lib/classLevels.ts for the AA-checked
+// accents), a CSS/SVG illustration only — no photos, no paid
+// assets — the class name, the REAL live book count, and an
+// Explore button to that level's dashboard (/class/<slug>).
+// Levels with no books yet are hidden (28 Nov 2026 completeness
+// audit) instead of showing a "coming soon" state — the card
+// reappears automatically once books are published.
 // No "Most Popular" badge: the dream reference marks Class 6–8 as most
 // popular, but no usage data supports it — and Class 6–8 has zero books —
 // so no popularity claim is shown anywhere.
@@ -115,13 +118,18 @@ export function ClassCard({
 }) {
   const ready = bookCount > 0;
   const { lang, t } = useLanguage();
+  // 28 Nov 2026 (completeness audit): levels with no books yet are
+  // hidden entirely instead of showing a "coming soon" state. This
+  // is data-driven — the card reappears automatically once books
+  // for the level are published.
+  if (!ready) return null;
   return (
     <Reveal delayMs={delayMs}>
       <Link
         to={`/class/${def.slug}`}
         className="ev-class-card"
         style={{ background: def.accent, textDecoration: 'none' }}
-        aria-label={t({ bn: `${def.bn}. ${ready ? `${bookCount}টি বই` : 'শীঘ্রই আসছে'}`, en: `${def.en}. ${ready ? `${bookCount} books` : 'Coming soon'}` })}
+        aria-label={t({ bn: `${def.bn}. ${bookCount}টি বই`, en: `${def.en}. ${bookCount} books` })}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
           <div>
@@ -153,27 +161,9 @@ export function ClassCard({
           <BookArt />
         </div>
         <div style={{ marginTop: 'auto' }}>
-          {ready ? (
-            <p style={{ margin: '0 0 10px', fontSize: 14, color: 'rgba(255,255,255,0.95)', fontWeight: 600 }}>
-              {t({ bn: `${bookCount}টি বই · ${subjectCount}টি বিষয়`, en: `${bookCount} books · ${subjectCount} subjects` })}
-            </p>
-          ) : (
-            <p style={{ margin: '0 0 10px' }}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  background: 'rgba(0,0,0,0.28)',
-                  color: '#fff',
-                  fontSize: 13,
-                  fontWeight: 600,
-                  padding: '4px 10px',
-                  borderRadius: 999,
-                }}
-              >
-                {t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
-              </span>
-            </p>
-          )}
+          <p style={{ margin: '0 0 10px', fontSize: 14, color: 'rgba(255,255,255,0.95)', fontWeight: 600 }}>
+            {t({ bn: `${bookCount}টি বই · ${subjectCount}টি বিষয়`, en: `${bookCount} books · ${subjectCount} subjects` })}
+          </p>
           <span
             aria-hidden="true"
             style={{

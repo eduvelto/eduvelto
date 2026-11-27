@@ -4,8 +4,9 @@
 // Guards the sales gate and the order shape: the card is UI-ONLY
 // until verified PDF content exists — SUGGESTION_PDF_SALES_ENABLED
 // must stay false until the owner approves the sale in writing
-// with verified content. The card must keep its "শীঘ্রই আসছে"
-// notice while sales are off.
+// with verified content. The card must keep its "যাচাই চলছে"
+// notice while sales are off (28 Nov 2026 completeness audit —
+// was "শীঘ্রই আসছে" before).
 
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -33,9 +34,9 @@ describe('suggestion-PDF sales gate', () => {
     expect(SUGGESTION_PDF_PRICE).toBe(149);
   });
 
-  it('the card says "coming soon" while sales are off', () => {
+  it('the card says verification is in progress while sales are off', () => {
     const src = readFileSync(resolve(__dirname, '../../components/SuggestionPdfCard.tsx'), 'utf8');
-    expect(src).toContain('শীঘ্রই আসছে');
+    expect(src).toContain('যাচাই চলছে');
     expect(src).toContain('SUGGESTION_PDF_SALES_ENABLED');
     // The card never claims a PDF is ready to download.
     expect(src).not.toContain('ডাউনলোড করুন');

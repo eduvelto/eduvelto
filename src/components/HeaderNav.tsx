@@ -15,17 +15,15 @@
 // English (language system, 24 Nov 2026; supersedes the 22 Nov 2026
 // tabs-only rule).
 //
-// HONESTY: there is NO notifications system in this codebase — the bell
-// opens a small "শীঘ্রই আসছে / Coming soon" note instead of pretending
-// to work. The bell shows NO count badge (no real notification count
-// exists). Dark mode IS real since 22 Nov 2026 (lib/theme.tsx): the
-// moon icon toggles the theme and the choice persists per device.
-// Dropdown items that lead to unbuilt sections (/skills) carry a
-// "শীঘ্রই আসছে" chip and land on the shared Coming Soon page; /jobs
-// and /admissions have been LIVE since 22 Nov 2026, so their chips
-// were removed (24 Nov 2026 homepage redesign). The header search is
-// a real input now (Global Search, /search) — it used to be a plain
-// link to /library.
+// HONESTY: there is NO notifications system in this codebase — the
+// bell was removed entirely (28 Nov 2026 completeness audit) rather
+// than show a "coming soon" note. Dark mode IS real since 22 Nov
+// 2026 (lib/theme.tsx): the moon icon toggles the theme and the
+// choice persists per device. Unbuilt sections are not listed in
+// the nav at all (/skills is hidden and redirects to /tools);
+// /jobs and /admissions have been LIVE since 22 Nov 2026. The
+// header search is a real input now (Global Search, /search) — it
+// used to be a plain link to /library.
 
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
@@ -38,7 +36,7 @@ import SupportButton from './SupportModal';
 import type { Lang } from '../i18n/strings';
 import './home-redesign.css';
 
-type MenuItem = { to: string; bn: string; en: string; soon?: boolean };
+type MenuItem = { to: string; bn: string; en: string };
 type Menu = { id: string; bn: string; en: string; icon: React.ReactNode; items: MenuItem[] };
 
 function BriefcaseIcon() {
@@ -63,14 +61,6 @@ function BookIcon() {
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-    </svg>
-  );
-}
-function SkillsIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M3 3v18h18" />
-      <path d="M7 15l4-6 4 3 5-8" />
     </svg>
   );
 }
@@ -112,14 +102,6 @@ function SunIcon() {
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <circle cx="12" cy="12" r="4" />
       <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-    </svg>
-  );
-}
-function BellIcon() {
-  return (
-    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
     </svg>
   );
 }
@@ -227,18 +209,9 @@ const MENUS: Menu[] = [
       { to: '/directory', bn: 'শিক্ষা নির্দেশিকা', en: 'Education Directory' },
     ],
   },
-  {
-    id: 'skills',
-    bn: 'দক্ষতা উন্নয়ন',
-    en: 'Professional Skills',
-    icon: <SkillsIcon />,
-    items: [
-      { to: '/skills', bn: 'দক্ষতা উন্নয়ন', en: 'Professional Skills', soon: true },
-      { to: '/skills', bn: 'English', en: 'English', soon: true },
-      { to: '/skills', bn: 'Computer', en: 'Computer', soon: true },
-      { to: '/skills', bn: 'Digital Skills', en: 'Digital Skills', soon: true },
-    ],
-  },
+  // 28 Nov 2026 (completeness audit): the Professional Skills menu
+  // group is hidden — the /skills section does not exist yet and
+  // every item in it showed a "coming soon" chip.
 ];
 
 // Secondary pages — reachable from the mobile menu (and the footer).
@@ -362,29 +335,25 @@ export default function HeaderNav() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const [bellNote, setBellNote] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
 
   // Close every open menu on navigation.
   useEffect(() => {
     setMenuOpen(false);
     setOpenMenu(null);
-    setBellNote(false);
   }, [location.pathname]);
 
   // Close dropdowns on Escape / outside click.
   useEffect(() => {
-    if (!openMenu && !bellNote) return;
+    if (!openMenu) return;
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         setOpenMenu(null);
-        setBellNote(false);
       }
     }
     function onClick(e: MouseEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setOpenMenu(null);
-        setBellNote(false);
       }
     }
     document.addEventListener('keydown', onKey);
@@ -393,7 +362,7 @@ export default function HeaderNav() {
       document.removeEventListener('keydown', onKey);
       document.removeEventListener('mousedown', onClick);
     };
-  }, [openMenu, bellNote]);
+  }, [openMenu]);
 
   const initial = (profile?.displayName ?? user?.email ?? '?').trim().charAt(0).toUpperCase() || '?';
 
@@ -403,7 +372,10 @@ export default function HeaderNav() {
         <img src={theme === 'dark' ? '/logo-white.png' : '/logo.png'} alt="Eduvelto" style={{ height: 44, width: 'auto', display: 'block' }} />
       </Link>
 
-      {/* Mobile-only: theme toggle + bell (Coming Soon) + avatar (signed in). */}
+      {/* Mobile-only: theme toggle + avatar (signed in). The
+          notifications bell is hidden (28 Nov 2026 completeness
+          audit) — notifications do not exist yet and the bell only
+          opened a "coming soon" note. */}
       <span className="ev-header-mobile-actions">
         <button
           type="button"
@@ -414,24 +386,6 @@ export default function HeaderNav() {
         >
           {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
         </button>
-        <span style={{ position: 'relative' }}>
-          <button
-            type="button"
-            className="ev-header-icon-btn"
-            aria-label={t({ bn: 'নোটিফিকেশন', en: 'Notifications' })}
-            aria-expanded={bellNote}
-            onClick={() => {
-              setBellNote((v) => !v);
-            }}
-          >
-            <BellIcon />
-          </button>
-          {bellNote ? (
-            <span className="ev-header-note" role="status">
-              {t({ bn: 'নোটিফিকেশন শীঘ্রই আসছে', en: 'Notifications coming soon' })}
-            </span>
-          ) : null}
-        </span>
         {/* Language toggle — top-right, beside the profile (owner rule 22 Nov 2026). */}
         <LangToggleButton />
         {loading ? null : user ? (
@@ -482,7 +436,6 @@ export default function HeaderNav() {
                   {menu.items.map((item) => (
                     <NavLink key={`${item.to}-${item.bn}`} to={item.to} className="ev-hnav-panel-link" role="menuitem">
                       <span>{t({ bn: item.bn, en: item.en })}</span>
-                      {item.soon ? <span className="ev-hnav-soon">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</span> : null}
                     </NavLink>
                   ))}
                 </div>

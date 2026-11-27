@@ -4,8 +4,10 @@
 //
 // Guards the two honesty rules of this day:
 //  (1) STORE: no verified suggestion-PDF content exists, so the
-//      store is coming-soon ONLY — no PDF listed, no order
-//      possible, no money moves; the sales gate stays OFF.
+//      store shows an honest "verification in progress" state
+//      only — no PDF listed, no order possible, no money moves;
+//      the sales gate stays OFF. (28 Nov 2026 completeness audit:
+//      the old "coming soon" chips are removed.)
 //  (2) WALL + NUMBER: the Supporters Wall shows REAL donors from
 //      the donations collection (never invented names/amounts),
 //      and the donation number / WhatsApp number link are NEVER
@@ -35,7 +37,7 @@ const FOOTER_SRC = readFileSync(resolve(__dirname, '../../components/Footer.tsx'
 // tests; they must never reach the rendered DOM.
 const HIDDEN = ['8801754267001', '8801975225751', 'wa.me/880', 'wa.me/eduvelto'];
 
-describe('Suggestion PDF Store — honest coming-soon only', () => {
+describe('Suggestion PDF Store — honest verification-in-progress state only', () => {
   it('the sales gate stays OFF (no price change, no flip)', () => {
     expect(SUGGESTION_PDF_SALES_ENABLED).toBe(false);
   });
@@ -43,7 +45,7 @@ describe('Suggestion PDF Store — honest coming-soon only', () => {
   it('the store says plainly that no PDF is for sale yet', () => {
     expect(STORE_SRC).toContain('এখনো কোনো সাজেশন PDF বিক্রির জন্য তৈরি নয়');
     expect(STORE_SRC).toContain('এখন কোনো পেমেন্ট নেওয়া হচ্ছে না');
-    expect(STORE_SRC).toContain('শীঘ্রই আসছে');
+    expect(STORE_SRC).toContain('যাচাই চলছে');
   });
 
   it('the store lists planned categories only — no PDF, no download, no invented content', () => {

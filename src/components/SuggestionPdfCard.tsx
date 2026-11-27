@@ -7,7 +7,7 @@
 // by hand until a delivery flow exists).
 //
 // ⚠️ UI-ONLY UNTIL VERIFIED CONTENT EXISTS. SUGGESTION_PDF_SALES_ENABLED
-// is false: the card shows "শীঘ্রই আসছে" and the order button is
+// is false: the card shows "যাচাই চলছে" and the order button is
 // disabled, because no verified suggestion-PDF content exists
 // (library audit: 506 wrong books). No money may move for a PDF
 // that does not exist yet. The modal code is complete and tested,
@@ -206,14 +206,16 @@ export default function SuggestionPdfCard({ examName }: { examName?: string }) {
               en: 'Suggestion and model tests for last-minute exam preparation — pay via bKash/Nagad and order with the TrxID.',
             })
           : t({
-              bn: 'শীঘ্রই আসছে — বিষয়বস্তু যাচাই চলছে, তাই এখনো বিক্রি শুরু হয়নি। যাচাই শেষ হলে এখান থেকেই অর্ডার করা যাবে।',
-              en: 'Coming soon — content is being verified, so sales have not started yet. You will be able to order from here once verification is done.',
+              // 28 Nov 2026 (completeness audit): honest status, no
+              // "coming soon" wording.
+              bn: 'বিষয়বস্তু যাচাই চলছে, তাই এখনো বিক্রি শুরু হয়নি। যাচাই শেষ হলে এখান থেকেই অর্ডার করা যাবে।',
+              en: 'Content is being verified, so sales have not started yet. You will be able to order from here once verification is done.',
             })}
       </p>
       <Button disabled={!salesOn} onClick={() => setModalOpen(true)}>
         {salesOn
           ? t({ bn: 'অর্ডার করুন — ৳১৪৯', en: 'Order — ৳149' })
-          : t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
+          : t({ bn: 'যাচাই চলছে', en: 'Verification in progress' })}
       </Button>
       {modalOpen && salesOn ? <OrderModal onClose={() => setModalOpen(false)} /> : null}
     </Card>

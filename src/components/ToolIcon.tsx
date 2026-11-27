@@ -747,14 +747,12 @@ export const TOOL_ICON_NAMES: ToolIconName[] = Object.keys(ICON_PATHS) as ToolIc
 // a letter or an empty tile.
 // ---------------------------------------------------------------------------
 export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
-  // PDF & Document (15)
+  // PDF & Document (13)
   'pdf-merger': 'docMerge',
   'pdf-splitter': 'docSplit',
   'pdf-compressor': 'docCompress',
   'pdf-to-jpg': 'docImage',
   'pdf-to-word': 'convert',
-  'jpg-to-pdf': 'imageDoc',
-  'pdf-page-extractor': 'docSplit',
   'pdf-page-reorder': 'reorder',
   'pdf-watermark': 'docDrop',
   'image-to-pdf': 'imageDoc',

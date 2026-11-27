@@ -16,7 +16,7 @@ export const WORLD_CLOCK_PRESETS: LiveClockZone[] = [
   { zone: 'Asia/Kathmandu', nameBn: 'কাঠমান্ডু', nameEn: 'Kathmandu' },
   { zone: 'Asia/Dubai', nameBn: 'দুবাই', nameEn: 'Dubai' },
   { zone: 'Asia/Riyadh', nameBn: 'রিয়াদ', nameEn: 'Riyadh' },
-  { zone: 'Asia/Doha', nameBn: 'দোহা', nameEn: 'Doha' },
+  { zone: 'Asia/Qatar', nameBn: 'দোহা', nameEn: 'Doha' },
   { zone: 'Asia/Kuala_Lumpur', nameBn: 'কুয়ালালামপুর', nameEn: 'Kuala Lumpur' },
   { zone: 'Asia/Singapore', nameBn: 'সিঙ্গাপুর', nameEn: 'Singapore' },
   { zone: 'Asia/Tokyo', nameBn: 'টোকিও', nameEn: 'Tokyo' },

@@ -17,17 +17,17 @@
  *  (5) canonicals are eduvelto.com, JSON-LD is Organization +
  *      WebSite + WebPage + BreadcrumbList.
  *  (6) Job/Admission copy never presents practice or mocks as live —
- *      any mention must carry "শীঘ্রই আসছে" (22 Nov 2026, current
- *      plan: no practice UI on live); per-exam descriptions state the
- *      verified pattern honestly (Bank penalty unverified, NTRCA
- *      last-verified 18th, Primary verified per Recruitment Rules
- *      2025, the rest unverified / scope pending).
+ *      any mention must carry "এখনো চালু হয়নি" (28 Nov 2026
+ *      completeness audit; was "শীঘ্রই আসছে" before); per-exam
+ *      descriptions state the verified pattern honestly (Bank penalty
+ *      unverified, NTRCA last-verified 18th, Primary verified per
+ *      Recruitment Rules 2025, the rest unverified / scope pending).
  *  (7) Organization JSON-LD names the founder (owner 22 Nov 18:24)
  *      with no private details (no DOB/address/phone).
  *  (8) sitemap.xml lists exactly the prerendered public routes
  *      (no drift) — 27 Nov 2026: the committed sitemap went
  *      prerender-generated (bn canonicals), so the expected set is
- *      derived from scripts/prerender.mjs, not the 285-URL
+ *      derived from scripts/prerender.mjs, not the 283-URL
  *      SITEMAP_URLS list (now the SEO route list only).
  *  (9) A "যাচাইকৃত ধরন" claim is gated on patternStatus (SF1/SF2/
  *      SF3, 22 Nov 2026): a per-exam description may say it only when
@@ -40,7 +40,7 @@
  *  (10) SEO 50–100 pages (23 Nov 2026, feature/seo-50-100-pages):
  *      all 23 job subject pages resolve (BCS 10, Bank 5, Primary
  *      Teacher 4, NTRCA 4) with verified marks in Bangla digits and
- *      "শীঘ্রই আসছে"; cross-exam / unknown slugs resolve to null.
+ *      "এখনো চালু হয়নি"; cross-exam / unknown slugs resolve to null.
  *  (11) all 9 NU subject pages resolve (3 common subjects × 3
  *      groups) with the group name in the title and "বিজ্ঞপ্তি থেকে
  *      যাচাইকৃত" + "খসড়া" in the description; group-block slugs
@@ -55,7 +55,7 @@
  *  (14) every sitemap <url> carries a <lastmod> (audit SEO-007).
  *  (15) forbidden-claim sweep over every sitemap URL + all 23 job +
  *      9 NU subject pages: no "#1" claim; practice/mock mentions
- *      carry "শীঘ্রই আসছে"; no live "প্রশ্নব্যাংক" / "AI শিক্ষক";
+ *      carry "এখনো চালু হয়নি"; no live "প্রশ্নব্যাংক" / "AI শিক্ষক";
  *      "যাচাইকৃত ধরন" only for a verified pattern — subject pages
  *      may say "যাচাইকৃত সিলেবাসে", never "যাচাইকৃত ধরন".
  *  (16) /jobs emits an ItemList of exactly the 14 exam hubs;
@@ -68,13 +68,12 @@
  *      /jobs/circulars, /jobs/calendar (until a confirmed event
  *      exists), /ai-teacher — while the 6 live BCS English practice
  *      + lesson routes are indexable and in the sitemap. The (6) /
- *      (15) "শীঘ্রই আসছে" guards are phrase-scoped to "MCQ
+ *      (15) "এখনো চালু হয়নি" guards are phrase-scoped to "MCQ
  *      অনুশীলন" / "মক টেস্ট": the new honest copy says BCS English
- *      practice is live with different words ("অনুশীলন এখন চালু",
- *      "মক পরীক্ষা … প্রস্তুত হচ্ছে"), so the guards stay green
- *      while the copy stays honest. The guards themselves are stale
- *      for BCS English and need a coordinated update before any
- *      other practice goes live.
+ *      practice is live with different words ("অনুশীলন এখন চালু"),
+ *      so the guards stay green while the copy stays honest.
+ *      (28 Nov 2026 completeness audit: the old "শীঘ্রই আসছে"
+ *      guard phrase was replaced by "এখনো চালু হয়নি", same intent.)
  *
  * Runs under plain node: resolveRouteSeo is pure (jobExams.ts has no
  * imports). Run with `npm run test:unit`.
@@ -294,8 +293,6 @@ const SITEMAP_URLS = [
   '/tools/pdf-splitter',
   '/tools/pdf-compressor',
   '/tools/pdf-to-jpg',
-  '/tools/jpg-to-pdf',
-  '/tools/pdf-page-extractor',
   '/tools/pdf-page-reorder',
   '/tools/pdf-watermark',
   '/tools/image-to-pdf',
@@ -545,12 +542,13 @@ describe('resolveRouteSeo — public routes', () => {
   });
 
   it('Job/Admission copy never presents practice or mocks as live', () => {
-    // Live state (22 Nov 2026): no practice UI is wired to the bank on
-    // live; the UI says "শীঘ্রই আসছে". Any Job/Admission description
-    // mentioning MCQ practice or mock tests must qualify it with
-    // "শীঘ্রই আসছে" — never as an available feature. The question
-    // bank exists in Firestore but has no live UI, so "প্রশ্নব্যাংক"
-    // must not appear as an offer either.
+    // Live state (22 Nov 2026; wording 28 Nov 2026 completeness
+    // audit): no practice UI is wired to the bank on live; the
+    // descriptions say practice is "এখনো চালু হয়নি". Any
+    // Job/Admission description mentioning MCQ practice or mock
+    // tests must qualify it that way — never as an available
+    // feature. The question bank exists in Firestore but has no
+    // live UI, so "প্রশ্নব্যাংক" must not appear as an offer either.
     const paths = [
       '/jobs',
       '/jobs/common',
@@ -584,7 +582,7 @@ describe('resolveRouteSeo — public routes', () => {
       expect(seo, `no SEO for ${path}`).not.toBeNull();
       const d = seo!.description;
       if (d.includes('MCQ অনুশীলন') || d.includes('মক টেস্ট')) {
-        expect(d, `unqualified live-practice claim in ${path}`).toContain('শীঘ্রই আসছে');
+        expect(d, `unqualified live-practice claim in ${path}`).toContain('এখনো চালু হয়নি');
       }
       expect(d, `প্রশ্নব্যাংক offered as live in ${path}`).not.toContain('প্রশ্নব্যাংক');
     }
@@ -657,11 +655,9 @@ describe('resolveRouteSeo — public routes', () => {
     }
   });
 
-  it('/skills resolves to an honest coming-soon entry', () => {
+  it('/skills has no SEO entry — the route redirects to /tools (28 Nov 2026 completeness audit)', () => {
     const seo = resolveRouteSeo('/skills');
-    expect(seo).not.toBeNull();
-    expect(seo!.title).toContain('শীঘ্রই আসছে');
-    expect(seo!.description).toContain('শীঘ্রই আসছে');
+    expect(seo).toBeNull();
   });
 
   it('/terms resolves to the honest Terms entry (23 Nov 2026, Master Plan quick-wins)', () => {
@@ -680,7 +676,7 @@ describe('resolveRouteSeo — public routes', () => {
   it('sitemap.xml lists exactly the prerendered public routes (no drift)', () => {
     // 27 Nov 2026: the committed sitemap is the PRERENDER-GENERATED
     // one (bn canonicals, 2,747 locs) — the old hand-maintained
-    // 285-URL SITEMAP_URLS list is now the SEO route list only, not
+    // 283-URL SITEMAP_URLS list is now the SEO route list only, not
     // the sitemap. Derive the expected locs the same way
     // scripts/prerender.mjs builds them: static + academic practice
     // + tool paths, plus one page per book from the 24 Nov backup.
@@ -923,7 +919,7 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       expect(seo!.title, path).toContain(exam.bn);
       expect(subject.marks, `${path} marks must be verified`).not.toBeNull();
       expect(seo!.description, path).toContain(`${bnDigits(subject.marks!)} নম্বর`);
-      expect(seo!.description, path).toContain('শীঘ্রই আসছে');
+      expect(seo!.description, path).toContain('এখনো চালু হয়নি');
       expect(breadcrumbNames(seo!), path).toEqual([
         'হোম',
         'চাকরি প্রস্তুতি',
@@ -1043,7 +1039,7 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     const blocks = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => m[1]);
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     // One <url> block per <loc> (2,747 in the prerender-generated
-    // sitemap, 27 Nov 2026) — the old SITEMAP_URLS count (285) is the
+    // sitemap, 27 Nov 2026) — the old SITEMAP_URLS count (283) is the
     // SEO route list, not the sitemap, since the sitemap went
     // prerender-generated.
     expect(blocks.length).toBe(locs.length);
@@ -1101,12 +1097,12 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       expect(seo!.description, `description ${path}`).not.toMatch(FORBIDDEN_RANK_CLAIM);
       const d = seo!.description;
       if (d.includes('মক টেস্ট') || d.includes('MCQ অনুশীলন')) {
-        expect(d, `unqualified live-practice claim in ${path}`).toContain('শীঘ্রই আসছে');
+        expect(d, `unqualified live-practice claim in ${path}`).toContain('এখনো চালু হয়নি');
       }
       expect(d, `প্রশ্নব্যাংক offered as live in ${path}`).not.toContain('প্রশ্নব্যাংক');
       if (d.includes('AI শিক্ষক')) {
-        // The /ai-teacher page may only say it is coming soon.
-        expect(d, `AI teacher presented as live in ${path}`).toContain('শীঘ্রই আসছে');
+        // The /ai-teacher page is a scripted demo, not live AI.
+        expect(d, `AI teacher presented as live in ${path}`).toContain('আসল এআই নয়');
       }
       // "যাচাইকৃত ধরন" gate, extended to subject pages: it may appear
       // only on a per-exam page whose pattern is verified /
@@ -1716,14 +1712,14 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
     }
   });
 
-  it('English copy keeps the honest caveats (no content for 6–8, drafts, coming soon)', () => {
+  it('English copy keeps the honest caveats (no content for 6–8, drafts, scripted demo)', () => {
     expect(resolveRouteSeo('/class/class-6-8', 'en')!.description).toContain(
       'have not reached the library yet',
     );
     expect(resolveRouteSeo('/learn/bcs-english-tense', 'en')!.description).toContain(
       'awaiting teacher review',
     );
-    expect(resolveRouteSeo('/ai-teacher', 'en')!.description).toContain('coming soon');
+    expect(resolveRouteSeo('/ai-teacher', 'en')!.description).toContain('not live AI');
     expect(resolveRouteSeo('/health/doctors', 'en')!.description).toContain('nobody is listed yet');
   });
 
@@ -1814,8 +1810,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 285 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides + /support, Phase 3 + 6 Day 1 audit fix, 26 Nov 2026 + 1 Day 6 /suggestions store + 106 100-tools, Phase 1, 26 Nov 2026 + 35 100-tools, Phase 2 batch 2, 27 Nov 2026)', () => {
-    expect(SITEMAP_URLS.length).toBe(285);
+  it('sitemap has 283 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides + /support, Phase 3 + 6 Day 1 audit fix, 26 Nov 2026 + 1 Day 6 /suggestions store + 106 100-tools, Phase 1, 26 Nov 2026 + 35 100-tools, Phase 2 batch 2, 27 Nov 2026 − 2 owner-approved duplicate tools removed 28 Nov 2026)', () => {
+    expect(SITEMAP_URLS.length).toBe(283);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {

@@ -29,7 +29,6 @@ import { loginState } from '../lib/loginReturn';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Card, Chip, LinkButton, ProgressBar, Reveal, SkeletonCards } from '../components/ui';
 import AdSlot from '../components/AdSlot';
-import { ComingSoonHero } from '../components/ComingSoon';
 import { useAuth } from '../lib/auth';
 import { useLanguage, T, TabT } from '../i18n/LanguageContext';
 import { listBooksForClass, listBooksForClassPage, getPublishedBook, type Book, type ClassListCursor } from '../lib/content';
@@ -507,7 +506,7 @@ export default function ClassDashboardPage() {
             {t({ bn: def.tagBn, en: def.tagEn })}
           </p>
         </div>
-        {books === null || stats === undefined ? null : ready ? (
+        {books === null || stats === undefined ? null : (
           <div className="ev-class-hero-stats">
             <span>
               <strong>{bookTotal}</strong>{t({ bn: 'টি বই', en: ' books' })}
@@ -522,11 +521,9 @@ export default function ClassDashboardPage() {
               <strong>{quizTotal}</strong>{t({ bn: 'টি পরীক্ষা', en: ' tests' })}
             </span>
           </div>
-        ) : (
-          <p style={{ margin: '12px 0 0' }}>
-            <span className="ev-class-hero-coming">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</span>
-          </p>
         )}
+        {/* 28 Nov 2026 (completeness audit): the hero always shows the
+            real counts (0 when empty) — no "coming soon" chip. */}
       </section>
 
       {/* Tab bar — Home, Books, Subjects, Practice, Tests, Results, Progress, Profile. */}
@@ -582,7 +579,12 @@ export default function ClassDashboardPage() {
           {activeTab === 'home' ? (
             <>
               {!ready ? (
-                <ComingSoonHero def={def} />
+                // 28 Nov 2026 (completeness audit): honest empty state
+                // instead of the "coming soon" hero.
+                <EmptyState
+                  bn="এই শ্রেণির কোনো বই এখনো প্রকাশিত হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
+                  en="No books for this class are published yet. Content will appear here once it is published."
+                />
               ) : (
                 <>
                   {/* Continue learning — real attempts only, never a fake % */}

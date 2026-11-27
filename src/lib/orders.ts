@@ -10,7 +10,7 @@
 // is false on purpose: no verified suggestion-PDF content exists
 // (the library audit found 506 wrong books; selling wrong paid
 // content would damage the owner's reputation). The card shows
-// "শীঘ্রই আসছে" and the order button stays disabled until this
+// "যাচাই চলছে" and the order button stays disabled until this
 // flag is flipped — flip it ONLY when verified PDF content exists
 // AND the owner approves the sale in writing. The orders.test.ts
 // flag test is the forcing function: flipping the flag without

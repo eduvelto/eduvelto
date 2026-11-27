@@ -79,7 +79,7 @@ const MORE_LINKS = [
 const MENU_SECTIONS: {
   titleBn: string;
   titleEn: string;
-  links: { to: string; bn: string; en: string; soon?: boolean }[];
+  links: { to: string; bn: string; en: string }[];
 }[] = [
   {
     titleBn: 'চাকরি প্রস্তুতি', titleEn: 'Job Preparation',
@@ -103,10 +103,9 @@ const MENU_SECTIONS: {
       { to: '/directory', bn: 'শিক্ষা নির্দেশিকা', en: 'Education Directory' },
     ],
   },
-  {
-    titleBn: 'দক্ষতা উন্নয়ন', titleEn: 'Professional Skills',
-    links: [{ to: '/skills', bn: 'দক্ষতা উন্নয়ন', en: 'Professional Skills', soon: true }],
-  },
+  // 28 Nov 2026 (completeness audit): the Professional Skills section
+  // is hidden — the /skills section does not exist yet and its only
+  // link showed a "coming soon" chip.
 ];
 
 export default function BottomNav(props: { bottomOffsetPx: number }) {
@@ -158,8 +157,6 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
     if (sheet) document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [sheet, closeSheet]);
-
-  const soonChip = <span className="ev-hnav-soon">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</span>;
 
   return (
     <>
@@ -271,7 +268,6 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
                     {section.links.map((link) => (
                       <Link key={`${link.to}-${link.bn}`} to={link.to} className="ev-sheet-link">
                         <span>{t({ bn: link.bn, en: link.en })}</span>
-                        {link.soon ? soonChip : null}
                       </Link>
                     ))}
                   </div>

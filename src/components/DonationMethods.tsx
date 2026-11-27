@@ -15,8 +15,10 @@
 //   it 20:48 after the public-number risk discussion, so NO bank
 //   account number ever entered the code.
 // - The FULL /support page (non-compact) keeps the Day 6 behavior:
-//   no number rendered, payment via the /whatsapp redirect, and
-//   Rocket/Bank Transfer still shown as coming soon.
+//   no number rendered, payment via the /whatsapp redirect — and
+//   since 28 Nov 2026 (completeness audit) it also shows bKash /
+//   Nagad only: the Rocket / Bank Transfer cards only ever showed
+//   a "coming soon" state.
 // Copying is click-only (SSR-safe: no navigator access at render
 // time) with a textarea fallback where clipboard.writeText is
 // unavailable. The number itself always comes from
@@ -192,14 +194,17 @@ export default function DonationMethods({ compact = false }: { compact?: boolean
           gap: 12,
         }}
       >
-        {DONATION_METHODS.map((m) => (
+        {/* 28 Nov 2026 (completeness audit): bKash + Nagad only, same
+            as the modal — the Rocket / Bank Transfer cards only ever
+            showed a "coming soon" state. */}
+        {DONATION_METHODS.filter((m) => m.id === 'bkash' || m.id === 'nagad').map((m) => (
           <MethodCard key={m.id} method={m} />
         ))}
       </div>
       <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.6 }}>
         {t({
-          bn: 'বিকাশ ও নগদ — পেমেন্টের নম্বর WhatsApp-এ জানিয়ে দেওয়া হবে। রকেট ও ব্যাংক ট্রান্সফার শীঘ্রই আসছে।',
-          en: 'bKash and Nagad — the payment number will be shared on WhatsApp. Rocket and Bank Transfer are coming soon.',
+          bn: 'বিকাশ ও নগদ — পেমেন্টের নম্বর WhatsApp-এ জানিয়ে দেওয়া হবে।',
+          en: 'bKash and Nagad — the payment number will be shared on WhatsApp.',
         })}
       </p>
     </div>

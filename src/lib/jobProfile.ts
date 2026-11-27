@@ -287,8 +287,9 @@ export function jobCategoryHubs(categorySlug: string): string[] {
  * (Step 5 — Step 2 §0.4/§2.1: the section is grouped BY CATEGORY,
  * not by tier). One entry per category, in order 1–10, each with its
  * hubs in hubSlugs order. Every exam appears in exactly one group
- * (pinned by the Step 5 unit test). Tier is NOT a grouping here — the
- * cards themselves still carry the tier-2/3 "Coming soon" chip.
+ * (pinned by the Step 5 unit test). Tier is NOT a grouping here —
+ * the cards carry no "coming soon" chip (28 Nov 2026 completeness
+ * audit) — every card just says "View structure".
  */
 export interface JobCategoryGroup {
   category: JobCategoryDef;

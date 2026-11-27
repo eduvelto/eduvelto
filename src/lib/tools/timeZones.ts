@@ -22,7 +22,7 @@ export const COMMON_TIME_ZONES: readonly TimeZoneOption[] = [
   { zone: 'Asia/Karachi', nameBn: 'করাচি (পাকিস্তান)', nameEn: 'Karachi (Pakistan)' },
   { zone: 'Asia/Dubai', nameBn: 'দুবাই (সংযুক্ত আরব আমিরাত)', nameEn: 'Dubai (UAE)' },
   { zone: 'Asia/Riyadh', nameBn: 'রিয়াদ (সৌদি আরব)', nameEn: 'Riyadh (Saudi Arabia)' },
-  { zone: 'Asia/Doha', nameBn: 'দোহা (কাতার)', nameEn: 'Doha (Qatar)' },
+  { zone: 'Asia/Qatar', nameBn: 'দোহা (কাতার)', nameEn: 'Doha (Qatar)' },
   { zone: 'Asia/Kuala_Lumpur', nameBn: 'কুয়ালালামপুর (মালয়েশিয়া)', nameEn: 'Kuala Lumpur (Malaysia)' },
   { zone: 'Asia/Singapore', nameBn: 'সিঙ্গাপুর', nameEn: 'Singapore' },
   { zone: 'Asia/Tokyo', nameBn: 'টোকিও (জাপান)', nameEn: 'Tokyo (Japan)' },

@@ -36,7 +36,6 @@ import { setupPushNotifications } from './lib/pushNotifications';
 // shell stay static — they are small and needed on every page.
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ClassIndexPage = lazy(() => import('./pages/ClassIndexPage'));
-const ComingSoonPage = lazy(() => import('./pages/ComingSoonPage'));
 const ClassDashboardPage = lazy(() => import('./pages/ClassDashboardPage'));
 const ClassSubjectPage = lazy(() => import('./pages/ClassSubjectPage'));
 const JobsPage = lazy(() => import('./pages/JobsPage'));
@@ -540,12 +539,13 @@ export default function App() {
             disallowed in robots.txt — search result pages are noindex. */}
         <Route path="search" element={<SearchPage />} />
         {/* Four main sections (homepage redesign, 21 Nov 2026): /class is
-            the real class index; /skills lands on the shared Coming Soon
-            page until it is built (22 Nov 2026: /jobs moved to the real
-            JobsPage below — the old /jobs Coming Soon route shadowed it).
-            /admissions is now the hub index (NU-5) — see the NU routes below. */}
+            the real class index; /skills redirects to the tools hub
+            (28 Nov 2026 completeness audit — the /skills section does
+            not exist yet and showed a "coming soon" page; the nav no
+            longer lists it). /admissions is now the hub index (NU-5)
+            — see the NU routes below. */}
         <Route path="class" element={<ClassIndexPage />} />
-        <Route path="skills" element={<ComingSoonPage section="skills" />} />
+        <Route path="skills" element={<Navigate to="../tools" replace />} />
         {/* NU admission (NU-5, design §5): index → NU hub (8 tabs) →
             group pages → candidate dashboard. The dashboard and the
             three STATIC group routes sit above the hub's `:tab` route

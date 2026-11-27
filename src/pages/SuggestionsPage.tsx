@@ -5,19 +5,21 @@
 // same component under /bn + /en — NOT a redirect; the bare
 // /suggestions 301s to /bn/suggestions in firebase.json).
 //
-// ⚠️ HONEST COMING-SOON ONLY. No verified suggestion-PDF content
-// exists (library audit: 506 wrong books), so NOTHING is for sale
-// here: no PDF is listed, no order can be placed, no money moves.
-// The page shows the planned categories + the planned ৳99–৳149
-// price range as "শীঘ্রই আসছে" only, and the SuggestionPdfCard
-// below renders its own coming-soon state (sales gate in
-// lib/orders.ts: SUGGESTION_PDF_SALES_ENABLED is false). A PDF
-// may be listed here ONLY after it is actually verified — never
-// from a claim — with the owner's written approval.
+// ⚠️ HONEST EMPTY STATE ONLY (28 Nov 2026 completeness audit —
+// the old "coming soon" chips are removed). No verified
+// suggestion-PDF content exists (library audit: 506 wrong books),
+// so NOTHING is for sale here: no PDF is listed, no order can be
+// placed, no money moves. The page shows the planned categories +
+// the planned ৳99–৳149 price range with an honest "verification in
+// progress" note, and the SuggestionPdfCard below renders its own
+// verification state (sales gate in lib/orders.ts:
+// SUGGESTION_PDF_SALES_ENABLED is false). A PDF may be listed here
+// ONLY after it is actually verified — never from a claim — with
+// the owner's written approval.
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { Card, Chip } from '../components/ui';
+import { Card } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import SuggestionPdfCard from '../components/SuggestionPdfCard';
 
@@ -68,7 +70,6 @@ export default function SuggestionsPage() {
             <Card key={c.bn} style={{ opacity: 0.9 }}>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
                 <strong style={{ fontSize: 16, color: 'var(--heading)' }}>{t({ bn: c.bn, en: c.en })}</strong>
-                <Chip tone="outline">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
               </div>
               <p style={{ color: 'var(--muted)', lineHeight: 1.7, margin: '8px 0 0', fontSize: 14 }}>
                 {t({

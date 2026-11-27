@@ -74,14 +74,9 @@ export default function AboutPage() {
           <Link to="/exam" style={{ fontWeight: 700, color: 'var(--heading)' }}>{t({ bn: 'পরীক্ষা', en: 'Exams' })}</Link>
           <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'বিনামূল্যে পরীক্ষা ও ফলাফল।', en: 'Free exams and results.' })}</p>
         </div>
-        <div className="ev-card ev-card-hover">
-          <Link to="/routine" style={{ fontWeight: 700, color: 'var(--heading)' }}>{t({ bn: 'রুটিন', en: 'Study Routine' })}</Link>
-          <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'স্মার্ট পড়ার পরিকল্পনা — শীঘ্রই আসছে।', en: 'Smart study planning — coming soon.' })}</p>
-        </div>
-        <div className="ev-card">
-          <strong style={{ color: 'var(--heading)' }}>{t({ bn: 'ব্যক্তিগত AI শিক্ষক', en: 'Personal AI Teacher' })}</strong>
-          <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'শিগগিরই আসছে।', en: 'Coming soon.' })}</p>
-        </div>
+        {/* 28 Nov 2026 (completeness audit): the Routine / smart study
+            planning and Personal AI Teacher cards are hidden until
+            those features exist — they showed a "coming soon" state. */}
       </div>
 
       {/* Live counts + what Eduvelto is NOT (24 Nov 2026, brand-SEO
