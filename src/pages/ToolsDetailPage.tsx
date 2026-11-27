@@ -34,6 +34,7 @@ import { faqPageJsonLd, relatedToolsFor } from '../lib/toolSeo';
 import { langUrl, SITE_URL } from '../lib/langRouting';
 import { ToolIcon } from '../components/ToolIcon';
 import AdSlot from '../components/AdSlot';
+import ShareButton from '../components/ShareButton';
 import LifePdfToolsPage from './LifePdfToolsPage';
 import LifeCalculatorsPage from './LifeCalculatorsPage';
 import LifeConvertersPage from './LifeConvertersPage';
@@ -674,6 +675,15 @@ export default function ToolsDetailPage() {
       <p className="ev-tool-desc" style={{ fontSize: 16, lineHeight: 1.7 }}>
         {t({ bn: meta.descriptionBn, en: meta.descriptionEn })}
       </p>
+      {/* Share / copy-link (28 Nov 2026): one shared button on every
+          tool page — native share sheet where available, otherwise
+          copies the canonical tool URL. */}
+      <div style={{ margin: '4px 0 16px' }}>
+        <ShareButton
+          url={`${SITE_URL}/${lang}/tools/${meta.slug}`}
+          title={lang === 'bn' ? meta.titleBn : meta.titleEn}
+        />
+      </div>
       {ToolUI ? (
         <ToolUI />
       ) : (

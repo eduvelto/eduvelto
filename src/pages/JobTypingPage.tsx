@@ -5,6 +5,7 @@
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import ShareButton from '../components/ShareButton';
 import JobTypingSimulator from '../components/JobTypingSimulator';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -17,6 +18,9 @@ export default function JobTypingPage() {
           {t({ bn: '← সরকারি চাকরি (১১–২০ গ্রেড)', en: '← Government Jobs (Grades 11–20)' })}
         </Link>
       </p>
+      <div style={{ margin: '0 0 16px' }}>
+        <ShareButton />
+      </div>
       <JobTypingSimulator />
     </PageShell>
   );
