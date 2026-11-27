@@ -3756,13 +3756,18 @@ html[data-theme="dark"] .ev-header {
 /* navy slightly, as the greeting did).                               */
 /* Content: ALL our real features + our offers + the Surah Al-Alaq   */
 /* ayah 1 (Arabic only) ONLY — never any other site's stats or       */
-/* claims. Respectful display: SLOW marquee (80s per copy), no       */
-/* flashing, pause on hover; the track moves with a rigid translateX */
-/* only, so the Arabic letters/harakat are never distorted. Reduced  */
-/* motion: no animation — the items wrap statically. Items never     */
-/* truncate: white-space: nowrap per item, the track is 4 identical  */
-/* copies and the loop shifts by exactly one copy, so there is no    */
-/* gap at the seam.                                                   */
+/* claims. Respectful display: SLOW marquee (480s per copy — the     */
+/* loop slowed from 80s on 27 Nov 2026 when all 140 live tools       */
+/* joined the ticker: the old 80s covered 16 items (~600 bn chars);  */
+/* the 140 tool titles add ~2,860 chars, so the same reading pace    */
+/* needs ~461s + per-item padding = ~488s; 480s keeps the original   */
+/* ~74px/s pace, each item readable as long as before), no flashing, */
+/* pause on hover; the track moves with a rigid translateX only, so  */
+/* the Arabic letters/harakat are never distorted. Reduced motion:   */
+/* no animation — the items wrap statically. Items never truncate:   */
+/* white-space: nowrap per item, the track is 4 identical copies    */
+/* and the loop shifts by exactly one copy, so there is no gap at    */
+/* the seam.                                                          */
 /* ------------------------------------------------------------------ */
 
 .ev-announcement-ticker {
@@ -3778,7 +3783,7 @@ html[data-theme="dark"] .ev-header {
 .ev-ticker-track {
   display: flex;
   width: max-content;
-  animation: ev-ticker-scroll 80s linear infinite;
+  animation: ev-ticker-scroll 480s linear infinite;
 }
 .ev-announcement-ticker:hover .ev-ticker-track {
   animation-play-state: paused;

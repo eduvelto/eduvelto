@@ -69,6 +69,13 @@ function featureItems(): Extract<AnnouncementTickerItem, { kind: 'feature' }>[] 
   );
 }
 
+/** renderToString escapes & as &amp; — several tool titles contain
+ *  & ("Mortgage & Home Loan Calculator", "Calorie & TDEE ..."),
+ *  so compare against the escaped form. */
+function esc(s: string): string {
+  return s.replace(/&/g, '&amp;');
+}
+
 describe('AnnouncementTicker content (owner 25 Nov 10:03 + 18:01)', () => {
   it('shows the Al-Alaq ayah 1 in Arabic ONLY — no translation, no attribution', async () => {
     const html = await renderTicker('bn');
@@ -109,16 +116,34 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03 + 18:01)', () => {
 
   it('rotates ALL our real features, each linked to its page', async () => {
     const features = featureItems();
-    expect(features.length).toBe(12);
+    // 12 core features + 140 live tools (owner 27 Nov 2026: every
+    // feature in the banner, one by one) = 152 feature items.
+    expect(features.length).toBe(152);
+    // The 12 core features (first 12, in rotation order).
+    const core = features.slice(0, 12);
+    expect(core.map((f) => f.id)).toEqual([
+      'library',
+      'generator',
+      'jobs',
+      'admissions',
+      'daily-quiz',
+      'book-search',
+      'exams',
+      'ai-chat',
+      'custom-paper',
+      'opportunities',
+      'life-services',
+      'progress',
+    ]);
     const html = await renderTicker('bn');
     for (const f of features) {
-      expect(html).toContain(f.bn);
+      expect(html).toContain(esc(f.bn));
       expect(html).toContain(`href="${f.href}"`);
     }
     // English mode: the same features in English.
     const htmlEn = await renderTicker('en');
     for (const f of features) {
-      expect(htmlEn).toContain(f.en);
+      expect(htmlEn).toContain(esc(f.en));
     }
     // The library item carries the live counts (real numbers only).
     expect(html).toContain('৬০৯টি বই');
@@ -126,6 +151,36 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03 + 18:01)', () => {
     expect(html).toContain('২৩,২৫৯টি প্রশ্ন');
     expect(htmlEn).toContain('609 books');
     expect(htmlEn).toContain('23,259 questions');
+  });
+
+  it('rotates all 140 live tools, one item each — lab checker NOT yet (not live)', async () => {
+    const { TICKER_TOOL_ITEMS } = await import('../AnnouncementTicker');
+    expect(TICKER_TOOL_ITEMS.length).toBe(140);
+    // Every tool item links to its real /tools/<slug> page.
+    const { TOOLS_META } = await import('../../lib/toolsMeta');
+    const liveSlugs = TOOLS_META.map((t) => t.slug).filter(
+      (s) => s !== 'lab-test-result-checker',
+    );
+    expect(liveSlugs.length).toBe(140);
+    expect(TICKER_TOOL_ITEMS.map((t) => t.href)).toEqual(
+      liveSlugs.map((s) => `/tools/${s}`),
+    );
+    expect(TICKER_TOOL_ITEMS.map((t) => t.id)).toEqual(
+      liveSlugs.map((s) => `tool-${s}`),
+    );
+    // The Lab Test Checker is built but NOT live (MBBS review
+    // pending) — it must not appear in the banner yet.
+    const html = await renderTicker('bn');
+    expect(html).not.toContain('lab-test-result-checker');
+    expect(html).not.toContain('ল্যাব টেস্ট রেজাল্ট চেকার');
+    // Spot-check tool items render in both languages.
+    expect(html).toContain('পিডিএফ মার্জার');
+    expect(html).toContain('href="/tools/pdf-merger"');
+    expect(html).toContain('যাকাত ক্যালকুলেটর');
+    expect(html).toContain('href="/tools/zakat-calculator"');
+    const htmlEn = await renderTicker('en');
+    expect(htmlEn).toContain('PDF Merger');
+    expect(htmlEn).toContain('Zakat Calculator');
   });
 
   it('never shows their stats, their brand, or any WhatsApp number', async () => {
@@ -161,8 +216,8 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03 + 18:01)', () => {
 });
 
 describe('AnnouncementTicker respectful display (CSS)', () => {
-  it('scrolls SLOW (80s loop), pauses on hover, and stops under reduced motion', () => {
-    expect(CSS_SRC).toContain('ev-ticker-scroll 80s linear infinite');
+  it('scrolls SLOW (480s loop — slowed from 80s when the 140 tools joined, same px/s pace), pauses on hover, and stops under reduced motion', () => {
+    expect(CSS_SRC).toContain('ev-ticker-scroll 480s linear infinite');
     expect(CSS_SRC).toContain('.ev-announcement-ticker:hover .ev-ticker-track');
     expect(CSS_SRC).toContain('animation-play-state: paused');
     expect(CSS_SRC).toContain('translateX(-25%)');

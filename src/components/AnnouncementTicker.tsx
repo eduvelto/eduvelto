@@ -21,18 +21,42 @@
 // English translation and no attribution. The Arabic string was
 // supplied by the owner 25 Nov 10:03; copy character for character,
 // NEVER retype from memory and never pick a different ayat.
-// Respectful display (standing rule): SLOW marquee (80s loop),
-// no flashing, no fast movement, pause on hover; the Arabic
-// letters/harakat are never distorted — the marquee moves the track
-// with a rigid translateX only (no skew, scale or rotate on the
-// text). Under prefers-reduced-motion the track stops and wraps
-// statically, so nothing moves at all.
+// Respectful display (standing rule): SLOW marquee (480s loop —
+// see the timing note below), no flashing, no fast movement, pause
+// on hover; the Arabic letters/harakat are never distorted — the
+// marquee moves the track with a rigid translateX only (no skew,
+// scale or rotate on the text). Under prefers-reduced-motion the
+// track stops and wraps statically, so nothing moves at all.
+//
+// TOOLS IN THE TICKER (owner 27 Nov 2026: every feature in the
+// scroll banner, one by one) — all 140 LIVE tools appear below as
+// one item each (tool title in bn/en, linking to /tools/<slug>),
+// derived from toolsMeta at runtime so a new tool appears here
+// automatically. EXCLUDED: lab-test-result-checker — built but NOT
+// live yet (MBBS review pending); add it at its deploy by deleting
+// the filter in TICKER_TOOL_ITEMS below. NOTE: ~107 of the 140
+// tool pages currently show the honest "still being built" box
+// (only 25 have an interactive UI + 8 aliases render real pages);
+// the ticker links to their real pages either way, and the box
+// says so plainly.
+//
+// LOOP TIMING — the loop is 480s per copy, NOT the old 80s. The
+// old 80s covered 16 items (~600 bn chars, ~74px/s). The 140
+// tool titles add ~2,860 bn chars (total ~3,460), so the same
+// reading pace needs 80s x (3,460/601) = ~461s, plus per-item
+// padding/separator width = ~488s; 480s keeps the original pace
+// (same px/s, each item readable as long as before). Slowing by
+// item COUNT instead (80s x 156/16 = 780s) would halve the pace
+// for no reason — the tool titles are much shorter than the old
+// feature lines (avg 20 chars vs 38). The CSS animation duration
+// and the tests below pin 480s; change all three together.
 //
 // STATIC content — no Firestore reads (Spark rule for public pages).
 // The offer + feature items link to our own pages; the ayat item is
 // not a link.
 import type { Lang } from '../i18n/strings';
 import { useLanguage } from '../i18n/LanguageContext';
+import { TOOLS_META } from '../lib/toolsMeta';
 
 /** Ayat — Arabic ONLY (owner 25 Nov 18:01). Verbatim from the owner
  * (25 Nov 2026 10:03); never retype, never pick another ayat. The
@@ -45,9 +69,27 @@ export type AnnouncementTickerItem =
   | { id: string; kind: 'offer'; bn: string; en: string; href: string }
   | { id: string; kind: 'feature'; bn: string; en: string; href: string };
 
+/** All 140 LIVE tools, one ticker item each (owner 27 Nov 2026).
+ *  Derived from toolsMeta at runtime — a new tool appears here
+ *  automatically, and a title change flows through. EXCLUDED:
+ *  lab-test-result-checker (built, not live yet — MBBS review
+ *  pending); delete the filter at its deploy. Item text is the
+ *  tool's own bn/en title; href is its real /tools/<slug> page. */
+export const TICKER_TOOL_ITEMS: Extract<
+  AnnouncementTickerItem,
+  { kind: 'feature' }
+>[] = TOOLS_META.filter((t) => t.slug !== 'lab-test-result-checker').map((t) => ({
+  id: `tool-${t.slug}`,
+  kind: 'feature',
+  bn: t.titleBn,
+  en: t.titleEn,
+  href: `/tools/${t.slug}`,
+}));
+
 /** Rotation order: the ayat leads, then our offers, then every real
- * feature (owner 25 Nov 18:01). Feature items are real pages only —
- * no invented features, no invented numbers. */
+ * feature (owner 25 Nov 18:01), then all 140 live tools (owner
+ * 27 Nov 2026) — each links to its page. Feature items are real
+ * pages only — no invented features, no invented numbers. */
 export const ANNOUNCEMENT_TICKER_ITEMS: AnnouncementTickerItem[] = [
   { id: 'ayat', kind: 'ayat' },
   {
@@ -156,6 +198,9 @@ export const ANNOUNCEMENT_TICKER_ITEMS: AnnouncementTickerItem[] = [
     en: 'Track your study progress',
     href: '/progress',
   },
+  // All 140 live tools, one item each (owner 27 Nov 2026) —
+  // derived from toolsMeta above, in toolsMeta order.
+  ...TICKER_TOOL_ITEMS,
 ];
 
 /** How many identical copies of the item set the track renders (see

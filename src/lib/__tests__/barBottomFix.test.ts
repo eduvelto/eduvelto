@@ -57,18 +57,21 @@ describe('bar + bottom-nav CSS contract (owner 24 Nov 2026)', () => {
     // on the owner's phone.
     expect(block).toMatch(/white-space\s*:\s*nowrap/);
     expect(block).not.toMatch(/text-overflow\s*:\s*ellipsis/);
-    // The track scrolls (80s loop) instead of truncating.
+    // The track scrolls (480s loop — slowed from 80s when the 140
+    // live tools joined the ticker, same px/s pace) instead of
+    // truncating.
     const track = ruleBlock(CSS, '.ev-ticker-track');
-    expect(track).toMatch(/animation\s*:\s*ev-ticker-scroll 80s linear infinite/);
+    expect(track).toMatch(/animation\s*:\s*ev-ticker-scroll 480s linear infinite/);
     expect(stripComments(CSS)).toMatch(/@keyframes ev-ticker-scroll/);
   });
 
   it('ticker: slow scroll + Arabic item class exist + reduced motion stops it', () => {
     // Owner 25 Nov 10:03 — the ticker replaces the ayah bar. Slow
-    // 80s loop, pause on hover, no flashing/fast movement; the
-    // Arabic ayat rides in its own class (Amiri/Naskh serif, rtl).
+    // 480s loop (80s before the 140 tools joined), pause on hover,
+    // no flashing/fast movement; the Arabic ayat rides in its own
+    // class (Amiri/Naskh serif, rtl).
     const track = ruleBlock(CSS, '.ev-ticker-track');
-    expect(track).toMatch(/animation\s*:\s*ev-ticker-scroll 80s linear infinite/);
+    expect(track).toMatch(/animation\s*:\s*ev-ticker-scroll 480s linear infinite/);
     const clean = stripComments(CSS);
     expect(clean).toMatch(/@keyframes ev-ticker-scroll[\s\S]*?translateX\(-25%\)/);
     const arBlock = ruleBlock(CSS, '.ev-ticker-ayat-ar');
