@@ -18,7 +18,46 @@ interface Env {
   MODEL?: string;
 }
 
-const ALLOWED_ORIGINS = new Set(['https://eduvelto.com', 'https://www.eduvelto.com']);
+const ALLOWED_ORIGINS = new Set([
+  'https://eduvelto.com',
+  'https://www.eduvelto.com',
+  // Same live site on the Pages domain (owner order, 27 Nov 2026).
+  'https://eduvelto.pages.dev',
+]);
+
+// Rate limit (owner order, 27 Nov 2026): max 20 requests/minute per
+// client IP. In-memory sliding window, per Worker isolate — the free
+// tier has no shared store, so the limit is per isolate, not global:
+// a burst spread across many isolates can exceed 20/min in total. It
+// still stops one abusive client hammering a single isolate, at zero
+// cost. Preflight OPTIONS never consumes quota (handled before this).
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 20;
+const rateLimitHits = new Map<string, number[]>();
+
+function clientIp(request: Request): string {
+  const cf = request.headers.get('CF-Connecting-IP');
+  if (cf !== null && cf.trim() !== '') return cf.trim();
+  const xff = request.headers.get('X-Forwarded-For');
+  if (xff !== null && xff.trim() !== '') return xff.split(',')[0].trim();
+  return 'unknown';
+}
+
+/** Returns seconds to wait when limited, or null when the request may proceed. */
+function checkRateLimit(ip: string, now: number): number | null {
+  const cutoff = now - RATE_LIMIT_WINDOW_MS;
+  let hits = rateLimitHits.get(ip);
+  if (hits === undefined) {
+    hits = [];
+    rateLimitHits.set(ip, hits);
+  }
+  while (hits.length > 0 && hits[0] <= cutoff) hits.shift();
+  if (hits.length >= RATE_LIMIT_MAX) {
+    return Math.ceil((hits[0] + RATE_LIMIT_WINDOW_MS - now) / 1000);
+  }
+  hits.push(now);
+  return null;
+}
 
 function corsHeaders(origin: string | null): Record<string, string> {
   const allowed = origin !== null && ALLOWED_ORIGINS.has(origin) ? origin : '';
@@ -30,10 +69,15 @@ function corsHeaders(origin: string | null): Record<string, string> {
   };
 }
 
-function json(body: unknown, status: number, origin: string | null): Response {
+function json(
+  body: unknown,
+  status: number,
+  origin: string | null,
+  extraHeaders: Record<string, string> = {},
+): Response {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+    headers: { 'Content-Type': 'application/json', ...corsHeaders(origin), ...extraHeaders },
   });
 }
 
@@ -48,8 +92,18 @@ export default {
     if (url.pathname !== '/api/chat' || request.method !== 'POST') {
       return json({ error: 'not-found' }, 404, origin);
     }
+    // Missing Origin is allowed (pre-existing pattern): a browser
+    // cross-origin POST always carries Origin, so a request with no
+    // Origin is a server/curl client, not a browser bypass. Only a
+    // present-but-foreign Origin is rejected.
     if (origin !== null && !ALLOWED_ORIGINS.has(origin)) {
       return json({ error: 'forbidden-origin' }, 403, origin);
+    }
+    // Bad origins never consume quota; invalid bodies DO count (the
+    // limit sits before parsing, so flooding with junk is still cut off).
+    const limited = checkRateLimit(clientIp(request), Date.now());
+    if (limited !== null) {
+      return json({ error: 'rate-limited' }, 429, origin, { 'Retry-After': String(limited) });
     }
     if (!env.GEMINI_API_KEY) {
       // Key not configured yet (owner step) — say so, do not fake.

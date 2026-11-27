@@ -14,8 +14,14 @@ owner's Cloudflare account — this branch only prepares the code.
 ## What the proxy does
 
 - `POST /api/chat` with `{ messages, lang }` → `{ reply, provider }`.
-- CORS allowlist: only `https://eduvelto.com` and
-  `https://www.eduvelto.com` may call it.
+- CORS allowlist: only `https://eduvelto.com`,
+  `https://www.eduvelto.com` and `https://eduvelto.pages.dev` may call it.
+  A request with no `Origin` header (server/curl client) is allowed; a
+  present-but-foreign Origin gets 403.
+- Rate limit: 20 requests/minute per client IP (in-memory sliding window,
+  per Worker isolate — no shared store on the free tier, so the limit is
+  per isolate, not global). Over the limit → 429 `{ error: "rate-limited" }`
+  with a `Retry-After` header. Preflight `OPTIONS` never consumes quota.
 - Validates every request (max 20 messages, max 2000 chars each).
 - Never logs or stores message text. Never asks for personal data.
 - Maps a Gemini 429 to HTTP 429 `{ error: "quota-exhausted" }` so the
