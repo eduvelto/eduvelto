@@ -14,8 +14,24 @@
 // served the 28,657-byte home page). Now the Function serves the
 // prerendered file for the route when one exists, and falls back to
 // /index.html only for genuine client-side routes (dashboard, app, ...).
+// 27 Nov 2026 — host unification: www.eduvelto.com, eduvelto.pages.dev
+// and www.eduvelto.pages.dev 301 to the apex host (see onRequest) —
+// Cloudflare analytics showed the same site split across 3 hosts
+// (www 20.57k, pages.dev 2.44k requests), diluting SEO/AdSense.
 export async function onRequest(context) {
   const url = new URL(context.request.url);
+  // Host unification FIRST, before any asset/prerender/SPA logic:
+  // the duplicate hosts redirect permanently to the apex host, keeping
+  // path + query. Exact-host match only, so branch preview hosts
+  // (<branch>.eduvelto.pages.dev) pass through untouched, and the apex
+  // host itself is never redirected (no loop).
+  if (
+    url.hostname === 'www.eduvelto.com' ||
+    url.hostname === 'eduvelto.pages.dev' ||
+    url.hostname === 'www.eduvelto.pages.dev'
+  ) {
+    return Response.redirect(`https://eduvelto.com${url.pathname}${url.search}`, 301);
+  }
   const path = url.pathname;
   // Static asset (has a file extension) — let Pages serve it normally.
   if (/\.[a-zA-Z0-9]+$/.test(path)) {
