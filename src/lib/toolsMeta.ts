@@ -1997,11 +1997,11 @@ export const TOOLS_META: ToolMeta[] = [
   {
     slug: 'standard-deviation-calculator',
     category: 'education',
-    titleBn: 'পরিমিত ব্যবধান (স্ট্যান্ডার্ড ডেভিয়েশন) ক্যালকুলেটর',
+    titleBn: 'পরিমিত ব্যবধান ক্যালকুলেটর',
     titleEn: 'Standard Deviation Calculator',
     descriptionBn: 'একগুচ্ছ সংখ্যার পরিমিত ব্যবধান ও ভেদাঙ্ক বের করুন — সমগ্রক ও নমুনা দুইভাবেই।',
     descriptionEn: 'Find the standard deviation and variance of a list of numbers — both population and sample versions.',
-    crumbBn: 'পরিমিত ব্যবধান (স্ট্যান্ডার্ড ডেভিয়েশন) ক্যালকুলেটর',
+    crumbBn: 'পরিমিত ব্যবধান ক্যালকুলেটর',
     crumbEn: 'Standard Deviation Calculator',
     relatedSlugs: ['scientific-calculator', 'grade-analyzer', 'bcs-marks-calculator'],
   },
