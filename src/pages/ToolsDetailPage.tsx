@@ -210,6 +210,31 @@ import { FlashcardMakerTool } from './tools/FlashcardMakerTool';
 import { AgeCalculatorTool } from './tools/AgeCalculatorTool';
 import { PercentageConverterTool } from './tools/PercentageConverterTool';
 import { LoanEmiCalculatorTool } from './tools/LoanEmiCalculatorTool';
+import { FractionCalculatorTool } from './tools/FractionCalculatorTool';
+import { AverageCalculatorTool } from './tools/AverageCalculatorTool';
+import { MedianModeCalculatorTool } from './tools/MedianModeCalculatorTool';
+import { StandardDeviationCalculatorTool } from './tools/StandardDeviationCalculatorTool';
+import { RatioCalculatorTool } from './tools/RatioCalculatorTool';
+import { ProportionCalculatorTool } from './tools/ProportionCalculatorTool';
+import { PercentageChangeCalculatorTool } from './tools/PercentageChangeCalculatorTool';
+import { SquareRootCubeRootCalculatorTool } from './tools/SquareRootCubeRootCalculatorTool';
+import { ExponentPowerCalculatorTool } from './tools/ExponentPowerCalculatorTool';
+import { LogarithmCalculatorTool } from './tools/LogarithmCalculatorTool';
+import { QuadraticEquationSolverTool } from './tools/QuadraticEquationSolverTool';
+import { LinearEquationSolverTool } from './tools/LinearEquationSolverTool';
+import { AreaCalculatorTool } from './tools/AreaCalculatorTool';
+import { VolumeCalculatorTool } from './tools/VolumeCalculatorTool';
+import { PythagoreanTheoremCalculatorTool } from './tools/PythagoreanTheoremCalculatorTool';
+import { TriangleCalculatorTool } from './tools/TriangleCalculatorTool';
+import { CircleCalculatorTool } from './tools/CircleCalculatorTool';
+import { PrimeNumberCheckerTool } from './tools/PrimeNumberCheckerTool';
+import { FactorCalculatorTool } from './tools/FactorCalculatorTool';
+import { LcmHcfCalculatorTool } from './tools/LcmHcfCalculatorTool';
+import { FactorialCalculatorTool } from './tools/FactorialCalculatorTool';
+import { PermutationCombinationCalculatorTool } from './tools/PermutationCombinationCalculatorTool';
+import { ProbabilityCalculatorTool } from './tools/ProbabilityCalculatorTool';
+import { BinaryHexOctalCalculatorTool } from './tools/BinaryHexOctalCalculatorTool';
+import { MatrixCalculatorTool } from './tools/MatrixCalculatorTool';
 import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
@@ -399,6 +424,32 @@ const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'age-calculator': AgeCalculatorTool,
   'percentage-converter': PercentageConverterTool,
   'loan-emi-calculator': LoanEmiCalculatorTool,
+  // Math batch, 27 Nov 2026 (93-tools build)
+  'fraction-calculator': FractionCalculatorTool,
+  'average-calculator': AverageCalculatorTool,
+  'median-mode-calculator': MedianModeCalculatorTool,
+  'standard-deviation-calculator': StandardDeviationCalculatorTool,
+  'ratio-calculator': RatioCalculatorTool,
+  'proportion-calculator': ProportionCalculatorTool,
+  'percentage-change-calculator': PercentageChangeCalculatorTool,
+  'square-root-cube-root-calculator': SquareRootCubeRootCalculatorTool,
+  'exponent-power-calculator': ExponentPowerCalculatorTool,
+  'logarithm-calculator': LogarithmCalculatorTool,
+  'quadratic-equation-solver': QuadraticEquationSolverTool,
+  'linear-equation-solver': LinearEquationSolverTool,
+  'area-calculator': AreaCalculatorTool,
+  'volume-calculator': VolumeCalculatorTool,
+  'pythagorean-theorem-calculator': PythagoreanTheoremCalculatorTool,
+  'triangle-calculator': TriangleCalculatorTool,
+  'circle-calculator': CircleCalculatorTool,
+  'prime-number-checker': PrimeNumberCheckerTool,
+  'factor-calculator': FactorCalculatorTool,
+  'lcm-hcf-calculator': LcmHcfCalculatorTool,
+  'factorial-calculator': FactorialCalculatorTool,
+  'permutation-combination-calculator': PermutationCombinationCalculatorTool,
+  'probability-calculator': ProbabilityCalculatorTool,
+  'binary-hex-octal-calculator': BinaryHexOctalCalculatorTool,
+  'matrix-calculator': MatrixCalculatorTool,
 };
 
 const gridStyle: CSSProperties = {
