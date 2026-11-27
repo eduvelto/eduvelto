@@ -21,6 +21,7 @@ import {
   qpgLevelFor,
   qpgModelSectionQuestions,
   qpgModelTests,
+  qpgQuestionMarks,
   qpgTypeForQKind,
   qpgVerifiedChapter,
   saveQpgFlowPrefill,
@@ -28,20 +29,32 @@ import {
 } from '../questionPaper';
 
 describe('verified pool (MVP content)', () => {
-  it('holds the 35 owner-verified BCS English questions + 2,318 verified Academic (Classes 3–12, thirty-five subjects)', () => {
-    expect(QPG_VERIFIED_POOL).toHaveLength(2353);
-    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(2353);
+  it('holds the 35 owner-verified BCS English questions + 2,318 verified Academic MCQ (Classes 3–12, thirty-five subjects) + 359 reviewed CQ (Classes 9–12)', () => {
+    expect(QPG_VERIFIED_POOL).toHaveLength(2712);
+    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(2712);
     expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toHaveLength(35);
-    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'))).toHaveLength(2318);
+    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-') && q.type === 'mcq')).toHaveLength(2318);
+    expect(QPG_VERIFIED_POOL.filter((q) => q.type === 'cq')).toHaveLength(359);
   });
 
-  it('every question is verified, MCQ, and linked to its chapter (BCS or an NCTB unit)', () => {
+  it('every question is verified and linked to its chapter (BCS or an NCTB unit); MCQ carry 4 options + a key, CQ carry a stimulus + 4 parts', () => {
     for (const q of QPG_VERIFIED_POOL) {
       expect(q.verified).toBe(true);
-      expect(q.type).toBe('mcq');
+      expect(['mcq', 'cq']).toContain(q.type);
       expect(q.chapterId === QPG_VERIFIED_CHAPTER_ID || q.chapterId.startsWith('acad-')).toBe(true);
-      expect(q.options).toHaveLength(4);
-      expect(['A', 'B', 'C', 'D']).toContain(q.correctLetter);
+      if (q.type === 'mcq') {
+        expect(q.options).toHaveLength(4);
+        expect(['A', 'B', 'C', 'D']).toContain(q.correctLetter);
+        expect(qpgQuestionMarks(q)).toBe(1);
+      } else {
+        expect(q.stimulus).toBeTruthy();
+        expect(q.parts).toHaveLength(4);
+        expect(q.parts!.map((p) => p.marks)).toEqual([1, 2, 3, 4]);
+        expect(q.parts!.every((p) => p.answerOutline.trim().length > 0)).toBe(true);
+        expect(qpgQuestionMarks(q)).toBe(10);
+        expect(q.options).toBeUndefined();
+        expect(q.correctLetter).toBeUndefined();
+      }
     }
   });
 
@@ -118,40 +131,52 @@ describe('verified pool (MVP content)', () => {
     for (const c of c5mat) expect(c.subjectId).toBe('math');
     for (const c of c3eng) expect(c.subjectId).toBe('english');
     // Class 9 is live now (26 Nov 2026) — 557 questions, 323 chapters.
+    // CQ (26 Nov 2026): Math gains 1 CQ-only chapter (15 total, 12 CQ
+    // across 11 merged + 1 CQ-only); Bangla 1st's 12 CQ all merge into
+    // existing chapters (21 total); Physics-depth has no CQ.
     const c9mat = qpgChaptersFor('general', 'class-9', 'math');
-    expect(c9mat).toHaveLength(14);
+    expect(c9mat).toHaveLength(15);
     expect(c9mat.reduce((a, c) => a + c.verifiedCount, 0)).toBe(22);
+    expect(c9mat.reduce((a, c) => a + (c.cqVerifiedCount ?? 0), 0)).toBe(12);
     const c9ban1st = qpgChaptersFor('general', 'class-9', 'bangla-1st');
     expect(c9ban1st).toHaveLength(21);
     expect(c9ban1st.reduce((a, c) => a + c.verifiedCount, 0)).toBe(21);
+    expect(c9ban1st.reduce((a, c) => a + (c.cqVerifiedCount ?? 0), 0)).toBe(12);
     const c9phydepth = qpgChaptersFor('general', 'class-9', 'physics-depth');
     expect(c9phydepth).toHaveLength(13);
     expect(c9phydepth.reduce((a, c) => a + c.verifiedCount, 0)).toBe(31);
+    expect(c9phydepth.reduce((a, c) => a + (c.cqVerifiedCount ?? 0), 0)).toBe(0);
     // Class 10 shares the Class 9 pool — same chapters, same counts.
     const c10mat = qpgChaptersFor('general', 'class-10', 'math');
-    expect(c10mat).toHaveLength(14);
+    expect(c10mat).toHaveLength(15);
     expect(c10mat.reduce((a, c) => a + c.verifiedCount, 0)).toBe(22);
     expect(c10mat.map((c) => c.id)).toEqual(c9mat.map((c) => c.id));
     // Class 11 is live now (26 Nov 2026) — 374 questions, 210 chapters.
+    // CQ (26 Nov 2026): most CQ chapters are CQ-only (no MCQ chapter
+    // matched), so chapter counts grow well past the MCQ chapter count.
     const c11phy = qpgChaptersFor('general', 'class-11', 'physics');
-    expect(c11phy).toHaveLength(13);
+    expect(c11phy).toHaveLength(22);
     expect(c11phy.reduce((a, c) => a + c.verifiedCount, 0)).toBe(24);
+    expect(c11phy.reduce((a, c) => a + (c.cqVerifiedCount ?? 0), 0)).toBe(10);
     const c11isl = qpgChaptersFor('general', 'class-11', 'islamic-history');
-    expect(c11isl).toHaveLength(11);
+    expect(c11isl).toHaveLength(21);
     expect(c11isl.reduce((a, c) => a + c.verifiedCount, 0)).toBe(20);
+    expect(c11isl.reduce((a, c) => a + (c.cqVerifiedCount ?? 0), 0)).toBe(10);
     const c11eng = qpgChaptersFor('general', 'class-11', 'english');
-    expect(c11eng).toHaveLength(15);
+    expect(c11eng).toHaveLength(22);
     expect(c11eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(20);
+    expect(c11eng.reduce((a, c) => a + (c.cqVerifiedCount ?? 0), 0)).toBe(9);
     const c11che = qpgChaptersFor('general', 'class-11', 'chemistry');
-    expect(c11che).toHaveLength(10);
+    expect(c11che).toHaveLength(17);
     expect(c11che.reduce((a, c) => a + c.verifiedCount, 0)).toBe(24);
+    expect(c11che.reduce((a, c) => a + (c.cqVerifiedCount ?? 0), 0)).toBe(10);
     // Class 12 shares the Class 11 pool — same chapters, same counts.
     const c12phy = qpgChaptersFor('general', 'class-12', 'physics');
-    expect(c12phy).toHaveLength(13);
+    expect(c12phy).toHaveLength(22);
     expect(c12phy.reduce((a, c) => a + c.verifiedCount, 0)).toBe(24);
     expect(c12phy.map((c) => c.id)).toEqual(c11phy.map((c) => c.id));
     const c12eng = qpgChaptersFor('general', 'class-12', 'english');
-    expect(c12eng).toHaveLength(15);
+    expect(c12eng).toHaveLength(22);
     expect(c12eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(20);
   });
 });
@@ -191,10 +216,10 @@ describe('chapter-first selection', () => {
     expect(r.available).toBe(35);
   });
 
-  it('CQ / short types honestly return zero (verified pool is MCQ-only)', () => {
+  it('short / written types honestly return zero; CQ is empty only where the chapter has no CQ (BCS English has none)', () => {
     expect(selectQpgQuestions({ ...base, type: 'cq' }).available).toBe(0);
     expect(selectQpgQuestions({ ...base, type: 'short' }).available).toBe(0);
-    expect(selectQpgQuestions({ ...base, type: 'cq' }).reasonsBn.join(' ')).toContain('MCQ');
+    expect(selectQpgQuestions({ ...base, type: 'cq' }).reasonsBn.join(' ')).toContain('সৃজনশীল (CQ)');
   });
 
   it('a specific difficulty honestly returns zero (no difficulty tags yet)', () => {

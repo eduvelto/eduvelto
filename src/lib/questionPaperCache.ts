@@ -22,7 +22,11 @@
 
 import { QPG_VERIFIED_POOL, type QpgQuestion } from './questionPaper';
 
-export const QPG_CACHE_VERSION = 'v1';
+/** Cache version — bump when the cached chapter-question shape
+ *  changes. v2 (26 Nov 2026): the pool gained CQ questions (new
+ *  optional stimulus/parts/marks fields); a v1 cache would serve
+ *  MCQ-only chapters. */
+export const QPG_CACHE_VERSION = 'v2';
 const QPG_CACHE_VERSION_KEY = 'eduvelto-qpg-cache-version';
 const QPG_CACHE_PREFIX = `eduvelto-qpg-cache:${QPG_CACHE_VERSION}:`;
 

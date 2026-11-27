@@ -353,15 +353,42 @@ export function buildPaperDom(paper: QpgPaper, opts: QpgPaperDomOptions): HTMLEl
         }
       }
     }
-    qBlock.appendChild(el('div', `${qi + 1}. ${q.questionText}`, { fontWeight: '600' }));
-    const qOpts = document.createElement('div');
-    Object.assign(qOpts.style, {
-      display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 18px', marginTop: '4px', paddingLeft: '22px',
-    } as Partial<CSSStyleDeclaration>);
-    q.options.forEach((o) => {
-      qOpts.appendChild(el('div', `(${o.letter}) ${o.text}`, { fontSize: '13px' }));
-    });
-    qBlock.appendChild(qOpts);
+    if (q.type === 'cq' && q.parts && q.parts.length > 0) {
+      // CQ block: number + stimulus, then the 4 parts with their
+      // marks (ক 1, খ 2, গ 3, ঘ 4 = 10). No options, no correct
+      // letter — CQ is written work. The whole block never splits
+      // across pages (same rule as MCQ blocks).
+      qBlock.appendChild(
+        el('div', `${qi + 1}. ${q.stimulus ?? q.questionText}`, { fontWeight: '600' }),
+      );
+      qBlock.appendChild(
+        el('div', 'উদ্দীপকটি পড়ে নিচের প্রশ্নগুলোর উত্তর দাও।', {
+          fontSize: '13px', fontStyle: 'italic', marginTop: '4px',
+        } as Partial<CSSStyleDeclaration>),
+      );
+      const qParts = document.createElement('div');
+      Object.assign(qParts.style, {
+        marginTop: '6px', paddingLeft: '22px',
+      } as Partial<CSSStyleDeclaration>);
+      q.parts.forEach((p) => {
+        qParts.appendChild(
+          el('div', `${p.label}. ${p.question} (${p.marks} নম্বর)`, {
+            fontSize: '13px', marginTop: '4px',
+          } as Partial<CSSStyleDeclaration>),
+        );
+      });
+      qBlock.appendChild(qParts);
+    } else {
+      qBlock.appendChild(el('div', `${qi + 1}. ${q.questionText}`, { fontWeight: '600' }));
+      const qOpts = document.createElement('div');
+      Object.assign(qOpts.style, {
+        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 18px', marginTop: '4px', paddingLeft: '22px',
+      } as Partial<CSSStyleDeclaration>);
+      (q.options ?? []).forEach((o) => {
+        qOpts.appendChild(el('div', `(${o.letter}) ${o.text}`, { fontSize: '13px' }));
+      });
+      qBlock.appendChild(qOpts);
+    }
     container.appendChild(qBlock);
   });
   root.appendChild(container);
@@ -687,7 +714,10 @@ export function buildOmrBubbleSheetDom(
   Object.assign(grid.style, {
     display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 28px',
   } as Partial<CSSStyleDeclaration>);
-  const indices = opts.rowIndices ?? paper.questions.map((_q, i) => i);
+  // OMR is MCQ-only: CQ questions get no bubble row (written work).
+  const indices =
+    opts.rowIndices ??
+    paper.questions.map((_q, i) => i).filter((i) => paper.questions[i].type === 'mcq');
   indices.forEach((qi) => {
     const row = document.createElement('div');
     row.className = 'qpg-omr-row';
@@ -727,6 +757,8 @@ export async function renderOmrSheetCanvases(
   paper: QpgPaper,
   opts: { watermarked?: boolean; userLabel?: string } = {},
 ): Promise<HTMLCanvasElement[]> {
+  // No MCQ questions → no OMR sheet (CQ is written work, never OMR).
+  if (!paper.questions.some((q) => q.type === 'mcq')) return [];
   const host = document.createElement('div');
   Object.assign(host.style, {
     position: 'fixed', left: '-10000px', top: '0', zIndex: '-1',
@@ -810,12 +842,17 @@ function addCanvasPagesToPdf(pdf: QpgPdfWriter, canvases: HTMLCanvasElement[]): 
  *  pass y=280mm, so a 40+ question paper never runs off the page
  *  (the old code wrote 32 + i*8 with no pagination). */
 function addAnswerKeyPagesToPdf(pdf: QpgPdfWriter, paper: QpgPaper): void {
+  // No MCQ questions → no Answer Key at all (CQ is written work).
+  if (!paper.questions.some((q) => q.type === 'mcq' && q.correctLetter)) return;
   pdf.addPage();
   pdf.setFontSize(16);
   pdf.text('Answer Key', 20, 20);
   pdf.setFontSize(12);
   let y = 32;
+  // Answer Key covers the MCQ section only (CQ has no key) — the
+  // numbers stay the paper numbers so the key lines up with the paper.
   paper.questions.forEach((q, i) => {
+    if (q.type !== 'mcq' || !q.correctLetter) return;
     if (y > 280) {
       pdf.addPage();
       pdf.setFontSize(16);

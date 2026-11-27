@@ -157,6 +157,10 @@ export const LEGACY_PUBLIC_SEGMENTS: readonly string[] = [
   'lessons',
   'health',
   'life',
+  // 100-Tools Project, Phase 1 (26 Nov 2026): /tools is a real
+  // lang-prefixed route now (/bn/tools + /bn/tools/:slug) — same
+  // pattern as 'life' above.
+  'tools',
   'search',
   'about',
   'why-eduvelto',

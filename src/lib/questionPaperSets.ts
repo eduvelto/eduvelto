@@ -14,7 +14,7 @@
 // spec) — the key data itself is what the OMR evaluator consumes.
 
 import type { QpgQuestion, QpgSetCode } from './questionPaper';
-import { QPG_SET_CODES } from './questionPaper';
+import { QPG_SET_CODES, qpgMcqAnswerKey } from './questionPaper';
 
 /** Deterministic PRNG (mulberry32) — same seed, same order. */
 export function qpgSeededRandom(seed: number): () => number {
@@ -47,14 +47,16 @@ export interface QpgQuestionSet {
 }
 
 /** Build the four sets from one question list. Set ক keeps the
- *  original order; খ/গ/ঘ shuffle with seed+1/+2/+3. */
+ *  original order; খ/গ/ঘ shuffle with seed+1/+2/+3. The per-set
+ *  Answer Key covers the MCQ section only (CQ has no key — written
+ *  work, never OMR); a CQ-only paper's sets carry an empty key. */
 export function buildQuestionSets(questions: QpgQuestion[], seed: number): QpgQuestionSet[] {
   return QPG_SET_CODES.map((code, i) => {
     const ordered = i === 0 ? [...questions] : qpgShuffleSeeded(questions, seed + i);
     return {
       code,
       questions: ordered,
-      answerKey: ordered.map((q) => q.correctLetter),
+      answerKey: qpgMcqAnswerKey(ordered),
     };
   });
 }

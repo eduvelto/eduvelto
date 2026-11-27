@@ -11,11 +11,46 @@ import {
   QPG_VERIFIED_POOL,
   buildQpgPaper,
   defaultPaperSetup,
+  qpgQuestionsTotalMarks,
+  qpgSectionsForQuestions,
+  type QpgQuestion,
 } from '../questionPaper';
 import {
   buildPaperDocxDocument,
   downloadCleanPaperDocx,
 } from '../questionPaperDocx';
+
+async function documentXmlFor(questions: QpgQuestion[], includeAnswerKey: boolean): Promise<string> {
+  const setup = defaultPaperSetup({
+    title: 'Test paper',
+    subject: 'Test',
+    classLabel: 'Class 9',
+    questionCount: questions.length,
+    marksPerQuestion: 1,
+    timeMinutes: 60,
+    sectionHeading: 'Test',
+    totalMarks: qpgQuestionsTotalMarks(questions),
+  });
+  const paper = buildQpgPaper({
+    setup,
+    questions,
+    sections: qpgSectionsForQuestions(questions),
+    isCustomVariant: false,
+    kind: 'chapter-paper',
+    patternLabelBn: 'Test',
+    patternLabelEn: 'Test',
+  });
+  const doc = await buildPaperDocxDocument(paper, {
+    proUnlocked: true,
+    includeAnswerKey,
+  });
+  const { Packer } = await import('docx');
+  const buf = await Packer.toBuffer(doc);
+  const files = unzipSync(new Uint8Array(buf));
+  const xml = files['word/document.xml'];
+  expect(xml).toBeDefined();
+  return new TextDecoder().decode(xml);
+}
 
 async function documentXml(includeAnswerKey: boolean): Promise<string> {
   const setup = defaultPaperSetup({
@@ -62,6 +97,34 @@ describe('Word (.docx) export (Pro)', () => {
   it('includes the Answer Key sheet when requested', async () => {
     const xml = await documentXml(true);
     expect(xml).toContain('Answer Key');
+  });
+
+  it('renders a CQ-only paper as stimulus + 4 parts with marks, and no Answer Key (CQ has no key)', async () => {
+    const cq = QPG_VERIFIED_POOL.filter((q) => q.type === 'cq').slice(0, 2);
+    const xml = await documentXmlFor(cq, true);
+    // Stimulus + the read-the-stimulus instruction + each part with its mark.
+    expect(xml).toContain(cq[0].stimulus!);
+    expect(xml).toContain('উদ্দীপকটি পড়ে নিচের প্রশ্নগুলোর উত্তর দাও।');
+    expect(xml).toContain(cq[0].parts![0].question);
+    expect(xml).toContain('(1 নম্বর)');
+    expect(xml).toContain('(4 নম্বর)');
+    expect(xml).not.toContain('Answer Key');
+  });
+
+  it('renders a Combined paper (MCQ + CQ) and its Answer Key lists only the MCQ numbers (paper numbering preserved)', async () => {
+    const mcq = QPG_VERIFIED_POOL.filter((q) => q.type === 'mcq').slice(0, 2);
+    const cq = QPG_VERIFIED_POOL.filter((q) => q.type === 'cq').slice(0, 1);
+    // Paper order: MCQ, CQ, MCQ — so the key must list 1 and 3, never 2.
+    const questions = [mcq[0], cq[0], mcq[1]];
+    const xml = await documentXmlFor(questions, true);
+    expect(xml).toContain(mcq[0].questionText);
+    expect(xml).toContain(cq[0].stimulus!);
+    expect(xml).toContain(cq[0].parts![0].question);
+    const keyTail = xml.split('Answer Key')[1];
+    expect(keyTail).toBeDefined();
+    expect(keyTail).toContain(`1. ${mcq[0].correctLetter}`);
+    expect(keyTail).toContain(`3. ${mcq[1].correctLetter}`);
+    expect(keyTail).not.toContain('2. ');
   });
 
   it('throws unless Pro is unlocked (MVP: Pro locked)', async () => {

@@ -211,6 +211,11 @@ const LifeHealthPage = lazy(() => import('./pages/LifeHealthPage'));
 const LifeGovernmentPage = lazy(() => import('./pages/LifeGovernmentPage'));
 const LifeTravelPage = lazy(() => import('./pages/LifeTravelPage'));
 const LifeServicesPage = lazy(() => import('./pages/LifeServicesPage'));
+// 100-Tools Project, Phase 1 (26 Nov 2026): Tools hub + slug-driven
+// detail page (one component for all 105 tools; the 8 existing
+// tools render their own page via the aliasPage dispatch).
+const ToolsHubPage = lazy(() => import('./pages/ToolsHubPage'));
+const ToolsDetailPage = lazy(() => import('./pages/ToolsDetailPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
@@ -745,6 +750,10 @@ export default function App() {
         <Route path="life/government" element={<LifeGovernmentPage />} />
         <Route path="life/travel" element={<LifeTravelPage />} />
         <Route path="life/services" element={<LifeServicesPage />} />
+        {/* 100-Tools Project, Phase 1 (26 Nov 2026): /:lang/tools hub
+            + slug-driven detail page (one component, all 105 tools). */}
+        <Route path="tools" element={<ToolsHubPage />} />
+        <Route path="tools/:slug" element={<ToolsDetailPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="why-eduvelto" element={<WhyEduveltoPage />} />
         <Route path="founder" element={<FounderPage />} />
@@ -824,6 +833,8 @@ export default function App() {
         <Route path="/health/*" element={<LegacyRedirect />} />
         <Route path="/life" element={<LegacyRedirect />} />
         <Route path="/life/*" element={<LegacyRedirect />} />
+        <Route path="/tools" element={<LegacyRedirect />} />
+        <Route path="/tools/*" element={<LegacyRedirect />} />
         <Route path="/search" element={<LegacyRedirect />} />
         <Route path="/about" element={<LegacyRedirect />} />
         <Route path="/why-eduvelto" element={<LegacyRedirect />} />

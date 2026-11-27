@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { PDFDocument } from 'pdf-lib';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
@@ -17,16 +16,20 @@ import { downloadBlobInApp } from '../lib/nativeFileDownload';
 
 const BENGALI_RE = /[\u0980-\u09FF]/;
 
-// jspdf is loaded on demand (Phase 2b, Spark Optimization): the PDF
-// library is fetched only when the user actually downloads a PDF —
-// never on page visit. The page itself is already route-lazy
-// (App.tsx), so jspdf was never in the entry chunk; this removes it
-// from the page chunk too. (pdf-lib stays statically imported: the
-// merge tool needs it on the same click, and splitting it is a
-// separate, smaller win — noted as a follow-up, not done here.)
+// jspdf and pdf-lib are loaded on demand (Phase 2b, Spark Optimization):
+// the PDF libraries are fetched only when the user actually uses a PDF
+// tool — never on page visit. The page itself is already route-lazy
+// (App.tsx), so neither library was ever in the entry chunk; this
+// removes both from the page chunk too. pdf-lib loads only when the
+// user clicks Merge (loadPdfLib, same pattern as loadJsPdf below).
 async function loadJsPdf() {
   const { jsPDF } = await import('jspdf');
   return jsPDF;
+}
+
+async function loadPdfLib() {
+  const { PDFDocument } = await import('pdf-lib');
+  return PDFDocument;
 }
 
 // IN-APP (audit, 24 Nov 2026): a stock Android WebView does not
@@ -220,6 +223,7 @@ export default function LifePdfToolsPage() {
     }
     setMergeBusy(true);
     try {
+      const PDFDocument = await loadPdfLib();
       const merged = await PDFDocument.create();
       for (const file of files) {
         const bytes = await file.arrayBuffer();

@@ -118,8 +118,10 @@ function slideFromQuestion(q: QpgQuestion, n: number): QpgBoardSlide {
     id: slideId(n),
     questionId: q.id,
     questionText: q.questionText,
-    options: q.options,
-    correctLetter: q.correctLetter,
+    // CQ has no options / correct letter (written work) — the slide
+    // shows the stimulus with an empty option list and no answer.
+    options: q.options ?? [],
+    correctLetter: q.correctLetter ?? null,
     explanation: q.explanation,
     showAnswer: false,
     annotations: [],
@@ -134,8 +136,11 @@ export function buildBoardSlides(paper: QpgPaper, layout: QpgBoardLayout): QpgBo
     const text = paper.questions
       .map((q, i) => `${i + 1}. ${q.questionText}`)
       .join('\n');
+    // Answer Key covers the MCQ section only (CQ has no key) — the
+    // numbers stay the paper numbers so the key lines up with the text.
     const key = paper.questions
-      .map((q, i) => `${i + 1}. ${q.correctLetter}`)
+      .map((q, i) => (q.type === 'mcq' && q.correctLetter ? `${i + 1}. ${q.correctLetter}` : ''))
+      .filter(Boolean)
       .join('  ');
     return [
       {

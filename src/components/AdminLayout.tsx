@@ -434,7 +434,7 @@ export function AdminLayout() {
               </div>
             ) : null}
           </div>
-          <a href="https://eduvelto.web.app" target="_blank" rel="noreferrer" className="ev-admin-live-site">
+          <a href="https://eduvelto.com" target="_blank" rel="noreferrer" className="ev-admin-live-site">
             {t({ bn: 'লাইভ সাইট', en: 'Live Site' })} ↗
           </a>
           <div className="ev-admin-bell-wrap">

@@ -97,6 +97,16 @@ describe('legacyRedirectTarget', () => {
     expect(legacyRedirectTarget('/custom-paper')).toBe('/bn/custom-paper');
   });
 
+  it('redirects the bare /tools hub and tool pages to /bn/... (100-Tools, Phase 1, 26 Nov 2026)', () => {
+    // /tools is a real lang-prefixed route now (/bn/tools +
+    // /bn/tools/:slug); firebase.json 301s the bare URLs
+    // server-side and this is the client-side half of the same
+    // contract (see the firebaseHosting agreement test).
+    expect(legacyRedirectTarget('/tools')).toBe('/bn/tools');
+    expect(legacyRedirectTarget('/tools/pdf-merger')).toBe('/bn/tools/pdf-merger');
+    expect(legacyRedirectTarget('/tools/bmi-calculator', 'en')).toBe('/en/tools/bmi-calculator');
+  });
+
   it('maps the old book hub /library to the canonical /books', () => {
     expect(legacyRedirectTarget('/library')).toBe('/bn/books');
     expect(legacyRedirectTarget('/library/hons-211001')).toBe('/bn/books/hons-211001');

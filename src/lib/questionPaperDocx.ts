@@ -118,12 +118,32 @@ export async function buildPaperDocxDocument(
       const q = byId.get(qid);
       if (!q) continue;
       globalIndex += 1;
+      if (q.type === 'cq' && q.parts && q.parts.length > 0) {
+        // CQ: stimulus + the 4 parts with their marks (ক 1, খ 2,
+        // গ 3, ঘ 4 = 10). No options, no correct letter.
+        children.push(
+          new Paragraph({
+            children: [new TextRun({ text: `${globalIndex}. ${q.stimulus ?? q.questionText}`, bold: true })],
+          }),
+        );
+        children.push(
+          new Paragraph({
+            children: [new TextRun({ text: 'উদ্দীপকটি পড়ে নিচের প্রশ্নগুলোর উত্তর দাও।', italics: true })],
+          }),
+        );
+        for (const p of q.parts) {
+          children.push(
+            new Paragraph({ text: `${p.label}. ${p.question} (${p.marks} নম্বর)` }),
+          );
+        }
+        continue;
+      }
       children.push(
         new Paragraph({
           children: [new TextRun({ text: `${globalIndex}. ${q.questionText}`, bold: true })],
         }),
       );
-      q.options.forEach((o) => {
+      (q.options ?? []).forEach((o) => {
         children.push(new Paragraph({ text: `(${o.letter}) ${o.text}` }));
       });
     }
@@ -133,11 +153,14 @@ export async function buildPaperDocxDocument(
       );
     }
   }
-  if (opts.includeAnswerKey) {
+  if (opts.includeAnswerKey && paper.questions.some((q) => q.type === 'mcq' && q.correctLetter)) {
     children.push(
       new Paragraph({ text: 'Answer Key', heading: HeadingLevel.HEADING_2 }),
     );
+    // Answer Key covers the MCQ section only (CQ has no key) — the
+    // numbers stay the paper numbers so the key lines up with the paper.
     paper.questions.forEach((q, i) => {
+      if (q.type !== 'mcq' || !q.correctLetter) return;
       children.push(new Paragraph({ text: `${i + 1}. ${q.correctLetter}` }));
     });
   }

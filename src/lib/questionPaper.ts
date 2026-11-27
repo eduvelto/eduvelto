@@ -35,6 +35,10 @@
 //   Class 11: Accounting, Bangla, Biology, Chemistry, Civics,
 //   Economics, English, Finance, Geography, Higher Math, History,
 //   ICT, Islamic History, Logic, Physics, Psychology, Statistics).
+//   Academic Creative Questions (CQ) add 359 verified questions
+//   (26 Nov 2026) — Classes 9–12, the same thirty-five subjects
+//   (190 Class 9-10 + 169 Class 11-12; CQ-1112-020 HELD, excluded).
+//   Each CQ is one stimulus + 4 parts ক/খ/গ/ঘ (marks 1/2/3/4 = 10).
 //   Class 10 shares the Class 9 pool (same combined draft set) and
 //   Class 12 shares the Class 11 pool (same combined draft set).
 //   They count ONLY under their NCTB units, never under any job exam (see
@@ -64,6 +68,11 @@ import {
   PUBLIC_ACADEMIC_QUESTIONS,
   type PublicAcademicQuestion,
 } from './publicAcademic';
+import {
+  PUBLIC_ACADEMIC_CQ_CHAPTERS,
+  PUBLIC_ACADEMIC_CQ_QUESTIONS,
+  type PublicAcademicCqQuestion,
+} from './publicAcademicCq';
 import { JOB_RULES_CONFIGS } from './jobExams';
 import { nuFullMockConfigSeed } from './nuExamConfig';
 
@@ -346,8 +355,14 @@ export interface QpgChapter {
   sourceNoteBn: string;
   sourceNoteEn: string;
   topics: QpgChapterTopic[];
-  /** Verified questions in the whole chapter. */
+  /** Verified questions in the whole chapter (MCQ count — the
+   *  long-standing meaning; see cqVerifiedCount for CQ). */
   verifiedCount: number;
+  /** Verified Creative (CQ) questions in this chapter (0 when the
+   *  chapter holds no CQ). The chapter picker shows MCQ and CQ
+   *  counts separately — a chapter with 5 MCQ + 1 CQ is NOT "6
+   *  questions" for either kind. */
+  cqVerifiedCount?: number;
 }
 
 export const QPG_STREAMS: Array<{ id: QpgStream; nameBn: string; nameEn: string }> = [
@@ -544,9 +559,9 @@ export const QPG_SECONDARY_Q_KINDS: Array<{ id: QpgSecondaryQKind; nameBn: strin
  *  Bangla 2nd paper and English 2nd paper (writing) are written
  *  exams, so a teacher building those papers needs the written kind.
  *  Every other subject keeps the standard three. The verified pool
- *  holds MCQs only today, so 'written' honestly yields 0 verified
- *  questions until written packs are verified — the UI says so, and
- *  never invents written questions. */
+ *  holds MCQs + 359 verified CQ (Classes 9–12); 'written' honestly
+ *  yields 0 verified questions until written packs are verified —
+ *  the UI says so, and never invents written questions. */
 export const QPG_WRITTEN_Q_KIND: { id: 'written'; nameBn: string; nameEn: string } = {
   id: 'written',
   nameBn: 'রচনামূলক (লিখিত)',
@@ -562,10 +577,10 @@ export function qpgSecondaryQKindsFor(subjectId: string): Array<{ id: QpgSeconda
 
 /** Map a level-aware question kind to the selection type filter.
  *  'combined' means no type filter ('all') — the paper mixes MCQ
- *  and CQ from the verified pool (MCQ-only today, so it honestly
- *  yields MCQs until verified CQ packs exist). 'written' maps to the
- *  'written' type, which has no verified questions yet — the
- *  selection honestly returns 0 with a reason. */
+ *  and CQ from the verified pool (359 verified CQ, Classes 9–12,
+ *  since 26 Nov 2026). 'written' maps to the 'written' type, which
+ *  has no verified questions yet — the selection honestly returns 0
+ *  with a reason. */
 export function qpgTypeForQKind(kind: QpgSecondaryQKind): QpgQuestionType | 'all' {
   if (kind === 'creative') return 'cq';
   if (kind === 'combined') return 'all';
@@ -620,10 +635,83 @@ export interface QpgQuestion {
    *  carry the exercise's id — never guessed. */
   exerciseId?: string;
   questionText: string;
-  options: Array<{ letter: 'A' | 'B' | 'C' | 'D'; text: string }>;
-  correctLetter: 'A' | 'B' | 'C' | 'D';
+  /** MCQ options — MCQ only. CQ questions carry NO options (written
+   *  work, never OMR): `options` is undefined for them, never an
+   *  empty placeholder. Read sites must use isCqQuestion() / the
+   *  `?? []` guard, never assume 4 options. */
+  options?: Array<{ letter: 'A' | 'B' | 'C' | 'D'; text: string }>;
+  /** MCQ correct letter — MCQ only. Undefined for CQ (a CQ has no
+   *  correct letter); the paper Answer Key covers the MCQ section
+   *  only (see buildQpgPaper / qpgMcqAnswerKey). */
+  correctLetter?: 'A' | 'B' | 'C' | 'D';
   explanation: string;
   sourceNote: string;
+  /** CQ stimulus (passage / poem / problem / situation) — CQ only.
+   *  For CQ, questionText IS the stimulus (so search / list / report
+   *  flows that read questionText keep working); `stimulus` is kept
+   *  as the explicit field renderers use. */
+  stimulus?: string;
+  /** CQ parts — CQ only. Four parts, marks 1/2/3/4 = 10. */
+  parts?: QpgCqPart[];
+  /** Total marks of this question: MCQ = 1, CQ = 10 (its parts'
+   *  marks summed). Use qpgQuestionMarks() — never guess. */
+  marks?: number;
+}
+
+/** One part of a Creative Question: ক (1 mark), খ (2), গ (3), ঘ (4).
+ *  `answerOutline` is a marking outline for the teacher — NOT a model
+ *  answer to print on the paper. */
+export interface QpgCqPart {
+  label: 'ক' | 'খ' | 'গ' | 'ঘ';
+  marks: number;
+  question: string;
+  answerOutline: string;
+}
+
+/** True when the question is a Creative (CQ) question. */
+export function isCqQuestion(q: QpgQuestion): boolean {
+  return q.type === 'cq';
+}
+
+/** Marks one question carries: MCQ = 1, CQ = 10 (its parts summed). */
+export function qpgQuestionMarks(q: QpgQuestion): number {
+  if (q.type === 'cq') return q.marks ?? 10;
+  return 1;
+}
+
+/** Total marks of a question list (MCQ × 1 + CQ × 10). */
+export function qpgQuestionsTotalMarks(questions: readonly QpgQuestion[]): number {
+  return questions.reduce((sum, q) => sum + qpgQuestionMarks(q), 0);
+}
+
+/** Suggested time (minutes) for a question list: MCQ ≈ 1 min each,
+ *  CQ ≈ 20 min each (a real HSC/SSC creative section gives ~20 min
+ *  per 10-mark CQ). A suggestion only — the teacher edits the paper's
+ *  time freely. */
+export function qpgQuestionsTimeMinutes(questions: readonly QpgQuestion[]): number {
+  let minutes = 0;
+  for (const q of questions) minutes += q.type === 'cq' ? 20 : 1;
+  return minutes;
+}
+
+/** MCQ questions of a list, in order. */
+export function qpgMcqQuestions(questions: readonly QpgQuestion[]): QpgQuestion[] {
+  return questions.filter((q) => q.type === 'mcq');
+}
+
+/** CQ questions of a list, in order. */
+export function qpgCqQuestions(questions: readonly QpgQuestion[]): QpgQuestion[] {
+  return questions.filter((q) => q.type === 'cq');
+}
+
+/** Answer Key for a question list — the MCQ section's correct
+ *  letters, in MCQ order. CQ has no key (written work, never OMR),
+ *  so a CQ-only paper's key is []. The OMR evaluator consumes this
+ *  key as the MCQ section's key. */
+export function qpgMcqAnswerKey(questions: readonly QpgQuestion[]): Array<'A' | 'B' | 'C' | 'D'> {
+  return questions
+    .filter((q) => q.type === 'mcq' && q.correctLetter !== undefined)
+    .map((q) => q.correctLetter as 'A' | 'B' | 'C' | 'D');
 }
 
 /** The single verified chapter in the MVP pool. The 35 BCS English
@@ -686,8 +774,45 @@ function toQpgAcademicQuestion(q: PublicAcademicQuestion): QpgQuestion {
   };
 }
 
+/** Map one verified Academic CQ (NCTB unit) to the pool shape.
+ *  CQ is chapter-level (topicId 'cq') with a stimulus + 4 parts
+ *  (marks 1/2/3/4 = 10). questionText IS the stimulus so search /
+ *  list / report flows keep working; options / correctLetter stay
+ *  undefined (a CQ has neither). The Academic easy/medium difficulty
+ *  lives in the CQ pool file; the QPG pool type carries 'unspecified'
+ *  until verified questions carry difficulty tags the QPG filters on. */
+function toQpgCqQuestion(q: PublicAcademicCqQuestion): QpgQuestion {
+  return {
+    id: q.id,
+    chapterId: q.chapterId,
+    chapterNameBn: q.chapterName,
+    topicId: q.topicId,
+    topicNameBn: 'সৃজনশীল (CQ)',
+    topicNameEn: 'Creative (CQ)',
+    type: 'cq',
+    difficulty: 'unspecified',
+    verified: true,
+    source: 'verified-batch',
+    cognitiveLevel: 'unspecified',
+    nature: 'unspecified',
+    questionText: q.stimulus,
+    stimulus: q.stimulus,
+    parts: q.parts.map((p) => ({
+      label: p.label,
+      marks: p.marks,
+      question: p.question,
+      answerOutline: p.answer_outline,
+    })),
+    marks: 10,
+    explanation: '',
+    sourceNote: q.sourceNote,
+  };
+}
+
 /** The whole verified pool: 35 BCS English MCQs + 2,318 Academic
- *  (Classes 3–12, thirty-five subjects) MCQs = 2,353. One bank — the Question
+ *  (Classes 3–12, thirty-five subjects) MCQs + 359 Academic CQs
+ *  (Classes 9–12, thirty-five subjects — 190 Class 9-10 + 169 Class
+ *  11-12; CQ-1112-020 HELD, excluded) = 2,712. One bank — the Question
  *  Maker and the Education Hub chapter practice draw from this same
  *  pool, so a question verified once appears in both places. BCS
  *  exam accounting counts ONLY the BCS chapter (see
@@ -695,6 +820,7 @@ function toQpgAcademicQuestion(q: PublicAcademicQuestion): QpgQuestion {
 export const QPG_VERIFIED_POOL: QpgQuestion[] = [
   ...PUBLIC_BCS_ENGLISH_QUESTIONS.map(toQpgQuestion),
   ...PUBLIC_ACADEMIC_QUESTIONS.map(toQpgAcademicQuestion),
+  ...PUBLIC_ACADEMIC_CQ_QUESTIONS.map(toQpgCqQuestion),
 ];
 
 export function qpgVerifiedChapter(): QpgChapter {
@@ -746,32 +872,95 @@ export function qpgChaptersFor(stream: QpgStream, classId: string, subjectId: st
  *  Class 10 resolves to the Class 9 pool (same combined draft set —
  *  no separate Class 10 set) and Class 12 resolves to the Class 11
  *  pool (same combined draft set — no separate Class 12 set); the
- *  returned chapters carry classId 'class-10' / 'class-12'. */
+ *  returned chapters carry classId 'class-10' / 'class-12'.
+ *
+ *  CQ MERGE (26 Nov 2026): a chapter that holds verified CQ shows
+ *  them as `cqVerifiedCount` + a 'cq' topic (so the topic picker can
+ *  select CQ alone); a chapter that holds ONLY CQ (no MCQ — the
+ *  CQ's cited chapter matches no MCQ chapter) appears here as its
+ *  own entry with verifiedCount 0. `verifiedCount` itself stays the
+ *  MCQ count — the picker shows the two counts separately. */
 export function qpgAcademicChaptersFor(classId: string, subjectId: string): QpgChapter[] {
   const subj = qpgSubjectsFor('general', classId).find((x) => x.id === subjectId);
   const subjBn = subj?.nameBn ?? subjectId;
   const subjEn = subj?.nameEn ?? subjectId;
   const effectiveClassId =
     classId === 'class-10' ? 'class-9' : classId === 'class-12' ? 'class-11' : classId;
-  return PUBLIC_ACADEMIC_CHAPTERS.filter(
+  const cqById = new Map(
+    PUBLIC_ACADEMIC_CQ_CHAPTERS.filter(
+      (c) => c.classId === effectiveClassId && c.subjectId === subjectId,
+    ).map((c) => [c.id, c]),
+  );
+  const chapters: QpgChapter[] = PUBLIC_ACADEMIC_CHAPTERS.filter(
     (c) => c.classId === effectiveClassId && c.subjectId === subjectId,
-  ).map((c) => ({
-    id: c.id,
-    stream: 'general' as const,
-    classId: classId,
-    subjectId: c.subjectId,
-    nameBn: c.name,
-    nameEn: c.name,
-    sourceNoteBn: `NCTB ${subjBn} — যাচাইকৃত অনুশীলন প্রশ্ন (মূল পাঠভিত্তিক, বোর্ড প্রশ্ন নয়)।`,
-    sourceNoteEn: `NCTB ${subjEn} — verified practice questions (lesson-based, not board questions).`,
-    topics: c.topics.map((t) => ({
+  ).map((c) => {
+    const cq = cqById.get(c.id);
+    const topics: QpgChapterTopic[] = c.topics.map((t) => ({
       id: t.id,
       nameBn: t.id,
       nameEn: t.id,
       verifiedCount: t.count,
-    })),
-    verifiedCount: c.questionCount,
-  }));
+    }));
+    if (cq) {
+      topics.push({
+        id: 'cq',
+        nameBn: 'সৃজনশীল (CQ)',
+        nameEn: 'Creative (CQ)',
+        verifiedCount: cq.questionCount,
+      });
+    }
+    return {
+      id: c.id,
+      stream: 'general' as const,
+      classId: classId,
+      subjectId: c.subjectId,
+      nameBn: c.name,
+      nameEn: c.name,
+      sourceNoteBn: `NCTB ${subjBn} — যাচাইকৃত অনুশীলন প্রশ্ন (মূল পাঠভিত্তিক, বোর্ড প্রশ্ন নয়)।`,
+      sourceNoteEn: `NCTB ${subjEn} — verified practice questions (lesson-based, not board questions).`,
+      topics,
+      verifiedCount: c.questionCount,
+      cqVerifiedCount: cq?.questionCount ?? 0,
+    };
+  });
+  // CQ-only chapters (no MCQ chapter with this id) — their own entry.
+  const mcqIds = new Set(chapters.map((c) => c.id));
+  for (const cq of cqById.values()) {
+    if (mcqIds.has(cq.id)) continue;
+    chapters.push({
+      id: cq.id,
+      stream: 'general' as const,
+      classId: classId,
+      subjectId: cq.subjectId,
+      nameBn: cq.name,
+      nameEn: cq.name,
+      sourceNoteBn: `NCTB ${subjBn} — যাচাইকৃত সৃজনশীল (CQ) প্রশ্ন (মূল পাঠভিত্তিক, বোর্ড প্রশ্ন নয়)।`,
+      sourceNoteEn: `NCTB ${subjEn} — verified Creative (CQ) questions (lesson-based, not board questions).`,
+      topics: [
+        {
+          id: 'cq',
+          nameBn: 'সৃজনশীল (CQ)',
+          nameEn: 'Creative (CQ)',
+          verifiedCount: cq.questionCount,
+        },
+      ],
+      verifiedCount: 0,
+      cqVerifiedCount: cq.questionCount,
+    });
+  }
+  const unitById = new Map<string, number>();
+  for (const c of PUBLIC_ACADEMIC_CHAPTERS) unitById.set(c.id, c.unitNumber);
+  for (const c of PUBLIC_ACADEMIC_CQ_CHAPTERS) {
+    if (!unitById.has(c.id)) unitById.set(c.id, c.unitNumber);
+  }
+  chapters.sort(
+    (a, b) =>
+      a.classId.localeCompare(b.classId) ||
+      a.subjectId.localeCompare(b.subjectId) ||
+      (unitById.get(a.id) ?? 0) - (unitById.get(b.id) ?? 0) ||
+      a.id.localeCompare(b.id),
+  );
+  return chapters;
 }
 
 // ---------------------------------------------------------------------
@@ -932,17 +1121,29 @@ export function selectQpgQuestions(
     }
     filtered = mapped;
   }
-  if (sel.type !== 'mcq' && sel.type !== 'all') {
-    // The verified pool holds MCQs only today. CQ / Short /
-    // Multiple-Completion / Situation-Set / Written questions need
-    // verified packs that do not exist yet — never fake them.
-    reasonsBn.push(
-      'যাচাইকৃত প্রশ্নভান্ডারে এখন শুধু MCQ আছে — Creative (CQ) / সংক্ষিপ্ত / বহুপদী / অভিন্ন তথ্যভিত্তিক / ছবিভিত্তিক / রচনামূলক প্রশ্নের যাচাইকৃত প্যাক এখনো তৈরি হয়নি।',
-    );
-    reasonsEn.push(
-      'The verified pool holds MCQs only today — no verified Creative (CQ) / short / multiple-completion / situation-set / picture-based / written pack exists yet.',
-    );
-    filtered = [];
+  if (sel.type === 'all') {
+    // Combined paper (MCQ + CQ) — no type filter. The pool holds
+    // both, so 'all' honestly yields both kinds.
+  } else {
+    // A specific kind: keep ONLY that type. (An explicit 'mcq'
+    // filter matters now that CQ shares the pool — without it an
+    // MCQ paper would silently include CQ questions.)
+    filtered = filtered.filter((q) => q.type === sel.type);
+    if (filtered.length === 0) {
+      // No verified questions of this type in the selected
+      // chapters/topics — an honest reason, never filler. CQ exists
+      // for Classes 9–12 only; short / written / other kinds have
+      // no verified pack yet.
+      const section = QPG_SECTION_TYPES.find((t) => t.questionType === sel.type);
+      const typeBn = section?.nameBn ?? sel.type;
+      const typeEn = section?.nameEn ?? sel.type;
+      reasonsBn.push(
+        `নির্বাচিত অধ্যায়/টপিকে যাচাইকৃত ${typeBn} প্রশ্ন নেই। অন্য অধ্যায় বা ধরন বেছে নিন — যাচাই হয়নি এমন প্রশ্ন এখানে দেখানো হয় না।`,
+      );
+      reasonsEn.push(
+        `No verified ${typeEn} questions in the selected chapters/topics. Pick another chapter or kind — unverified questions are never shown here.`,
+      );
+    }
   }
   if (sel.source && sel.source !== 'any') {
     if (sel.source === 'board' || sel.source === 'repeated-board' || sel.source === 'test-exam') {
@@ -1135,16 +1336,52 @@ export function qpgPaperSections(paper: QpgPaper): QpgPaperSection[] {
     paper.questions.length > 0
       ? Math.max(1, Math.round(paper.setup.totalMarks / paper.questions.length))
       : 1;
+  // Single-section papers keep the original shape; the type follows
+  // the questions (an all-CQ paper is a CQ section, not MCQ).
+  const allCq = paper.questions.length > 0 && paper.questions.every((q) => q.type === 'cq');
   return [
     {
       id: 'section-1',
       headingBn: paper.setup.sectionHeading,
-      type: 'mcq',
+      type: allCq ? 'cq' : 'mcq',
       questionIds: paper.questions.map((q) => q.id),
       marksPerQuestion: marksPerQ,
       answerCount: paper.setup.answerCount,
     },
   ];
+}
+
+/** Build explicit sections for a question list, grouped by type —
+ *  MCQ first (ক-বিভাগ), then CQ (খ-বিভাগ). Each section carries its
+ *  own marks per question (MCQ 1, CQ 10), so a Combined paper's total
+ *  is MCQ × 1 + CQ × 10. A single-kind list yields one section.
+ *  The teacher's setup.sectionHeading is NOT overwritten here — for
+ *  single-section papers the paper renders setup.sectionHeading; the
+ *  section heading rides inside the first block only for
+ *  multi-section papers (see buildPaperDom). */
+export function qpgSectionsForQuestions(questions: readonly QpgQuestion[]): QpgPaperSection[] {
+  const sections: QpgPaperSection[] = [];
+  const mcq = qpgMcqQuestions(questions);
+  const cq = qpgCqQuestions(questions);
+  if (mcq.length > 0) {
+    sections.push({
+      id: 'section-mcq',
+      headingBn: 'ক-বিভাগ: বহুনির্বাচনি প্রশ্ন (MCQ)',
+      type: 'mcq',
+      questionIds: mcq.map((q) => q.id),
+      marksPerQuestion: 1,
+    });
+  }
+  if (cq.length > 0) {
+    sections.push({
+      id: 'section-cq',
+      headingBn: 'খ-বিভাগ: সৃজনশীল প্রশ্ন (CQ)',
+      type: 'cq',
+      questionIds: cq.map((q) => q.id),
+      marksPerQuestion: 10,
+    });
+  }
+  return sections;
 }
 
 /** Total marks of a multi-section paper = sum over sections of
@@ -1196,6 +1433,11 @@ export function defaultPaperSetup(args: {
   /** Auto-fields (25 Nov 09:19): pre-filled, editable, resettable. */
   institutionAddress?: string;
   institutionMotto?: string;
+  /** Exact total marks (CQ / Combined papers: MCQ × 1 + CQ × 10 —
+   *  see qpgQuestionsTotalMarks). When given, it replaces
+   *  questionCount × marksPerQuestion; otherwise the product is used
+   *  (unchanged MCQ behaviour). */
+  totalMarks?: number;
 }): QpgPaperSetup {
   const today = new Date().toISOString().slice(0, 10);
   return {
@@ -1206,7 +1448,7 @@ export function defaultPaperSetup(args: {
     subject: args.subject,
     classLabel: args.classLabel,
     examDate: today,
-    totalMarks: args.questionCount * args.marksPerQuestion,
+    totalMarks: args.totalMarks ?? args.questionCount * args.marksPerQuestion,
     timeMinutes: args.timeMinutes,
     instructions:
       'সব প্রশ্নের উত্তর দাও। প্রতিটি সঠিক উত্তরের জন্য নির্ধারিত নম্বর পাবে। ভুল উত্তরের জন্য নম্বর কাটা যেতে পারে (প্রশ্নপত্রে উল্লেখ থাকলে)।',
@@ -1227,8 +1469,10 @@ export interface QpgPaper {
    *  marks and answer-count. `questions` is the concatenation in
    *  section order. Absent = the original single-section paper. */
   sections?: QpgPaperSection[];
-  /** Answer key in paper order (correct letters) — drives the
-   *  per-set keys and the OMR evaluator. */
+  /** Answer key in MCQ order (correct letters) — drives the
+   *  per-set keys and the OMR evaluator. CQ has no key (written
+   *  work, never OMR), so a CQ-only paper's key is [] and a Combined
+   *  paper's key covers its MCQ section only (see qpgMcqAnswerKey). */
   answerKey: Array<'A' | 'B' | 'C' | 'D'>;
   /** Chapter(s) the paper draws from, for the 8-field header. */
   chapterNameBn: string;
@@ -1258,7 +1502,7 @@ export function buildQpgPaper(args: {
     setup: args.setup,
     questions: args.questions,
     sections: args.sections,
-    answerKey: args.questions.map((q) => q.correctLetter),
+    answerKey: qpgMcqAnswerKey(args.questions),
     chapterNameBn:
       [...new Set(args.questions.map((q) => q.chapterNameBn))].join(' • ') || '—',
     isCustomVariant: args.isCustomVariant,

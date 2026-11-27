@@ -54,6 +54,7 @@ import {
   publicAcademicChaptersFor,
 } from './publicAcademic';
 import { QPG_GENERAL_CLASSES, qpgSubjectsFor } from './questionPaper';
+import { toolBySlug } from './toolsMeta';
 
 export { SITE_URL };
 
@@ -867,6 +868,19 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     descriptionEn:
       'Free everyday tools — budget, EMI and interest calculations, currency and unit conversion, planner, PDF tools, and health and government-service guides.',
     crumbEn: 'Life Services',
+  },
+  // 100-tools project, Phase 1 (26 Nov 2026) + batch 2 (27 Nov 2026):
+  // the Tools hub. The 140 tool pages are dynamic (resolveRouteSeo
+  // /tools/:slug below) — only the hub gets a STATIC_ROUTES entry.
+  '/tools': {
+    title: 'ফ্রি টুলস — PDF, ছবি, হিসাব ও পড়াশোনা | Eduvelto',
+    description:
+      '১৪০টি ফ্রি টুল — PDF, ছবি, হিসাব, স্বাস্থ্য, পড়াশোনা ও চাকরির প্রস্তুতি। সব কাজ আপনার ব্রাউজারেই হয়, ফাইল কোথাও আপলোড হয় না। Eduvelto।',
+    crumb: 'টুলস',
+    titleEn: 'Free Tools — PDF, Images, Calculators & Study | Eduvelto',
+    descriptionEn:
+      '140 free tools — PDF, images, calculators, health, study and job preparation. Everything runs in your browser; files are never uploaded. Eduvelto.',
+    crumbEn: 'Tools',
   },
   '/life/budget': {
     title: 'বাজেট প্ল্যানার — আয়-ব্যয়ের হিসাব | Eduvelto',
@@ -2310,6 +2324,36 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
           crumbEn: seed.titleEn,
         };
         crumbs = lang === 'bn' ? ['সুযোগ হাব', seed.titleBn] : ['Opportunity Hub', seed.titleEn];
+      } else {
+        return null;
+      }
+    }
+  }
+  if (!entry) {
+    // /tools/:slug — 100-tools project (26 Nov 2026). Dynamic SEO
+    // from the toolsMeta source of truth: an unknown slug resolves
+    // to null here and falls back to the noindex home SEO — an
+    // unknown tool must never look indexable. New tools get SEO
+    // here automatically — no entry per tool.
+    const toolMatch = path.match(/^\/tools\/([^/]+)$/);
+    if (toolMatch) {
+      const tool = toolBySlug(toolMatch[1]);
+      if (tool) {
+        // Brand-SEO wave 12: descriptions must fit <=160 chars, and
+        // the sitemap sweep needs >40 — 16 meta descriptions are
+        // shorter than 40, so every tool description carries the
+        // same short free-tool suffix (mirrors the /opportunities
+        // verification suffix above). Longest meta description is
+        // 99 chars, so the suffixed total stays <=128 (bn) / <=123 (en).
+        entry = {
+          title: `${tool.titleBn} | Eduvelto`,
+          description: `${tool.descriptionBn} — বিনামূল্যের টুল। Eduvelto।`,
+          crumb: tool.crumbBn,
+          titleEn: `${tool.titleEn} | Eduvelto`,
+          descriptionEn: `${tool.descriptionEn} — a free Eduvelto tool.`,
+          crumbEn: tool.crumbEn,
+        };
+        crumbs = lang === 'bn' ? ['টুলস', tool.crumbBn] : ['Tools', tool.crumbEn];
       } else {
         return null;
       }

@@ -222,6 +222,11 @@
         "type": 301
       },
       {
+        "source": "/tools",
+        "destination": "/bn/tools",
+        "type": 301
+      },
+      {
         "source": "/search",
         "destination": "/bn/search",
         "type": 301
@@ -354,6 +359,11 @@
       {
         "source": "/life/:rest*",
         "destination": "/bn/life/:rest*",
+        "type": 301
+      },
+      {
+        "source": "/tools/:rest*",
+        "destination": "/bn/tools/:rest*",
         "type": 301
       },
       {
@@ -640,6 +650,14 @@
       {
         "destination": "/index.html",
         "source": "/opportunities/**"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/tools"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/tools/**"
       },
       {
         "destination": "/index.html",

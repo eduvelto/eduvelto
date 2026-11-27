@@ -281,6 +281,7 @@ export const LINK_REWRITE_SEGMENTS = [
   'lessons',
   'health',
   'life',
+  'tools',
   'search',
   'about',
   'why-eduvelto',
@@ -398,6 +399,29 @@ export function getAcademicPracticePaths(source) {
         seen.add(chapterPath12);
         paths.push(chapterPath12);
       }
+    }
+  }
+  return paths;
+}
+
+/** Tool paths from the toolsMeta.ts source text (100-tools project,
+ *  26 Nov 2026). Extracts every `slug: '...'` in TOOLS_META in file
+ *  order and builds the hub + one path per tool. The regex only
+ *  matches `slug: '...'` — the interface's `slug: string` has no
+ *  quotes and relatedSlugs entries carry no `slug:` prefix, so
+ *  neither leaks in. A future tool adds its path automatically —
+ *  no prerender-list edit per tool. Never invents a path: only
+ *  slugs actually present in the source. */
+export function getToolPaths(source) {
+  const paths = ['/tools'];
+  const seen = new Set(paths);
+  const re = /slug:\s*'([^']+)'/g;
+  let m;
+  while ((m = re.exec(source)) !== null) {
+    const toolPath = `/tools/${m[1]}`;
+    if (!seen.has(toolPath)) {
+      seen.add(toolPath);
+      paths.push(toolPath);
     }
   }
   return paths;
@@ -1150,12 +1174,18 @@ async function main() {
   // A future verified batch adds its paths automatically.
   // publicAcademic.ts itself is skipped — it is the combined
   // re-export, and its triples are already in the per-subject files.
+  // The CQ pool files (publicAcademicCq*.ts) are skipped too —
+  // Education Hub chapter practice is MCQ-only; CQ practice is a
+  // separate future task, so CQ-only chapters get no Hub path.
   let academicPracticePaths = [];
   try {
     const academicFiles = readdirSync(join(root, 'src/lib'))
       .filter(
         (f) =>
-          f.startsWith('publicAcademic') && f.endsWith('.ts') && f !== 'publicAcademic.ts',
+          f.startsWith('publicAcademic') &&
+          !f.startsWith('publicAcademicCq') &&
+          f.endsWith('.ts') &&
+          f !== 'publicAcademic.ts',
       )
       .sort();
     const academicSource = academicFiles
@@ -1166,7 +1196,22 @@ async function main() {
   } catch (err) {
     console.warn(`WARN: could not derive Academic practice paths: ${err.message}`);
   }
-  const staticPaths = [...PRERENDER_STATIC_PATHS, ...academicPracticePaths];
+
+  // --- Tool paths (100-tools project, 26 Nov 2026) ---
+  // Derived from the toolsMeta source of truth (src/lib/toolsMeta.ts)
+  // — hub + one path per tool. They join the static-pages loop below,
+  // so they are prerendered + sitemapped like every other public page.
+  // A future tool adds its path automatically — no prerender-list
+  // edit per tool.
+  let toolPaths = [];
+  try {
+    const toolsSource = readFileSync(join(root, 'src/lib/toolsMeta.ts'), 'utf8');
+    toolPaths = getToolPaths(toolsSource);
+    console.log(`Tools: ${toolPaths.length} paths (hub + tools)`);
+  } catch (err) {
+    console.warn(`WARN: could not derive tool paths: ${err.message}`);
+  }
+  const staticPaths = [...PRERENDER_STATIC_PATHS, ...academicPracticePaths, ...toolPaths];
 
   // --- SSR renderer ---
   const { render } = await import(pathToFileURL(ssrEntryPath).href);
@@ -1235,7 +1280,8 @@ async function main() {
 
   // --- Static pages (both langs) ---
   // staticPaths = PRERENDER_STATIC_PATHS + the derived Academic
-  // practice paths (hub + subjects + chapters).
+  // practice paths (hub + subjects + chapters) + the derived tool
+  // paths (hub + tools).
   for (const barePath of staticPaths) {
     for (const lang of LANGS) {
       const url = withLangPrefix(barePath, lang);
@@ -1311,7 +1357,7 @@ async function main() {
   writeFile(distDir, 'book-search-index.json', `${JSON.stringify(searchIndex)}\n`);
   console.log(`Book search index: ${searchIndex.count} entries -> dist/book-search-index.json`);
 
-  console.log(`Rendered pages: ${rendered} (${PRERENDER_STATIC_PATHS.length} static paths x 2 langs + ${books.length} books x 2 langs)`);
+  console.log(`Rendered pages: ${rendered} (${staticPaths.length} static paths x 2 langs + ${books.length} books x 2 langs)`);
   console.log(`Sitemap URLs: ${sitemapUrls.length * 2} (bn + en variants)`);
   console.log(`SSR render fallbacks (shell + head only): ${renderFallbacks}`);
   if (noindexWarnings.length > 0) {

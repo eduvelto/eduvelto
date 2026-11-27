@@ -59,6 +59,7 @@ import {
   buildQpgPaper,
   checkQpgPaperStandard,
   defaultPaperSetup,
+  isCqQuestion,
   qpgChaptersFor,
   qpgClassesFor,
   qpgCombinedPaperReady,
@@ -69,7 +70,10 @@ import {
   qpgModelTests,
   qpgMultiSectionTotalMarks,
   qpgPaperSections,
+  qpgQuestionsTimeMinutes,
+  qpgQuestionsTotalMarks,
   qpgSecondaryQKindsFor,
+  qpgSectionsForQuestions,
   qpgSubjectsFor,
   qpgTypeForQKind,
   replaceQpgQuestion,
@@ -444,6 +448,9 @@ export default function QuestionPaperGeneratorPage() {
   const selectedQuestions = availableQuestions
     .filter((q) => selectedIds.includes(q.id))
     .map(applyEdits);
+  // Stable key for the selection (ids in order) — defaultSetup's
+  // total marks depend on the MCQ/CQ MIX, not just the count.
+  const selectedQuestionsKey = selectedQuestions.map((q) => q.id).join(',');
   // Topic-wise search (pattern 5): filters only the displayed picker
   // list — the selection itself is untouched.
   const displayedQuestions = searchText.trim()
@@ -589,52 +596,63 @@ export default function QuestionPaperGeneratorPage() {
         : qType === 'all'
           ? 'ক-বিভাগ: বহুনির্বাচনি ও সৃজনশীল প্রশ্ন'
           : 'ক-বিভাগ: বহুনির্বাচনি প্রশ্ন (MCQ)';
+    // Total marks + time follow the actual question mix (MCQ × 1 +
+    // CQ × 10 marks; MCQ ≈ 1 min, CQ ≈ 20 min each). For MCQ-only
+    // papers this is exactly the old values (N marks, N minutes).
+    const totalMarks = qpgQuestionsTotalMarks(selectedQuestions);
+    const timeMinutes = Math.max(30, qpgQuestionsTimeMinutes(selectedQuestions));
     return defaultPaperSetup({
       title: examTitle,
       subject: subjectLabel,
       classLabel,
       questionCount: Math.max(selectedQuestions.length, 1),
       marksPerQuestion: 1,
-      timeMinutes: Math.max(30, selectedQuestions.length),
+      timeMinutes,
       sectionHeading,
+      totalMarks,
       setCode,
       seed,
     });
-  }, [stream, jobExam, jobSubject, jobCount, jobAvailable.length, subjectLabel, classLabel, selectedQuestions.length, setCode, seed, level, term, examKind, qType]);
+  }, [stream, jobExam, jobSubject, jobCount, jobAvailable.length, subjectLabel, classLabel, selectedQuestionsKey, setCode, seed, level, term, examKind, qType]);
 
   const setup: QpgPaperSetup = { ...defaultSetup, ...overrides };
 
   /** Standard Checker (A-Z parity): every section must have enough
    *  verified questions for a balanced paper, and the declared full
-   *  marks must match questions × marks-per-question. */
-  const standardCheck = useMemo(
-    () =>
-      checkQpgPaperStandard({
+   *  marks must match questions × marks-per-question. Chapter papers
+   *  check one section per question kind (MCQ 1 mark, CQ 10 marks)
+   *  so the marks check is exact for CQ / Combined papers. */
+  const standardCheck = useMemo(() => {
+    if (stream === 'job_admission') {
+      return checkQpgPaperStandard({
         sections: [
           {
             headingBn: setup.sectionHeading,
-            requested:
-              stream === 'job_admission'
-                ? Math.min(jobCount, jobAvailable.length)
-                : selectedQuestions.length,
-            available:
-              stream === 'job_admission' ? jobAvailable.length : selection.available,
-            marksPerQuestion: stream === 'job_admission' ? jobExam.marksPerQuestion : 1,
+            requested: Math.min(jobCount, jobAvailable.length),
+            available: jobAvailable.length,
+            marksPerQuestion: jobExam.marksPerQuestion,
           },
         ],
         declaredMarks: setup.totalMarks,
-      }),
-    [
-      stream,
-      jobExam.marksPerQuestion,
-      jobCount,
-      jobAvailable.length,
-      selectedQuestions.length,
-      selection.available,
-      setup.sectionHeading,
-      setup.totalMarks,
-    ],
-  );
+      });
+    }
+    const sections = qpgSectionsForQuestions(selectedQuestions).map((s) => ({
+      headingBn: s.headingBn,
+      requested: s.questionIds.length,
+      available: selection.questions.filter((q) => q.type === s.type).length,
+      marksPerQuestion: s.marksPerQuestion,
+    }));
+    return checkQpgPaperStandard({ sections, declaredMarks: setup.totalMarks });
+  }, [
+    stream,
+    jobExam.marksPerQuestion,
+    jobCount,
+    jobAvailable.length,
+    selectedQuestionsKey,
+    selection,
+    setup.sectionHeading,
+    setup.totalMarks,
+  ]);
 
   /** Apply a named paper template (A-Z parity): pre-fills the title,
    *  instructions and section heading; everything stays editable. */
@@ -720,9 +738,19 @@ export default function QuestionPaperGeneratorPage() {
     phaseStartedAt = Date.now();
     setGenProgress({ phase: 'building', donePages: 0, totalPages: 0 });
     // Real building work: build the paper from the ordered questions.
+    // CQ / Combined papers get explicit sections (MCQ 1 mark, CQ 10
+    // marks each); MCQ-only papers keep the single-section shape.
+    // A sectioned paper's flat list runs MCQ-first, CQ-second (each
+    // kind keeps its shuffled set order), so question numbers run
+    // 1..N in render order.
+    const hasCq = ordered.some((q) => q.type === 'cq');
+    const paperQuestions = hasCq
+      ? [...ordered.filter((q) => q.type === 'mcq'), ...ordered.filter((q) => q.type === 'cq')]
+      : ordered;
     const built = buildQpgPaper({
       setup,
-      questions: ordered,
+      questions: paperQuestions,
+      sections: hasCq ? qpgSectionsForQuestions(paperQuestions) : undefined,
       isCustomVariant: false,
       kind: 'chapter-paper',
       patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত প্রশ্ন',
@@ -936,10 +964,10 @@ export default function QuestionPaperGeneratorPage() {
   return (
     <PageShell titleBn="প্রশ্নপত্র জেনারেটর" titleEn="Question Paper Generator" wide className="ev-qpg-theme">
       <AlertBox tone="info">
-        ডেমো (আজকের MVP): যাচাইকৃত প্রশ্ন মাত্র ৩৫টি — BCS ইংরেজি ব্যাচ ১ (মালিক-যাচাইকৃত, ২২ নভেম্বর
-        ২০২৬)। Class 3–8 + মাদ্রাসার বই সংগ্রহ ও যাচাই চলছে; যাচাই শেষে অধ্যায়ভিত্তিক প্রশ্ন এখানে যোগ
-        হবে। যাচাই হয়নি এমন প্রশ্ন এই জেনারেটরে কখনো দেখানো হয় না।{' '}
-        <Link to="/jobs/bcs/practice/english">যাচাইকৃত ৩৫টি প্রশ্ন দেখুন</Link>
+        যাচাইকৃত প্রশ্ন: ২,৩৫৩টি MCQ (৩৫টি BCS ইংরেজি + ২,৩১৮টি একাডেমিক, Class 3–12) ও ৩৫৯টি
+        সৃজনশীল (CQ) প্রশ্ন (Class 9–12)। Class 3–8 + মাদ্রাসার বই সংগ্রহ ও যাচাই চলছে; যাচাই শেষে
+        অধ্যায়ভিত্তিক প্রশ্ন এখানে যোগ হবে। যাচাই হয়নি এমন প্রশ্ন এই জেনারেটরে কখনো দেখানো হয় না।{' '}
+        <Link to="/jobs/bcs/practice/english">যাচাইকৃত ৩৫টি BCS প্রশ্ন দেখুন</Link>
       </AlertBox>
       <p style={{ fontSize: 13, color: '#555', margin: '12px 0 4px' }}>
         ফ্রি: প্রতি মাসে {QPG_FREE_MONTHLY_LIMIT}টি পেপার (এই মাসে ব্যবহার {usage.used}/{usage.limit}
@@ -1233,9 +1261,12 @@ export default function QuestionPaperGeneratorPage() {
                   <p style={{ fontSize: 13, margin: '0 0 10px' }}>
                     নির্বাচিত: <strong>{chapterIds.length}/{chapters.length} অধ্যায়</strong>
                     {chapterIds.length > 0
-                      ? ` — যাচাইকৃত ${chapters
-                          .filter((c) => chapterIds.includes(c.id))
-                          .reduce((sum, c) => sum + c.verifiedCount, 0)}টি প্রশ্ন`
+                      ? (() => {
+                          const sel = chapters.filter((c) => chapterIds.includes(c.id));
+                          const mcq = sel.reduce((sum, c) => sum + c.verifiedCount, 0);
+                          const cq = sel.reduce((sum, c) => sum + (c.cqVerifiedCount ?? 0), 0);
+                          return ` — যাচাইকৃত ${mcq}টি প্রশ্ন${cq > 0 ? ` • ${cq}টি সৃজনশীল (CQ)` : ''}`;
+                        })()
                       : ''}
                     {' · '}
                     <Link to="/library">বই দেখুন</Link>
@@ -1280,6 +1311,9 @@ export default function QuestionPaperGeneratorPage() {
                           onChange={() => toggleChapter(ch.id)}
                         />{' '}
                         <strong>{ch.nameBn}</strong> — যাচাইকৃত {ch.verifiedCount}টি প্রশ্ন
+                        {(ch.cqVerifiedCount ?? 0) > 0
+                          ? ` • ${(ch.cqVerifiedCount ?? 0)}টি সৃজনশীল (CQ)`
+                          : ''}
                       </label>
                       <div style={{ fontSize: 12, color: '#666', marginTop: 4 }}>{ch.sourceNoteBn}</div>
                       {ch.topics.length > 0 ? (
@@ -1455,8 +1489,10 @@ export default function QuestionPaperGeneratorPage() {
               {qKind !== 'mcq' && level !== 'primary' ? (
                 <AlertBox tone="info">
                   {qKind === 'combined'
-                    ? 'সমন্বিত বাছলে যাচাইকৃত MCQ দিয়েই পেপার হবে — যাচাইকৃত CQ প্যাক এলে সৃজনশীল প্রশ্নও আসবে। প্রশ্ন বানিয়ে ঘাটতি পূরণ করা হবে না।'
-                    : 'যাচাইকৃত প্রশ্নভান্ডারে এখন শুধু MCQ আছে — এই ধরনের (সৃজনশীল / রচনামূলক) যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি। যাচাইকৃত প্যাক এলে এই ধরন পুরোপুরি চালু হবে; প্রশ্ন বানিয়ে ঘাটতি পূরণ করা হবে না।'}
+                    ? 'সমন্বিত পেপারে যাচাইকৃত MCQ ও সৃজনশীল (CQ) — দুটোই আসবে (Class 9–12-এ CQ আছে; অন্য শ্রেণিতে শুধু MCQ)। প্রশ্ন বানিয়ে ঘাটতি পূরণ করা হবে না।'
+                    : qKind === 'creative'
+                      ? 'সৃজনশীল (CQ) প্রশ্ন এখন Class 9–12-এ যাচাইকৃত আছে। অন্য শ্রেণিতে এই ধরনের যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি — যাচাইকৃত প্যাক এলে চালু হবে; প্রশ্ন বানিয়ে ঘাটতি পূরণ করা হবে না।'
+                      : 'যাচাইকৃত প্রশ্নভান্ডারে এখন MCQ ও সৃজনশীল (CQ) আছে — এই ধরনের (রচনামূলক) যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি। যাচাইকৃত প্যাক এলে এই ধরন পুরোপুরি চালু হবে; প্রশ্ন বানিয়ে ঘাটতি পূরণ করা হবে না।'}
                 </AlertBox>
               ) : null}
             </Card>
@@ -1586,11 +1622,22 @@ export default function QuestionPaperGeneratorPage() {
                         />{' '}
                         <strong>{i + 1}.</strong> {shown.questionText}{' '}
                         <Chip tone="outline">{shown.topicNameBn}</Chip>
+                        {isCqQuestion(shown) ? (
+                          <Chip tone="outline">সৃজনশীল (CQ) • ১০ নম্বর</Chip>
+                        ) : null}
                         {shown.edited ? <Chip tone="gold">শিক্ষক-সম্পাদিত</Chip> : null}
                       </label>
-                      <div style={{ fontSize: 12, color: '#666', marginTop: 4, paddingLeft: 24 }}>
-                        {shown.options.map((o) => `( ${o.letter} ) ${o.text}`).join('   ')}
-                      </div>
+                      {isCqQuestion(shown) && shown.parts ? (
+                        <div style={{ fontSize: 12, color: '#666', marginTop: 4, paddingLeft: 24 }}>
+                          {shown.parts
+                            .map((p) => `${p.label}. ${p.question} (${p.marks} নম্বর)`)
+                            .join('   ')}
+                        </div>
+                      ) : (
+                        <div style={{ fontSize: 12, color: '#666', marginTop: 4, paddingLeft: 24 }}>
+                          {(shown.options ?? []).map((o) => `( ${o.letter} ) ${o.text}`).join('   ')}
+                        </div>
+                      )}
                       <div style={{ marginTop: 6, paddingLeft: 24, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                         <Button
                           variant="ghost"
@@ -1657,7 +1704,13 @@ export default function QuestionPaperGeneratorPage() {
                               style={fieldStyle()}
                             />
                           </label>
-                          {shown.options.map((o, oi) => (
+                          {isCqQuestion(shown) ? (
+                            <p style={{ fontSize: 12, color: '#666', margin: '6px 0 0' }}>
+                              সৃজনশীল প্রশ্নের উদ্দীপক (উপরের “প্রশ্ন” ঘর) সম্পাদনা করা যায়। ক/খ/গ/ঘ অংশের
+                              ইনলাইন সম্পাদনা এখনো নেই — অংশ বদলাতে প্রশ্নটি বদলে নিন।
+                            </p>
+                          ) : (
+                            (shown.options ?? []).map((o, oi) => (
                             <label key={o.letter} style={{ fontSize: 13, display: 'block', marginTop: 6 }}>
                               অপশন {o.letter}
                               <input
@@ -1665,7 +1718,7 @@ export default function QuestionPaperGeneratorPage() {
                                 value={o.text}
                                 onChange={(e) =>
                                   setEdits((prev) => {
-                                    const nextOptions = shown.options.map((op, j) =>
+                                    const nextOptions = (shown.options ?? []).map((op, j) =>
                                       j === oi ? { ...op, text: e.target.value } : op,
                                     );
                                     return {
@@ -1677,7 +1730,7 @@ export default function QuestionPaperGeneratorPage() {
                                 style={fieldStyle()}
                               />
                             </label>
-                          ))}
+                          )))}
                           <div style={{ marginTop: 8 }}>
                             <Button size="sm" onClick={() => setEditingId(null)}>
                               সংরক্ষণ
@@ -1981,10 +2034,18 @@ export default function QuestionPaperGeneratorPage() {
             <input
               type="checkbox"
               checked={includeOmrSheet}
+              disabled={
+                selectedQuestions.length > 0 &&
+                !selectedQuestions.some((q) => q.type === 'mcq')
+              }
               onChange={(e) => setIncludeOmrSheet(e.target.checked)}
             />{' '}
             OMR Bubble Sheet সংযুক্ত করুন (ফ্রি — জলছাপসহ আসবে; Pro পেপারে পরিষ্কার আসে। OMR যাচাই
             সম্পূর্ণ ফ্রি — <Link to="/omr-evaluator">OMR মূল্যায়ন</Link> পাতায় যাচাই করুন।)
+            {selectedQuestions.length > 0 &&
+            !selectedQuestions.some((q) => q.type === 'mcq')
+              ? ' (শুধু MCQ পেপারে প্রযোজ্য — সৃজনশীল (CQ) প্রশ্নের OMR হয় না।)'
+              : ''}
           </label>
           <label style={{ fontSize: 13, display: 'block', marginTop: 8 }}>
             <input
@@ -2297,7 +2358,10 @@ export default function QuestionPaperGeneratorPage() {
                         style={{ border: '1px solid #eee', borderRadius: 8, padding: 8, marginBottom: 6 }}
                       >
                         <div style={{ fontSize: 13 }}>
-                          <strong>{globalIndex}.</strong> {shown.questionText}
+                          <strong>{globalIndex}.</strong> {shown.questionText}{' '}
+                          {isCqQuestion(shown) ? (
+                            <Chip tone="outline">সৃজনশীল (CQ) • ১০ নম্বর</Chip>
+                          ) : null}
                         </div>
                         <div style={{ marginTop: 4, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                           <Button

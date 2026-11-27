@@ -51,6 +51,9 @@
      robots-disallowed (SearchPage comment — gated content must never
      leak to crawlers), /health is noindex (empty/unverified, needs
      qualified review), /exam + /progress are login-gated.
+     EXTENDED 26 Nov 2026 (100-tools project, Phase 1): 250 URLs —
+     added the /tools hub + all 105 tool pages (dynamic SEO in
+     src/lib/seo.ts, prerendered via getToolPaths in scripts/prerender.mjs).
      All URLs carry <lastmod> (audit SEO-007). All URLs are
      canonical eduvelto.com URLs. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -1351,5 +1354,1274 @@
     <lastmod>2026-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pdf-merger</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pdf-merger?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pdf-merger?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pdf-merger" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pdf-splitter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pdf-splitter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pdf-splitter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pdf-splitter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pdf-compressor</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pdf-compressor?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pdf-compressor?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pdf-compressor" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pdf-to-jpg</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pdf-to-jpg?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pdf-to-jpg?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pdf-to-jpg" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/jpg-to-pdf</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/jpg-to-pdf?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/jpg-to-pdf?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/jpg-to-pdf" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pdf-page-extractor</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pdf-page-extractor?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pdf-page-extractor?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pdf-page-extractor" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pdf-page-reorder</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pdf-page-reorder?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pdf-page-reorder?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pdf-page-reorder" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pdf-watermark</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pdf-watermark?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pdf-watermark?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pdf-watermark" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/image-to-pdf</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/image-to-pdf?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/image-to-pdf?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/image-to-pdf" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/text-to-pdf</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/text-to-pdf?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/text-to-pdf?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/text-to-pdf" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/image-compressor</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/image-compressor?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/image-compressor?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/image-compressor" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/image-resizer</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/image-resizer?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/image-resizer?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/image-resizer" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/image-cropper</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/image-cropper?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/image-cropper?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/image-cropper" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/jpg-to-png</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/jpg-to-png?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/jpg-to-png?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/jpg-to-png" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/png-to-jpg</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/png-to-jpg?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/png-to-jpg?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/png-to-jpg" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/webp-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/webp-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/webp-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/webp-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/heic-to-jpg</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/heic-to-jpg?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/heic-to-jpg?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/heic-to-jpg" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/image-watermark-maker</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/image-watermark-maker?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/image-watermark-maker?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/image-watermark-maker" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/image-color-picker</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/image-color-picker?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/image-color-picker?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/image-color-picker" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/favicon-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/favicon-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/favicon-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/favicon-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/mortgage-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/mortgage-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/mortgage-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/mortgage-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/compound-interest-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/compound-interest-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/compound-interest-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/compound-interest-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/loan-emi-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/loan-emi-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/loan-emi-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/loan-emi-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/credit-card-payoff-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/credit-card-payoff-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/credit-card-payoff-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/credit-card-payoff-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/salary-to-hourly-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/salary-to-hourly-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/salary-to-hourly-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/salary-to-hourly-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/retirement-savings-planner</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/retirement-savings-planner?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/retirement-savings-planner?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/retirement-savings-planner" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/income-tax-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/income-tax-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/income-tax-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/income-tax-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/zakat-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/zakat-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/zakat-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/zakat-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/bank-emi-dps-fdr-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/bank-emi-dps-fdr-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/bank-emi-dps-fdr-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/bank-emi-dps-fdr-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/discount-vat-profit-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/discount-vat-profit-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/discount-vat-profit-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/discount-vat-profit-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/bmi-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/bmi-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/bmi-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/bmi-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/calorie-tdee-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/calorie-tdee-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/calorie-tdee-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/calorie-tdee-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/macro-nutrient-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/macro-nutrient-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/macro-nutrient-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/macro-nutrient-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pregnancy-due-date-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pregnancy-due-date-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pregnancy-due-date-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pregnancy-due-date-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/water-intake-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/water-intake-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/water-intake-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/water-intake-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/sleep-cycle-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/sleep-cycle-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/sleep-cycle-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/sleep-cycle-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/body-fat-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/body-fat-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/body-fat-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/body-fat-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/heart-rate-zone-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/heart-rate-zone-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/heart-rate-zone-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/heart-rate-zone-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/bmr-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/bmr-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/bmr-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/bmr-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pace-speed-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pace-speed-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pace-speed-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pace-speed-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/ssc-hsc-gpa-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/ssc-hsc-gpa-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/ssc-hsc-gpa-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/ssc-hsc-gpa-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/nu-cgpa-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/nu-cgpa-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/nu-cgpa-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/nu-cgpa-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/international-gpa-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/international-gpa-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/international-gpa-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/international-gpa-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/cgpa-to-percentage-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/cgpa-to-percentage-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/cgpa-to-percentage-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/cgpa-to-percentage-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/exam-countdown-timer</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/exam-countdown-timer?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/exam-countdown-timer?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/exam-countdown-timer" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pomodoro-timer</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pomodoro-timer?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pomodoro-timer?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pomodoro-timer" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/study-routine-maker</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/study-routine-maker?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/study-routine-maker?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/study-routine-maker" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/grade-analyzer</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/grade-analyzer?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/grade-analyzer?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/grade-analyzer" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/attendance-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/attendance-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/attendance-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/attendance-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/scientific-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/scientific-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/scientific-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/scientific-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/govt-job-age-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/govt-job-age-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/govt-job-age-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/govt-job-age-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/bcs-marks-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/bcs-marks-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/bcs-marks-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/bcs-marks-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/negative-marking-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/negative-marking-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/negative-marking-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/negative-marking-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/typing-speed-test</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/typing-speed-test?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/typing-speed-test?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/typing-speed-test" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/gk-flashcard</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/gk-flashcard?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/gk-flashcard?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/gk-flashcard" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/vocabulary-trainer</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/vocabulary-trainer?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/vocabulary-trainer?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/vocabulary-trainer" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/cv-builder</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/cv-builder?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/cv-builder?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/cv-builder" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/cover-letter-builder</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/cover-letter-builder?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/cover-letter-builder?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/cover-letter-builder" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/application-fee-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/application-fee-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/application-fee-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/application-fee-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/admit-card-checklist</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/admit-card-checklist?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/admit-card-checklist?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/admit-card-checklist" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/exam-seat-plan-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/exam-seat-plan-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/exam-seat-plan-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/exam-seat-plan-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/merit-rank-result-sheet</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/merit-rank-result-sheet?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/merit-rank-result-sheet?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/merit-rank-result-sheet" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pass-fail-analyzer</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pass-fail-analyzer?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pass-fail-analyzer?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pass-fail-analyzer" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/printable-paper-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/printable-paper-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/printable-paper-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/printable-paper-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/academic-calendar-maker</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/academic-calendar-maker?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/academic-calendar-maker?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/academic-calendar-maker" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/quiz-stopwatch-timer</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/quiz-stopwatch-timer?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/quiz-stopwatch-timer?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/quiz-stopwatch-timer" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/random-student-group-maker</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/random-student-group-maker?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/random-student-group-maker?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/random-student-group-maker" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/certificate-maker</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/certificate-maker?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/certificate-maker?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/certificate-maker" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/assignment-cover-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/assignment-cover-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/assignment-cover-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/assignment-cover-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/percentage-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/percentage-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/percentage-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/percentage-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/bijoy-to-unicode-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/bijoy-to-unicode-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/bijoy-to-unicode-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/bijoy-to-unicode-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/unicode-to-bijoy-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/unicode-to-bijoy-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/unicode-to-bijoy-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/unicode-to-bijoy-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/word-counter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/word-counter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/word-counter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/word-counter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/text-case-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/text-case-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/text-case-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/text-case-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/duplicate-line-remover</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/duplicate-line-remover?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/duplicate-line-remover?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/duplicate-line-remover" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/text-diff-checker</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/text-diff-checker?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/text-diff-checker?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/text-diff-checker" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/find-and-replace</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/find-and-replace?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/find-and-replace?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/find-and-replace" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/number-to-words-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/number-to-words-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/number-to-words-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/number-to-words-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/lorem-ipsum-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/lorem-ipsum-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/lorem-ipsum-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/lorem-ipsum-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/citation-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/citation-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/citation-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/citation-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/json-formatter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/json-formatter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/json-formatter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/json-formatter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/code-minifier-beautifier</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/code-minifier-beautifier?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/code-minifier-beautifier?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/code-minifier-beautifier" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/base64-encoder-decoder</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/base64-encoder-decoder?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/base64-encoder-decoder?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/base64-encoder-decoder" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/url-encoder-decoder</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/url-encoder-decoder?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/url-encoder-decoder?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/url-encoder-decoder" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/regex-tester</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/regex-tester?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/regex-tester?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/regex-tester" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/uuid-hash-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/uuid-hash-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/uuid-hash-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/uuid-hash-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/color-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/color-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/color-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/color-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/css-gradient-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/css-gradient-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/css-gradient-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/css-gradient-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/meta-tag-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/meta-tag-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/meta-tag-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/meta-tag-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/robots-sitemap-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/robots-sitemap-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/robots-sitemap-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/robots-sitemap-generator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/prayer-times</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/prayer-times?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/prayer-times?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/prayer-times" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/hijri-date-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/hijri-date-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/hijri-date-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/hijri-date-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/daily-quran-verse</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/daily-quran-verse?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/daily-quran-verse?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/daily-quran-verse" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/daily-hadith</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/daily-hadith?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/daily-hadith?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/daily-hadith" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/qibla-direction</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/qibla-direction?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/qibla-direction?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/qibla-direction" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/sehri-iftar-time</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/sehri-iftar-time?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/sehri-iftar-time?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/sehri-iftar-time" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/land-measurement</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/land-measurement?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/land-measurement?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/land-measurement" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/electricity-bill-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/electricity-bill-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/electricity-bill-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/electricity-bill-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/age-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/age-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/age-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/age-calculator" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/unit-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/unit-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/unit-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/unit-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/video-compressor</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/video-compressor?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/video-compressor?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/video-compressor" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/video-trimmer</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/video-trimmer?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/video-trimmer?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/video-trimmer" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/video-format-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/video-format-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/video-format-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/video-format-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/video-to-audio-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/video-to-audio-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/video-to-audio-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/video-to-audio-converter" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/music-player</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/music-player?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/music-player?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/music-player" />
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/tip-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/tip-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/tip-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/tip-calculator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/invoice-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/invoice-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/invoice-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/invoice-generator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/budget-planner</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/budget-planner?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/budget-planner?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/budget-planner" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/expense-splitter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/expense-splitter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/expense-splitter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/expense-splitter" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/break-even-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/break-even-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/break-even-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/break-even-calculator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/meeting-time-planner</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/meeting-time-planner?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/meeting-time-planner?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/meeting-time-planner" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/world-date-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/world-date-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/world-date-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/world-date-converter" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/meme-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/meme-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/meme-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/meme-generator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/exif-viewer-remover</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/exif-viewer-remover?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/exif-viewer-remover?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/exif-viewer-remover" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/emergency-numbers</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/emergency-numbers?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/emergency-numbers?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/emergency-numbers" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/govt-service-links</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/govt-service-links?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/govt-service-links?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/govt-service-links" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/results-hub</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/results-hub?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/results-hub?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/results-hub" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/dictionary</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/dictionary?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/dictionary?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/dictionary" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/text-to-speech</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/text-to-speech?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/text-to-speech?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/text-to-speech" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/notes-todo</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/notes-todo?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/notes-todo?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/notes-todo" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/tasbih-counter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/tasbih-counter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/tasbih-counter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/tasbih-counter" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/bkash-nagad-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/bkash-nagad-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/bkash-nagad-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/bkash-nagad-calculator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/image-rotate-flip</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/image-rotate-flip?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/image-rotate-flip?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/image-rotate-flip" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/image-to-base64</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/image-to-base64?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/image-to-base64?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/image-to-base64" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/image-filter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/image-filter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/image-filter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/image-filter" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pdf-password-protector</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pdf-password-protector?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pdf-password-protector?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pdf-password-protector" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/pdf-page-remover</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/pdf-page-remover?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/pdf-page-remover?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/pdf-page-remover" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/remove-extra-spaces</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/remove-extra-spaces?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/remove-extra-spaces?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/remove-extra-spaces" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/speech-to-text</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/speech-to-text?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/speech-to-text?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/speech-to-text" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/fancy-text-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/fancy-text-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/fancy-text-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/fancy-text-generator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/reverse-text-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/reverse-text-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/reverse-text-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/reverse-text-generator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/ovulation-calculator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/ovulation-calculator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/ovulation-calculator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/ovulation-calculator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/credit-card-validator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/credit-card-validator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/credit-card-validator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/credit-card-validator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/roman-numeral-converter</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/roman-numeral-converter?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/roman-numeral-converter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/roman-numeral-converter" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/jwt-token-decoder</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/jwt-token-decoder?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/jwt-token-decoder?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/jwt-token-decoder" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/html-table-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/html-table-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/html-table-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/html-table-generator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/youtube-thumbnail-downloader</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/youtube-thumbnail-downloader?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/youtube-thumbnail-downloader?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/youtube-thumbnail-downloader" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/whatsapp-link-generator</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/whatsapp-link-generator?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/whatsapp-link-generator?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/whatsapp-link-generator" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/screen-resolution-checker</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/screen-resolution-checker?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/screen-resolution-checker?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/screen-resolution-checker" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/tools/background-remover</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/tools/background-remover?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/tools/background-remover?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/tools/background-remover" />
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

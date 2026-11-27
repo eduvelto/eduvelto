@@ -26,6 +26,7 @@ import {
   getAcademicPracticePaths,
   getGuidePaths,
   getGuideSlugs,
+  getToolPaths,
   insertInitialDataScript,
   normalizeBooksFixture,
   normalizeChaptersFixture,
@@ -48,12 +49,17 @@ function readSitemapPaths(): string[] {
 describe('PRERENDER_STATIC_PATHS', () => {
   it('covers every committed-sitemap URL, plus the new /books hub', () => {
     const sitemapPaths = readSitemapPaths();
-    expect(sitemapPaths.length).toBe(144); // 137 + 6 (Day 1 audit fix, 26 Nov 2026) + 1 (Day 6: /suggestions store)
+    expect(sitemapPaths.length).toBe(285); // 144 + 141 (100-tools project: /tools hub + 140 tools — Phase 1, 26 Nov 2026: 106; batch 2, 27 Nov 2026: +35)
+    // Tool paths are DERIVED from toolsMeta.ts (like the Academic
+    // practice paths) — they are prerendered + sitemapped via
+    // getToolPaths(), not hand-listed in PRERENDER_STATIC_PATHS.
+    const toolsSource = readFileSync(join(process.cwd(), 'src', 'lib', 'toolsMeta.ts'), 'utf8');
+    const prerendered = new Set([...PRERENDER_STATIC_PATHS, ...getToolPaths(toolsSource)]);
     for (const p of sitemapPaths) {
       // Every committed-sitemap URL is a prerendered static path
       // (login-gated /exam + /progress stay OUT of the sitemap —
       // Day 1 audit fix, 26 Nov 2026).
-      expect(PRERENDER_STATIC_PATHS, `sitemap path missing from prerender list: ${p}`).toContain(p);
+      expect([...prerendered], `sitemap path missing from prerender list: ${p}`).toContain(p);
     }
     expect(PRERENDER_STATIC_PATHS).toContain('/books');
     // /founder IS prerendered since Phase 2 (25 Nov 2026): its SEO
@@ -537,7 +543,10 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
     const files = readdirSync(join(process.cwd(), 'src', 'lib'))
       .filter(
         (f) =>
-          f.startsWith('publicAcademic') && f.endsWith('.ts') && f !== 'publicAcademic.ts',
+          f.startsWith('publicAcademic') &&
+          !f.startsWith('publicAcademicCq') &&
+          f.endsWith('.ts') &&
+          f !== 'publicAcademic.ts',
       )
       .sort();
     expect(files).toHaveLength(35);
@@ -650,5 +659,31 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
     // Unverified classes never get a path — the honest empty moved to
     // Honours (no verified practice questions yet).
     expect(paths.filter((p) => p.startsWith('/learn/practice/honours'))).toEqual([]);
+  });
+});
+
+describe('getToolPaths — 100-tools project (26 Nov 2026)', () => {
+  it('derives the hub + one path per tool from toolsMeta.ts (141: /tools + 140 tools)', () => {
+    // Same source the prerender script reads. A future tool adds its
+    // path here automatically — no prerender-list edit per tool.
+    const source = readFileSync(join(process.cwd(), 'src', 'lib', 'toolsMeta.ts'), 'utf8');
+    const paths = getToolPaths(source);
+    expect(paths).toHaveLength(141);
+    expect(paths[0]).toBe('/tools');
+    expect(new Set(paths).size).toBe(paths.length);
+    for (const slug of [
+      'pdf-merger',
+      'loan-emi-calculator',
+      'bmi-calculator',
+      'cv-builder',
+      'zakat-calculator',
+      'video-compressor',
+      'music-player',
+      'bkash-nagad-calculator',
+      'certificate-maker',
+      'background-remover',
+    ]) {
+      expect(paths).toContain(`/tools/${slug}`);
+    }
   });
 });
