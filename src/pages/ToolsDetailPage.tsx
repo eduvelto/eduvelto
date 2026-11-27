@@ -30,6 +30,7 @@ import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, LinkButton } from '../components/ui';
 import { toolBySlug } from '../lib/toolsMeta';
 import { toolGuideBySlug } from '../lib/toolsGuides';
+import { ToolIcon } from '../components/ToolIcon';
 import LifePdfToolsPage from './LifePdfToolsPage';
 import LifeCalculatorsPage from './LifeCalculatorsPage';
 import LifeConvertersPage from './LifeConvertersPage';
@@ -208,6 +209,7 @@ export default function ToolsDetailPage() {
                 className="ev-card ev-card-hover"
                 style={{ display: 'block', textDecoration: 'none', color: 'var(--heading)', minHeight: 44 }}
               >
+                <ToolIcon slug={relatedMeta.slug} category={relatedMeta.category} size={36} style={{ marginBottom: 10 }} />
                 <strong style={{ display: 'block', fontSize: 16 }}>
                   {t({ bn: relatedMeta.titleBn, en: relatedMeta.titleEn })}
                 </strong>

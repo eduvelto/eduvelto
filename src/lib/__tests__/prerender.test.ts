@@ -49,17 +49,42 @@ function readSitemapPaths(): string[] {
 describe('PRERENDER_STATIC_PATHS', () => {
   it('covers every committed-sitemap URL, plus the new /books hub', () => {
     const sitemapPaths = readSitemapPaths();
-    expect(sitemapPaths.length).toBe(285); // 144 + 141 (100-tools project: /tools hub + 140 tools — Phase 1, 26 Nov 2026: 106; batch 2, 27 Nov 2026: +35)
+    // 27 Nov 2026: the committed sitemap is the PRERENDER-GENERATED
+    // one (bn canonicals, 2,747 locs), not the old hand-maintained
+    // 285-URL static list. Derive the expected set the same way
+    // scripts/prerender.mjs builds it: static paths + academic
+    // practice paths + tool paths, plus one page per book.
     // Tool paths are DERIVED from toolsMeta.ts (like the Academic
     // practice paths) — they are prerendered + sitemapped via
     // getToolPaths(), not hand-listed in PRERENDER_STATIC_PATHS.
     const toolsSource = readFileSync(join(process.cwd(), 'src', 'lib', 'toolsMeta.ts'), 'utf8');
-    const prerendered = new Set([...PRERENDER_STATIC_PATHS, ...getToolPaths(toolsSource)]);
+    const academicFiles = readdirSync(join(process.cwd(), 'src', 'lib')).filter(
+      (f) =>
+        f.startsWith('publicAcademic') &&
+        !f.startsWith('publicAcademicCq') &&
+        f.endsWith('.ts') &&
+        f !== 'publicAcademic.ts',
+    );
+    const academicSource = academicFiles
+      .map((f) => readFileSync(join(process.cwd(), 'src', 'lib', f), 'utf8'))
+      .join('\n');
+    const prerendered = new Set([
+      ...PRERENDER_STATIC_PATHS,
+      ...getAcademicPracticePaths(academicSource),
+      ...getToolPaths(toolsSource),
+    ]);
+    const { books } = normalizeBooksFixture(JSON.parse(readFileSync(BACKUP_PATH, 'utf8')));
+    const bookPaths = new Set(books.map((b) => `/books/${b.id}`));
+    const expected = new Set([...prerendered, ...bookPaths]);
+    expect(sitemapPaths.length).toBe(expected.size);
     for (const p of sitemapPaths) {
-      // Every committed-sitemap URL is a prerendered static path
-      // (login-gated /exam + /progress stay OUT of the sitemap —
-      // Day 1 audit fix, 26 Nov 2026).
-      expect([...prerendered], `sitemap path missing from prerender list: ${p}`).toContain(p);
+      // Sitemap locs are bn canonicals (/bn/about, /bn for home) —
+      // strip the /bn prefix to get the bare path the prerender renders.
+      const bare = p === '/bn' ? '/' : p.replace(/^\/bn/, '');
+      // Every committed-sitemap URL is a prerendered static path or a
+      // book page (login-gated /exam + /progress stay OUT of the
+      // sitemap — Day 1 audit fix, 26 Nov 2026).
+      expect([...expected], `sitemap path missing from prerender list: ${p}`).toContain(bare);
     }
     expect(PRERENDER_STATIC_PATHS).toContain('/books');
     // /founder IS prerendered since Phase 2 (25 Nov 2026): its SEO

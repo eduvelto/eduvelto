@@ -1610,3 +1610,28 @@ export const TOOL_SLUGS: string[] = TOOLS_META.map((t) => t.slug);
 export function getToolPaths(): string[] {
   return ['/tools', ...TOOLS_META.map((t) => `/tools/${t.slug}`)];
 }
+
+// Display meta for the 11 tool categories (bn/en titles + blurbs).
+// Shared by ToolsHubPage and LifeHubPage so the two hubs always show
+// the same category names, in the same order.
+export interface ToolCategoryMeta {
+  key: ToolCategory;
+  titleBn: string;
+  titleEn: string;
+  blurbBn: string;
+  blurbEn: string;
+}
+
+export const TOOL_CATEGORY_META: ToolCategoryMeta[] = [
+  { key: 'pdf', titleBn: 'পিডিএফ ও ডকুমেন্ট', titleEn: 'PDF & Document', blurbBn: 'মার্জ, স্প্লিট, কমপ্রেস — পিডিএফের সব কাজ', blurbEn: 'Merge, split, compress — everything for PDFs' },
+  { key: 'image', titleBn: 'ছবি ও গ্রাফিক্স', titleEn: 'Image & Graphics', blurbBn: 'ছবি ছোট করা, রিসাইজ, ব্যাকগ্রাউন্ড সরানো', blurbEn: 'Compress, resize and remove backgrounds' },
+  { key: 'finance', titleBn: 'অর্থ ও ঋণ', titleEn: 'Finance & Loan', blurbBn: 'ঋণ, কিস্তি, সঞ্চয় আর বাজেটের হিসাব', blurbEn: 'Loans, instalments, savings and budgets' },
+  { key: 'health', titleBn: 'স্বাস্থ্য ও ফিটনেস', titleEn: 'Health & Fitness', blurbBn: 'বিএমআই, ক্যালরি আর সুস্থতার হিসাব', blurbEn: 'BMI, calories and everyday wellness' },
+  { key: 'education', titleBn: 'শিক্ষা ও শিক্ষার্থী', titleEn: 'Education & Student', blurbBn: 'জিপিএ, সিজিপিএ আর পড়াশোনার হিসাব', blurbEn: 'GPA, CGPA and study calculations' },
+  { key: 'job', titleBn: 'চাকরি ও ক্যারিয়ার', titleEn: 'Job & Career', blurbBn: 'সিভি, টাইপিং আর চাকরির প্রস্তুতি', blurbEn: 'CVs, typing and job preparation' },
+  { key: 'teacher', titleBn: 'শিক্ষক ও প্রতিষ্ঠান', titleEn: 'Teacher & Institution', blurbBn: 'সার্টিফিকেট, ফলাফল আর ক্লাসের কাজ', blurbEn: 'Certificates, results and classroom work' },
+  { key: 'text', titleBn: 'লেখা, ভাষা ও রচনা', titleEn: 'Text, Language & Writing', blurbBn: 'বিজয়-ইউনিকোড, গণনা আর লেখার টুল', blurbEn: 'Bijoy–Unicode, counters and writing tools' },
+  { key: 'developer', titleBn: 'ডেভেলপার ও ওয়েব', titleEn: 'Developer & Web', blurbBn: 'জেসন, কালার আর ওয়েবের ছোট কাজ', blurbEn: 'JSON, colours and small web jobs' },
+  { key: 'utility', titleBn: 'দৈনন্দিন জীবন ও ইউটিলিটি', titleEn: 'Daily Life & Utility', blurbBn: 'নামাজের সময়, জরুরি নম্বর আর দৈনন্দিন হিসাব', blurbEn: 'Prayer times, emergency numbers and daily helpers' },
+  { key: 'video', titleBn: 'ভিডিও ও মিউজিক', titleEn: 'Video & Music', blurbBn: 'ভিডিও ছোট করা, কাটা আর অডিও বের করা', blurbEn: 'Compress, trim and extract audio from video' },
+];

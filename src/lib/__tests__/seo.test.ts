@@ -24,7 +24,11 @@
  *      2025, the rest unverified / scope pending).
  *  (7) Organization JSON-LD names the founder (owner 22 Nov 18:24)
  *      with no private details (no DOB/address/phone).
- *  (8) sitemap.xml lists exactly the SITEMAP_URLS (no drift).
+ *  (8) sitemap.xml lists exactly the prerendered public routes
+ *      (no drift) — 27 Nov 2026: the committed sitemap went
+ *      prerender-generated (bn canonicals), so the expected set is
+ *      derived from scripts/prerender.mjs, not the 285-URL
+ *      SITEMAP_URLS list (now the SEO route list only).
  *  (9) A "যাচাইকৃত ধরন" claim is gated on patternStatus (SF1/SF2/
  *      SF3, 22 Nov 2026): a per-exam description may say it only when
  *      jobPatternStatus(slug) is 'verified' (BCS, Primary Teacher —
@@ -76,8 +80,15 @@
  * imports). Run with `npm run test:unit`.
  */
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import {
+  PRERENDER_STATIC_PATHS,
+  canonicalUrl,
+  getAcademicPracticePaths,
+  getToolPaths,
+  normalizeBooksFixture,
+} from '../../../scripts/prerender.mjs';
 import {
   resolveRouteSeo,
   resolveFallbackSeo,
@@ -666,13 +677,44 @@ describe('resolveRouteSeo — public routes', () => {
     expect(seo!.description).not.toMatch(FORBIDDEN_RANK_CLAIM);
   });
 
-  it('sitemap.xml lists exactly the SITEMAP_URLS (no drift)', () => {
+  it('sitemap.xml lists exactly the prerendered public routes (no drift)', () => {
+    // 27 Nov 2026: the committed sitemap is the PRERENDER-GENERATED
+    // one (bn canonicals, 2,747 locs) — the old hand-maintained
+    // 285-URL SITEMAP_URLS list is now the SEO route list only, not
+    // the sitemap. Derive the expected locs the same way
+    // scripts/prerender.mjs builds them: static + academic practice
+    // + tool paths, plus one page per book from the 24 Nov backup.
     const xml = readFileSync(
       fileURLToPath(new URL('../../../public/sitemap.xml', import.meta.url)),
       'utf8',
     );
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-    const expected = SITEMAP_URLS.map((p) => `${SITE_URL}${p === '/' ? '/' : p}`);
+    const libDir = fileURLToPath(new URL('../../../src/lib', import.meta.url));
+    const toolsSource = readFileSync(`${libDir}/toolsMeta.ts`, 'utf8');
+    const academicFiles = readdirSync(libDir).filter(
+      (f) =>
+        f.startsWith('publicAcademic') &&
+        !f.startsWith('publicAcademicCq') &&
+        f.endsWith('.ts') &&
+        f !== 'publicAcademic.ts',
+    );
+    const academicSource = academicFiles.map((f) => readFileSync(`${libDir}/${f}`, 'utf8')).join('\n');
+    const { books } = normalizeBooksFixture(
+      JSON.parse(
+        readFileSync(
+          fileURLToPath(new URL('../../../../backups/eduvelto-backup-20261124-014508.json', import.meta.url)),
+          'utf8',
+        ),
+      ),
+    );
+    const expected = [
+      ...new Set([
+        ...PRERENDER_STATIC_PATHS,
+        ...getAcademicPracticePaths(academicSource),
+        ...getToolPaths(toolsSource),
+        ...books.map((b) => `/books/${b.id}`),
+      ]),
+    ].map((p) => canonicalUrl(p, 'bn'));
     expect(locs.sort()).toEqual(expected.sort());
   });
 
@@ -972,7 +1014,12 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       'utf8',
     );
     const blocks = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => m[1]);
-    expect(blocks.length).toBe(SITEMAP_URLS.length);
+    const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    // One <url> block per <loc> (2,747 in the prerender-generated
+    // sitemap, 27 Nov 2026) — the old SITEMAP_URLS count (285) is the
+    // SEO route list, not the sitemap, since the sitemap went
+    // prerender-generated.
+    expect(blocks.length).toBe(locs.length);
     for (const block of blocks) {
       const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1];
       expect(block, `no <lastmod> for ${loc}`).toContain('<lastmod>');

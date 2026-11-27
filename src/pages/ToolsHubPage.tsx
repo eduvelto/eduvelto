@@ -1,6 +1,6 @@
 // Eduvelto — Tools hub (26 Nov 2026, 100-Tools Project, Phase 1;
 // redesigned 27 Nov 2026, Batch 2 — eye-catching hero, search,
-// colour-coded category headers, letter-tile tool cards).
+// colour-coded category headers, picture-tile tool cards).
 //
 // /:lang/tools — the hub for all 140 free tools, driven from the
 // single source of truth in src/lib/toolsMeta.ts (TOOLS_META),
@@ -15,30 +15,20 @@
 // same list client-side by title/description in the current
 // language; empty categories hide while searching. No tool in
 // toolsMeta.ts carries a coming-soon flag, so no card is marked
-// coming soon. No emoji icons anywhere: tool tiles show the
-// tool's first letter, category headers use a palette accent bar.
+// coming soon. No emoji icons anywhere: every tool tile shows a
+// function-matching picture (ToolIcon, src/components/ToolIcon.tsx)
+// on a gradient 3D-style tile — never a letter.
 
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
-import { TOOLS_META, type ToolCategory } from '../lib/toolsMeta';
+import { ToolIcon } from '../components/ToolIcon';
+import { TOOLS_META, TOOL_CATEGORY_META } from '../lib/toolsMeta';
 
 // Category order follows the order in toolsMeta.ts (10 categories
 // x 10 tools + 5 video/music tools).
-const CATEGORIES: { key: ToolCategory; titleBn: string; titleEn: string; blurbBn: string; blurbEn: string }[] = [
-  { key: 'pdf', titleBn: 'পিডিএফ ও ডকুমেন্ট', titleEn: 'PDF & Document', blurbBn: 'মার্জ, স্প্লিট, কমপ্রেস — পিডিএফের সব কাজ', blurbEn: 'Merge, split, compress — everything for PDFs' },
-  { key: 'image', titleBn: 'ছবি ও গ্রাফিক্স', titleEn: 'Image & Graphics', blurbBn: 'ছবি ছোট করা, রিসাইজ, ব্যাকগ্রাউন্ড সরানো', blurbEn: 'Compress, resize and remove backgrounds' },
-  { key: 'finance', titleBn: 'অর্থ ও ঋণ', titleEn: 'Finance & Loan', blurbBn: 'ঋণ, কিস্তি, সঞ্চয় আর বাজেটের হিসাব', blurbEn: 'Loans, instalments, savings and budgets' },
-  { key: 'health', titleBn: 'স্বাস্থ্য ও ফিটনেস', titleEn: 'Health & Fitness', blurbBn: 'বিএমআই, ক্যালরি আর সুস্থতার হিসাব', blurbEn: 'BMI, calories and everyday wellness' },
-  { key: 'education', titleBn: 'শিক্ষা ও শিক্ষার্থী', titleEn: 'Education & Student', blurbBn: 'জিপিএ, সিজিপিএ আর পড়াশোনার হিসাব', blurbEn: 'GPA, CGPA and study calculations' },
-  { key: 'job', titleBn: 'চাকরি ও ক্যারিয়ার', titleEn: 'Job & Career', blurbBn: 'সিভি, টাইপিং আর চাকরির প্রস্তুতি', blurbEn: 'CVs, typing and job preparation' },
-  { key: 'teacher', titleBn: 'শিক্ষক ও প্রতিষ্ঠান', titleEn: 'Teacher & Institution', blurbBn: 'সার্টিফিকেট, ফলাফল আর ক্লাসের কাজ', blurbEn: 'Certificates, results and classroom work' },
-  { key: 'text', titleBn: 'লেখা, ভাষা ও রচনা', titleEn: 'Text, Language & Writing', blurbBn: 'বিজয়-ইউনিকোড, গণনা আর লেখার টুল', blurbEn: 'Bijoy–Unicode, counters and writing tools' },
-  { key: 'developer', titleBn: 'ডেভেলপার ও ওয়েব', titleEn: 'Developer & Web', blurbBn: 'জেসন, কালার আর ওয়েবের ছোট কাজ', blurbEn: 'JSON, colours and small web jobs' },
-  { key: 'utility', titleBn: 'দৈনন্দিন জীবন ও ইউটিলিটি', titleEn: 'Daily Life & Utility', blurbBn: 'নামাজের সময়, জরুরি নম্বর আর দৈনন্দিন হিসাব', blurbEn: 'Prayer times, emergency numbers and daily helpers' },
-  { key: 'video', titleBn: 'ভিডিও ও মিউজিক', titleEn: 'Video & Music', blurbBn: 'ভিডিও ছোট করা, কাটা আর অডিও বের করা', blurbEn: 'Compress, trim and extract audio from video' },
-];
+const CATEGORIES = TOOL_CATEGORY_META;
 
 // Accent cycles teal → forest → amber (palette only, no new colours).
 // Each entry: gradient underline + count-badge colours. Badge text
@@ -241,25 +231,7 @@ export default function ToolsHubPage() {
                       className="ev-card tools-hub-card"
                       style={{ display: 'block', textDecoration: 'none', color: 'var(--heading)', minHeight: 44 }}
                     >
-                      <span
-                        aria-hidden="true"
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          width: 44,
-                          height: 44,
-                          borderRadius: 12,
-                          background: 'linear-gradient(135deg, var(--teal), var(--forest))',
-                          color: '#fff',
-                          fontFamily: 'var(--font-head)',
-                          fontSize: 22,
-                          fontWeight: 700,
-                          marginBottom: 10,
-                        }}
-                      >
-                        {title.charAt(0)}
-                      </span>
+                      <ToolIcon slug={tool.slug} category={tool.category} size={44} style={{ marginBottom: 10 }} />
                       <strong style={{ display: 'block', fontSize: 16, fontFamily: 'var(--font-head)' }}>
                         {title}
                       </strong>

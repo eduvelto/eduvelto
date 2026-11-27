@@ -8,6 +8,7 @@
 import { describe, it, expect } from 'vitest';
 import { TOOLS_META } from '../toolsMeta';
 import { TOOLS_GUIDES } from '../toolsGuides';
+import { toolIconFor, TOOL_ICON_NAMES, TOOL_ICON_BY_SLUG, CATEGORY_ICON } from '../../components/ToolIcon';
 
 const ALLOWED_CATEGORIES = new Set([
   'pdf',
@@ -115,6 +116,44 @@ describe('TOOLS_META', () => {
       'background-remover',
     ]) {
       expect(slugs.has(slug), slug).toBe(true);
+    }
+  });
+});
+
+describe('tool icons (27 Nov 2026 — picture tiles, never a letter)', () => {
+  it('maps every tool slug to a known icon', () => {
+    const known = new Set(TOOL_ICON_NAMES);
+    for (const tool of TOOLS_META) {
+      const icon = toolIconFor(tool.slug, tool.category);
+      expect(known.has(icon), `${tool.slug} -> ${icon}`).toBe(true);
+    }
+  });
+
+  it('has an explicit mapping entry for all 140 slugs (no silent fallback reliance)', () => {
+    for (const tool of TOOLS_META) {
+      expect(TOOL_ICON_BY_SLUG[tool.slug], tool.slug).toBeDefined();
+      expect(TOOL_ICON_NAMES, tool.slug).toContain(TOOL_ICON_BY_SLUG[tool.slug]);
+    }
+  });
+
+  it('uses every icon at least once (no dead glyphs)', () => {
+    const used = new Set(TOOLS_META.map((t) => toolIconFor(t.slug, t.category)));
+    for (const name of TOOL_ICON_NAMES) {
+      expect(used.has(name), `unused icon: ${name}`).toBe(true);
+    }
+  });
+
+  it('falls back to the category icon for an unknown slug (never a letter or undefined)', () => {
+    for (const category of Object.keys(CATEGORY_ICON) as (keyof typeof CATEGORY_ICON)[]) {
+      const icon = toolIconFor('not-a-real-slug', category);
+      expect(icon).toBe(CATEGORY_ICON[category]);
+      expect(TOOL_ICON_NAMES).toContain(icon);
+    }
+  });
+
+  it('has no letter or generic placeholder icon in the set', () => {
+    for (const name of TOOL_ICON_NAMES) {
+      expect(name, name).not.toMatch(/letter|generic|placeholder|initial/i);
     }
   });
 });
