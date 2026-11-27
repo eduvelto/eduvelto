@@ -781,7 +781,7 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'image-filter': 'filter',
   'youtube-thumbnail-downloader': 'play',
   'background-remover': 'scissors',
-  // Finance & Loan (20)
+  // Finance & Loan (30)
   'mortgage-calculator': 'home',
   'compound-interest-calculator': 'growth',
   'loan-emi-calculator': 'calendarCoin',
@@ -802,7 +802,18 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'simple-interest-calculator': 'calculator',
   'savings-goal-calculator': 'vault',
   'fuel-cost-calculator': 'droplet',
-  // Health & Fitness (12)
+  // Finance/Health batch (15, 27 Nov 2026)
+  'roi-calculator': 'growth',
+  'gst-calculator': 'taxDoc',
+  'down-payment-calculator': 'calendarCoin',
+  'auto-loan-calculator': 'calendarCoin',
+  'inflation-calculator': 'chartCheck',
+  'cpm-calculator': 'tagPercent',
+  'ctr-calculator': 'chartCheck',
+  'engagement-rate-calculator': 'users',
+  'youtube-money-calculator': 'play',
+  'adsense-revenue-calculator': 'growth',
+  // Health & Fitness (16)
   'bmi-calculator': 'scale',
   'calorie-tdee-calculator': 'flame',
   'macro-nutrient-calculator': 'apple',
@@ -816,6 +827,10 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'ovulation-calculator': 'calendarHeart',
   'lab-test-result-checker': 'flask',
   'ideal-weight-calculator': 'scale',
+  // Finance/Health batch (15, 27 Nov 2026)
+  'steps-to-calories-calculator': 'flame',
+  'dog-age-calculator': 'heart',
+  'cat-age-calculator': 'heart',
   // Education & Student (36)
   'ssc-hsc-gpa-calculator': 'gradCap',
   'nu-cgpa-calculator': 'openBook',
@@ -946,7 +961,7 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'html-to-markdown': 'diffDocs',
   'password-generator': 'key',
   'password-strength-checker': 'docLock',
-  // Daily Life, Islamic & Utility (49)
+  // Daily Life, Islamic & Utility (51)
   'prayer-times': 'mosque',
   'hijri-date-converter': 'moonCalendar',
   'daily-quran-verse': 'openBook',
@@ -975,6 +990,9 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'qr-code-generator': 'gridPaper',
   'qr-code-reader': 'imageSearch',
   'barcode-generator': 'tag',
+  // Finance/Health batch (15, 27 Nov 2026)
+  'working-days-calculator': 'calendarCheck',
+  'love-compatibility-calculator': 'heart',
   // Converters batch (21, 27 Nov 2026)
   'volume-converter': 'convert',
   'data-storage-converter': 'convert',

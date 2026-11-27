@@ -281,6 +281,21 @@ import { WeekNumberCalculatorTool } from './tools/WeekNumberCalculatorTool';
 import { LeapYearCheckerTool } from './tools/LeapYearCheckerTool';
 import { JulianDateConverterTool } from './tools/JulianDateConverterTool';
 import { BanglaDateConverterTool } from './tools/BanglaDateConverterTool';
+import { RoiCalculatorTool } from './tools/RoiCalculatorTool';
+import { GstCalculatorTool } from './tools/GstCalculatorTool';
+import { StepsToCaloriesCalculatorTool } from './tools/StepsToCaloriesCalculatorTool';
+import { WorkingDaysCalculatorTool } from './tools/WorkingDaysCalculatorTool';
+import { DogAgeCalculatorTool } from './tools/DogAgeCalculatorTool';
+import { CatAgeCalculatorTool } from './tools/CatAgeCalculatorTool';
+import { LoveCompatibilityCalculatorTool } from './tools/LoveCompatibilityCalculatorTool';
+import { DownPaymentCalculatorTool } from './tools/DownPaymentCalculatorTool';
+import { AutoLoanCalculatorTool } from './tools/AutoLoanCalculatorTool';
+import { InflationCalculatorTool } from './tools/InflationCalculatorTool';
+import { CpmCalculatorTool } from './tools/CpmCalculatorTool';
+import { CtrCalculatorTool } from './tools/CtrCalculatorTool';
+import { EngagementRateCalculatorTool } from './tools/EngagementRateCalculatorTool';
+import { YoutubeMoneyCalculatorTool } from './tools/YoutubeMoneyCalculatorTool';
+import { AdsenseRevenueCalculatorTool } from './tools/AdsenseRevenueCalculatorTool';
 import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
@@ -543,6 +558,22 @@ const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'leap-year-checker': LeapYearCheckerTool,
   'julian-date-converter': JulianDateConverterTool,
   'bangla-date-converter': BanglaDateConverterTool,
+  // Finance/Health batch (15, 27 Nov 2026)
+  'roi-calculator': RoiCalculatorTool,
+  'gst-calculator': GstCalculatorTool,
+  'steps-to-calories-calculator': StepsToCaloriesCalculatorTool,
+  'working-days-calculator': WorkingDaysCalculatorTool,
+  'dog-age-calculator': DogAgeCalculatorTool,
+  'cat-age-calculator': CatAgeCalculatorTool,
+  'love-compatibility-calculator': LoveCompatibilityCalculatorTool,
+  'down-payment-calculator': DownPaymentCalculatorTool,
+  'auto-loan-calculator': AutoLoanCalculatorTool,
+  'inflation-calculator': InflationCalculatorTool,
+  'cpm-calculator': CpmCalculatorTool,
+  'ctr-calculator': CtrCalculatorTool,
+  'engagement-rate-calculator': EngagementRateCalculatorTool,
+  'youtube-money-calculator': YoutubeMoneyCalculatorTool,
+  'adsense-revenue-calculator': AdsenseRevenueCalculatorTool,
 };
 
 const gridStyle: CSSProperties = {
