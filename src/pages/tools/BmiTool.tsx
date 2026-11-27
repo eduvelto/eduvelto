@@ -5,9 +5,17 @@
 // weight (kg) / height (m)^2, categories per WHO. Reverse mode:
 // "what weight for BMI 22?" All outputs are informational estimates.
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
-import { calculateBmi, weightForBmi, BMI_CATEGORY_LABELS } from '../../lib/tools/bodyMetrics';
+import {
+  calculateBmi,
+  weightForBmi,
+  BMI_CATEGORY_LABELS,
+  cmToFeetInches,
+  parseHeightInput,
+  exampleHeightForUnit,
+  type HeightUnit,
+} from '../../lib/tools/bmi';
 import { idealWeight } from '../../lib/tools/idealWeight';
 import {
   inputStyle,
@@ -31,25 +39,64 @@ import {
   CopyButton,
 } from './healthShared';
 
-export function BmiTool() {
+const HEIGHT_UNITS: { unit: HeightUnit; bn: string; en: string }[] = [
+  { unit: 'cm', bn: 'সেমি', en: 'cm' },
+  { unit: 'feet', bn: 'ফুট', en: 'Feet' },
+  { unit: 'meter', bn: 'মিটার', en: 'Meter' },
+];
+
+/** Segmented unit button: same 36px fixed height as the sex buttons below. */
+function unitButtonStyle(active: boolean): CSSProperties {
+  return {
+    minHeight: 36,
+    padding: '0 14px',
+    borderRadius: 8,
+    border: '1px solid var(--line)',
+    background: active ? 'var(--teal)' : 'var(--surface)',
+    color: active ? '#fff' : 'var(--heading)',
+    fontWeight: 600,
+    cursor: 'pointer',
+  };
+}
+
+export function BmiTool({ initialHeightUnit = 'cm' }: { initialHeightUnit?: HeightUnit }) {
   const { t } = useLanguage();
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
+  const [heightFeet, setHeightFeet] = useState('');
+  const [heightInches, setHeightInches] = useState('');
+  const [heightUnit, setHeightUnit] = useState<HeightUnit>(initialHeightUnit);
   const [targetBmi, setTargetBmi] = useState('');
   const [sex, setSex] = useState<'male' | 'female'>('male');
   const { copied, copyText } = useCopy();
 
   const weightV = parseAmount(weight);
-  const heightV = parseAmount(height);
+  // Height in cm, whatever unit was entered — the engine still takes cm.
+  const parsedHeight = parseHeightInput(heightUnit, height, heightFeet, heightInches);
+  const heightV = parsedHeight.heightCm;
   const targetV = parseAmount(targetBmi);
   const invalid =
     (weightV !== null && weightV <= 0) ||
-    (heightV !== null && heightV <= 0) ||
+    parsedHeight.invalid ||
     (targetV !== null && targetV <= 0) ||
     (weight.trim() !== '' && weightV === null) ||
-    (height.trim() !== '' && heightV === null) ||
     (targetBmi.trim() !== '' && targetV === null);
   const ready = weightV !== null && weightV > 0 && heightV !== null && heightV > 0;
+
+  // Height as the user entered it, for the reverse-weight sentence
+  // (cm mode keeps the old "at this height" wording; feet/meter mode
+  // restates the height in the chosen unit).
+  const heightPhrase = useMemo(() => {
+    if (heightV === null) return null;
+    if (heightUnit === 'feet') {
+      const { feet, inches } = cmToFeetInches(heightV);
+      return { bn: `${fmtNum(feet)} ফুট ${fmtNum(inches)} ইঞ্চি`, en: `${feet} ft ${inches} in` };
+    }
+    if (heightUnit === 'meter') {
+      return { bn: `${fmtNum(heightV / 100)} মিটার`, en: `${fmtNum(heightV / 100)} m` };
+    }
+    return { bn: `${fmtNum(heightV)} সেমি`, en: `${fmtNum(heightV)} cm` };
+  }, [heightV, heightUnit]);
 
   const result = useMemo(() => {
     if (!ready) return null;
@@ -83,10 +130,47 @@ export function BmiTool() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [heightV, sex, weightV]);
 
+  // Switching units converts the entered height instead of dropping
+  // it (cm -> ft/in rounds to the nearest inch; ft/in -> cm shows one
+  // decimal). An empty or invalid height just clears the fields.
+  function switchUnit(next: HeightUnit): void {
+    if (next === heightUnit) return;
+    if (heightV !== null && heightV > 0) {
+      if (next === 'feet') {
+        const { feet, inches } = cmToFeetInches(heightV);
+        setHeightFeet(String(feet));
+        setHeightInches(String(inches));
+        setHeight('');
+      } else if (next === 'meter') {
+        setHeight(fmtNum(heightV / 100));
+        setHeightFeet('');
+        setHeightInches('');
+      } else {
+        setHeight(fmtNum(heightV, 1));
+        setHeightFeet('');
+        setHeightInches('');
+      }
+    } else {
+      setHeight('');
+      setHeightFeet('');
+      setHeightInches('');
+    }
+    setHeightUnit(next);
+  }
+
   function loadExample(): void {
     setWeight('70');
-    setHeight('175');
     setTargetBmi('22');
+    const ex = exampleHeightForUnit(heightUnit);
+    if (ex.unit === 'feet') {
+      setHeightFeet(ex.feet);
+      setHeightInches(ex.inches);
+      setHeight('');
+    } else {
+      setHeight(ex.height);
+      setHeightFeet('');
+      setHeightInches('');
+    }
   }
 
   return (
@@ -118,20 +202,75 @@ export function BmiTool() {
           />
         </div>
         <div>
-          <label style={labelStyle} htmlFor="bmi-height">
-            {t({ bn: 'উচ্চতা (সেমি)', en: 'Height (cm)' })}
+          <label style={labelStyle} htmlFor={heightUnit === 'feet' ? 'bmi-height-feet' : 'bmi-height'}>
+            {heightUnit === 'feet'
+              ? t({ bn: 'উচ্চতা (ফুট)', en: 'Height (feet)' })
+              : heightUnit === 'meter'
+                ? t({ bn: 'উচ্চতা (মিটার)', en: 'Height (meter)' })
+                : t({ bn: 'উচ্চতা (সেমি)', en: 'Height (cm)' })}
           </label>
-          <input
-            id="bmi-height"
-            style={inputStyle}
-            type="number"
-            min="0"
-            step="0.1"
-            inputMode="decimal"
-            value={height}
-            onChange={(e) => setHeight(e.target.value)}
-            placeholder="175"
-          />
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 8 }} role="group" aria-label={t({ bn: 'উচ্চতার একক', en: 'Height unit' })}>
+            {HEIGHT_UNITS.map((u) => (
+              <button
+                key={u.unit}
+                type="button"
+                style={unitButtonStyle(heightUnit === u.unit)}
+                onClick={() => switchUnit(u.unit)}
+                aria-pressed={heightUnit === u.unit}
+              >
+                {t({ bn: u.bn, en: u.en })}
+              </button>
+            ))}
+          </div>
+          {heightUnit === 'feet' ? (
+            <div style={{ display: 'flex', gap: 8 }}>
+              <div style={{ flex: 1 }}>
+                <label style={{ ...labelStyle, fontSize: 12, fontWeight: 500, color: 'var(--muted)' }} htmlFor="bmi-height-feet">
+                  {t({ bn: 'ফুট', en: 'Feet' })}
+                </label>
+                <input
+                  id="bmi-height-feet"
+                  style={inputStyle}
+                  type="number"
+                  min="0"
+                  step="1"
+                  inputMode="numeric"
+                  value={heightFeet}
+                  onChange={(e) => setHeightFeet(e.target.value)}
+                  placeholder="5"
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label style={{ ...labelStyle, fontSize: 12, fontWeight: 500, color: 'var(--muted)' }} htmlFor="bmi-height-inches">
+                  {t({ bn: 'ইঞ্চি', en: 'Inches' })}
+                </label>
+                <input
+                  id="bmi-height-inches"
+                  style={inputStyle}
+                  type="number"
+                  min="0"
+                  max="11"
+                  step="1"
+                  inputMode="numeric"
+                  value={heightInches}
+                  onChange={(e) => setHeightInches(e.target.value)}
+                  placeholder="9"
+                />
+              </div>
+            </div>
+          ) : (
+            <input
+              id="bmi-height"
+              style={inputStyle}
+              type="number"
+              min="0"
+              step="0.1"
+              inputMode="decimal"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+              placeholder={heightUnit === 'meter' ? '1.75' : '175'}
+            />
+          )}
         </div>
         <div>
           <label style={labelStyle} htmlFor="bmi-target">
@@ -152,16 +291,25 @@ export function BmiTool() {
       </div>
       <div style={buttonRowStyle}>
         <button type="button" className="ev-btn-outline" onClick={loadExample}>
-          {t({ bn: 'উদাহরণ বসান (৭০ কেজি, ১৭৫ সেমি)', en: 'Load example (70 kg, 175 cm)' })}
+          {heightUnit === 'feet'
+            ? t({ bn: 'উদাহরণ বসান (৭০ কেজি, ৫ ফুট ৯ ইঞ্চি)', en: 'Load example (70 kg, 5 ft 9 in)' })
+            : heightUnit === 'meter'
+              ? t({ bn: 'উদাহরণ বসান (৭০ কেজি, ১.৭৫ মিটার)', en: 'Load example (70 kg, 1.75 m)' })
+              : t({ bn: 'উদাহরণ বসান (৭০ কেজি, ১৭৫ সেমি)', en: 'Load example (70 kg, 175 cm)' })}
         </button>
       </div>
-      {reverseWeight !== null && targetV !== null ? (
+      {reverseWeight !== null && targetV !== null && heightPhrase !== null ? (
         <div style={{ ...resultStyle, background: 'var(--amber-soft)' }}>
           <p style={{ margin: 0, fontSize: 15 }}>
-            {t({
-              bn: `BMI ${fmtNum(targetV)} পেতে এই উচ্চতায় ওজন হতে হবে ${fmtNum(reverseWeight, 1)} কেজি।`,
-              en: `To reach a BMI of ${fmtNum(targetV)} at this height, weight would need to be ${fmtNum(reverseWeight, 1)} kg.`,
-            })}
+            {heightUnit === 'cm'
+              ? t({
+                bn: `BMI ${fmtNum(targetV)} পেতে এই উচ্চতায় ওজন হতে হবে ${fmtNum(reverseWeight, 1)} কেজি।`,
+                en: `To reach a BMI of ${fmtNum(targetV)} at this height, weight would need to be ${fmtNum(reverseWeight, 1)} kg.`,
+              })
+              : t({
+                bn: `BMI ${fmtNum(targetV)} পেতে ${heightPhrase.bn} উচ্চতায় ওজন হতে হবে ${fmtNum(reverseWeight, 1)} কেজি।`,
+                en: `To reach a BMI of ${fmtNum(targetV)} at ${heightPhrase.en}, weight would need to be ${fmtNum(reverseWeight, 1)} kg.`,
+              })}
           </p>
         </div>
       ) : null}

@@ -54,7 +54,7 @@ export const TOOL_GUIDE_SECTIONS: Record<string, ToolGuideSections> = {
       intro: `বিএমআই ক্যালকুলেটর আপনার ওজন ও উচ্চতা দিয়ে শরীরের ভর সূচক (BMI) হিসাব করে। এটি দেখায় আপনার ওজন আপনার উচ্চতার তুলনায় কম, স্বাভাবিক, বেশি, নাকি স্থূলতার পর্যায়ে আছে। ফলাফল WHO শ্রেণিবিভাগ অনুযায়ী দেওয়া হয়। এই টুলটি ছাত্র, অভিভাবক ও স্বাস্থ্য সচেতন যে কারও জন্য সহজে ব্যবহারযোগ্য।`,
       howTo: [
         `ওজনের ঘরে আপনার ওজন কেজিতে লিখুন।`,
-        `উচ্চতার ঘরে আপনার উচ্চতা সেন্টিমিটারে লিখুন।`,
+        `উচ্চতা লিখুন — সেমি, ফুট-ইঞ্চি বা মিটার।`,
         `চাইলে লক্ষ্য BMI-এর ঘরে একটি সংখ্যা লিখুন, তাহলে ওই BMI-তে পৌঁছাতে কত ওজন দরকার তা দেখাবে।`,
         `ফলাফলে আপনার BMI, WHO শ্রেণি ও স্বাস্থ্যকর ওজনের সীমা দেখুন।`,
       ],
@@ -62,7 +62,7 @@ export const TOOL_GUIDE_SECTIONS: Record<string, ToolGuideSections> = {
       example: `উদাহরণ: ওজন ৭০ কেজি ও উচ্চতা ১৭৫ সেমি হলে উচ্চতা মিটারে ১.৭৫। হিসাব: 70 ÷ (1.75 × 1.75) = 22.86। এটি স্বাভাবিক শ্রেণিতে পড়ে। এই উচ্চতায় স্বাস্থ্যকর ওজন ৫৬.৭–৭৬.৩ কেজি।`,
       faq: [
         { q: `BMI কি চিকিৎসকের পরামর্শের বদলে ব্যবহার করা যায়?`, a: `না, BMI শুধু একটি সাধারণ নির্দেশিকা। স্বাস্থ্য নিয়ে কোনো সিদ্ধান্ত নেওয়ার আগে চিকিৎসকের সঙ্গে কথা বলুন।` },
-        { q: `উচ্চতা কি সেন্টিমিটারেই দিতে হবে?`, a: `হ্যাঁ, এই টুলে উচ্চতা সেন্টিমিটারে দিতে হয়। টুলটি নিজেই সেটিকে মিটারে বদলে হিসাব করে।` },
+        { q: `উচ্চতা কি সেন্টিমিটারেই দিতে হবে?`, a: `না — সেমি, ফুট বা মিটার বেছে নিন; ফুট বাছলে ফুট ও ইঞ্চি আলাদা ঘরে লিখুন।` },
         { q: `লক্ষ্য BMI-এর ঘরটি কী কাজে লাগে?`, a: `আপনি যে BMI-তে পৌঁছাতে চান সেটি লিখলে টুলটি বলে দেয় আপনার উচ্চতায় সেই BMI-র জন্য কত কেজি ওজন দরকার।` },
         { q: `আমার তথ্য কি কোথাও পাঠানো হয়?`, a: `না, সব হিসাব আপনার ব্রাউজারেই হয়। ওজন বা উচ্চতার কোনো তথ্য সার্ভারে পাঠানো হয় না।` },
       ],
@@ -72,7 +72,7 @@ export const TOOL_GUIDE_SECTIONS: Record<string, ToolGuideSections> = {
       intro: `The BMI Calculator works out your body mass index (BMI) from your weight and height. It shows whether your weight is underweight, normal, overweight or obese for your height, following the WHO classification. Students, parents and anyone watching their health can use it easily.`,
       howTo: [
         `Enter your weight in kilograms.`,
-        `Enter your height in centimetres.`,
+        `Enter your height — in centimetres, feet and inches, or metres.`,
         `Optionally, enter a target BMI to see the weight you would need for it.`,
         `Read your BMI, WHO category and healthy weight range.`,
       ],
@@ -80,7 +80,7 @@ export const TOOL_GUIDE_SECTIONS: Record<string, ToolGuideSections> = {
       example: `Example: a weight of 70 kg and a height of 175 cm (1.75 m). Calculation: 70 ÷ (1.75 × 1.75) = 22.86, in the normal range. For this height, the healthy weight range is 56.7–76.3 kg.`,
       faq: [
         { q: `Can BMI replace a doctor's advice?`, a: `No, BMI is only a general guide. Talk to a doctor before making any health decision based on it.` },
-        { q: `Must height be entered in centimetres?`, a: `Yes. Enter height in centimetres; the tool converts it to metres itself.` },
+        { q: `Must height be entered in centimetres?`, a: `No — pick cm, feet or metres; with feet, enter feet and inches in the two boxes.` },
         { q: `What is the target BMI box for?`, a: `Enter the BMI you want to reach, and the tool shows the weight you would need at your height.` },
         { q: `Is my information sent anywhere?`, a: `No. Everything is calculated in your browser, and your weight and height are never sent to a server.` },
       ],
