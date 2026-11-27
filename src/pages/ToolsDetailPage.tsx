@@ -467,7 +467,7 @@ export default function ToolsDetailPage() {
           { label: lang === 'bn' ? meta.crumbBn : meta.crumbEn },
         ]}
       />
-      <p style={{ fontSize: 16, lineHeight: 1.7 }}>
+      <p className="ev-tool-desc" style={{ fontSize: 16, lineHeight: 1.7 }}>
         {t({ bn: meta.descriptionBn, en: meta.descriptionEn })}
       </p>
       {ToolUI ? (

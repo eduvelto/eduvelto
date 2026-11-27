@@ -1601,7 +1601,11 @@ export const TOOLS_META: ToolMeta[] = [
     titleBn: 'ব্যাকগ্রাউন্ড রিমুভার',
     titleEn: 'Background Remover',
     descriptionBn: 'ছবির পেছনের ব্যাকগ্রাউন্ড সরিয়ে স্বচ্ছ বা সাদা ব্যাকগ্রাউন্ডে ছবি পান — সবকিছু ব্রাউজারেই হয়।',
-    descriptionEn: 'Remove the background from a photo to get a transparent or plain background — all in the browser.',
+    // bn/en parity (27 Nov 2026): the old 104-char English text wrapped
+    // to 2 lines at 1280px (3 at 390px) while Bangla fit 1 (2 at 390px),
+    // pushing the tool + result 27px lower in English. This shorter
+    // text fits 1 line at 1280px and 2 lines at 390px, like Bangla.
+    descriptionEn: 'Remove the background from a photo — transparent or plain, all in the browser.',
     crumbBn: 'ব্যাকগ্রাউন্ড রিমুভার',
     crumbEn: 'Background Remover',
     relatedSlugs: ['image-compressor', 'image-cropper', 'image-filter'],

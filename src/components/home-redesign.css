@@ -175,6 +175,13 @@ html[data-theme="dark"] .ev-rd-ai { background: linear-gradient(135deg, #2c1f3d 
   .ev-header-search button { flex: none; border: 0; border-radius: 999px; padding: 6px 12px; background: var(--teal-deep); color: #fff; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; }
 }
 
+/* bn/en parity (27 Nov 2026): narrow desktop keeps the focused
+   search input at 170px — growing it to 220px would push the
+   logo-row actions to a second row at 861-1100px. */
+@media (min-width: 861px) and (max-width: 1100px) {
+  .ev-header-search input:focus { width: 170px; }
+}
+
 /* ---------- search page ---------- */
 .ev-search-title { margin: 4px 0 14px; font-size: 24px; color: var(--heading); }
 .ev-search-form { display: flex; gap: 0; max-width: 640px; background: var(--card); border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 4px 4px 18px; box-shadow: var(--shadow-sm); }

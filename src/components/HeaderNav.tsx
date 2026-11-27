@@ -259,19 +259,31 @@ const SECONDARY: MenuItem[] = [
   { to: '/privacy', bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' },
 ];
 
-export default function HeaderNav() {
-  const { t, tTab, tabLang } = useLanguage();
+/**
+ * Header actions: search + theme + language + Support + auth controls.
+ *
+ * Rendered TWICE — once as a direct <header> child (desktop, >=861px)
+ * and once inside the <nav> (mobile menu, <=860px) — CSS shows exactly
+ * one per viewport (same pattern as LangToggleButton). The `suffix`
+ * keeps the search input id unique across the two copies.
+ *
+ * bn/en layout parity (27 Nov 2026, Image Compressor report): these
+ * actions must sit on the LOGO row, not inside the wrapping nav —
+ * with the actions inside the nav, the English nav labels (~250px
+ * wider than Bangla) pushed the nav to a second row at 1280px, so
+ * the header was 168px in English vs 122px in Bangla and every tool
+ * + result preview sat 46px lower in English. Each copy keeps its
+ * own search-query state (only one copy is ever visible).
+ */
+function HeaderActions({ suffix }: { suffix: string }) {
+  const { t, tTab } = useLanguage();
   const { user, profile, loading, signOut } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
   // Sections audit (24 Nov 2026): return here after sign-in.
   const back = loginState(location.pathname + location.search);
-  const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const [bellNote, setBellNote] = useState(false);
   const [headerQuery, setHeaderQuery] = useState('');
-  const navRef = useRef<HTMLElement | null>(null);
 
   // Header Global Search — a real input (24 Nov 2026 redesign). The
   // magnifier used to be a plain link to /library; it now navigates
@@ -281,6 +293,77 @@ export default function HeaderNav() {
     const q = headerQuery.trim();
     navigate(q ? `/search?q=${encodeURIComponent(q)}` : '/search');
   }
+
+  return (
+    <span className="ev-header-actions">
+      <form className="ev-header-search" onSubmit={runHeaderSearch} role="search">
+        <label htmlFor={`ev-header-search${suffix}`} style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
+          {t({ bn: 'খুঁজুন', en: 'Search' })}
+        </label>
+        <input
+          id={`ev-header-search${suffix}`}
+          type="search"
+          value={headerQuery}
+          onChange={(e) => setHeaderQuery(e.target.value)}
+          placeholder={t({ bn: 'খুঁজুন…', en: 'Search…' })}
+          aria-label={t({ bn: 'বই, চাকরি, সুযোগ বা সেবা খুঁজুন', en: 'Search books, jobs, opportunities or services' })}
+        />
+        <button type="submit" aria-label={t({ bn: 'খুঁজুন', en: 'Search' })}>
+          <SearchIcon />
+        </button>
+      </form>
+      <button
+        type="button"
+        className="ev-header-icon-btn"
+        aria-label={theme === 'dark' ? t({ bn: 'লাইট মোড', en: 'Light mode' }) : t({ bn: 'ডার্ক মোড', en: 'Dark mode' })}
+        aria-pressed={theme === 'dark'}
+        title={theme === 'dark' ? t({ bn: 'লাইট মোড', en: 'Light mode' }) : t({ bn: 'ডার্ক মোড', en: 'Dark mode' })}
+        onClick={() => {
+          toggleTheme();
+        }}
+      >
+        {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+      </button>
+      {/* Language toggle — top-right, beside the profile (owner rule 22 Nov 2026). */}
+      <LangToggleButton />
+      {/* Phase 3 (25 Nov 2026): prominent gold Support button —
+          opens the quick donate modal (full page at /:lang/support). */}
+      <SupportButton />
+      {loading ? null : user ? (
+        <>
+          <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
+            {tTab({ bn: 'ড্যাশবোর্ড', en: 'Dashboard' })}
+          </NavLink>
+          <NavLink to="/profile" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
+            {profile?.displayName ?? tTab({ bn: 'প্রোফাইল', en: 'Profile' })}
+          </NavLink>
+          <button type="button" onClick={() => void signOut()} className="ev-btn ev-btn-sm ev-header-btn-outline">
+            {t({ bn: 'লগআউট', en: 'Log out' })}
+          </button>
+        </>
+      ) : (
+        <>
+          <NavLink to="/login" state={back} className="ev-btn ev-btn-sm ev-header-btn-login">
+            {t({ bn: 'লগইন', en: 'Log in' })}
+          </NavLink>
+          <NavLink to="/register" state={back} className="ev-btn ev-btn-sm ev-header-btn-register">
+            {t({ bn: 'রেজিস্টার', en: 'Register' })}
+          </NavLink>
+        </>
+      )}
+    </span>
+  );
+}
+
+export default function HeaderNav() {
+  const { t, tTab, tabLang } = useLanguage();
+  const { user, profile, loading } = useAuth();
+  const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [bellNote, setBellNote] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
 
   // Close every open menu on navigation.
   useEffect(() => {
@@ -369,6 +452,14 @@ export default function HeaderNav() {
         {menuOpen ? `✕ ${t({ bn: 'বন্ধ', en: 'Close' })}` : `☰ ${t({ bn: 'মেনু', en: 'Menu' })}`}
       </button>
 
+      {/* Desktop actions (search + theme + language + Support + auth)
+          live on the LOGO row as a direct <header> child — NOT inside
+          the <nav> (bn/en parity, 27 Nov 2026: inside the wrapping nav
+          they pushed the English nav to a second row at 1280px). The
+          mobile-menu copy lives inside the <nav> below; CSS shows
+          exactly one per viewport. */}
+      <HeaderActions suffix="" />
+
       <nav aria-label={t({ bn: 'প্রধান মেনু', en: 'Main menu' })} id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
         <NavLink to={langUrl('/', tabLang)} end className={({ isActive }) => `ev-hnav-home${isActive ? ' ev-hnav-home-active' : ''}`}>
           <HomeIcon /> {tTab({ bn: 'হোম', en: 'Home' })}
@@ -414,64 +505,10 @@ export default function HeaderNav() {
           ) : null}
         </span>
 
-        <span className="ev-header-actions">
-          <form className="ev-header-search" onSubmit={runHeaderSearch} role="search">
-            <label htmlFor="ev-header-search" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
-              {t({ bn: 'খুঁজুন', en: 'Search' })}
-            </label>
-            <input
-              id="ev-header-search"
-              type="search"
-              value={headerQuery}
-              onChange={(e) => setHeaderQuery(e.target.value)}
-              placeholder={t({ bn: 'খুঁজুন…', en: 'Search…' })}
-              aria-label={t({ bn: 'বই, চাকরি, সুযোগ বা সেবা খুঁজুন', en: 'Search books, jobs, opportunities or services' })}
-            />
-            <button type="submit" aria-label={t({ bn: 'খুঁজুন', en: 'Search' })}>
-              <SearchIcon />
-            </button>
-          </form>
-          <button
-            type="button"
-            className="ev-header-icon-btn"
-            aria-label={theme === 'dark' ? t({ bn: 'লাইট মোড', en: 'Light mode' }) : t({ bn: 'ডার্ক মোড', en: 'Dark mode' })}
-            aria-pressed={theme === 'dark'}
-            title={theme === 'dark' ? t({ bn: 'লাইট মোড', en: 'Light mode' }) : t({ bn: 'ডার্ক মোড', en: 'Dark mode' })}
-            onClick={() => {
-              toggleTheme();
-              setBellNote(false);
-            }}
-          >
-            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-          </button>
-          {/* Language toggle — top-right, beside the profile (owner rule 22 Nov 2026). */}
-          <LangToggleButton />
-          {/* Phase 3 (25 Nov 2026): prominent gold Support button —
-              opens the quick donate modal (full page at /:lang/support). */}
-          <SupportButton />
-          {loading ? null : user ? (
-            <>
-              <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-                {tTab({ bn: 'ড্যাশবোর্ড', en: 'Dashboard' })}
-              </NavLink>
-              <NavLink to="/profile" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-                {profile?.displayName ?? tTab({ bn: 'প্রোফাইল', en: 'Profile' })}
-              </NavLink>
-              <button type="button" onClick={() => void signOut()} className="ev-btn ev-btn-sm ev-header-btn-outline">
-                {t({ bn: 'লগআউট', en: 'Log out' })}
-              </button>
-            </>
-          ) : (
-            <>
-              <NavLink to="/login" state={back} className="ev-btn ev-btn-sm ev-header-btn-login">
-                {t({ bn: 'লগইন', en: 'Log in' })}
-              </NavLink>
-              <NavLink to="/register" state={back} className="ev-btn ev-btn-sm ev-header-btn-register">
-                {t({ bn: 'রেজিস্টার', en: 'Register' })}
-              </NavLink>
-            </>
-          )}
-        </span>
+        {/* Mobile-menu copy of the header actions (visible <=860px
+            when the menu is open; the desktop copy above is the
+            direct <header> child). */}
+        <HeaderActions suffix="-m" />
       </nav>
     </header>
   );

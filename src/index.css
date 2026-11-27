@@ -1806,6 +1806,68 @@ a:hover {
   }
 }
 
+/* ---- bn/en header + tool-description layout parity (27 Nov 2026,
+   Image Compressor report) ----
+   ROOT CAUSE (measured live, Playwright, 1280px + 390px): the tool
+   itself renders identically in both languages (same widths/heights);
+   the whole tool + result preview sat LOWER in English because of
+   content ABOVE it:
+   (a) Desktop: English nav labels are ~250px wider than Bangla, so
+   with the actions inside the wrapping nav the English nav wrapped
+   to a second row — header 168px in English vs 122px in Bangla at
+   1280px, shifting everything below by 46px. Fix: the actions live
+   on the logo row as a direct <header> child (HeaderNav.tsx) and
+   the nav is always its own full-width row on desktop, so the
+   header is 122px in both languages from 861px up. The nav copy of
+   the actions is the mobile-menu copy — hidden on desktop.
+   (b) Phones: the English tool description wraps to two lines while
+   Bangla fits one (image-compressor: 54.4px vs 27.2px at 390px),
+   shifting the tool + preview 27px lower in English. Fix: reserve
+   two lines for the description below 560px. */
+@media (min-width: 861px) {
+  .ev-header-nav {
+    flex-basis: 100%;
+  }
+  .ev-header-nav .ev-header-actions {
+    display: none;
+  }
+  .ev-header > .ev-header-actions {
+    margin-left: auto;
+  }
+  /* Fixed nav-button heights: the buttons' line boxes differ by font
+     (Hind Siliguri vs system-ui), which made the nav row 40px in
+     Bangla vs 42px in English before the webfonts loaded. Both
+     buttons are inline-flex with centered content, so a fixed height
+     cannot clip the labels. */
+  .ev-header-nav .ev-hnav-home {
+    height: 40px;
+  }
+  .ev-header-nav .ev-hnav-drop-btn {
+    height: 45px;
+  }
+}
+@media (max-width: 860px) {
+  .ev-header > .ev-header-actions {
+    display: none;
+  }
+}
+/* Narrow desktop (861-1100px): the English nav links are 831px wide
+   against an 829px row at 861px — trim 2px of horizontal padding per
+   nav button so the links stay on one row in both languages. */
+@media (min-width: 861px) and (max-width: 1100px) {
+  .ev-header-nav .ev-hnav-home {
+    padding: 8px 8px;
+  }
+  .ev-header-nav .ev-hnav-drop-btn {
+    padding: 10px 6px;
+  }
+}
+@media (max-width: 560px) {
+  .ev-tool-desc {
+    min-height: 3.4em;
+  }
+}
+
 /* Homepage: mobile search bar (≤768px only). */
 .ev-home-msearch {
   display: none;
