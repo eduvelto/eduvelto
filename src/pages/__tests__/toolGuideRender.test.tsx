@@ -93,4 +93,26 @@ describe('ToolsDetailPage guide rendering', () => {
     expect(html).not.toContain('কীভাবে ব্যবহার করবেন');
     expect(html).not.toContain('সচরাচর প্রশ্ন');
   });
+
+  it('renders the FAQPage JSON-LD script for a tool with FAQs (bn)', () => {
+    // Tool-SEO program (27 Nov 2026): the FAQPage script comes from the
+    // guide's FAQs and carries the same canonical as resolveRouteSeo.
+    mockLangState.lang = 'bn';
+    const html = renderTool('/bn/tools/bmi-calculator');
+    const guide = TOOL_GUIDE_SECTIONS['bmi-calculator'].bn;
+    expect(html).toContain('application/ld+json');
+    expect(html).toContain('"@type":"FAQPage"');
+    const questions = html.match(/"@type":"Question"/g) ?? [];
+    expect(questions.length).toBe(guide.faq.length);
+    expect(html).toContain('https://eduvelto.com/bn/tools/bmi-calculator#faq');
+  });
+
+  it('renders exactly 5 related tool links (same-category first)', () => {
+    // Tool-SEO program (27 Nov 2026): relatedToolsFor(meta, 5).
+    mockLangState.lang = 'bn';
+    const html = renderTool('/bn/tools/bmi-calculator');
+    const links = html.match(/href="\/bn\/tools\/[a-z0-9-]+"/g) ?? [];
+    expect(links.length).toBe(5);
+    expect(new Set(links).size).toBe(5);
+  });
 });

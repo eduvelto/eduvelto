@@ -611,7 +611,14 @@ export default function ToolsDetailPage() {
         </>
       ) : null}
       {faqJsonLd ? (
-        <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
+        // dangerouslySetInnerHTML on purpose: a plain {JSON.stringify(..)}
+        // child renders HTML-escaped (&quot;) inside <script>, which is
+        // invalid JSON-LD. Helmet does the same raw injection for head
+        // JSON-LD; this is the body equivalent.
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
       ) : null}
       <AdSlot placement="in-content-2" />
       {related.length > 0 ? (
