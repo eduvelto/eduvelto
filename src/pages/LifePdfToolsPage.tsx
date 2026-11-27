@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
+import AdSlot from '../components/AdSlot';
 import { downloadBlobInApp } from '../lib/nativeFileDownload';
 import { mergePdfs } from '../lib/tools/pdfPageOps';
 
@@ -307,6 +308,14 @@ export default function LifePdfToolsPage() {
         ) : null}
       </section>
 
+      {/* Ads rollout B1 (27 Nov 2026): this is a standalone route
+          (/life/pdf-tools, no tool slug aliases to it) with real tool
+          content, so it mounts its own two display slots — in-content
+          between the two tools, in-content-2 at the end. Same
+          placements as the ToolsDetailPage wrapper; never covering a
+          tool's inputs or buttons. */}
+      <AdSlot placement="in-content" />
+
       {/* (2) Merge PDFs */}
       <section className="ev-card" style={{ marginTop: 16, display: 'grid', gap: 12 }} aria-labelledby="merge-pdf-heading">
         <h2 id="merge-pdf-heading" style={{ margin: 0, fontSize: 20, color: 'var(--heading)' }}>
@@ -366,6 +375,8 @@ export default function LifePdfToolsPage() {
           </p>
         ) : null}
       </section>
+
+      <AdSlot placement="in-content-2" />
 
       <p style={{ color: 'var(--muted)', fontSize: 14, marginTop: 20 }}>
         {t({

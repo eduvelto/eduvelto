@@ -5,10 +5,12 @@
 // this file is only the interactive UI. Everything runs in the browser:
 // results are saved to localStorage ONLY, never sent anywhere.
 //
-// Ads (owner 27 Nov 2026, binding): two standard in-content AdSense
-// slots via the existing <AdSlot> component — one below the hero, one
-// between sections. They never cover the checker, the result or any
-// medical content, and never delay a result. The doctor-summary PDF
+// Ads (owner 27 Nov 2026, binding): the two standard in-content AdSense
+// slots for this page live in the ToolsDetailPage wrapper (ads rollout
+// B1) — one below the tool UI, one before Related tools — so this file
+// mounts NO AdSlot itself (its own two slots were removed in B1 to
+// avoid doubling to four). They never cover the checker, the result or
+// any medical content, and never delay a result. The doctor-summary PDF
 // download and the history export go through the existing
 // <RewardedAdButton> (Free Download live; Unlock disabled until
 // AdSense approves — no fake timer). Viewing and printing a result
@@ -36,7 +38,6 @@ import {
   type ResultBand,
   type Sex,
 } from '../../lib/healthTests';
-import AdSlot from '../../components/AdSlot';
 import RewardedAdButton from '../../components/RewardedAdButton';
 
 const inputStyle: CSSProperties = {
@@ -309,8 +310,6 @@ export function LabTestResultCheckerTool() {
           en: 'Your own lab report’s range is the real one. Normal ranges can differ slightly between labs.',
         })}
       </div>
-
-      <AdSlot placement="in-content" />
 
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 12 }} role="tablist">
         {tabs.map((tabDef) => (
@@ -714,8 +713,6 @@ export function LabTestResultCheckerTool() {
           )}
         </div>
       ) : null}
-
-      <AdSlot placement="in-content-2" />
 
       <p style={{ color: 'var(--muted)', fontSize: 13, margin: '16px 0 0', lineHeight: 1.6 }}>
         {t({

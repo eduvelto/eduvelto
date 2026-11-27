@@ -32,6 +32,7 @@ import { toolBySlug } from '../lib/toolsMeta';
 import { toolGuideBySlug, toolGuideSectionsBySlug } from '../lib/toolsGuides';
 import { langUrl } from '../lib/langRouting';
 import { ToolIcon } from '../components/ToolIcon';
+import AdSlot from '../components/AdSlot';
 import LifePdfToolsPage from './LifePdfToolsPage';
 import LifeCalculatorsPage from './LifeCalculatorsPage';
 import LifeConvertersPage from './LifeConvertersPage';
@@ -482,6 +483,17 @@ export default function ToolsDetailPage() {
           })}
         </AlertBox>
       )}
+      {/* Ads rollout B1 (27 Nov 2026): the display slots for EVERY tool
+          page live here, once — in-content below the tool UI and
+          in-content-2 before Related tools. Tool components must NOT
+          mount their own AdSlot (Lab's local slots were removed for
+          this reason). LifePdfToolsPage is a standalone route
+          (/life/pdf-tools, no tool slug aliases to it) with real tool
+          content and mounts its own slots directly. Placements follow
+          adsConfig.isInPageSlotAllowed('tool', …); on production the
+          slots render nothing until AdSense IDs exist, on preview
+          hosts a labelled placeholder. */}
+      <AdSlot placement="in-content" />
       {guideSections ? (
         <ToolGuide guide={guideSections} />
       ) : guideText ? (
@@ -492,6 +504,7 @@ export default function ToolsDetailPage() {
           <p style={guideStyle}>{guideText}</p>
         </>
       ) : null}
+      <AdSlot placement="in-content-2" />
       {related.length > 0 ? (
         <>
           <h2 style={sectionTitleStyle}>{t({ bn: 'সম্পর্কিত টুলস', en: 'Related tools' })}</h2>
