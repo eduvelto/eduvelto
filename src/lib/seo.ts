@@ -55,6 +55,7 @@ import {
 } from './publicAcademic';
 import { QPG_GENERAL_CLASSES, qpgSubjectsFor } from './questionPaper';
 import { toolBySlug } from './toolsMeta';
+import { toolWebApplicationJsonLd } from './toolSeo';
 
 export { SITE_URL };
 
@@ -2420,6 +2421,27 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
       : entry.bareCanonical
         ? [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage]
         : [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage, breadcrumbFor(path, crumbs, lang)];
+  if (path.startsWith('/tools/')) {
+    // Tool-SEO program (27 Nov 2026): every tool page carries a
+    // WebApplication object built from its toolsMeta entry — name,
+    // description, category and free offer. The description is the
+    // same lang-resolved text as the meta description above, so head
+    // and JSON-LD never disagree. FAQPage lives in ToolsDetailPage
+    // (it needs the guide FAQs, which seo.ts must not import — the
+    // prose is lazy-loaded and must not download on first paint).
+    const toolMatch = path.match(/^\/tools\/([^/]+)$/);
+    const tool = toolMatch ? toolBySlug(toolMatch[1]) : undefined;
+    if (tool) {
+      jsonLd.push(
+        toolWebApplicationJsonLd(
+          tool,
+          canonical,
+          lang,
+          lang === 'bn' ? entry.description : entry.descriptionEn,
+        ),
+      );
+    }
+  }
   if (path === '/jobs') {
     // ItemList (23 Nov 2026, Gemini fold-in): the hub renders a real
     // card grid of all 15 exam hubs — list them with their real URLs.

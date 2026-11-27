@@ -56,15 +56,20 @@ function guideWords(content: {
 }
 
 describe('TOOL_GUIDE_SECTIONS (top 20)', () => {
-  it('still covers the 20 chosen slugs — and 156 structured guides in total (27 Nov 2026: J guides + A-tools + PDF to Word)', () => {
+  it('still covers the 20 chosen slugs — and 216 structured guides in total (27 Nov 2026: J guides + A-tools + PDF to Word + 25 Math + 12 prose conversions + 23 Text)', () => {
     for (const slug of EXPECTED_GUIDE_SLUGS) {
       expect(TOOL_GUIDE_SECTIONS, slug).toHaveProperty(slug);
     }
-    // 156 structured guides here + 12 prose guides in TOOLS_GUIDES =
-    // 168 guided of 172 live tools. The 4 unguided slugs are the
-    // aliases (typing-speed-test, cv-builder, cover-letter-builder,
-    // unit-converter) which render their alias page, never a guide.
-    expect(Object.keys(TOOL_GUIDE_SECTIONS)).toHaveLength(156);
+    // 216 structured guides here + 12 prose guides in TOOLS_GUIDES =
+    // 216 guided of 221 tools in toolsMeta (172 live + 25 Math + 23 Text
+    // + 1 more landed by the 93-tool build). The 4 unguided slugs are
+    // the aliases (typing-speed-test, cv-builder, cover-letter-builder,
+    // unit-converter) which render their alias page, never a guide. The
+    // 12 prose entries remain as a fallback; their structured versions
+    // now take precedence. (45 more guides — 20 Converters + 25
+    // Finance/Health/Main — are written and verified, held in
+    // fast-program/guides-fragments/ until their tools land in toolsMeta.)
+    expect(Object.keys(TOOL_GUIDE_SECTIONS)).toHaveLength(216);
   });
 
   it.each([...EXPECTED_GUIDE_SLUGS])('has a complete structured guide for %s', (slug) => {
@@ -99,5 +104,51 @@ describe('TOOL_GUIDE_SECTIONS (top 20)', () => {
     const combined = guideWords(sections.bn) + guideWords(sections.en);
     expect(combined, `${slug} combined words (${combined})`).toBeGreaterThanOrEqual(300);
     expect(combined, `${slug} combined words (${combined})`).toBeLessThanOrEqual(500);
+  });
+});
+
+describe('TOOL_GUIDE_SECTIONS (all guides — tool-SEO program loose guard)', () => {
+  // The top-20 strict bar (howTo==4, 150–250 words/lang) applies only
+  // to EXPECTED_GUIDE_SLUGS above. Older guides (e.g. the A-tools
+  // batch with howTo==5 and longer text) predate it and are fine for
+  // SEO, so this guard enforces only the brief's own bar on EVERY
+  // guide: a real how-to, 3–5 FAQs, 300+ combined words, no
+  // 'verified' / '#1' claims, and every guide slug is a real
+  // non-aliased tool (guides render on ToolsDetailPage only).
+  it('every structured guide meets the brief bar', () => {
+    for (const [slug, sections] of Object.entries(TOOL_GUIDE_SECTIONS)) {
+      const meta = toolBySlug(slug);
+      expect(meta, `${slug} must exist in toolsMeta`).toBeDefined();
+      expect(meta?.aliasPage, `${slug} must not be aliased`).toBeUndefined();
+      for (const lang of ['bn', 'en'] as const) {
+        const content = sections[lang];
+        expect(content.howTo.length, `${slug} ${lang} howTo`).toBeGreaterThanOrEqual(3);
+        expect(content.howTo.length, `${slug} ${lang} howTo`).toBeLessThanOrEqual(5);
+        expect(content.faq.length, `${slug} ${lang} faq`).toBeGreaterThanOrEqual(3);
+        expect(content.faq.length, `${slug} ${lang} faq`).toBeLessThanOrEqual(5);
+        for (const item of content.faq) {
+          expect(item.q.trim(), `${slug} ${lang} faq q`).not.toBe('');
+          expect(item.a.trim(), `${slug} ${lang} faq a`).not.toBe('');
+        }
+      }
+      const combined = guideWords(sections.bn) + guideWords(sections.en);
+      expect(combined, `${slug} combined words (${combined})`).toBeGreaterThanOrEqual(300);
+      const fullText = [
+        sections.bn.title,
+        sections.bn.intro,
+        ...sections.bn.howTo,
+        sections.bn.formula,
+        sections.bn.example,
+        ...sections.bn.faq.flatMap((item) => [item.q, item.a]),
+        sections.en.title,
+        sections.en.intro,
+        ...sections.en.howTo,
+        sections.en.formula,
+        sections.en.example,
+        ...sections.en.faq.flatMap((item) => [item.q, item.a]),
+      ].join(' ');
+      expect(fullText, `${slug} must not claim verified status`).not.toContain('যাচাইকৃত');
+      expect(fullText, `${slug} must not claim #1`).not.toContain('#1');
+    }
   });
 });

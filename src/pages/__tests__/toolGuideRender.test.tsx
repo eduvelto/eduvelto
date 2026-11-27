@@ -5,6 +5,12 @@
 // a tool with only a legacy prose guide keeps the prose paragraph; a
 // tool with no guide shows neither. Renders with renderToString in
 // plain node (no jsdom), the same pattern as toolHubLinks.test.tsx.
+//
+// NOTE (27 Nov 2026): all 12 prose guides were converted to structured
+// guides, so no live tool exercises the prose fallback any more. The
+// fallback test below simulates a prose-only tool by hiding
+// ovulation-calculator's structured guide (real prose data still flows
+// through toolGuideBySlug), so the fallback path stays covered.
 import { describe, expect, it, vi } from 'vitest';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
@@ -22,6 +28,17 @@ vi.mock('../../i18n/LanguageContext', () => ({
     setLanguage: () => {},
   }),
 }));
+
+// Hide ovulation-calculator's structured guide so the fallback test can
+// exercise the prose path with real prose data (see NOTE above).
+vi.mock('../../lib/toolsGuides', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../lib/toolsGuides')>();
+  return {
+    ...actual,
+    toolGuideSectionsBySlug: (slug: string) =>
+      slug === 'ovulation-calculator' ? undefined : actual.toolGuideSectionsBySlug(slug),
+  };
+});
 
 function renderTool(path: string): string {
   return renderToString(

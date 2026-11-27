@@ -803,6 +803,33 @@ describe('resolveRouteSeo — public routes', () => {
     expect(items.map((i) => i['name'])).toEqual(['হোম', 'চাকরি প্রস্তুতি', 'বিসিএস']);
   });
 
+  it('tool pages carry a WebApplication object after the BreadcrumbList', () => {
+    // Tool-SEO program (27 Nov 2026): every /tools/:slug page gets a
+    // WebApplication built from its toolsMeta entry — free offer, Web
+    // operating system, category mapped from the tool category.
+    for (const lang of ['bn', 'en'] as const) {
+      const seo = resolveRouteSeo(`/${lang}/tools/pdf-compressor`, lang);
+      expect(seo, lang).not.toBeNull();
+      const types = (seo!.jsonLd as Array<Record<string, unknown>>).map((o) => o['@type']);
+      expect(types, lang).toEqual([
+        'Organization',
+        'WebSite',
+        'WebPage',
+        'BreadcrumbList',
+        'WebApplication',
+      ]);
+      const app = seo!.jsonLd![4] as Record<string, unknown>;
+      expect(app['@id']).toBe(`https://eduvelto.com/${lang}/tools/pdf-compressor#webapp`);
+      expect(app.url).toBe(`https://eduvelto.com/${lang}/tools/pdf-compressor`);
+      expect(app.applicationCategory).toBe('UtilitiesApplication');
+      expect(app.operatingSystem).toBe('Web');
+      expect(app.isAccessibleForFree).toBe(true);
+      expect(app.offers).toEqual({ '@type': 'Offer', price: '0', priceCurrency: 'BDT' });
+      // Head and JSON-LD must never disagree on the description.
+      expect(app.description).toBe(seo!.description);
+    }
+  });
+
   it('Organization JSON-LD names the founder, with no private details', () => {
     // Owner 22 Nov 18:24: his name belongs in the SEO. The founder is
     // named inline (name + jobTitle) and linked to the full Person on
