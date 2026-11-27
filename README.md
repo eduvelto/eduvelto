@@ -1,145 +1,335 @@
-# Eduvelto — Phase 2 project skeleton
+# Eduvelto — Free Education & Tools for Bangladesh
 
 **শেখো, এগিয়ে যাও, স্বপ্ন গড়ো — Learn, Grow, Achieve.**
-Free digital education platform for Bangladesh. **Budget: BDT 0** — no purchases,
-no billing, no paid API credits, no public launch without the owner's approval.
 
-This is the **Phase 2 implementation skeleton** (Vite + React 18 + TypeScript +
-Firebase Spark). It is **push-ready**: the moment the owner creates the empty
-GitHub repository (action A2), this code can be pushed. **Step 1 (auth +
-profiles) is implemented** — email/password + Google sign-in, profile
-creation on first sign-in, profile view/edit — against the real Firebase
-project `eduvelto` (Spark, no billing); the web-app config is wired in
-`src/firebase-config.ts`. Two console steps remain before a real student
-can sign in (not code — needs a console session): enable **Email/Password
-+ Google** sign-in (Authentication → Sign-in method) and create the
-**Firestore database** (production mode, `asia-south1`). The security-rules
-emulator suite must go green on a Java-capable machine before
-`firestore.rules` is deployed (see "Emulator" below). Every page renders
-an honest "no data yet" empty state until real published content exists.
+[**eduvelto.com**](https://eduvelto.com) — Bangladesh's free education platform, in Bangla and English. Free forever: books, verified questions, job and admission preparation, and **267 free online tools** — no sign-up needed to use the tools, and file tools (PDF, image, video) process everything in your browser, so your files are never uploaded anywhere.
 
-**Demo-data rule: demo users and demo data are WIPED, never migrated.**
-The Phase 1b demo (exported HTML + docs archive, already delivered) used
-`localStorage` demo data. None of it moves into this project.
+## What is on Eduvelto
 
-## Source of truth
+- **267 free tools** — PDF, image, finance, health, education, job, teacher, text, developer, utility, video and music tools. Every tool below links straight to its page on eduvelto.com.
+- **Library** — 609 books, 2,307 chapters ([eduvelto.com/bn/books](https://eduvelto.com/bn/books)).
+- **Job preparation** — BCS, bank, NTRCA and government-job exams with real exam patterns ([eduvelto.com/bn/jobs](https://eduvelto.com/bn/jobs)).
+- **Admission preparation** — GST cluster, DU, RU, CU, JU, Medical and more ([eduvelto.com/bn/admissions](https://eduvelto.com/bn/admissions)).
+- **Question Paper Generator** — build MCQ / CQ / combined papers from the verified question bank ([eduvelto.com/bn/question-paper-generator](https://eduvelto.com/bn/question-paper-generator)).
+- **AI Assistant** — study help in Bangla and English ([eduvelto.com/bn/ai-assistant](https://eduvelto.com/bn/ai-assistant)).
+- **All tools** — [eduvelto.com/bn/tools](https://eduvelto.com/bn/tools).
 
-- Master blueprint: `../eduorbit-complete-blueprint.md` (15 sections — costs,
-  quotas, verdicts)
-- Firestore schema + rule principles: `../database-schema.md`
-- Milestones + gates G1–G13: `../milestones.md`
-- This plan: `../phase2-implementation-plan.md`
+Library counts are from the live site, 27 Nov 2026. Tools are free to use; the site is supported by ads — nothing is paywalled.
 
-## Prerequisites
+## All 267 free tools
 
-- Node.js 18+ and npm (verified here: Node v24.22.1, npm 10.9.4)
-- The Firebase project `eduvelto` (created 20 Nov 2026, Spark, no billing).
-  The web-app config ("Eduvelto Web") is already wired in
-  `src/firebase-config.ts`. Still to do in the console: enable
-  Email/Password + Google sign-in and create the Firestore database
-  (production mode, `asia-south1`) — see the note at the top of
-  `src/firebase-config.ts`.
-- A GitHub repository via action **A2** (same shape: owner signs in once,
-  Muse does the clicks; Muse pushes the code).
-- Java 17+ (only for running the Firestore emulator + rules tests locally;
-  see "Emulator" below)
+### পিডিএফ ও ডকুমেন্ট — PDF & Document (15)
 
-## Setup
+- [পিডিএফ মার্জার (PDF Merger)](https://eduvelto.com/bn/tools/pdf-merger)
+- [পিডিএফ স্প্লিটার (PDF Splitter)](https://eduvelto.com/bn/tools/pdf-splitter)
+- [পিডিএফ কম্প্রেসর (PDF Compressor)](https://eduvelto.com/bn/tools/pdf-compressor)
+- [পিডিএফ থেকে জেপিজি (PDF to JPG)](https://eduvelto.com/bn/tools/pdf-to-jpg)
+- [পিডিএফ থেকে ওয়ার্ড (PDF to Word)](https://eduvelto.com/bn/tools/pdf-to-word)
+- [জেপিজি থেকে পিডিএফ (JPG to PDF)](https://eduvelto.com/bn/tools/jpg-to-pdf)
+- [পিডিএফ পাতা এক্সট্রাক্টর (PDF Page Extractor)](https://eduvelto.com/bn/tools/pdf-page-extractor)
+- [পিডিএফ পাতা সাজানো (PDF Page Reorder)](https://eduvelto.com/bn/tools/pdf-page-reorder)
+- [পিডিএফ ওয়াটারমার্ক (PDF Watermark)](https://eduvelto.com/bn/tools/pdf-watermark)
+- [ছবি থেকে পিডিএফ (Image to PDF)](https://eduvelto.com/bn/tools/image-to-pdf)
+- [লেখা থেকে পিডিএফ (Text to PDF)](https://eduvelto.com/bn/tools/text-to-pdf)
+- [পিডিএফ পাসওয়ার্ড প্রোটেক্টর (PDF Password Protector)](https://eduvelto.com/bn/tools/pdf-password-protector)
+- [পিডিএফ পাতা রিমুভার (PDF Page Remover)](https://eduvelto.com/bn/tools/pdf-page-remover)
+- [পিডিএফ ঘোরান (PDF Rotate)](https://eduvelto.com/bn/tools/pdf-rotate)
+- [PDF পাতায় নম্বর বসান (PDF Page Number Adder)](https://eduvelto.com/bn/tools/pdf-page-number-adder)
+
+### ছবি ও গ্রাফিক্স — Image & Graphics (17)
+
+- [ছবি কম্প্রেসর (Image Compressor)](https://eduvelto.com/bn/tools/image-compressor)
+- [ছবি রিসাইজার (Image Resizer)](https://eduvelto.com/bn/tools/image-resizer)
+- [ছবি ক্রপার (Image Cropper)](https://eduvelto.com/bn/tools/image-cropper)
+- [জেপিজি থেকে পিএনজি (JPG to PNG)](https://eduvelto.com/bn/tools/jpg-to-png)
+- [পিএনজি থেকে জেপিজি (PNG to JPG)](https://eduvelto.com/bn/tools/png-to-jpg)
+- [ওয়েবপি কনভার্টার (WebP Converter)](https://eduvelto.com/bn/tools/webp-converter)
+- [এইচইআইসি থেকে জেপিজি (HEIC to JPG)](https://eduvelto.com/bn/tools/heic-to-jpg)
+- [ছবিতে ওয়াটারমার্ক (Image Watermark Maker)](https://eduvelto.com/bn/tools/image-watermark-maker)
+- [ছবির রং বাছাই (Image Color Picker)](https://eduvelto.com/bn/tools/image-color-picker)
+- [ফ্যাভিকন জেনারেটর (Favicon Generator)](https://eduvelto.com/bn/tools/favicon-generator)
+- [মিম জেনারেটর (Meme Generator)](https://eduvelto.com/bn/tools/meme-generator)
+- [এক্সিফ ভিউয়ার ও রিমুভার (EXIF Viewer & Remover)](https://eduvelto.com/bn/tools/exif-viewer-remover)
+- [ছবি ঘোরানো ও উল্টানো (Image Rotate & Flip)](https://eduvelto.com/bn/tools/image-rotate-flip)
+- [ছবি থেকে বেস৬৪ (Image to Base64)](https://eduvelto.com/bn/tools/image-to-base64)
+- [ছবির ফিল্টার (Image Filter)](https://eduvelto.com/bn/tools/image-filter)
+- [ইউটিউব থাম্বনেইল ডাউনলোডার (YouTube Thumbnail Downloader)](https://eduvelto.com/bn/tools/youtube-thumbnail-downloader)
+- [ব্যাকগ্রাউন্ড রিমুভার (Background Remover)](https://eduvelto.com/bn/tools/background-remover)
+
+### অর্থ ও ঋণ — Finance & Loan (30)
+
+- [মর্টগেজ ও হোম লোন ক্যালকুলেটর (Mortgage & Home Loan Calculator)](https://eduvelto.com/bn/tools/mortgage-calculator)
+- [চক্রবৃদ্ধি সুদ ক্যালকুলেটর (Compound Interest Calculator)](https://eduvelto.com/bn/tools/compound-interest-calculator)
+- [লোন ইএমআই ক্যালকুলেটর (Loan EMI Calculator)](https://eduvelto.com/bn/tools/loan-emi-calculator)
+- [ক্রেডিট কার্ড পরিশোধ ক্যালকুলেটর (Credit Card Payoff Calculator)](https://eduvelto.com/bn/tools/credit-card-payoff-calculator)
+- [বেতন থেকে ঘণ্টাপ্রতি হার (Salary to Hourly Converter)](https://eduvelto.com/bn/tools/salary-to-hourly-converter)
+- [অবসর সঞ্চয় পরিকল্পনা (Retirement Savings Planner)](https://eduvelto.com/bn/tools/retirement-savings-planner)
+- [আয়কর ক্যালকুলেটর (Income Tax Calculator)](https://eduvelto.com/bn/tools/income-tax-calculator)
+- [যাকাত ক্যালকুলেটর (Zakat Calculator)](https://eduvelto.com/bn/tools/zakat-calculator)
+- [ব্যাংক ইএমআই, ডিপিএস ও এফডিআর ক্যালকুলেটর (Bank EMI, DPS & FDR Calculator)](https://eduvelto.com/bn/tools/bank-emi-dps-fdr-calculator)
+- [ছাড়, ভ্যাট ও লাভ ক্যালকুলেটর (Discount, VAT & Profit Calculator)](https://eduvelto.com/bn/tools/discount-vat-profit-calculator)
+- [টিপ ক্যালকুলেটর (Tip Calculator)](https://eduvelto.com/bn/tools/tip-calculator)
+- [ইনভয়েস জেনারেটর (Invoice Generator)](https://eduvelto.com/bn/tools/invoice-generator)
+- [বাজেট পরিকল্পনা (Budget Planner)](https://eduvelto.com/bn/tools/budget-planner)
+- [খরচ ভাগাভাগি ক্যালকুলেটর (Expense Splitter)](https://eduvelto.com/bn/tools/expense-splitter)
+- [ব্রেক-ইভেন ক্যালকুলেটর (Break-Even Calculator)](https://eduvelto.com/bn/tools/break-even-calculator)
+- [বিকাশ-নগদ ক্যাশ আউট ক্যালকুলেটর (bKash-Nagad Cash Out Calculator)](https://eduvelto.com/bn/tools/bkash-nagad-calculator)
+- [প্রফিট মার্জিন ক্যালকুলেটর (Profit Margin Calculator)](https://eduvelto.com/bn/tools/profit-margin-calculator)
+- [সরল সুদ ক্যালকুলেটর (Simple Interest Calculator)](https://eduvelto.com/bn/tools/simple-interest-calculator)
+- [সঞ্চয় লক্ষ্য ক্যালকুলেটর (Savings Goal Calculator)](https://eduvelto.com/bn/tools/savings-goal-calculator)
+- [জ্বালানি খরচ ক্যালকুলেটর (Fuel Cost Calculator)](https://eduvelto.com/bn/tools/fuel-cost-calculator)
+- [আরওআই (ROI) ক্যালকুলেটর (ROI Calculator)](https://eduvelto.com/bn/tools/roi-calculator)
+- [জিএসটি / ভ্যাট ক্যালকুলেটর (GST / VAT Calculator)](https://eduvelto.com/bn/tools/gst-calculator)
+- [ডাউন পেমেন্ট ক্যালকুলেটর (Down Payment Calculator)](https://eduvelto.com/bn/tools/down-payment-calculator)
+- [গাড়ির ঋণ ক্যালকুলেটর (Auto Loan Calculator)](https://eduvelto.com/bn/tools/auto-loan-calculator)
+- [মুদ্রাস্ফীতি ক্যালকুলেটর (Inflation Calculator)](https://eduvelto.com/bn/tools/inflation-calculator)
+- [সিপিএম (CPM) ক্যালকুলেটর (CPM Calculator)](https://eduvelto.com/bn/tools/cpm-calculator)
+- [সিটিআর (CTR) ক্যালকুলেটর (CTR Calculator)](https://eduvelto.com/bn/tools/ctr-calculator)
+- [এনগেজমেন্ট রেট ক্যালকুলেটর (Engagement Rate Calculator)](https://eduvelto.com/bn/tools/engagement-rate-calculator)
+- [ইউটিউব আয় ক্যালকুলেটর (YouTube Money Calculator)](https://eduvelto.com/bn/tools/youtube-money-calculator)
+- [অ্যাডসেন্স আয় ক্যালকুলেটর (AdSense Revenue Calculator)](https://eduvelto.com/bn/tools/adsense-revenue-calculator)
+
+### স্বাস্থ্য ও ফিটনেস — Health & Fitness (16)
+
+- [বিএমআই ক্যালকুলেটর (BMI Calculator)](https://eduvelto.com/bn/tools/bmi-calculator)
+- [ক্যালোরি ও টিডিইই ক্যালকুলেটর (Calorie & TDEE Calculator)](https://eduvelto.com/bn/tools/calorie-tdee-calculator)
+- [ম্যাক্রো নিউট্রিয়েন্ট ক্যালকুলেটর (Macro Nutrient Calculator)](https://eduvelto.com/bn/tools/macro-nutrient-calculator)
+- [গর্ভাবস্থার সম্ভাব্য তারিখ ক্যালকুলেটর (Pregnancy Due Date Calculator)](https://eduvelto.com/bn/tools/pregnancy-due-date-calculator)
+- [পানি পান ক্যালকুলেটর (Water Intake Calculator)](https://eduvelto.com/bn/tools/water-intake-calculator)
+- [ঘুমের চক্র ক্যালকুলেটর (Sleep Cycle Calculator)](https://eduvelto.com/bn/tools/sleep-cycle-calculator)
+- [শরীরের চর্বির হার ক্যালকুলেটর (Body Fat Calculator)](https://eduvelto.com/bn/tools/body-fat-calculator)
+- [হার্ট রেট জোন ক্যালকুলেটর (Heart Rate Zone Calculator)](https://eduvelto.com/bn/tools/heart-rate-zone-calculator)
+- [বিএমআর ক্যালকুলেটর (BMR Calculator)](https://eduvelto.com/bn/tools/bmr-calculator)
+- [গতি ও পেস ক্যালকুলেটর (Pace & Speed Calculator)](https://eduvelto.com/bn/tools/pace-speed-calculator)
+- [ল্যাব টেস্ট রেজাল্ট চেকার (Lab Test Result Checker)](https://eduvelto.com/bn/tools/lab-test-result-checker)
+- [ডিম্বস্ফোটন ক্যালকুলেটর (Ovulation Calculator)](https://eduvelto.com/bn/tools/ovulation-calculator)
+- [আদর্শ ওজন ক্যালকুলেটর (Ideal Weight Calculator)](https://eduvelto.com/bn/tools/ideal-weight-calculator)
+- [হাঁটা থেকে ক্যালরি ক্যালকুলেটর (Steps to Calories Calculator)](https://eduvelto.com/bn/tools/steps-to-calories-calculator)
+- [কুকুরের বয়স ক্যালকুলেটর (Dog Age Calculator)](https://eduvelto.com/bn/tools/dog-age-calculator)
+- [বিড়ালের বয়স ক্যালকুলেটর (Cat Age Calculator)](https://eduvelto.com/bn/tools/cat-age-calculator)
+
+### শিক্ষা ও শিক্ষার্থী — Education & Student (38)
+
+- [এসএসসি/এইচএসসি জিপিএ ক্যালকুলেটর (SSC/HSC GPA Calculator)](https://eduvelto.com/bn/tools/ssc-hsc-gpa-calculator)
+- [জাতীয় বিশ্ববিদ্যালয় সিজিপিএ ক্যালকুলেটর (NU CGPA Calculator)](https://eduvelto.com/bn/tools/nu-cgpa-calculator)
+- [আন্তর্জাতিক জিপিএ ক্যালকুলেটর (International GPA Calculator)](https://eduvelto.com/bn/tools/international-gpa-calculator)
+- [সিজিপিএ থেকে শতাংশ কনভার্টার (CGPA to Percentage Converter)](https://eduvelto.com/bn/tools/cgpa-to-percentage-converter)
+- [পরীক্ষার কাউন্টডাউন টাইমার (Exam Countdown Timer)](https://eduvelto.com/bn/tools/exam-countdown-timer)
+- [পোমোডোরো স্টাডি টাইমার (Pomodoro Study Timer)](https://eduvelto.com/bn/tools/pomodoro-timer)
+- [পড়ার রুটিন মেকার (Study Routine Maker)](https://eduvelto.com/bn/tools/study-routine-maker)
+- [গ্রেড বিশ্লেষক (Grade Analyzer)](https://eduvelto.com/bn/tools/grade-analyzer)
+- [উপস্থিতি ক্যালকুলেটর (Attendance Calculator)](https://eduvelto.com/bn/tools/attendance-calculator)
+- [বৈজ্ঞানিক ক্যালকুলেটর (Scientific Calculator)](https://eduvelto.com/bn/tools/scientific-calculator)
+- [ফ্ল্যাশকার্ড মেকার (Flashcard Maker)](https://eduvelto.com/bn/tools/flashcard-maker)
+- [ভগ্নাংশ ক্যালকুলেটর (Fraction Calculator)](https://eduvelto.com/bn/tools/fraction-calculator)
+- [গড় (গাণিতিক গড়) ক্যালকুলেটর (Average (Mean) Calculator)](https://eduvelto.com/bn/tools/average-calculator)
+- [মধ্যমা ও প্রচুরক ক্যালকুলেটর (Median & Mode Calculator)](https://eduvelto.com/bn/tools/median-mode-calculator)
+- [পরিমিত ব্যবধান ক্যালকুলেটর (Standard Deviation Calculator)](https://eduvelto.com/bn/tools/standard-deviation-calculator)
+- [অনুপাত ক্যালকুলেটর (Ratio Calculator)](https://eduvelto.com/bn/tools/ratio-calculator)
+- [সমানুপাত ক্যালকুলেটর (Proportion Calculator)](https://eduvelto.com/bn/tools/proportion-calculator)
+- [শতকরা পরিবর্তন ক্যালকুলেটর (Percentage Change Calculator)](https://eduvelto.com/bn/tools/percentage-change-calculator)
+- [বর্গমূল ও ঘনমূল ক্যালকুলেটর (Square Root & Cube Root Calculator)](https://eduvelto.com/bn/tools/square-root-cube-root-calculator)
+- [ঘাত (পাওয়ার) ক্যালকুলেটর (Exponent / Power Calculator)](https://eduvelto.com/bn/tools/exponent-power-calculator)
+- [লগারিদম ক্যালকুলেটর (Logarithm Calculator)](https://eduvelto.com/bn/tools/logarithm-calculator)
+- [দ্বিঘাত সমীকরণ সমাধানকারী (Quadratic Equation Solver)](https://eduvelto.com/bn/tools/quadratic-equation-solver)
+- [একঘাত সমীকরণ সমাধানকারী (Linear Equation Solver)](https://eduvelto.com/bn/tools/linear-equation-solver)
+- [ক্ষেত্রফল ক্যালকুলেটর (Area Calculator)](https://eduvelto.com/bn/tools/area-calculator)
+- [আয়তন ক্যালকুলেটর (Volume Calculator)](https://eduvelto.com/bn/tools/volume-calculator)
+- [পিথাগোরাসের উপপাদ্য ক্যালকুলেটর (Pythagorean Theorem Calculator)](https://eduvelto.com/bn/tools/pythagorean-theorem-calculator)
+- [ত্রিভুজ ক্যালকুলেটর (Triangle Calculator)](https://eduvelto.com/bn/tools/triangle-calculator)
+- [বৃত্ত ক্যালকুলেটর (Circle Calculator)](https://eduvelto.com/bn/tools/circle-calculator)
+- [মৌলিক সংখ্যা পরীক্ষক (Prime Number Checker)](https://eduvelto.com/bn/tools/prime-number-checker)
+- [গুণনীয়ক ও মৌলিক উৎপাদক ক্যালকুলেটর (Factor Calculator)](https://eduvelto.com/bn/tools/factor-calculator)
+- [লসাগু ও গসাগু ক্যালকুলেটর (LCM & HCF Calculator)](https://eduvelto.com/bn/tools/lcm-hcf-calculator)
+- [ফ্যাক্টোরিয়াল ক্যালকুলেটর (Factorial Calculator)](https://eduvelto.com/bn/tools/factorial-calculator)
+- [বিন্যাস ও সমাবেশ ক্যালকুলেটর (Permutation & Combination Calculator)](https://eduvelto.com/bn/tools/permutation-combination-calculator)
+- [সম্ভাবনা ক্যালকুলেটর (Probability Calculator)](https://eduvelto.com/bn/tools/probability-calculator)
+- [বাইনারি / হেক্স / অক্টাল ক্যালকুলেটর (Binary / Hex / Octal Calculator)](https://eduvelto.com/bn/tools/binary-hex-octal-calculator)
+- [ম্যাট্রিক্স ক্যালকুলেটর (Matrix Calculator)](https://eduvelto.com/bn/tools/matrix-calculator)
+- [গণিত ও পদার্থবিজ্ঞানের সূত্র (Math & Physics Formulas)](https://eduvelto.com/bn/tools/math-physics-formulas)
+- [পর্যায় সারণি (Periodic Table)](https://eduvelto.com/bn/tools/periodic-table)
+
+### চাকরি ও ক্যারিয়ার — Job & Career (10)
+
+- [সরকারি চাকরির বয়স ক্যালকুলেটর (Govt Job Age Calculator)](https://eduvelto.com/bn/tools/govt-job-age-calculator)
+- [বিসিএস নম্বর ক্যালকুলেটর (BCS Marks Calculator)](https://eduvelto.com/bn/tools/bcs-marks-calculator)
+- [নেগেটিভ মার্কিং ক্যালকুলেটর (Negative Marking Calculator)](https://eduvelto.com/bn/tools/negative-marking-calculator)
+- [টাইপিং গতি পরীক্ষা (Typing Speed Test)](https://eduvelto.com/bn/tools/typing-speed-test)
+- [সাধারণ জ্ঞান ফ্ল্যাশকার্ড (GK Flashcard)](https://eduvelto.com/bn/tools/gk-flashcard)
+- [শব্দভান্ডার প্রশিক্ষক (Vocabulary Trainer)](https://eduvelto.com/bn/tools/vocabulary-trainer)
+- [সিভি বিল্ডার (CV Builder)](https://eduvelto.com/bn/tools/cv-builder)
+- [কভার লেটার বিল্ডার (Cover Letter Builder)](https://eduvelto.com/bn/tools/cover-letter-builder)
+- [আবেদন ফি ক্যালকুলেটর (Application Fee Calculator)](https://eduvelto.com/bn/tools/application-fee-calculator)
+- [প্রবেশপত্র চেকলিস্ট (Admit Card Checklist)](https://eduvelto.com/bn/tools/admit-card-checklist)
+
+### শিক্ষক ও প্রতিষ্ঠান — Teacher & Institution (11)
+
+- [পরীক্ষার আসন পরিকল্পনা (Exam Seat Plan Generator)](https://eduvelto.com/bn/tools/exam-seat-plan-generator)
+- [মেধাক্রম ও ফলাফল শিট (Merit Rank & Result Sheet)](https://eduvelto.com/bn/tools/merit-rank-result-sheet)
+- [পাস-ফেল বিশ্লেষক (Pass-Fail Analyzer)](https://eduvelto.com/bn/tools/pass-fail-analyzer)
+- [ছাপার কাগজ জেনারেটর (Printable Paper Generator)](https://eduvelto.com/bn/tools/printable-paper-generator)
+- [শিক্ষাবর্ষ ক্যালেন্ডার মেকার (Academic Calendar Maker)](https://eduvelto.com/bn/tools/academic-calendar-maker)
+- [কুইজ স্টপওয়াচ টাইমার (Quiz Stopwatch Timer)](https://eduvelto.com/bn/tools/quiz-stopwatch-timer)
+- [এলোমেলো ছাত্র দল মেকার (Random Student Group Maker)](https://eduvelto.com/bn/tools/random-student-group-maker)
+- [সার্টিফিকেট মেকার (Certificate Maker)](https://eduvelto.com/bn/tools/certificate-maker)
+- [অ্যাসাইনমেন্ট কভার জেনারেটর (Assignment Cover Generator)](https://eduvelto.com/bn/tools/assignment-cover-generator)
+- [শতাংশ কনভার্টার (Percentage Converter)](https://eduvelto.com/bn/tools/percentage-converter)
+- [নাম বাছাইকারী (Random Name Picker)](https://eduvelto.com/bn/tools/random-name-picker)
+
+### লেখা, ভাষা ও রচনা — Text, Language & Writing (44)
+
+- [বিজয় থেকে ইউনিকোড কনভার্টার (Bijoy to Unicode Converter)](https://eduvelto.com/bn/tools/bijoy-to-unicode-converter)
+- [ইউনিকোড থেকে বিজয় কনভার্টার (Unicode to Bijoy Converter)](https://eduvelto.com/bn/tools/unicode-to-bijoy-converter)
+- [শব্দ গণনা (Word Counter)](https://eduvelto.com/bn/tools/word-counter)
+- [লেখার কেস কনভার্টার (Text Case Converter)](https://eduvelto.com/bn/tools/text-case-converter)
+- [ডুপ্লিকেট লাইন রিমুভার (Duplicate Line Remover)](https://eduvelto.com/bn/tools/duplicate-line-remover)
+- [লেখার পার্থক্য পরীক্ষক (Text Diff Checker)](https://eduvelto.com/bn/tools/text-diff-checker)
+- [খুঁজুন ও বদলান (Find and Replace)](https://eduvelto.com/bn/tools/find-and-replace)
+- [সংখ্যা থেকে শব্দ কনভার্টার (Number to Words Converter)](https://eduvelto.com/bn/tools/number-to-words-converter)
+- [লোরেম ইপসাম জেনারেটর (Lorem Ipsum Generator)](https://eduvelto.com/bn/tools/lorem-ipsum-generator)
+- [উদ্ধৃতি জেনারেটর (Citation Generator)](https://eduvelto.com/bn/tools/citation-generator)
+- [অভিধান (Dictionary)](https://eduvelto.com/bn/tools/dictionary)
+- [লেখা থেকে কণ্ঠ (Text to Speech)](https://eduvelto.com/bn/tools/text-to-speech)
+- [অতিরিক্ত ফাঁকা জায়গা সরান (Remove Extra Spaces)](https://eduvelto.com/bn/tools/remove-extra-spaces)
+- [কণ্ঠ থেকে লেখা (Speech to Text)](https://eduvelto.com/bn/tools/speech-to-text)
+- [স্টাইলিশ লেখা জেনারেটর (Fancy Text Generator)](https://eduvelto.com/bn/tools/fancy-text-generator)
+- [উল্টো লেখা জেনারেটর (Reverse Text Generator)](https://eduvelto.com/bn/tools/reverse-text-generator)
+- [ক্যারেক্টার কাউন্টার (Character Counter)](https://eduvelto.com/bn/tools/character-counter)
+- [পড়ার সময় ক্যালকুলেটর (Reading Time Calculator)](https://eduvelto.com/bn/tools/reading-time-calculator)
+- [টেক্সট সর্টার (Text Sorter)](https://eduvelto.com/bn/tools/text-sorter)
+- [র‍্যান্ডম শব্দ জেনারেটর (Random Word Generator)](https://eduvelto.com/bn/tools/random-word-generator)
+- [জালগো / গ্লিচ টেক্সট জেনারেটর (Zalgo / Glitch Text Generator)](https://eduvelto.com/bn/tools/zalgo-text-generator)
+- [ছোট লেখা ও সুপারস্ক্রিপ্ট জেনারেটর (Small Text & Superscript Generator)](https://eduvelto.com/bn/tools/small-text-generator)
+- [প্রিফিক্স ও সাফিক্স যোগকারী (Prefix & Suffix Adder)](https://eduvelto.com/bn/tools/prefix-suffix-adder)
+- [তালিকা থেকে CSV কনভার্টার (List to CSV Converter)](https://eduvelto.com/bn/tools/list-to-csv-converter)
+- [টেক্সট থেকে বাইনারি কনভার্টার (Text to Binary Converter)](https://eduvelto.com/bn/tools/text-to-binary-converter)
+- [বাইনারি থেকে টেক্সট কনভার্টার (Binary to Text Converter)](https://eduvelto.com/bn/tools/binary-to-text-converter)
+- [মোর্স কোড কনভার্টার (Morse Code Converter)](https://eduvelto.com/bn/tools/morse-code-converter)
+- [আসকি আর্ট জেনারেটর (ASCII Art Generator)](https://eduvelto.com/bn/tools/ascii-art-generator)
+- [ইমোজি পিকার (Emoji Picker)](https://eduvelto.com/bn/tools/emoji-picker)
+- [অদৃশ্য অক্ষর জেনারেটর (Invisible Character Generator)](https://eduvelto.com/bn/tools/invisible-character-generator)
+- [প্যালিনড্রোম পরীক্ষক (Palindrome Checker)](https://eduvelto.com/bn/tools/palindrome-checker)
+- [অ্যানাগ্রাম সলভার ও পরীক্ষক (Anagram Solver & Checker)](https://eduvelto.com/bn/tools/anagram-solver)
+- [রচনা / থিসিস বিবৃতি জেনারেটর (Essay / Thesis Statement Generator)](https://eduvelto.com/bn/tools/essay-thesis-generator)
+- [কীওয়ার্ড ঘনত্ব পরীক্ষক (Keyword Density Checker)](https://eduvelto.com/bn/tools/keyword-density-checker)
+- [স্লাগ জেনারেটর (Slug Generator)](https://eduvelto.com/bn/tools/slug-generator)
+- [পঠনযোগ্যতা স্কোর পরীক্ষক (Readability Score Checker)](https://eduvelto.com/bn/tools/readability-score-checker)
+- [বায়ো ও ইউজারনেম জেনারেটর (Bio & Username Generator)](https://eduvelto.com/bn/tools/bio-username-generator)
+- [হ্যাশট্যাগ জেনারেটর (Hashtag Generator)](https://eduvelto.com/bn/tools/hashtag-generator)
+- [ইউটিউব শিরোনাম ও বিবরণ অক্ষর পরীক্ষক (YouTube Title & Description Checker)](https://eduvelto.com/bn/tools/youtube-title-description-checker)
+- [লাইন নম্বর যোগকারী (Line Number Adder)](https://eduvelto.com/bn/tools/line-number-adder)
+- [চাকা ঘোরানো — যেকোনো সিদ্ধান্ত নিন (Wheel Spinner — Random Decision Maker)](https://eduvelto.com/bn/tools/wheel-spinner)
+- [কয়েন ফ্লিপ ও ডাইস রোলার (Coin Flip & Dice Roller)](https://eduvelto.com/bn/tools/coin-flip-dice-roller)
+- [শব্দ থেকে সংখ্যা কনভার্টার (Words to Number Converter)](https://eduvelto.com/bn/tools/words-to-number-converter)
+- [অনুবাদ (ইংরেজি ↔ বাংলা) (Translate (English ↔ Bangla))](https://eduvelto.com/bn/tools/translate)
+
+### ডেভেলপার ও ওয়েব — Developer & Web (26)
+
+- [জেসন ফরম্যাটার (JSON Formatter)](https://eduvelto.com/bn/tools/json-formatter)
+- [কোড মিনিফায়ার ও বিউটিফায়ার (Code Minifier & Beautifier)](https://eduvelto.com/bn/tools/code-minifier-beautifier)
+- [বেস৬৪ এনকোডার ও ডিকোডার (Base64 Encoder & Decoder)](https://eduvelto.com/bn/tools/base64-encoder-decoder)
+- [ইউআরএল এনকোডার ও ডিকোডার (URL Encoder & Decoder)](https://eduvelto.com/bn/tools/url-encoder-decoder)
+- [রেগেক্স টেস্টার (Regex Tester)](https://eduvelto.com/bn/tools/regex-tester)
+- [ইউইউআইডি ও হ্যাশ জেনারেটর (UUID & Hash Generator)](https://eduvelto.com/bn/tools/uuid-hash-generator)
+- [রং কনভার্টার (Color Converter)](https://eduvelto.com/bn/tools/color-converter)
+- [সিএসএস গ্রেডিয়েন্ট জেনারেটর (CSS Gradient Generator)](https://eduvelto.com/bn/tools/css-gradient-generator)
+- [মেটা ট্যাগ জেনারেটর (Meta Tag Generator)](https://eduvelto.com/bn/tools/meta-tag-generator)
+- [রোবটস ও সাইটম্যাপ জেনারেটর (Robots & Sitemap Generator)](https://eduvelto.com/bn/tools/robots-sitemap-generator)
+- [ক্রেডিট কার্ড যাচাইকারী (Credit Card Validator)](https://eduvelto.com/bn/tools/credit-card-validator)
+- [রোমান সংখ্যা কনভার্টার (Roman Numeral Converter)](https://eduvelto.com/bn/tools/roman-numeral-converter)
+- [জেডব্লিউটি টোকেন ডিকোডার (JWT Token Decoder)](https://eduvelto.com/bn/tools/jwt-token-decoder)
+- [এইচটিএমএল টেবিল জেনারেটর (HTML Table Generator)](https://eduvelto.com/bn/tools/html-table-generator)
+- [ইউনিক্স টাইমস্ট্যাম্প কনভার্টার (Unix Timestamp Converter)](https://eduvelto.com/bn/tools/unix-timestamp-converter)
+- [CSV থেকে Excel (CSV to Excel)](https://eduvelto.com/bn/tools/csv-to-excel)
+- [Excel থেকে CSV (Excel to CSV)](https://eduvelto.com/bn/tools/excel-to-csv)
+- [JSON থেকে CSV (JSON to CSV)](https://eduvelto.com/bn/tools/json-to-csv)
+- [XML ফরম্যাটার (XML Formatter)](https://eduvelto.com/bn/tools/xml-formatter)
+- [মার্কডাউন থেকে HTML (Markdown to HTML)](https://eduvelto.com/bn/tools/markdown-to-html)
+- [HTML থেকে মার্কডাউন (HTML to Markdown)](https://eduvelto.com/bn/tools/html-to-markdown)
+- [পাসওয়ার্ড জেনারেটর (Password Generator)](https://eduvelto.com/bn/tools/password-generator)
+- [পাসওয়ার্ড শক্তি যাচাই (Password Strength Checker)](https://eduvelto.com/bn/tools/password-strength-checker)
+- [HTML এনটিটি এনকোডার ও ডিকোডার (HTML Entity Encoder & Decoder)](https://eduvelto.com/bn/tools/html-entity-encoder-decoder)
+- [CSV থেকে JSON কনভার্টার (CSV to JSON Converter)](https://eduvelto.com/bn/tools/csv-to-json-converter)
+- [SQL ফরম্যাটার (SQL Formatter)](https://eduvelto.com/bn/tools/sql-formatter)
+
+### দৈনন্দিন জীবন ও ইউটিলিটি — Daily Life & Utility (55)
+
+- [নামাজের সময় (Prayer Times)](https://eduvelto.com/bn/tools/prayer-times)
+- [হিজরি তারিখ কনভার্টার (Hijri Date Converter)](https://eduvelto.com/bn/tools/hijri-date-converter)
+- [প্রতিদিনের কুরআনের আয়াত (Daily Quran Verse)](https://eduvelto.com/bn/tools/daily-quran-verse)
+- [প্রতিদিনের হাদিস (Daily Hadith)](https://eduvelto.com/bn/tools/daily-hadith)
+- [কিবলার দিক (Qibla Direction)](https://eduvelto.com/bn/tools/qibla-direction)
+- [সেহরি ও ইফতারের সময় (Sehri & Iftar Time)](https://eduvelto.com/bn/tools/sehri-iftar-time)
+- [জমির মাপ (Land Measurement)](https://eduvelto.com/bn/tools/land-measurement)
+- [বিদ্যুৎ বিল ক্যালকুলেটর (Electricity Bill Calculator)](https://eduvelto.com/bn/tools/electricity-bill-calculator)
+- [বয়স ক্যালকুলেটর (Age Calculator)](https://eduvelto.com/bn/tools/age-calculator)
+- [একক কনভার্টার (Unit Converter)](https://eduvelto.com/bn/tools/unit-converter)
+- [মিটিং সময় পরিকল্পনা (Meeting Time Planner)](https://eduvelto.com/bn/tools/meeting-time-planner)
+- [বিশ্ব তারিখ কনভার্টার (World Date Converter)](https://eduvelto.com/bn/tools/world-date-converter)
+- [জরুরি নম্বর (Emergency Numbers)](https://eduvelto.com/bn/tools/emergency-numbers)
+- [সরকারি সেবার লিংক (Government Service Links)](https://eduvelto.com/bn/tools/govt-service-links)
+- [ফলাফল হাব (Results Hub)](https://eduvelto.com/bn/tools/results-hub)
+- [নোট ও করণীয় তালিকা (Notes & To-Do List)](https://eduvelto.com/bn/tools/notes-todo)
+- [তসবিহ কাউন্টার (Tasbih Counter)](https://eduvelto.com/bn/tools/tasbih-counter)
+- [হোয়াটসঅ্যাপ লিংক জেনারেটর (WhatsApp Link Generator)](https://eduvelto.com/bn/tools/whatsapp-link-generator)
+- [স্ক্রিন রেজোলিউশন চেকার (Screen Resolution Checker)](https://eduvelto.com/bn/tools/screen-resolution-checker)
+- [স্টপওয়াচ (Stopwatch)](https://eduvelto.com/bn/tools/stopwatch)
+- [বিশ্ব ঘড়ি (World Clock)](https://eduvelto.com/bn/tools/world-clock)
+- [টাইম জোন কনভার্টার (Time Zone Converter)](https://eduvelto.com/bn/tools/time-zone-converter)
+- [তারিখের ব্যবধান ক্যালকুলেটর (Date Difference Calculator)](https://eduvelto.com/bn/tools/date-difference-calculator)
+- [সময়ের ব্যবধান ক্যালকুলেটর (Time Duration Calculator)](https://eduvelto.com/bn/tools/time-duration-calculator)
+- [কিউআর কোড জেনারেটর (QR Code Generator)](https://eduvelto.com/bn/tools/qr-code-generator)
+- [কিউআর কোড রিডার (QR Code Reader)](https://eduvelto.com/bn/tools/qr-code-reader)
+- [বারকোড জেনারেটর (Barcode Generator)](https://eduvelto.com/bn/tools/barcode-generator)
+- [এলোমেলো সংখ্যা জেনারেটর (Random Number Generator)](https://eduvelto.com/bn/tools/random-number-generator)
+- [আয়তন কনভার্টার (Volume Converter)](https://eduvelto.com/bn/tools/volume-converter)
+- [ডেটা স্টোরেজ কনভার্টার (Data Storage Converter)](https://eduvelto.com/bn/tools/data-storage-converter)
+- [ডেটা ট্রান্সফার স্পিড কনভার্টার (Data Transfer Speed Converter)](https://eduvelto.com/bn/tools/data-transfer-speed-converter)
+- [চাপ কনভার্টার (Pressure Converter)](https://eduvelto.com/bn/tools/pressure-converter)
+- [শক্তি কনভার্টার (Energy Converter)](https://eduvelto.com/bn/tools/energy-converter)
+- [ক্ষমতা কনভার্টার (Power Converter)](https://eduvelto.com/bn/tools/power-converter)
+- [কোণ কনভার্টার (Angle Converter)](https://eduvelto.com/bn/tools/angle-converter)
+- [সময় কনভার্টার (Time Converter)](https://eduvelto.com/bn/tools/time-converter)
+- [কম্পাঙ্ক কনভার্টার (Frequency Converter)](https://eduvelto.com/bn/tools/frequency-converter)
+- [জ্বালানি সাশ্রয় কনভার্টার (Fuel Economy Converter)](https://eduvelto.com/bn/tools/fuel-economy-converter)
+- [রান্নার মাপ কনভার্টার (Cooking Measurement Converter)](https://eduvelto.com/bn/tools/cooking-measurement-converter)
+- [জুতার সাইজ কনভার্টার (Shoe Size Converter)](https://eduvelto.com/bn/tools/shoe-size-converter)
+- [পোশাকের সাইজ কনভার্টার (Clothing Size Converter)](https://eduvelto.com/bn/tools/clothing-size-converter)
+- [DPI / PPI ক্যালকুলেটর (DPI / PPI Calculator)](https://eduvelto.com/bn/tools/dpi-ppi-calculator)
+- [অ্যাসপেক্ট রেশিও ক্যালকুলেটর (Aspect Ratio Calculator)](https://eduvelto.com/bn/tools/aspect-ratio-calculator)
+- [PX থেকে REM কনভার্টার (PX to REM Converter)](https://eduvelto.com/bn/tools/px-to-rem-converter)
+- [অনলাইন অ্যালার্ম ঘড়ি (Online Alarm Clock)](https://eduvelto.com/bn/tools/online-alarm-clock)
+- [সপ্তাহ নম্বর ক্যালকুলেটর (Week Number Calculator)](https://eduvelto.com/bn/tools/week-number-calculator)
+- [অধিবর্ষ (লিপ ইয়ার) যাচাই (Leap Year Checker)](https://eduvelto.com/bn/tools/leap-year-checker)
+- [জুলিয়ান তারিখ কনভার্টার (Julian Date Converter)](https://eduvelto.com/bn/tools/julian-date-converter)
+- [বাংলা তারিখ কনভার্টার (Bangla Date Converter)](https://eduvelto.com/bn/tools/bangla-date-converter)
+- [কর্মদিবস ক্যালকুলেটর (Working Days Calculator)](https://eduvelto.com/bn/tools/working-days-calculator)
+- [ভালোবাসার মিল ক্যালকুলেটর (Love Compatibility Calculator)](https://eduvelto.com/bn/tools/love-compatibility-calculator)
+- [আবহাওয়া (Weather)](https://eduvelto.com/bn/tools/weather)
+- [পূর্ণরূপ / সংক্ষিপ্ত রূপ (Full Forms / Abbreviations)](https://eduvelto.com/bn/tools/full-forms-abbreviations)
+- [দেশের কলিং কোড (Country Calling Codes)](https://eduvelto.com/bn/tools/country-calling-codes)
+- [আজকের উক্তি ও শুভেচ্ছা (Daily Quotes & Wishes)](https://eduvelto.com/bn/tools/daily-quotes-wishes)
+
+### ভিডিও ও মিউজিক — Video & Music (5)
+
+- [ভিডিও কম্প্রেসর (Video Compressor)](https://eduvelto.com/bn/tools/video-compressor)
+- [ভিডিও ট্রিমার (Video Trimmer)](https://eduvelto.com/bn/tools/video-trimmer)
+- [ভিডিও ফরম্যাট কনভার্টর (Video Format Converter)](https://eduvelto.com/bn/tools/video-format-converter)
+- [ভিডিও থেকে অডিও কনভার্টার (Video to Audio Converter)](https://eduvelto.com/bn/tools/video-to-audio-converter)
+- [মিউজিক প্লেয়ার (Music Player)](https://eduvelto.com/bn/tools/music-player)
+
+## Tech
+
+Vite + React 18 + TypeScript, Firebase (Firestore + Auth, Spark plan), hosted on Cloudflare Pages. AI chat runs through a Cloudflare Worker proxy (Gemini). The site is Bangla-first with full English, and every tool page carries its own SEO meta, hreflang and JSON-LD schema.
 
 ```bash
-npm install          # install dependencies (package-lock.json is NOT committed)
+npm install
+npm run dev        # local development
+npm run build:pages  # production build + prerender (Cloudflare Pages)
 ```
 
-1. The Firebase config is already wired in `src/firebase-config.ts`
-   (project `eduvelto`, web app "Eduvelto Web"). If it ever needs
-   re-pasting, copy the values from the Firebase console
-   (Project settings → Your apps → Web app) over the placeholders in
-   `src/firebase-config.example.ts`.
-   These client keys are **public-by-design** (they identify the project in
-   the browser); security comes from `firestore.rules`, never from hiding
-   them. **Never** commit a service-account key (`firebase-adminsdk-*.json`)
-   — see `.gitignore`.
-2. `.firebaserc` already points at the real project id `eduvelto`.
+## About
 
-## Commands
+Eduvelto is founded by **Ali Hasan Mohammed Mizan** (Founder & CEO), Cox's Bazar, Bangladesh. The platform is free forever — built for students, job seekers and teachers across Bangladesh.
 
-| Command | What it does |
-|---|---|
-| `npm run dev` | Local dev server |
-| `npm run build` | Type-check + production build into `dist/` |
-| `npm run preview` | Serve the production build locally |
-| `npm run emulators` | Start Firestore + Auth emulators (needs Java) |
-| `npm run test:rules` | Run the security-rules test suite in the emulator |
-
-## Deploy (Firebase Hosting)
-
-```bash
-npm run build
-npx firebase deploy --only hosting,firestore
-```
-
-See `DEPLOY.md` for the full deployment instructions, the no-billing rule,
-PWA notes, and what to do when a quota is hit.
-
-## Emulator (security-rules testing)
-
-The Firestore emulator needs a Java runtime (`java` on PATH). Start it with
-`npm run emulators`, then run the suite with `npm run test:rules`
-(`emulator-tests/rules.test.ts`, using `@firebase/rules-unit-testing`).
-Known environment issue (20 Nov 2026, this sandbox): the emulator starts
-and Java 21 installs fine, but the Firestore JS SDK v10 gRPC transport
-fails against emulator v1.19.8 here (`http2 exception` on rule load,
-`RST_STREAM` protocol error on writes) — all 15 tests COULD NOT RUN here.
-The suite is written and ready; it is a **pre-Phase-2 gate** and must run
-green on a Java-capable machine before rules are deployed (see the
-implementation plan §4 for the exact errors and re-verification commands).
-
-## Project layout
-
-```
-src/
-  main.tsx            entry point
-  App.tsx             router (routes mirror page-map.md)
-  firebase.ts         Firebase init (null-safe until config is pasted)
-  firebase-config.ts  placeholder config (copy from .example, paste real values)
-  i18n/strings.ts     Bangla-first UI strings (bn/en)
-  lib/usage.ts        client-side usage counters (estimates; console is authoritative)
-  lib/backup.ts       JSON export / restore helpers (admin only)
-  components/PageShell.tsx   shared page shell + honest empty state
-  pages/              one small real file per route (title + empty state, no fake data)
-firestore.rules       hardened security rules (database-schema.md §5)
-firestore.indexes.json composite indexes (database-schema.md §4)
-firebase.json         hosting + firestore config (no Functions / no Storage)
-.firebaserc           project id "eduvelto" — the real project (set 20 Nov 2026)
-```
-
-## Free-tier quotas (Spark, verified 20 Nov 2026 — do not exceed by design)
-
-Firestore: 1 GiB stored · 50,000 reads/day · 20,000 writes/day ·
-20,000 deletes/day · 10 GiB/month egress. Auth: 50,000 MAU.
-Hosting: 10 GB storage · 360 MB/day transfer.
-**Cloud Storage and Cloud Functions are NOT available on Spark** (Blaze/billing
-only) — so there are no file uploads, no voice messages, no server-side code.
-
-**Hosting transfer (360 MB/day) and Firestore egress (10 GiB/month) are
-separate quotas with separate counters** — see `src/lib/usage.ts` and the
-implementation plan. Do not mix them up.
-
-## What is NOT in this project (by design)
-
-- No private messaging, group chat, or voice messages (blueprint §7 — not
-  until safety, age protection and moderation are ready).
-- No live AI teacher — `/ai-teacher` is a labelled scripted demonstration.
-  Free production-quality AI is not feasible (blueprint §5). Honest free
-  helpers only: glossary, formula sheets, spaced repetition.
-- No file uploads of any kind (no Storage on Spark).
-- No fake data anywhere. Empty states say "no data yet" honestly.
-
-## Audit docs
-
-The Phase 1 / 1b audit documents live in `~/workspace/eduorbit/` alongside
-this project (`eduorbit-complete-blueprint.md`, `database-schema.md`,
-`milestones.md`, `page-map.md`, `roles-permissions.md`,
-`security-child-safety-plan.md`, `hosting-plan.md`, `feasibility-report.md`,
-`capability-matrix.md`, `architecture.md`). The demo archive is
-`eduorbit-audit-docs.tar.gz`.
+Contact: [eduvelto.com](https://eduvelto.com) — see the footer (About Us / Contact Us) on the site.
