@@ -718,6 +718,48 @@ export const TOOL_GUIDE_SECTIONS: Record<string, ToolGuideSections> = {
       ],
     },
   },
+  'pdf-to-word': {
+    bn:     {
+      title: `পিডিএফ থেকে ওয়ার্ড`,
+      intro: `এই টুলটি পিডিএফ ফাইলের লেখা পড়ে একটি সম্পাদনাযোগ্য Word (.docx) ফাইল বানিয়ে দেয়। ফাইলটি আপনার ডিভাইসেই প্রক্রিয়া হয়, কোথাও আপলোড করা হয় না। সবচেয়ে বড় সুবিধা — বাংলা ও ইংরেজি ফন্ট আপনি নিজে বেছে নিতে পারেন, যাতে Word ফাইলটি আপনার পছন্দের ফন্টেই খোলে।`,
+      howTo: [
+        `পিডিএফ ফাইলের ঘরে আপনার .pdf ফাইলটি বেছে নিন — পাতা ও অক্ষরের সংখ্যা দেখা যাবে।`,
+        `বাংলা ফন্টের তালিকা থেকে একটি ফন্ট বেছে নিন (Noto Sans Bengali, SolaimanLipi, Siyam Rupali, SutonnyMJ, Nikosh বা Kalpurush)।`,
+        `ইংরেজি ফন্টের তালিকা থেকে একটি ফন্ট বেছে নিন (Times New Roman, Calibri, Arial বা Georgia)।`,
+        `“Word ফাইলে রূপান্তর করুন” বোতাম চেপে তৈরি হওয়া .docx ফাইলটি ডাউনলোড করুন।`,
+      ],
+      formula: `নিয়ম: শুধু .pdf ফাইল চলবে; ফাইল সর্বোচ্চ ১০ MB, একবারে সর্বোচ্চ ৫০ পাতা। বাংলা লেখা বাংলা ফন্টে আর ইংরেজি লেখা ইংরেজি ফন্টে বসে; মেশানো লাইনে প্রতিটি অংশ নিজের ফন্টেই থাকে। SutonnyMJ বাছলে বাংলা লেখা বিজয় কোডে রূপান্তর করে দেওয়া হয়, কারণ SutonnyMJ একটি বিজয় ফন্ট।`,
+      example: `উদাহরণ: ২ পাতার একটি পিডিএফে বাংলা অনুচ্ছেদ ও ইংরেজি লাইন আছে। বাংলা ফন্ট SolaimanLipi ও ইংরেজি ফন্ট Times New Roman বেছে রূপান্তর করলে report.docx ফাইলে বাংলা অংশ SolaimanLipi-তে আর ইংরেজি অংশ Times New Roman-এ থাকে — Word-এ খুলে সরাসরি সম্পাদনা করা যায়।`,
+      faq: [
+        { q: `ফাইলটি কি সার্ভারে আপলোড হয়?`, a: `না, সব কাজ আপনার ব্রাউজারেই হয়। পিডিএফ ফাইলটি আপনার ডিভাইস ছাড়ে না।` },
+        { q: `আমার Word-এ বাছা ফন্ট না থাকলে কী হবে?`, a: `ফাইলে ফন্টের নাম লেখা থাকে; আপনার Word-এ সেই ফন্ট না থাকলে Word নিজে থেকে অন্য একটি ফন্টে দেখাবে। লেখা হারাবে না, শুধু চেহারা বদলাবে।` },
+        { q: `স্ক্যান করা পিডিএফ কি রূপান্তর করা যায়?`, a: `না, স্ক্যান করা বা ছবির পিডিএফে পড়ার মতো লেখা থাকে না, তাই রূপান্তর করা যায় না। এমন ফাইল বাছলে পরিষ্কার সতর্কবার্তা দেখানো হয়, খালি ফাইল দেওয়া হয় না।` },
+        { q: `টেবিল বা ছবি কি হুবহু আসবে?`, a: `না, জটিল লেআউট, টেবিল ও ছবি হুবহু রূপান্তর হয় না। লেখার বিষয়বস্তু ঠিক থাকে, সাজানো যথাসম্ভব চেষ্টা করা হয়।` },
+        { q: `SutonnyMJ বাছলে লেখা ভুল দেখালে কী করব?`, a: `SutonnyMJ বিজয় ফন্ট বলে লেখা বিজয় কোডে রূপান্তর করা হয়। কোনো অক্ষরের বিজয় রূপ না থাকলে সেই অংশটি SolaimanLipi ফন্টে ইউনিকোড হিসেবে রাখা হয়, আর তা জানিয়ে দেওয়া হয় — ভুল অক্ষর দেখানো হয় না।` },
+        { q: `ডাউনলোড করতে কি বিজ্ঞাপন দেখতে হবে?`, a: `রূপান্তর সম্পূর্ণ বিনামূল্যে। ডাউনলোডের আগে ৩০ সেকেন্ডের একটি বিজ্ঞাপন দেখাতে হয়। তবে AdSense এখনো review-এ আছে বলে এখন বিজ্ঞাপন আসে না, তাই ডাউনলোড এখন বিনামূল্যে হচ্ছে। ডাউনলোডের আগের প্রিভিউতে “Eduvelto” ওয়াটারমার্ক থাকে, আর ডাউনলোড করা ফাইলে কোনো ওয়াটারমার্ক থাকে না।` },
+      ],
+    },
+    en:     {
+      title: `PDF to Word`,
+      intro: `This tool reads the text of a PDF file and makes an editable Word (.docx) file from it. The file is processed on your device and is never uploaded anywhere. The biggest benefit — you choose the Bangla and English fonts yourself, so the Word file opens in the fonts you prefer.`,
+      howTo: [
+        `Choose your .pdf file in the PDF file box — the page and character counts will appear.`,
+        `Pick a Bangla font from the list (Noto Sans Bengali, SolaimanLipi, Siyam Rupali, SutonnyMJ, Nikosh or Kalpurush).`,
+        `Pick an English font from the list (Times New Roman, Calibri, Arial or Georgia).`,
+        `Press “Convert to Word” and download the .docx file that is created.`,
+      ],
+      formula: `Rules: only .pdf files work; a file may be at most 10 MB, and at most 50 pages at a time. Bangla text is set in the Bangla font and English text in the English font; in a mixed line each part keeps its own font. If SutonnyMJ is picked, Bangla text is converted to Bijoy encoding, because SutonnyMJ is a Bijoy font.`,
+      example: `Example: a 2-page PDF has a Bangla paragraph and English lines. Picking SolaimanLipi for Bangla and Times New Roman for English produces report.docx, where the Bangla parts are in SolaimanLipi and the English parts in Times New Roman — ready to edit in Word.`,
+      faq: [
+        { q: `Is my file uploaded to a server?`, a: `No, everything happens in your browser. The PDF never leaves your device.` },
+        { q: `What if my Word does not have the font I picked?`, a: `The font name is stored in the file; if your Word does not have that font, Word will show another font instead. No text is lost, only the look changes.` },
+        { q: `Can I convert a scanned PDF?`, a: `No, a scanned or image PDF has no readable text, so it cannot be converted. Choosing such a file shows a clear warning instead of an empty file.` },
+        { q: `Will tables or images convert exactly?`, a: `No, complex layouts, tables and images do not convert exactly. The text content is preserved and the layout is best-effort.` },
+        { q: `What if the text looks wrong with SutonnyMJ?`, a: `Because SutonnyMJ is a Bijoy font, the text is converted to Bijoy encoding. If a character has no Bijoy form, that part is kept in Unicode with the SolaimanLipi font and you are told — wrong characters are never shown.` },
+        { q: `Do I have to watch an ad to download?`, a: `Conversion is completely free. A 30-second ad plays before the download. But AdSense is still in review, so no ad can load yet and the download is free for now. The preview before download carries an “Eduvelto” watermark; the downloaded file has no watermark.` },
+      ],
+    },
+  },
   'calorie-tdee-calculator': {
     bn:     {
       title: `ক্যালোরি ও টিডিইই ক্যালকুলেটর`,

@@ -56,15 +56,15 @@ function guideWords(content: {
 }
 
 describe('TOOL_GUIDE_SECTIONS (top 20)', () => {
-  it('still covers the 20 chosen slugs — and 155 structured guides in total (27 Nov 2026: J guides + A-tools)', () => {
+  it('still covers the 20 chosen slugs — and 156 structured guides in total (27 Nov 2026: J guides + A-tools + PDF to Word)', () => {
     for (const slug of EXPECTED_GUIDE_SLUGS) {
       expect(TOOL_GUIDE_SECTIONS, slug).toHaveProperty(slug);
     }
-    // 155 structured guides here + 12 prose guides in TOOLS_GUIDES =
-    // 167 guided of 171 live tools. The 4 unguided slugs are the
+    // 156 structured guides here + 12 prose guides in TOOLS_GUIDES =
+    // 168 guided of 172 live tools. The 4 unguided slugs are the
     // aliases (typing-speed-test, cv-builder, cover-letter-builder,
     // unit-converter) which render their alias page, never a guide.
-    expect(Object.keys(TOOL_GUIDE_SECTIONS)).toHaveLength(155);
+    expect(Object.keys(TOOL_GUIDE_SECTIONS)).toHaveLength(156);
   });
 
   it.each([...EXPECTED_GUIDE_SLUGS])('has a complete structured guide for %s', (slug) => {

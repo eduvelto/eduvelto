@@ -49,7 +49,7 @@ export const TOOLS_META: ToolMeta[] = [
     descriptionEn: 'Combine several PDF files into one PDF. Files are processed in your browser and are never uploaded.',
     crumbBn: 'পিডিএফ মার্জার',
     crumbEn: 'PDF Merger',
-    relatedSlugs: ['pdf-splitter', 'pdf-compressor', 'image-to-pdf'],
+    relatedSlugs: ['pdf-splitter', 'pdf-compressor', 'pdf-to-word'],
   },
   {
     slug: 'pdf-splitter',
@@ -82,7 +82,18 @@ export const TOOLS_META: ToolMeta[] = [
     descriptionEn: 'Convert PDF pages into JPG images.',
     crumbBn: 'পিডিএফ থেকে জেপিজি',
     crumbEn: 'PDF to JPG',
-    relatedSlugs: ['jpg-to-pdf', 'image-to-pdf', 'pdf-page-extractor'],
+    relatedSlugs: ['jpg-to-pdf', 'image-to-pdf', 'pdf-to-word'],
+  },
+  {
+    slug: 'pdf-to-word',
+    category: 'pdf',
+    titleBn: 'পিডিএফ থেকে ওয়ার্ড',
+    titleEn: 'PDF to Word',
+    descriptionBn: 'পিডিএফের লেখা Word (.docx) ফাইলে রূপান্তর করুন — বাংলা ও ইংরেজি ফন্ট নিজে বেছে নিন।',
+    descriptionEn: 'Convert a PDF’s text into an editable Word (.docx) file — choose your own Bangla and English fonts.',
+    crumbBn: 'পিডিএফ থেকে ওয়ার্ড',
+    crumbEn: 'PDF to Word',
+    relatedSlugs: ['pdf-to-jpg', 'jpg-to-pdf', 'pdf-merger'],
   },
   {
     slug: 'jpg-to-pdf',
@@ -93,7 +104,7 @@ export const TOOLS_META: ToolMeta[] = [
     descriptionEn: 'Create a PDF file from JPG images.',
     crumbBn: 'জেপিজি থেকে পিডিএফ',
     crumbEn: 'JPG to PDF',
-    relatedSlugs: ['pdf-to-jpg', 'image-to-pdf', 'pdf-merger'],
+    relatedSlugs: ['pdf-to-jpg', 'image-to-pdf', 'pdf-to-word'],
   },
   {
     slug: 'pdf-page-extractor',

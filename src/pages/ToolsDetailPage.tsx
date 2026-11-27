@@ -69,6 +69,7 @@ import { VideoToAudioTool } from './tools/VideoToAudioTool';
 import { MusicPlayerTool } from './tools/MusicPlayerTool';
 import { LabTestResultCheckerTool } from './tools/LabTestResultCheckerTool';
 import { PdfToJpgTool } from './tools/PdfToJpgTool';
+import { PdfToWordTool } from './tools/PdfToWordTool';
 import { JpgToPdfTool } from './tools/JpgToPdfTool';
 import { PdfPageExtractorTool } from './tools/PdfPageExtractorTool';
 import { PdfPageReorderTool } from './tools/PdfPageReorderTool';
@@ -253,6 +254,7 @@ const TOOL_COMPONENTS: Record<string, ComponentType> = {
   // Lab Test Result Checker, wired 27 Nov 2026 (141st tool).
   'lab-test-result-checker': LabTestResultCheckerTool,
   'pdf-to-jpg': PdfToJpgTool,
+  'pdf-to-word': PdfToWordTool,
   'jpg-to-pdf': JpgToPdfTool,
   'pdf-page-extractor': PdfPageExtractorTool,
   'pdf-page-reorder': PdfPageReorderTool,
