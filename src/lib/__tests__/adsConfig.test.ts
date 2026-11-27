@@ -96,6 +96,14 @@ describe('getPageAdType', () => {
     expect(getPageAdType('/articles/hello')).toBe('article');
   });
 
+  it('classifies tool pages (owner 27 Nov 2026 — every feature carries ads)', () => {
+    expect(getPageAdType('/tools')).toBe('tool');
+    expect(getPageAdType('/tools/bmi-calculator')).toBe('tool');
+    expect(getPageAdType('/tools/lab-test-result-checker')).toBe('tool');
+    expect(getPageAdType('/bn/tools/lab-test-result-checker')).toBe('tool');
+    expect(getBannerPlacementForPath('/tools/lab-test-result-checker')).toBe('bottom-banner');
+  });
+
   it('ignores query strings and trailing slashes; unknown paths fall back', () => {
     expect(getPageAdType('/library?search=math')).toBe('library');
     expect(getPageAdType('/library/')).toBe('library');
@@ -174,6 +182,14 @@ describe('isInPageSlotAllowed', () => {
     expect(isInPageSlotAllowed('article', 'in-content')).toBe(true);
     expect(isInPageSlotAllowed('article', 'in-content-2')).toBe(true);
     expect(isInPageSlotAllowed('article', 'in-feed')).toBe(false);
+    // Tool pages: in-content (below the hero) + in-content-2 (between
+    // sections) only — never a top banner, sidebar or mobile slot.
+    expect(isInPageSlotAllowed('tool', 'in-content')).toBe(true);
+    expect(isInPageSlotAllowed('tool', 'in-content-2')).toBe(true);
+    expect(isInPageSlotAllowed('tool', 'top-banner')).toBe(false);
+    expect(isInPageSlotAllowed('tool', 'sidebar')).toBe(false);
+    expect(isInPageSlotAllowed('tool', 'mobile')).toBe(false);
+    expect(isInPageSlotAllowed('tool', 'in-feed')).toBe(false);
   });
 
   it('never allows an in-page slot on exam pages (any placement)', () => {

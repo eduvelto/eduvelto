@@ -1,6 +1,6 @@
 // Tools metadata (second batch, 27 Nov 2026) — integrity tests.
 //
-// Guards the TOOLS_META contract in src/lib/toolsMeta.ts: 140 slugs,
+// Guards the TOOLS_META contract in src/lib/toolsMeta.ts: 141 slugs,
 // every related slug resolves, no self-references, no duplicates, and
 // every entry has non-empty Bangla/English titles and descriptions.
 // Also guards the three second-batch Finance/Health guides in
@@ -29,8 +29,8 @@ function wordCount(text: string): number {
 }
 
 describe('TOOLS_META', () => {
-  it('has exactly 140 slugs', () => {
-    expect(TOOLS_META.length).toBe(140);
+  it('has exactly 141 slugs', () => {
+    expect(TOOLS_META.length).toBe(141);
   });
 
   it('has no duplicate slugs', () => {
@@ -52,6 +52,54 @@ describe('TOOLS_META', () => {
       expect(tool.descriptionEn.trim().length, `${tool.slug} descriptionEn`).toBeGreaterThan(0);
       expect(tool.crumbBn.trim().length, `${tool.slug} crumbBn`).toBeGreaterThan(0);
       expect(tool.crumbEn.trim().length, `${tool.slug} crumbEn`).toBeGreaterThan(0);
+    }
+  });
+
+  it('gives every tool unique SEO titles/descriptions within Google length limits (27 Nov 2026 SEO pass)', () => {
+    // Mirrors seo.ts tool SEO exactly: title `${title} | Eduvelto`,
+    // description `${description} — বিনামূল্যের টুল। Eduvelto।` (bn) /
+    // `${description} — a free Eduvelto tool.` (en). Titles must fit
+    // ~60 chars; descriptions must be >40 (sitemap sweep) and <=160.
+    // No competitor names, no "verified" wording, no #1/best claims.
+    const BN_DESC_SUFFIX = ' — বিনামূল্যের টুল। Eduvelto।';
+    const EN_DESC_SUFFIX = ' — a free Eduvelto tool.';
+    const FORBIDDEN = [
+      'proshnobanai', 'প্রশ্নবানাই', 'eproshnobank', 'remove.bg',
+      'smallpdf', 'ilovepdf', 'যাচাইকৃত', 'verified', 'সেরা', '#1', 'নম্বর ১',
+    ];
+    const seen = {
+      titleBn: new Map<string, string>(),
+      titleEn: new Map<string, string>(),
+      descriptionBn: new Map<string, string>(),
+      descriptionEn: new Map<string, string>(),
+    };
+    for (const tool of TOOLS_META) {
+      const bnTitle = `${tool.titleBn} | Eduvelto`;
+      const enTitle = `${tool.titleEn} | Eduvelto`;
+      const bnDesc = `${tool.descriptionBn}${BN_DESC_SUFFIX}`;
+      const enDesc = `${tool.descriptionEn}${EN_DESC_SUFFIX}`;
+      expect(bnTitle.length, `${tool.slug} bn title (${bnTitle})`).toBeLessThanOrEqual(60);
+      expect(enTitle.length, `${tool.slug} en title (${enTitle})`).toBeLessThanOrEqual(60);
+      expect(bnDesc.length, `${tool.slug} bn desc`).toBeGreaterThan(40);
+      expect(bnDesc.length, `${tool.slug} bn desc`).toBeLessThanOrEqual(160);
+      expect(enDesc.length, `${tool.slug} en desc`).toBeGreaterThan(40);
+      expect(enDesc.length, `${tool.slug} en desc`).toBeLessThanOrEqual(160);
+      for (const word of FORBIDDEN) {
+        for (const [field, value] of [
+          ['titleBn', tool.titleBn], ['titleEn', tool.titleEn],
+          ['descriptionBn', tool.descriptionBn], ['descriptionEn', tool.descriptionEn],
+        ] as const) {
+          expect(value.toLowerCase().includes(word.toLowerCase()), `${tool.slug} ${field} contains "${word}"`).toBe(false);
+        }
+      }
+      for (const [key, value] of [
+        ['titleBn', bnTitle], ['titleEn', enTitle],
+        ['descriptionBn', bnDesc], ['descriptionEn', enDesc],
+      ] as const) {
+        const map = seen[key as keyof typeof seen];
+        expect(map.has(value), `${key} "${value}" duplicated by ${tool.slug} (first: ${map.get(value)})`).toBe(false);
+        map.set(value, tool.slug);
+      }
     }
   });
 
@@ -129,7 +177,7 @@ describe('tool icons (27 Nov 2026 — picture tiles, never a letter)', () => {
     }
   });
 
-  it('has an explicit mapping entry for all 140 slugs (no silent fallback reliance)', () => {
+  it('has an explicit mapping entry for all 141 slugs (no silent fallback reliance)', () => {
     for (const tool of TOOLS_META) {
       expect(TOOL_ICON_BY_SLUG[tool.slug], tool.slug).toBeDefined();
       expect(TOOL_ICON_NAMES, tool.slug).toContain(TOOL_ICON_BY_SLUG[tool.slug]);

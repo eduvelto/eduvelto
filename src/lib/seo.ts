@@ -870,16 +870,16 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumbEn: 'Life Services',
   },
   // 100-tools project, Phase 1 (26 Nov 2026) + batch 2 (27 Nov 2026):
-  // the Tools hub. The 140 tool pages are dynamic (resolveRouteSeo
+  // the Tools hub. The 141 tool pages are dynamic (resolveRouteSeo
   // /tools/:slug below) — only the hub gets a STATIC_ROUTES entry.
   '/tools': {
     title: 'ফ্রি টুলস — PDF, ছবি, হিসাব ও পড়াশোনা | Eduvelto',
     description:
-      '১৪০টি ফ্রি টুল — PDF, ছবি, হিসাব, স্বাস্থ্য, পড়াশোনা ও চাকরির প্রস্তুতি। সব কাজ আপনার ব্রাউজারেই হয়, ফাইল কোথাও আপলোড হয় না। Eduvelto।',
+      '১৪১টি ফ্রি টুল — PDF, ছবি, হিসাব, স্বাস্থ্য, পড়াশোনা ও চাকরির প্রস্তুতি। সব কাজ আপনার ব্রাউজারেই হয়, ফাইল কোথাও আপলোড হয় না। Eduvelto।',
     crumb: 'টুলস',
     titleEn: 'Free Tools — PDF, Images, Calculators & Study | Eduvelto',
     descriptionEn:
-      '140 free tools — PDF, images, calculators, health, study and job preparation. Everything runs in your browser; files are never uploaded. Eduvelto.',
+      '141 free tools — PDF, images, calculators, health, study and job preparation. Everything runs in your browser; files are never uploaded. Eduvelto.',
     crumbEn: 'Tools',
   },
   '/life/budget': {

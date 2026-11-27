@@ -112,6 +112,7 @@ export type PageAdType =
   | 'progress'
   | 'social'
   | 'health'
+  | 'tool'
   | 'info'
   | 'unknown';
 
@@ -172,6 +173,7 @@ export function getPageAdType(pathname: string): PageAdType {
   if (path === '/progress') return 'progress';
   if (path === '/social') return 'social';
   if (seg[0] === 'health') return 'health';
+  if (seg[0] === 'tools') return 'tool';
   if (
     path === '/about' ||
     path === '/founder' ||
@@ -257,6 +259,10 @@ export function getBottomNavOffsetPx(args: {
  * - directory → in-content;
  * - article → top-banner/in-content/in-content-2 (no article routes
  *   exist yet — ready when they land).
+ * - tool (/tools/:slug, owner 27 Nov 2026 — every feature must carry
+ *   ads) → in-content (below the hero) + in-content-2 (between
+ *   sections). Never covering the tool's inputs, results or medical
+ *   content, and never delaying a result.
  * Everything else (exam, exam-result, ai-teacher, profile, auth,
  * admin, dashboards, health, info, ...) gets the banner only — no
  * in-page slot, ever. In particular: never a slot between quiz
@@ -278,6 +284,11 @@ export function isInPageSlotAllowed(pageType: PageAdType, placement: AdPlacement
       return placement === 'in-content' || placement === 'in-content-2';
     case 'directory':
       return placement === 'in-content';
+    case 'tool':
+      // Tool pages (owner 27 Nov 2026 — every feature carries ads):
+      // in-content below the hero + in-content-2 between sections.
+      // Never a top banner, sidebar or mobile slot here.
+      return placement === 'in-content' || placement === 'in-content-2';
     case 'article':
       return placement === 'top-banner' || placement === 'in-content' || placement === 'in-content-2';
     default:

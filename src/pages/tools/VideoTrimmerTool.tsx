@@ -10,6 +10,7 @@
 
 import { useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { langUrl } from '../../lib/langRouting';
 import { Button } from '../../components/ui';
 import {
   trimVideo,
@@ -174,7 +175,7 @@ function loadRealVideo(file: Blob): Promise<HTMLVideoElement> {
 }
 
 export function VideoTrimmerTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [duration, setDuration] = useState<number | null>(null);
@@ -396,7 +397,7 @@ export function VideoTrimmerTool() {
       </p>
       <p style={noteStyle}>
         {t({ bn: 'কাটা ভিডিওটি আরও ছোট করতে চাইলে ', en: 'To make the trimmed clip smaller, use the ' })}
-        <a href="/tools/video-compressor" style={{ color: 'var(--teal-text)', fontWeight: 600 }}>
+        <a href={langUrl('/tools/video-compressor', lang)} style={{ color: 'var(--teal-text)', fontWeight: 600 }}>
           {t({ bn: 'ভিডিও ছোট করার টুল', en: 'video compressor tool' })}
         </a>
         {t({ bn: ' — কাটা ফাইলটি ডাউনলোড করে সেখানে বাছুন।', en: ' — download the trimmed file and pick it there.' })}

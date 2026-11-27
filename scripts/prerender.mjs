@@ -404,6 +404,18 @@ export function getAcademicPracticePaths(source) {
   return paths;
 }
 
+/** Tools whose pages exist in toolsMeta.ts but must NOT be prerendered
+ *  or sitemapped yet — they are built but not live. Remove a slug from
+ *  this set at its deploy time (its page then prerenders + sitemaps
+ *  automatically, like every other tool).
+ *  - 'lab-test-result-checker': WAS excluded (27 Nov 2026) pending
+ *    MBBS review — owner LIFTED the review gate 27 Nov 12:13
+ *    ("doctor reviews ar dorkar nai") and ordered everything live,
+ *    so the exclusion is removed at this deploy. Ranges were verified
+ *    against ADA / Mayo / MedlinePlus / NHLBI / StatPearls and the 5
+ *    disagreements are surfaced in-tool with doctor-to-confirm notes. */
+export const PRERENDER_EXCLUDED_TOOL_SLUGS = new Set([]);
+
 /** Tool paths from the toolsMeta.ts source text (100-tools project,
  *  26 Nov 2026). Extracts every `slug: '...'` in TOOLS_META in file
  *  order and builds the hub + one path per tool. The regex only
@@ -411,13 +423,15 @@ export function getAcademicPracticePaths(source) {
  *  quotes and relatedSlugs entries carry no `slug:` prefix, so
  *  neither leaks in. A future tool adds its path automatically —
  *  no prerender-list edit per tool. Never invents a path: only
- *  slugs actually present in the source. */
+ *  slugs actually present in the source. Slugs in
+ *  PRERENDER_EXCLUDED_TOOL_SLUGS are skipped (built but not live). */
 export function getToolPaths(source) {
   const paths = ['/tools'];
   const seen = new Set(paths);
   const re = /slug:\s*'([^']+)'/g;
   let m;
   while ((m = re.exec(source)) !== null) {
+    if (PRERENDER_EXCLUDED_TOOL_SLUGS.has(m[1])) continue;
     const toolPath = `/tools/${m[1]}`;
     if (!seen.has(toolPath)) {
       seen.add(toolPath);

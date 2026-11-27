@@ -29,16 +29,11 @@
 // track stops and wraps statically, so nothing moves at all.
 //
 // TOOLS IN THE TICKER (owner 27 Nov 2026: every feature in the
-// scroll banner, one by one) — all 140 LIVE tools appear below as
+// scroll banner, one by one) — all 141 LIVE tools appear below as
 // one item each (tool title in bn/en, linking to /tools/<slug>),
 // derived from toolsMeta at runtime so a new tool appears here
-// automatically. EXCLUDED: lab-test-result-checker — built but NOT
-// live yet (MBBS review pending); add it at its deploy by deleting
-// the filter in TICKER_TOOL_ITEMS below. NOTE: ~107 of the 140
-// tool pages currently show the honest "still being built" box
-// (only 25 have an interactive UI + 8 aliases render real pages);
-// the ticker links to their real pages either way, and the box
-// says so plainly.
+// automatically. The Lab Test Checker joined the ticker at the
+// 27 Nov deploy (owner lifted the MBBS-review gate 12:13).
 //
 // LOOP TIMING — the loop is 480s per copy, NOT the old 80s. The
 // old 80s covered 16 items (~600 bn chars, ~74px/s). The 140
@@ -72,13 +67,14 @@ export type AnnouncementTickerItem =
 /** All 140 LIVE tools, one ticker item each (owner 27 Nov 2026).
  *  Derived from toolsMeta at runtime — a new tool appears here
  *  automatically, and a title change flows through. EXCLUDED:
- *  lab-test-result-checker (built, not live yet — MBBS review
- *  pending); delete the filter at its deploy. Item text is the
- *  tool's own bn/en title; href is its real /tools/<slug> page. */
+ *  All 141 live tools are included (Lab Test Checker joined at the
+ *  27 Nov deploy — owner lifted the MBBS-review gate 12:13). Item
+ *  text is the tool's own bn/en title; href is its real
+ *  /tools/<slug> page. */
 export const TICKER_TOOL_ITEMS: Extract<
   AnnouncementTickerItem,
   { kind: 'feature' }
->[] = TOOLS_META.filter((t) => t.slug !== 'lab-test-result-checker').map((t) => ({
+>[] = TOOLS_META.map((t) => ({
   id: `tool-${t.slug}`,
   kind: 'feature',
   bn: t.titleBn,
@@ -87,7 +83,7 @@ export const TICKER_TOOL_ITEMS: Extract<
 }));
 
 /** Rotation order: the ayat leads, then our offers, then every real
- * feature (owner 25 Nov 18:01), then all 140 live tools (owner
+ * feature (owner 25 Nov 18:01), then all 141 live tools (owner
  * 27 Nov 2026) — each links to its page. Feature items are real
  * pages only — no invented features, no invented numbers. */
 export const ANNOUNCEMENT_TICKER_ITEMS: AnnouncementTickerItem[] = [

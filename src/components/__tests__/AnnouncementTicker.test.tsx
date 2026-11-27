@@ -116,9 +116,11 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03 + 18:01)', () => {
 
   it('rotates ALL our real features, each linked to its page', async () => {
     const features = featureItems();
-    // 12 core features + 140 live tools (owner 27 Nov 2026: every
-    // feature in the banner, one by one) = 152 feature items.
-    expect(features.length).toBe(152);
+    // 12 core features + 141 live tools (owner 27 Nov 2026: every
+    // feature in the banner, one by one; Lab Test Checker joined at
+    // the 27 Nov deploy — owner lifted the MBBS-review gate 12:13)
+    // = 153 feature items.
+    expect(features.length).toBe(153);
     // The 12 core features (first 12, in rotation order).
     const core = features.slice(0, 12);
     expect(core.map((f) => f.id)).toEqual([
@@ -153,26 +155,24 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03 + 18:01)', () => {
     expect(htmlEn).toContain('23,259 questions');
   });
 
-  it('rotates all 140 live tools, one item each — lab checker NOT yet (not live)', async () => {
+  it('rotates all 141 live tools, one item each — including the Lab Test Checker (owner lifted the MBBS-review gate 27 Nov 12:13)', async () => {
     const { TICKER_TOOL_ITEMS } = await import('../AnnouncementTicker');
-    expect(TICKER_TOOL_ITEMS.length).toBe(140);
+    expect(TICKER_TOOL_ITEMS.length).toBe(141);
     // Every tool item links to its real /tools/<slug> page.
     const { TOOLS_META } = await import('../../lib/toolsMeta');
-    const liveSlugs = TOOLS_META.map((t) => t.slug).filter(
-      (s) => s !== 'lab-test-result-checker',
-    );
-    expect(liveSlugs.length).toBe(140);
+    const liveSlugs = TOOLS_META.map((t) => t.slug);
+    expect(liveSlugs.length).toBe(141);
     expect(TICKER_TOOL_ITEMS.map((t) => t.href)).toEqual(
       liveSlugs.map((s) => `/tools/${s}`),
     );
     expect(TICKER_TOOL_ITEMS.map((t) => t.id)).toEqual(
       liveSlugs.map((s) => `tool-${s}`),
     );
-    // The Lab Test Checker is built but NOT live (MBBS review
-    // pending) — it must not appear in the banner yet.
+    // The Lab Test Checker joined the banner at the 27 Nov deploy
+    // (owner lifted the MBBS-review gate 12:13) — it must appear.
     const html = await renderTicker('bn');
-    expect(html).not.toContain('lab-test-result-checker');
-    expect(html).not.toContain('ল্যাব টেস্ট রেজাল্ট চেকার');
+    expect(html).toContain('lab-test-result-checker');
+    expect(html).toContain('ল্যাব টেস্ট রেজাল্ট চেকার');
     // Spot-check tool items render in both languages.
     expect(html).toContain('পিডিএফ মার্জার');
     expect(html).toContain('href="/tools/pdf-merger"');

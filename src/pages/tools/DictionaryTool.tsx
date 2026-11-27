@@ -12,6 +12,7 @@
 
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { langUrl } from '../../lib/langRouting';
 import { searchDictionary } from '../../lib/tools/dictionary';
 
 const inputStyle: CSSProperties = {
@@ -131,7 +132,7 @@ function exampleChipStyle(): CSSProperties {
 const EXAMPLE_WORDS = ['water', 'book', 'teacher', 'পানি', 'বই', 'শিক্ষক'];
 
 export function DictionaryTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [query, setQuery] = useState('');
   const [copied, setCopied] = useState('');
 
@@ -227,7 +228,7 @@ export function DictionaryTool() {
             })}
           </p>
           <p style={{ fontSize: 14, margin: '10px 0 0' }}>
-            <a href="/tools/text-to-speech">
+            <a href={langUrl('/tools/text-to-speech', lang)}>
               {t({ bn: 'শব্দটি শুনুন — টেক্সট টু স্পিচ →', en: 'Hear the word — Text to Speech →' })}
             </a>
           </p>

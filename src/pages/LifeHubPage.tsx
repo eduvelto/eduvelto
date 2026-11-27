@@ -3,6 +3,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
 import { ToolIcon } from '../components/ToolIcon';
 import { TOOLS_META, TOOL_CATEGORY_META } from '../lib/toolsMeta';
+import { langUrl } from '../lib/langRouting';
 
 // Eduvelto Life hub (§3C) — /life.
 // Card grid linking to every life tool. The tool pages themselves are
@@ -153,7 +154,7 @@ export default function LifeHubPage() {
                 {tools.map((tool) => (
                   <Link
                     key={tool.slug}
-                    to={`/tools/${tool.slug}`}
+                    to={langUrl(`/tools/${tool.slug}`, lang)}
                     className="ev-card ev-card-hover"
                     style={{ display: 'block', textDecoration: 'none', color: 'var(--heading)', minHeight: 44 }}
                   >

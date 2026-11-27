@@ -25,6 +25,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
 import { ToolIcon } from '../components/ToolIcon';
 import { TOOLS_META, TOOL_CATEGORY_META } from '../lib/toolsMeta';
+import { langUrl } from '../lib/langRouting';
 
 // Category order follows the order in toolsMeta.ts (10 categories
 // x 10 tools + 5 video/music tools).
@@ -227,7 +228,7 @@ export default function ToolsHubPage() {
                   return (
                     <Link
                       key={tool.slug}
-                      to={`/tools/${tool.slug}`}
+                      to={langUrl(`/tools/${tool.slug}`, lang)}
                       className="ev-card tools-hub-card"
                       style={{ display: 'block', textDecoration: 'none', color: 'var(--heading)', minHeight: 44 }}
                     >

@@ -7,10 +7,10 @@
 // the guide bodies live in ./toolsGuides.ts and are pulled in
 // only by the lazy tool pages. Keep this file LIGHT.
 //
-// Source of truth for all 140 tools: 10 categories x 10 tools
+// Source of truth for all 141 tools: 10 categories x 10 tools
 // + 5 video/music tools + 35 second-batch tools
 // (see ~/workspace/eduorbit/final-100-tools.md).
-// Related slugs must always resolve to one of the 140 slugs below.
+// Related slugs must always resolve to one of the 141 slugs below.
 
 export type ToolCategory =
   | 'pdf'
@@ -484,6 +484,17 @@ export const TOOLS_META: ToolMeta[] = [
     crumbBn: 'গতি ও পেস',
     crumbEn: 'Pace & Speed',
     relatedSlugs: ['heart-rate-zone-calculator', 'calorie-tdee-calculator', 'sleep-cycle-calculator'],
+  },
+  {
+    slug: 'lab-test-result-checker',
+    category: 'health',
+    titleBn: 'ল্যাব টেস্ট রেজাল্ট চেকার',
+    titleEn: 'Lab Test Result Checker',
+    descriptionBn: 'রিপোর্টের মান বসিয়ে দেখুন সেটি স্বাভাবিক সীমায় আছে কি না — ৩৭টি সাধারণ পরীক্ষা, লক্ষণ দিয়ে খোঁজা ও ডাক্তারের জন্য সারসংক্ষেপসহ।',
+    descriptionEn: 'Enter a value from your report to see if it is in the normal range — 37 common tests, symptom search and a doctor-visit summary.',
+    crumbBn: 'ল্যাব টেস্ট চেকার',
+    crumbEn: 'Lab Test Checker',
+    relatedSlugs: ['bmi-calculator', 'water-intake-calculator', 'sleep-cycle-calculator'],
   },
   // ---- 5. Education & Student Tools ----
   {

@@ -30,6 +30,7 @@ import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, LinkButton } from '../components/ui';
 import { toolBySlug } from '../lib/toolsMeta';
 import { toolGuideBySlug } from '../lib/toolsGuides';
+import { langUrl } from '../lib/langRouting';
 import { ToolIcon } from '../components/ToolIcon';
 import LifePdfToolsPage from './LifePdfToolsPage';
 import LifeCalculatorsPage from './LifeCalculatorsPage';
@@ -66,6 +67,114 @@ import { VideoTrimmerTool } from './tools/VideoTrimmerTool';
 import { VideoFormatConverterTool } from './tools/VideoFormatConverterTool';
 import { VideoToAudioTool } from './tools/VideoToAudioTool';
 import { MusicPlayerTool } from './tools/MusicPlayerTool';
+import { LabTestResultCheckerTool } from './tools/LabTestResultCheckerTool';
+import { PdfToJpgTool } from './tools/PdfToJpgTool';
+import { JpgToPdfTool } from './tools/JpgToPdfTool';
+import { PdfPageExtractorTool } from './tools/PdfPageExtractorTool';
+import { PdfPageReorderTool } from './tools/PdfPageReorderTool';
+import { PdfWatermarkTool } from './tools/PdfWatermarkTool';
+import { ImageToPdfTool } from './tools/ImageToPdfTool';
+import { TextToPdfTool } from './tools/TextToPdfTool';
+import { ImageCropperTool } from './tools/ImageCropperTool';
+import { JpgToPngTool } from './tools/JpgToPngTool';
+import { PngToJpgTool } from './tools/PngToJpgTool';
+import { WebpConverterTool } from './tools/WebpConverterTool';
+import { HeicToJpgTool } from './tools/HeicToJpgTool';
+import { ImageWatermarkMakerTool } from './tools/ImageWatermarkMakerTool';
+import { ImageColorPickerTool } from './tools/ImageColorPickerTool';
+import { FaviconGeneratorTool } from './tools/FaviconGeneratorTool';
+import { ImageRotateFlipTool } from './tools/ImageRotateFlipTool';
+import { ImageToBase64Tool } from './tools/ImageToBase64Tool';
+import { ImageFilterTool } from './tools/ImageFilterTool';
+import { PdfPasswordProtectorTool } from './tools/PdfPasswordProtectorTool';
+import { PdfPageRemoverTool } from './tools/PdfPageRemoverTool';
+import { MemeGeneratorTool } from './tools/MemeGeneratorTool';
+import { ExifViewerRemoverTool } from './tools/ExifViewerRemoverTool';
+import { MortgageTool } from './tools/MortgageTool';
+import { CompoundInterestTool } from './tools/CompoundInterestTool';
+import { CreditCardPayoffTool } from './tools/CreditCardPayoffTool';
+import { SalaryToHourlyTool } from './tools/SalaryToHourlyTool';
+import { RetirementSavingsTool } from './tools/RetirementSavingsTool';
+import { IncomeTaxTool } from './tools/IncomeTaxTool';
+import { BankEmiDpsFdrTool } from './tools/BankEmiDpsFdrTool';
+import { DiscountVatProfitTool } from './tools/DiscountVatProfitTool';
+import { ExpenseSplitterTool } from './tools/ExpenseSplitterTool';
+import { BreakEvenTool } from './tools/BreakEvenTool';
+import { BmiTool } from './tools/BmiTool';
+import { BmrTool } from './tools/BmrTool';
+import { CalorieTdeeTool } from './tools/CalorieTdeeTool';
+import { MacroNutrientTool } from './tools/MacroNutrientTool';
+import { PregnancyDueDateTool } from './tools/PregnancyDueDateTool';
+import { WaterIntakeTool } from './tools/WaterIntakeTool';
+import { SleepCycleTool } from './tools/SleepCycleTool';
+import { BodyFatTool } from './tools/BodyFatTool';
+import { HeartRateZoneTool } from './tools/HeartRateZoneTool';
+import { PaceSpeedTool } from './tools/PaceSpeedTool';
+import { OvulationTool } from './tools/OvulationTool';
+import { InternationalGpaTool } from './tools/InternationalGpaTool';
+import { CgpaToPercentageTool } from './tools/CgpaToPercentageTool';
+import { ExamCountdownTool } from './tools/ExamCountdownTool';
+import { PomodoroTool } from './tools/PomodoroTool';
+import { StudyRoutineTool } from './tools/StudyRoutineTool';
+import { GradeAnalyzerTool } from './tools/GradeAnalyzerTool';
+import { AttendanceTool } from './tools/AttendanceTool';
+import { ScientificCalculatorTool } from './tools/ScientificCalculatorTool';
+import { GovtJobAgeTool } from './tools/GovtJobAgeTool';
+import { BcsMarksTool } from './tools/BcsMarksTool';
+import { NegativeMarkingTool } from './tools/NegativeMarkingTool';
+import { GkFlashcardTool } from './tools/GkFlashcardTool';
+import { VocabularyTrainerTool } from './tools/VocabularyTrainerTool';
+import { ApplicationFeeTool } from './tools/ApplicationFeeTool';
+import { AdmitCardChecklistTool } from './tools/AdmitCardChecklistTool';
+import { ExamSeatPlanTool } from './tools/ExamSeatPlanTool';
+import { MeritRankTool } from './tools/MeritRankTool';
+import { PassFailTool } from './tools/PassFailTool';
+import { PrintablePaperTool } from './tools/PrintablePaperTool';
+import { AcademicCalendarTool } from './tools/AcademicCalendarTool';
+import { QuizStopwatchTool } from './tools/QuizStopwatchTool';
+import { RandomStudentGroupTool } from './tools/RandomStudentGroupTool';
+import { AssignmentCoverTool } from './tools/AssignmentCoverTool';
+import { WordCounterTool } from './tools/WordCounterTool';
+import { TextCaseConverterTool } from './tools/TextCaseConverterTool';
+import { DuplicateLineRemoverTool } from './tools/DuplicateLineRemoverTool';
+import { TextDiffCheckerTool } from './tools/TextDiffCheckerTool';
+import { FindAndReplaceTool } from './tools/FindAndReplaceTool';
+import { NumberToWordsConverterTool } from './tools/NumberToWordsConverterTool';
+import { LoremIpsumGeneratorTool } from './tools/LoremIpsumGeneratorTool';
+import { CitationGeneratorTool } from './tools/CitationGeneratorTool';
+import { JsonFormatterTool } from './tools/JsonFormatterTool';
+import { CodeMinifierBeautifierTool } from './tools/CodeMinifierBeautifierTool';
+import { Base64EncoderDecoderTool } from './tools/Base64EncoderDecoderTool';
+import { UrlEncoderDecoderTool } from './tools/UrlEncoderDecoderTool';
+import { RegexTesterTool } from './tools/RegexTesterTool';
+import { UuidHashGeneratorTool } from './tools/UuidHashGeneratorTool';
+import { ColorConverterTool } from './tools/ColorConverterTool';
+import { CssGradientGeneratorTool } from './tools/CssGradientGeneratorTool';
+import { MetaTagGeneratorTool } from './tools/MetaTagGeneratorTool';
+import { RobotsSitemapGeneratorTool } from './tools/RobotsSitemapGeneratorTool';
+import { RemoveExtraSpacesTool } from './tools/RemoveExtraSpacesTool';
+import { FancyTextGeneratorTool } from './tools/FancyTextGeneratorTool';
+import { ReverseTextGeneratorTool } from './tools/ReverseTextGeneratorTool';
+import { CreditCardValidatorTool } from './tools/CreditCardValidatorTool';
+import { RomanNumeralConverterTool } from './tools/RomanNumeralConverterTool';
+import { JwtTokenDecoderTool } from './tools/JwtTokenDecoderTool';
+import { HtmlTableGeneratorTool } from './tools/HtmlTableGeneratorTool';
+import { YoutubeThumbnailDownloaderTool } from './tools/YoutubeThumbnailDownloaderTool';
+import { WhatsappLinkGeneratorTool } from './tools/WhatsappLinkGeneratorTool';
+import { ScreenResolutionCheckerTool } from './tools/ScreenResolutionCheckerTool';
+import { SpeechToTextTool } from './tools/SpeechToTextTool';
+import { HijriDateConverterTool } from './tools/HijriDateConverterTool';
+import { DailyQuranVerseTool } from './tools/DailyQuranVerseTool';
+import { DailyHadithTool } from './tools/DailyHadithTool';
+import { QiblaDirectionTool } from './tools/QiblaDirectionTool';
+import { SehriIftarTool } from './tools/SehriIftarTool';
+import { ElectricityBillCalculatorTool } from './tools/ElectricityBillCalculatorTool';
+import { MeetingTimePlannerTool } from './tools/MeetingTimePlannerTool';
+import { WorldDateConverterTool } from './tools/WorldDateConverterTool';
+import { GovtServiceLinksTool } from './tools/GovtServiceLinksTool';
+import { ResultsHubTool } from './tools/ResultsHubTool';
+import { NotesTodoTool } from './tools/NotesTodoTool';
+import { TasbihCounterTool } from './tools/TasbihCounterTool';
 
 // ---------------------------------------------------------------------------
 // Phase-2 plug-in point (TOOL_COMPONENTS registry).
@@ -107,6 +216,115 @@ const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'video-format-converter': VideoFormatConverterTool,
   'video-to-audio-converter': VideoToAudioTool,
   'music-player': MusicPlayerTool,
+  // Lab Test Result Checker, wired 27 Nov 2026 (141st tool).
+  'lab-test-result-checker': LabTestResultCheckerTool,
+  'pdf-to-jpg': PdfToJpgTool,
+  'jpg-to-pdf': JpgToPdfTool,
+  'pdf-page-extractor': PdfPageExtractorTool,
+  'pdf-page-reorder': PdfPageReorderTool,
+  'pdf-watermark': PdfWatermarkTool,
+  'image-to-pdf': ImageToPdfTool,
+  'text-to-pdf': TextToPdfTool,
+  'image-cropper': ImageCropperTool,
+  'jpg-to-png': JpgToPngTool,
+  'png-to-jpg': PngToJpgTool,
+  'webp-converter': WebpConverterTool,
+  'heic-to-jpg': HeicToJpgTool,
+  'image-watermark-maker': ImageWatermarkMakerTool,
+  'image-color-picker': ImageColorPickerTool,
+  'favicon-generator': FaviconGeneratorTool,
+  'image-rotate-flip': ImageRotateFlipTool,
+  'image-to-base64': ImageToBase64Tool,
+  'image-filter': ImageFilterTool,
+  'pdf-password-protector': PdfPasswordProtectorTool,
+  'pdf-page-remover': PdfPageRemoverTool,
+  'meme-generator': MemeGeneratorTool,
+  'exif-viewer-remover': ExifViewerRemoverTool,
+  'mortgage-calculator': MortgageTool,
+  'compound-interest-calculator': CompoundInterestTool,
+  'credit-card-payoff-calculator': CreditCardPayoffTool,
+  'salary-to-hourly-converter': SalaryToHourlyTool,
+  'retirement-savings-planner': RetirementSavingsTool,
+  'income-tax-calculator': IncomeTaxTool,
+  'bank-emi-dps-fdr-calculator': BankEmiDpsFdrTool,
+  'discount-vat-profit-calculator': DiscountVatProfitTool,
+  'expense-splitter': ExpenseSplitterTool,
+  'break-even-calculator': BreakEvenTool,
+  'bmi-calculator': BmiTool,
+  'bmr-calculator': BmrTool,
+  'calorie-tdee-calculator': CalorieTdeeTool,
+  'macro-nutrient-calculator': MacroNutrientTool,
+  'pregnancy-due-date-calculator': PregnancyDueDateTool,
+  'water-intake-calculator': WaterIntakeTool,
+  'sleep-cycle-calculator': SleepCycleTool,
+  'body-fat-calculator': BodyFatTool,
+  'heart-rate-zone-calculator': HeartRateZoneTool,
+  'pace-speed-calculator': PaceSpeedTool,
+  'ovulation-calculator': OvulationTool,
+  'international-gpa-calculator': InternationalGpaTool,
+  'cgpa-to-percentage-converter': CgpaToPercentageTool,
+  'exam-countdown-timer': ExamCountdownTool,
+  'pomodoro-timer': PomodoroTool,
+  'study-routine-maker': StudyRoutineTool,
+  'grade-analyzer': GradeAnalyzerTool,
+  'attendance-calculator': AttendanceTool,
+  'scientific-calculator': ScientificCalculatorTool,
+  'govt-job-age-calculator': GovtJobAgeTool,
+  'bcs-marks-calculator': BcsMarksTool,
+  'negative-marking-calculator': NegativeMarkingTool,
+  'gk-flashcard': GkFlashcardTool,
+  'vocabulary-trainer': VocabularyTrainerTool,
+  'application-fee-calculator': ApplicationFeeTool,
+  'admit-card-checklist': AdmitCardChecklistTool,
+  'exam-seat-plan-generator': ExamSeatPlanTool,
+  'merit-rank-result-sheet': MeritRankTool,
+  'pass-fail-analyzer': PassFailTool,
+  'printable-paper-generator': PrintablePaperTool,
+  'academic-calendar-maker': AcademicCalendarTool,
+  'quiz-stopwatch-timer': QuizStopwatchTool,
+  'random-student-group-maker': RandomStudentGroupTool,
+  'assignment-cover-generator': AssignmentCoverTool,
+  'word-counter': WordCounterTool,
+  'text-case-converter': TextCaseConverterTool,
+  'duplicate-line-remover': DuplicateLineRemoverTool,
+  'text-diff-checker': TextDiffCheckerTool,
+  'find-and-replace': FindAndReplaceTool,
+  'number-to-words-converter': NumberToWordsConverterTool,
+  'lorem-ipsum-generator': LoremIpsumGeneratorTool,
+  'citation-generator': CitationGeneratorTool,
+  'json-formatter': JsonFormatterTool,
+  'code-minifier-beautifier': CodeMinifierBeautifierTool,
+  'base64-encoder-decoder': Base64EncoderDecoderTool,
+  'url-encoder-decoder': UrlEncoderDecoderTool,
+  'regex-tester': RegexTesterTool,
+  'uuid-hash-generator': UuidHashGeneratorTool,
+  'color-converter': ColorConverterTool,
+  'css-gradient-generator': CssGradientGeneratorTool,
+  'meta-tag-generator': MetaTagGeneratorTool,
+  'robots-sitemap-generator': RobotsSitemapGeneratorTool,
+  'remove-extra-spaces': RemoveExtraSpacesTool,
+  'fancy-text-generator': FancyTextGeneratorTool,
+  'reverse-text-generator': ReverseTextGeneratorTool,
+  'credit-card-validator': CreditCardValidatorTool,
+  'roman-numeral-converter': RomanNumeralConverterTool,
+  'jwt-token-decoder': JwtTokenDecoderTool,
+  'html-table-generator': HtmlTableGeneratorTool,
+  'youtube-thumbnail-downloader': YoutubeThumbnailDownloaderTool,
+  'whatsapp-link-generator': WhatsappLinkGeneratorTool,
+  'screen-resolution-checker': ScreenResolutionCheckerTool,
+  'speech-to-text': SpeechToTextTool,
+  'hijri-date-converter': HijriDateConverterTool,
+  'daily-quran-verse': DailyQuranVerseTool,
+  'daily-hadith': DailyHadithTool,
+  'qibla-direction': QiblaDirectionTool,
+  'sehri-iftar-time': SehriIftarTool,
+  'electricity-bill-calculator': ElectricityBillCalculatorTool,
+  'meeting-time-planner': MeetingTimePlannerTool,
+  'world-date-converter': WorldDateConverterTool,
+  'govt-service-links': GovtServiceLinksTool,
+  'results-hub': ResultsHubTool,
+  'notes-todo': NotesTodoTool,
+  'tasbih-counter': TasbihCounterTool,
 };
 
 const gridStyle: CSSProperties = {
@@ -137,7 +355,7 @@ export default function ToolsDetailPage() {
           bn="এই ঠিকানায় কোনো টুল নেই।"
           en="There is no tool at this address."
         />
-        <LinkButton to="/tools" variant="primary">
+        <LinkButton to={langUrl('/tools', lang)} variant="primary">
           {lang === 'bn' ? 'সব টুল' : 'All tools'}
         </LinkButton>
       </PageShell>
@@ -205,7 +423,7 @@ export default function ToolsDetailPage() {
             {related.map((relatedMeta) => (
               <Link
                 key={relatedMeta.slug}
-                to={`/tools/${relatedMeta.slug}`}
+                to={langUrl(`/tools/${relatedMeta.slug}`, lang)}
                 className="ev-card ev-card-hover"
                 style={{ display: 'block', textDecoration: 'none', color: 'var(--heading)', minHeight: 44 }}
               >

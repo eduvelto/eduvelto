@@ -6,7 +6,7 @@
 // inline SVGs: 24x24, stroke-based, white on a gradient tile.
 //
 // The set is deliberately small and curated: ~100 simple glyphs shared
-// by the 140 tools (about 1.4 tools per glyph). Tools that do the same
+// by the 141 tools (about 1.4 tools per glyph). Tools that do the same
 // thing share a glyph (all format converters share `convert`, all
 // calculators that show a scale share `scale`), while tools whose
 // function is visibly different get their own (merge / split /
@@ -317,6 +317,12 @@ const ICON_PATHS = {
   pulse: (
     <>
       <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+    </>
+  ),
+  flask: (
+    <>
+      <path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.3 21.5h11.4a2 2 0 0 0 1.8-3L14 9V3" />
+      <path d="M7.5 15h9" />
     </>
   ),
   stopwatch: (
@@ -735,7 +741,7 @@ export type ToolIconName = keyof typeof ICON_PATHS;
 export const TOOL_ICON_NAMES: ToolIconName[] = Object.keys(ICON_PATHS) as ToolIconName[];
 
 // ---------------------------------------------------------------------------
-// Slug -> icon. Every one of the 140 slugs has an explicit entry here
+// Slug -> icon. Every one of the 141 slugs has an explicit entry here
 // (guarded by tests); `toolIconFor` falls back to the category icon
 // for any slug added later without an entry, so a tool never renders
 // a letter or an empty tile.
@@ -801,6 +807,7 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'bmr-calculator': 'flame',
   'pace-speed-calculator': 'stopwatch',
   'ovulation-calculator': 'calendarHeart',
+  'lab-test-result-checker': 'flask',
   // Education & Student (10)
   'ssc-hsc-gpa-calculator': 'gradCap',
   'nu-cgpa-calculator': 'openBook',
