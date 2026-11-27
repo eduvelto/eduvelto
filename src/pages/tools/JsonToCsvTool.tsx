@@ -3,6 +3,7 @@
 // Engine: jsonToCsv() + csvToJson() in src/lib/tools/docConverters.ts. 100% in-browser; nothing is uploaded.
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {ToolHero, CopyButton, ButtonRow, ExampleButton, ClearButton, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { jsonToCsv, csvToJson } from '../../lib/tools/docConverters';
 
@@ -29,7 +30,7 @@ function downloadText(filename: string, text: string, type = 'text/plain'): void
 const SAMPLE_JSON = '[\n  {"name": "Rahim", "marks": 85},\n  {"name": "Karim", "marks": 90},\n  {"name": "Salma", "marks": 78}\n]';
 
 export function JsonToCsvTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [mode, setMode] = useState<'json-csv' | 'csv-json'>('json-csv');
   const [input, setInput] = useState(SAMPLE_JSON);
   const result = useMemo(() => {
@@ -76,9 +77,8 @@ export function JsonToCsvTool() {
           </div>
           <ButtonRow>
             <CopyButton text={result.output} labelBn="ফলাফল কপি করুন" labelEn="Copy result" />
-            <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={() => downloadText(mode === 'json-csv' ? 'eduvelto-table.csv' : 'eduvelto-data.json', result.output, mode === 'json-csv' ? 'text/csv' : 'application/json')}>
-              {t({ bn: 'ডাউনলোড করুন', en: 'Download' })}
-            </button>
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadText(mode === 'json-csv' ? 'eduvelto-table.csv' : 'eduvelto-data.json', result.output, mode === 'json-csv' ? 'text/csv' : 'application/json')} />
           </ButtonRow>
         </>
       )}

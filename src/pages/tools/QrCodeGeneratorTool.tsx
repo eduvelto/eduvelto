@@ -1,8 +1,9 @@
 // Eduvelto — QR Code Generator tool UI (landed 27 Nov 2026, A-tools).
 // Renders inside ToolsDetailPage's PageShell (no own h1 / Breadcrumb).
 // Engine: buildQrPayload() + generateQrDataUrl()/generateQrSvg() in src/lib/tools/qrBarcode.ts; qrcode loads via dynamic import() only. 100% in-browser; nothing is uploaded.
-import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { useRef, useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {ToolHero, CopyButton, ButtonRow, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { buildQrPayload, checkQrLength, qrContrastOk, type QrContentKind, type QrErrorCorrection } from '../../lib/tools/qrBarcode';
 import { generateQrDataUrl, generateQrSvg } from '../../lib/tools/qrBarcode';
@@ -38,7 +39,7 @@ const KINDS: readonly { id: QrContentKind; bn: string; en: string }[] = [
 ];
 
 export function QrCodeGeneratorTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [kind, setKind] = useState<QrContentKind>('url');
   const [text, setText] = useState('https://eduvelto.com');
   const [ssid, setSsid] = useState('');
@@ -54,6 +55,7 @@ export function QrCodeGeneratorTool() {
   const [dark, setDark] = useState('#000000');
   const [light, setLight] = useState('#ffffff');
   const [dataUrl, setDataUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const payload = useMemo(() => {
@@ -215,8 +217,11 @@ export function QrCodeGeneratorTool() {
         <div style={{ marginTop: 16, textAlign: 'center' }}>
           <img src={dataUrl} alt={t({ bn: 'তৈরি করা কিউআর কোড', en: 'Generated QR code' })} style={{ width: 256, height: 256, imageRendering: 'pixelated', border: '1px solid var(--line)', borderRadius: 12, background: light }} />
           <ButtonRow>
-            <a href={dataUrl} download="eduvelto-qr.png" style={{ minHeight: 44, lineHeight: '44px', padding: '0 18px', borderRadius: 8, background: 'var(--teal)', color: '#fff', fontWeight: 700, textDecoration: 'none' }}>{t({ bn: 'PNG ডাউনলোড করুন', en: 'Download PNG' })}</a>
-            <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={() => void downloadSvg()}>{t({ bn: 'SVG ডাউনলোড করুন', en: 'Download SVG' })}</button>
+            <a ref={downloadRef} href={dataUrl} download="eduvelto-qr.png" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). PNG download. */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). SVG download. */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => void downloadSvg()} />
             <CopyButton text={payload ?? ''} labelBn="লেখাটি কপি করুন" labelEn="Copy the text" />
           </ButtonRow>
         </div>

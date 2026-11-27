@@ -644,7 +644,8 @@ export function LabTestResultCheckerTool() {
           ) : (
             <div>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 12 }}>
-                <RewardedAdButton lang={lang} onFreeDownload={handleExportHistory} />
+                {/* Ads rollout B3 (27 Nov 2026): history CSV is a light export — 15s, not the 30s default. The summary PDF gate below stays 30s. */}
+                <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={handleExportHistory} />
                 {exportedNote ? (
                   <span style={{ color: 'var(--teal-deep)', fontSize: 14 }}>
                     {t({ bn: 'CSV ফাইল ডাউনলোড হয়েছে।', en: 'CSV file downloaded.' })}

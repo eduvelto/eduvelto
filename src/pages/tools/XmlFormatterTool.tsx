@@ -3,6 +3,7 @@
 // Engine: formatXml() + minifyXml() in src/lib/tools/docConverters.ts (hand-rolled tokenizer, no dependency). 100% in-browser; nothing is uploaded.
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {ToolHero, CopyButton, ButtonRow, ExampleButton, ClearButton, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { formatXml, minifyXml } from '../../lib/tools/docConverters';
 
@@ -29,7 +30,7 @@ function downloadText(filename: string, text: string, type = 'text/plain'): void
 const SAMPLE_XML = '<note><to>Rahim</to><from>Karim</from><heading>Reminder</heading><body>Class starts at 10am.</body></note>';
 
 export function XmlFormatterTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [input, setInput] = useState(SAMPLE_XML);
   const [indent, setIndent] = useState(2);
   const [minify, setMinify] = useState(false);
@@ -76,9 +77,8 @@ export function XmlFormatterTool() {
           </div>
           <ButtonRow>
             <CopyButton text={result.output} labelBn="ফলাফল কপি করুন" labelEn="Copy result" />
-            <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={() => downloadText('eduvelto-formatted.xml', result.output, 'application/xml')}>
-              {t({ bn: '.xml ডাউনলোড করুন', en: 'Download .xml' })}
-            </button>
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadText('eduvelto-formatted.xml', result.output, 'application/xml')} />
           </ButtonRow>
         </>
       )}

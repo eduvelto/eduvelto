@@ -6,6 +6,7 @@
 
 import { useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { hexToRgb, rgbToHex, rgbToHsl } from '../../lib/tools/imageConvert';
 import {
   cardStyle, CopyButton, errorStyle, gridStyle, headlineLabelStyle, headlineStyle,
@@ -18,7 +19,7 @@ interface Picked { r: number; g: number; b: number; x: number; y: number; }
 const PRESET_HEX = ['#0b7285', '#14532d', '#f59e0b', '#dc2626', '#2563eb', '#7c3aed', '#db2777', '#111827', '#ffffff', '#f8fafc'];
 
 export function ImageColorPickerTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [imgUrl, setImgUrl] = useState<string | null>(null);
   const [imgEl, setImgEl] = useState<HTMLImageElement | null>(null);
   const [picked, setPicked] = useState<Picked | null>(null);
@@ -181,20 +182,10 @@ export function ImageColorPickerTool() {
             </p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               <CopyButton text={paletteText} label={t({ bn: 'প্যালেট কপি করুন', en: 'Copy palette' })} />
-              <button
-                type="button"
-                onClick={() => downloadPalette('eduvelto-palette.txt', paletteText, 'text/plain;charset=utf-8')}
-                style={{ minHeight: 36, padding: '0 14px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }}
-              >
-                {t({ bn: '.txt ডাউনলোড করুন', en: 'Download .txt' })}
-              </button>
-              <button
-                type="button"
-                onClick={() => downloadPalette('eduvelto-palette.css', paletteCss, 'text/css;charset=utf-8')}
-                style={{ minHeight: 36, padding: '0 14px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }}
-              >
-                {t({ bn: '.css ডাউনলোড করুন', en: 'Download .css' })}
-              </button>
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadPalette('eduvelto-palette.txt', paletteText, 'text/plain;charset=utf-8')} />
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadPalette('eduvelto-palette.css', paletteCss, 'text/css;charset=utf-8')} />
             </div>
             <p style={noteStyle}>
               {t({

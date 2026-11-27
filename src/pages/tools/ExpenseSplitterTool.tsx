@@ -338,7 +338,7 @@ export function ExpenseSplitterTool() {
                   en: `Formula: each share = total ৳${fmtMoney(totalV as number)} × (own ratio ÷ sum of all ratios). The shares add up to the total exactly.`,
                 })}
           </p>
-          <SummaryDownload filename="expense-split-summary.txt" text={summary} />
+          <SummaryDownload filename="expense-split-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : invalid ? (
         <p style={errorStyle} role="alert">

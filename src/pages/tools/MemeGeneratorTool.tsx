@@ -7,9 +7,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { memeFontSize, memeMaxChars, wrapMemeText } from '../../lib/tools/faviconMeme';
 import {
-  cardStyle, downloadStyle, errorStyle, gridStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, gridStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, previewStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
@@ -43,7 +44,7 @@ function drawMeme(canvas: HTMLCanvasElement, img: HTMLImageElement, top: string,
 }
 
 export function MemeGeneratorTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [imgEl, setImgEl] = useState<HTMLImageElement | null>(null);
   const [topText, setTopText] = useState('');
@@ -51,6 +52,7 @@ export function MemeGeneratorTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultBytes, setResultBytes] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -145,7 +147,9 @@ export function MemeGeneratorTool() {
             <Tile label={t({ bn: 'নিচের লেখা', en: 'Bottom text' })} value={bottomText.trim() || '—'} />
             <Tile label={t({ bn: 'ফাইলের আকার', en: 'File size' })} value={`${(resultBytes / 1024).toFixed(1)} KB`} />
           </div>
-          <a href={resultUrl} download="meme.png" style={downloadStyle}>{t({ bn: 'মিম ডাউনলোড করুন (PNG)', en: 'Download the meme (PNG)' })}</a>
+          <a ref={downloadRef} href={resultUrl} download="meme.png" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B3 (27 Nov 2026): this image download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

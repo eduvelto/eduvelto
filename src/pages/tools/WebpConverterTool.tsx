@@ -3,12 +3,13 @@
 // Logic in src/lib/tools/imageConvert.ts (canvas). File stays on device.
 // Two directions: any image -> WebP, or WebP -> JPG/PNG.
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { convertImage, realImageDeps, type ImageMime } from '../../lib/tools/imageConvert';
 import {
-  cardStyle, downloadStyle, errorStyle, fmtBytes, gridStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, fmtBytes, gridStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, previewStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
@@ -16,7 +17,7 @@ import {
 type Direction = 'to-webp' | 'from-webp';
 
 export function WebpConverterTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [direction, setDirection] = useState<Direction>('to-webp');
@@ -25,6 +26,7 @@ export function WebpConverterTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [result, setResult] = useState<{ width: number; height: number; bytes: number; format: ImageMime } | null>(null);
 
   function handleFile(next: File | null): void {
@@ -116,7 +118,9 @@ export function WebpConverterTool() {
             <Tile label={t({ bn: 'মান', en: 'Quality' })} value={`${Math.round(Number(quality) * 100)}%`} />
           </div>
           <img src={resultUrl} alt={t({ bn: 'রূপান্তরিত ছবির প্রিভিউ', en: 'Preview of the converted image' })} style={previewStyle} />
-          <a href={resultUrl} download={`converted.${ext}`} style={downloadStyle}>{t({ bn: 'ছবি ডাউনলোড করুন', en: 'Download the image' })}</a>
+          <a ref={downloadRef} href={resultUrl} download={`converted.${ext}`} style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B3 (27 Nov 2026): this image download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

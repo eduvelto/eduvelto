@@ -7,9 +7,10 @@
 import { useEffect, useRef, useState, type ReactElement } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { computeCropRect, convertImage, realImageDeps } from '../../lib/tools/imageConvert';
 import {
-  cardStyle, downloadStyle, errorStyle, gridStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, gridStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, previewStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
@@ -25,7 +26,7 @@ const PRESETS: { id: string; bn: string; en: string; crop: Crop }[] = [
 ];
 
 export function ImageCropperTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [imgEl, setImgEl] = useState<HTMLImageElement | null>(null);
   const [crop, setCrop] = useState<Crop>({ x: 0.1, y: 0.1, w: 0.8, h: 0.8 });
@@ -33,6 +34,7 @@ export function ImageCropperTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [result, setResult] = useState<{ width: number; height: number; bytes: number } | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -154,7 +156,9 @@ export function ImageCropperTool() {
             <Tile label={t({ bn: 'নতুন আকার', en: 'New size' })} value={`${result.width}×${result.height}`} />
             <Tile label={t({ bn: 'ফাইলের আকার', en: 'File size' })} value={`${(result.bytes / 1024).toFixed(1)} KB`} />
           </div>
-          <a href={resultUrl} download={format === 'image/png' ? 'cropped.png' : 'cropped.jpg'} style={downloadStyle}>{t({ bn: 'ক্রপ করা ছবি ডাউনলোড করুন', en: 'Download the cropped image' })}</a>
+          <a ref={downloadRef} href={resultUrl} download={format === 'image/png' ? 'cropped.png' : 'cropped.jpg'} style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B3 (27 Nov 2026): this image download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

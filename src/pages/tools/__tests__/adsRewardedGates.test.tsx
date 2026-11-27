@@ -8,8 +8,9 @@
 // the owner order forbids. Render checks below prove the gate is absent
 // until a result exists (the tool itself is never blocked behind an ad).
 //
-// The 15s gates (B3) are covered by the same map once they land — this
-// file is extended then; B2 files must all use the 30s default (no
+// The 15s gates (B3) are covered by the same map (ONE_GATE_15S /
+// TWO_GATE_15S below, plus the finance 15s fix and the Lab history-CSV
+// 15s fix). B2 files must all use the 30s default (no
 // durationSeconds={15} may appear in a B2 file).
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -29,9 +30,12 @@ function src(dir: string, file: string): string {
   const raw = readFileSync(join(dir, file), 'utf8');
   // Strip comments first: header comments name <RewardedAdButton> without
   // mounting one (e.g. CertificateMakerTool, Lab) and would inflate the count.
+  // Only real comments are stripped — a /* inside a string literal such as
+  // accept="image/*" (BackgroundRemoverTool) must NOT start a comment span.
   return raw
     .replace(/^\s*\/\/.*$/gm, '')
-    .replace(/\/\*[\s\S]*?\*\//g, '');
+    .replace(/^\s*\/\*[\s\S]*?\*\//gm, '')
+    .replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
 }
 
 function gateCount(text: string): number {
@@ -68,9 +72,45 @@ const ONE_GATE_30S = [
   'VideoCompressorTool.tsx',
 ];
 
-/** Finance summaries (B3 duration fix pending): one gate per summary,
- *  three per tabbed tool — each tab is its own download action with
- *  its own filename. */
+/** One gate per file, 15s (ads rollout B3). */
+const ONE_GATE_15S = [
+  'ImageCompressorTool.tsx',
+  'ImageResizerTool.tsx',
+  'ImageCropperTool.tsx',
+  'JpgToPngTool.tsx',
+  'PngToJpgTool.tsx',
+  'WebpConverterTool.tsx',
+  'HeicToJpgTool.tsx',
+  'ImageWatermarkMakerTool.tsx',
+  'ImageRotateFlipTool.tsx',
+  'ImageFilterTool.tsx',
+  'FaviconGeneratorTool.tsx',
+  'MemeGeneratorTool.tsx',
+  'ExifViewerRemoverTool.tsx',
+  'CsvToExcelTool.tsx',
+  'CharacterCounterTool.tsx',
+  'TextSorterTool.tsx',
+  'StopwatchTool.tsx',
+  'RandomNumberTool.tsx',
+  'FlashcardMakerTool.tsx',
+  'ExcelToCsvTool.tsx',
+  'JsonToCsvTool.tsx',
+  'XmlFormatterTool.tsx',
+  'MarkdownToHtmlTool.tsx',
+  'HtmlToMarkdownTool.tsx',
+];
+
+/** Two gates per file, 15s — each guards a DIFFERENT download. */
+const TWO_GATE_15S: Record<string, string[]> = {
+  'ImageColorPickerTool.tsx': ['eduvelto-palette.txt', 'eduvelto-palette.css'],
+  'QrCodeGeneratorTool.tsx': ['eduvelto-qr.png', 'downloadSvg'],
+  'BarcodeGeneratorTool.tsx': ['downloadPng', 'downloadSvg'],
+  'BackgroundRemoverTool.tsx': ['background-removed.png', 'background-removed-ai.png'],
+};
+
+/** Finance summaries (B3 duration fix: all 15s now): one gate per
+ *  summary, three per tabbed tool — each tab is its own download
+ *  action with its own filename. */
 const SUMMARY_GATES: Record<string, { count: number; filenames: string[] }> = {
   'MortgageTool.tsx': { count: 1, filenames: ['mortgage-summary.txt'] },
   'CompoundInterestTool.tsx': { count: 1, filenames: ['compound-interest-summary.txt'] },
@@ -99,12 +139,60 @@ describe('ads rollout: one rewarded gate per download action', () => {
     }
   });
 
-  it('Lab has exactly two gates for its two different downloads', () => {
+  it('each 15s tool file has exactly one gate, at 15s', () => {
+    for (const file of ONE_GATE_15S) {
+      const text = src(TOOLS_DIR, file);
+      expect(gateCount(text), `${file}: exactly one rewarded gate`).toBe(1);
+      expect(text, `${file}: the gate is 15s`).toContain('durationSeconds={15}');
+      expect(text, `${file}: no 30s gate`).not.toContain('durationSeconds={30}');
+    }
+  });
+
+  it('each two-download 15s tool has exactly two gates, each for its own file', () => {
+    for (const [file, markers] of Object.entries(TWO_GATE_15S)) {
+      const text = src(TOOLS_DIR, file);
+      expect(gateCount(text), `${file}: exactly two rewarded gates`).toBe(2);
+      expect((text.match(/durationSeconds=\{15\}/g) ?? []).length, `${file}: both gates 15s`).toBe(2);
+      for (const marker of markers) {
+        expect(text, `${file}: guards ${marker}`).toContain(marker);
+      }
+    }
+  });
+
+  it('PdfToJpg has one gate source line, rendered once per page row', () => {
+    const text = src(TOOLS_DIR, 'PdfToJpgTool.tsx');
+    expect(gateCount(text)).toBe(1);
+    expect(text).toContain('durationSeconds={15}');
+    expect(text).toContain('results.map');
+    expect(text).toContain('rowRefs');
+  });
+
+  it('Smartboard PNG export has exactly one 15s gate; Pro exports have none', () => {
+    const text = src(PAGES_DIR, 'SmartboardPage.tsx');
+    expect(gateCount(text)).toBe(1);
+    expect(text).toContain('durationSeconds={15}');
+    expect(text).toContain('exportPng');
+    expect(text).toContain('exportPdf');
+  });
+
+  it('Lab history CSV is 15s and the summary PDF stays 30s', () => {
     const text = src(TOOLS_DIR, 'LabTestResultCheckerTool.tsx');
     expect(gateCount(text)).toBe(2);
+    expect((text.match(/durationSeconds=\{15\}/g) ?? []).length).toBe(1);
+    expect(text).not.toContain('durationSeconds={30}');
     expect(text).toContain('handleExportHistory');
     expect(text).toContain('onSummaryPdf');
-    expect(text).not.toContain('durationSeconds={15}');
+  });
+
+  it('every finance SummaryDownload site is 15s', () => {
+    for (const [file, expected] of Object.entries(SUMMARY_GATES)) {
+      const text = src(TOOLS_DIR, file);
+      expect(gateCount(text), `${file}: gate count`).toBe(expected.count);
+      expect(
+        (text.match(/<SummaryDownload[^>]*durationSeconds=\{15\}/g) ?? []).length,
+        `${file}: all SummaryDownload sites 15s`,
+      ).toBe(expected.count);
+    }
   });
 
   it('LifePdfToolsPage has exactly two gates for its two PDF downloads', () => {
@@ -174,6 +262,15 @@ describe('ads rollout: no gate before a result exists', () => {
       ['../PdfCompressorTool', 'PdfCompressorTool'],
       ['../InvoiceGeneratorTool', 'InvoiceGeneratorTool'],
       ['../VideoTrimmerTool', 'VideoTrimmerTool'],
+      // B3: 15s tools — no gate until a result/export exists. (Tools
+      // whose old download button was always visible, e.g.
+      // CharacterCounter / Barcode, keep an always-visible gate in its
+      // place — the gate IS the download button there — so they are
+      // covered by the source counts above, not by this render check.)
+      ['../ImageCompressorTool', 'ImageCompressorTool'],
+      ['../QrCodeGeneratorTool', 'QrCodeGeneratorTool'],
+      ['../CsvToExcelTool', 'CsvToExcelTool'],
+      ['../ImageColorPickerTool', 'ImageColorPickerTool'],
     ] as const) {
       const html = await renderTool(mod, name);
       expect(html, `${name}: no gate in the empty state`).not.toContain('Free Download');

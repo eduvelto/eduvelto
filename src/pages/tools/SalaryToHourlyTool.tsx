@@ -257,7 +257,7 @@ export function SalaryToHourlyTool() {
               en: `Formula: yearly salary = ৳${fmtMoney(result.yearly)}; working hours per year = ${hoursV} × 52 = ${(hoursV as number) * 52}; hourly = ৳${fmtMoney(result.yearly)} ÷ ${(hoursV as number) * 52} = ৳${fmtMoney(result.hourly)}. The daily rate assumes a 5-day working week.`,
             })}
           </p>
-          <SummaryDownload filename="salary-to-hourly-summary.txt" text={summary} />
+          <SummaryDownload filename="salary-to-hourly-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : invalid ? (
         <p style={errorStyle} role="alert">

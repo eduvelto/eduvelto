@@ -322,7 +322,7 @@ export function DiscountVatProfitTool() {
               en: `Formula: discount = ৳${fmtMoney(priceV as number)} × ${discountV}% ÷ 100 = ৳${fmtMoney(discountResult.discountAmount)}; pay = ৳${fmtMoney(priceV as number)} − ৳${fmtMoney(discountResult.discountAmount)} = ৳${fmtMoney(discountResult.finalPrice)}.`,
             })}
           </p>
-          <SummaryDownload filename="discount-summary.txt" text={summary} />
+          <SummaryDownload filename="discount-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : vatResult ? (
         <div style={resultStyle} role="status">
@@ -371,7 +371,7 @@ export function DiscountVatProfitTool() {
               en: 'The VAT rate is an example only — in Bangladesh the rate differs by product and service (e.g. 5%, 7.5%, 10%, 15%). Check the correct rate for your item in the NBR schedule. Noted: 27 Nov 2026.',
             })}
           </p>
-          <SummaryDownload filename="vat-summary.txt" text={summary} />
+          <SummaryDownload filename="vat-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : profitResult ? (
         <div style={resultStyle} role="status">
@@ -415,7 +415,7 @@ export function DiscountVatProfitTool() {
               en: `Formula: profit = ৳${fmtMoney(sellingV as number)} − ৳${fmtMoney(costV as number)} = ৳${fmtMoney(profitResult.profit)}; margin = ৳${fmtMoney(profitResult.profit)} ÷ ৳${fmtMoney(sellingV as number)} × 100 = ${profitResult.profitMarginPercent}%.`,
             })}
           </p>
-          <SummaryDownload filename="profit-summary.txt" text={summary} />
+          <SummaryDownload filename="profit-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : invalid ? (
         <p style={errorStyle} role="alert">

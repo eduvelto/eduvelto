@@ -356,7 +356,7 @@ export function RetirementSavingsTool() {
               en: 'The rate is an example only — the actual return depends on the fund and can change; inflation is not included. Noted: 27 Nov 2026.',
             })}
           </p>
-          <SummaryDownload filename="retirement-savings-summary.txt" text={summary} />
+          <SummaryDownload filename="retirement-savings-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : invalid ? (
         <p style={errorStyle} role="alert">

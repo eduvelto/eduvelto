@@ -314,7 +314,7 @@ export function IncomeTaxTool() {
               en: 'This is an estimate — exemptions, rebates, surcharge and other categories (different tax-free limits) are not included. Check the current NBR rules before filing.',
             })}
           </p>
-          <SummaryDownload filename="income-tax-summary.txt" text={summary} />
+          <SummaryDownload filename="income-tax-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : invalid ? (
         <p style={errorStyle} role="alert">

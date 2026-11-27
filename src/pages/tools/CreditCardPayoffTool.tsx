@@ -252,7 +252,7 @@ export function CreditCardPayoffTool() {
                 en: 'The APR is an example only — the real rate differs by card and bank. Check your own card statement for the current rate. Noted: 27 Nov 2026.',
               })}
             </p>
-            <SummaryDownload filename="credit-card-payoff-summary.txt" text={summary} />
+            <SummaryDownload filename="credit-card-payoff-summary.txt" text={summary} durationSeconds={15} />
           </div>
         ) : (
           <div style={resultStyle} role="status">

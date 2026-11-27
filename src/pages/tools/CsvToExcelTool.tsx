@@ -3,6 +3,7 @@
 // Engine: parseCsv() / detectDelimiter() in src/lib/tools/docConverters.ts; .xlsx writing via SheetJS (xlsx) loaded with dynamic import() only. 100% in-browser; nothing is uploaded.
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {ToolHero, Tiles, ButtonRow, ExampleButton, ClearButton, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { parseCsv, detectDelimiter } from '../../lib/tools/docConverters';
 
@@ -28,7 +29,7 @@ function downloadBlob(filename: string, blob: Blob): void {
 const SAMPLE_CSV = 'নাম,রোল,নম্বর\nরহিম,1,85\nকরিম,2,90\nসালমা,3,78';
 
 export function CsvToExcelTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [csv, setCsv] = useState(SAMPLE_CSV);
   const [delimiter, setDelimiter] = useState<',' | ';' | '\t' | 'auto'>('auto');
   const [hasHeader, setHasHeader] = useState(true);
@@ -36,6 +37,9 @@ export function CsvToExcelTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
+  // Ads rollout B3 (27 Nov 2026): the .xlsx is built first and stored;
+  // the download goes through RewardedAdButton (15s) below.
+  const [xlsxBlob, setXlsxBlob] = useState<Blob | null>(null);
 
   const parsed = useMemo(() => {
     try {
@@ -61,6 +65,7 @@ export function CsvToExcelTool() {
   async function handleDownload(): Promise<void> {
     setError(null);
     setDone(null);
+    setXlsxBlob(null);
     const safeName = sheetName.replace(/[\[\]:*?/\\]/g, '').trim() || 'Sheet1';
     if (safeName !== sheetName) {
       setError(t({ bn: 'শিটের নামে [ ] : * ? / \ চিহ্ন দেওয়া যায় না।', en: 'Sheet names cannot contain [ ] : * ? / \.' }));
@@ -76,8 +81,8 @@ export function CsvToExcelTool() {
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, safeName);
       const out = XLSX.write(wb, { bookType: 'xlsx', type: 'array' }) as ArrayBuffer;
-      downloadBlob('eduvelto-table.xlsx', new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
-      setDone(t({ bn: `ডাউনলোড হয়েছে: ${rows.length} সারি, ${rows[0]?.length ?? 0} কলাম।`, en: `Downloaded: ${rows.length} rows, ${rows[0]?.length ?? 0} columns.` }));
+      setXlsxBlob(new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
+      setDone(t({ bn: `Excel ফাইল তৈরি হয়েছে: ${rows.length} সারি, ${rows[0]?.length ?? 0} কলাম — নিচে বিনামূল্যে ডাউনলোড করুন।`, en: `Excel file is ready: ${rows.length} rows, ${rows[0]?.length ?? 0} columns — download it free below.` }));
     } catch {
       setError(t({ bn: 'Excel ফাইল বানানো যায়নি — আবার চেষ্টা করুন।', en: 'Could not create the Excel file — please try again.' }));
     } finally {
@@ -142,9 +147,15 @@ export function CsvToExcelTool() {
           </div>
           <ButtonRow>
             <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: 'none', background: 'var(--teal)', color: '#fff', fontWeight: 700, cursor: 'pointer' }} onClick={() => void handleDownload()} disabled={busy}>
-              {busy ? t({ bn: 'বানানো হচ্ছে…', en: 'Creating…' }) : t({ bn: '.xlsx ডাউনলোড করুন', en: 'Download .xlsx' })}
+              {busy ? t({ bn: 'বানানো হচ্ছে…', en: 'Creating…' }) : t({ bn: '.xlsx বানান', en: 'Create .xlsx' })}
             </button>
           </ButtonRow>
+          {xlsxBlob ? (
+            <div style={{ marginTop: 12 }}>
+              {/* Ads rollout B3 (27 Nov 2026): this .xlsx download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+              <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadBlob('eduvelto-table.xlsx', xlsxBlob)} />
+            </div>
+          ) : null}
           {done ? <p style={noteStyle} role="status">{done}</p> : null}
         </>
       ) : null}

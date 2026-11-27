@@ -3,6 +3,7 @@
 // Engine: markdownToHtml() in src/lib/tools/docConverters.ts (safe subset — raw HTML is escaped, never rendered). 100% in-browser; nothing is uploaded.
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {ToolHero, CopyButton, ButtonRow, ExampleButton, ClearButton, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { markdownToHtml } from '../../lib/tools/docConverters';
 
@@ -29,7 +30,7 @@ function downloadText(filename: string, text: string, type = 'text/plain'): void
 const SAMPLE_MD = '# স্বাগতম\n\nEduvelto is a **free** learning platform for Bangladesh.\n\n- পড়াশোনা\n- চাকরির প্রস্তুতি\n- দরকারি টুলস\n\n[Eduvelto](https://eduvelto.com) দেখুন।\n\n> প্রতিদিন একটু একটু করে পড়ুন।';
 
 export function MarkdownToHtmlTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [input, setInput] = useState(SAMPLE_MD);
   const result = useMemo(() => {
     try { return { html: markdownToHtml(input).html }; } catch (e) {
@@ -62,9 +63,8 @@ export function MarkdownToHtmlTool() {
           </div>
           <ButtonRow>
             <CopyButton text={result.html} labelBn="HTML কপি করুন" labelEn="Copy HTML" />
-            <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={() => downloadText('eduvelto-page.html', `<!doctype html>\n<html lang="bn">\n<head>\n<meta charset="utf-8">\n<title>Eduvelto page</title>\n</head>\n<body>\n${result.html}\n</body>\n</html>\n`, 'text/html')}>
-              {t({ bn: '.html ডাউনলোড করুন', en: 'Download .html' })}
-            </button>
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadText('eduvelto-page.html', `<!doctype html>\n<html lang="bn">\n<head>\n<meta charset="utf-8">\n<title>Eduvelto page</title>\n</head>\n<body>\n${result.html}\n</body>\n</html>\n`, 'text/html')} />
           </ButtonRow>
         </>
       )}

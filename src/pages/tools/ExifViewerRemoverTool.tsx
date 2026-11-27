@@ -4,12 +4,13 @@
 // Removal = canvas re-encode, which drops every metadata segment.
 // File stays on device. A missing tag is shown as missing, never invented.
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { formatGps, parseExif, stripExif, type ExifData } from '../../lib/tools/exif';
 import {
-  cardStyle, downloadStyle, errorStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, previewStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
@@ -24,13 +25,14 @@ function Row({ label, value }: { label: string; value: string | number | undefin
 }
 
 export function ExifViewerRemoverTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [exif, setExif] = useState<ExifData | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [cleanUrl, setCleanUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [cleanBytes, setCleanBytes] = useState(0);
   const [cleanFormat, setCleanFormat] = useState<'image/jpeg' | 'image/png'>('image/jpeg');
 
@@ -136,7 +138,9 @@ export function ExifViewerRemoverTool() {
             <Tile label={t({ bn: 'পরের আকার', en: 'After' })} value={`${(cleanBytes / 1024).toFixed(1)} KB`} />
             <Tile label={t({ bn: 'ফরম্যাট', en: 'Format' })} value={cleanFormat === 'image/png' ? 'PNG' : 'JPG'} />
           </div>
-          <a href={cleanUrl} download={cleanFormat === 'image/png' ? 'clean.png' : 'clean.jpg'} style={downloadStyle}>{t({ bn: 'পরিষ্কার ছবি ডাউনলোড করুন', en: 'Download the clean image' })}</a>
+          <a ref={downloadRef} href={cleanUrl} download={cleanFormat === 'image/png' ? 'clean.png' : 'clean.jpg'} style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B3 (27 Nov 2026): this image download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

@@ -280,7 +280,7 @@ export function BreakEvenTool() {
                 en: `Formula: contribution per unit = ৳${fmtMoney(priceV as number)} − ৳${fmtMoney(variableV as number)} = ৳${fmtMoney(result.contributionMarginPerUnit)}; break-even units = ৳${fmtMoney(fixedV as number)} ÷ ৳${fmtMoney(result.contributionMarginPerUnit)} = ${result.breakEvenUnits} (rounded up); revenue = ${result.breakEvenUnits} × ৳${fmtMoney(priceV as number)} = ৳${fmtMoney(result.breakEvenRevenue as number)}.`,
               })}
             </p>
-            <SummaryDownload filename="break-even-summary.txt" text={summary} />
+            <SummaryDownload filename="break-even-summary.txt" text={summary} durationSeconds={15} />
           </div>
         ) : (
           <div style={resultStyle} role="status">

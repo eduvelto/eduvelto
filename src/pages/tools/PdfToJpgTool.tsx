@@ -8,12 +8,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {
   baseNameOf, getPdfInfo, isPdfFile, jpegFileName, renderPdfToJpegs,
   PDF_TO_JPG_MAX_MB, PDF_TO_JPG_MAX_PAGES, type PdfInfo, type RenderedPage,
 } from '../../lib/tools/pdfToJpg';
 import {
-  cardStyle, downloadStyle, errorStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
@@ -30,7 +31,7 @@ interface RenderedJpg {
 const SCALE_PRESETS = [1, 1.5, 2, 3];
 
 export function PdfToJpgTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [info, setInfo] = useState<PdfInfo | null>(null);
   const [scale, setScale] = useState(1.5);
@@ -39,6 +40,10 @@ export function PdfToJpgTool() {
   const [progress, setProgress] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<RenderedJpg[]>([]);
+  // Ads rollout B3 (27 Nov 2026): one hidden anchor per page row, so
+  // each page's JPG download goes through its own 15s rewarded gate
+  // (one gate per download action, never two on the same file).
+  const rowRefs = useRef(new Map<number, HTMLAnchorElement | null>());
   const urlsRef = useRef<string[]>([]);
 
   useEffect(() => {
@@ -227,9 +232,9 @@ export function PdfToJpgTool() {
                 <span style={{ fontSize: 14, flex: 1, wordBreak: 'break-word' }}>
                   {t({ bn: 'পাতা ', en: 'Page ' })}{r.pageNumber} · {r.width}×{r.height} · {(r.bytes / 1024).toFixed(1)} KB
                 </span>
-                <a href={r.url} download={r.name} style={{ ...downloadStyle, marginTop: 0, lineHeight: '40px', minHeight: 40 }}>
-                  {t({ bn: 'ডাউনলোড', en: 'Download' })}
-                </a>
+                <a ref={(el) => { rowRefs.current.set(r.pageNumber, el); }} href={r.url} download={r.name} style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+                {/* Ads rollout B3 (27 Nov 2026): each page's JPG download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+                <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => rowRefs.current.get(r.pageNumber)?.click()} />
               </li>
             ))}
           </ol>

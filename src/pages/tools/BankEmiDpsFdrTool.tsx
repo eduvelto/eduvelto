@@ -386,7 +386,7 @@ export function BankEmiDpsFdrTool() {
               en: `Formula: monthly rate = ${emiRateV}% ÷ 12; EMI over ${(emiYearsV as number) * 12} payments = ৳${fmtMoney(emiResult.emi)}. Total interest = ৳${fmtMoney(emiResult.totalPayment)} − ৳${fmtMoney(loanV as number)} = ৳${fmtMoney(emiResult.totalInterest)}.`,
             })}
           </p>
-          <SummaryDownload filename="bank-emi-summary.txt" text={summary} />
+          <SummaryDownload filename="bank-emi-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : dpsResult ? (
         <div style={resultStyle} role="status">
@@ -424,7 +424,7 @@ export function BankEmiDpsFdrTool() {
               en: `Formula: ৳${fmtMoney(depositV as number)}/month for ${dpsMonthsV} months, compounded at ${dpsRateV}% yearly — maturity ৳${fmtMoney(dpsResult.maturityValue)}. Profit = ৳${fmtMoney(dpsResult.maturityValue)} − ৳${fmtMoney(dpsResult.totalDeposited)} = ৳${fmtMoney(dpsResult.interestEarned)}.`,
             })}
           </p>
-          <SummaryDownload filename="bank-dps-summary.txt" text={summary} />
+          <SummaryDownload filename="bank-dps-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : fdrResult ? (
         <div style={resultStyle} role="status">
@@ -462,7 +462,7 @@ export function BankEmiDpsFdrTool() {
               en: `Formula: ৳${fmtMoney(principalV as number)} × (1 + ${fdrRateV}% ÷ ${compoundingV})^(${compoundingV} × ${fdrYearsV}) = ৳${fmtMoney(fdrResult.maturityValue)}.`,
             })}
           </p>
-          <SummaryDownload filename="bank-fdr-summary.txt" text={summary} />
+          <SummaryDownload filename="bank-fdr-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : invalid ? (
         <p style={errorStyle} role="alert">

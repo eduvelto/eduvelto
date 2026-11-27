@@ -8,23 +8,25 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {
   convertHeicToJpg, heicJpegFileName, isHeicFile, validateHeicQuality,
   HEIC_MAX_MB,
 } from '../../lib/tools/heicToJpg';
 import {
-  cardStyle, downloadStyle, errorStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
 
 export function HeicToJpgTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [quality, setQuality] = useState(0.92);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultBytes, setResultBytes] = useState(0);
   const [dims, setDims] = useState<{ width: number; height: number } | null>(null);
   const urlRef = useRef<string | null>(null);
@@ -152,9 +154,9 @@ export function HeicToJpgTool() {
             <Tile label={t({ bn: 'আকার (পিক্সেল)', en: 'Dimensions (px)' })} value={dims ? `${dims.width}×${dims.height}` : '…'} />
           </div>
           <img src={resultUrl} alt={file ? heicJpegFileName(file.name) : 'JPG'} style={{ width: '100%', maxWidth: 320, borderRadius: 8, marginTop: 12, display: 'block' }} />
-          <a href={resultUrl} download={file ? heicJpegFileName(file.name) : 'photo.jpg'} style={{ ...downloadStyle, marginTop: 12 }}>
-            {t({ bn: 'JPG ডাউনলোড করুন', en: 'Download the JPG' })}
-          </a>
+          <a ref={downloadRef} href={resultUrl} download={file ? heicJpegFileName(file.name) : 'photo.jpg'} style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B3 (27 Nov 2026): this image download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

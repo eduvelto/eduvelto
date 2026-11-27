@@ -3,6 +3,7 @@
 // Engine: createDeck() / addCard() / editCard() / deleteCard() / recordAnswer() / importDeck() / exportDeck() in src/lib/tools/flashcardMaker.ts (localStorage key eduvelto-flashcards-v1). 100% in-browser; nothing is uploaded.
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { ToolHero, CopyButton, ButtonRow, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import {
   FLASHCARD_STORAGE_KEY, addCard, createDeck, deleteCard, editCard, exportDeck, importDeck, recordAnswer, dueCards,
@@ -42,7 +43,7 @@ function loadDecks(): FlashDeck[] {
 }
 
 export function FlashcardMakerTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [decks, setDecks] = useState<FlashDeck[]>(() => loadDecks());
   const [activeId, setActiveId] = useState<string | null>(null);
   const [title, setTitle] = useState('');
@@ -206,9 +207,8 @@ export function FlashcardMakerTool() {
             <button type="button" style={{ minHeight: 40, padding: '0 14px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', cursor: 'pointer', fontWeight: 600 }} onClick={() => { setActiveId(null); setSession([]); }}>
               ← {t({ bn: 'সব ডেক', en: 'All decks' })}
             </button>
-            <button type="button" style={{ minHeight: 40, padding: '0 14px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', cursor: 'pointer', fontWeight: 600 }} onClick={() => handleExport(active)}>
-              {t({ bn: 'ডেক এক্সপোর্ট করুন (JSON)', en: 'Export deck (JSON)' })}
-            </button>
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => handleExport(active)} />
           </ButtonRow>
           <p style={{ fontSize: 16, fontWeight: 700, margin: '14px 0 4px' }}>{active.title} <span style={{ color: 'var(--muted)', fontWeight: 400 }}>({active.cards.length} {t({ bn: 'কার্ড', en: 'cards' })}{dueCount > 0 ? ` • ${dueCount} ${t({ bn: 'আজকের পড়া বাকি', en: 'due today' })}` : ''})</span></p>
 

@@ -3,6 +3,7 @@
 // Engine: randomInt() + randomInts() in src/lib/tools/passwordRandom.ts (crypto-based, unbiased rejection sampling). 100% in-browser; nothing is uploaded.
 import {useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {ToolHero, Tiles, CopyButton, ButtonRow, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { randomInts } from '../../lib/tools/passwordRandom';
 
@@ -39,7 +40,7 @@ function downloadText(filename: string, text: string, type = 'text/plain'): void
 
 
 export function RandomNumberTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [min, setMin] = useState('1');
   const [max, setMax] = useState('100');
   const [count, setCount] = useState('1');
@@ -113,9 +114,8 @@ export function RandomNumberTool() {
           ]} />
           <ButtonRow>
             <CopyButton text={numbers.join(', ')} labelBn="সংখ্যা কপি করুন" labelEn="Copy numbers" />
-            <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={() => downloadText('eduvelto-random-numbers.txt', numbers.join('\n'))}>
-              {t({ bn: '.txt ডাউনলোড করুন', en: 'Download .txt' })}
-            </button>
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadText('eduvelto-random-numbers.txt', numbers.join('\n'))} />
           </ButtonRow>
         </>
       ) : null}

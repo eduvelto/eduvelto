@@ -4,19 +4,20 @@
 // (PNG-embedded ICO). PNG downloads per size are canvas exports.
 // File stays on device. No ICO claim is made that is not delivered.
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { Button } from '../../components/ui';
 import { buildIco, FAVICON_SIZES } from '../../lib/tools/faviconMeme';
 import { realImageDeps } from '../../lib/tools/imageConvert';
 import {
-  cardStyle, downloadStyle, errorStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, previewStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
 
 export function FaviconGeneratorTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [sizes, setSizes] = useState<Set<number>>(new Set([16, 32, 48]));
@@ -24,6 +25,11 @@ export function FaviconGeneratorTool() {
   const [error, setError] = useState<string | null>(null);
   const [pngUrls, setPngUrls] = useState<{ size: number; url: string; bytes: number }[]>([]);
   const [icoUrl, setIcoUrl] = useState<string | null>(null);
+  // Ads rollout B3 (27 Nov 2026): the .ico is the bundled take-away
+  // (it holds every chosen size), so ITS download goes through the
+  // 15s rewarded gate. The small per-size PNG links stay direct —
+  // gating each of up to 6 sizes would stack six gates on one result.
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [icoBytes, setIcoBytes] = useState(0);
 
   function toggleSize(size: number): void {
@@ -136,7 +142,11 @@ export function FaviconGeneratorTool() {
             ))}
           </div>
           {icoUrl ? (
-            <a href={icoUrl} download="favicon.ico" style={downloadStyle}>{t({ bn: 'favicon.ico ডাউনলোড করুন', en: 'Download favicon.ico' })}</a>
+            <>
+              <a ref={downloadRef} href={icoUrl} download="favicon.ico" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+              {/* Ads rollout B3 (27 Nov 2026): this .ico download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+              <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
+            </>
           ) : null}
           <p style={noteStyle}>{t({ bn: '.ico ফাইলটিতে বাছা সব আকারের PNG ডেটা আসল ICO কাঠামোয় লেখা আছে।', en: 'The .ico file contains the chosen sizes as PNG data inside a real ICO container.' })}</p>
         </div>

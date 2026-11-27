@@ -3,6 +3,7 @@
 // Engine: countText() in src/lib/tools/textUtils.ts (Unicode-aware). 100% in-browser; nothing is uploaded.
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { ToolHero, Tiles, CopyButton, ButtonRow, ExampleButton, ClearButton, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { countText } from '../../lib/tools/textUtils';
 
@@ -38,7 +39,7 @@ const LIMITS: readonly { id: string; bn: string; en: string; limit: number | nul
 const EXAMPLE = 'আমি বাংলা ভালোবাসি। Eduvelto is a free learning platform for Bangladesh — শেখো, এগিয়ে যাও, স্বপ্ন গড়ো।';
 
 export function CharacterCounterTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [input, setInput] = useState(EXAMPLE);
   const [preset, setPreset] = useState('sms');
   const counts = useMemo(() => countText(input), [input]);
@@ -88,9 +89,8 @@ export function CharacterCounterTool() {
       )}
       <ButtonRow>
         <CopyButton text={summary} labelBn="সারাংশ কপি করুন" labelEn="Copy summary" />
-        <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={() => downloadText('eduvelto-text.txt', input)}>
-          {t({ bn: '.txt ডাউনলোড করুন', en: 'Download .txt' })}
-        </button>
+        {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+        <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadText('eduvelto-text.txt', input)} />
       </ButtonRow>
       <p style={noteStyle}>{t({ bn: 'অক্ষর গোনা হয় ইউনিকোড কোড পয়েন্ট দিয়ে — “আমি” ৩ অক্ষর। যুক্তাক্ষর একাধিক কোড পয়েন্ট হতে পারে, তাই গণনাটি আনুমানিক হতে পারে।', en: 'Characters are counted as Unicode code points — "আমি" counts as 3. Combined letters can be several code points, so the count is approximate.' })}</p>
     </section>

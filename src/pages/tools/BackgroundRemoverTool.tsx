@@ -14,6 +14,7 @@
 
 import { useRef, useState, type CSSProperties, type MouseEvent } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {
   BACKGROUND_REMOVER_MAX_BYTES,
   flattenOnBackground,
@@ -173,10 +174,13 @@ function formatBytes(bytes: number): string {
 }
 
 export function BackgroundRemoverTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  // Ads rollout B3 (27 Nov 2026): hidden anchors for the two PNG
+  // downloads below — each goes through its own 15s rewarded gate.
+  const localDownloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultBytes, setResultBytes] = useState<number | null>(null);
   const [view, setView] = useState<'before' | 'after' | 'both'>('both');
   const [bgColor, setBgColor] = useState('#ffffff');
@@ -205,6 +209,7 @@ export function BackgroundRemoverTool() {
   const [aiBusy, setAiBusy] = useState(false);
   const [aiError, setAiError] = useState<string | null>(null);
   const [aiResultUrl, setAiResultUrl] = useState<string | null>(null);
+  const aiDownloadRef = useRef<HTMLAnchorElement | null>(null);
   const [aiResultBytes, setAiResultBytes] = useState<number | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
@@ -680,9 +685,9 @@ export function BackgroundRemoverTool() {
                   </>
                 ) : null}
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                  <a href={resultUrl} download="background-removed.png" style={downloadStyle}>
-                    {t({ bn: 'PNG ডাউনলোড করুন', en: 'Download PNG' })}
-                  </a>
+                  <a ref={localDownloadRef} href={resultUrl} download="background-removed.png" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+                  {/* Ads rollout B3 (27 Nov 2026): this PNG download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+                  <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => localDownloadRef.current?.click()} />
                   {newBgColor ? (
                     <>
                       <button
@@ -821,9 +826,9 @@ export function BackgroundRemoverTool() {
                 />
               </div>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}>
-                <a href={aiResultUrl} download="background-removed-ai.png" style={downloadStyle}>
-                  {t({ bn: 'PNG ডাউনলোড করুন (স্ট্যান্ডার্ড)', en: 'Download PNG (standard)' })}
-                </a>
+                <a ref={aiDownloadRef} href={aiResultUrl} download="background-removed-ai.png" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+                {/* Ads rollout B3 (27 Nov 2026): this AI-result PNG download goes through its own RewardedAdButton (15s) — a different file from the local result above, so its own gate is one per download action, not a stack. */}
+                <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => aiDownloadRef.current?.click()} />
                 <button
                   type="button"
                   style={{ ...downloadStyle, background: 'var(--muted)', cursor: 'not-allowed', border: 'none' }}

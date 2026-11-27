@@ -6,15 +6,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { computeRotatedDimensions, convertImage, realImageDeps } from '../../lib/tools/imageConvert';
 import {
-  cardStyle, downloadStyle, errorStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, previewStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
 
 export function ImageRotateFlipTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [imgEl, setImgEl] = useState<HTMLImageElement | null>(null);
   const [rotate, setRotate] = useState(0);
@@ -24,6 +25,7 @@ export function ImageRotateFlipTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [result, setResult] = useState<{ width: number; height: number; bytes: number } | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -136,7 +138,9 @@ export function ImageRotateFlipTool() {
             <Tile label={t({ bn: 'ফরম্যাট', en: 'Format' })} value={ext.toUpperCase()} />
             <Tile label={t({ bn: 'ফাইলের আকার', en: 'File size' })} value={`${(result.bytes / 1024).toFixed(1)} KB`} />
           </div>
-          <a href={resultUrl} download={`rotated.${ext}`} style={downloadStyle}>{t({ bn: 'ছবি ডাউনলোড করুন', en: 'Download the image' })}</a>
+          <a ref={downloadRef} href={resultUrl} download={`rotated.${ext}`} style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B3 (27 Nov 2026): this image download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

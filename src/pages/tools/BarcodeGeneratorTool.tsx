@@ -3,6 +3,7 @@
 // Engine: validateBarcodeValue() + ean13CheckDigit() + renderBarcode() in src/lib/tools/qrBarcode.ts; JsBarcode loads via dynamic import() only. 100% in-browser; nothing is uploaded.
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { ToolHero, CopyButton, ButtonRow, ExampleButton, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { validateBarcodeValue, ean13CheckDigit, renderBarcode, type BarcodeFormat } from '../../lib/tools/qrBarcode';
 
@@ -42,7 +43,7 @@ const FORMATS: readonly { id: BarcodeFormat; bn: string; en: string }[] = [
 ];
 
 export function BarcodeGeneratorTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [format, setFormat] = useState<BarcodeFormat>('CODE128');
   const [value, setValue] = useState('HELLO123');
   const [height, setHeight] = useState(100);
@@ -145,8 +146,10 @@ export function BarcodeGeneratorTool() {
             <svg ref={svgRef} style={{ maxWidth: '100%' }} role="img" aria-label={t({ bn: 'তৈরি করা বারকোড', en: 'Generated barcode' })} />
           </div>
           <ButtonRow>
-            <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: 'none', background: 'var(--teal)', color: '#fff', fontWeight: 700, cursor: 'pointer' }} onClick={downloadPng}>{t({ bn: 'PNG ডাউনলোড করুন', en: 'Download PNG' })}</button>
-            <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={downloadSvg}>{t({ bn: 'SVG ডাউনলোড করুন', en: 'Download SVG' })}</button>
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={downloadPng} />
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={downloadSvg} />
             <CopyButton text={value} labelBn="মানটি কপি করুন" labelEn="Copy the value" />
           </ButtonRow>
         </>

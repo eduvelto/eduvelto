@@ -3,6 +3,7 @@
 // Engine: sortTextLines() in src/lib/tools/textUtils.ts (Bangla-aware collation via Intl.Collator bn). 100% in-browser; nothing is uploaded.
 import { useMemo, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { ToolHero, Tiles, CopyButton, ButtonRow, ExampleButton, ClearButton, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { sortTextLines, type SortMode } from '../../lib/tools/textUtils';
 
@@ -34,7 +35,7 @@ const MODES: readonly { id: SortMode; bn: string; en: string }[] = [
 const EXAMPLE = 'রহিম\nকরিম\nরহিম\nসালমা\n\nআরিফ\n10\n2\n1';
 
 export function TextSorterTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [input, setInput] = useState(EXAMPLE);
   const [mode, setMode] = useState<SortMode>('az');
   const [dedupe, setDedupe] = useState<'none' | 'first' | 'last'>('none');
@@ -113,9 +114,8 @@ export function TextSorterTool() {
       </div>
       <ButtonRow>
         <CopyButton text={output} labelBn="ফলাফল কপি করুন" labelEn="Copy result" />
-        <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={() => downloadText('eduvelto-sorted.txt', output)}>
-          {t({ bn: '.txt ডাউনলোড করুন', en: 'Download .txt' })}
-        </button>
+        {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+        <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadText('eduvelto-sorted.txt', output)} />
       </ButtonRow>
       <p style={noteStyle}>{t({ bn: 'বাংলা লাইন বাংলার বর্ণক্রমে সাজানো হয় (অ-এর আগে আ নয়) — ইংরেজি ক্রমে সাজালে বাংলা ভুলভাবে সাজে। সংখ্যা মোডে ২-এর আগে ১০ আসে না; ১, ২, ১০ এই ক্রমে আসে।', en: 'Bangla lines sort in Bangla alphabetical order — English collation would order them wrongly. In numeric mode 2 comes before 10, as 1, 2, 10.' })}</p>
     </section>

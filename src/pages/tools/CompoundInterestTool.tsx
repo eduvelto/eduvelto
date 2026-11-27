@@ -317,7 +317,7 @@ export function CompoundInterestTool() {
               en: 'The rate is an example only — the actual return depends on the bank or fund and can change. Noted: 27 Nov 2026.',
             })}
           </p>
-          <SummaryDownload filename="compound-interest-summary.txt" text={summary} />
+          <SummaryDownload filename="compound-interest-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : invalid ? (
         <p style={errorStyle} role="alert">

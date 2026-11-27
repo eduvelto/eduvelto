@@ -15,9 +15,10 @@
 // Real-browser canvas encoding itself was not verified in Node (no DOM
 // there) — a live-browser encode check is still owed before ship.
 
-import { useState, type CSSProperties } from 'react';
+import { useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {
   computeResizeDimensions,
   IMAGE_RESIZE_PRESETS,
@@ -72,19 +73,6 @@ const errorStyle: CSSProperties = {
   marginTop: 14,
   color: '#b3261e',
   fontSize: 14,
-};
-
-const downloadStyle: CSSProperties = {
-  display: 'inline-block',
-  marginTop: 10,
-  minHeight: 44,
-  lineHeight: '44px',
-  padding: '0 18px',
-  borderRadius: 8,
-  background: 'var(--teal, #0b7285)',
-  color: '#fff',
-  fontWeight: 600,
-  textDecoration: 'none',
 };
 
 const presetButtonStyle: CSSProperties = {
@@ -155,7 +143,7 @@ function realImageDeps(): ImageDomDeps {
 }
 
 export function ImageResizerTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [width, setWidth] = useState('300');
   const [height, setHeight] = useState('300');
@@ -163,6 +151,7 @@ export function ImageResizerTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultDims, setResultDims] = useState<{ width: number; height: number } | null>(null);
 
   function handleFileChange(next: File | null): void {
@@ -359,9 +348,9 @@ export function ImageResizerTool() {
             </p>
           ) : null}
           <img src={resultUrl} alt={t({ bn: 'আকার বদলানো ছবির প্রিভিউ', en: 'Preview of the resized image' })} style={previewStyle} />
-          <a href={resultUrl} download="resized.jpg" style={downloadStyle}>
-            {t({ bn: 'আকার বদলানো ছবি ডাউনলোড করুন', en: 'Download the resized image' })}
-          </a>
+          <a ref={downloadRef} href={resultUrl} download="resized.jpg" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B3 (27 Nov 2026): this image download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

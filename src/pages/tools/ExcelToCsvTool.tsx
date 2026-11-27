@@ -3,6 +3,7 @@
 // Engine: parseCsv() / toCsv() in src/lib/tools/docConverters.ts; .xlsx reading via SheetJS (xlsx) loaded with dynamic import() only. 100% in-browser; nothing is uploaded.
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {ToolHero, Tiles, CopyButton, ButtonRow, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { toCsv } from '../../lib/tools/docConverters';
 
@@ -27,7 +28,7 @@ function downloadText(filename: string, text: string, type = 'text/plain'): void
 
 
 export function ExcelToCsvTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [fileName, setFileName] = useState('');
   const [sheets, setSheets] = useState<{ name: string; rows: string[][] }[]>([]);
   const [activeSheet, setActiveSheet] = useState(0);
@@ -127,9 +128,8 @@ export function ExcelToCsvTool() {
               </div>
               <ButtonRow>
                 <CopyButton text={csv} labelBn="CSV কপি করুন" labelEn="Copy CSV" />
-                <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: 'none', background: 'var(--teal)', color: '#fff', fontWeight: 700, cursor: 'pointer' }} onClick={() => downloadText('eduvelto-table.csv', csv, 'text/csv')}>
-                  {t({ bn: '.csv ডাউনলোড করুন', en: 'Download .csv' })}
-                </button>
+                {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+                <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadText('eduvelto-table.csv', csv, 'text/csv')} />
               </ButtonRow>
             </>
           )}

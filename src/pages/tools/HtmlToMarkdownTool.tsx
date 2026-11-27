@@ -3,6 +3,7 @@
 // Engine: htmlToMarkdown() in src/lib/tools/docConverters.ts (DOMParser on a detached document; scripts/styles stripped). 100% in-browser; nothing is uploaded.
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {ToolHero, CopyButton, ButtonRow, ExampleButton, ClearButton, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
 import { htmlToMarkdown } from '../../lib/tools/docConverters';
 
@@ -29,7 +30,7 @@ function downloadText(filename: string, text: string, type = 'text/plain'): void
 const SAMPLE_HTML = '<h1>Welcome</h1>\n<p>Eduvelto is a <strong>free</strong> learning platform.</p>\n<ul>\n<li>Study</li>\n<li>Job preparation</li>\n</ul>\n<blockquote>Learn a little every day.</blockquote>';
 
 export function HtmlToMarkdownTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [input, setInput] = useState(SAMPLE_HTML);
   const result = useMemo(() => {
     try { return { markdown: htmlToMarkdown(input).markdown }; } catch (e) {
@@ -58,9 +59,8 @@ export function HtmlToMarkdownTool() {
           </div>
           <ButtonRow>
             <CopyButton text={result.markdown} labelBn="Markdown কপি করুন" labelEn="Copy Markdown" />
-            <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={() => downloadText('eduvelto-text.md', result.markdown, 'text/markdown')}>
-              {t({ bn: '.md ডাউনলোড করুন', en: 'Download .md' })}
-            </button>
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadText('eduvelto-text.md', result.markdown, 'text/markdown')} />
           </ButtonRow>
         </>
       )}

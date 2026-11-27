@@ -14,9 +14,10 @@
 // Real-browser canvas encoding itself was not verified in Node (no DOM
 // there) — a live-browser encode check is still owed before ship.
 
-import { useState, type CSSProperties } from 'react';
+import { useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {
   assertImageFile,
   compressImage,
@@ -72,19 +73,6 @@ const errorStyle: CSSProperties = {
   marginTop: 14,
   color: '#b3261e',
   fontSize: 14,
-};
-
-const downloadStyle: CSSProperties = {
-  display: 'inline-block',
-  marginTop: 10,
-  minHeight: 44,
-  lineHeight: '44px',
-  padding: '0 18px',
-  borderRadius: 8,
-  background: 'var(--teal, #0b7285)',
-  color: '#fff',
-  fontWeight: 600,
-  textDecoration: 'none',
 };
 
 const previewStyle: CSSProperties = {
@@ -143,7 +131,7 @@ export function realImageDeps(): ImageDomDeps {
 }
 
 export function ImageCompressorTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [quality, setQuality] = useState('0.8');
   const [maxDimension, setMaxDimension] = useState('1920');
@@ -151,6 +139,7 @@ export function ImageCompressorTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [originalBytes, setOriginalBytes] = useState(0);
   const [newBytes, setNewBytes] = useState(0);
   const [savedPercent, setSavedPercent] = useState(0);
@@ -319,13 +308,9 @@ export function ImageCompressorTool() {
               : ` · ${t({ bn: 'আর ছোট হয়নি', en: 'No bytes saved' })}`}
           </p>
           <img src={resultUrl} alt={t({ bn: 'ছোট করা ছবির প্রিভিউ', en: 'Preview of the compressed image' })} style={previewStyle} />
-          <a
-            href={resultUrl}
-            download={outputType === 'image/png' ? 'compressed.png' : outputType === 'image/webp' ? 'compressed.webp' : 'compressed.jpg'}
-            style={downloadStyle}
-          >
-            {t({ bn: 'ছোট ছবি ডাউনলোড করুন', en: 'Download the compressed image' })}
-          </a>
+          <a ref={downloadRef} href={resultUrl} download={outputType === 'image/png' ? 'compressed.png' : outputType === 'image/webp' ? 'compressed.webp' : 'compressed.jpg'} style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B3 (27 Nov 2026): this image download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadRef.current?.click()} />
           <p style={noteStyle}>
             {t({
               bn: 'কতটা ছোট হবে তা ছবির ওপর নির্ভর করে — কোনো নির্দিষ্ট হার দেওয়ার প্রতিশ্রুতি দেওয়া হয় না।',

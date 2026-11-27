@@ -19,6 +19,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
+import RewardedAdButton from '../components/RewardedAdButton';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -200,6 +202,9 @@ const TOOLS: Array<{ id: QpgBoardTool; label: string }> = [
 export default function SmartboardPage() {
   const { boardId: shareBoardId } = useParams();
   const { user } = useAuth();
+  // Ads rollout B3 (27 Nov 2026): only the gate's language — the page
+  // itself stays Bangla-only.
+  const { lang } = useLanguage();
   const uid = user?.uid ?? 'guest';
   const userName = user?.displayName ?? user?.email ?? '';
   const isGuest = uid === 'guest';
@@ -898,9 +903,8 @@ export default function SmartboardPage() {
                     সংরক্ষণ করুন
                   </Button>
                   {saveState ? <span style={{ fontSize: 13, color: '#555' }}>{saveState}</span> : null}
-                  <Button variant="outline" onClick={exportPng}>
-                    PNG এক্সপোর্ট (ফ্রি)
-                  </Button>
+                  {/* Ads rollout B3 (27 Nov 2026): the free PNG slide export goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). PDF export + share link are Pro-only and stay payment-gated — NO rewarded gate on top of them. */}
+                  <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={exportPng} />
                   <Button variant="outline" onClick={() => void exportPdf()} disabled={!proUnlocked}>
                     PDF এক্সপোর্ট (Pro) {proUnlocked ? '' : '🔒'}
                   </Button>

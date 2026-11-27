@@ -3,6 +3,7 @@
 // Engine: formatStopwatch() + lapDurations() in src/lib/tools/timerEngine.ts. 100% in-browser; nothing is uploaded.
 import {useCallback, useEffect, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {ToolHero, CopyButton, ButtonRow, cardStyle, noteStyle } from './toolUi';
 import { formatStopwatch, lapDurations } from '../../lib/tools/timerEngine';
 
@@ -28,7 +29,7 @@ function downloadText(filename: string, text: string, type = 'text/plain'): void
 }
 
 export function StopwatchTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [baseMs, setBaseMs] = useState(0);
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [now, setNow] = useState(() => Date.now());
@@ -113,9 +114,8 @@ export function StopwatchTool() {
           </div>
           <ButtonRow>
             <CopyButton text={lapsText} labelBn="ল্যাপ কপি করুন" labelEn="Copy laps" />
-            <button type="button" style={{ minHeight: 44, padding: '0 18px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }} onClick={() => downloadText('eduvelto-stopwatch-laps.csv', lapsCsv, 'text/csv')}>
-              {t({ bn: 'CSV ডাউনলোড করুন', en: 'Download CSV' })}
-            </button>
+            {/* Ads rollout B3 (27 Nov 2026): this download goes through RewardedAdButton (15s) — Free Download is live, the 15s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} durationSeconds={15} onFreeDownload={() => downloadText('eduvelto-stopwatch-laps.csv', lapsCsv, 'text/csv')} />
           </ButtonRow>
         </>
       ) : null}

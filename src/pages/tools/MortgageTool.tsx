@@ -300,7 +300,7 @@ export function MortgageTool() {
               en: 'The interest rate is an example only — bank rates change over time. Before taking a loan, check the current rate, processing fee and other terms with your bank. Noted: 27 Nov 2026.',
             })}
           </p>
-          <SummaryDownload filename="mortgage-summary.txt" text={summary} />
+          <SummaryDownload filename="mortgage-summary.txt" text={summary} durationSeconds={15} />
         </div>
       ) : invalid ? (
         <p style={errorStyle} role="alert">
