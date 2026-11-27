@@ -1,0 +1,4 @@
+# Cloudflare Pages SPA fallback: serve index.html for every route so the
+# client-side router handles /bn, /bn/learn, /en/tools/* etc.
+# (Equivalent of the Firebase Hosting rewrites in firebase.json.)
+/* /index.html 200
