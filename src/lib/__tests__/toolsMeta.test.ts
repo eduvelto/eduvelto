@@ -207,7 +207,10 @@ describe('tool icons (27 Nov 2026 — picture tiles, never a letter)', () => {
 });
 
 describe('TOOLS_GUIDES (second batch)', () => {
-  it.each(['tip-calculator', 'bkash-nagad-calculator', 'ovulation-calculator'])(
+  // tip-calculator and bkash-nagad-calculator moved to structured guides
+  // (TOOL_GUIDE_SECTIONS) on 27 Nov 2026; only ovulation-calculator
+  // keeps its prose guide.
+  it.each(['ovulation-calculator'])(
     'has a 300-400 word guide in both languages for %s',
     (slug) => {
       const guide = TOOLS_GUIDES[slug];

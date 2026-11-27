@@ -29,7 +29,7 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, LinkButton } from '../components/ui';
 import { toolBySlug } from '../lib/toolsMeta';
-import { toolGuideBySlug } from '../lib/toolsGuides';
+import { toolGuideBySlug, toolGuideSectionsBySlug } from '../lib/toolsGuides';
 import { langUrl } from '../lib/langRouting';
 import { ToolIcon } from '../components/ToolIcon';
 import LifePdfToolsPage from './LifePdfToolsPage';
@@ -175,6 +175,7 @@ import { GovtServiceLinksTool } from './tools/GovtServiceLinksTool';
 import { ResultsHubTool } from './tools/ResultsHubTool';
 import { NotesTodoTool } from './tools/NotesTodoTool';
 import { TasbihCounterTool } from './tools/TasbihCounterTool';
+import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
 // Phase-2 plug-in point (TOOL_COMPONENTS registry).
@@ -381,6 +382,7 @@ export default function ToolsDetailPage() {
   }
 
   const guide = toolGuideBySlug(meta.slug);
+  const guideSections = toolGuideSectionsBySlug(meta.slug);
   const guideText = guide ? (lang === 'en' ? guide.guideEn : guide.guideBn) : null;
   const related = meta.relatedSlugs
     .map((relatedSlug) => toolBySlug(relatedSlug))
@@ -408,7 +410,9 @@ export default function ToolsDetailPage() {
           })}
         </AlertBox>
       )}
-      {guideText ? (
+      {guideSections ? (
+        <ToolGuide guide={guideSections} />
+      ) : guideText ? (
         <>
           <h2 style={sectionTitleStyle}>
             {t({ bn: 'বিস্তারিত গাইড', en: 'Detailed guide' })}

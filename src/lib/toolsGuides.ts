@@ -20,38 +20,794 @@ export interface ToolGuide {
   guideEn: string;
 }
 
-export const TOOLS_GUIDES: Record<string, { guideBn: string; guideEn: string }> = {
-  'mortgage-calculator': {
-    guideEn: `A mortgage calculator helps you understand the monthly cost of a home loan before you commit to one. You enter the loan amount, the annual interest rate, and the loan term in years, and the tool works out your fixed monthly payment, the total amount you will pay over the life of the loan, and how much of that total is interest. Over a long loan the interest can add up to a large share of the total cost. The calculation uses the standard amortisation formula, the same one lenders use for fixed-rate loans. If P is the loan amount, r is the monthly interest rate, and n is the total number of monthly payments, the monthly payment is P times r times (1 + r) to the power n, divided by ((1 + r) to the power n minus 1). The monthly rate is the annual rate divided by 12, so a 9 percent annual rate means a monthly rate of 0.0075. For a worked example, take a loan of 5,000,000 at a 9 percent annual rate over 20 years. The monthly rate is 0.0075 and there are 240 payments, and the formula gives a monthly payment of about 44,986. Over 240 months you pay about 10,796,640 in total, of which about 5,796,640 is interest, more than the amount borrowed. The same loan over 10 years would cost about 63,338 a month but only about 2,600,560 in interest, which shows the trade-off clearly: a shorter term means a higher monthly payment but much less interest overall. Amortisation also explains why early payments feel slow. In the first months most of each payment goes to interest and only a small part reduces the loan balance. As the balance falls, the interest part shrinks and more of each payment goes to principal, so the balance falls faster in later years. Extra payments early in the loan therefore save more interest than the same payment made years later. A practical tip is to compare at least three offers with the same loan amount and term, changing only the rate, and to check whether the lender charges a fee for early repayment. A lower rate with a prepayment penalty can cost more than a higher rate without one. This tool estimates the loan payment only; taxes, insurance, and other home costs are separate.`,
-    guideBn: `মর্টগেজ ক্যালকুলেটর আপনাকে বাড়ির ঋণ নেওয়ার আগেই তার মাসিক খরচ বুঝতে সাহায্য করে। আপনি ঋণের পরিমাণ, বার্ষিক সুদের হার এবং মেয়াদ বছর হিসেবে লিখলে এই টুলটি আপনার নির্দিষ্ট মাসিক কিস্তি, পুরো মেয়াদে মোট কত টাকা দিতে হবে এবং তার মধ্যে কতটা সুদ — তা বের করে দেয়। শেষের সংখ্যাটি প্রথমবার ঋণ নিতে যাওয়া অনেককেই অবাক করে, কারণ দীর্ঘ মেয়াদের ঋণে সুদের পরিমাণ মোট খরচের একটি বড় অংশ হয়ে যায়, কখনো কখনো মূল ঋণের চেয়েও বেশি। এই হিসাবটি করা হয় প্রচলিত অ্যামর্টাইজেশন সূত্র দিয়ে, নির্দিষ্ট সুদের হারের ঋণে ব্যাংকগুলোও একই সূত্র ব্যবহার করে। P যদি ঋণের পরিমাণ হয়, r মাসিক সুদের হার হয় এবং n মোট মাসিক কিস্তির সংখ্যা হয়, তাহলে মাসিক কিস্তি হলো P গুণ r গুণ (1 + r) এর n ঘাত, ভাগ করে ((1 + r) এর n ঘাত বিয়োগ 1) দিয়ে। মাসিক হার হলো বার্ষিক হারকে 12 দিয়ে ভাগ করলে যা হয়, অর্থাৎ 9 শতাংশ বার্ষিক হারে মাসিক হার 0.0075। একটি উদাহরণ দেখা যাক: 5,000,000 টাকার ঋণ, 9 শতাংশ বার্ষিক হার, মেয়াদ 20 বছর। এখানে মাসিক হার 0.0075 এবং কিস্তির সংখ্যা 240, সূত্র অনুযায়ী মাসিক কিস্তি দাঁড়ায় প্রায় 44,986 টাকা। 240 মাসে মোট দিতে হয় প্রায় 10,796,640 টাকা, যার মধ্যে সুদ প্রায় 5,796,640 টাকা — মূল ঋণের চেয়েও বেশি। একই ঋণ 10 বছরে নিলে মাসিক কিস্তি হতো প্রায় 63,338 টাকা, কিন্তু সুদ হতো মাত্র প্রায় 2,600,560 টাকা। এ থেকেই বোঝা যায় মেয়াদ কম হলে মাসিক কিস্তি বেশি হয়, কিন্তু মোট সুদ অনেক কমে যায়। অ্যামর্টাইজেশন বুঝলে এটাও পরিষ্কার হয় যে শুরুর দিকে ঋণ কমতে দেরি হয় কেন। প্রথম মাসগুলোতে কিস্তির বেশিরভাগ অংশ সুদে চলে যায়, আর অল্প অংশই আসল কমায়। বকেয়া কমতে থাকলে সুদের অংশও কমে, আর কিস্তির বেশি অংশ আসলে যায়, তাই পরের বছরগুলোতে বকেয়া দ্রুত কমে। এ কারণে ঋণের শুরুর দিকে অতিরিক্ত টাকা জমা দিলে পরে দেওয়ার চেয়ে বেশি সুদ বাঁচে। ব্যবহারিক পরামর্শ হলো একই ঋণের পরিমাণ ও মেয়াদে কমপক্ষে তিনটি প্রস্তাব তুলনা করুন, শুধু হার বদলে দেখুন, আর আগাম পরিশোধে কোনো জরিমানা আছে কি না তা যাচাই করুন। কম হারের ঋণে আগাম পরিশোধের জরিমানা থাকলে তা বেশি খরচের হতে পারে। মনে রাখবেন, এই টুলটি শুধু ঋণের কিস্তির হিসাব দেয়; কর, বীমা ও বাড়ির অন্যান্য খরচ আলাদা, আর আপনি যে হার লিখবেন তা আপনার ঋণদাতার জানানো হারের সঙ্গে মিলিয়ে নেবেন।`,
+// Structured guides (27 Nov 2026, AdSense guides): the top-20 tools
+// get a full guide — intro, numbered how-to, formula/rule, one worked
+// example, 3-5 FAQs — in both languages. Each language is 150-250
+// words (300-500 combined). Rendered by ToolGuide.tsx; ToolsDetailPage
+// prefers a structured guide and falls back to the prose guide above
+// for tools that only have one. Facts come from each tool's own engine
+// code (src/lib/tools/); where a rate varies, the guide says so instead
+// of fixing a number.
+export interface ToolGuideFaq {
+  q: string;
+  a: string;
+}
+
+export interface ToolGuideContent {
+  title: string;
+  intro: string;
+  howTo: string[];
+  formula: string;
+  example: string;
+  faq: ToolGuideFaq[];
+}
+
+export interface ToolGuideSections {
+  bn: ToolGuideContent;
+  en: ToolGuideContent;
+}
+
+export const TOOL_GUIDE_SECTIONS: Record<string, ToolGuideSections> = {
+  'bmi-calculator': {
+    bn:     {
+      title: `বিএমআই ক্যালকুলেটর`,
+      intro: `বিএমআই ক্যালকুলেটর আপনার ওজন ও উচ্চতা দিয়ে শরীরের ভর সূচক (BMI) হিসাব করে। এটি দেখায় আপনার ওজন আপনার উচ্চতার তুলনায় কম, স্বাভাবিক, বেশি, নাকি স্থূলতার পর্যায়ে আছে। ফলাফল WHO শ্রেণিবিভাগ অনুযায়ী দেওয়া হয়। এই টুলটি ছাত্র, অভিভাবক ও স্বাস্থ্য সচেতন যে কারও জন্য সহজে ব্যবহারযোগ্য।`,
+      howTo: [
+        `ওজনের ঘরে আপনার ওজন কেজিতে লিখুন।`,
+        `উচ্চতার ঘরে আপনার উচ্চতা সেন্টিমিটারে লিখুন।`,
+        `চাইলে লক্ষ্য BMI-এর ঘরে একটি সংখ্যা লিখুন, তাহলে ওই BMI-তে পৌঁছাতে কত ওজন দরকার তা দেখাবে।`,
+        `ফলাফলে আপনার BMI, WHO শ্রেণি ও স্বাস্থ্যকর ওজনের সীমা দেখুন।`,
+      ],
+      formula: `সূত্র: BMI = ওজন (কেজি) ÷ উচ্চতা (মিটার)²। WHO শ্রেণি: ১৮.৫-এর নিচে কম ওজন, ১৮.৫–২৪.৯ স্বাভাবিক, ২৫–২৯.৯ বেশি ওজন, ৩০ বা বেশি স্থূলতা। ফলাফল দুই দশমিক পর্যন্ত দেখানো হয়।`,
+      example: `উদাহরণ: ওজন ৭০ কেজি ও উচ্চতা ১৭৫ সেমি হলে উচ্চতা মিটারে ১.৭৫। হিসাব: 70 ÷ (1.75 × 1.75) = 22.86। এটি স্বাভাবিক শ্রেণিতে পড়ে। এই উচ্চতায় স্বাস্থ্যকর ওজন ৫৬.৭–৭৬.৩ কেজি।`,
+      faq: [
+        { q: `BMI কি চিকিৎসকের পরামর্শের বদলে ব্যবহার করা যায়?`, a: `না, BMI শুধু একটি সাধারণ নির্দেশিকা। স্বাস্থ্য নিয়ে কোনো সিদ্ধান্ত নেওয়ার আগে চিকিৎসকের সঙ্গে কথা বলুন।` },
+        { q: `উচ্চতা কি সেন্টিমিটারেই দিতে হবে?`, a: `হ্যাঁ, এই টুলে উচ্চতা সেন্টিমিটারে দিতে হয়। টুলটি নিজেই সেটিকে মিটারে বদলে হিসাব করে।` },
+        { q: `লক্ষ্য BMI-এর ঘরটি কী কাজে লাগে?`, a: `আপনি যে BMI-তে পৌঁছাতে চান সেটি লিখলে টুলটি বলে দেয় আপনার উচ্চতায় সেই BMI-র জন্য কত কেজি ওজন দরকার।` },
+        { q: `আমার তথ্য কি কোথাও পাঠানো হয়?`, a: `না, সব হিসাব আপনার ব্রাউজারেই হয়। ওজন বা উচ্চতার কোনো তথ্য সার্ভারে পাঠানো হয় না।` },
+      ],
+    },
+    en:     {
+      title: `BMI Calculator`,
+      intro: `The BMI Calculator works out your body mass index (BMI) from your weight and height. It shows whether your weight is underweight, normal, overweight or obese for your height, following the WHO classification. Students, parents and anyone watching their health can use it easily.`,
+      howTo: [
+        `Enter your weight in kilograms.`,
+        `Enter your height in centimetres.`,
+        `Optionally, enter a target BMI to see the weight you would need for it.`,
+        `Read your BMI, WHO category and healthy weight range.`,
+      ],
+      formula: `Formula: BMI = weight (kg) ÷ height (m)². WHO ranges: below 18.5 underweight, 18.5–24.9 normal, 25–29.9 overweight, 30 or above obese. The result is shown to two decimal places.`,
+      example: `Example: a weight of 70 kg and a height of 175 cm (1.75 m). Calculation: 70 ÷ (1.75 × 1.75) = 22.86, in the normal range. For this height, the healthy weight range is 56.7–76.3 kg.`,
+      faq: [
+        { q: `Can BMI replace a doctor's advice?`, a: `No, BMI is only a general guide. Talk to a doctor before making any health decision based on it.` },
+        { q: `Must height be entered in centimetres?`, a: `Yes. Enter height in centimetres; the tool converts it to metres itself.` },
+        { q: `What is the target BMI box for?`, a: `Enter the BMI you want to reach, and the tool shows the weight you would need at your height.` },
+        { q: `Is my information sent anywhere?`, a: `No. Everything is calculated in your browser, and your weight and height are never sent to a server.` },
+      ],
+    },
+  },
+  'bmr-calculator': {
+    bn:     {
+      title: `বিএমআর ক্যালকুলেটর`,
+      intro: `বিএমআর ক্যালকুলেটর হিসাব করে বিশ্রাম অবস্থায় আপনার শরীর এক দিনে কত ক্যালোরি খরচ করে। BMR মানে বেসাল মেটাবলিক রেট। এটি খাবারের পরিমাণ ও ব্যায়ামের পরিকল্পনা করার প্রথম ধাপ। হিসাবটি Mifflin-St Jeor সূত্র (১৯৯০) অনুযায়ী হয়।`,
+      howTo: [
+        `লিঙ্গের ঘরে পুরুষ বা নারী বেছে নিন।`,
+        `ওজনের ঘরে আপনার ওজন কেজিতে লিখুন।`,
+        `উচ্চতার ঘরে আপনার উচ্চতা সেন্টিমিটারে লিখুন।`,
+        `বয়সের ঘরে আপনার বয়স বছরে লিখুন, তারপর দৈনিক ক্যালোরির ফলাফল দেখুন।`,
+      ],
+      formula: `সূত্র (Mifflin-St Jeor, 1990): পুরুষ: BMR = 10 × ওজন (কেজি) + 6.25 × উচ্চতা (সেমি) − 5 × বয়স + 5। নারী: একই হিসাবের শেষে − 161। ফলাফল পূর্ণ সংখ্যায় ক্যালোরি/দিনে দেখানো হয়।`,
+      example: `উদাহরণ: একজন পুরুষ, ওজন ৭০ কেজি, উচ্চতা ১৭৫ সেমি, বয়স ৩০ বছর। হিসাব: 10 × 70 = 700; 6.25 × 175 = 1093.75; 5 × 30 = 150। BMR = 700 + 1093.75 − 150 + 5 = 1648.75, অর্থাৎ ১৬৪৯ ক্যালোরি/দিন। সপ্তাহে ১১,৫৪৩ ক্যালোরি।`,
+      faq: [
+        { q: `BMR আর TDEE-এর মধ্যে পার্থক্য কী?`, a: `BMR হলো বিশ্রামে শরীরের খরচ; TDEE হলো কাজ ও ব্যায়ামসহ মোট খরচ। মোট চাহিদা জানতে TDEE ক্যালকুলেটর দেখুন।` },
+        { q: `লিঙ্গ কেন ফলাফল বদলে দেয়?`, a: `পুরুষের জন্য শেষে ৫ যোগ হয়, নারীর জন্য ১৬১ বিয়োগ হয়। তাই একই তথ্যেও ফলাফল আলাদা হয়।` },
+        { q: `বয়স বাড়লে BMR কি কমে?`, a: `হ্যাঁ, সূত্রে প্রতি বছর বয়সের জন্য ৫ ক্যালোরি কমে। বয়স বাড়লে BMR সাধারণত কিছুটা কমে।` },
+        { q: `এই ফলাফল কি চিকিৎসা পরামর্শ?`, a: `না, এটি আনুমানিক হিসাব, চিকিৎসা পরামর্শ নয়। বড় সিদ্ধান্তের আগে বিশেষজ্ঞের সঙ্গে কথা বলুন।` },
+      ],
+    },
+    en:     {
+      title: `BMR Calculator`,
+      intro: `The BMR Calculator works out how many calories your body uses in a day at rest (basal metabolic rate). It follows the Mifflin-St Jeor equation from 1990.`,
+      howTo: [
+        `Choose male or female.`,
+        `Enter your weight in kilograms.`,
+        `Enter your height in centimetres.`,
+        `Enter your age in years, then read your daily calorie result.`,
+      ],
+      formula: `Formula (Mifflin-St Jeor, 1990): men: BMR = 10 × weight (kg) + 6.25 × height (cm) − 5 × age + 5. Women: same, but − 161 at the end. The result is a whole number in kcal/day.`,
+      example: `Example: a man, 70 kg, 175 cm, aged 30. Calculation: 10 × 70 = 700; 6.25 × 175 = 1093.75; 5 × 30 = 150. So BMR = 700 + 1093.75 − 150 + 5 = 1648.75, rounded to 1649 kcal/day (11,543 per week).`,
+      faq: [
+        { q: `What is the difference between BMR and TDEE?`, a: `BMR is the at-rest cost; TDEE adds daily activity and exercise. Use the TDEE calculator for your total daily need.` },
+        { q: `Why does sex change the result?`, a: `The formula adds 5 for men and subtracts 161 for women, so the same inputs give different results.` },
+        { q: `Does BMR fall as you get older?`, a: `Yes, it subtracts 5 kcal per year of age, so BMR usually falls a little with age.` },
+        { q: `Is this result medical advice?`, a: `No, it is an estimate, not medical advice. Talk to a specialist before big decisions about food or exercise.` },
+      ],
+    },
+  },
+  'grade-analyzer': {
+    bn:     {
+      title: `গ্রেড বিশ্লেষক`,
+      intro: `গ্রেড বিশ্লেষক আপনার পরীক্ষার নম্বর থেকে গ্রেড ও জিপিএ বের করে। এটি বাংলাদেশের SSC ও HSC নম্বর-গ্রেড স্কেল ব্যবহার করে। প্রতিটি বিষয়ের গ্রেড, মোট নম্বর, গড় ও পাস-ফেল একসঙ্গে দেখায়। ছাত্র, শিক্ষক ও অভিভাবকদের জন্য এটি সহজ একটি টুল।`,
+      howTo: [
+        `নম্বরের ঘরে সব বিষয়ের নম্বর লিখুন, কমা বা নতুন লাইন দিয়ে আলাদা করুন।`,
+        `প্রতিটি নম্বর ০ থেকে ১০০-এর মধ্যে হতে হবে।`,
+        `ফলাফল নিজে থেকেই দেখাবে, কোনো বোতাম চাপতে হবে না।`,
+        `জিপিএ, মোট, গড় ও প্রতিটি বিষয়ের গ্রেডের তালিকা দেখুন।`,
+      ],
+      formula: `নিয়ম (বাংলাদেশের SSC/HSC স্কেল): ৮০+ = A+ (৫.০), ৭০+ = A (৪.০), ৬০+ = A− (৩.৫), ৫০+ = B (৩.০), ৪০+ = C (২.০), ৩৩+ = D (১.০), ৩৩-এর নিচে F (০)। জিপিএ = গ্রেড পয়েন্টের গড়, দুই দশমিক পর্যন্ত।`,
+      example: `উদাহরণ: নম্বর 85, 72, 65। গ্রেড: 85 = A+ (৫.০), 72 = A (৪.০), 65 = A− (৩.৫)। মোট ২২২, গড় ৭৪.০০। জিপিএ = (5.0 + 4.0 + 3.5) ÷ 3 = 4.17। কোনো বিষয়ে F নেই, তাই ফল পাস।`,
+      faq: [
+        { q: `পাস নম্বর কত?`, a: `এই টুলে পাস নম্বর ৩৩। ৩৩-এর নিচে পেলে বিষয়টিতে F হয়।` },
+        { q: `এক বিষয়ে ফেল করলে কি পুরো ফল ফেল হয়?`, a: `হ্যাঁ, কোনো একটি বিষয়ে F থাকলে পুরো ফল ফেল হয়, জিপিএ যতই ভালো হোক।` },
+        { q: `১০০-এর বেশি নম্বর দেওয়া যাবে?`, a: `না, প্রতিটি নম্বর ০ থেকে ১০০-এর মধ্যে হতে হবে। এর বাইরের সংখ্যা দিলে টুলটি ভুল বার্তা দেখায়।` },
+        { q: `এই জিপিএ কি বোর্ডের অফিসিয়াল জিপিএ?`, a: `এই জিপিএ বিষয়গুলোর গ্রেড পয়েন্টের গড়। বোর্ডের অফিসিয়াল নিয়ম আলাদা হতে পারে, তাই অফিসিয়াল ফলের জন্য বোর্ডের নিয়ম দেখে নিন।` },
+      ],
+    },
+    en:     {
+      title: `Grade Analyzer`,
+      intro: `The Grade Analyzer turns your exam marks into grades and a GPA, using the Bangladesh SSC and HSC marks-to-grade scale. It shows each subject's grade, the total, the average and pass or fail together.`,
+      howTo: [
+        `Type all subject marks in the box, separated by commas or new lines.`,
+        `Every mark must be between 0 and 100.`,
+        `The result appears on its own; no button to press.`,
+        `Read the GPA, total, average and each subject's grade.`,
+      ],
+      formula: `Rule (Bangladesh SSC/HSC scale): 80+ = A+ (5.0), 70+ = A (4.0), 60+ = A− (3.5), 50+ = B (3.0), 40+ = C (2.0), 33+ = D (1.0), below 33 = F (0). GPA = mean grade point, to two decimals.`,
+      example: `Example: marks 85, 72, 65. Grades: 85 = A+ (5.0), 72 = A (4.0), 65 = A− (3.5). Total 222, average 74.00. GPA = (5.0 + 4.0 + 3.5) ÷ 3 = 4.17. No F, so it is a pass.`,
+      faq: [
+        { q: `What is the pass mark?`, a: `The pass mark is 33. Below 33 in a subject gives an F.` },
+        { q: `Does failing one subject fail the whole result?`, a: `Yes. One F in any subject fails the whole result, whatever the GPA.` },
+        { q: `Can I enter a mark above 100?`, a: `No. Every mark must be between 0 and 100; anything else shows an error.` },
+        { q: `Is this GPA the board's official GPA?`, a: `This GPA is the average of grade points. Board rules may differ, so check them for an official result.` },
+      ],
+    },
+  },
+  'word-counter': {
+    bn:     {
+      title: `শব্দ গণনা`,
+      intro: `শব্দ গণনা টুলটি আপনার লেখার শব্দ, অক্ষর, বাক্য, অনুচ্ছেদ ও লাইনের সংখ্যা গুনে দেয়। একই সঙ্গে পড়তে কত সময় লাগবে তার একটি অনুমান দেয়। রচনা, অ্যাসাইনমেন্ট বা যেকোনো লেখার দৈর্ঘ্য মাপতে এটি কাজে লাগে। সব গণনা আপনার ব্রাউজারেই হয়।`,
+      howTo: [
+        `লেখার ঘরে আপনার লেখা টাইপ করুন বা পেস্ট করুন।`,
+        `গণনা নিজে থেকেই হালনাগাদ হয়, কোনো বোতাম চাপতে হবে না।`,
+        `উপরের টাইলে শব্দ, অক্ষর, বাক্য, অনুচ্ছেদ ও লাইনের সংখ্যা দেখুন।`,
+        `নিচে পড়ার সময় দেখুন, চাইলে উদাহরণ বোতামে নমুনা লেখা বসান।`,
+      ],
+      formula: `নিয়ম: শব্দ গোনা হয় ফাঁকা জায়গা দিয়ে ভাগ করে; বাক্য গোনা হয় . ! ? । চিহ্ন দিয়ে ভাগ করে; অনুচ্ছেদ গোনা হয় ফাঁকা লাইন দিয়ে ভাগ করে। পড়ার সময় = শব্দ ÷ ২০০ শব্দ/মিনিট। অক্ষর গোনা হয় ফাঁকাসহ ও ফাঁকা ছাড়া দুভাবেই।`,
+      example: `উদাহরণ: লেখা: আমি বাংলা ভালোবাসি। Eduvelto is a free learning platform for Bangladesh। এই লেখায় শব্দ ১১টি, অক্ষর ৭২টি, ফাঁকা ছাড়া অক্ষর ৬২টি, বাক্য ২টি। পড়ার সময়: 11 ÷ 200 × 60 = ৩.৩ সেকেন্ড, অর্থাৎ প্রায় ৩ সেকেন্ড।`,
+      faq: [
+        { q: `বাংলা লেখা কি গোনা যায়?`, a: `হ্যাঁ, শব্দ গোনা হয় ফাঁকা জায়গা দিয়ে ভাগ করে, তাই বাংলা ও ইংরেজি একইভাবে গোনা হয়।` },
+        { q: `সংখ্যাও কি শব্দ হিসেবে গোনা হয়?`, a: `হ্যাঁ, ফাঁকা জায়গা দিয়ে আলাদা করা যেকোনো টুকরো একটি শব্দ হিসেবে গোনা হয়, সংখ্যাসহ।` },
+        { q: `পড়ার সময় কি একদম ঠিক?`, a: `না, এটি একটি অনুমান মাত্র। ধরা হয় একজন পাঠক মিনিটে প্রায় ২০০ শব্দ পড়েন।` },
+        { q: `আমার লেখা কি কোথাও পাঠানো হয়?`, a: `না, সব গণনা আপনার ব্রাউজারেই হয়। আপনার লেখা কোথাও আপলোড বা সংরক্ষণ করা হয় না।` },
+      ],
+    },
+    en:     {
+      title: `Word Counter`,
+      intro: `The Word Counter counts the words, characters, sentences, paragraphs and lines in your text. It also estimates how long the text takes to read. It is useful for essays, assignments or any writing, and all counting happens in your browser.`,
+      howTo: [
+        `Type or paste your text in the text box.`,
+        `The counts update on their own; no button to press.`,
+        `Read the words, characters, sentences, paragraphs and lines in the tiles.`,
+        `See the reading time below, or load the sample text with the example button.`,
+      ],
+      formula: `Rule: words are counted by splitting on whitespace; sentences by splitting on . ! ? and । ; paragraphs by splitting on blank lines. Reading time = words ÷ 200 words per minute. Characters are counted with spaces and without spaces.`,
+      example: `Example: the text “আমি বাংলা ভালোবাসি। Eduvelto is a free learning platform for Bangladesh.” has 11 words, 72 characters, 62 characters without spaces, and 2 sentences. Reading time: 11 ÷ 200 × 60 = 3.3 seconds, about 3 seconds.`,
+      faq: [
+        { q: `Can it count Bangla text?`, a: `Yes. Words are counted by splitting on whitespace, so Bangla and English count the same way.` },
+        { q: `Do numbers count as words?`, a: `Yes, any piece separated by whitespace counts as one word, including numbers.` },
+        { q: `Is the reading time exact?`, a: `No, it is only an estimate, assuming about 200 words per minute.` },
+        { q: `Is my text sent anywhere?`, a: `No, all counting happens in your browser. Your text is never uploaded or stored anywhere.` },
+      ],
+    },
   },
   'compound-interest-calculator': {
-    guideEn: `A compound interest calculator shows how savings or an investment can grow when the interest itself starts earning interest. With simple interest you earn interest only on the original amount, but with compound interest each period's interest is added to the balance, so the next period earns interest on a larger amount. Over long periods this snowball effect makes a large difference. The tool needs four inputs: the starting amount, the annual interest rate, how often interest is added each year, and the number of years. The formula is A equals P times (1 + r divided by n) to the power (n times t), where A is the final amount, P is the starting amount, r is the annual rate as a decimal, n is how many times interest is added per year, and t is the number of years. For a worked example, take a starting amount of 100,000 at a 8 percent annual rate, added once a year, for 10 years. The formula gives 100,000 times 1.08 to the power 10, which is about 215,892. With simple interest the same money would reach only 180,000, so compounding adds about 35,892 extra. If interest is added monthly instead, n is 12 and the result is slightly higher, about 221,964, because the interest starts earning interest sooner. The tool also shows the effect of regular monthly deposits, which is how most people actually save. Adding 5,000 every month to the same example lifts the final amount far above 215,892, because every deposit gets years of compounding of its own. Time is the strongest input in the whole calculation. Doubling the number of years usually grows the final amount far more than doubling the rate, because compounding is exponential rather than steady. That is why a small amount started at age 25 can end up larger than a bigger amount started at age 35. A practical tip is to test two scenarios side by side: your current plan, and the same plan started five years earlier or with a slightly larger monthly deposit. Seeing the gap in numbers often makes the habit easier to keep. Remember that the rate you enter is an assumption, not a promise: real returns vary from year to year, and this tool does not account for taxes, fees, or inflation, so treat the result as a planning estimate.`,
-    guideBn: `চক্রবৃদ্ধি সুদের ক্যালকুলেটর দেখায় সঞ্চয় বা বিনিয়োগ কীভাবে বাড়ে, যখন সুদের ওপরও সুদ পাওয়া যায়। সরল সুদে আপনি শুধু মূল টাকার ওপর সুদ পান, কিন্তু চক্রবৃদ্ধি সুদে প্রতিটি মেয়াদের সুদ মূল টাকার সঙ্গে যোগ হয়, ফলে পরের মেয়াদে বড় অঙ্কের ওপর সুদ ধরে। দীর্ঘ সময়ে এই জমতে থাকা প্রভাব অনেক বড় পার্থক্য তৈরি করে, তাই তাড়াতাড়ি শুরু করা অধিকাংশ মানুষের ধারণার চেয়েও বেশি গুরুত্বপূর্ণ। এই টুলটির জন্য চারটি তথ্য লাগে: শুরুর টাকা, বার্ষিক সুদের হার, বছরে কতবার সুদ যোগ হয় এবং কত বছর। সূত্রটি হলো A সমান P গুণ (1 + r ভাগ n) এর ঘাত (n গুণ t), যেখানে A শেষের পরিমাণ, P শুরুর টাকা, r দশমিক হিসেবে বার্ষিক হার, n বছরে কতবার সুদ যোগ হয় এবং t বছরের সংখ্যা। একটি উদাহরণ দেখা যাক: শুরুর টাকা 100,000, বার্ষিক হার 8 শতাংশ, বছরে একবার সুদ যোগ হয়, মেয়াদ 10 বছর। সূত্র অনুযায়ী পাওয়া যায় 100,000 গুণ 1.08 এর 10 ঘাত, অর্থাৎ প্রায় 215,892 টাকা। সরল সুদে একই টাকা হতো মাত্র 180,000 টাকা, অর্থাৎ চক্রবৃদ্ধিতে বাড়তি পাওয়া যায় প্রায় 35,892 টাকা। সুদ মাসে মাসে যোগ হলে n হয় 12 এবং ফল সামান্য বেশি হয়, প্রায় 221,964 টাকা, কারণ সুদ তাড়াতাড়ি সুদ ধরতে শুরু করে। এই টুলটি নিয়মিত মাসিক জমার প্রভাবও দেখায়, আর বেশিরভাগ মানুষ আসলে এভাবেই সঞ্চয় করে। একই উদাহরণে প্রতি মাসে 5,000 টাকা করে জমা দিলে শেষের পরিমাণ 215,892 টাকার অনেক ওপরে উঠে যায়, কারণ প্রতিটি জমা নিজে নিজে বছরের পর বছর চক্রবৃদ্ধি পায়। এই হিসাবের সবচেয়ে শক্তিশালী উপাদান হলো সময়। বছরের সংখ্যা দ্বিগুণ করলে সাধারণত হারের চেয়ে অনেক বেশি ফল বাড়ে, কারণ চক্রবৃদ্ধি ধারাবাহিকভাবে নয়, ঘাত হারে বাড়ে। তাই 25 বছর বয়সে শুরু করা অল্প টাকা 35 বছর বয়সে শুরু করা বড় অঙ্কের চেয়েও বেশি হতে পারে। ব্যবহারিক পরামর্শ হলো দুটি পরিস্থিতি পাশাপাশি পরীক্ষা করুন: আপনার বর্তমান পরিকল্পনা, আর একই পরিকল্পনা পাঁচ বছর আগে শুরু করলে বা মাসিক জমা সামান্য বাড়ালে কেমন হতো। সংখ্যার পার্থক্য দেখলে অভ্যাসটি ধরে রাখা সহজ হয়। মনে রাখবেন, আপনি যে হার লিখবেন তা একটি ধারণা, কোনো নিশ্চয়তা নয়: বাস্তবে প্রতি বছর লাভ কমবেশি হয়, আর এই টুলটি কর, ফি বা মূল্যস্ফীতি হিসাব করে না, তাই ফলাফলকে পরিকল্পনার একটি আনুমানিক হিসাব হিসেবে নিন।`,
+    bn:     {
+      title: `চক্রবৃদ্ধি সুদ ক্যালকুলেটর`,
+      intro: `এই ক্যালকুলেটর দেখায় সঞ্চয় বা বিনিয়োগ চক্রবৃদ্ধি সুদে কীভাবে বাড়ে, যখন সুদের ওপরও সুদ পাওয়া যায়। দীর্ঘ সময়ে এই জমতে থাকা প্রভাব বড় পার্থক্য তৈরি করে।`,
+      howTo: [
+        `শুরুর টাকা লিখুন।`,
+        `মাসিক জমা লিখুন (না থাকলে 0)।`,
+        `বার্ষিক হার (%) ও মেয়াদ (বছর) লিখুন।`,
+        `মেয়াদ শেষে মোট টাকা ও সুদ দেখুন।`,
+      ],
+      formula: `FV = P × (1 + r)^n + C × ((1 + r)^n − 1) ÷ r, যেখানে P শুরুর টাকা, C মাসিক জমা, r মাসিক হার (বার্ষিক হার ÷ 12) ও n মাসের সংখ্যা।`,
+      example: `উদাহরণ: শুরুর টাকা 100,000, বার্ষিক হার 8%, মেয়াদ 10 বছর। বছরে একবার সুদ যোগ হলে মোট হয় প্রায় 215,892 টাকা; সরল সুদে হতো মাত্র 180,000 টাকা। মাসে মাসে সুদ যোগ হলে (টুলটি এভাবেই হিসাব করে) ফল প্রায় 221,964 টাকা।`,
+      faq: [
+        { q: `চক্রবৃদ্ধি সুদ আর সরল সুদের পার্থক্য কী?`, a: `সরল সুদে শুধু মূল টাকার ওপর সুদ পাওয়া যায়; চক্রবৃদ্ধিতে সুদের ওপরও সুদ ধরে, তাই টাকা দ্রুত বাড়ে।` },
+        { q: `মাসিক জমা দিলে কী হয়?`, a: `প্রতিটি জমা নিজে নিজে বছরের পর বছর চক্রবৃদ্ধি পায়, তাই শেষের পরিমাণ অনেক বেড়ে যায়।` },
+        { q: `ফলাফল কি নিশ্চিত?`, a: `না, লেখা হার একটি ধারণা মাত্র। বাস্তব লাভ, কর, ফি ও মূল্যস্ফীতি হিসাব করা হয় না; ফলাফল আনুমানিক।` },
+      ],
+    },
+    en:     {
+      title: `Compound Interest Calculator`,
+      intro: `This calculator shows how savings or an investment grows with compound interest, when the interest itself starts earning interest. Over long periods, this snowball effect makes a large difference.`,
+      howTo: [
+        `Enter the starting amount.`,
+        `Enter the monthly contribution (0 if none).`,
+        `Enter the annual rate (%) and the term in years.`,
+        `Read the final amount and the interest earned.`,
+      ],
+      formula: `FV = P × (1 + r)^n + C × ((1 + r)^n − 1) ÷ r, where P is the starting amount, C is the monthly contribution, r is the monthly rate (annual rate ÷ 12) and n is the number of months.`,
+      example: `Example: a starting amount of 100,000 at 8% a year for 10 years. Added once a year, it grows to about 215,892; with simple interest it would reach only 180,000. Added monthly (as this tool calculates), the result is about 221,964.`,
+      faq: [
+        { q: `What is the difference from simple interest?`, a: `Simple interest pays only on the original amount; compound interest also earns interest on the interest, so money grows faster.` },
+        { q: `What do monthly deposits change?`, a: `Every deposit earns compound interest for years of its own, so the final amount grows much larger.` },
+        { q: `Is the result guaranteed?`, a: `No. The rate you enter is an assumption, and the tool ignores taxes, fees and inflation, so treat the result as a planning estimate.` },
+      ],
+    },
   },
-  'loan-emi-calculator': {
-    guideEn: `A loan EMI calculator tells you the fixed monthly instalment, called the EMI, that you will pay on a loan. EMI stands for Equated Monthly Instalment, and it stays the same every month for the whole loan term, so you always know what leaves your account. You enter the loan amount, the annual interest rate, and the term in months or years, and the tool returns the EMI, the total amount you will pay, and the total interest. The calculation uses the standard formula EMI equals P times r times (1 + r) to the power n, divided by ((1 + r) to the power n minus 1), where P is the loan amount, r is the monthly interest rate, and n is the number of monthly payments. The monthly rate is the annual rate divided by 12, so a 12 percent annual rate means a monthly rate of 0.01. For a worked example, take a loan of 500,000 at a 12 percent annual rate for 3 years. The monthly rate is 0.01 and there are 36 payments, and the formula gives an EMI of about 16,607. Over 36 months you pay about 597,852 in total, of which about 97,852 is interest. Stretching the same loan to 5 years drops the EMI to about 11,122, which feels easier each month, but the total interest rises to about 167,320, so the cheaper monthly payment costs about 69,468 more overall. Inside each EMI, the split between interest and principal changes every month. Early payments are mostly interest, because the balance is at its largest, and only a small part reduces what you owe. As the balance falls, the interest part shrinks and the principal part grows, so the loan is paid off faster in the later months. A practical tip is to check the EMI against your monthly income before signing anything: many advisers suggest keeping all loan payments within a modest share of take-home pay, so that one unexpected expense does not break the budget. Also compare the total interest, not only the EMI, when choosing between two offers, and ask whether part-payment is allowed without a fee, because paying a little extra in the early months cuts the total interest noticeably. Remember that the rate you enter should be the rate your lender actually quotes, including any processing fee effect you want to account for separately.`,
-    guideBn: `লোন ইএমআই ক্যালকুলেটর আপনাকে জানায় ঋণের জন্য প্রতি মাসে কত টাকা কিস্তি দিতে হবে। ইএমআই মানে সমান মাসিক কিস্তি, এবং পুরো মেয়াদে প্রতি মাসে এই অঙ্ক একই থাকে, ফলে বাজেট করা সহজ হয়: প্রতি মাসে আপনার হিসাব থেকে ঠিক কত টাকা যাবে তা আপনি আগেই জানেন। আপনি ঋণের পরিমাণ, বার্ষিক সুদের হার এবং মেয়াদ মাস বা বছর হিসেবে লিখলে টুলটি ইএমআই, মোট কত টাকা দিতে হবে এবং মোট সুদ বের করে দেয়। হিসাবের সূত্রটি হলো ইএমআই সমান P গুণ r গুণ (1 + r) এর n ঘাত, ভাগ করে ((1 + r) এর n ঘাত বিয়োগ 1) দিয়ে, যেখানে P ঋণের পরিমাণ, r মাসিক সুদের হার এবং n মাসিক কিস্তির সংখ্যা। মাসিক হার হলো বার্ষিক হারকে 12 দিয়ে ভাগ করলে যা হয়, অর্থাৎ 12 শতাংশ বার্ষিক হারে মাসিক হার 0.01। একটি উদাহরণ দেখা যাক: 500,000 টাকার ঋণ, 12 শতাংশ বার্ষিক হার, মেয়াদ 3 বছর। এখানে মাসিক হার 0.01 এবং কিস্তির সংখ্যা 36, সূত্র অনুযায়ী ইএমআই দাঁড়ায় প্রায় 16,607 টাকা। 36 মাসে মোট দিতে হয় প্রায় 597,852 টাকা, যার মধ্যে সুদ প্রায় 97,852 টাকা। একই ঋণ 5 বছরে নিলে ইএমআই কমে প্রায় 11,122 টাকায় নামে, প্রতি মাসে যা সহজ মনে হয়, কিন্তু মোট সুদ বেড়ে হয় প্রায় 167,320 টাকা, অর্থাৎ মাসিক কিস্তি কমানোর জন্য মোট খরচ বাড়ে প্রায় 69,468 টাকা। এই টুলটি সবচেয়ে গুরুত্বপূর্ণ যে বিষয়টি দেখায়, তা হলো এই বিনিময়। প্রতিটি কিস্তির ভেতরে সুদ ও আসলের ভাগ প্রতি মাসে বদলায়। শুরুর কিস্তিগুলোতে বেশিরভাগ অংশই সুদ, কারণ তখন বকেয়া সবচেয়ে বেশি থাকে, আর অল্প অংশই আসল কমায়। বকেয়া কমতে থাকলে সুদের অংশ কমে আর আসলের অংশ বাড়ে, তাই পরের মাসগুলোতে ঋণ দ্রুত শোধ হয়। ব্যবহারিক পরামর্শ হলো চুক্তিতে সই করার আগে ইএমআই আপনার মাসিক আয়ের সঙ্গে মিলিয়ে দেখুন: অনেক উপদেষ্টা পরামর্শ দেন সব ঋণের কিস্তি মিলিয়ে হাতে পাওয়া বেতনের একটি পরিমিত অংশের মধ্যে রাখতে, যাতে হঠাৎ একটি খরচে বাজেট ভেঙে না যায়। দুটি প্রস্তাবের মধ্যে বেছে নেওয়ার সময় শুধু ইএমআই নয়, মোট সুদও তুলনা করুন, আর আংশিক পরিশোধে কোনো ফি লাগে কি না জেনে নিন, কারণ শুরুর মাসগুলোতে একটু বাড়তি টাকা দিলে মোট সুদ চোখে পড়ার মতো কমে। মনে রাখবেন, আপনি যে হার লিখবেন তা আপনার ঋণদাতার আসল উদ্ধৃত হার হওয়া উচিত, আর প্রসেসিং ফির প্রভাব আলাদাভাবে হিসাব করুন।`,
+  'mortgage-calculator': {
+    bn:     {
+      title: `মর্টগেজ ও হোম লোন ক্যালকুলেটর`,
+      intro: `এই ক্যালকুলেটর বাড়ির ঋণ নেওয়ার আগেই তার মাসিক খরচ বুঝতে সাহায্য করে। মাসিক কিস্তি, মোট পরিশোধ ও মোট সুদ দেখে তিনটি প্রস্তাব সহজে তুলনা করা যায়।`,
+      howTo: [
+        `বাড়ির দাম লিখুন।`,
+        `ডাউন পেমেন্ট লিখুন (ঋণ = দাম − ডাউন পেমেন্ট)।`,
+        `বার্ষিক সুদের হার (%) ও মেয়াদ (বছর) লিখুন।`,
+        `মাসিক কিস্তি, মোট সুদ ও মোট পরিশোধ দেখুন।`,
+      ],
+      formula: `EMI = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), যেখানে P ঋণের পরিমাণ, r মাসিক হার (বার্ষিক হার ÷ 12) ও n কিস্তির সংখ্যা। সুদ 0% হলে EMI = P ÷ n।`,
+      example: `উদাহরণ: বাড়ির দাম 5,000,000 টাকা, ডাউন পেমেন্ট নেই, হার 9%, মেয়াদ 20 বছর। ঋণ 5,000,000 টাকা; মাসিক হার 0.0075 ও কিস্তি 240টি, EMI প্রায় 44,986 টাকা। মোট দিতে হয় 10,796,640 টাকা, যার মধ্যে সুদ 5,796,640 টাকা। একই ঋণ 10 বছরে নিলে কিস্তি প্রায় 63,338 টাকা, কিন্তু সুদ মাত্র 2,600,560 টাকা।`,
+      faq: [
+        { q: `শুরুর দিকে ঋণ কমতে দেরি হয় কেন?`, a: `প্রথম মাসগুলোতে কিস্তির বেশিরভাগ অংশ সুদে যায়, অল্প অংশই আসল কমায়। বকেয়া কমলে সুদের অংশও কমে।` },
+        { q: `আগাম পরিশোধ করলে লাভ হয়?`, a: `হ্যাঁ, শুরুর দিকে বাড়তি টাকা দিলে মোট সুদ অনেক কমে। তবে আগাম পরিশোধে জরিমানা আছে কি না জেনে নিন।` },
+        { q: `কর, বীমা কি হিসাবে ধরা হয়?`, a: `না, এই টুলটি শুধু ঋণের কিস্তি হিসাব করে। কর, বীমা ও বাড়ির অন্যান্য খরচ আলাদা।` },
+      ],
+    },
+    en:     {
+      title: `Mortgage & Home Loan Calculator`,
+      intro: `This calculator helps you understand the monthly cost of a home loan before you commit. Comparing EMI, total payment and total interest makes it easy to compare offers.`,
+      howTo: [
+        `Enter the home price.`,
+        `Enter the down payment (loan = price − down payment).`,
+        `Enter the annual rate (%) and the term in years.`,
+        `Read the EMI, total interest and total payment.`,
+      ],
+      formula: `EMI = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), where P is the loan, r is the monthly rate (annual rate ÷ 12) and n is the number of payments. At 0%, EMI = P ÷ n.`,
+      example: `Example: a home price of 5,000,000 with no down payment, at 9% a year for 20 years. The loan is 5,000,000; the monthly rate is 0.0075 and there are 240 payments, so the EMI is about 44,986. In total you pay about 10,796,640, including about 5,796,640 in interest. Over 10 years it costs about 63,338 a month but only about 2,600,560 in interest.`,
+      faq: [
+        { q: `Why does the balance fall slowly at first?`, a: `In the early months most of each payment goes to interest and only a small part reduces the loan.` },
+        { q: `Does paying early save money?`, a: `Yes, extra payments early in the loan cut total interest the most. But check whether the lender charges a fee for early repayment.` },
+        { q: `Are taxes and insurance included?`, a: `No, this tool estimates the loan payment only. Taxes, insurance and other home costs are separate.` },
+      ],
+    },
   },
+  'income-tax-calculator': {
+    bn:     {
+      title: `আয়কর ক্যালকুলেটর`,
+      intro: `এই ক্যালকুলেটর বার্ষিক আয়ের ওপর আনুমানিক আয়কর বের করে, আপনি নিজে যে স্ল্যাব ও হার লিখবেন সেই অনুযায়ী। করের নিয়ম প্রতি বছর বদলায়, তাই হার এখানে স্থায়ীভাবে বসানো হয়নি।`,
+      howTo: [
+        `বার্ষিক আয় লিখুন।`,
+        `করের ধাপের সীমা ও হার দেখে নিন, প্রয়োজনে বদলে নিন।`,
+        `মোট কর, মাসিক কর ও কার্যকর হার দেখুন।`,
+        `দাখিলের আগে NBR-এর বর্তমান স্ল্যাব মিলিয়ে নিন।`,
+      ],
+      formula: `কর = প্রতিটি স্ল্যাবের (স্ল্যাবের আয় × স্ল্যাবের হার) যোগফল। টুলটি NBR-এর অর্থ আইন ২০২৫-এর স্ল্যাব দিয়ে শুরু হয়: প্রথম 350,000 টাকা করমুক্ত।`,
+      example: `উদাহরণ: করযোগ্য আয় 500,000 টাকা; স্ল্যাব: প্রথম 300,000 টাকায় 0%, পরের 200,000 টাকায় 10%। প্রথম স্ল্যাবে কর নেই, দ্বিতীয় স্ল্যাবে 20,000 টাকা; মোট কর 20,000 টাকা। কার্যকর হার 4%। আয় 600,000 টাকা হলে শুধু বাড়তি 100,000 টাকার ওপর বেশি হার পড়ে, পুরো আয়ের ওপর নয়।`,
+      faq: [
+        { q: `প্রান্তিক হার আর কার্যকর হার কী?`, a: `আয়ের শেষ অংশের হার প্রান্তিক হার; মোট করকে মোট আয় দিয়ে ভাগ করলে কার্যকর হার পাওয়া যায়, যা প্রায় সবসময় কম হয়।` },
+        { q: `বেতন বাড়লে হাতে কম টাকা থাকবে?`, a: `না, বেশি হারে শুধু বাড়তি আয়ের ওপর কর পড়ে, পুরো আয়ের ওপর নয়। তাই বেতন বাড়লে করের পরও বেশি টাকা থাকে।` },
+        { q: `এই হিসাব কি কর পরামর্শ?`, a: `না, এটি শুধু পরিকল্পনার জন্য আনুমানিক হিসাব। জটিল রিটার্নের ক্ষেত্রে লাইসেন্সপ্রাপ্ত কর উপদেষ্টার সাহায্য নিন।` },
+      ],
+    },
+    en:     {
+      title: `Income Tax Calculator`,
+      intro: `This calculator estimates the income tax on your yearly income, using the slabs and rates you enter yourself. Tax rules change every year, so no rate is fixed in place here.`,
+      howTo: [
+        `Enter your annual income.`,
+        `Check the slab limits and rates, and change them if needed.`,
+        `Read the total tax, monthly tax and effective rate.`,
+        `Before filing, check the current NBR slabs.`,
+      ],
+      formula: `Tax = the sum over slabs of (income in the slab × that slab's rate). The tool starts with the NBR Finance Act 2025 slabs: the first 350,000 is tax-free.`,
+      example: `Example: taxable income 500,000, with slabs you enter: 0% on the first 300,000 and 10% on the next 200,000. The first slab gives no tax; the second gives 20,000, so total tax is 20,000. The effective rate is 4%. If income rose to 600,000, only the extra 100,000 would be taxed at the higher rate, not the whole amount.`,
+      faq: [
+        { q: `What are the marginal and effective rates?`, a: `The marginal rate is the rate on the last part of your income; the effective rate is total tax divided by total income, and it is almost always lower.` },
+        { q: `Can a pay rise leave me with less money?`, a: `No. Only the extra income is taxed at the higher rate, not the whole income, so you keep more after tax.` },
+        { q: `Is this tax advice?`, a: `No, it is an estimate for planning only. For a complex return, ask a licensed tax adviser to check your situation.` },
+      ],
+    },
+  },
+  'salary-to-hourly-converter': {
+    bn:     {
+      title: `বেতন থেকে ঘণ্টাপ্রতি হার`,
+      intro: `এই টুলটি মাসিক বা বার্ষিক বেতনকে ঘণ্টাপ্রতি হারে রূপান্তর করে। চাকরির প্রস্তাব, ফ্রিল্যান্স কাজ ও খণ্ডকালীন কাজের তুলনা একই মাপে করা যায়।`,
+      howTo: [
+        `বেতনের পরিমাণ লিখুন।`,
+        `বেতনের সময়কাল বেছে নিন: মাসিক, বার্ষিক, সাপ্তাহিক বা দৈনিক।`,
+        `সপ্তাহে কাজের ঘণ্টা লিখুন (সাধারণত 40)।`,
+        `ঘণ্টাপ্রতি, দৈনিক, সাপ্তাহিক ও বার্ষিক হার দেখুন।`,
+      ],
+      formula: `ঘণ্টাপ্রতি হার = বার্ষিক বেতন ÷ বছরের মোট কাজের ঘণ্টা; মোট ঘণ্টা = সপ্তাহে ঘণ্টা × 52। দৈনিক হার ধরা হয় 5 দিনের সপ্তাহে।`,
+      example: `উদাহরণ: বার্ষিক বেতন 600,000 টাকা, সপ্তাহে 40 ঘণ্টা, বছরে 52 সপ্তাহ। মোট ঘণ্টা 2,080; 600,000 ÷ 2,080 = প্রায় 288 টাকা প্রতি ঘণ্টা। মাসিক 50,000 টাকা একই হিসাব। উল্টোভাবে, ঘণ্টায় 350 টাকা হলে বার্ষিক আয় প্রায় 728,000 টাকা।`,
+      faq: [
+        { q: `ঘণ্টাপ্রতি হার কেন জানা দরকার?`, a: `দুটি চাকরির কাজের ঘণ্টা আলাদা হলে শুধু মাসিক বেতন দেখে তুলনা করা যায় না; ঘণ্টাপ্রতি হার আসল মূল্য দেখায়।` },
+        { q: `ফ্রিল্যান্স হার ঠিক করতে কী করব?`, a: `মোট কাজের ঘণ্টা নয়, বিল করা যায় এমন ঘণ্টা ব্যবহার করুন; ক্লায়েন্ট খোঁজা ও হিসাবের সময়ও ধরুন।` },
+        { q: `ছুটি ও সুবিধা কি হিসাবে ধরা হয়?`, a: `না, শুধু বেতন ও ঘণ্টা দিয়ে হিসাব করা হয়। তুলনার আগে সুবিধার টাকার মূল্য বেতনের সঙ্গে যোগ করে নিন।` },
+      ],
+    },
+    en:     {
+      title: `Salary to Hourly Converter`,
+      intro: `This tool converts a monthly or yearly salary into an hourly rate. It lets you compare job offers, freelance work and part-time roles on equal terms.`,
+      howTo: [
+        `Enter the salary amount.`,
+        `Choose the salary period: monthly, yearly, weekly or daily.`,
+        `Enter your working hours per week (usually 40).`,
+        `Read the hourly, daily, weekly and yearly rates.`,
+      ],
+      formula: `Hourly rate = annual salary ÷ total working hours in a year; total hours = hours per week × 52. The daily rate assumes a 5-day working week.`,
+      example: `Example: an annual salary of 600,000 with a 40-hour week over 52 weeks. Total hours are 52 × 40 = 2,080, and 600,000 ÷ 2,080 gives about 288 per hour. A monthly salary of 50,000 is the same example. In reverse, 350 an hour at 40 hours a week for 52 weeks equals about 728,000 a year.`,
+      faq: [
+        { q: `Why do I need an hourly rate?`, a: `When two jobs have different working hours, monthly pay alone cannot compare them; the hourly rate shows the real value of your time.` },
+        { q: `How should I set a freelance rate?`, a: `Use your billable hours, not your total working hours, and count unpaid time spent finding clients and doing admin.` },
+        { q: `Are holidays and benefits included?`, a: `No, the tool uses only pay and hours. Add the cash value of benefits to the salary before converting for a fair comparison.` },
+      ],
+    },
+  },
+  'electricity-bill-calculator': {
+    bn:     {
+      title: `বিদ্যুৎ বিল ক্যালকুলেটর`,
+      intro: `এই টুল দিয়ে মাসে ব্যবহৃত ইউনিট থেকে আনুমানিক বিল বের করতে পারবেন। আবাসিক গ্রাহকদের জন্য তৈরি; বাড়ির মালিক, ভাড়াটিয়া কিংবা বিদ্যুৎ খরচের হিসাব রাখতে চান—এমন যে কারও কাজে লাগবে। ফলাফল আনুমানিক, সরকারি বিলের বিকল্প নয়।`,
+      howTo: [
+        `"ব্যবহৃত ইউনিট (kWh)" ঘরে মাসের মোট ব্যবহার লিখুন।`,
+        `"অনুমোদিত লোড (kW)" ঘরে মিটারের লোড লিখুন; সাধারণত এটি ১।`,
+        `মিটার ভাড়া থাকলে তা লিখুন; না থাকলে ০ রাখুন।`,
+        `প্রয়োজন হলে স্ল্যাবের হার, ডিমান্ড চার্জ ও ভ্যাট সর্বশেষ বিলের সঙ্গে মিলিয়ে বদলে নিন।`,
+      ],
+      formula: `ব্যবহার স্ল্যাব অনুযায়ী ভাগ হয়: ৫০ ইউনিট পর্যন্ত লাইফলাইন হার ৳৪.৬৩; এর বেশি হলে ০–৭৫ ইউনিট ৳৫.২৬, ৭৬–২০০ ইউনিট ৳৮.৫০, ২০১–৩০০ ইউনিট ৳৯.১০, ৩০১–৪০০ ইউনিট ৳৯.৬২, ৪০১–৬০০ ইউনিট ৳১৫.০১ এবং ৬০০-এর বেশি ৳১৭.৩৫। এর সঙ্গে ডিমান্ড চার্জ ৳৪২/kW ও মিটার ভাড়া যোগ হয়, তারপর মোটের ওপর ৫% ভ্যাট। হার জুন ২০২৬ বিলিং মাসের প্রকাশিত আবাসিক ট্যারিফের ডিফল্ট মান।`,
+      example: `২০০ ইউনিট, ১ kW লোড, মিটার ভাড়া ০: জ্বালানি চার্জ ৭৫ × ৫.২৬ + ১২৫ × ৮.৫০ = ৳১,৪৫৭। ডিমান্ড চার্জ ৳৪২। মোট ৳১,৪৯৯-এর ওপর ৫% ভ্যাট ৳৭৪.৯৫। মোট ৳১,৫৭৩.৯৫, প্রতি ইউনিটে গড়ে প্রায় ৳৭.৮৭।`,
+      faq: [
+        { q: `এই হিসাব কি আমার আসল বিলের সমান হবে?`, a: `না। এটি আনুমানিক হিসাব; হার বদলাতে পারে, আর মিটার ভাড়া বা ছাড় আপনার বিলে ভিন্ন হতে পারে। বিলের সঙ্গে মিলিয়ে নিন।` },
+        { q: `৫০ ইউনিটের কম ব্যবহার করলে কী হয়?`, a: `মোট ব্যবহার ৫০ ইউনিট বা তার কম হলে লাইফলাইন হার ৳৪.৬৩ প্রযোজ্য হয়।` },
+        { q: `ডিমান্ড চার্জ কী?`, a: `অনুমোদিত লোডের জন্য প্রতি kW-তে মাসিক চার্জ; ডিফল্ট হার ৳৪২/kW।` },
+      ],
+    },
+    en:     {
+      title: `Electricity Bill Calculator`,
+      intro: `This tool estimates your monthly electricity bill from the units used. It is for residential customers — homeowners, tenants, or anyone tracking electricity spending. The result is an estimate, not your official bill.`,
+      howTo: [
+        `Enter your monthly usage in the "Units used (kWh)" field.`,
+        `Enter your sanctioned load in the "Sanctioned load (kW)" field; usually 1.`,
+        `Enter the meter rent, or leave it at 0.`,
+        `Edit the slab rates, demand charge and VAT to match your latest bill.`,
+      ],
+      formula: `Usage is split by slab: up to 50 units, the lifeline rate is ৳4.63; above that, 0–75 units cost ৳5.26, 76–200 units ৳8.50, 201–300 units ৳9.10, 301–400 units ৳9.62, 401–600 units ৳15.01, and above 600 units ৳17.35. A demand charge of ৳42/kW and any meter rent are added, then 5% VAT applies to the total. Rates are the default tariff as reported for June 2026.`,
+      example: `200 units, 1 kW load, no meter rent: energy charge 75 × 5.26 + 125 × 8.50 = ৳1,457. Demand charge ৳42. VAT at 5% on ৳1,499 is ৳74.95. Total bill ৳1,573.95, about ৳7.87 per unit on average.`,
+      faq: [
+        { q: `Will this match my real bill exactly?`, a: `No. It is an estimate — rates change, and meter rent or rebates may differ. Check your latest bill.` },
+        { q: `What happens if I use 50 units or less?`, a: `At 50 units or less, the lifeline rate of ৳4.63 applies to all units.` },
+        { q: `What is the demand charge?`, a: `A monthly charge per kW of sanctioned load; the default is ৳42/kW.` },
+      ],
+    },
+  },
+  'zakat-calculator': {
+    bn:     {
+      title: `যাকাত ক্যালকুলেটর`,
+      intro: `যাকাত ইসলামের একটি ফরজ ইবাদত। এই টুল আপনার নগদ টাকা, সোনা, রুপা, ব্যবসার পণ্য ও ঋণের হিসাব থেকে মোট সম্পদ ও নিসাব বের করে যাকাতের পরিমাণ হিসাব করতে সাহায্য করে। এটি শুধু হিসাবের সহায়ক; ধর্মীয় সিদ্ধান্তের জন্য আলেমের পরামর্শ নিন।`,
+      howTo: [
+        `নগদ টাকা, সোনার পরিমাণ (গ্রাম) ও ব্যবসার পণ্যের মূল্য লিখুন।`,
+        `রুপার পরিমাণ (গ্রাম) ও ঋণ বা দেনার পরিমাণ লিখুন।`,
+        `সোনা ও রুপার বর্তমান বাজারদর (প্রতি গ্রাম) নিজে বসান—এখানে কোনো দাম আগে থেকে দেওয়া নেই।`,
+        `নিসাবের ভিত্তি বাছুন—সোনা (৮৫ গ্রাম) বা রুপা (৫৯৫ গ্রাম)—তারপর ফল দেখুন।`,
+      ],
+      formula: `মোট সম্পদ = নগদ টাকা + সোনার মূল্য + রুপার মূল্য + ব্যবসার পণ্য − ঋণ। নিসাব = ৮৫ গ্রাম সোনার দাম অথবা ৫৯৫ গ্রাম রুপার দাম। মোট সম্পদ নিসাবের সমান বা বেশি হলে যাকাত = মোট সম্পদের ২.৫%; নিসাবের নিচে হলে যাকাত দিতে হয় না।`,
+      example: `নগদ ৳১,০০,০০০, সোনা ১০ গ্রাম (প্রতি গ্রাম ৳৮,০০০), রুপা ১০০ গ্রাম (প্রতি গ্রাম ৳১২০), ব্যবসার পণ্য ৳৫০,০০০, ঋণ ৳২০,০০০: মোট সম্পদ = ১,০০,০০০ + ৮০,০০০ + ১২,০০০ + ৫০,০০০ − ২০,০০০ = ৳২,২২,০০০। রুপার ভিত্তিতে নিসাব = ৫৯৫ × ১২০ = ৳৭১,৪০০। সম্পদ নিসাবের বেশি, তাই যাকাত = ২,২২,০০০ × ২.৫% = ৳৫,৫৫০।`,
+      faq: [
+        { q: `নিসাব কী?`, a: `যাকাত ফরজ হওয়ার সর্বনিম্ন সম্পদের পরিমাণ। এই টুলে সোনার ভিত্তিতে ৮৫ গ্রাম ও রুপার ভিত্তিতে ৫৯৫ গ্রামের দাম ধরা হয়।` },
+        { q: `সোনা ও রুপার দাম এখানে দেওয়া নেই কেন?`, a: `বাজারদর প্রতিদিন বদলায়, তাই আপনি নিজে বর্তমান দাম বসাবেন—তাহলেই হিসাব সঠিক হবে।` },
+        { q: `ঋণ থাকলে কী হয়?`, a: `মোট সম্পদ থেকে ঋণ বাদ দেওয়া হয়। বাকি সম্পদ নিসাবের সমান বা বেশি হলেই যাকাত দিতে হয়।` },
+      ],
+    },
+    en:     {
+      title: `Zakat Calculator`,
+      intro: `Zakat is an obligatory act of worship in Islam. This tool works out the amount of zakat from your cash, gold, silver, business goods and debts. It is only a calculation aid; for religious decisions, consult a scholar.`,
+      howTo: [
+        `Enter your cash, gold in grams, and business goods value.`,
+        `Enter your silver in grams and any debts you owe.`,
+        `Enter the current gold and silver prices per gram yourself.`,
+        `Choose the nisab basis — gold (85 g) or silver (595 g) — then view the result.`,
+      ],
+      formula: `Net wealth = cash + gold + silver + business goods − debts. Nisab = the price of 85 g of gold or 595 g of silver. At or above the nisab, zakat = 2.5% of net wealth; below it, no zakat is due.`,
+      example: `Cash ৳100,000, gold 10 g (৳8,000/g), silver 100 g (৳120/g), business goods ৳50,000, debts ৳20,000: net wealth = 100,000 + 80,000 + 12,000 + 50,000 − 20,000 = ৳222,000. Silver-basis nisab = 595 × 120 = ৳71,400. Wealth is above the nisab, so zakat = 222,000 × 2.5% = ৳5,550.`,
+      faq: [
+        { q: `What is nisab?`, a: `The minimum wealth at which zakat becomes due: the price of 85 g of gold or 595 g of silver.` },
+        { q: `Why are gold and silver prices not given here?`, a: `Prices change daily, so enter the current prices yourself.` },
+        { q: `What happens if I have debts?`, a: `Debts are subtracted from total wealth. Zakat is due only when the remaining wealth reaches the nisab.` },
+      ],
+    },
+  },
+  'govt-job-age-calculator': {
+    bn:     {
+      title: `সরকারি চাকরির বয়স ক্যালকুলেটর`,
+      intro: `সরকারি চাকরির আবেদনে বয়সসীমা একটি গুরুত্বপূর্ণ শর্ত। এই টুল জন্মতারিখ থেকে আপনার বর্তমান বয়স বছর, মাস ও দিনে বের করে এবং বেছে নেওয়া বয়সসীমার সঙ্গে মিলিয়ে আপনি আবেদনের যোগ্য কি না তা জানায়।`,
+      howTo: [
+        `"জন্মতারিখ" ঘরে আপনার জন্মতারিখ বসান।`,
+        `"বয়সসীমা (বছর)" ঘরে পদের বয়সসীমা লিখুন; সাধারণত এটি ৩০।`,
+        `চাইলে "সাধারণ: ৩০" বা "মুক্তিযোদ্ধা কোটা: ৩২" বোতামে চাপ দিয়ে সীমা বসান।`,
+        `ফলে আপনার বয়স, যোগ্যতা ও কত বছর বাকি আছে তা দেখুন।`,
+      ],
+      formula: `বয়স = আজকের তারিখ − জন্মতারিখ (বছর, মাস ও দিনে)। সীমার সমান বয়সেও যোগ্য ধরা হয়; সীমা পেরিয়ে গেলে আর যোগ্য নন। ডিফল্ট সীমা সাধারণ ৩০ বছর, মুক্তিযোদ্ধা কোটায় ৩২ বছর—তবে প্রতিটি বিজ্ঞপ্তির সীমা আলাদা হতে পারে, তাই আবেদনের বিজ্ঞপ্তি দেখে যাচাই করুন।`,
+      example: `জন্মতারিখ ১৫ জানুয়ারি ২০০০, হিসাবের তারিখ ২৭ নভেম্বর ২০২৬, সীমা ৩০ বছর: বয়স ২৬ বছর। আপনি ৩০ বছরে পৌঁছাবেন ১৫ জানুয়ারি ২০৩০-এ, তাই এখনও ৩ পূর্ণ বছর বাকি—আপনি আবেদনের যোগ্য।`,
+      faq: [
+        { q: `বয়সসীমা কি সব পদের জন্য একই?`, a: `না। সাধারণ সীমা ৩০ বছর হলেও পদ ও কোটাভেদে ভিন্ন হতে পারে। আবেদনের বিজ্ঞপ্তিতে লেখা সীমাই চূড়ান্ত।` },
+        { q: `বয়স কোন তারিখ ধরে হিসাব হয়?`, a: `এই টুল আজকের তারিখ ধরে বয়স বের করে। বিজ্ঞপ্তিতে অন্য তারিখ দেওয়া থাকলে সেই তারিখের বয়স হিসাব করে মিলিয়ে নিন।` },
+        { q: `মুক্তিযোদ্ধা কোটার বয়সসীমা কত?`, a: `টুলের ডিফল্ট মান ৩২ বছর। তবে এটি শুধু একটি সাধারণ মান—বিজ্ঞপ্তি দেখে যাচাই করা জরুরি।` },
+      ],
+    },
+    en:     {
+      title: `Govt Job Age Calculator`,
+      intro: `The age limit is an important condition for government job applications. This tool calculates your age from your date of birth, then compares it with the limit you choose and tells you whether you are eligible.`,
+      howTo: [
+        `Enter your date of birth in the "Date of birth" field.`,
+        `Enter the post's age limit; it is usually 30.`,
+        `Or tap "General: 30" or "Freedom-fighter quota: 32".`,
+        `View your age, eligibility and years left.`,
+      ],
+      formula: `Age = today's date − date of birth (in years, months and days). An age equal to the limit still counts as eligible; above the limit, you are not. The default limits are 30 years for general applicants and 32 for the freedom-fighter quota. Each circular can set its own limit, so verify it.`,
+      example: `Date of birth 15 January 2000, on 27 November 2026, limit 30 years: age 26 years. You turn 30 on 15 January 2030, so 3 years remain — you are eligible.`,
+      faq: [
+        { q: `Is the age limit the same for every post?`, a: `No. The general limit is 30 years, but it can differ by post and quota. The limit in the job circular is final.` },
+        { q: `Which date is the age calculated from?`, a: `This tool calculates your age as of today. If the circular gives a different cut-off date, work out your age on that date.` },
+        { q: `What is the age limit for the freedom-fighter quota?`, a: `The tool’s default value is 32 years — only a general value, so verify it against the circular.` },
+      ],
+    },
+  },
+  'prayer-times': {
+    bn:     {
+      title: `নামাজের সময়`,
+      intro: `এই টুল আপনার অবস্থান ও তারিখ থেকে পাঁচ ওয়াক্ত নামাজের সময় হিসাব করে—ফজর, যোহর, আসর, মাগরিব ও ইশা, সঙ্গে সূর্যোদয়। হিসাব আপনার ডিভাইসেই হয়; কোনো ইন্টারনেট বা তথ্য পাঠানোর দরকার নেই।`,
+      howTo: [
+        `তারিখ বসান; আজকের তারিখ আগে থেকেই দেওয়া থাকে।`,
+        `অক্ষাংশ (latitude) লিখুন—ঢাকার জন্য ২৩.৮১০৩।`,
+        `দ্রাঘিমাংশ (longitude) লিখুন—ঢাকার জন্য ৯০.৪১২৫।`,
+        `সময় অঞ্চল লিখুন—বাংলাদেশের জন্য UTC+৬—তারপর ছয়টি সময় দেখুন।`,
+      ],
+      formula: `হিসাব হয় সূর্যের অবস্থান থেকে, Muslim World League পদ্ধতিতে: ফজর সূর্য দিগন্তের ১৮° নিচে, ইশা ১৭° নিচে; আসরে ছায়া-গুণক ১; সূর্যোদয় ও সূর্যাস্তে −০.৮৩৩°। ভিন্ন পদ্ধতিতে সময় কয়েক মিনিট এদিক-ওদিক হতে পারে।`,
+      example: `ঢাকা, ২৬ নভেম্বর ২০২৬ (অক্ষাংশ ২৩.৮১, দ্রাঘিমাংশ ৯০.৪১, UTC+৬): ফজর প্রায় ০৫:০১, সূর্যোদয় ০৬:২০, যোহর ১১:৪৭, আসর ১৪:৫০, মাগরিব ১৭:১১, ইশা ১৮:২৬–১৮:৩০। প্রকাশিত সময়সূচির সঙ্গে কয়েক মিনিটের পার্থক্য হতে পারে।`,
+      faq: [
+        { q: `হিসাবের সময় কি মসজিদের সময়সূচির সঙ্গে পুরোপুরি মিলবে?`, a: `সাধারণত কয়েক মিনিটের মধ্যে মিলবে, তবে পদ্ধতিভেদে পার্থক্য হতে পারে। নামাজের জন্য স্থানীয় সময়সূচি মিলিয়ে নিন।` },
+        { q: `ইন্টারনেট ছাড়া কি কাজ করে?`, a: `হ্যাঁ। হিসাব আপনার ডিভাইসেই হয়, কোনো তথ্য কোথাও পাঠানো হয় না।` },
+        { q: `অন্য শহরের সময় কীভাবে পাব?`, a: `সেই শহরের অক্ষাংশ, দ্রাঘিমাংশ ও সময় অঞ্চল বসালেই হবে।` },
+        { q: `আসরের হিসাব কোন মতে হয়?`, a: `ডিফল্ট ছায়া-গুণক ১, অর্থাৎ শাফেয়ী মত অনুযায়ী।` },
+      ],
+    },
+    en:     {
+      title: `Prayer Times`,
+      intro: `This tool calculates the five daily prayer times — Fajr, Dhuhr, Asr, Maghrib and Isha — plus sunrise, from your location and date. The calculation happens on your own device; no internet connection or data transfer is needed.`,
+      howTo: [
+        `Enter the date; today's date is already filled in.`,
+        `Enter the latitude — for Dhaka, 23.8103.`,
+        `Enter the longitude — for Dhaka, 90.4125.`,
+        `Enter the time zone — UTC+6 for Bangladesh — then view all six times.`,
+      ],
+      formula: `Times are calculated from the Sun's position using the Muslim World League method: Fajr when the Sun is 18° below the horizon, Isha at 17° below; Asr uses shadow factor 1; sunrise and sunset use −0.833°. Different methods can shift the times by a few minutes.`,
+      example: `Dhaka, 26 November 2026 (latitude 23.81, longitude 90.41, UTC+6): Fajr about 05:01, Sunrise 06:20, Dhuhr 11:47, Asr 14:50, Maghrib 17:11, Isha 18:26–18:30. Published timetables may differ by a few minutes.`,
+      faq: [
+        { q: `Will the times match my mosque's timetable exactly?`, a: `Usually within a few minutes, but methods can differ slightly. Check the local timetable before prayer.` },
+        { q: `Does it work without the internet?`, a: `Yes. The calculation happens on your device, and no data is sent anywhere.` },
+        { q: `How do I get times for another city?`, a: `Just enter that city's latitude, longitude and time zone.` },
+        { q: `Which school of thought is used for Asr?`, a: `The default shadow factor is 1, which follows the Shafi'i view.` },
+      ],
+    },
+  },
+  'cgpa-to-percentage-converter': {
+    bn:     {
+      title: `সিজিপিএ থেকে শতাংশ কনভার্টার`,
+      intro: `চাকরির আবেদন বা ভর্তির ফরমে অনেক সময় সিজিপিএর বদলে শতাংশ চাওয়া হয়। এই টুল আপনার সিজিপিএকে শতাংশে রূপান্তর করে—সূত্রটি আপনি নিজে বেছে নিতে পারবেন, কারণ কোনো একক সর্বজনীন সূত্র নেই।`,
+      howTo: [
+        `সিজিপিএ ঘরে আপনার সিজিপিএ লিখুন, যেমন ৩.৫।`,
+        `স্কেল বাছুন—৪.০০, ৫.০০ বা ১০.০০।`,
+        `সূত্র বাছুন—আনুপাতিক, × ৯.৫ অথবা × ১০।`,
+        `ফলে শতাংশ দেখুন; যে প্রতিষ্ঠানে জমা দেবেন, তাদের সূত্র মিলিয়ে নিন।`,
+      ],
+      formula: `আনুপাতিক: শতাংশ = সিজিপিএ ÷ স্কেল × ১০০। × ৯.৫: শতাংশ = সিজিপিএ × ৯.৫ (১০-পয়েন্ট স্কেলের সাধারণ সূত্র)। × ১০: শতাংশ = সিজিপিএ × ১০। ফল ১০০%-এর বেশি হলে ১০০% ধরা হয়।`,
+      example: `সিজিপিএ ৩.৫, স্কেল ৪.০, আনুপাতিক সূত্র: ৩.৫ ÷ ৪.০ × ১০০ = ৮৭.৫%। একই সিজিপিএ × ৯.৫ সূত্রে ৩৩.২৫% হয়—তাই ফরম জমা দেওয়ার আগে প্রতিষ্ঠান কোন সূত্র চায়, তা জেনে নিন।`,
+      faq: [
+        { q: `কোন সূত্রটি সঠিক?`, a: `কোনো একক সঠিক সূত্র নেই। প্রতিষ্ঠানভেদে ভিন্ন হয়—আবেদনপত্রে যে সূত্র বলা আছে, সেটিই ব্যবহার করুন।` },
+        { q: `× ৯.৫ সূত্রটি কাদের জন্য?`, a: `এটি ১০-পয়েন্ট স্কেলের একটি সাধারণ সূত্র; ৪.০ স্কেলে সাধারণত আনুপাতিক সূত্র ব্যবহৃত হয়।` },
+        { q: `৫.০ স্কেলের সিজিপিএ কি এখানে চলে?`, a: `হ্যাঁ—স্কেলে ৪.০০, ৫.০০ বা ১০.০০ বাছা যায়।` },
+        { q: `শতাংশ কি ১০০%-এর বেশি হতে পারে?`, a: `না। ফল ১০০%-এর বেশি হলে টুল ১০০% দেখায়।` },
+      ],
+    },
+    en:     {
+      title: `CGPA to Percentage Converter`,
+      intro: `Job applications and admission forms often ask for a percentage instead of a CGPA. This tool converts your CGPA into a percentage — and you choose the formula yourself, because there is no single universal formula.`,
+      howTo: [
+        `Enter your CGPA, for example 3.5.`,
+        `Choose the scale — 4.00, 5.00 or 10.00.`,
+        `Choose the formula — proportional, × 9.5 or × 10.`,
+        `View the percentage, and check which formula the institution you are applying to expects.`,
+      ],
+      formula: `Proportional: percentage = CGPA ÷ scale × 100. × 9.5: percentage = CGPA × 9.5 (the common 10-point formula). × 10: percentage = CGPA × 10. If the result is above 100%, it is capped at 100%.`,
+      example: `CGPA 3.5 on a 4.0 scale, proportional formula: 3.5 ÷ 4.0 × 100 = 87.5%. The same CGPA with the × 9.5 formula gives 33.25% — so check which formula the institution wants before you submit the form.`,
+      faq: [
+        { q: `Which formula is correct?`, a: `No single formula is correct for everyone. It differs by institution — use the formula stated in the application form.` },
+        { q: `Who is the × 9.5 formula for?`, a: `It is a common formula for the 10-point scale; on a 4.0 scale the proportional formula is usually used.` },
+        { q: `Can I convert a CGPA on the 5.0 scale?`, a: `Yes — the scale can be set to 4.00, 5.00 or 10.00.` },
+        { q: `Can the percentage go above 100%?`, a: `No. If the result is above 100%, the tool shows 100%.` },
+      ],
+    },
+  },
+  'pdf-splitter': {
+    bn:     {
+      title: `পিডিএফ স্প্লিটার`,
+      intro: `একটি পিডিএফ থেকে দরকারি পাতাগুলো আলাদা করে নতুন পিডিএফ বানান। বড় নথি থেকে শুধু যে পাতাগুলো লাগবে সেগুলো নিতে এটি কাজে আসে। ফাইল আপনার ডিভাইসেই থাকে, কোথাও আপলোড হয় না।`,
+      howTo: [
+        `আপনার পিডিএফ ফাইলটি বাছুন — টুলটি মোট কত পাতা আছে তা দেখাবে।`,
+        `পাতা বাছাইয়ের ঘরে লিখুন, যেমন 1,3-5 — মানে ১, ৩, ৪ ও ৫ নম্বর পাতা।`,
+        `ভাগ করুন বোতামে ক্লিক করুন।`,
+        `তৈরি নতুন পিডিএফটি ডাউনলোড করুন।`,
+      ],
+      formula: `নিয়ম: পাতা গোনা হয় ১ থেকে। একক পাতা কমা দিয়ে আর পরপর পাতা ড্যাশ দিয়ে লিখুন, যেমন 1,3-5,7 — পরিসর দুই দিকেই অন্তর্ভুক্ত। একই পাতা দুবার লিখলে একবারই নেওয়া হয়, আর মোট পাতার বাইরের নম্বর লিখলে ভুল দেখাবে।`,
+      example: `ধরুন একটি পিডিএফে ১০টি পাতা আছে আর আপনার দরকার পাতা ১, ৩, ৪ ও ৫। ঘরে লিখুন 1,3-5 — পাবেন মোট ৪ পাতার একটি নতুন পিডিএফ, যার পাতাগুলো হবে মূল ফাইলের ১, ৩, ৪ ও ৫ নম্বর পাতা।`,
+      faq: [
+        { q: `পাতা বাছাই কেমন করে লিখব?`, a: `একক পাতা কমা দিয়ে লিখুন, যেমন 1,7, আর পরপর পাতা ড্যাশ দিয়ে, যেমন 3-5। একসঙ্গে লিখতে পারেন: 1,3-5।` },
+        { q: `ফাইল কি সার্ভারে আপলোড হয়?`, a: `না। ফাইল আপনার ব্রাউজারেই ভাগ করা হয়, কোথাও আপলোড হয় না।` },
+        { q: `ফাইলের সর্বোচ্চ আকার কত?`, a: `এই টুলের কোডে ফাইলের আকারের কোনো সীমা লেখা নেই — শুধু .pdf ফাইল চলবে। খুব বড় ফাইল ব্রাউজারে ধীরে চলতে পারে।` },
+        { q: `নষ্ট বা পিডিএফ নয় এমন ফাইল দিলে কী হবে?`, a: `টুলটি ভুল দেখাবে — ফাইলটি পিডিএফ হিসেবে পড়া যায়নি। সঠিক .pdf ফাইল বেছে আবার চেষ্টা করুন।` },
+      ],
+    },
+    en:     {
+      title: `PDF Splitter`,
+      intro: `Extract the pages you need from a PDF into a new PDF — useful when only a few pages of a large document are needed. The file stays on your device and is never uploaded.`,
+      howTo: [
+        `Choose your PDF file — the tool shows how many pages it has.`,
+        `Type the page selection, e.g. 1,3-5, meaning pages 1, 3, 4 and 5.`,
+        `Click the Split PDF button.`,
+        `Download the new PDF that is created.`,
+      ],
+      formula: `Key rule: pages are counted from 1. Write single pages separated by commas and consecutive pages with a dash, e.g. 1,3-5,7 — ranges include both ends. A number beyond the total pages shows an error.`,
+      example: `Suppose a PDF has 10 pages and you need pages 1, 3, 4 and 5. Type 1,3-5 to get a new PDF of 4 pages, made from those pages of the original file.`,
+      faq: [
+        { q: `How do I write the page selection?`, a: `Write single pages with commas, e.g. 1,7, and consecutive pages with a dash, e.g. 3-5. You can mix them: 1,3-5.` },
+        { q: `Is the file uploaded to a server?`, a: `No. The file is split in your browser and is never uploaded.` },
+        { q: `What is the maximum file size?`, a: `No size limit is stated in this tool's code — only .pdf files work. Very large files may run slowly.` },
+        { q: `What if the file is corrupt or not a PDF?`, a: `The tool shows an error — the file could not be read as a PDF. Choose a .pdf file and try again.` },
+      ],
+    },
+  },
+  'image-to-pdf': {
+    bn:     {
+      title: `ছবি থেকে পিডিএফ`,
+      intro: `এক বা একাধিক ছবি থেকে পিডিএফ ফাইল তৈরি করুন। ছবি তোলা নোট, সার্টিফিকেট বা ফরমের ছবি একসঙ্গে একটি পিডিএফে পাঠাতে এটি কাজে আসে। সবকিছু আপনার ডিভাইসেই প্রক্রিয়া হয়, কোথাও আপলোড হয় না।`,
+      howTo: [
+        `ছবিগুলো বাছুন — একসঙ্গে একাধিক ছবি বাছা যায়।`,
+        `তীর চিহ্ন দিয়ে ছবির ক্রম সাজান; প্রতিটি ছবি পিডিএফের এক পাতা হবে।`,
+        `পিডিএফ বানান বোতামে ক্লিক করুন।`,
+        `তৈরি পিডিএফটি ডাউনলোড করুন।`,
+      ],
+      formula: `নিয়ম: JPG, PNG ও WebP ছবি চলে; অন্য ছবি JPEG-এ বদলে নেওয়া হয়। প্রতিটি ছবি ১০ MB-এর মধ্যে হতে হবে। প্রতিটি ছবি A4 পাতায় বসানো হয়, ছবির অনুপাত ঠিক রেখে।`,
+      example: `ধরুন আপনার তিনটি ছবি আছে — একটি নোটের, একটি সার্টিফিকেটের ও একটি ফরমের। তিনটি বাছলে পাবেন ৩ পাতার একটি পিডিএফ, প্রতিটি পাতায় একটি করে ছবি, আপনার সাজানো ক্রমে।`,
+      faq: [
+        { q: `কোন ছবির ফরম্যাট চলে?`, a: `JPG, PNG ও WebP চলে। অন্য ফরম্যাটের ছবি JPEG-এ বদলে নেওয়া হয়, তাই বেশিরভাগ ছবিই কাজ করবে।` },
+        { q: `এক ছবির সর্বোচ্চ আকার কত?`, a: `প্রতিটি ছবি ১০ MB-এর মধ্যে হতে হবে। এর বেশি হলে ছোট করে নিন, তারপর বাছুন।` },
+        { q: `ছবিগুলো কি সার্ভারে আপলোড হয়?`, a: `না। সবকিছু আপনার ডিভাইসেই প্রক্রিয়া হয়, ছবি কোথাও পাঠানো হয় না।` },
+        { q: `৫টির বেশি ছবি হলে কী হয়?`, a: `৫টির বেশি ছবি হলে ডাউনলোড বিনামূল্যে পেতে একটি ছোট বিজ্ঞাপন দেখতে হয় — তারপর ডাউনলোড বোতামটি কাজ করে।` },
+      ],
+    },
+    en:     {
+      title: `Image to PDF`,
+      intro: `Turn one or more images into a PDF file. It is handy for sending photographed notes, certificates or forms together as a single PDF. Everything is processed on your device and nothing is uploaded.`,
+      howTo: [
+        `Choose your images — you can pick several at once.`,
+        `Use the arrows to order the images; each image becomes one PDF page.`,
+        `Click the Make PDF button.`,
+        `Download the finished PDF.`,
+      ],
+      formula: `Key rule: JPG, PNG and WebP images work; other images are converted to JPEG first. Each image must be within 10 MB. Each image is placed on an A4 page, keeping its aspect ratio.`,
+      example: `Suppose you have three images — a note, a certificate and a form. Choose all three to get a 3-page PDF, one image per page, in the order you arranged.`,
+      faq: [
+        { q: `Which image formats work?`, a: `JPG, PNG and WebP work. Other formats are converted to JPEG first, so most images will work.` },
+        { q: `What is the maximum size of one image?`, a: `Each image must be within 10 MB. If one is bigger, shrink it first, then choose it.` },
+        { q: `Are my images uploaded to a server?`, a: `No. Everything is processed on your device, and no image is sent anywhere.` },
+        { q: `What if I add more than 5 images?`, a: `With more than 5 images, the free download asks you to watch a short ad first — then the download button works.` },
+      ],
+    },
+  },
+  'bkash-nagad-calculator': {
+    bn:     {
+      title: `বিকাশ / নগদ ক্যাশ আউট চার্জ ক্যালকুলেটর`,
+      intro: `এই টুলটি এজেন্টের মাধ্যমে বিকাশ বা নগদ অ্যাকাউন্ট থেকে নগদ টাকা তুলতে কত চার্জ লাগবে তা বের করে দেয়। চার্জের হার বদলাতে পারে, তাই টুলটি কোনো হার নির্দিষ্ট করে রাখে না — আপনি বর্তমান হারটি নিজে লিখবেন।`,
+      howTo: [
+        `টাকার পরিমাণের ঘরে কত টাকা তুলতে চান তা লিখুন।`,
+        `বিকাশ বা নগদ বেছে নিন, আর পদ্ধতি থেকে এজেন্ট, পার্সোনাল নম্বর বা অ্যাপ বেছে নিন।`,
+        `চার্জের হারের ঘরে অ্যাপে দেখা বর্তমান হারটি লিখুন।`,
+        `ফলাফলে চার্জ, মোট খরচ ও হাতে কত পাবেন তা দেখুন।`,
+      ],
+      formula: `সূত্র: চার্জ = টাকার পরিমাণ × হার ÷ ১০০; মোট খরচ = টাকার পরিমাণ + চার্জ।`,
+      example: `উদাহরণ: ৫,০০০ টাকা ক্যাশ আউট করতে চান, হার ১.৫%। চার্জ = ৫,০০০ × ১.৫ ÷ ১০০ = ৭৫ টাকা; মোট মূল্য ৫,০৭৫ টাকা। চার্জ টাকা থেকে কাটা হলে হাতে পাবেন ৪,৯২৫ টাকা। একই হারে ২০,০০০ টাকা তুললে চার্জ ৩০০ টাকা।`,
+      faq: [
+        { q: `হারটি কোথা থেকে জানব?`, a: `অ্যাপে বা এজেন্ট পয়েন্টে দেখা বর্তমান হারটি লিখুন; হার বদলাতে পারে, তাই আগে যাচাই করে নিন।` },
+        { q: `হাতে ১০,০০০ টাকা পেতে কত তুলতে হবে?`, a: `উল্টো ঘরে হাতে কত চান তা লিখুন। ১.৫% হারে ১০,০০০ টাকা পেতে তুলতে হবে প্রায় ১০,১৫২ টাকা, চার্জ প্রায় ১৫২ টাকা।` },
+        { q: `সেন্ড মানি আর ক্যাশ আউট কি একই?`, a: `না, দুটি আলাদা লেনদেন, চার্জও আলাদা হতে পারে। আপনি যে লেনদেন করছেন তার হারটিই লিখুন।` },
+        { q: `সরাসরি দিলে কি খরচ কম হয়?`, a: `অনেক সময় সরাসরি অ্যাকাউন্ট থেকে দিলে খরচ কম হয়, তাই দুটি উপায়ের চার্জ তুলনা করে নিন।` },
+      ],
+    },
+    en:     {
+      title: `bKash / Nagad Cash Out Charge Calculator`,
+      intro: `This tool works out the charge for withdrawing cash from a bKash or Nagad account through an agent. The charge rate can change, so the tool never fixes a rate — you enter the current rate yourself.`,
+      howTo: [
+        `Enter the amount you want to withdraw.`,
+        `Choose bKash or Nagad and the method: agent, personal number or app.`,
+        `Enter the current rate from the app or agent point.`,
+        `Read the charge, total cost and cash in hand.`,
+      ],
+      formula: `Formula: charge = amount × rate ÷ 100; total cost = amount + charge.`,
+      example: `Example: you cash out 5,000 taka at a rate of 1.5%. Charge = 5,000 × 1.5 ÷ 100 = 75 taka; total value 5,075 taka. If the charge is taken from the amount, you receive 4,925 taka.`,
+      faq: [
+        { q: `Where do I find the current rate?`, a: `Use the rate shown in the app or at the agent point, and check it before you calculate.` },
+        { q: `How much must I withdraw to receive 10,000 taka in hand?`, a: `Enter the cash you want in hand in the reverse box. At 1.5%, 10,000 taka in hand needs about 10,152 taka, a charge of about 152 taka.` },
+        { q: `Is send money the same as cash out?`, a: `No. They are different transactions with different charges, so enter the rate for the one you are doing.` },
+        { q: `Is paying directly cheaper than withdrawing cash first?`, a: `Often yes. Compare the cash out charge with paying directly from your account where the shop accepts it.` },
+      ],
+    },
+  },
+  'ssc-hsc-gpa-calculator': {
+    bn:     {
+      title: `এসএসসি/এইচএসসি জিপিএ ক্যালকুলেটর`,
+      intro: `এই টুলটি এসএসসি বা এইচএসসি পরীক্ষার ৬টি মূল বিষয়ের গ্রেড থেকে জিপিএ বের করে দেয়। চতুর্থ বিষয়ের গ্রেড থাকলে তার অতিরিক্ত নম্বরও হিসাব করা হয়।`,
+      howTo: [
+        `মূল বিষয় ১ থেকে ৬ — প্রতিটি ঘরে সেই বিষয়ের গ্রেড বেছে নিন।`,
+        `চতুর্থ বিষয়ের গ্রেড থাকলে সেই ঘরেও গ্রেড বেছে নিন; না থাকলে খালি রাখুন।`,
+        `সব মূল বিষয়ের গ্রেড দিলেই জিপিএ, গ্রেড ও পাস-ফেল দেখা যাবে।`,
+        `ফলাফলের নিচে দেওয়া সূত্র দিয়ে হিসাবটি মিলিয়ে নিন।`,
+      ],
+      formula: `সূত্র: জিপিএ = (৬টি মূল বিষয়ের গ্রেড পয়েন্টের যোগফল + চতুর্থ বিষয়ের অতিরিক্ত) ÷ ৬। চতুর্থ বিষয়ের অতিরিক্ত = চতুর্থ বিষয়ের পয়েন্ট − ২, সর্বোচ্চ ৩.০। জিপিএ সর্বোচ্চ ৫.০। গ্রেড পয়েন্ট: A+ ৫.০, A ৪.০, A− ৩.৫, B ৩.০, C ২.০, D ১.০, F ০.০।`,
+      example: `উদাহরণ: মূল বিষয়ের গ্রেড পয়েন্ট ৫, ৫, ৪, ৪, ৩.৫ ও ৩; চতুর্থ বিষয় A+ (৫.০)। মূল যোগফল ২৪.৫, চতুর্থ বিষয়ের অতিরিক্ত ৫ − ২ = ৩। জিপিএ = (২৪.৫ + ৩) ÷ ৬ = ৪.৫৮, গ্রেড A।`,
+      faq: [
+        { q: `চতুর্থ বিষয়ে A+ পেলে কত বাড়তি পয়েন্ট মেলে?`, a: `চতুর্থ বিষয়ের পয়েন্ট থেকে ২ বাদ যায়, আর বাড়তি সর্বোচ্চ ৩.০। তাই A+ (৫.০) দিলে বাড়তি ৩.০ মেলে।` },
+        { q: `একটি মূল বিষয়ে F থাকলে কী হয়?`, a: `কোনো মূল বিষয়ে F থাকলে পরীক্ষায় ফেল হয়, আর জিপিএ ০ ধরা হয় — অন্য বিষয়ের গ্রেড যত ভালোই হোক।` },
+        { q: `জিপিএ কি ৫.০-এর বেশি হতে পারে?`, a: `না, জিপিএ সর্বোচ্চ ৫.০। হিসাব ৫.০ ছাড়িয়ে গেলেও ফলাফল ৫.০-তেই থামে।` },
+        { q: `চতুর্থ বিষয় ছাড়া কি জিপিএ বের করা যায়?`, a: `হ্যাঁ, চতুর্থ বিষয়ের ঘর খালি রাখলে শুধু ৬টি মূল বিষয়ের গড়েই জিপিএ বের হয়।` },
+      ],
+    },
+    en:     {
+      title: `SSC/HSC GPA Calculator`,
+      intro: `This tool works out the GPA from the grades of the 6 main subjects in an SSC or HSC exam. A 4th subject grade adds extra points.`,
+      howTo: [
+        `Choose the grade for each main subject.`,
+        `If there is a 4th subject grade, choose it too.`,
+        `Once all 6 grades are entered, the GPA, grade and pass or fail appear.`,
+        `Check the working against the formula shown under the result.`,
+      ],
+      formula: `Formula: GPA = (sum of the 6 main-subject grade points + 4th-subject extra) ÷ 6. 4th-subject extra = 4th-subject points − 2, capped at 3.0. GPA is capped at 5.0. Grade points: A+ 5.0, A 4.0, A− 3.5, B 3.0, C 2.0, D 1.0, F 0.0.`,
+      example: `Example: main grades 5, 5, 4, 4, 3.5 and 3; 4th subject A+ (5.0). Main total 24.5, 4th-subject extra 5 − 2 = 3. GPA = (24.5 + 3) ÷ 6 = 4.58, grade A.`,
+      faq: [
+        { q: `How many extra points does an A+ in the 4th subject give?`, a: `Two is subtracted from the 4th-subject points, capped at 3.0, so an A+ (5.0) gives 3.0 extra.` },
+        { q: `What happens with an F in a main subject?`, a: `An F in any main subject means failing, and the GPA is 0, however good the other grades are.` },
+        { q: `Can the GPA go above 5.0?`, a: `No, the GPA is capped at 5.0.` },
+        { q: `Can I get a GPA without a 4th subject?`, a: `Yes. Leave the 4th-subject box empty and the GPA is the average of the 6 main subjects.` },
+      ],
+    },
+  },
+  'pdf-to-jpg': {
+    bn:     {
+      title: `পিডিএফ থেকে জেপিজি`,
+      intro: `এই টুলটি পিডিএফ ফাইলের প্রতিটি পাতাকে জেপিজি ছবিতে রূপান্তর করে দেয়। ফাইলটি আপনার ডিভাইসেই প্রক্রিয়া হয়, কোথাও আপলোড করা হয় না। ছবি শেয়ার করা, প্রিন্ট করা বা অন্য কাজে ব্যবহার করা সহজ হয়।`,
+      howTo: [
+        `পিডিএফ ফাইলের ঘরে আপনার .pdf ফাইলটি বেছে নিন।`,
+        `ছবির মানের বোতাম থেকে ১×, ১.৫×, ২× বা ৩× বেছে নিন।`,
+        `JPG কোয়ালিটির স্লাইডার দিয়ে ছবির মান ৫০% থেকে ১০০%-এর মধ্যে ঠিক করুন।`,
+        `তৈরি হওয়া প্রতিটি JPG ছবির পাশে ডাউনলোড বোতাম চেপে সংরক্ষণ করুন।`,
+      ],
+      formula: `নিয়ম: শুধু .pdf ফাইল চলবে; ফাইল সর্বোচ্চ ১০ MB, একবারে সর্বোচ্চ ৫০ পাতা। ছবির মান: ১× = ৭২ DPI, ১.৫× = ১০৮ DPI, ২× = ১৪৪ DPI, ৩× = ২১৬ DPI। JPG কোয়ালিটি ৫০% থেকে ১০০% পর্যন্ত বাছা যায়।`,
+      example: `উদাহরণ: ৩ পাতার একটি পিডিএফ ২× (১৪৪ DPI) ও ৯০% কোয়ালিটিতে রূপান্তর করলে ৩টি JPG ছবি তৈরি হয় — report-p1.jpg, report-p2.jpg ও report-p3.jpg। প্রতিটি ছবি আলাদাভাবে ডাউনলোড করা যায়।`,
+      faq: [
+        { q: `পাসওয়ার্ড দেওয়া পিডিএফ কি রূপান্তর করা যায়?`, a: `না, পাসওয়ার্ড দেওয়া পিডিএফ রূপান্তর করা যায় না। আগে পাসওয়ার্ড সরিয়ে নিন, তারপর ফাইলটি বাছুন।` },
+        { q: `ফাইলটি কি সার্ভারে আপলোড হয়?`, a: `না, সব কাজ আপনার ব্রাউজারেই হয়। পিডিএফ ফাইলটি আপনার ডিভাইস ছাড়ে না।` },
+        { q: `৫০ পাতার বেশি পিডিএফ হলে কী করব?`, a: `একবারে সর্বোচ্চ ৫০ পাতা রূপান্তর করা যায়। বড় পিডিএফ ছোট ভাগে ভাগ করে নিন, তারপর আলাদাভাবে রূপান্তর করুন।` },
+        { q: `কোন DPI বেছে নেব?`, a: `সাধারণ ব্যবহারের জন্য ১.৫× (১০৮ DPI) যথেষ্ট। প্রিন্ট বা বড় ছবির জন্য ২× বা ৩× বেছে নিন, তবে ফাইলের আকার বড় হবে।` },
+      ],
+    },
+    en:     {
+      title: `PDF to JPG`,
+      intro: `This tool turns every page of a PDF file into a JPG image. The file is processed on your device and is never uploaded anywhere. The images are easy to share, print or use elsewhere.`,
+      howTo: [
+        `Choose your .pdf file in the PDF file box.`,
+        `Pick an image quality button: 1×, 1.5×, 2× or 3×.`,
+        `Set the JPG quality slider between 50% and 100%.`,
+        `Download each JPG image with the download button beside it.`,
+      ],
+      formula: `Rules: only .pdf files work; a file may be at most 10 MB, and at most 50 pages at a time. Quality: 1× = 72 DPI, 1.5× = 108 DPI, 2× = 144 DPI, 3× = 216 DPI. JPG quality can be set from 50% to 100%.`,
+      example: `Example: converting a 3-page PDF at 2× (144 DPI) and 90% quality makes 3 JPG images — report-p1.jpg, report-p2.jpg and report-p3.jpg. Each image can be downloaded separately.`,
+      faq: [
+        { q: `Can I convert a password-protected PDF?`, a: `No, password-protected PDFs cannot be converted. Remove the password first, then choose the file.` },
+        { q: `Is my file uploaded to a server?`, a: `No, everything happens in your browser. The PDF never leaves your device.` },
+        { q: `What if my PDF has more than 50 pages?`, a: `At most 50 pages can be converted at once. Split a larger PDF into smaller parts first.` },
+        { q: `Which DPI should I choose?`, a: `For everyday use, 1.5× (108 DPI) is enough. For printing or larger images choose 2× or 3×, but the files will be bigger.` },
+      ],
+    },
+  },
+  'calorie-tdee-calculator': {
+    bn:     {
+      title: `ক্যালোরি ও টিডিইই ক্যালকুলেটর`,
+      intro: `এই টুলটি অনুমান করে আপনার শরীর দিনে কত ক্যালোরি খরচ করে, যাতে আপনি লক্ষ্য অনুযায়ী সঠিক পরিমাণ খেতে পারেন। প্রথমে মিফলিন-সেন্ট জিওর সূত্রে বিএমআর বের হয়, তারপর কাজের ধরনের গুণক দিয়ে গুণ করে টিডিইই পাওয়া যায়।`,
+      howTo: [
+        `লিঙ্গ থেকে পুরুষ বা নারী বেছে নিন।`,
+        `ওজনের ঘরে ওজন কেজিতে ও উচ্চতার ঘরে উচ্চতা সেন্টিমিটারে লিখুন।`,
+        `বয়সের ঘরে আপনার বয়স বছর হিসেবে লিখুন।`,
+        `কাজের ধরন বেছে নিন, তারপর ফলাফলে বিএমআর ও টিডিইই দেখুন।`,
+      ],
+      formula: `সূত্র: পুরুষের বিএমআর = ১০ × ওজন (কেজি) + ৬.২৫ × উচ্চতা (সেমি) − ৫ × বয়স + ৫; নারীর ক্ষেত্রে শেষে + ৫-এর বদলে − ১৬১। টিডিইই = বিএমআর × কাজের গুণক (বসে থাকা ১.২, হালকা ১.৩৭৫, মাঝারি ১.৫৫, সক্রিয় ১.৭২৫, খুব সক্রিয় ১.৯)।`,
+      example: `উদাহরণ: ৩০ বছর বয়সী পুরুষ, ওজন ৮০ কেজি, উচ্চতা ১৮০ সেমি। বিএমআর = ৮০০ + ১,১২৫ − ১৫০ + ৫ = ১,৭৮০ ক্যালোরি। মাঝারি কাজে টিডিইই = ১,৭৮০ × ১.৫৫ ≈ ২,৭৫৯ ক্যালোরি/দিন। এই পরিমাণ খেলে ওজন প্রায় একই থাকবে।`,
+      faq: [
+        { q: `টিডিইই আর বিএমআর-এর পার্থক্য কী?`, a: `বিএমআর হলো বিশ্রামে শরীরের খরচ, আর টিডিইই হলো বিএমআর-কে কাজের গুণক দিয়ে গুণ করা মোট দৈনিক খরচ।` },
+        { q: `ওজন কমাতে কত ক্যালোরি খাব?`, a: `টিডিইই থেকে দিনে প্রায় ৫০০ ক্যালোরি কম খেলে সপ্তাহে প্রায় আধা কেজি কমতে পারে। এটি একটি সাধারণ নির্দেশিকা, চিকিৎসা পরামর্শ নয়।` },
+        { q: `কাজের স্তর ভুল বাছলে কী হয়?`, a: `মাঝারি বাছলে ফলাফল বেশি দেখায়। সাপ্তাহিক ব্যায়াম ও হাঁটা সততার সঙ্গে হিসাব করুন।` },
+        { q: `ফলাফল না মিললে কী করব?`, a: `ফলাফলকে শুরুর হিসাব ধরুন: দুই-তিন সপ্তাহ মেনে চলুন, ওজনের ধারা দেখুন, তারপর একবারে ২০০ ক্যালোরি করে সমন্বয় করুন।` },
+      ],
+    },
+    en:     {
+      title: `Calorie & TDEE Calculator`,
+      intro: `This tool estimates how many calories your body uses in a day, so you can eat the right amount for your goal. It first works out BMR with the Mifflin-St Jeor equation, then multiplies by an activity factor to give TDEE.`,
+      howTo: [
+        `Choose male or female.`,
+        `Enter weight in kilograms and height in centimetres.`,
+        `Enter your age in years.`,
+        `Choose your activity level, then read BMR and TDEE.`,
+      ],
+      formula: `Formula: for men, BMR = 10 × weight (kg) + 6.25 × height (cm) − 5 × age + 5; for women the last term is −161. TDEE = BMR × activity factor (1.2 to 1.9).`,
+      example: `Example: a 30-year-old man, 80 kg, 180 cm. BMR = 800 + 1,125 − 150 + 5 = 1,780 kcal. At moderate activity, TDEE = 1,780 × 1.55 ≈ 2,759 kcal/day.`,
+      faq: [
+        { q: `What is the difference between TDEE and BMR?`, a: `BMR is energy used at rest; TDEE is BMR times an activity factor, the total for the day.` },
+        { q: `How many calories for weight loss?`, a: `About 500 fewer calories a day than your TDEE should lead to roughly half a kilogram of fat loss a week.` },
+        { q: `What happens if I pick the wrong activity level?`, a: `Many people pick moderate when their real life is sedentary, overstating the result by several hundred calories.` },
+        { q: `What if the result does not match?`, a: `Treat it as a starting point: follow it for two or three weeks, then adjust by 200 calories at a time.` },
+      ],
+    },
+  },
+  'tip-calculator': {
+    bn:     {
+      title: `টিপ ক্যালকুলেটর`,
+      intro: `এই টুলটি ভালো সেবার জন্য বাড়তি কত টাকা দেবেন আর মোট বিল কত হবে তা বের করে দেয়, যাতে টেবিলে বসে হিসাব করতে না হয়। বিলের পরিমাণ ও টিপের শতাংশ লিখুন, আর ভাগ হলে প্রত্যেকের ভাগও দেখে নিন।`,
+      howTo: [
+        `বিলের পরিমাণের ঘরে বিলের মোট টাকা লিখুন।`,
+        `টিপের ঘরে শতাংশ লিখুন, বা দেওয়া বোতাম থেকে বেছে নিন।`,
+        `কতজন ভাগ করবে সেই ঘরে লোকের সংখ্যা লিখুন।`,
+        `ফলাফলে টিপ, মোট বিল ও প্রত্যেকে কত দেবে তা দেখুন।`,
+      ],
+      formula: `সূত্র: টিপ = বিল × শতাংশ ÷ ১০০; মোট = বিল + টিপ; প্রত্যেকে = মোট ÷ লোকের সংখ্যা।`,
+      example: `উদাহরণ: বিল ২,০০০ টাকা, টিপ ১০%। টিপ = ২,০০০ × ১০ ÷ ১০০ = ২০০ টাকা; মোট ২,২০০ টাকা। ১৫% দিলে টিপ ৩০০ টাকা, মোট ২,৩০০ টাকা; ২০% দিলে টিপ ৪০০ টাকা, মোট ২,৪০০ টাকা। চারজনে ভাগ করলে ১০%-এ প্রত্যেকে ৫৫০ টাকা দেবে।`,
+      faq: [
+        { q: `কত শতাংশ টিপ দেওয়া ঠিক?`, a: `অনেক রেস্তোরাঁয় ১০% সাধারণ শুরু, ভালো সেবায় ১৫% উদার, আর ২০% স্পষ্টভাবে ভালো সেবার জন্য।` },
+        { q: `বিলে সার্ভিস চার্জ থাকলে কি আবার টিপ দেব?`, a: `আগে রসিদ দেখে নিন। সার্ভিস চার্জে টিপ ধরা থাকতে পারে, তখন আবার পুরো টিপ দিলে দুবার দেওয়া হবে।` },
+        { q: `বিল সমান ভাগে না ভাগ হলে কী করব?`, a: `প্রত্যেকের নিজের অংশ আলাদাভাবে লিখুন, সবার ওপর একই শতাংশ প্রয়োগ করুন, তাহলে প্রত্যেকে ন্যায্য পরিমাণ দেবে।` },
+        { q: `করের আগে না পরে টিপ ধরব?`, a: `টুলটিতে করের ঘর আছে; করের আগে বা পরে বেছে নিন। কর না লিখলে দুটি একই হয়।` },
+      ],
+    },
+    en:     {
+      title: `Tip Calculator`,
+      intro: `A tip calculator works out how much extra to leave for good service and what the total bill comes to. Enter the bill and the tip percentage, and see each person's share when the bill is split.`,
+      howTo: [
+        `Enter the total bill amount.`,
+        `Enter the tip percentage, or tap a preset chip.`,
+        `Enter how many people are splitting the bill.`,
+        `Read the tip, the total and what each person pays.`,
+      ],
+      formula: `Formula: tip = bill × percentage ÷ 100; total = bill + tip; per person = total ÷ people.`,
+      example: `Example: a bill of 2,000 taka with a 10% tip. Tip = 2,000 × 10 ÷ 100 = 200 taka; total 2,200 taka. At 15% the tip is 300 taka; at 20% it is 400 taka. Split between four people at 10%, each pays 550 taka.`,
+      faq: [
+        { q: `What tip percentage is right?`, a: `In many restaurants 10% is a common starting point, 15% is generous for good service, and 20% is for clearly better service.` },
+        { q: `Should I tip again if a service charge is already added?`, a: `Check the receipt first. The service charge may already cover the tip, so another full tip would pay twice.` },
+        { q: `What if the bill should not be split equally?`, a: `Enter each person's own share separately and apply the same percentage to each.` },
+        { q: `Should the tip be on the pre-tax or post-tax amount?`, a: `Use the tax box and choose pre-tax or post-tax; with no tax entered, both are the same.` },
+      ],
+    },
+  },
+};
+
+export function toolGuideSectionsBySlug(slug: string): ToolGuideSections | undefined {
+  return TOOL_GUIDE_SECTIONS[slug];
+}
+
+export const TOOLS_GUIDES: Record<string, { guideBn: string; guideEn: string }> = {
   'credit-card-payoff-calculator': {
     guideEn: `A credit card payoff calculator shows how long it will take to clear a card balance, and how much interest you will pay along the way. Credit card interest is charged monthly on the unpaid balance, so paying only the minimum each month keeps the debt alive for a long time. You enter the current balance, the annual interest rate, and the fixed amount you plan to pay each month, and the tool works out the number of months until the card is clear and the total interest paid. The maths behind it is the same amortisation idea used for loans: each month interest is added on the balance at the monthly rate, which is the annual rate divided by 12, and then your payment reduces the balance. The balance only falls when the payment is larger than that month's interest, so a payment barely above the interest charge makes almost no progress. For a worked example, take a balance of 100,000 at a 24 percent annual rate, which is a monthly rate of 0.02. Paying 5,000 a month clears the card in about 26 months and costs about 29,000 in interest. Paying only 2,500 a month stretches the payoff to about 81 months and costs about 103,000 in interest, more than the original balance. The same debt costs more than three times as much interest simply because the monthly payment was halved. That comparison is the point of the tool. It also shows why a small increase in the monthly payment helps so much: raising the payment from 5,000 to 6,000 in the example above cuts several months off the payoff and saves thousands in interest, because more of every payment reaches the principal. A practical tip is to pay the highest-rate card first while making at least the minimum payment on every other card, and to stop adding new spending to a card you are trying to clear, since new purchases restart the interest clock on fresh amounts. If the balance feels unmanageable, contact the card issuer to ask about a lower rate or a structured repayment plan before missing payments, because missed payments add fees and damage your credit record. Remember that the rate you enter should match the rate on your statement, and that this tool estimates payoff time from a fixed monthly payment, not from changing minimum-payment rules.`,
     guideBn: `ক্রেডিট কার্ড পে-অফ ক্যালকুলেটর দেখায় কার্ডের বকেয়া শোধ করতে কত সময় লাগবে এবং পথে কত সুদ দিতে হবে। ক্রেডিট কার্ডের সুদ প্রতি মাসে অপরিশোধিত বকেয়ার ওপর ধরা হয়, তাই শুধু সর্বনিম্ন টাকা দিতে থাকলে ঋণ অনেক বছর ধরে টিকে থাকে, আর আপনার দেওয়া টাকার বেশিরভাগই সুদে চলে যায়, আসল কমে খুব কম। আপনি বর্তমান বকেয়া, বার্ষিক সুদের হার এবং প্রতি মাসে কত টাকা দেবেন তা লিখলে টুলটি হিসাব করে কত মাসে কার্ড শোধ হবে এবং মোট কত সুদ দিতে হবে। এর পেছনের হিসাব ঋণের অ্যামর্টাইজেশনের মতোই: প্রতি মাসে মাসিক হারে বকেয়ার ওপর সুদ যোগ হয়, মাসিক হার হলো বার্ষিক হারকে 12 দিয়ে ভাগ করলে যা হয়, তারপর আপনার দেওয়া টাকা বকেয়া কমায়। বকেয়া তখনই কমে যখন দেওয়া টাকা সেই মাসের সুদের চেয়ে বেশি হয়, তাই সুদের সামান্য ওপরে টাকা দিলে প্রায় কোনো অগ্রগতি হয় না। একটি উদাহরণ দেখা যাক: বকেয়া 100,000 টাকা, বার্ষিক হার 24 শতাংশ, অর্থাৎ মাসিক হার 0.02। মাসে 5,000 টাকা করে দিলে কার্ড শোধ হয় প্রায় 26 মাসে, আর সুদ দিতে হয় প্রায় 29,000 টাকা। মাসে মাত্র 2,500 টাকা দিলে শোধ হতে লাগে প্রায় 81 মাস, আর সুদ দিতে হয় প্রায় 103,000 টাকা — মূল বকেয়ার চেয়েও বেশি। একই ঋণে মাসিক দেওয়া অর্ধেক করায় সুদের খরচ বেড়ে যায় তিন গুণের বেশি। এই তুলনাটাই এই টুলের আসল উদ্দেশ্য। এটা আরও দেখায় মাসিক দেওয়া সামান্য বাড়ালে কতটা উপকার হয়: ওপরের উদাহরণে 5,000 টাকার বদলে 6,000 টাকা দিলে শোধের সময় কয়েক মাস কমে যায় এবং হাজার হাজার টাকা সুদ বাঁচে, কারণ প্রতিটি দেওয়ার বেশি অংশ আসলে পৌঁছায়। ব্যবহারিক পরামর্শ হলো সবচেয়ে বেশি হারের কার্ডটি আগে শোধ করুন, আর অন্য সব কার্ডে অন্তত সর্বনিম্ন টাকাটা দিতে থাকুন। আর যে কার্ডটি শোধ করার চেষ্টা করছেন, তাতে নতুন খরচ যোগ করা বন্ধ করুন, কারণ নতুন কেনাকাটায় নতুন টাকার ওপর আবার সুদ ধরা শুরু হয়। বকেয়া সামলানো কঠিন মনে হলে কিস্তি মিস করার আগে কার্ডের প্রতিষ্ঠানের সঙ্গে যোগাযোগ করে কম হার বা কাঠামোবদ্ধ পরিশোধ পরিকল্পনার কথা জিজ্ঞাসা করুন, কারণ মিস করা কিস্তিতে ফি যোগ হয় এবং আপনার ক্রেডিট রেকর্ড ক্ষতিগ্রস্ত হয়। মনে রাখবেন, আপনি যে হার লিখবেন তা আপনার স্টেটমেন্টের হারের সঙ্গে মিলতে হবে, আর এই টুলটি নির্দিষ্ট মাসিক দেওয়ার ভিত্তিতে শোধের সময়ের অনুমান দেয়, পরিবর্তনশীল সর্বনিম্ন কিস্তির নিয়মের ভিত্তিতে নয়।`,
   },
-  'salary-to-hourly-converter': {
-    guideEn: `A salary to hourly converter turns an annual or monthly salary into an hourly rate, so you can compare job offers, freelance work, and part-time roles on equal terms. A monthly salary can hide the real value of an hour of your time, especially when two jobs have different working hours, holidays, or overtime. You enter your salary and how many hours you work each week, and the tool divides the pay by the hours to give your hourly rate. The basic formula is simple: hourly rate equals annual salary divided by total working hours in a year. Total working hours equal weeks worked per year times hours worked per week. For a worked example, take an annual salary of 600,000 with a 40-hour week over 52 weeks. Total hours are 52 times 40, which is 2,080, and 600,000 divided by 2,080 gives about 288 per hour. A monthly salary of 50,000 is the same example, since 50,000 times 12 is 600,000. The tool also works in reverse: multiply an hourly rate by your weekly hours and weeks worked to get the equivalent annual salary. An hourly rate of 350 at 40 hours a week for 52 weeks equals about 728,000 a year. Real comparisons need more than the headline number. A salaried job often includes paid holidays, sick leave, festival bonuses, and retirement contributions, while freelance or hourly work usually does not. If a salaried job gives 20 days of paid leave, those are hours you are paid for but do not work, so the effective hourly value is higher than the simple division suggests. Freelancers should also count unpaid time: finding clients, invoicing, and admin work take hours that no client pays for directly. A practical tip is to add the cash value of benefits to the salary before converting, and to use your billable hours, not your total working hours, when setting a freelance rate. As a starting check, a freelancer who needs the same income as a 600,000 salary but can only bill 1,000 hours a year would need to charge about 600 per hour before costs. Always enter the hours you actually work, including regular overtime, or the comparison will mislead you.`,
-    guideBn: `বেতন থেকে ঘণ্টাপ্রতি হার বের করার ক্যালকুলেটর বার্ষিক বা মাসিক বেতনকে ঘণ্টাপ্রতি হারে রূপান্তর করে, যাতে চাকরির প্রস্তাব, ফ্রিল্যান্স কাজ আর খণ্ডকালীন কাজের তুলনা একই মাপে করা যায়। মাসিক বেতন আপনার এক ঘণ্টা সময়ের আসল মূল্য লুকিয়ে রাখতে পারে, বিশেষ করে যখন দুটি চাকরিতে কাজের ঘণ্টা, ছুটি বা ওভারটাইম আলাদা হয়। আপনি বেতন এবং সপ্তাহে কত ঘণ্টা কাজ করেন তা লিখলে টুলটি বেতনকে ঘণ্টা দিয়ে ভাগ করে ঘণ্টাপ্রতি হার বের করে দেয়। মূল সূত্রটি সহজ: ঘণ্টাপ্রতি হার সমান বার্ষিক বেতন ভাগ করে বছরের মোট কাজের ঘণ্টা। বছরের মোট ঘণ্টা সমান কাজের সপ্তাহের সংখ্যা গুণ সাপ্তাহিক কাজের ঘণ্টা। একটি উদাহরণ দেখা যাক: বার্ষিক বেতন 600,000 টাকা, সপ্তাহে 40 ঘণ্টা কাজ, বছরে 52 সপ্তাহ। মোট ঘণ্টা 52 গুণ 40, অর্থাৎ 2,080, আর 600,000 ভাগ 2,080 দিলে হয় প্রায় 288 টাকা প্রতি ঘণ্টা। মাসিক 50,000 টাকা বেতন একই উদাহরণ, কারণ 50,000 গুণ 12 সমান 600,000। এই টুলটি উল্টোভাবেও কাজ করে: ঘণ্টাপ্রতি হারকে সাপ্তাহিক ঘণ্টা ও কাজের সপ্তাহ দিয়ে গুণ করলে সমতুল্য বার্ষিক বেতন পাওয়া যায়। 52 সপ্তাহে সপ্তাহে 40 ঘণ্টা করে 350 টাকা হারে বার্ষিক আয় হয় প্রায় 728,000 টাকা। বাস্তব তুলনার জন্য শুধু মূল সংখ্যাটি যথেষ্ট নয়। বেতনভুক্ত চাকরিতে সাধারণত বেতনসহ ছুটি, অসুস্থতার ছুটি, উৎসব ভাতা ও অবসর সঞ্চয়ের সুবিধা থাকে, আর ফ্রিল্যান্স বা ঘণ্টাভিত্তিক কাজে সাধারণত এসব থাকে না। বেতনভুক্ত চাকরিতে 20 দিনের বেতনসহ ছুটি থাকলে সেগুলো এমন ঘণ্টা যার জন্য আপনি বেতন পান কিন্তু কাজ করেন না, তাই কার্যকর ঘণ্টাপ্রতি মূল্য সাধারণ ভাগফলের চেয়ে বেশি হয়। ফ্রিল্যান্সারদের অবৈতনিক সময়ও হিসাব করা উচিত: ক্লায়েন্ট খোঁজা, বিল করা আর হিসাবের কাজে এমন ঘণ্টা যায় যার জন্য কোনো ক্লায়েন্ট সরাসরি টাকা দেয় না। ব্যবহারিক পরামর্শ হলো রূপান্তরের আগে সুবিধাগুলোর টাকার মূল্য বেতনের সঙ্গে যোগ করুন, আর ফ্রিল্যান্স হার ঠিক করার সময় মোট কাজের ঘণ্টা নয়, বিল করা যায় এমন ঘণ্টা ব্যবহার করুন। একটি প্রাথমিক হিসাব হিসেবে, যে ফ্রিল্যান্সার 600,000 টাকা বেতনের সমান আয় চান কিন্তু বছরে মাত্র 1,000 ঘণ্টা বিল করতে পারেন, তাঁকে খরচের আগে প্রতি ঘণ্টায় প্রায় 600 টাকা নিতে হবে। আপনি আসলে যত ঘণ্টা কাজ করেন, নিয়মিত ওভারটাইমসহ, সেই সংখ্যাটাই লিখুন, নইলে তুলনাটি ভুল হবে।`,
-  },
   'retirement-savings-planner': {
     guideEn: `A retirement savings planner helps you work out how much to save each month so you can stop working with enough money to live on. Small regular deposits, left to grow for decades, can become a large sum because each deposit earns returns for years. The tool takes your current age, the age you plan to retire, how much you have saved already, how much you can add each month, and an assumed annual return, and it projects the final amount. The maths uses the future value of a series of monthly deposits. If you deposit the same amount every month at a monthly rate r for n months, the deposits grow to PMT times ((1 + r) to the power n minus 1) divided by r, where PMT is the monthly deposit. Your existing savings grow separately by compound interest. For a worked example, suppose you save 10,000 a month at an assumed 8 percent annual return, which is a monthly rate of about 0.00667, for 20 years, or 240 months. The deposits grow to about 5,893,000, while you only paid in 2,400,000, so about 3,493,000 comes from growth alone. Starting ten years earlier, at 30 years, the same monthly deposit would grow to about 14,916,000, which shows why time matters more than the deposit size. The planner also works backwards: enter the amount you want at retirement and it shows the monthly deposit needed to reach it. Inflation is the part people forget. Prices rise over time, so 5,890,000 in twenty years will buy less than the same amount buys today. To allow for this, some planners let you enter a lower real return, which is the investment return minus inflation, and that gives a figure in today's buying power. A commonly cited rule of thumb is that you can withdraw about 4 percent of your savings each year in retirement without running out quickly, so 5,893,000 would support about 235,700 a year, or about 19,600 a month, before tax. A practical tip is to increase your monthly deposit a little each year, for example when your pay rises, because even a small annual increase compounds into a large difference over twenty years. The return you enter is an assumption, not a guarantee: real returns vary, and this tool does not account for taxes, fees, or pension rules.`,
     guideBn: `অবসর সঞ্চয় পরিকল্পনাকারী আপনাকে হিসাব করতে সাহায্য করে প্রতি মাসে কত টাকা জমাতে হবে, যাতে কাজ বন্ধ করার পর জীবনযাপনের জন্য যথেষ্ট টাকা থাকে। ধারণাটি সহজ: নিয়মিত অল্প অল্প জমা, কয়েক দশক ধরে বাড়তে দিলে, বড় অঙ্কে পরিণত হতে পারে, কারণ প্রতিটি জমা বহু বছর ধরে লাভ দেয়। এই টুলটি আপনার বর্তমান বয়স, কত বছর বয়সে অবসর নিতে চান, এখন কত জমা আছে, প্রতি মাসে কত যোগ করতে পারেন এবং ধরে নেওয়া বার্ষিক লাভের হার নিয়ে শেষের পরিমাণের পূর্বাভাস দেয়। হিসাবটি মাসিক জমার ভবিষ্যৎ মূল্যের সূত্রে করা হয়। মাসিক হার r-এ n মাস ধরে প্রতি মাসে একই টাকা জমা দিলে জমাগুলো বেড়ে হয় PMT গুণ ((1 + r) এর n ঘাত বিয়োগ 1) ভাগ r, যেখানে PMT মাসিক জমা। আপনার আগের সঞ্চয় আলাদাভাবে চক্রবৃদ্ধি হারে বাড়ে। একটি উদাহরণ দেখা যাক: ধরা যাক আপনি 8 শতাংশ বার্ষিক লাভের ধারণায়, অর্থাৎ মাসিক হার প্রায় 0.00667-এ, 20 বছর বা 240 মাস ধরে প্রতি মাসে 10,000 টাকা করে জমা দিচ্ছেন। জমাগুলো বেড়ে হয় প্রায় 5,893,000 টাকা, অথচ আপনি জমা দিয়েছেন মাত্র 2,400,000 টাকা, অর্থাৎ প্রায় 3,493,000 টাকা আসে শুধু বৃদ্ধি থেকে। দশ বছর আগে শুরু করলে, 30 বছরে একই মাসিক জমা বেড়ে হতো প্রায় 14,916,000 টাকা, যা দেখায় জমার অঙ্কের চেয়ে সময় বেশি গুরুত্বপূর্ণ। পরিকল্পনাকারী উল্টোভাবেও কাজ করে: অবসরের সময় কত টাকা চান তা লিখলে সেখানে পৌঁছাতে মাসে কত জমাতে হবে তা দেখায়। মূল্যস্ফীতিই সেই অংশ যা মানুষ ভুলে যায়। সময়ের সঙ্গে দাম বাড়ে, তাই বিশ বছর পরের 5,890,000 টাকায় আজকের সমান টাকার চেয়ে কম জিনিস কেনা যাবে। এ জন্য কিছু পরিকল্পনাকারীতে কম বাস্তব লাভের হার লেখা যায়, যা বিনিয়োগের লাভ থেকে মূল্যস্ফীতি বাদ দিলে থাকে, আর তাতে আজকের ক্রয়ক্ষমতায় হিসাব পাওয়া যায়। একটি বহুল প্রচলিত ধারণা হলো অবসরে প্রতি বছর সঞ্চয়ের প্রায় 4 শতাংশ তুলে খরচ করা যায়, আর তাতে টাকা দ্রুত শেষ হয় না, তাই 5,893,000 টাকা থেকে বছরে প্রায় 235,700 টাকা বা মাসে প্রায় 19,600 টাকা পাওয়া যাবে, করের আগে। ব্যবহারিক পরামর্শ হলো প্রতি বছর মাসিক জমা সামান্য বাড়ান, যেমন বেতন বাড়লে, কারণ বিশ বছরে সামান্য বার্ষিক বৃদ্ধিও চক্রবৃদ্ধি হয়ে বড় পার্থক্য তৈরি করে। মনে রাখবেন, আপনি যে লাভের হার লিখবেন তা একটি ধারণা, কোনো নিশ্চয়তা নয়: বাস্তবে লাভ কমবেশি হয়, আর এই টুলটি কর, ফি বা পেনশনের নিয়ম হিসাব করে না, তাই ফলাফলকে পরিকল্পনার একটি নির্দেশিকা হিসেবে নিন।`,
-  },
-  'income-tax-calculator': {
-    guideEn: `An income tax calculator estimates how much tax you owe on your yearly income, using the tax rates you enter yourself. Tax rules change from year to year, so this tool does not fix any rate in place: you type in the current slabs and rates for your situation, and the tool applies them to your income. That design keeps the result honest even after the rules change. You start with your total income for the year, then subtract the deductions and exemptions you are allowed, which you also enter, to get your taxable income. Tax is then charged slab by slab, which means each part of your income is taxed at the rate for that slab, not the whole income at one rate. The rate on the last part of your income is called the marginal rate, and your total tax divided by your total income is called the effective rate. The effective rate is almost always lower than the marginal rate. For a worked example, suppose your taxable income is 500,000 and you enter these slabs: 0 percent on the first 300,000, and 10 percent on the next 200,000. The first slab gives no tax, the second gives 10 percent of 200,000, which is 20,000, so your total tax is 20,000. Your marginal rate is 10 percent, but your effective rate is 20,000 divided by 500,000, which is 4 percent. If your income rose to 600,000, only the extra 100,000 would be taxed at the higher slab rate, not the whole 600,000. That is the detail most people get wrong, and it is why a pay rise never leaves you with less money after tax. The tool can also compare two income levels, so you can see the tax effect of a bonus or extra freelance work before accepting it. A practical tip is to keep a simple record through the year of income, receipts, and deductible expenses, so the numbers you enter are real rather than guessed, and to check the current year's official rules before filing, because slabs, exemptions, and rebate rates are revised regularly. This tool gives an estimate for planning only and is not tax advice; for a complex return, a licensed tax adviser can check your specific situation.`,
-    guideBn: `আয়কর ক্যালকুলেটর আপনার বার্ষিক আয়ের ওপর কত কর দিতে হবে তার একটি অনুমান দেয়, আপনি নিজে যে করের হার লিখবেন সেই অনুযায়ী। করের নিয়ম প্রতি বছর বদলায়, তাই এই টুলটি কোনো হার স্থায়ীভাবে বসিয়ে রাখে না: আপনি আপনার পরিস্থিতি অনুযায়ী বর্তমান স্ল্যাব ও হার লিখবেন, আর টুলটি আপনার আয়ে সেগুলো প্রয়োগ করবে। নিয়ম বদলে গেলেও এই ব্যবস্থায় ফলাফল সঠিক থাকে। প্রথমে বছরের মোট আয় লিখুন, তারপর আপনি যে ছাড় ও করমুক্ত অংশের অধিকারী তা বাদ দিন, যা আপনিও নিজে লিখবেন, তাতে পাওয়া যায় করযোগ্য আয়। এরপর কর ধরা হয় স্ল্যাব ধরে ধরে, অর্থাৎ আয়ের প্রতিটি অংশে সেই স্ল্যাবের হার প্রযোজ্য হয়, পুরো আয়ে একটিই হার নয়। আয়ের শেষ অংশের ওপর যে হার পড়ে তাকে বলে প্রান্তিক হার, আর মোট করকে মোট আয় দিয়ে ভাগ করলে যা হয় তাকে বলে কার্যকর হার। কার্যকর হার প্রায় সবসময় প্রান্তিক হারের চেয়ে কম হয়। একটি উদাহরণ দেখা যাক: ধরা যাক আপনার করযোগ্য আয় 500,000 টাকা, আর আপনি এই স্ল্যাবগুলো লিখলেন: প্রথম 300,000 টাকায় 0 শতাংশ, পরের 200,000 টাকায় 10 শতাংশ। প্রথম স্ল্যাবে কোনো কর নেই, দ্বিতীয় স্ল্যাবে 200,000 টাকার 10 শতাংশ, অর্থাৎ 20,000 টাকা, তাই মোট কর 20,000 টাকা। আপনার প্রান্তিক হার 10 শতাংশ, কিন্তু কার্যকর হার 20,000 ভাগ 500,000, অর্থাৎ 4 শতাংশ। আয় 600,000 টাকা হলে শুধু বাড়তি 100,000 টাকার ওপরই বেশি স্ল্যাবের হার পড়বে, পুরো 600,000 টাকার ওপর নয়। এই বিষয়টাই অধিকাংশ মানুষ ভুল বোঝে, আর এ কারণেই বেতন বাড়লে করের পর হাতে কম টাকা থাকে না। এই টুলটি দুটি আয়ের স্তরের তুলনাও করতে পারে, তাই বোনাস বা বাড়তি ফ্রিল্যান্স কাজ নেওয়ার আগে তার করের প্রভাব দেখে নিতে পারেন। ব্যবহারিক পরামর্শ হলো সারা বছর আয়, রসিদ ও করমুক্ত খরচের একটি সহজ হিসাব রাখুন, যাতে আপনি যে সংখ্যা লিখবেন তা অনুমান নয়, বাস্তব হয়, আর কর দেওয়ার আগে চলতি বছরের সরকারি নিয়ম দেখে নিন, কারণ স্ল্যাব, ছাড় ও রেয়াতের হার নিয়মিত সংশোধন করা হয়। এই টুলটি শুধু পরিকল্পনার জন্য একটি অনুমান দেয়, কর বিষয়ে পরামর্শ নয়; জটিল রিটার্নের ক্ষেত্রে লাইসেন্সপ্রাপ্ত কর উপদেষ্টা আপনার নির্দিষ্ট পরিস্থিতি যাচাই করতে পারেন।`,
-  },
-  'zakat-calculator': {
-    guideEn: `A zakat calculator works out the zakat due on your wealth, at the standard rate of 2.5 percent of zakatable wealth held above the nisab threshold for one lunar year. Zakat is due on cash, bank savings, gold, silver, and goods held for trade, after subtracting debts you owe, while personal items such as your home, clothes, and furniture are not counted. The nisab is the minimum wealth level: it is set by the value of 87.48 grams of gold or 612.36 grams of silver, and because gold and silver prices change, this tool does not fix those prices in place. You enter the current price of gold and silver yourself, and the tool shows both nisab values, so you can see whether your wealth is above the threshold. For a worked example, suppose you enter a gold price of 10,000 per gram and a silver price of 120 per gram. The gold nisab is then 87.48 times 10,000, which is 874,800, and the silver nisab is 612.36 times 120, which is about 73,483. Now suppose your zakatable wealth is cash of 500,000, gold worth 200,000, and trade goods worth 100,000, a total of 800,000, with a debt of 50,000 to subtract, leaving 750,000. That is above both nisab values in this example, so zakat is 2.5 percent of 750,000, which is 18,750. The calculation is simply 750,000 times 0.025. The tool lists each category separately, because many people forget one of them: cash in hand and in the bank, gold and silver jewellery, money lent to others that is expected back, and stock held for sale all count, while the house you live in and the car you use do not. Debts you owe are subtracted, and money you have lent counts only if you expect it to be repaid. A practical tip is to pick one date each lunar year, for example the same date in Ramadan, and calculate zakat on that date every year, using the gold and silver prices of that day, so the habit stays regular and no year is missed. Prices change daily, so enter the prices from a reliable local source on the day you calculate. This tool gives a planning estimate for personal use and is not a religious ruling; if your situation is unusual, ask a knowledgeable scholar.`,
-    guideBn: `যাকাত ক্যালকুলেটর আপনার সম্পদের ওপর কত যাকাত দিতে হবে তা হিসাব করে, এক চন্দ্র বছর ধরে নিসাবের ওপরে থাকা যাকাতযোগ্য সম্পদের 2.5 শতাংশ হারে। যাকাত দিতে হয় নগদ টাকা, ব্যাংক সঞ্চয়, সোনা, রুপা ও ব্যবসার পণ্যের ওপর, আপনার দেনা বাদ দেওয়ার পর, আর বাড়ি, পোশাক ও আসবাবের মতো ব্যক্তিগত জিনিস হিসাব করা হয় না। নিসাব হলো সম্পদের সর্বনিম্ন সীমা: এটি নির্ধারিত হয় 87.48 গ্রাম সোনা বা 612.36 গ্রাম রুপার মূল্য দিয়ে, আর সোনা-রুপার দাম বদলায় বলে এই টুলটি সেই দাম স্থায়ীভাবে বসিয়ে রাখে না। আপনি নিজে সোনা ও রুপার বর্তমান দাম লিখবেন, আর টুলটি দুটি নিসাবের মানই দেখাবে, যাতে আপনি বুঝতে পারেন আপনার সম্পদ সীমার ওপরে আছে কি না। একটি উদাহরণ দেখা যাক: ধরা যাক আপনি সোনার দাম লিখলেন প্রতি গ্রাম 10,000 টাকা, আর রুপার দাম প্রতি গ্রাম 120 টাকা। তাহলে সোনার নিসাব হয় 87.48 গুণ 10,000, অর্থাৎ 874,800 টাকা, আর রুপার নিসাব হয় 612.36 গুণ 120, অর্থাৎ প্রায় 73,483 টাকা। এখন ধরা যাক আপনার যাকাতযোগ্য সম্পদ হলো নগদ 500,000 টাকা, 200,000 টাকার সোনা ও 100,000 টাকার ব্যবসার পণ্য, মোট 800,000 টাকা, আর 50,000 টাকা দেনা বাদ দিলে থাকে 750,000 টাকা। এই উদাহরণে তা দুটি নিসাবেরই ওপরে, তাই যাকাত হবে 750,000 টাকার 2.5 শতাংশ, অর্থাৎ 18,750 টাকা। হিসাবটি সহজ: 750,000 গুণ 0.025। টুলটি প্রতিটি খাত আলাদাভাবে দেখায়, কারণ অনেকেই কোনো একটি খাত ভুলে যান: হাতের নগদ ও ব্যাংকের টাকা, সোনা-রুপার গয়না, ফেরত পাওয়ার আশা আছে এমন ধার দেওয়া টাকা এবং বিক্রির জন্য রাখা পণ্য — সবই হিসাব হয়, আর আপনি যে বাড়িতে থাকেন ও যে গাড়ি ব্যবহার করেন তা হয় না। আপনার দেনা বাদ দেওয়া হয়, আর ধার দেওয়া টাকা তখনই ধরা হয় যখন ফেরত পাওয়ার আশা থাকে। ব্যবহারিক পরামর্শ হলো প্রতি চন্দ্র বছরে একটি তারিখ ঠিক করুন, যেমন রমজানের একই তারিখ, আর প্রতি বছর সেই তারিখে সেই দিনের সোনা-রুপার দাম দিয়ে যাকাত হিসাব করুন, যাতে অভ্যাসটি নিয়মিত থাকে এবং কোনো বছর বাদ না যায়। দাম প্রতিদিন বদলায়, তাই হিসাবের দিনে স্থানীয় নির্ভরযোগ্য উৎস থেকে দাম লিখুন। এই টুলটি ব্যক্তিগত ব্যবহারের জন্য পরিকল্পনার অনুমান দেয়, ধর্মীয় ফতোয়া নয়; আপনার পরিস্থিতি অস্বাভাবিক হলে জ্ঞানী আলেমের কাছে জিজ্ঞাসা করুন।`,
   },
   'bank-emi-dps-fdr-calculator': {
     guideEn: `A bank EMI, DPS, and FDR calculator covers the three most common bank products in one place, so you can compare borrowing against saving before deciding. The EMI part works out the fixed monthly instalment on a loan, using the standard formula EMI equals P times r times (1 + r) to the power n, divided by ((1 + r) to the power n minus 1), where P is the loan amount, r is the monthly rate, and n is the number of payments. A DPS, or deposit pension scheme, is the opposite direction: you deposit a fixed amount every month for a set term, and the bank pays back the deposits plus profit at maturity. Its maturity value uses the future value of monthly deposits: PMT times ((1 + r) to the power n minus 1) divided by r, where PMT is the monthly deposit and r is the monthly rate. For a worked example, deposit 5,000 a month at an 8 percent annual rate, which is a monthly rate of about 0.00667, for 5 years, or 60 months. The maturity value is about 367,423, while you paid in 300,000, so the profit is about 67,423. An FDR, or fixed deposit receipt, is a single lump sum kept with the bank for a fixed term. Its value is A equals P times (1 + r) to the power t, where P is the deposit, r is the annual rate, and t is the years. For example, 100,000 kept for one year at 8 percent grows to 108,000, a profit of 8,000, and for two years with yearly compounding it grows to about 116,640. The three products answer different questions: EMI tells you what borrowing costs, DPS builds savings by habit, and FDR locks a lump sum away at a known return. A practical tip is to compare the return after tax and fees, not the headline rate, because profit on deposits may be taxed and deducted at source, and breaking an FDR early usually loses part of the profit, so check the early-encashment rule before locking money away. Also compare the DPS maturity value with the total EMI cost of a loan of the same size, because saving first and buying later is often cheaper than borrowing. Enter the rates your own bank quotes, since rates differ between banks and change over time.`,
@@ -60,14 +816,6 @@ export const TOOLS_GUIDES: Record<string, { guideBn: string; guideEn: string }> 
   'discount-vat-profit-calculator': {
     guideEn: `A discount, VAT, and profit calculator helps shopkeepers, online sellers, and buyers check prices quickly and avoid mistakes at the till. The three calculations look similar but answer different questions, and mixing them up is a common source of lost money. A discount reduces the marked price: the price you pay equals the marked price times (1 minus the discount rate). For a worked example, a marked price of 2,000 with a 25 percent discount means you pay 2,000 times 0.75, which is 1,500, saving 500. Two discounts do not simply add up: a 20 percent discount followed by another 10 percent gives 2,000 times 0.8 times 0.9, which is 1,440, not 1,400, because the second discount applies to the already reduced price. VAT, or value added tax, is charged at the rate you enter, because rates differ by place and product and change over time. If the price excludes VAT, the VAT amount is the price times the rate, so a price of 1,000 at a user-entered rate of 15 percent adds 150, making the total 1,150. If the price already includes VAT, the VAT inside it is the total times the rate divided by (1 plus the rate): 1,150 times 15 divided by 115 equals 150. Profit is the difference between selling price and cost, and it is measured two ways that are often confused. Profit margin is profit divided by selling price, while markup is profit divided by cost. For example, buying at 800 and selling at 1,000 gives a profit of 200, a margin of 200 divided by 1,000, which is 20 percent, and a markup of 200 divided by 800, which is 25 percent. A practical tip is to set your selling price from the margin you need, not from a markup you guessed: if you need a 20 percent margin and the cost is 800, the price must be 800 divided by 0.8, which is 1,000. Check the VAT rate that applies to your product before quoting a price, and always write the rate you used next to the result.`,
     guideBn: `ছাড়, ভ্যাট ও লাভের ক্যালকুলেটর দোকানদার, অনলাইন বিক্রেতা ও ক্রেতাদের দাম দ্রুত যাচাই করতে এবং হিসাবের ভুল এড়াতে সাহায্য করে। তিনটি হিসাব দেখতে একই রকম হলেও তিনটি আলাদা প্রশ্নের উত্তর দেয়, আর এগুলো গুলিয়ে ফেললে প্রায়ই টাকা নষ্ট হয়। ছাড় নির্ধারিত দাম কমায়: আপনি যে দাম দেবেন তা সমান নির্ধারিত দাম গুণ (1 বিয়োগ ছাড়ের হার)। একটি উদাহরণ দেখা যাক: 2,000 টাকা নির্ধারিত দামে 25 শতাংশ ছাড় হলে দিতে হয় 2,000 গুণ 0.75, অর্থাৎ 1,500 টাকা, বাঁচে 500 টাকা। দুটি ছাড় সরাসরি যোগ হয় না: 20 শতাংশ ছাড়ের পর আরও 10 শতাংশ ছাড় দিলে হয় 2,000 গুণ 0.8 গুণ 0.9, অর্থাৎ 1,440 টাকা, 1,400 টাকা নয়, কারণ দ্বিতীয় ছাড়টি কমানো দামের ওপর ধরা হয়। ভ্যাট বা মূল্য সংযোজন কর ধরা হয় আপনি যে হার লিখবেন সেই হারে, কারণ জায়গা ও পণ্যভেদে হার আলাদা হয় এবং সময়ের সঙ্গে বদলায়। দামে ভ্যাট না থাকলে ভ্যাটের পরিমাণ হলো দাম গুণ হার, তাই 1,000 টাকার দামে আপনি লেখা 15 শতাংশ হারে ভ্যাট যোগ হয় 150 টাকা, মোট হয় 1,150 টাকা। দামে ভ্যাট আগেই থাকলে তার ভেতরের ভ্যাট হলো মোট দাম গুণ হার ভাগ (1 যোগ হার): 1,150 গুণ 15 ভাগ 115 সমান 150 টাকা। লাভ হলো বিক্রয়মূল্য ও খরচের পার্থক্য, আর এটি দুভাবে মাপা হয় যা প্রায়ই গুলিয়ে যায়। লাভের মার্জিন হলো লাভ ভাগ বিক্রয়মূল্য, আর মার্কআপ হলো লাভ ভাগ খরচ। যেমন 800 টাকায় কিনে 1,000 টাকায় বিক্রি করলে লাভ 200 টাকা, মার্জিন 200 ভাগ 1,000, অর্থাৎ 20 শতাংশ, আর মার্কআপ 200 ভাগ 800, অর্থাৎ 25 শতাংশ। ব্যবহারিক পরামর্শ হলো বিক্রয়মূল্য ঠিক করুন আপনার প্রয়োজনীয় মার্জিন থেকে, অনুমান করা মার্কআপ থেকে নয়: 20 শতাংশ মার্জিন চাইলে এবং খরচ 800 টাকা হলে দাম হতে হবে 800 ভাগ 0.8, অর্থাৎ 1,000 টাকা। দাম বলার আগে আপনার পণ্যে কোন ভ্যাট হার প্রযোজ্য তা দেখে নিন, আর ফলাফলের পাশে আপনি যে হার ব্যবহার করেছেন তা লিখে রাখুন। দোকানে কেনার আগে ছাড়ের পরের দাম নিজে হিসাব করে নিলে ভুল ধরা সহজ হয়।`,
-  },
-  'bmi-calculator': {
-    guideEn: `A BMI calculator works out your body mass index, a simple number that compares your weight with your height and places the result in a standard weight band. You enter your weight in kilograms and your height in metres or centimetres, and the tool divides the weight by the square of the height in metres. The formula is BMI equals weight in kilograms divided by height in metres squared. The result is grouped using the World Health Organization bands: underweight is below 18.5, normal weight is 18.5 to 24.9, overweight is 25 to 29.9, and obese is 30 or above. For a worked example, take a person who weighs 70 kilograms and is 1.75 metres tall. The height squared is 1.75 times 1.75, which is 3.0625, and 70 divided by 3.0625 gives a BMI of about 22.9, which sits in the normal band. The same tool can show your healthy weight range for your height: multiply 18.5 and 24.9 by your height squared. For 1.75 metres that gives about 56.7 to 76.3 kilograms, so anyone of that height inside that range has a normal BMI. BMI is useful because it needs only two measurements and gives a quick population-level signal, which is why doctors and health surveys use it so widely. But it has real limits that matter for individuals. It cannot tell muscle from fat, so a muscular athlete can score as overweight while carrying little body fat, and it does not account for age, sex, or where fat is stored. Older adults can have a normal BMI while losing muscle, and fat carried around the waist carries more health risk than the same amount elsewhere. A practical tip is to use BMI together with your waist measurement: measure around your waist at the navel, and if it is high for your height, talk to a doctor even if your BMI looks normal. Re-check your BMI every few months rather than every day, because weight changes slowly and daily readings mostly show water and food. This guide is general information, not medical advice; if you are concerned about your weight or health, see a doctor.`,
-    guideBn: `বিএমআই ক্যালকুলেটর আপনার বডি মাস ইনডেক্স বের করে, একটি সহজ সংখ্যা যা আপনার ওজনের সঙ্গে উচ্চতার তুলনা করে এবং ফলাফলকে একটি প্রচলিত ওজনের শ্রেণিতে ফেলে। আপনি ওজন কিলোগ্রামে এবং উচ্চতা মিটার বা সেন্টিমিটারে লিখলে টুলটি ওজনকে উচ্চতার বর্গ দিয়ে ভাগ করে। সূত্রটি হলো বিএমআই সমান কিলোগ্রামে ওজন ভাগ মিটারে উচ্চতার বর্গ। ফলাফলকে বিশ্ব স্বাস্থ্য সংস্থার শ্রেণি অনুযায়ী ভাগ করা হয়: 18.5-এর নিচে কম ওজন, 18.5 থেকে 24.9 স্বাভাবিক ওজন, 25 থেকে 29.9 বেশি ওজন এবং 30 বা তার বেশি স্থূলতা। একটি উদাহরণ দেখা যাক: একজন ব্যক্তির ওজন 70 কিলোগ্রাম এবং উচ্চতা 1.75 মিটার। উচ্চতার বর্গ 1.75 গুণ 1.75, অর্থাৎ 3.0625, আর 70 ভাগ 3.0625 দিলে বিএমআই হয় প্রায় 22.9, যা স্বাভাবিক শ্রেণিতে পড়ে। একই টুল আপনার উচ্চতার জন্য স্বাস্থ্যকর ওজনের সীমাও দেখাতে পারে: 18.5 ও 24.9-কে উচ্চতার বর্গ দিয়ে গুণ করুন। 1.75 মিটার উচ্চতার জন্য তা হয় প্রায় 56.7 থেকে 76.3 কিলোগ্রাম, অর্থাৎ এই উচ্চতার যে কেউ এই সীমার মধ্যে থাকলে তাঁর বিএমআই স্বাভাবিক। বিএমআই উপকারী, কারণ এতে মাত্র দুটি মাপ লাগে এবং এটি দ্রুত একটি সাধারণ ধারণা দেয়, তাই চিকিৎসক ও স্বাস্থ্য জরিপে এটি এত ব্যাপকভাবে ব্যবহৃত হয়। কিন্তু ব্যক্তির ক্ষেত্রে এর বাস্তব সীমাবদ্ধতা আছে। এটি পেশি ও চর্বির পার্থক্য বুঝতে পারে না, তাই পেশিবহুল খেলোয়াড়ের বিএমআই বেশি ওজন দেখাতে পারে, যদিও তাঁর শরীরে চর্বি কম। এটি বয়স, লিঙ্গ বা চর্বি শরীরের কোথায় জমেছে তাও হিসাব করে না। বয়স্কদের বিএমআই স্বাভাবিক থাকলেও পেশি কমে যেতে পারে, আর কোমরের চারপাশে জমা চর্বি শরীরের অন্য জায়গার একই পরিমাণ চর্বির চেয়ে বেশি স্বাস্থ্যঝুঁকি বয়ে আনে। ব্যবহারিক পরামর্শ হলো বিএমআইয়ের সঙ্গে কোমরের মাপও ব্যবহার করুন: নাভির চারপাশে কোমর মাপুন, আর আপনার উচ্চতার তুলনায় তা বেশি হলে বিএমআই স্বাভাবিক দেখালেও চিকিৎসকের সঙ্গে কথা বলুন। প্রতিদিন নয়, কয়েক মাস পরপর বিএমআই আবার দেখুন, কারণ ওজন ধীরে বদলায় এবং প্রতিদিনের মাপে বেশিরভাগই পানি ও খাবারের পার্থক্য ধরা পড়ে। এই গাইডটি সাধারণ তথ্য, চিকিৎসা পরামর্শ নয়; ওজন বা স্বাস্থ্য নিয়ে চিন্তা থাকলে চিকিৎসকের কাছে যান।`,
-  },
-  'calorie-tdee-calculator': {
-    guideEn: `A calorie and TDEE calculator estimates how many calories your body uses in a day, so you can eat the right amount for your goal. TDEE stands for Total Daily Energy Expenditure, and it is your basal metabolic rate, the energy used at rest, multiplied by an activity factor that reflects how much you move. First the tool works out your BMR with the Mifflin-St Jeor equation, which uses weight, height, age, and sex. For men it is 10 times weight in kilograms, plus 6.25 times height in centimetres, minus 5 times age in years, plus 5. For women the same calculation ends with minus 161 instead of plus 5. For a worked example, take a 30-year-old man who weighs 80 kilograms and is 180 centimetres tall. His BMR is 800 plus 1,125 minus 150 plus 5, which is 1,780 calories a day at rest. Then the tool multiplies by an activity level: 1.2 for sedentary, 1.375 for light activity, 1.55 for moderate activity, 1.725 for active, and 1.9 for very active. At moderate activity his TDEE is 1,780 times 1.55, which is about 2,759 calories a day. Eating around that number should hold weight steady, eating about 500 fewer a day should lead to roughly half a kilogram of fat loss a week, and eating about 500 more should lead to gradual weight gain. The activity factor is where most errors come from: many people pick moderate when their real life is sedentary, which overstates the result by several hundred calories. Count your actual weekly exercise and daily steps honestly before choosing a level. A practical tip is to treat the result as a starting point, not a fixed truth: follow it for two or three weeks, watch your weight trend, and then adjust by 200 calories at a time until the trend matches your goal. This guide is general information, not medical advice; if you have a medical condition, are pregnant, or need a large change in weight, see a doctor or a registered dietitian first.`,
-    guideBn: `ক্যালোরি ও টিডিইই ক্যালকুলেটর অনুমান করে আপনার শরীর দিনে কত ক্যালোরি খরচ করে, যাতে আপনি আপনার লক্ষ্য অনুযায়ী সঠিক পরিমাণ খেতে পারেন। টিডিইই মানে মোট দৈনিক শক্তি ব্যয়, আর এটি আপনার বেসাল মেটাবলিক রেট, অর্থাৎ বিশ্রামে ব্যবহৃত শক্তি, গুণ করে একটি কার্যকলাপের গুণক দিয়ে, যা আপনার নড়াচড়ার পরিমাণ দেখায়। প্রথমে টুলটি মিফলিন-সেন্ট জিওর সমীকরণ দিয়ে আপনার বিএমআর বের করে, যাতে ওজন, উচ্চতা, বয়স ও লিঙ্গ ব্যবহার করা হয়। পুরুষের ক্ষেত্রে এটি 10 গুণ কিলোগ্রামে ওজন, যোগ 6.25 গুণ সেন্টিমিটারে উচ্চতা, বিয়োগ 5 গুণ বছর হিসেবে বয়স, যোগ 5। নারীর ক্ষেত্রে একই হিসাবের শেষে যোগ 5-এর বদলে বিয়োগ 161 হয়। একটি উদাহরণ দেখা যাক: 30 বছর বয়সী একজন পুরুষ, ওজন 80 কিলোগ্রাম, উচ্চতা 180 সেন্টিমিটার। তাঁর বিএমআর হলো 800 যোগ 1,125 বিয়োগ 150 যোগ 5, অর্থাৎ বিশ্রামে দিনে 1,780 ক্যালোরি। এরপর টুলটি কার্যকলাপের স্তর দিয়ে গুণ করে: বসে থাকা জীবনে 1.2, হালকা কাজে 1.375, মাঝারি কাজে 1.55, সক্রিয় জীবনে 1.725 এবং খুব সক্রিয় জীবনে 1.9। মাঝারি কাজে তাঁর টিডিইই হয় 1,780 গুণ 1.55, অর্থাৎ দিনে প্রায় 2,759 ক্যালোরি। এই পরিমাণ খেলে ওজন প্রায় একই থাকবে, দিনে প্রায় 500 ক্যালোরি কম খেলে সপ্তাহে প্রায় আধা কিলোগ্রাম চর্বি কমবে, আর দিনে প্রায় 500 ক্যালোরি বেশি খেলে ওজন ধীরে ধীরে বাড়বে। কার্যকলাপের গুণকেই বেশিরভাগ ভুল হয়: অনেকেই আসলে বসে থাকা জীবনযাপন করলেও মাঝারি স্তর বেছে নেন, ফলে ফলাফল কয়েক শ ক্যালোরি বেশি দেখায়। স্তর বেছে নেওয়ার আগে আপনার সাপ্তাহিক ব্যায়াম ও দৈনিক হাঁটার পরিমাণ সততার সঙ্গে হিসাব করুন। ব্যবহারিক পরামর্শ হলো ফলাফলকে শুরুর হিসাব হিসেবে নিন, চূড়ান্ত সত্য হিসেবে নয়: দুই বা তিন সপ্তাহ এটি মেনে চলুন, ওজনের ধারা দেখুন, আর তারপর ধারা লক্ষ্যের সঙ্গে না মিললে একবারে 200 ক্যালোরি করে সমন্বয় করুন। এই গাইডটি সাধারণ তথ্য, চিকিৎসা পরামর্শ নয়; আপনার কোনো অসুস্থতা থাকলে, আপনি গর্ভবতী হলে বা ওজনে বড় পরিবর্তন দরকার হলে আগে চিকিৎসক বা নিবন্ধিত পুষ্টিবিদের কাছে যান। ওজন মাপার সময় প্রতিদিন একই সময়ে ও একই পোশাকে মাপলে ধারাটি নির্ভুল থাকে।`,
   },
   'macro-nutrient-calculator': {
     guideEn: `A macro nutrient calculator splits your daily calories into protein, carbohydrates, and fat, the three nutrients that supply energy, so you can plan meals that match your goal. Each gram of protein gives 4 calories, each gram of carbohydrate gives 4 calories, and each gram of fat gives 9 calories, which is why fat is the most energy-dense of the three. You enter your daily calorie target, usually from a TDEE calculator, and the share of calories you want from each macro, and the tool converts those shares into grams per day. For a worked example, take a daily target of 2,000 calories split as 25 percent protein, 50 percent carbohydrates, and 25 percent fat. Protein is 25 percent of 2,000, which is 500 calories, and 500 divided by 4 gives 125 grams of protein. Carbohydrates are 50 percent, which is 1,000 calories, and 1,000 divided by 4 gives 250 grams. Fat is 25 percent, which is 500 calories, and 500 divided by 9 gives about 56 grams of fat. The three grams add up to the full 2,000 calories, and the tool shows the same breakdown for any split you choose. Common splits vary by goal: people aiming to build or keep muscle often raise protein to around 30 percent of calories, while endurance athletes often raise carbohydrates, and people reducing calories sometimes keep protein high because it helps with fullness and muscle retention. A useful cross-check is protein per kilogram of body weight: many active adults aim for roughly 1.6 to 2.2 grams of protein per kilogram a day, so a 70-kilogram person would aim for about 112 to 154 grams, which you can compare with the calculator's result. A practical tip is to track what you actually eat for one week before changing anything, because most people misjudge their current protein and fat intake by a wide margin, and the calculator can only help once the starting point is honest. This guide is general information, not medical advice; if you have kidney disease, diabetes, or another condition that affects diet, see a doctor or a registered dietitian.`,
@@ -93,21 +841,9 @@ export const TOOLS_GUIDES: Record<string, { guideBn: string; guideEn: string }> 
     guideEn: `A heart rate zone calculator shows the heart rate ranges for different training intensities, so you can train at the right effort for your goal instead of guessing. Each zone is a percentage of your maximum heart rate, and each one trains a different quality: easier zones build endurance, harder zones build speed and power. You enter your age and optionally your resting heart rate, and the tool works out the five zones. Maximum heart rate is commonly estimated as 220 minus age, which is a rough population average rather than an exact measure for any one person. For a worked example, take a 30-year-old: the estimated maximum is 220 minus 30, which is 190 beats per minute. The zones are Zone 1 at 50 to 60 percent, which is 95 to 114 beats per minute, Zone 2 at 60 to 70 percent, which is 114 to 133, Zone 3 at 70 to 80 percent, which is 133 to 152, Zone 4 at 80 to 90 percent, which is 152 to 171, and Zone 5 at 90 to 100 percent, which is 171 to 190. Zone 2 is where most endurance training happens: you can still talk in full sentences, and the effort feels sustainable for a long time. A more personal method is the Karvonen formula, which uses heart rate reserve, the gap between maximum and resting heart rate. With a resting rate of 60, the reserve is 190 minus 60, which is 130, and Zone 2 becomes 130 times 0.6 plus 60, which is 138, to 130 times 0.7 plus 60, which is 151. The Karvonen zones sit higher because they account for your resting rate. A practical tip is to spend most training time in Zone 2 and only short periods in Zones 4 and 5, because too much hard training without enough easy training is the most common cause of stalled progress and injury. Check your resting rate first thing in the morning, before getting up, for the most reliable reading. This guide is general information, not medical advice; if you have a heart condition, high blood pressure, or feel chest pain, dizziness, or unusual breathlessness during exercise, stop and see a doctor.`,
     guideBn: `হার্ট রেট জোন ক্যালকুলেটর বিভিন্ন প্রশিক্ষণের তীব্রতার জন্য হৃদস্পন্দনের সীমা দেখায়, যাতে আপনি অনুমান না করে আপনার লক্ষ্যের জন্য সঠিক চেষ্টায় প্রশিক্ষণ নিতে পারেন। প্রতিটি জোন আপনার সর্বোচ্চ হৃদস্পন্দনের একটি শতাংশ, আর প্রতিটি জোন আলাদা গুণ গড়ে তোলে: সহজ জোনগুলো সহনশীলতা গড়ে, আর কঠিন জোনগুলো গতি ও শক্তি গড়ে। আপনি বয়স এবং চাইলে বিশ্রামে হৃদস্পন্দন লিখলে টুলটি পাঁচটি জোন বের করে দেয়। সর্বোচ্চ হৃদস্পন্দন সাধারণত 220 বিয়োগ বয়স দিয়ে অনুমান করা হয়, যা কোনো একজনের জন্য নিখুঁত মাপ নয়, বরং জনসংখ্যার একটি সাধারণ গড়। একটি উদাহরণ দেখা যাক: 30 বছর বয়সী একজন মানুষের আনুমানিক সর্বোচ্চ হৃদস্পন্দন 220 বিয়োগ 30, অর্থাৎ প্রতি মিনিটে 190 বার। জোনগুলো হলো জোন 1: 50 থেকে 60 শতাংশ, অর্থাৎ 95 থেকে 114 বার প্রতি মিনিটে, জোন 2: 60 থেকে 70 শতাংশ, অর্থাৎ 114 থেকে 133, জোন 3: 70 থেকে 80 শতাংশ, অর্থাৎ 133 থেকে 152, জোন 4: 80 থেকে 90 শতাংশ, অর্থাৎ 152 থেকে 171, এবং জোন 5: 90 থেকে 100 শতাংশ, অর্থাৎ 171 থেকে 190। জোন 2-এই বেশিরভাগ সহনশীলতার প্রশিক্ষণ হয়: আপনি তখনও পূর্ণ বাক্যে কথা বলতে পারেন, আর চেষ্টাটি দীর্ঘ সময় ধরে রাখা যায়। আরও ব্যক্তিগত একটি পদ্ধতি হলো কারভোনেন সূত্র, যাতে হৃদস্পন্দনের রিজার্ভ ব্যবহার করা হয়, অর্থাৎ সর্বোচ্চ ও বিশ্রামের হৃদস্পন্দনের পার্থক্য। বিশ্রামের হার 60 হলে রিজার্ভ হয় 190 বিয়োগ 60, অর্থাৎ 130, আর জোন 2 হয় 130 গুণ 0.6 যোগ 60, অর্থাৎ 138, থেকে 130 গুণ 0.7 যোগ 60, অর্থাৎ 151। কারভোনেন জোনগুলো বেশি হয়, কারণ এতে আপনার বিশ্রামের হার হিসাব করা হয়। ব্যবহারিক পরামর্শ হলো বেশিরভাগ প্রশিক্ষণের সময় জোন 2-এ কাটান, আর জোন 4 ও 5-এ শুধু অল্প সময় থাকুন, কারণ যথেষ্ট সহজ প্রশিক্ষণ ছাড়া অতিরিক্ত কঠিন প্রশিক্ষণই অগ্রগতি থেমে যাওয়া ও আঘাতের সবচেয়ে সাধারণ কারণ। সবচেয়ে নির্ভরযোগ্য মাপের জন্য সকালে ওঠার আগে, বিছানা থেকে না উঠে বিশ্রামের হার মাপুন। এই গাইডটি সাধারণ তথ্য, চিকিৎসা পরামর্শ নয়; আপনার হৃদরোগ, উচ্চ রক্তচাপ থাকলে বা ব্যায়ামের সময় বুকে ব্যথা, মাথা ঘোরা বা অস্বাভাবিক শ্বাসকষ্ট হলে থেমে গিয়ে চিকিৎসকের কাছে যান।`,
   },
-  'bmr-calculator': {
-    guideEn: `A BMR calculator estimates your basal metabolic rate, the number of calories your body burns at complete rest just to stay alive. Breathing, keeping your heart beating, maintaining body temperature, and running the brain and organs all use energy around the clock, and BMR is that baseline cost before any movement, work, or exercise is added. The tool uses the Mifflin-St Jeor equation, which is widely used because it needs only weight, height, age, and sex. For men the formula is 10 times weight in kilograms, plus 6.25 times height in centimetres, minus 5 times age in years, plus 5. For women the same calculation ends with minus 161 instead of plus 5. For a worked example, take a 30-year-old man who weighs 80 kilograms and is 180 centimetres tall. His BMR is 800 plus 1,125 minus 150 plus 5, which is 1,780 calories a day. For a 30-year-old woman who weighs 65 kilograms and is 165 centimetres tall, the BMR is 650 plus 1,031.25 minus 150 minus 161, which is about 1,370 calories a day. The difference shows why sex, weight, and height all matter: larger bodies and more muscle cost more energy to maintain. BMR is not the same as total daily calorie needs. To get total needs, multiply BMR by an activity factor: 1.2 for sedentary, 1.375 for light activity, 1.55 for moderate activity, 1.725 for active, and 1.9 for very active. The 1,780 example at moderate activity needs about 2,759 calories a day in total. A practical tip is to use BMR as a floor, not a diet target: eating far below BMR for long periods can leave you tired, cold, and hungry, and it often backfires, so a weight-loss target is usually set between BMR and total needs, not below BMR. Re-check your BMR when your weight changes by a few kilograms, because the baseline moves with it. This guide is general information, not medical advice; see a doctor or a registered dietitian before a large change in diet.`,
-    guideBn: `বিএমআর ক্যালকুলেটর আপনার বেসাল মেটাবলিক রেট অনুমান করে, অর্থাৎ সম্পূর্ণ বিশ্রামে শুধু বেঁচে থাকার জন্য আপনার শরীর কত ক্যালোরি খরচ করে। শ্বাস নেওয়া, হৃদস্পন্দন চালু রাখা, শরীরের তাপমাত্রা ধরে রাখা এবং মস্তিষ্ক ও অঙ্গগুলো চালানো — সবকিছুতেই সারাক্ষণ শক্তি লাগে, আর বিএমআর হলো কোনো নড়াচড়া, কাজ বা ব্যায়াম যোগ করার আগের সেই মূল খরচ। এই টুলটি মিফলিন-সেন্ট জিওর সমীকরণ ব্যবহার করে, যা ব্যাপকভাবে ব্যবহৃত হয় কারণ এতে শুধু ওজন, উচ্চতা, বয়স ও লিঙ্গ লাগে। পুরুষদের সূত্রটি হলো 10 গুণ কিলোগ্রামে ওজন, যোগ 6.25 গুণ সেন্টিমিটারে উচ্চতা, বিয়োগ 5 গুণ বছর হিসেবে বয়স, যোগ 5। নারীদের ক্ষেত্রে একই হিসাবের শেষে যোগ 5-এর বদলে বিয়োগ 161 হয়। একটি উদাহরণ দেখা যাক: 30 বছর বয়সী একজন পুরুষ, ওজন 80 কিলোগ্রাম, উচ্চতা 180 সেন্টিমিটার। তাঁর বিএমআর হলো 800 যোগ 1,125 বিয়োগ 150 যোগ 5, অর্থাৎ দিনে 1,780 ক্যালোরি। 30 বছর বয়সী একজন নারী, ওজন 65 কিলোগ্রাম, উচ্চতা 165 সেন্টিমিটার, তাঁর বিএমআর হলো 650 যোগ 1,031.25 বিয়োগ 150 বিয়োগ 161, অর্থাৎ দিনে প্রায় 1,370 ক্যালোরি। এই পার্থক্য দেখায় লিঙ্গ, ওজন ও উচ্চতা কেন গুরুত্বপূর্ণ: বড় শরীর ও বেশি পেশি ধরে রাখতে বেশি শক্তি লাগে। বিএমআর দৈনিক মোট ক্যালোরির চাহিদার সমান নয়। মোট চাহিদা পেতে বিএমআরকে কার্যকলাপের গুণক দিয়ে গুণ করুন: বসে থাকা জীবনে 1.2, হালকা কাজে 1.375, মাঝারি কাজে 1.55, সক্রিয় জীবনে 1.725 এবং খুব সক্রিয় জীবনে 1.9। 1,780-এর উদাহরণে মাঝারি কাজে মোট চাহিদা হয় দিনে প্রায় 2,759 ক্যালোরি। ব্যবহারিক পরামর্শ হলো বিএমআরকে সর্বনিম্ন সীমা হিসেবে নিন, খাদ্যের লক্ষ্য হিসেবে নয়: দীর্ঘ সময় বিএমআরের অনেক নিচে খেলে ক্লান্তি, ঠান্ডা লাগা ও ক্ষুধা দেখা দিতে পারে, আর এতে প্রায়ই উল্টো ফল হয়, তাই ওজন কমানোর লক্ষ্য সাধারণত বিএমআর ও মোট চাহিদার মাঝখানে ঠিক করা হয়, বিএমআরের নিচে নয়। ওজন কয়েক কিলোগ্রাম বদলালে বিএমআর আবার দেখুন, কারণ মূল হিসাবটিও তার সঙ্গে বদলায়। এই গাইডটি সাধারণ তথ্য, চিকিৎসা পরামর্শ নয়; খাদ্যে বড় পরিবর্তনের আগে চিকিৎসক বা নিবন্ধিত পুষ্টিবিদের কাছে যান।`,
-  },
   'pace-speed-calculator': {
     guideEn: `A pace and speed calculator converts between the two ways runners describe how fast they are going, and works out finish times for any distance. Pace is time per unit of distance, usually minutes per kilometre or minutes per mile, while speed is distance per unit of time, usually kilometres per hour. You enter any two of distance, time, and pace, and the tool works out the third. Pace equals time divided by distance, and speed equals distance divided by time. For a worked example, running 5 kilometres in 30 minutes gives a pace of 30 divided by 5, which is 6 minutes per kilometre, and a speed of 5 divided by 0.5 hours, which is 10 kilometres per hour. Running 10 kilometres in 50 minutes gives a pace of 5 minutes per kilometre and a speed of 12 kilometres per hour. To convert pace to speed, divide 60 by the pace in minutes per kilometre: 60 divided by 6 is 10 kilometres per hour, and 60 divided by 5 is 12. The tool can also predict a finish time: at a steady 6 minutes per kilometre, a 10-kilometre run takes 60 minutes, and a half marathon of 21.1 kilometres takes about 2 hours 7 minutes. Splits help you check progress during a race: at 5 minutes per kilometre you should pass 5 kilometres in 25 minutes and 10 kilometres in 50 minutes, so a watch check at each marker tells you whether you are ahead or behind. A practical tip is to train most runs slightly slower than race pace and to aim for even or slightly faster second halves, because starting too fast is the most common reason runners fade in the later kilometres. Record your pace on the same flat route when comparing weeks, since hills and heat change pace without any change in fitness. This guide is general information, not medical advice; build distance gradually, and see a doctor if running causes chest pain, dizziness, or joint pain that does not settle.`,
     guideBn: `গতি ও গতিবেগের ক্যালকুলেটর দৌড়বিদরা কত দ্রুত যাচ্ছেন তা বোঝানোর দুটি উপায়ের মধ্যে রূপান্তর করে এবং যেকোনো দূরত্বের শেষ করার সময় বের করে দেয়। পেস হলো প্রতি একক দূরত্বে সময়, সাধারণত প্রতি কিলোমিটারে মিনিট বা প্রতি মাইলে মিনিট, আর গতি হলো প্রতি একক সময়ে দূরত্ব, সাধারণত ঘণ্টায় কিলোমিটার। আপনি দূরত্ব, সময় ও পেসের মধ্যে যেকোনো দুটি লিখলে টুলটি তৃতীয়টি বের করে দেয়। পেস সমান সময় ভাগ দূরত্ব, আর গতি সমান দূরত্ব ভাগ সময়। একটি উদাহরণ দেখা যাক: 30 মিনিটে 5 কিলোমিটার দৌড়ালে পেস হয় 30 ভাগ 5, অর্থাৎ প্রতি কিলোমিটারে 6 মিনিট, আর গতি হয় 5 ভাগ 0.5 ঘণ্টা, অর্থাৎ ঘণ্টায় 10 কিলোমিটার। 50 মিনিটে 10 কিলোমিটার দৌড়ালে পেস হয় প্রতি কিলোমিটারে 5 মিনিট এবং গতি হয় ঘণ্টায় 12 কিলোমিটার। পেস থেকে গতি বের করতে 60-কে প্রতি কিলোমিটারে মিনিটের পেস দিয়ে ভাগ করুন: 60 ভাগ 6 সমান ঘণ্টায় 10 কিলোমিটার, আর 60 ভাগ 5 সমান 12। এই টুলটি শেষ করার সময়ের পূর্বাভাসও দিতে পারে: প্রতি কিলোমিটারে 6 মিনিটের স্থির গতিতে 10 কিলোমিটার দৌড়ে লাগে 60 মিনিট, আর 21.1 কিলোমিটারের হাফ ম্যারাথনে লাগে প্রায় 2 ঘণ্টা 7 মিনিট। স্প্লিট বা ভাগের সময় দৌড়ের মধ্যে অগ্রগতি যাচাই করতে সাহায্য করে: প্রতি কিলোমিটারে 5 মিনিট গতিতে 5 কিলোমিটার পার হতে লাগবে 25 মিনিট এবং 10 কিলোমিটার পার হতে 50 মিনিট, তাই প্রতিটি চিহ্নে ঘড়ি দেখলে বোঝা যায় আপনি এগিয়ে আছেন নাকি পিছিয়ে। ব্যবহারিক পরামর্শ হলো বেশিরভাগ প্রশিক্ষণ দৌড় প্রতিযোগিতার গতির চেয়ে সামান্য ধীরে দিন, আর দ্বিতীয়ার্ধে সমান বা সামান্য দ্রুত গতির লক্ষ্য রাখুন, কারণ শুরুতে বেশি দ্রুত দৌড়ানোই পরের কিলোমিটারগুলোতে ক্লান্ত হয়ে পড়ার সবচেয়ে সাধারণ কারণ। সপ্তাহের তুলনা করার সময় একই সমতল পথে আপনার পেস লিখে রাখুন, কারণ পাহাড় ও গরম ফিটনেস না বদলেও পেস বদলে দেয়। এই গাইডটি সাধারণ তথ্য, চিকিৎসা পরামর্শ নয়; দূরত্ব ধীরে ধীরে বাড়ান, আর দৌড়ে বুকে ব্যথা, মাথা ঘোরা বা জয়েন্টের ব্যথা হলে চিকিৎসকের কাছে যান। প্রতিযোগিতার আগে নতুন জুতা পরে দৌড়াবেন না, আগের জুতাই ব্যবহার করুন।`,
-  },
-  'tip-calculator': {
-    guideEn: `A tip calculator helps you work out how much extra to leave for good service, and what the total bill comes to, so you never have to do the maths at the table. You enter the bill amount, choose a tip percentage, and the tool shows the tip, the total, and each person's share when the bill is split. The maths is simple: tip equals bill amount times tip percentage divided by 100, and total equals bill plus tip. For a worked example, take a bill of 2,000 taka with a 10 percent tip. The tip is 2,000 times 10 divided by 100, which is 200 taka, and the total is 2,200 taka. At 15 percent the tip is 300 taka and the total is 2,300 taka; at 20 percent the tip is 400 taka and the total is 2,400 taka. Split between four people at 10 percent, each pays 550 taka. Tip percentages vary by place and by service. In many restaurants 10 percent is a common starting point, 15 percent is generous for good service, and 20 percent is for service clearly above the usual standard. In Bangladesh tipping is less fixed than in some other countries, so the percentage can reflect the place and the service, and small tips for porters, delivery riders and drivers are common. Decide the percentage before the bill arrives, so the choice reflects the service rather than the size of the bill. When a service charge is already added, check the receipt before adding a tip, because that charge may already cover it, and adding another full tip would mean paying twice for the same service. If the service charge is small, some people add a little extra on top, while others treat the charge as the tip itself. The tool also helps with an uneven split, for example when one person ordered a much more expensive dish: enter each person's share separately, apply the same percentage to each, and everyone pays a fair amount rather than an equal split that favours one person. When paying cash, round the final total to a nearby round number so the change is easy, and keep the receipt until the payment is settled. This tool only does the arithmetic; it does not tell you what percentage is right, because that depends on local custom and the service you received.`,
-    guideBn: `টিপ ক্যালকুলেটর আপনাকে হিসাব করতে সাহায্য করে ভালো সেবার জন্য বাড়তি কত টাকা দেবেন এবং মোট বিল কত হবে, যাতে টেবিলে বসে হিসাব করতে না হয়। আপনি বিলের পরিমাণ লিখবেন, টিপের শতাংশ বেছে নেবেন, আর চাইলে বিলটি কয়েকজনের মধ্যে ভাগ করে দেবেন, আর টুলটি দেখাবে টিপের টাকা, মোট কত দিতে হবে এবং প্রত্যেকে কত দেবে। হিসাবটি সহজ: টিপ সমান বিলের পরিমাণ গুণ টিপের শতাংশ ভাগ 100, আর মোট সমান বিল যোগ টিপ। একটি উদাহরণ দেখা যাক: 2,000 টাকার বিলে 10 শতাংশ টিপ দিলে টিপ হয় 2,000 গুণ 10 ভাগ 100, অর্থাৎ 200 টাকা, আর মোট হয় 2,200 টাকা। 15 শতাংশ টিপ দিলে টিপ হয় 300 টাকা আর মোট হয় 2,300 টাকা, আর 20 শতাংশ দিলে টিপ হয় 400 টাকা আর মোট হয় 2,400 টাকা। চারজনের মধ্যে ভাগ করলে 10 শতাংশের ক্ষেত্রে প্রত্যেকের ভাগ হয় 550 টাকা, যা 2,200 ভাগ 4। টিপের শতাংশ জায়গা ও সেবা অনুযায়ী বদলায়। অনেক রেস্তোরাঁয় 10 শতাংশ একটি সাধারণ শুরু, ভালো সেবার জন্য 15 শতাংশ উদার টিপ, আর 20 শতাংশ সেই সেবার জন্য যা সাধারণ মানের চেয়ে স্পষ্টভাবে ভালো। বাংলাদেশে টিপ দেওয়ার নিয়ম কিছু দেশের মতো নির্দিষ্ট নয়, তাই আপনি যে শতাংশ বেছে নেবেন তা জায়গা ও সেবার মানের সঙ্গে মিলিয়ে নিতে পারেন, আর কুলি, ডেলিভারি রাইডার ও চালককে অল্প টিপ দেওয়াও সাধারণ ব্যাপার। একটি ভালো অভ্যাস হলো বিল আসার আগেই শতাংশ ঠিক করা, যাতে সিদ্ধান্তটি সেবার ওপর নির্ভর করে, বিলের আকারের ওপর নয়। বিলে আগে থেকে সার্ভিস চার্জ যোগ করা থাকলে টিপ দেওয়ার আগে রসিদ দেখে নিন, কারণ সেই চার্জের মধ্যে টিপ ধরা থাকতে পারে, আর আবার পুরো টিপ দিলে একই সেবার জন্য দুবার টাকা দেওয়া হবে। সার্ভিস চার্জ অল্প হলে কেউ কেউ ওপরে সামান্য বাড়তি দেন, আবার কেউ কেউ চার্জটিকেই টিপ হিসেবে ধরেন। এই টুলটি তখনও সাহায্য করে যখন বিল সমান ভাগে ভাগ করা যায় না, যেমন একজন অনেক দামি খাবার নিলে। প্রত্যেকের নিজের অংশ আলাদাভাবে লিখুন, সবার ওপর একই শতাংশ প্রয়োগ করুন, আর প্রত্যেকে ন্যায্য পরিমাণ দেবে, সমান ভাগের বদলে যেখানে একজন সুবিধা পায়। ব্যবহারিক পরামর্শ হলো নগদে দিলে শেষের মোট অঙ্কটি কাছাকাছি গোল সংখ্যায় নিয়ে নিন, যাতে ভাংতি সহজ হয়, আর টাকা দেওয়া শেষ না হওয়া পর্যন্ত রসিদটি রেখে দিন। এই টুলটি শুধু হিসাব করে; কোন শতাংশ ঠিক তা এটি বলে না, কারণ তা নির্ভর করে স্থানীয় রীতি ও আপনি যে সেবা পেয়েছেন তার ওপর।`,
-  },
-  'bkash-nagad-calculator': {
-    guideEn: `A cash out calculator for mobile money services such as bKash and Nagad shows the cost of withdrawing cash from your account through an agent. The charge depends on the amount and the charge rate in force at the time, and the rate can change, so this tool never fixes a rate in place: you enter the current rate yourself, from the rate the service shows in its app or at the agent point. The maths is simple: charge equals amount times rate divided by 100, and the total cost of the withdrawal is the amount plus the charge. For a worked example, suppose you want to cash out 5,000 taka and the rate you enter is 1.5 percent, as an example only. The charge is 5,000 times 1.5 divided by 100, which is 75 taka, so the total value is 5,075 taka, or you receive 4,925 taka if the charge is taken from the amount. At the same example rate, a 20,000 taka withdrawal costs 300 taka. The example rate is only an illustration: always check the current rate in the app or with the agent before you calculate, because the rate may be different for different account types, and some services charge less for sending money to another account than for cashing out. Sending money to another personal account and cashing out at an agent are different transactions with different charges, so enter the rate for the transaction you are actually doing. A second use of the tool is to plan backwards: enter the cash you need in hand, and work out how much must leave your account once the charge is added. If you need 10,000 taka in hand and the rate is 1.5 percent, the amount to withdraw is 10,000 divided by (1 minus 0.015), which is about 10,152 taka, and the charge is about 152 taka. A practical tip is to compare the cash out charge with the cost of paying directly from the account where the shop or service accepts it, because paying directly often costs less than withdrawing cash first. Keep the transaction message and the agent receipt until the cash is counted, and count the cash at the agent point before leaving. This tool only estimates the charge from the rate you enter; it does not store any rate and it never moves money.`,
-    guideBn: `মোবাইল ব্যাংকিংয়ের ক্যাশ আউট ক্যালকুলেটর দেখায় এজেন্টের মাধ্যমে অ্যাকাউন্ট থেকে নগদ টাকা তুলতে কত চার্জ লাগে। চার্জ নির্ভর করে আপনি কত টাকা তুলছেন এবং তখন কার্যকর চার্জের হারের ওপর, আর হারটি বদলাতে পারে, তাই এই টুলটি কোনো হার নির্দিষ্ট করে রাখে না: আপনি নিজেই বর্তমান হারটি লিখবেন, অ্যাপে বা এজেন্ট পয়েন্টে সেবাটি যে হার দেখায় তা থেকে, আর টুলটি আপনার টাকার ওপর সেই হার প্রয়োগ করবে। হিসাবটি সহজ: চার্জ সমান টাকার পরিমাণ গুণ হার ভাগ 100, আর তোলার মোট খরচ হলো টাকার পরিমাণ যোগ চার্জ। একটি উদাহরণ দেখা যাক: ধরুন আপনি 5,000 টাকা ক্যাশ আউট করতে চান এবং আপনি যে হারটি লিখলেন তা 1.5 শতাংশ, শুধু উদাহরণ হিসেবে। চার্জ হবে 5,000 গুণ 1.5 ভাগ 100, অর্থাৎ 75 টাকা, তাই মোট মূল্য দাঁড়ায় 5,075 টাকা, অথবা চার্জ টাকা থেকে কাটা হলে আপনি হাতে পাবেন 4,925 টাকা। একই উদাহরণের হারে 20,000 টাকা তুললে চার্জ হবে 300 টাকা। উদাহরণের হারটি শুধু বোঝানোর জন্য: হিসাব করার আগে অ্যাপে বা এজেন্টের কাছে বর্তমান হারটি যাচাই করে নিন, কারণ বিভিন্ন ধরনের অ্যাকাউন্টে হার আলাদা হতে পারে, আর ক্যাশ আউটের চেয়ে অন্য অ্যাকাউন্টে টাকা পাঠাতে খরচ কম হতে পারে। অন্য ব্যক্তিগত অ্যাকাউন্টে টাকা পাঠানো আর এজেন্টের কাছে ক্যাশ আউট করা আলাদা লেনদেন, চার্জও আলাদা, তাই আপনি আসলে যে লেনদেন করছেন তার হারটিই লিখুন। এই টুলের দ্বিতীয় ব্যবহার হলো উল্টোভাবে পরিকল্পনা করা: হাতে কত নগদ দরকার তা লিখুন, আর চার্জ যোগ করে অ্যাকাউন্ট থেকে কত টাকা যাবে তা বের করুন। হাতে 10,000 টাকা দরকার হলে আর হার 1.5 শতাংশ হলে তুলতে হবে 10,000 ভাগ (1 বিয়োগ 0.015), অর্থাৎ প্রায় 10,152 টাকা, আর চার্জ হবে প্রায় 152 টাকা। ব্যবহারিক পরামর্শ হলো ক্যাশ আউটের চার্জের সঙ্গে তুলনা করুন যেখানে দোকান বা সেবা সরাসরি অ্যাকাউন্ট থেকে টাকা নেয়, সেখানে সরাসরি দেওয়া যায় কি না, কারণ সরাসরি দিলে প্রায়ই খরচ কম হয়, আগে নগদ তুলে দেওয়ার চেয়ে। লেনদেনের বার্তা ও এজেন্টের রসিদটি টাকা গোনা শেষ না হওয়া পর্যন্ত রেখে দিন, আর এজেন্ট পয়েন্ট ছাড়ার আগে টাকাটি গুনে নিন। এই টুলটি শুধু আপনার লেখা হার থেকে চার্জের অনুমান দেয়; এটি কোনো হার সংরক্ষণ করে না এবং এটি দিয়ে টাকা পাঠানো যায় না।`,
   },
   'ovulation-calculator': {
     guideEn: `An ovulation calculator estimates the days in a menstrual cycle when ovulation is most likely, using the dates you enter. Ovulation is the release of an egg from the ovary, and it usually happens about 14 days before the next period starts, not a fixed number of days after the last period began. The tool needs two inputs: the first day of your last period and the usual length of your cycle, in days. For a worked example, take a regular cycle of 28 days, with the last period starting on 1 March. The next period is expected on 29 March, and ovulation is estimated at about 14 days before that, on 15 March. The fertile window is the days when pregnancy is most likely: the five days before ovulation plus the day of ovulation, because sperm can survive in the body for up to five days while the egg survives for about a day. In the example the fertile window runs from about 10 March to 15 March. For a longer cycle of 32 days, ovulation moves later: with a period starting on 1 March, the next period is expected on 2 April, ovulation is estimated at about 19 March, and the fertile window runs from about 14 to 19 March. For a shorter cycle of 24 days, ovulation is estimated at about 11 March, with the fertile window from about 6 to 11 March. The key point is that the estimate counts backwards from the next period, so it depends on the cycle length you enter. Cycles vary from month to month, even for the same person, and stress, illness, travel and age can all shift the timing, so the result is an estimate, not a certainty. Track three or more cycles and enter your average cycle length, rather than a single cycle, because the average gives a steadier estimate. Some people also watch body signs such as changes in cervical mucus and a small rise in morning temperature, but this tool uses dates only. This guide is general information, not medical advice. Do not rely on this estimate as a method of contraception, because ovulation can happen earlier or later than predicted. If your cycles are very irregular, very short, or very long, or if you have been trying to conceive for a year without success, see a doctor.`,
