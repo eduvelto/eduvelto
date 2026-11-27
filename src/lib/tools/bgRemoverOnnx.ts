@@ -2,7 +2,12 @@
 //
 // Loader + pre/post-processing ONLY. onnxruntime-web loads via dynamic
 // import() inside loadBgModel (never a static import, never in the main
-// bundle). The model file itself is a HOSTED ASSET, never bundled and
+// bundle). The import uses the 'onnxruntime-web/wasm' subpath — the
+// wasm-backend-only bundle — so the build emits the 14.8 MB plain
+// threaded wasm, not the 29.5 MB jsep wasm the full 'onnxruntime-web'
+// entry pulls in. Cloudflare Pages rejects any single site asset over
+// 25 MiB, and the jsep wasm failed the deploy twice (27 Nov 2026);
+// scripts/check-dist-size.mjs guards dist/ against that limit.
 // never committed as a binary — served from /models/<name>.onnx.
 //
 // MODEL DECISION — FLAGGED FOR OWNER CONFIRMATION (spec-07):
@@ -100,11 +105,19 @@ export async function loadBgModel(onProgress: (p: ModelProgress) => void): Promi
   } finally {
     clearTimeout(timeout);
   }
-  // onnxruntime-web loads lazily here only; its .wasm files resolve
-  // relative to the bundled chunk by default. If the deploy serves the
-  // wasm files from a different path, set ort.env.wasm.wasmPaths first
-  // (see the deploy checklist in the landing report).
-  const ort = await import('onnxruntime-web');
+  // onnxruntime-web loads lazily here only, via the '/wasm' subpath —
+  // the wasm-backend-only bundle (27 Nov 2026, Pages 25 MiB fix). The
+  // default 'onnxruntime-web' entry is the full bundle (wasm + WebGL +
+  // WebGPU) whose wasm backend loads the 29.5 MB jsep wasm
+  // (ort-wasm-simd-threaded.jsep.wasm); Vite emits that file into
+  // dist/, and Cloudflare Pages rejects any single asset over 25 MiB,
+  // which failed the deploy twice. The '/wasm' subpath ships the same
+  // wasm backend with the plain threaded wasm (14.8 MB, under the
+  // limit), and the loader below still uses executionProviders
+  // ['wasm'] — no provider switch. The wasm resolves relative to the
+  // bundled chunk by default; if the deploy ever serves it from a
+  // different path, set ort.env.wasm.wasmPaths first.
+  const ort = await import('onnxruntime-web/wasm');
   try {
     cachedSession = await ort.InferenceSession.create(modelBytes, {
       executionProviders: ['wasm'],
@@ -185,7 +198,10 @@ export async function removeBackgroundAI(
   if (!cachedSession) {
     throw new Error('The AI model is not loaded yet — load it first');
   }
-  const ort = await import('onnxruntime-web');
+  // Same '/wasm' subpath as loadBgModel (see the note there): the
+  // wasm-backend-only bundle, so only the 14.8 MB plain threaded wasm
+  // ships in dist/ — never the 29.5 MB jsep wasm.
+  const ort = await import('onnxruntime-web/wasm');
   const session = cachedSession as Awaited<ReturnType<typeof ort.InferenceSession.create>>;
   const size = BG_ONNX_CONFIG.inputSize;
   const small = document.createElement('canvas');
