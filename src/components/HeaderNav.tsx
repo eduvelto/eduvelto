@@ -219,7 +219,6 @@ const MENUS: Menu[] = [
     icon: <BookIcon />,
     items: [
       { to: '/class', bn: 'শ্রেণি বেছে নিন', en: 'Choose Your Class' },
-      { to: '/class/class-1-5', bn: 'শ্রেণি ১–৫', en: 'Class 1–5' },
       { to: '/class/class-6-8', bn: 'শ্রেণি ৬–৮', en: 'Class 6–8' },
       { to: '/class/class-9-10', bn: 'শ্রেণি ৯–১০', en: 'Class 9–10' },
       { to: '/class/hsc', bn: 'HSC', en: 'HSC' },

@@ -29,11 +29,11 @@ import {
 } from '../questionPaper';
 
 describe('verified pool (MVP content)', () => {
-  it('holds the 35 owner-verified BCS English questions + 2,318 verified Academic MCQ (Classes 3–12, thirty-five subjects) + 359 reviewed CQ (Classes 9–12)', () => {
-    expect(QPG_VERIFIED_POOL).toHaveLength(2712);
-    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(2712);
+  it('holds the 35 owner-verified BCS English questions + 1,841 verified Academic MCQ (Classes 6–12, thirty-five subjects) + 359 reviewed CQ (Classes 9–12)', () => {
+    expect(QPG_VERIFIED_POOL).toHaveLength(2235);
+    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(2235);
     expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toHaveLength(35);
-    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-') && q.type === 'mcq')).toHaveLength(2318);
+    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-') && q.type === 'mcq')).toHaveLength(1841);
     expect(QPG_VERIFIED_POOL.filter((q) => q.type === 'cq')).toHaveLength(359);
   });
 
@@ -65,7 +65,7 @@ describe('verified pool (MVP content)', () => {
     expect(chapter.topics.reduce((a, t) => a + t.verifiedCount, 0)).toBe(35);
   });
 
-  it('Academic chapters exist for Classes 3–12 in all thirty-five subjects; other class/subjects stay empty', () => {
+  it('Academic chapters exist for Classes 6–12 in all thirty-five subjects; other class/subjects stay empty', () => {
     // Class 9 has no single 'english' subject (it is English 1st/2nd
     // Paper) — that stays honestly empty, as does Class 11 'math'
     // (there is no plain Math at HSC level — higher-math is the real
@@ -77,21 +77,13 @@ describe('verified pool (MVP content)', () => {
     expect(qpgChaptersFor('madrasah', 'dakhil', 'arabic')).toEqual([]);
     expect(qpgChaptersFor('general', 'honours', 'english')).toHaveLength(1);
     // Academic (26 Nov 2026): one chapter per NCTB unit / lesson with verified questions.
-    const c3eng = qpgChaptersFor('general', 'class-3', 'english');
-    expect(c3eng).toHaveLength(7);
-    expect(c3eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
-    const c5eng = qpgChaptersFor('general', 'class-5', 'english');
-    expect(c5eng).toHaveLength(20);
-    expect(c5eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
-    const c4eng = qpgChaptersFor('general', 'class-4', 'english');
-    expect(c4eng).toHaveLength(18);
-    expect(c4eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(27);
-    const c3ban = qpgChaptersFor('general', 'class-3', 'bangla');
-    expect(c3ban).toHaveLength(29);
-    expect(c3ban.reduce((a, c) => a + c.verifiedCount, 0)).toBe(29);
-    const c5mat = qpgChaptersFor('general', 'class-5', 'math');
-    expect(c5mat).toHaveLength(10);
-    expect(c5mat.reduce((a, c) => a + c.verifiedCount, 0)).toBe(30);
+    // Classes 3–5 were removed from the platform 27 Nov 2026
+    // (owner order) — their chapters are honestly empty now.
+    expect(qpgChaptersFor('general', 'class-3', 'english')).toEqual([]);
+    expect(qpgChaptersFor('general', 'class-4', 'english')).toEqual([]);
+    expect(qpgChaptersFor('general', 'class-5', 'english')).toEqual([]);
+    expect(qpgChaptersFor('general', 'class-3', 'bangla')).toEqual([]);
+    expect(qpgChaptersFor('general', 'class-5', 'math')).toEqual([]);
     // Class 6 (26 Nov 2026): eight Math chapters, and the new depth
     // subjects resolve too.
     const c6mat = qpgChaptersFor('general', 'class-6', 'math');
@@ -127,9 +119,13 @@ describe('verified pool (MVP content)', () => {
     const c8scidepth = qpgChaptersFor('general', 'class-8', 'science-depth');
     expect(c8scidepth).toHaveLength(14);
     expect(c8scidepth.reduce((a, c) => a + c.verifiedCount, 0)).toBe(34);
+    // Class 6 English: 28 lessons, 28 verified questions.
+    const c6eng = qpgChaptersFor('general', 'class-6', 'english');
+    expect(c6eng).toHaveLength(28);
+    expect(c6eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
     // Chapters are filtered by subject — a Math pick never shows English units.
-    for (const c of c5mat) expect(c.subjectId).toBe('math');
-    for (const c of c3eng) expect(c.subjectId).toBe('english');
+    for (const c of c6mat) expect(c.subjectId).toBe('math');
+    for (const c of c6eng) expect(c.subjectId).toBe('english');
     // Class 9 is live now (26 Nov 2026) — 557 questions, 323 chapters.
     // CQ (26 Nov 2026): Math gains 1 CQ-only chapter (15 total, 12 CQ
     // across 11 merged + 1 CQ-only); Bangla 1st's 12 CQ all merge into
@@ -331,12 +327,14 @@ describe('paper setup — free text, Pro layout', () => {
     expect(QPG_PRO_PER_PAPER_BDT).toBe(49);
     expect(QPG_PRO_MONTHLY_BDT).toBe(199);
     // No single all-in-one yearly tier anymore — the table IS the pricing.
-    expect(QPG_PRICE_TIERS).toHaveLength(18);
-    expect(QPG_CHEAPEST_ANNUAL_BDT).toBe(150);
-    expect(QPG_PRO_PLAN_AMOUNTS['class-3']).toBe(150);
+    // Classes 3–5 tiers were removed 27 Nov 2026 (owner order) —
+    // 8 tiers remain, cheapest annual is Class 6–8 at ৳300.
+    expect(QPG_PRICE_TIERS).toHaveLength(8);
+    expect(QPG_CHEAPEST_ANNUAL_BDT).toBe(300);
+    expect(QPG_PRO_PLAN_AMOUNTS['class-6-8']).toBe(300);
     expect(QPG_PRO_PLAN_AMOUNTS['class-9-10']).toBe(450);
-    expect(QPG_PRO_PLAN_AMOUNTS['bundle-3-10']).toBe(1200);
-    expect(QPG_PRO_PLAN_AMOUNTS['coaching-3-12']).toBe(1500);
+    expect(QPG_PRO_PLAN_AMOUNTS['bundle-6-10']).toBe(1050);
+    expect(QPG_PRO_PLAN_AMOUNTS['coaching-6-12']).toBe(1350);
   });
 
   it('every tier is exactly 30% of the market price (70% off) — the owner table, pair by pair', () => {
@@ -346,24 +344,14 @@ describe('paper setup — free text, Pro layout', () => {
     // while nearest ৳10 would give 70). The table value ৳75 stands;
     // the rounding wording gap is flagged in the MVP report.
     const expected: Record<string, [number, number]> = {
-      'class-3': [150, 499],
-      'class-4': [180, 599],
-      'class-5': [210, 699],
       'class-6-8': [300, 999],
       'class-9-10': [450, 1499],
       'class-11-12': [390, 1299],
       'per-subject': [75, 249],
       'subject-teacher': [210, 699],
-      'bundle-3-5': [450, 1499],
       'bundle-6-8': [750, 2499],
-      'bundle-3-8': [900, 2999],
       'bundle-6-10': [1050, 3499],
-      'bundle-3-10': [1200, 3999],
-      'coaching-5-8': [810, 2699],
-      'coaching-5-10': [1110, 3699],
-      'coaching-3-10': [1200, 3999],
       'coaching-6-12': [1350, 4499],
-      'coaching-3-12': [1500, 4999],
     };
     expect(QPG_PRICE_TIERS).toHaveLength(Object.keys(expected).length);
     for (const t of QPG_PRICE_TIERS) {
@@ -379,9 +367,7 @@ describe('paper setup — free text, Pro layout', () => {
 });
 
 describe('level-aware step 2 (pattern 3, sprint 26 Nov 2026)', () => {
-  it('primary is Class 3–5 + Ebtedayi, secondary is 6–12 + Dakhil/Alim, Honours is tertiary', () => {
-    expect(qpgLevelFor('general', 'class-3')).toBe('primary');
-    expect(qpgLevelFor('general', 'class-5')).toBe('primary');
+  it('primary is Ebtedayi only (Classes 3–5 removed 27 Nov 2026), secondary is 6–12 + Dakhil/Alim, Honours is tertiary', () => {
     expect(qpgLevelFor('madrasah', 'ebtedayi')).toBe('primary');
     expect(qpgLevelFor('general', 'class-6')).toBe('secondary');
     expect(qpgLevelFor('general', 'class-12')).toBe('secondary');

@@ -1,4 +1,4 @@
-// Eduvelto — combined verified Academic pool (Classes 3–12, thirty-five subjects).
+// Eduvelto — combined verified Academic pool (Classes 6–12, thirty-five subjects).
 //
 // The SINGLE verified source for both the Question Maker (QPG) and the
 // Education Hub chapter practice: a question verified once appears in
@@ -103,7 +103,7 @@ import { PUBLIC_ACADEMIC_LOGIC_QUESTIONS } from './publicAcademicLogic';
 import { PUBLIC_ACADEMIC_PSYCHOLOGY_QUESTIONS } from './publicAcademicPsychology';
 import { PUBLIC_ACADEMIC_STATISTICS_QUESTIONS } from './publicAcademicStatistics';
 
-export type PublicAcademicClassId = 'class-3' | 'class-4' | 'class-5' | 'class-6' | 'class-7' | 'class-8' | 'class-9' | 'class-10' | 'class-11' | 'class-12';
+export type PublicAcademicClassId = 'class-6' | 'class-7' | 'class-8' | 'class-9' | 'class-10' | 'class-11' | 'class-12';
 export type PublicAcademicSubjectId =
   | 'english'
   | 'bangla'
@@ -145,7 +145,7 @@ export interface PublicAcademicQuestion {
   id: string;
   classId: PublicAcademicClassId;
   subjectId: PublicAcademicSubjectId;
-  /** NCTB chapter slug, e.g. 'acad-class-3-eng-unit-1' or 'acad-class-3-ban-lesson-1'. One chapter per NCTB unit / lesson. */
+  /** NCTB chapter slug, e.g. 'acad-class-6-eng-unit-1' or 'acad-class-6-ban-lesson-1'. One chapter per NCTB unit / lesson. */
   chapterId: string;
   /** NCTB chapter name, e.g. 'Unit 1: Greetings, ...' or 'পাঠ ১: আমাদের কথা'. */
   chapterName: string;

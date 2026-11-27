@@ -1,16 +1,18 @@
 // Eduvelto — class-wise navigation (stage 3: class-wise homepage + mobile app).
 //
 // The homepage's primary navigation is CLASS-WISE, not subject-wise: the
-// student picks their level first — Class 1–5, Class 6–8, Class 9–10, HSC,
+// student picks their level first — Class 6–8, Class 9–10, HSC,
 // Honours & Masters — and each level has its own dashboard showing ONLY
 // that level's content.
 //
 // HONESTY: the level definitions carry the LIVE mapping (educationType +
-// classLevel values) used to filter books/quizzes. Class 1–5 and Class 6–8
-// have NO books in the library (0), so their `educationType` is null and
-// their dashboards must show an honest "not ready yet" state — never fake
-// books, subjects, chapters or progress. Counts are always computed from
-// the live fetched books, never hard-coded.
+// classLevel values) used to filter books/quizzes. Class 6–8 has NO books
+// in the library (0), so its `educationType` is null and its dashboard
+// must show an honest "not ready yet" state — never fake books, subjects,
+// chapters or progress. Counts are always computed from the live fetched
+// books, never hard-coded.
+// (Classes 1–5 were removed from the platform 27 Nov 2026, owner order —
+// see git history. The green #15803D accent belonged to that level.)
 // Class accent colours (owner's dream-design reference, 21 Nov 12:21):
 // white text on each accent passes WCAG AA normal (measured 21 Nov 2026):
 // green #15803D 5.02:1, blue #1D4ED8 6.70:1, purple #7E22CE 6.98:1,
@@ -45,18 +47,6 @@ export interface ClassLevelDef {
 }
 
 export const CLASS_LEVELS: ClassLevelDef[] = [
-  {
-    slug: 'class-1-5',
-    bn: 'শ্রেণি ১–৫',
-    en: 'Class 1–5',
-    tagBn: 'প্রাথমিক',
-    tagEn: 'Primary',
-    accent: '#15803D',
-    accentSoft: '#E7F4EB',
-    accentDeep: '#14532D',
-    educationType: null,
-    classLevels: [],
-  },
   {
     slug: 'class-6-8',
     bn: 'শ্রেণি ৬–৮',
@@ -159,10 +149,12 @@ export function subjectsForClass(books: Book[], def: ClassLevelDef): string[] {
 // ---------------------------------------------------------------------------
 // Class filter options (owner brief 21 Nov 13:20, BINDING): the Library and
 // Directory "শ্রেণি / Class" dropdowns must list EVERY class level —
-// including Class 1–5 and Class 6–8, which have zero books — never only
+// including Class 6–8, which has zero books — never only
 // the levels that happen to have content. A level with no books still
 // appears as an option; selecting it shows an honest empty/coming-soon
 // state, never fake books.
+//
+// (Classes 1–5 were removed from the platform 27 Nov 2026, owner order.)
 //
 // Option values: `level:<slug>` for the 7 class levels, the raw classLevel
 // string for any extra value found in live data that no level covers

@@ -90,23 +90,6 @@ export function ComingSoonHero({ def }: { def: ClassLevelDef }) {
           </span>
         ))}
       </div>
-      {def.slug === 'class-1-5' ? (
-        <p
-          style={{
-            margin: '16px auto 0',
-            maxWidth: 560,
-            color: '#57616A',
-            fontSize: 14,
-            lineHeight: 1.7,
-            background: 'rgba(255,255,255,0.65)',
-            border: '1px solid var(--line)',
-            borderRadius: 10,
-            padding: '10px 14px',
-          }}
-        >
-          {t({ bn: 'তৈরি হচ্ছে — প্রথম খসড়া অধ্যায়: Class 5 গণিত, অধ্যায় ৯: শতকরা — শিক্ষক যাচাইয়ের জন্য তৈরি হচ্ছে। এটি এখনো লাইব্রেরির বই নয়।', en: 'In preparation — first draft chapter: Class 5 Math, Chapter 9: Percentage — being prepared for teacher review. This is not a library book yet.' })}
-        </p>
-      ) : null}
       <div style={{ display: 'flex', gap: 10, marginTop: 20, flexWrap: 'wrap', justifyContent: 'center' }}>
         <LinkButton to="/library" variant="primary">
           {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}

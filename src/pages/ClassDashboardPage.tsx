@@ -344,7 +344,7 @@ export default function ClassDashboardPage() {
   const subjectStats: ClassSubjectStats[] | null = stats ? stats.subjects : null;
   const bookTotal = stats ? stats.bookCount : classBooks.length;
   // Audit m23 (24 Nov 2026): AdSlots mount on thin no-books pages
-  // (/class/class-1-5, /class/class-6-8) and sit on an empty page.
+  // (/class/class-6-8) and sit on an empty page.
   // Suppress both slots once the level is CONFIRMED to have zero
   // books — stats loaded (null = no stats doc, fall back to the
   // loaded book list) and the total is 0. While stats are still

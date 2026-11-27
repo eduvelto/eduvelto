@@ -209,13 +209,15 @@ describe('medical admission is blocked, not built', () => {
 
 describe('pricing truth (PRICING FINAL, owner 25 Nov 09:34)', () => {
   it('the table is the 70%-off table — our price is 30% of theirs, nearest ৳10', () => {
-    expect(QUESTION_MAKER_INITIAL_DATA.pricing).toHaveLength(18);
-    expect(QUESTION_MAKER_INITIAL_DATA.cheapestAnnualBdt).toBe(150);
+    // Classes 3–5 tiers were removed from the platform 27 Nov 2026
+    // (owner order): 8 tiers remain, cheapest annual ৳300.
+    expect(QUESTION_MAKER_INITIAL_DATA.pricing).toHaveLength(8);
+    expect(QUESTION_MAKER_INITIAL_DATA.cheapestAnnualBdt).toBe(300);
     expect(QUESTION_MAKER_INITIAL_DATA.priceClaimBn).toBe('সব প্রশ্নপত্রে ৭০% ছাড়ে');
     const ids = QUESTION_MAKER_INITIAL_DATA.pricing.map((t) => t.id);
-    expect(ids).toContain('class-3');
-    expect(ids).toContain('bundle-3-10');
-    expect(ids).toContain('coaching-3-12');
+    expect(ids).toContain('class-6-8');
+    expect(ids).toContain('bundle-6-10');
+    expect(ids).toContain('coaching-6-12');
     expect(ids).toContain('per-subject');
     // The old single-yearly tiers and the superseded 50% table must not exist.
     expect(QUESTION_MAKER_INITIAL_DATA.pricing.some((t) => t.eduveltoBdt === 999)).toBe(false);
@@ -292,7 +294,7 @@ describe('OMR checking is FREE for everyone (owner 25 Nov 09:43)', () => {
 describe('__INITIAL_DATA__ (Spark rule: pre-rendered, zero Firestore reads)', () => {
   it('publishes and reads back the build-time data', () => {
     const published = publishQuestionMakerInitialData();
-    expect(published.pricing).toHaveLength(18);
+    expect(published.pricing).toHaveLength(8);
     expect(getInitialData('question-maker')).toEqual(published);
     expect(getInitialData('pricing')).toEqual(published);
   });

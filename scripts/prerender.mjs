@@ -598,7 +598,6 @@ export function parseChapterRestDoc(doc) {
  *  always self-consistent — and they are exactly what the page's
  *  fallback (booksForClass over the live list) would compute. */
 export const CLASS_LEVEL_BOOK_FILTERS = [
-  { slug: 'class-1-5', educationType: null, classLevels: [] },
   { slug: 'class-6-8', educationType: null, classLevels: [] },
   { slug: 'class-9-10', educationType: 'SSC', classLevels: ['SSC'] },
   { slug: 'hsc', educationType: 'HSC', classLevels: ['HSC'] },

@@ -546,6 +546,9 @@ export default function App() {
         <Route path="admissions/national-university/:group/subjects/:subject/:topic" element={<NuTopicPage />} />
         <Route path="admissions/national-university/:tab" element={<NuHubPage />} />
         {/* Class-wise navigation (stage 3): Select Class → Class Dashboard → Tab → Subject → Book → Chapter. */}
+        {/* Classes 1–5 were removed from the platform 27 Nov 2026
+            (owner order) — old links redirect to the class index. */}
+        <Route path="class/class-1-5/*" element={<Navigate to="/class" replace />} />
         <Route path="class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
         <Route path="class/:slug/:tab" element={<ClassDashboardPage />} />
         <Route path="class/:slug" element={<ClassDashboardPage />} />

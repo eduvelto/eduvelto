@@ -36,7 +36,6 @@ export const CLASS_STATS_COLLECTION = 'leaderboardSnapshots';
 
 /** Dashboard levels, mirroring CLASS_LEVELS in src/lib/classLevels.ts. */
 export const CLASS_LEVEL_GROUPS = [
-  { slug: 'class-1-5', educationType: null, classLevels: [] },
   { slug: 'class-6-8', educationType: null, classLevels: [] },
   { slug: 'class-9-10', educationType: 'SSC', classLevels: ['SSC'] },
   { slug: 'hsc', educationType: 'HSC', classLevels: ['HSC'] },
@@ -271,7 +270,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   assert(hons.quizTitles.q2 === 'Book B', 'quizTitles strips written suffix');
   const ssc = stats.find((s) => s.slug === 'class-9-10');
   assert(ssc.bookCount === 1 && ssc.quizCount === 1, 'ssc 1/1');
-  const empty = stats.find((s) => s.slug === 'class-1-5');
+  const empty = stats.find((s) => s.slug === 'class-6-8');
   assert(empty.bookCount === 0 && empty.quizCount === 0 && empty.subjects.length === 0, 'empty level zeros');
   assert(classStatsDocId('honours-masters') === 'classStats-honours-masters', 'doc id');
   console.log('build-class-stats self-test: PASS (5 levels aggregated)');

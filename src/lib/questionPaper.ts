@@ -231,9 +231,6 @@ export interface QpgPriceTier {
 
 export const QPG_PRICE_TIERS: QpgPriceTier[] = [
   // Per-class annual, all subjects (1 yr).
-  { id: 'class-3', group: 'per-class', nameBn: '৩য় শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3 — annual, all subjects', eduveltoBdt: 150, marketBdt: 499 },
-  { id: 'class-4', group: 'per-class', nameBn: '৪র্থ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 4 — annual, all subjects', eduveltoBdt: 180, marketBdt: 599 },
-  { id: 'class-5', group: 'per-class', nameBn: '৫ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 5 — annual, all subjects', eduveltoBdt: 210, marketBdt: 699 },
   { id: 'class-6-8', group: 'per-class', nameBn: '৬ষ্ঠ / ৭ম / ৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 6 / 7 / 8 — annual, all subjects', eduveltoBdt: 300, marketBdt: 999 },
   { id: 'class-9-10', group: 'per-class', nameBn: '৯ম / ১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 9 / 10 — annual, all subjects', eduveltoBdt: 450, marketBdt: 1499 },
   { id: 'class-11-12', group: 'per-class', nameBn: '১১শ / ১২শ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 11 / 12 — annual, all subjects', eduveltoBdt: 390, marketBdt: 1299 },
@@ -241,17 +238,10 @@ export const QPG_PRICE_TIERS: QpgPriceTier[] = [
   { id: 'per-subject', group: 'per-subject', nameBn: 'প্রতি বিষয় (৬ষ্ঠ শ্রেণি+)', nameEn: 'Per subject (Class 6+)', eduveltoBdt: 75, marketBdt: 249 },
   { id: 'subject-teacher', group: 'per-subject', nameBn: 'বিষয়ভিত্তিক শিক্ষক (৬ষ্ঠ–১০ম শ্রেণি, প্রতি বিষয়)', nameEn: 'Subject-wise teacher (Class 6–10, per subject)', eduveltoBdt: 210, marketBdt: 699 },
   // Bundles, all subjects (1 yr).
-  { id: 'bundle-3-5', group: 'bundle', nameBn: '৩য়–৫ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3–5 bundle — annual, all subjects', eduveltoBdt: 450, marketBdt: 1499 },
   { id: 'bundle-6-8', group: 'bundle', nameBn: '৬ষ্ঠ–৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 6–8 bundle — annual, all subjects', eduveltoBdt: 750, marketBdt: 2499 },
-  { id: 'bundle-3-8', group: 'bundle', nameBn: '৩য়–৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3–8 bundle — annual, all subjects', eduveltoBdt: 900, marketBdt: 2999 },
   { id: 'bundle-6-10', group: 'bundle', nameBn: '৬ষ্ঠ–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 6–10 bundle — annual, all subjects', eduveltoBdt: 1050, marketBdt: 3499 },
-  { id: 'bundle-3-10', group: 'bundle', nameBn: '৩য়–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3–10 bundle — annual, all subjects', eduveltoBdt: 1200, marketBdt: 3999 },
   // Coaching / institution, all subjects (1 yr).
-  { id: 'coaching-5-8', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৫ম–৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 5–8 — annual, all subjects', eduveltoBdt: 810, marketBdt: 2699 },
-  { id: 'coaching-5-10', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৫ম–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 5–10 — annual, all subjects', eduveltoBdt: 1110, marketBdt: 3699 },
-  { id: 'coaching-3-10', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৩য়–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 3–10 — annual, all subjects', eduveltoBdt: 1200, marketBdt: 3999 },
   { id: 'coaching-6-12', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৬ষ্ঠ–১২শ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 6–12 — annual, all subjects', eduveltoBdt: 1350, marketBdt: 4499 },
-  { id: 'coaching-3-12', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৩য়–১২শ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 3–12 — annual, all subjects', eduveltoBdt: 1500, marketBdt: 4999 },
 ];
 
 /** Pro plan ids: per-paper + monthly + every annual tier id. */
@@ -269,7 +259,7 @@ export function qpgPriceTierById(id: string): QpgPriceTier | undefined {
 }
 
 /** Cheapest annual tier — used by the download dialog's Pro summary.
- *  (Per-subject ৳125 is not annual, so it is excluded.) */
+ *  (Per-subject ৳75 is not annual, so it is excluded.) */
 export const QPG_CHEAPEST_ANNUAL_BDT = Math.min(
   ...QPG_PRICE_TIERS.filter((t) => t.group !== 'per-subject').map((t) => t.eduveltoBdt),
 );
@@ -372,9 +362,6 @@ export const QPG_STREAMS: Array<{ id: QpgStream; nameBn: string; nameEn: string 
 ];
 
 export const QPG_GENERAL_CLASSES: QpgClassLevel[] = [
-  { id: 'class-3', nameBn: '৩য় শ্রেণি', nameEn: 'Class 3' },
-  { id: 'class-4', nameBn: '৪র্থ শ্রেণি', nameEn: 'Class 4' },
-  { id: 'class-5', nameBn: '৫ম শ্রেণি', nameEn: 'Class 5' },
   { id: 'class-6', nameBn: '৬ষ্ঠ শ্রেণি', nameEn: 'Class 6' },
   { id: 'class-7', nameBn: '৭ম শ্রেণি', nameEn: 'Class 7' },
   { id: 'class-8', nameBn: '৮ম শ্রেণি', nameEn: 'Class 8' },
@@ -395,14 +382,6 @@ export const QPG_MADRASAH_LEVELS: QpgClassLevel[] = [
  *  NAMES only — listing a subject never implies verified questions
  *  exist for it; chaptersFor() is the source of truth for coverage. */
 const GENERAL_SUBJECTS_BY_BAND: Record<string, QpgSubject[]> = {
-  '3-5': [
-    { id: 'bangla', nameBn: 'বাংলা', nameEn: 'Bangla' },
-    { id: 'english', nameBn: 'English', nameEn: 'English' },
-    { id: 'math', nameBn: 'গণিত', nameEn: 'Mathematics' },
-    { id: 'science', nameBn: 'বিজ্ঞান', nameEn: 'Science' },
-    { id: 'bgs', nameBn: 'বাংলাদেশ ও বিশ্বপরিচয়', nameEn: 'Bangladesh & Global Studies' },
-    { id: 'islam', nameBn: 'ইসলাম শিক্ষা', nameEn: 'Islam' },
-  ],
   '6-8': [
     { id: 'bangla', nameBn: 'বাংলা', nameEn: 'Bangla' },
     { id: 'english', nameBn: 'English', nameEn: 'English' },
@@ -505,7 +484,6 @@ const MADRASAH_SUBJECTS: QpgSubject[] = [
 function generalBand(classId: string): string {
   if (classId === 'honours') return 'honours';
   const n = Number(classId.replace('class-', ''));
-  if (n >= 3 && n <= 5) return '3-5';
   if (n >= 6 && n <= 8) return '6-8';
   if (n >= 9 && n <= 10) return '9-10';
   return '11-12';
@@ -513,8 +491,9 @@ function generalBand(classId: string): string {
 
 /** Level-aware step 2 (pattern 3, sprint 26 Nov 2026 — the
  *  competitor's /create step 2 differs by level):
- *  - primary (Class 3–5, Ebtedayi): term choice only — প্রথম /
- *    দ্বিতীয় / তৃতীয় প্রান্তিক; no question-type choice.
+ *  - primary (Ebtedayi only, since Class 3–5 were removed
+ *    27 Nov 2026): term choice only — প্রথম / দ্বিতীয় / তৃতীয়
+ *    প্রান্তিক; no question-type choice.
  *  - secondary (Class 6–12, Dakhil, Alim): exam kind (অর্ধবার্ষিক /
  *    বার্ষিক) + question kind (MCQ / সৃজনশীল / সমন্বিত).
  *  - tertiary (Honours): question kind only — Honours exams are
@@ -529,8 +508,7 @@ export function qpgLevelFor(stream: QpgStream, classId: string): QpgLevel {
     return classId === 'ebtedayi' ? 'primary' : 'secondary';
   }
   if (classId === 'honours') return 'tertiary';
-  const n = Number(classId.replace('class-', ''));
-  return n >= 3 && n <= 5 ? 'primary' : 'secondary';
+  return 'secondary'; // general stream is Class 6+ only now
 }
 
 export type QpgPrimaryTerm = 'first' | 'second' | 'third';

@@ -88,7 +88,7 @@ export default function LibraryPage() {
   const seededRef = useRef(!!initialLibrary);
   const [query, setQuery] = useState(() => params.get('q') ?? '');
   const [typeFilter, setTypeFilter] = useState(() => params.get('type') ?? '');
-  // `?class=` accepts a level slug (class-1-5, hsc, …) or a raw classLevel
+  // `?class=` accepts a level slug (class-6-8, hsc, …) or a raw classLevel
   // value (SSC, 1st Year, …) — see lib/classLevels.
   const [classFilter, setClassFilter] = useState(() => classFilterFromParam(params.get('class')));
   const [deptFilter, setDeptFilter] = useState(() => params.get('dept') ?? '');

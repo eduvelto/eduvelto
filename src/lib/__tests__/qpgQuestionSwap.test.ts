@@ -334,14 +334,14 @@ describe('swap candidates: verified-only, same-chapter, not already in the paper
   });
 
   it('Academic chapter swap candidates are Academic-only — no BCS leak from the grown pool', () => {
-    // The pool grew to 2,712 (35 BCS + 2,318 Academic MCQ + 359
-    // Academic CQ, 26 Nov 2026). A Class 3 paper's swap picker must
-    // offer only its own chapter's questions.
+    // The pool is 2,235 (35 BCS + 1,841 Academic MCQ + 359
+    // Academic CQ, 27 Nov 2026 — Classes 3–5 removed). A Class 6
+    // paper's swap picker must offer only its own chapter's questions.
     // Production passes the full chapter selection as `available` and the
     // paper's ids as `selectedIds` — mirror that here.
     const res = selectQpgQuestions(
       {
-        chapterIds: ['acad-class-3-eng-unit-1'],
+        chapterIds: ['acad-class-6-mat-chapter-1'],
         topicIds: [],
         type: 'mcq',
         difficulty: 'all',
@@ -350,15 +350,15 @@ describe('swap candidates: verified-only, same-chapter, not already in the paper
       },
       QPG_VERIFIED_POOL,
     );
-    expect(res.questions).toHaveLength(4); // Unit 1 has 4 verified questions
+    expect(res.questions).toHaveLength(4); // Chapter 1 has 4 verified questions
     const selectedIds = res.questions.slice(0, 2).map((q) => q.id);
     const candidates = pickerCandidates(res.questions, res.questions[0], selectedIds);
     expect(candidates).toHaveLength(2);
-    expect(candidates.every((c) => c.chapterId === 'acad-class-3-eng-unit-1')).toBe(true);
+    expect(candidates.every((c) => c.chapterId === 'acad-class-6-mat-chapter-1')).toBe(true);
     expect(candidates.every((c) => c.verified === true)).toBe(true);
     const allAcad = QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'));
-    expect(allAcad).toHaveLength(2677); // 2,318 MCQ + 359 CQ
-    expect(allAcad.filter((q) => q.type === 'mcq')).toHaveLength(2318);
+    expect(allAcad).toHaveLength(2200); // 1,841 MCQ + 359 CQ
+    expect(allAcad.filter((q) => q.type === 'mcq')).toHaveLength(1841);
     expect(allAcad.filter((q) => q.type === 'cq')).toHaveLength(359);
   });
 

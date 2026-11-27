@@ -437,12 +437,11 @@ describe('parseChapterRestDoc / fetchChaptersFromRest', () => {
 });
 
 describe('buildClassLevelCounts (24 Nov backup)', () => {
-  it('counts all seven levels from the books (loader stats cover only five)', () => {
+  it('counts all six levels from the books (loader stats cover only four)', () => {
     const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
     const { books } = normalizeBooksFixture(raw);
     const counts = buildClassLevelCounts(books);
     expect(counts).toEqual([
-      { slug: 'class-1-5', bookCount: 0, subjectCount: 0 },
       { slug: 'class-6-8', bookCount: 0, subjectCount: 0 },
       { slug: 'class-9-10', bookCount: 26, subjectCount: 3 },
       { slug: 'hsc', bookCount: 37, subjectCount: 3 },
@@ -450,7 +449,7 @@ describe('buildClassLevelCounts (24 Nov backup)', () => {
       { slug: 'technical', bookCount: 72, subjectCount: 3 },
       { slug: 'madrasa', bookCount: 35, subjectCount: 1 },
     ]);
-    // The loader stats cover only 5 of 7 levels — Technical (72) and
+    // The loader stats cover only 4 of 6 levels — Technical (72) and
     // Madrasa (35) have no stats doc, so a stats-based payload would
     // show a false zero for them. The book-derived counts cover all.
     expect(counts.reduce((s, c) => s + c.bookCount, 0)).toBe(609);
@@ -507,12 +506,12 @@ describe('__INITIAL_DATA__ payload builders', () => {
     expect(payload.books.length).toBeLessThan(books.length);
   });
 
-  it('buildClassIndexPayload carries all seven levels', () => {
+  it('buildClassIndexPayload carries all six levels', () => {
     const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
     const { books } = normalizeBooksFixture(raw);
     const payload = buildClassIndexPayload('/bn/class', books);
     expect(payload?.kind).toBe('class-index');
-    expect(payload?.levels).toHaveLength(7);
+    expect(payload?.levels).toHaveLength(6);
     expect(payload?.levels.reduce((s, l) => s + l.bookCount, 0)).toBe(609);
   });
 });
@@ -559,7 +558,7 @@ describe('__INITIAL_DATA__ script tag (CSP-safe carrier)', () => {
 });
 
 describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
-  it('derives hub + subject + chapter paths from EVERY per-subject pool file (1,853: 1 hub + 136 subjects + 1,716 chapters)', () => {
+  it('derives hub + subject + chapter paths from EVERY per-subject pool file (1,588: 1 hub + 118 subjects + 1,469 chapters)', () => {
     // Same directory scan the prerender script uses. A hardcoded
     // 6-file list silently dropped the six Class 6 subject files
     // (BanglaGrammar, MathDepth, ScienceDepth, Ict, Agriculture,
@@ -579,7 +578,7 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
       .map((f) => readFileSync(join(process.cwd(), 'src', 'lib', f), 'utf8'))
       .join('\n');
     const paths = getAcademicPracticePaths(source);
-    expect(paths).toHaveLength(1853);
+    expect(paths).toHaveLength(1588);
     expect(paths[0]).toBe('/learn/practice');
     for (const s of [
       'bangla-grammar',

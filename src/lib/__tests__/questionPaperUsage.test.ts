@@ -87,13 +87,13 @@ describe('Pro order validation (branch-only Firestore shape)', () => {
   it('accepts a correct pending-review order for a class tier', () => {
     expect(
       validateQpgProOrder({
-        uid: 'u1', plan: 'class-3', amountBdt: 150,
+        uid: 'u1', plan: 'class-6-8', amountBdt: 300,
         paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'pending-review', senderLast3: '123', source: 'onsite',
       }),
     ).toEqual([]);
     expect(
       validateQpgProOrder({
-        uid: 'u1', plan: 'coaching-3-12', amountBdt: 1500,
+        uid: 'u1', plan: 'coaching-6-12', amountBdt: 1350,
         paymentMethod: 'nagad', trxId: 'ABC1234567', status: 'pending-review', senderLast3: '123', source: 'onsite',
       }),
     ).toEqual([]);
@@ -102,7 +102,7 @@ describe('Pro order validation (branch-only Firestore shape)', () => {
   it('rejects orders that do not start as pending-review', () => {
     expect(
       validateQpgProOrder({
-        uid: 'u1', plan: 'class-3', amountBdt: 150,
+        uid: 'u1', plan: 'class-6-8', amountBdt: 300,
         paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'approved', senderLast3: '123', source: 'onsite',
       }).length,
     ).toBeGreaterThan(0);

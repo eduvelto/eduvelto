@@ -239,16 +239,16 @@ describe('take* seams', () => {
     };
     setupDom({ pathname: '/bn/class', jsonText: JSON.stringify(levels) });
     const mod = await loadReader();
-    // Incomplete (2 of 7 levels) — must fall back to the live fetch,
+    // Incomplete (2 of 6 levels) — must fall back to the live fetch,
     // never show honest-looking zeroes for the missing levels.
     expect(mod.takeClassIndexInitialData()).toBeNull();
   });
 
-  it('takeClassIndexInitialData accepts a complete seven-level payload', async () => {
+  it('takeClassIndexInitialData accepts a complete six-level payload', async () => {
     const levels = {
       kind: 'class-index',
       path: '/bn/class',
-      levels: ['class-1-5', 'class-6-8', 'class-9-10', 'hsc', 'honours-masters', 'technical', 'madrasa'].map((slug) => ({
+      levels: ['class-6-8', 'class-9-10', 'hsc', 'honours-masters', 'technical', 'madrasa'].map((slug) => ({
         slug,
         bookCount: 1,
         subjectCount: 1,
@@ -257,7 +257,7 @@ describe('take* seams', () => {
     setupDom({ pathname: '/bn/class', jsonText: JSON.stringify(levels) });
     const mod = await loadReader();
     const got = mod.takeClassIndexInitialData();
-    expect(got?.levels).toHaveLength(7);
+    expect(got?.levels).toHaveLength(6);
   });
 });
 
@@ -299,14 +299,14 @@ describe('prerender-built payloads pass the reader (shared shape)', () => {
     expect(got?.lastDocId).toBe(payload.lastDocId);
   });
 
-  it('a real class-index payload (seven levels, book-derived) validates', async () => {
+  it('a real class-index payload (six levels, book-derived) validates', async () => {
     const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
     const { books } = normalizeBooksFixture(raw);
     const payload = buildClassIndexPayload('/bn/class', books);
-    expect(payload.levels).toHaveLength(7);
-    // The loader stats cover only 5 of 7 levels (Technical 72 and
+    expect(payload.levels).toHaveLength(6);
+    // The loader stats cover only 4 of 6 levels (Technical 72 and
     // Madrasa 35 have no stats doc) — the book-derived payload
-    // covers all seven, so the page never shows a false zero.
+    // covers all six, so the page never shows a false zero.
     const bySlug = new Map(payload.levels.map((l) => [l.slug, l]));
     expect(bySlug.get('hsc')).toEqual({ slug: 'hsc', bookCount: 37, subjectCount: 3 });
     expect(bySlug.get('technical')).toEqual({ slug: 'technical', bookCount: 72, subjectCount: 3 });
@@ -315,7 +315,7 @@ describe('prerender-built payloads pass the reader (shared shape)', () => {
     setupDom({ pathname: '/bn/class', jsonText: JSON.stringify(payload) });
     const mod = await loadReader();
     const got = mod.takeClassIndexInitialData();
-    expect(got?.levels).toHaveLength(7);
+    expect(got?.levels).toHaveLength(6);
     expect(got?.levels.find((l) => l.slug === 'hsc')?.bookCount).toBe(37);
   });
 });

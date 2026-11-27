@@ -218,7 +218,6 @@ async function seed() {
       quizTitles: {},
       updatedAt: new Date().toISOString(),
     });
-    statsBatch.set(doc(db, 'leaderboardSnapshots', 'classStats-class-1-5'), emptyStats('class-1-5'));
     statsBatch.set(doc(db, 'leaderboardSnapshots', 'classStats-class-6-8'), emptyStats('class-6-8'));
     await statsBatch.commit();
   });
@@ -397,10 +396,12 @@ describe('read-usage AFTER the fix (stats doc + server paging)', () => {
     expect(subj.items.every((b) => b.department === 'English')).toBe(true);
     console.log('[read-usage:after] Honours English subject page: 20 reads (stats cached) — was 609');
 
-    // --- Class index: 5 stats docs (1 cached from the dashboard call) ---
+    // --- Class index: 4 stats docs (1 cached from the dashboard call) ---
+    // (Class 1–5's stats doc was deleted with the level, 27 Nov 2026 —
+    // Technical + Madrasa never had one, so 4 of 6 levels resolve.)
     const allStats = await getAllClassStats();
-    expect(allStats.filter(Boolean).length).toBe(5);
-    console.log('[read-usage:after] Class index: 5 reads (stats docs) — was 609');
+    expect(allStats.filter(Boolean).length).toBe(4);
+    console.log('[read-usage:after] Class index: 4 reads (stats docs) — was 609');
 
     // --- SSC / HSC after ---
     const sscStats = await getClassStats('class-9-10');

@@ -105,21 +105,23 @@ describe('Academic practice SEO (resolveRouteSeo)', () => {
       expect(hub, `hub (${lang})`).not.toBeNull();
       expect(hub!.title.length).toBeGreaterThan(10);
       expect(hub!.canonical).toBe(`https://eduvelto.com/${lang}/learn/practice`);
-      const subj = resolveRouteSeo('/learn/practice/class-3/english', lang);
+      // Classes 3–5 were removed 27 Nov 2026 — the SEO examples
+      // now use Class 6 (28 English questions, 28 Math questions).
+      const subj = resolveRouteSeo('/learn/practice/class-6/english', lang);
       expect(subj, `subject (${lang})`).not.toBeNull();
       expect(subj!.title).toContain('28');
       const ch = resolveRouteSeo(
-        '/learn/practice/class-3/english/acad-class-3-eng-unit-1',
+        '/learn/practice/class-6/english/acad-class-6-eng-lesson-1',
         lang,
       );
       expect(ch, `chapter (${lang})`).not.toBeNull();
-      expect(ch!.title).toContain('Unit 1');
+      expect(ch!.title).toContain('Lesson 1');
       // Non-English subjects resolve too now (26 Nov 2026: twelve subjects).
-      const mathSubj = resolveRouteSeo('/learn/practice/class-3/math', lang);
+      const mathSubj = resolveRouteSeo('/learn/practice/class-6/math', lang);
       expect(mathSubj, `math subject (${lang})`).not.toBeNull();
       expect(mathSubj!.title).toContain('28');
       const banCh = resolveRouteSeo(
-        '/learn/practice/class-4/bangla/acad-class-4-ban-lesson-1',
+        '/learn/practice/class-6/bangla/acad-class-6-ban-lesson-1',
         lang,
       );
       expect(banCh, `bangla chapter (${lang})`).not.toBeNull();
@@ -158,21 +160,23 @@ describe('Academic practice SEO (resolveRouteSeo)', () => {
       expect(resolveRouteSeo('/learn/practice/class-9/english', lang)).toBeNull();
       expect(resolveRouteSeo('/learn/practice/class-10/english', lang)).toBeNull();
       expect(resolveRouteSeo('/learn/practice/class-11/math', lang)).toBeNull();
-      expect(resolveRouteSeo('/learn/practice/class-3/ict', lang)).toBeNull();
+      // Removed classes resolve to nothing — never indexable.
+      expect(resolveRouteSeo('/learn/practice/class-3/english', lang)).toBeNull();
+      expect(resolveRouteSeo('/learn/practice/class-5/math', lang)).toBeNull();
       expect(
-        resolveRouteSeo('/learn/practice/class-3/english/acad-class-3-eng-unit-99', lang),
+        resolveRouteSeo('/learn/practice/class-6/english/acad-class-6-eng-lesson-99', lang),
       ).toBeNull();
     }
   });
 });
 
 describe('Academic practice first paint (renderToString)', () => {
-  it('hub lists the nine classes with verified practice', async () => {
+  it('hub lists the seven classes with verified practice', async () => {
     const html = await renderPractice('/bn/learn/practice');
     expect(html).toContain('অধ্যায়ভিত্তিক অনুশীলন');
-    expect(html).toContain('৩য় শ্রেণি');
-    expect(html).toContain('৪র্থ শ্রেণি');
-    expect(html).toContain('৫ম শ্রেণি');
+    expect(html).not.toContain('৩য় শ্রেণি');
+    expect(html).not.toContain('৪র্থ শ্রেণি');
+    expect(html).not.toContain('৫ম শ্রেণি');
     expect(html).toContain('৬ষ্ঠ শ্রেণি');
     expect(html).toContain('৭ম শ্রেণি');
     expect(html).toContain('৮ম শ্রেণি');
@@ -180,10 +184,10 @@ describe('Academic practice first paint (renderToString)', () => {
     expect(html).toContain('১০ম শ্রেণি');
     expect(html).toContain('একাদশ শ্রেণি');
     expect(html).toContain('দ্বাদশ শ্রেণি');
-    expect(html).toContain('/learn/practice/class-3/english');
-    expect(html).toContain('/learn/practice/class-4/math');
-    expect(html).toContain('/learn/practice/class-3/bangla');
-    expect(html).toContain('/learn/practice/class-5/english');
+    expect(html).toContain('/learn/practice/class-6/english');
+    expect(html).toContain('/learn/practice/class-7/math');
+    expect(html).toContain('/learn/practice/class-6/bangla');
+    expect(html).toContain('/learn/practice/class-8/english');
     expect(html).toContain('/learn/practice/class-6/math-depth');
     expect(html).toContain('/learn/practice/class-7/math-depth');
     expect(html).toContain('/learn/practice/class-8/math-depth');
@@ -197,48 +201,48 @@ describe('Academic practice first paint (renderToString)', () => {
   });
 
   it('subject page lists its units with counts', async () => {
-    const html = await renderPractice('/bn/learn/practice/class-3/english');
-    expect(html).toContain('Unit 1: Greetings');
-    expect(html).toContain('Unit 7: Save Our Planet');
-    expect(html).toContain('/learn/practice/class-3/english/acad-class-3-eng-unit-1');
-    expect(html).toContain('৪টি প্রশ্ন');
+    const html = await renderPractice('/bn/learn/practice/class-6/english');
+    expect(html).toContain('Lesson 1: Going to a New School');
+    expect(html).toContain('Lesson 7: Holding Hands');
+    expect(html).toContain('/learn/practice/class-6/english/acad-class-6-eng-lesson-1');
+    expect(html).toContain('১টি প্রশ্ন');
   });
 
   it('chapter page renders the questions with options and 0/N progress', async () => {
     const html = await renderPractice(
-      '/bn/learn/practice/class-3/english/acad-class-3-eng-unit-1',
+      '/bn/learn/practice/class-6/english/acad-class-6-eng-lesson-1',
     );
-    expect(html).toContain('Unit 1: Greetings');
-    expect(html).toContain('What do we say when we meet our teacher in the morning?');
-    expect(html).toContain('Good morning');
+    expect(html).toContain('Lesson 1: Going to a New School');
+    expect(html).toContain('What should we do at a new school?');
+    expect(html).toContain('Introduce ourselves to new friends and teachers');
     expect(html).toContain('অগ্রগতি');
-    expect(html).toContain('০/৪টি উত্তর দিয়েছেন');
+    expect(html).toContain('০/১টি উত্তর দিয়েছেন');
     expect(html).toContain('সঠিক: ০টি');
   });
 
   it('unknown chapter shows the honest empty state, never questions', async () => {
     const html = await renderPractice(
-      '/bn/learn/practice/class-3/english/acad-class-3-eng-unit-99',
+      '/bn/learn/practice/class-6/english/acad-class-6-eng-lesson-99',
     );
     expect(html).toContain('যাচাই চলছে');
-    expect(html).not.toContain('What do we say');
+    expect(html).not.toContain('What should we do at a new school?');
     expect(html).toContain('অধ্যায়ের তালিকা');
   });
 
   it('a non-English subject page lists its chapters with counts', async () => {
-    const html = await renderPractice('/bn/learn/practice/class-3/math');
-    expect(html).toContain('১. সংখ্যা (Numbers)');
-    expect(html).toContain('/learn/practice/class-3/math/acad-class-3-mat-chapter-1');
-    expect(html).toContain('৩টি প্রশ্ন');
+    const html = await renderPractice('/bn/learn/practice/class-6/math');
+    expect(html).toContain('১. স্বাভাবিক সংখ্যা ও ভগ্নাংশ');
+    expect(html).toContain('/learn/practice/class-6/math/acad-class-6-mat-chapter-1');
+    expect(html).toContain('৪টি প্রশ্ন');
   });
 
   it('a non-English chapter page renders the questions with options and 0/N progress', async () => {
     const html = await renderPractice(
-      '/bn/learn/practice/class-3/math/acad-class-3-mat-chapter-1',
+      '/bn/learn/practice/class-6/math/acad-class-6-mat-chapter-1',
     );
-    expect(html).toContain('১. সংখ্যা (Numbers)');
+    expect(html).toContain('১. স্বাভাবিক সংখ্যা ও ভগ্নাংশ');
     expect(html).toContain('অগ্রগতি');
-    expect(html).toContain('০/৩টি উত্তর দিয়েছেন');
+    expect(html).toContain('০/৪টি উত্তর দিয়েছেন');
     expect(html).toContain('সঠিক: ০টি');
   });
 

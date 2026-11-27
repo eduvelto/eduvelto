@@ -215,9 +215,9 @@ const SITEMAP_URLS = [
   '/admissions/national-university/business',
   '/library',
   '/class',
-  // Brand-SEO wave 1, F-06 (24 Nov 2026): /class/class-1-5 and
-  // /class/class-6-8 are OUT of the sitemap (thin, no books yet —
-  // noindexed until Classes 1–8 have real books).
+  // Brand-SEO wave 1, F-06 (24 Nov 2026): /class/class-6-8 is OUT
+  // of the sitemap (thin, no books yet — noindexed until Classes 6–8
+  // have real books). (Class 1–5 was removed 27 Nov 2026.)
   '/class/class-9-10',
   '/class/hsc',
   '/class/honours-masters',
@@ -454,16 +454,16 @@ describe('resolveRouteSeo — public routes', () => {
     // Class 10 shares the Class 9 pool and Class 12 shares the
     // Class 11 pool, so publicAcademicClassSubjects() repeats the same
     // 557 + 374 questions under class-10 and class-12; summing the
-    // rows claims 3,249. The hub meta description must state the unique
-    // pool total (2,318) — the number the hub itself renders.
+    // rows claims 2,772. The hub meta description must state the unique
+    // pool total (1,841) — the number the hub itself renders.
     const seo = resolveRouteSeo('/learn/practice');
     expect(seo).not.toBeNull();
-    expect(seo!.description).toContain('2318টি প্রশ্ন');
-    expect(seo!.description).not.toContain('3249টি প্রশ্ন');
+    expect(seo!.description).toContain('1841টি প্রশ্ন');
+    expect(seo!.description).not.toContain('2772টি প্রশ্ন');
     const seoEn = resolveRouteSeo('/en/learn/practice', 'en');
     expect(seoEn).not.toBeNull();
-    expect(seoEn!.description).toContain('2318 questions');
-    expect(seoEn!.description).not.toContain('3249 questions');
+    expect(seoEn!.description).toContain('1841 questions');
+    expect(seoEn!.description).not.toContain('2772 questions');
   });
 
   it('every sitemap URL resolves to real SEO', () => {
@@ -949,11 +949,11 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     ).toBeNull();
   });
 
-  it('all 7 class pages resolve; only the 5 with books are in the sitemap', () => {
-    expect(CLASS_LEVELS.length).toBe(7);
-    // Brand-SEO wave 1, F-06: class-1-5 / class-6-8 have no books
-    // yet, so they are out of the sitemap (and noindexed) until
-    // Classes 1–8 have real books — but they still resolve, live
+  it('all 6 class pages resolve; only the 5 with books are in the sitemap', () => {
+    expect(CLASS_LEVELS.length).toBe(6);
+    // Brand-SEO wave 1, F-06: class-6-8 has no books
+    // yet, so it is out of the sitemap (and noindexed) until
+    // Class 6–8 has real books — but it still resolves, live
     // for visitors with honest coming-soon content.
     const sitemapClassSlugs = SITEMAP_URLS.filter((p) => p.startsWith('/class/')).map((p) =>
       p.replace('/class/', ''),
@@ -972,8 +972,8 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     }
   });
 
-  it('class 1–5 / 6–8 say content has not arrived; 9–10 / HSC / honours-masters do not', () => {
-    for (const slug of ['class-1-5', 'class-6-8']) {
+  it('class 6–8 says content has not arrived; 9–10 / HSC / honours-masters do not', () => {
+    for (const slug of ['class-6-8']) {
       const seo = resolveRouteSeo(`/class/${slug}`)!;
       expect(seo.description, slug).toContain('আসেনি');
       expect(seo.description, slug).toContain('আসছে');
@@ -1053,10 +1053,10 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       '/ai-teacher',
       '/jobs/circulars',
       '/jobs/calendar',
-      // Brand-SEO wave 1, F-06 (24 Nov 2026): the 2 thin class pages
-      // are out of the sitemap now but STILL swept — their copy must
+      // Brand-SEO wave 1, F-06 (24 Nov 2026): the thin class page
+      // is out of the sitemap now but STILL swept — its copy must
       // pass the same claim gates as sitemap pages.
-      '/class/class-1-5',
+      // (Class 1–5 was removed from the platform 27 Nov 2026.)
       '/class/class-6-8',
     ]);
     // AdSense Part 1 (23 Nov 2026): subject pages are mostly OUT of
@@ -1065,8 +1065,8 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     // subject pages and 9 NU subject pages not in the sitemap
     // (BCS English is in both, counted once), plus the 8 noindexed
     // public pages above (none is in the sitemap or a subject path),
-    // plus the 2 thin class pages.
-    expect(swept.size).toBe(SITEMAP_URLS.length + 41);
+    // plus the thin class page.
+    expect(swept.size).toBe(SITEMAP_URLS.length + 40);
     for (const path of swept) {
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for swept path ${path}`).not.toBeNull();
@@ -1483,8 +1483,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     ]);
   });
 
-  it('class 1–5 / 6–8 are noindexed but still resolve, with honest copy', () => {
-    for (const slug of ['class-1-5', 'class-6-8']) {
+  it('class 6–8 is noindexed but still resolves, with honest copy', () => {
+    for (const slug of ['class-6-8']) {
       const seo = resolveRouteSeo(`/class/${slug}`)!;
       expect(seo.robots, slug).toBe('noindex, nofollow');
       expect(seo.description, slug).toContain('আসেনি');
@@ -1689,10 +1689,7 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
     }
   });
 
-  it('English copy keeps the honest caveats (no content for 1–5/6–8, drafts, coming soon)', () => {
-    expect(resolveRouteSeo('/class/class-1-5', 'en')!.description).toContain(
-      'have not reached the library yet',
-    );
+  it('English copy keeps the honest caveats (no content for 6–8, drafts, coming soon)', () => {
     expect(resolveRouteSeo('/class/class-6-8', 'en')!.description).toContain(
       'have not reached the library yet',
     );

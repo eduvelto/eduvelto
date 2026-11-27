@@ -212,12 +212,6 @@ export function qpgProPlanClassIds(plan: QpgProPlan): string[] | 'all' | 'single
       return 'single-paper';
     case 'monthly':
       return 'all';
-    case 'class-3':
-      return ['class-3'];
-    case 'class-4':
-      return ['class-4'];
-    case 'class-5':
-      return ['class-5'];
     case 'class-6-8':
       return ['class-6', 'class-7', 'class-8'];
     case 'class-9-10':
@@ -231,29 +225,12 @@ export function qpgProPlanClassIds(plan: QpgProPlan): string[] | 'all' | 'single
       // the code treats them as class-scoped to 6–10 until the owner
       // confirms the exact scope rule (§8.4).
       return ['class-6', 'class-7', 'class-8', 'class-9', 'class-10'];
-    case 'bundle-3-5':
-      return ['class-3', 'class-4', 'class-5'];
     case 'bundle-6-8':
       return ['class-6', 'class-7', 'class-8'];
-    case 'bundle-3-8':
-      return ['class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8'];
     case 'bundle-6-10':
       return ['class-6', 'class-7', 'class-8', 'class-9', 'class-10'];
-    case 'bundle-3-10':
-      return ['class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8', 'class-9', 'class-10'];
-    case 'coaching-5-8':
-      return ['class-5', 'class-6', 'class-7', 'class-8'];
-    case 'coaching-5-10':
-      return ['class-5', 'class-6', 'class-7', 'class-8', 'class-9', 'class-10'];
-    case 'coaching-3-10':
-      return ['class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8', 'class-9', 'class-10'];
     case 'coaching-6-12':
       return ['class-6', 'class-7', 'class-8', 'class-9', 'class-10', 'class-11', 'class-12'];
-    case 'coaching-3-12':
-      return [
-        'class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8',
-        'class-9', 'class-10', 'class-11', 'class-12',
-      ];
     default:
       return 'single-paper';
   }

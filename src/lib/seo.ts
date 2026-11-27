@@ -596,19 +596,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   },
   // Class level pages (23 Nov 2026, feature/seo-50-100-pages). Slugs
   // and names mirror CLASS_LEVELS in lib/classLevels.ts (cross-checked
-  // by unit test). HONESTY: Class 1–5 and Class 6–8 have NO books in
-  // the library yet — their descriptions say so plainly instead of
+  // by unit test). HONESTY: Class 6–8 has NO books in
+  // the library yet — its description says so plainly instead of
   // implying content exists.
-  '/class/class-1-5': {
-    title: 'শ্রেণি ১–৫ — প্রাথমিক | Eduvelto',
-    description:
-      'শ্রেণি ১–৫ (প্রাথমিক) — বই, পাঠ ও পরীক্ষা এখনো লাইব্রেরিতে আসেনি, আসছে। Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম।',
-    crumb: 'শ্রেণি ১–৫',
-    titleEn: 'Classes 1–5 — Primary | Eduvelto',
-    descriptionEn:
-      'Classes 1–5 (Primary) — books, lessons and exams have not reached the library yet; coming soon. Eduvelto — the free education platform of Bangladesh.',
-    crumbEn: 'Classes 1–5',
-  },
   '/class/class-6-8': {
     title: 'শ্রেণি ৬–৮ — নিম্ন মাধ্যমিক | Eduvelto',
     description:
@@ -1797,13 +1787,13 @@ const NOINDEX_STATIC = new Set([
   '/jobs/circulars',
   '/jobs/calendar',
   '/ai-teacher',
-  // Brand-SEO wave 1, F-06 (24 Nov 2026): /class/class-1-5 and
-  // /class/class-6-8 are thin (~118 words, no books yet) — they stay
-  // live for visitors with honest coming-soon content, but leave the
-  // sitemap and carry noindex until Classes 1–8 have real books.
-  // When books land, remove them from this set AND put them back in
+  // Brand-SEO wave 1, F-06 (24 Nov 2026): /class/class-6-8 is thin
+  // (~118 words, no books yet) — it stays live for visitors with
+  // honest coming-soon content, but leaves the sitemap and carries
+  // noindex until Classes 6–8 have real books.
+  // When books land, remove it from this set AND put it back in
   // the sitemap in the same commit.
-  '/class/class-1-5',
+  // (Class 1–5 was removed from the platform 27 Nov 2026, owner order.)
   '/class/class-6-8',
 ]);
 

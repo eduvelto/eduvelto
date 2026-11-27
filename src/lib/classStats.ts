@@ -103,7 +103,7 @@ export function getClassStats(slug: string): Promise<ClassStats | null> {
   return p;
 }
 
-/** All five level stats docs (5 reads, cached per session). */
+/** All level stats docs (4 exist — Technical + Madrasa have none; 6 reads, cached per session). */
 export function getAllClassStats(): Promise<Array<ClassStats | null>> {
   return Promise.all(CLASS_LEVELS.map((def) => getClassStats(def.slug)));
 }

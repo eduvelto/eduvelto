@@ -95,7 +95,7 @@ describe('approval window', () => {
     const monthly = qpgApprovalWindow('monthly', at);
     expect(monthly.proEnd).toBe(new Date(at.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString());
     expect(monthly.remainingUses).toBeUndefined();
-    const annual = qpgApprovalWindow('class-3', at);
+    const annual = qpgApprovalWindow('class-6-8', at);
     expect(annual.proEnd).toBe(new Date(at.getTime() + 365 * 24 * 60 * 60 * 1000).toISOString());
     const paper = qpgApprovalWindow('per-paper', at);
     expect(paper.remainingUses).toBe(1);
