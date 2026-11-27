@@ -61,5 +61,8 @@ Disallow: /subjects/
 # result pages are noindex by design; RouteSeo gives /search the
 # noindex fallback (no STATIC_ROUTES entry).
 Disallow: /search
+# /offline is a utility page (D-04, QA 27 Nov 2026) — the branded
+# offline page, not content. Keep crawlers off it.
+Disallow: /offline
 
 Sitemap: https://eduvelto.com/sitemap.xml

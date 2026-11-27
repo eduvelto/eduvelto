@@ -446,6 +446,32 @@ export default function ClassDashboardPage() {
     },
   ];
 
+  // D-08 (QA 27 Nov 2026): the "হোম" tab showed only text-less skeleton
+  // cards while the stats/books loaded, so on a slow connection the
+  // landing tab looked blank (header + tab bar + footer only). The
+  // Quick Access tiles need no data (links only), so they render in
+  // both states — while loading AND once loaded — and a visible
+  // "লোড হচ্ছে…" line replaces the silent skeleton-only wait.
+  const quickAccess = (
+    <>
+      <Reveal>
+        <h3 className="ev-section-h2">{t({ bn: 'দ্রুত লিংক', en: 'Quick Access' })}</h3>
+      </Reveal>
+      <div className="ev-quick-tiles">
+        {quickTiles.map((tile) => (
+          <Link key={tile.kind} to={tile.to} className="ev-quick-tile">
+            <span style={{ color: 'var(--heading)' }}>
+              <TileIcon kind={tile.kind} />
+            </span>
+            <span>
+              <T bn={tile.bn} en={tile.en} />
+            </span>
+          </Link>
+        ))}
+      </div>
+    </>
+  );
+
   return (
     <PageShell titleBn={def.bn} titleEn={def.en} wide hideTitle maxWidth={1240}>
       <p style={{ margin: '0 0 12px' }}>
@@ -529,7 +555,22 @@ export default function ClassDashboardPage() {
 
       <div className="ev-rail-grid">
         <div>
-          {books === null || stats === undefined ? <SkeletonCards count={3} /> : null}
+          {books === null || stats === undefined ? (
+            <>
+              {/* D-08: never leave the landing tab text-blank while
+                  loading — visible status line + the data-free Quick
+                  Access tiles, then the skeletons for the rest. */}
+              {activeTab === 'home' ? (
+                <>
+                  <p role="status" style={{ margin: '0 0 16px', color: 'var(--muted)', fontSize: 14 }}>
+                    {t({ bn: 'শ্রেণির তথ্য লোড হচ্ছে…', en: 'Loading class information…' })}
+                  </p>
+                  {quickAccess}
+                </>
+              ) : null}
+              <SkeletonCards count={3} />
+            </>
+          ) : null}
           {error ? (
             <AlertBox tone="error" onRetry={load}>
               {t({ bn: 'শ্রেণির তথ্য লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load this class — please try again.' })}
@@ -591,22 +632,9 @@ export default function ClassDashboardPage() {
                     </Reveal>
                   )}
 
-                  {/* Quick Access tiles */}
-                  <Reveal>
-                    <h3 className="ev-section-h2">{t({ bn: 'দ্রুত লিংক', en: 'Quick Access' })}</h3>
-                  </Reveal>
-                  <div className="ev-quick-tiles">
-                    {quickTiles.map((t) => (
-                      <Link key={t.kind} to={t.to} className="ev-quick-tile">
-                        <span style={{ color: 'var(--heading)' }}>
-                          <TileIcon kind={t.kind} />
-                        </span>
-                        <span>
-                          <T bn={t.bn} en={t.en} />
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
+                  {/* Quick Access tiles (D-08: shared with the loading
+                      state above, so the Home tab is never blank). */}
+                  {quickAccess}
 
                   {/* (No in-app ad here — ads placement plan 22 Nov 2026:
                       one dashboard page carries at most mobile-top +
