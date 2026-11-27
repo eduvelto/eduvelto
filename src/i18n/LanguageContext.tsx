@@ -35,6 +35,14 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Lang } from './strings';
 import { useAuth } from '../lib/auth';
+// Spec-09 language architecture (landed 27 Nov 2026): the registry in
+// ./languages is the single source of truth for which language codes
+// exist. Only the LIVE_LANGS (bn/en — the ones with content) are
+// accepted here; the other 8 registry codes resolve but are NOT live,
+// so they fall back to 'bn' until their content phases land. Lang
+// stays 'bn' | 'en' and langRouting is untouched — widening routing
+// without content would break the site.
+import { LIVE_LANGS, resolveLang } from './languages';
 import {
   isSupportedLang,
   langSwitchTarget,
@@ -52,7 +60,11 @@ export function getStoredLanguage(): Lang | null {
 function readStored(): Lang | null {
   try {
     const v = window.localStorage.getItem(STORAGE_KEY);
-    return v === 'bn' || v === 'en' ? v : null;
+    if (!v) return null;
+    // Via the registry: unknown codes resolve to 'bn'; non-live codes
+    // (es/ar/hi/…) are not accepted yet and fall through to 'bn'.
+    const resolved = resolveLang(v);
+    return (LIVE_LANGS as readonly string[]).includes(resolved) ? (resolved as Lang) : null;
   } catch {
     return null;
   }
@@ -69,7 +81,10 @@ function readPathLang(): Lang | null {
 function readUrlLang(): Lang | null {
   try {
     const v = new URLSearchParams(window.location.search).get('lang');
-    return v === 'bn' || v === 'en' ? v : null;
+    if (!v) return null;
+    // Via the registry (same live-only rule as readStored).
+    const resolved = resolveLang(v);
+    return (LIVE_LANGS as readonly string[]).includes(resolved) ? (resolved as Lang) : null;
   } catch {
     return null;
   }

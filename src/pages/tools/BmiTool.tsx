@@ -8,6 +8,7 @@
 import { useMemo, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { calculateBmi, weightForBmi, BMI_CATEGORY_LABELS } from '../../lib/tools/bodyMetrics';
+import { idealWeight } from '../../lib/tools/idealWeight';
 import {
   inputStyle,
   labelStyle,
@@ -35,6 +36,7 @@ export function BmiTool() {
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [targetBmi, setTargetBmi] = useState('');
+  const [sex, setSex] = useState<'male' | 'female'>('male');
   const { copied, copyText } = useCopy();
 
   const weightV = parseAmount(weight);
@@ -63,6 +65,23 @@ export function BmiTool() {
     targetV !== null && targetV > 0 && heightV !== null && heightV > 0
       ? weightForBmi(targetV, heightV)
       : null;
+
+  // Ideal-weight section (A-tools, landed 27 Nov 2026): reuses the
+  // idealWeight() engine — four formulas + healthy range + lose/gain
+  // lines — shown whenever a height is entered.
+  const ideal = useMemo(() => {
+    if (heightV === null || heightV <= 0) return null;
+    try {
+      return idealWeight({
+        heightCm: heightV,
+        sex,
+        currentWeightKg: weightV !== null && weightV > 0 ? weightV : undefined,
+      });
+    } catch {
+      return null;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [heightV, sex, weightV]);
 
   function loadExample(): void {
     setWeight('70');
@@ -186,6 +205,93 @@ export function BmiTool() {
         <p style={errorStyle} role="alert">
           {t({ bn: 'সঠিক মান দিন — ওজন ও উচ্চতা শূন্যের বেশি হতে হবে।', en: 'Enter valid values — weight and height must be greater than zero.' })}
         </p>
+      ) : null}
+      {ideal ? (
+        <div style={{ ...resultStyle, background: 'var(--teal-soft)', marginTop: 16 }}>
+          <p style={{ margin: '0 0 8px', fontSize: 15, fontWeight: 700 }}>
+            {t({ bn: 'আদর্শ ওজন (এই উচ্চতায়)', en: 'Ideal weight (at this height)' })}
+          </p>
+          <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
+            <button
+              type="button"
+              style={{ minHeight: 36, padding: '0 14px', borderRadius: 8, border: '1px solid var(--line)', background: sex === 'male' ? 'var(--teal)' : 'var(--surface)', color: sex === 'male' ? '#fff' : 'var(--heading)', fontWeight: 600, cursor: 'pointer' }}
+              onClick={() => setSex('male')}
+              aria-pressed={sex === 'male'}
+            >
+              {t({ bn: 'পুরুষ', en: 'Male' })}
+            </button>
+            <button
+              type="button"
+              style={{ minHeight: 36, padding: '0 14px', borderRadius: 8, border: '1px solid var(--line)', background: sex === 'female' ? 'var(--teal)' : 'var(--surface)', color: sex === 'female' ? '#fff' : 'var(--heading)', fontWeight: 600, cursor: 'pointer' }}
+              onClick={() => setSex('female')}
+              aria-pressed={sex === 'female'}
+            >
+              {t({ bn: 'নারী', en: 'Female' })}
+            </button>
+          </div>
+          <div style={tileGridStyle}>
+            <div style={tileStyle}>
+              <p style={tileLabelStyle}>{t({ bn: 'Devine', en: 'Devine' })}</p>
+              <p style={tileValueStyle}>{fmtNum(ideal.devineKg, 1)} {t({ bn: 'কেজি', en: 'kg' })}</p>
+            </div>
+            <div style={tileStyle}>
+              <p style={tileLabelStyle}>{t({ bn: 'Robinson', en: 'Robinson' })}</p>
+              <p style={tileValueStyle}>{fmtNum(ideal.robinsonKg, 1)} {t({ bn: 'কেজি', en: 'kg' })}</p>
+            </div>
+            <div style={tileStyle}>
+              <p style={tileLabelStyle}>{t({ bn: 'Miller', en: 'Miller' })}</p>
+              <p style={tileValueStyle}>{fmtNum(ideal.millerKg, 1)} {t({ bn: 'কেজি', en: 'kg' })}</p>
+            </div>
+            <div style={tileStyle}>
+              <p style={tileLabelStyle}>{t({ bn: 'Hamwi', en: 'Hamwi' })}</p>
+              <p style={tileValueStyle}>{fmtNum(ideal.hamwiKg, 1)} {t({ bn: 'কেজি', en: 'kg' })}</p>
+            </div>
+          </div>
+          <p style={{ margin: '10px 0 0', fontSize: 15 }}>
+            {t({
+              bn: `স্বাস্থ্যকর পরিসর (BMI ১৮.৫–২৪.৯): ${fmtNum(ideal.healthyRangeKg.min, 1)}–${fmtNum(ideal.healthyRangeKg.max, 1)} কেজি।`,
+              en: `Healthy range (BMI 18.5–24.9): ${fmtNum(ideal.healthyRangeKg.min, 1)}–${fmtNum(ideal.healthyRangeKg.max, 1)} kg.`,
+            })}
+          </p>
+          {ideal.toBmi25Kg !== null ? (
+            <p style={{ margin: '6px 0 0', fontSize: 15 }}>
+              {t({
+                bn: ideal.toBmi25Kg > 0
+                  ? `BMI ২৫-এ পৌঁছাতে ${fmtNum(ideal.toBmi25Kg, 1)} কেজি কমাতে হবে।`
+                  : ideal.toBmi25Kg < 0
+                    ? `BMI ২৫-এ পৌঁছাতে ${fmtNum(Math.abs(ideal.toBmi25Kg), 1)} কেজি বাড়াতে হবে।`
+                    : 'আপনার BMI ঠিক ২৫।',
+                en: ideal.toBmi25Kg > 0
+                  ? `Lose ${fmtNum(ideal.toBmi25Kg, 1)} kg to reach BMI 25.`
+                  : ideal.toBmi25Kg < 0
+                    ? `Gain ${fmtNum(Math.abs(ideal.toBmi25Kg), 1)} kg to reach BMI 25.`
+                    : 'Your BMI is exactly 25.',
+              })}
+            </p>
+          ) : null}
+          {ideal.toBmi22Kg !== null ? (
+            <p style={{ margin: '6px 0 0', fontSize: 15 }}>
+              {t({
+                bn: ideal.toBmi22Kg > 0
+                  ? `BMI ২২-এ (স্বাস্থ্যকর পরিসরের মাঝামাঝি) পৌঁছাতে ${fmtNum(ideal.toBmi22Kg, 1)} কেজি কমাতে হবে।`
+                  : ideal.toBmi22Kg < 0
+                    ? `BMI ২২-এ পৌঁছাতে ${fmtNum(Math.abs(ideal.toBmi22Kg), 1)} কেজি বাড়াতে হবে।`
+                    : 'আপনার BMI ঠিক ২২।',
+                en: ideal.toBmi22Kg > 0
+                  ? `Lose ${fmtNum(ideal.toBmi22Kg, 1)} kg to reach BMI 22 (mid-healthy range).`
+                  : ideal.toBmi22Kg < 0
+                    ? `Gain ${fmtNum(Math.abs(ideal.toBmi22Kg), 1)} kg to reach BMI 22.`
+                    : 'Your BMI is exactly 22.',
+              })}
+            </p>
+          ) : null}
+          <p style={formulaStyle}>
+            {t({
+              bn: 'চারটি সূত্রের ফলাফল কিছুটা আলাদা হয় — পরিসরটিই আসল তথ্য। এশীয়দের ক্ষেত্রে BMI ২৩-এর ওপরেই স্বাস্থ্যঝুঁকি বাড়তে শুরু করে বলে ধরা হয়। বিস্তারিত হিসাবের জন্য আদর্শ ওজন ক্যালকুলেটর টুলটি দেখুন। এটি সাধারণ তথ্য, চিকিৎসা পরামর্শ নয়।',
+              en: 'The four formulas differ slightly — the range is the real information. For Asian populations, health risk is considered to rise above BMI 23. See the ideal weight calculator tool for the full calculation. This is general information, not medical advice.',
+            })}
+          </p>
+        </div>
       ) : null}
     </section>
   );

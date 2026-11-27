@@ -78,6 +78,28 @@ export function ImageColorPickerTool() {
   const rgbText = picked ? `rgb(${picked.r}, ${picked.g}, ${picked.b})` : '';
   const hslText = hsl ? `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)` : '';
 
+  // Palette export (A-tools spec-08, landed 27 Nov 2026): the pick
+  // history (newest first) as a palette — copy as text, or download
+  // as .txt / .css (CSS variables). Duplicates are removed.
+  const paletteHexes = Array.from(new Set(history.map((h) => rgbToHex(h.r, h.g, h.b).toUpperCase())));
+  const paletteText = paletteHexes
+    .map((h) => {
+      const { r, g, b } = hexToRgb(h);
+      return `${h} — rgb(${r}, ${g}, ${b})`;
+    })
+    .join('\n');
+  const paletteCss = `:root {\n${paletteHexes.map((h, i) => `  --color-${i + 1}: ${h.toLowerCase()};`).join('\n')}\n}`;
+
+  function downloadPalette(filename: string, content: string, type: string): void {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
   return (
     <section className="ev-card" style={cardStyle} aria-labelledby="image-color-picker-title">
       <div style={heroStyle}>
@@ -153,6 +175,34 @@ export function ImageColorPickerTool() {
               </div>
             </div>
           ) : null}
+          <div style={{ marginTop: 14 }}>
+            <p style={{ margin: '0 0 8px', fontSize: 14, fontWeight: 600, color: 'var(--heading)' }}>
+              {t({ bn: `প্যালেট এক্সপোর্ট (${paletteHexes.length}টি রং)`, en: `Export palette (${paletteHexes.length} colours)` })}
+            </p>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <CopyButton text={paletteText} label={t({ bn: 'প্যালেট কপি করুন', en: 'Copy palette' })} />
+              <button
+                type="button"
+                onClick={() => downloadPalette('eduvelto-palette.txt', paletteText, 'text/plain;charset=utf-8')}
+                style={{ minHeight: 36, padding: '0 14px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }}
+              >
+                {t({ bn: '.txt ডাউনলোড করুন', en: 'Download .txt' })}
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadPalette('eduvelto-palette.css', paletteCss, 'text/css;charset=utf-8')}
+                style={{ minHeight: 36, padding: '0 14px', borderRadius: 8, border: '1px solid var(--line)', background: 'var(--surface)', color: 'var(--heading)', fontWeight: 600, cursor: 'pointer' }}
+              >
+                {t({ bn: '.css ডাউনলোড করুন', en: 'Download .css' })}
+              </button>
+            </div>
+            <p style={noteStyle}>
+              {t({
+                bn: '.css ফাইলে রংগুলো CSS ভেরিয়েবল হিসেবে থাকে (--color-1, --color-2…) — ওয়েবসাইটের স্টাইলে সরাসরি ব্যবহার করা যায়।',
+                en: 'The .css file stores the colours as CSS variables (--color-1, --color-2…) — ready to use in a website stylesheet.',
+              })}
+            </p>
+          </div>
         </div>
       ) : null}
       <PrivacyNote />

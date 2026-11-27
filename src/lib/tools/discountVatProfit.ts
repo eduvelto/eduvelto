@@ -134,3 +134,28 @@ export function calculateProfit(input: ProfitInput): ProfitResult {
     markupPercent: input.costPrice === 0 ? null : roundPct((profit / input.costPrice) * 100),
   };
 }
+
+/**
+ * Reverse modes for the Profit Margin tool (landed 27 Nov 2026, A-tools).
+ * Hand-check: cost 800 + margin 20% -> selling 1000; selling 1000 + margin
+ * 20% -> cost 800. Margin must be < 100% (at 100% no finite price exists).
+ */
+export function sellingPriceForMargin(costPrice: number, marginPercent: number): number {
+  if (!Number.isFinite(costPrice) || costPrice < 0) {
+    throw new Error(`costPrice must be a finite number >= 0, got ${costPrice}`);
+  }
+  if (!Number.isFinite(marginPercent) || marginPercent < 0 || marginPercent >= 100) {
+    throw new Error(`marginPercent must be between 0 and 100 (exclusive), got ${marginPercent}`);
+  }
+  return roundMoney(costPrice / (1 - marginPercent / 100));
+}
+
+export function costForMargin(sellingPrice: number, marginPercent: number): number {
+  if (!Number.isFinite(sellingPrice) || sellingPrice < 0) {
+    throw new Error(`sellingPrice must be a finite number >= 0, got ${sellingPrice}`);
+  }
+  if (!Number.isFinite(marginPercent) || marginPercent < 0 || marginPercent >= 100) {
+    throw new Error(`marginPercent must be between 0 and 100 (exclusive), got ${marginPercent}`);
+  }
+  return roundMoney(sellingPrice * (1 - marginPercent / 100));
+}

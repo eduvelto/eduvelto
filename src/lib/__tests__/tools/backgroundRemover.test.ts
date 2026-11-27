@@ -9,6 +9,7 @@ import {
   shouldRemovePixel,
   toleranceSliderToDistance,
   removeBackgroundPixels,
+  flattenOnBackground,
   validateBackgroundImageFile,
 } from '../../tools/backgroundRemover';
 
@@ -130,6 +131,44 @@ describe('removeBackgroundPixels', () => {
     ).toThrow(/does not match/);
     expect(() =>
       removeBackgroundPixels(new Uint8ClampedArray(16), 0, 1, { r: 0, g: 0, b: 0 }, 10),
+    ).toThrow(/dimensions/);
+  });
+});
+
+describe('flattenOnBackground', () => {
+  it('2x1 image over white: transparent pixel becomes white, half-red becomes (255,127,127)', () => {
+    // px0 fully transparent red, px1 half-transparent red; bg white.
+    const data = new Uint8ClampedArray([255, 0, 0, 0, 255, 0, 0, 128]);
+    const out = flattenOnBackground(data, 2, 1, { r: 255, g: 255, b: 255 });
+    // px0 -> (255,255,255,255); px1 -> (255, round(0*0.502+255*0.498)=127, 127, 255).
+    expect([...out]).toEqual([255, 255, 255, 255, 255, 127, 127, 255]);
+  });
+
+  it('opaque pixels are unchanged and output is always fully opaque', () => {
+    const data = new Uint8ClampedArray([10, 20, 30, 255, 200, 100, 50, 255]);
+    const out = flattenOnBackground(data, 2, 1, { r: 0, g: 0, b: 0 });
+    expect([...out]).toEqual([10, 20, 30, 255, 200, 100, 50, 255]);
+  });
+
+  it('transparent pixel over black becomes exactly black', () => {
+    const data = new Uint8ClampedArray([123, 45, 67, 0]);
+    const out = flattenOnBackground(data, 1, 1, { r: 0, g: 0, b: 0 });
+    expect([...out]).toEqual([0, 0, 0, 255]);
+  });
+
+  it('does not mutate the input array', () => {
+    const data = new Uint8ClampedArray([255, 0, 0, 0]);
+    const out = flattenOnBackground(data, 1, 1, { r: 255, g: 255, b: 255 });
+    expect([...data]).toEqual([255, 0, 0, 0]);
+    expect([...out]).toEqual([255, 255, 255, 255]);
+  });
+
+  it('rejects mismatched data length and bad dimensions', () => {
+    expect(() =>
+      flattenOnBackground(new Uint8ClampedArray([0, 0, 0]), 1, 1, { r: 0, g: 0, b: 0 }),
+    ).toThrow(/does not match/);
+    expect(() =>
+      flattenOnBackground(new Uint8ClampedArray(16), 0, 1, { r: 0, g: 0, b: 0 }),
     ).toThrow(/dimensions/);
   });
 });

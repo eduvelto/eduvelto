@@ -1,23 +1,28 @@
-// Eduvelto — Background Remover (SIMPLE version) tool UI (100-Tools Project, Phase 2).
+// Eduvelto — Background Remover (SIMPLE + AI) tool UI (100-Tools Project, Phase 2).
 //
 // Renders inside ToolsDetailPage's PageShell (no own h1 / Breadcrumb).
-// Canvas solid-colour removal, 100% in the browser, FREE: a pixel goes
-// transparent when its colour is within the chosen tolerance of the
-// picked background colour. The AI version (ONNX model ~40 MB) is a
-// LATER batch — no model is loaded here and no model dependency exists.
+// Two modes: SIMPLE (canvas solid-colour removal, free) and AI (ONNX
+// model, landed 27 Nov 2026 — A-tools spec-07). The AI model file is
+// NOT shipped yet (owner to confirm the model; /models/bg-remover-v1.onnx
+// is a placeholder) — on load failure the UI says so honestly and
+// offers the simple remover on the same page. onnxruntime-web is loaded
+// ONLY by dynamic import() inside bgRemoverOnnx.ts, never statically.
 //
-// Pure colour logic lives in src/lib/tools/backgroundRemover.ts.
+// Pure colour logic lives in src/lib/tools/backgroundRemover.ts;
+// the AI loader lives in src/lib/tools/bgRemoverOnnx.ts.
 // File limit is 10 MB, with a clear error above it.
 
 import { useRef, useState, type CSSProperties, type MouseEvent } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import {
   BACKGROUND_REMOVER_MAX_BYTES,
+  flattenOnBackground,
   parseHexColor,
   removeBackgroundPixels,
   toleranceSliderToDistance,
   validateBackgroundImageFile,
 } from '../../lib/tools/backgroundRemover';
+import { BG_ONNX_CONFIG, loadBgModel, removeBackgroundAI } from '../../lib/tools/bgRemoverOnnx';
 
 const inputStyle: CSSProperties = {
   width: '100%',
@@ -178,6 +183,29 @@ export function BackgroundRemoverTool() {
   const [tolerance, setTolerance] = useState(20);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // New background (owner order, 27 Nov 2026): an optional solid colour
+  // to put behind the subject. '' = keep transparent. The cleaned
+  // pixels are kept so the background-changed version can be
+  // downloaded as a real file (PNG with the colour as pixels, JPG
+  // flattened onto the colour).
+  const [newBgColor, setNewBgColor] = useState('');
+  const [bgDownloadBusy, setBgDownloadBusy] = useState(false);
+  const [bgDownloadError, setBgDownloadError] = useState<string | null>(null);
+  const resultDataRef = useRef<{
+    data: Uint8ClampedArray;
+    width: number;
+    height: number;
+  } | null>(null);
+  // AI mode (A-tools spec-07, landed 27 Nov 2026).
+  const [mode, setMode] = useState<'simple' | 'ai'>('simple');
+  const [aiStatus, setAiStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
+  const [aiLoadedBytes, setAiLoadedBytes] = useState(0);
+  const [aiTotalBytes, setAiTotalBytes] = useState<number | null>(null);
+  const [aiFeather, setAiFeather] = useState(2);
+  const [aiBusy, setAiBusy] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
+  const [aiResultUrl, setAiResultUrl] = useState<string | null>(null);
+  const [aiResultBytes, setAiResultBytes] = useState<number | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
   function loadImageElement(blob: Blob): Promise<HTMLImageElement> {
@@ -199,6 +227,11 @@ export function BackgroundRemoverTool() {
   async function handleFileChange(next: File | null): Promise<void> {
     setResultUrl(null);
     setResultBytes(null);
+    setBgDownloadError(null);
+    resultDataRef.current = null;
+    setAiResultUrl(null);
+    setAiResultBytes(null);
+    setAiError(null);
     setOriginalUrl(null);
     setFile(null);
     imageRef.current = null;
@@ -238,6 +271,46 @@ export function BackgroundRemoverTool() {
     setBgColor(`#${toHex(px[0])}${toHex(px[1])}${toHex(px[2])}`);
   }
 
+  /** AI mode: load the model once (with progress), then run it on the image. */
+  async function handleAiRemove(): Promise<void> {
+    const img = imageRef.current;
+    if (!img || aiBusy) return;
+    setAiBusy(true);
+    setAiError(null);
+    setAiResultUrl(null);
+    setAiResultBytes(null);
+    try {
+      if (aiStatus !== 'ready') {
+        setAiStatus('loading');
+        await loadBgModel((p) => {
+          setAiLoadedBytes(p.loadedBytes);
+          setAiTotalBytes(p.totalBytes);
+        });
+        setAiStatus('ready');
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('No 2d canvas context');
+      ctx.drawImage(img, 0, 0);
+      const out = await removeBackgroundAI(canvas, { featherPx: aiFeather });
+      const blob = await new Promise<Blob>((resolve, reject) => {
+        out.toBlob(
+          (result) => (result ? resolve(result) : reject(new Error('Canvas export failed'))),
+          'image/png',
+        );
+      });
+      setAiResultUrl(URL.createObjectURL(blob));
+      setAiResultBytes(blob.size);
+    } catch (e) {
+      setAiStatus('error');
+      setAiError(e instanceof Error ? e.message : 'AI model could not be loaded');
+    } finally {
+      setAiBusy(false);
+    }
+  }
+
   async function handleRemove(): Promise<void> {
     const img = imageRef.current;
     if (!img || busy) return;
@@ -263,6 +336,9 @@ export function BackgroundRemoverTool() {
       const outImage = ctx.createImageData(canvas.width, canvas.height);
       outImage.data.set(cleaned);
       ctx.putImageData(outImage, 0, 0);
+      // Keep the cleaned pixels so the background-changed version can
+      // be downloaded later without re-running the removal.
+      resultDataRef.current = { data: cleaned, width: canvas.width, height: canvas.height };
       const blob = await new Promise<Blob>((resolve, reject) => {
         canvas.toBlob(
           (result) =>
@@ -277,6 +353,49 @@ export function BackgroundRemoverTool() {
       setError('failed');
     } finally {
       setBusy(false);
+    }
+  }
+
+  /**
+   * Download the result composited onto the chosen solid background.
+   * PNG keeps the solid background as real pixels; JPG is flattened
+   * onto the same colour (JPEG has no transparency). The file is built
+   * in the browser from the cleaned pixels — nothing is uploaded.
+   */
+  async function downloadWithBackground(format: 'png' | 'jpg'): Promise<void> {
+    const kept = resultDataRef.current;
+    if (!kept || !newBgColor || bgDownloadBusy) return;
+    setBgDownloadBusy(true);
+    setBgDownloadError(null);
+    try {
+      const flat = flattenOnBackground(kept.data, kept.width, kept.height, parseHexColor(newBgColor));
+      const canvas = document.createElement('canvas');
+      canvas.width = kept.width;
+      canvas.height = kept.height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('No 2d canvas context');
+      const image = ctx.createImageData(kept.width, kept.height);
+      image.data.set(flat);
+      ctx.putImageData(image, 0, 0);
+      const blob = await new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob(
+          (result) => (result ? resolve(result) : reject(new Error('Canvas export failed'))),
+          format === 'jpg' ? 'image/jpeg' : 'image/png',
+          format === 'jpg' ? 0.92 : undefined,
+        );
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `background-changed.${format === 'jpg' ? 'jpg' : 'png'}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch {
+      setBgDownloadError('failed');
+    } finally {
+      setBgDownloadBusy(false);
     }
   }
 
@@ -296,6 +415,26 @@ export function BackgroundRemoverTool() {
           {t({ bn: '১০০% ব্রাউজারে • কোনো আপলোড নয়', en: '100% in-browser • nothing uploaded' })}
         </span>
       </div>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 4 }} role="tablist" aria-label={t({ bn: 'ব্যাকগ্রাউন্ড সরানোর ধরন', en: 'Removal mode' })}>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mode === 'simple'}
+          style={mode === 'simple' ? presetChipActiveStyle : presetChipStyle}
+          onClick={() => setMode('simple')}
+        >
+          {t({ bn: 'সাধারণ (একরঙা)', en: 'Simple (solid colour)' })}
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={mode === 'ai'}
+          style={mode === 'ai' ? presetChipActiveStyle : presetChipStyle}
+          onClick={() => setMode('ai')}
+        >
+          {t({ bn: 'AI (যেকোনো ব্যাকগ্রাউন্ড) — বিটা', en: 'AI (any background) — beta' })}
+        </button>
+      </div>
       <div>
         <label style={labelStyle} htmlFor="bg-file">
           {t({ bn: 'ছবির ফাইল (সর্বোচ্চ ১০ MB)', en: 'Image file (max 10 MB)' })}
@@ -313,6 +452,8 @@ export function BackgroundRemoverTool() {
           {file.name} — {formatBytes(file.size)}
         </p>
       ) : null}
+      {mode === 'simple' ? (
+      <>
       <div
         style={{
           display: 'grid',
@@ -375,6 +516,51 @@ export function BackgroundRemoverTool() {
             {t({
               bn: 'বেশি মান হলে কাছাকাছি রংগুলোও সরবে; কম মান হলে শুধু হুবহু একই রং সরবে।',
               en: 'Higher values also remove near-matching colours; lower values remove only the exact colour.',
+            })}
+          </p>
+        </div>
+        <div>
+          <label style={labelStyle} htmlFor="bg-new-color">
+            {t({ bn: 'নতুন ব্যাকগ্রাউন্ডের রং (ঐচ্ছিক)', en: 'New background colour (optional)' })}
+          </label>
+          <input
+            id="bg-new-color"
+            style={{ ...inputStyle, padding: 4, height: 44 }}
+            type="color"
+            value={newBgColor || '#ffffff'}
+            onChange={(e) => setNewBgColor(e.target.value)}
+          />
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }} role="group" aria-label={t({ bn: 'নতুন ব্যাকগ্রাউন্ড বাছুন', en: 'Choose a new background' })}>
+            <button
+              type="button"
+              style={newBgColor === '' ? presetChipActiveStyle : presetChipStyle}
+              aria-pressed={newBgColor === ''}
+              onClick={() => setNewBgColor('')}
+            >
+              {t({ bn: 'স্বচ্ছ রাখুন', en: 'Keep transparent' })}
+            </button>
+            {(['#ffffff', '#000000', '#2563eb', '#16a34a'] as const).map((c) => (
+              <button
+                key={c}
+                type="button"
+                style={newBgColor === c ? presetChipActiveStyle : presetChipStyle}
+                aria-pressed={newBgColor === c}
+                onClick={() => setNewBgColor(c)}
+              >
+                {c === '#ffffff'
+                  ? t({ bn: 'সাদা', en: 'White' })
+                  : c === '#000000'
+                    ? t({ bn: 'কালো', en: 'Black' })
+                    : c === '#2563eb'
+                      ? t({ bn: 'নীল', en: 'Blue' })
+                      : t({ bn: 'সবুজ', en: 'Green' })}
+              </button>
+            ))}
+          </div>
+          <p style={noteStyle}>
+            {t({
+              bn: 'রং বাছলে ব্যাকগ্রাউন্ড সরানোর পর সেই রংসহ ছবিটি দেখতে ও ডাউনলোড করতে পারবেন (PNG ও JPG)।',
+              en: 'Pick a colour to preview and download the image with that background after removal (PNG and JPG).',
             })}
           </p>
         </div>
@@ -479,18 +665,182 @@ export function BackgroundRemoverTool() {
                     style={{ maxWidth: '100%', borderRadius: 4, display: 'block' }}
                   />
                 </div>
-                <a href={resultUrl} download="background-removed.png" style={downloadStyle}>
-                  {t({ bn: 'PNG ডাউনলোড করুন', en: 'Download PNG' })}
-                </a>
+                {newBgColor ? (
+                  <>
+                    <p style={{ margin: '12px 0 6px', fontSize: 14, fontWeight: 600, color: 'var(--heading)' }}>
+                      {t({ bn: 'ফলাফল (নতুন ব্যাকগ্রাউন্ডসহ)', en: 'Result (with new background)' })}
+                    </p>
+                    <div style={{ backgroundColor: newBgColor, borderRadius: 8, padding: 4 }}>
+                      <img
+                        src={resultUrl}
+                        alt={t({ bn: 'নতুন ব্যাকগ্রাউন্ডসহ ছবি', en: 'Image with new background' })}
+                        style={{ maxWidth: '100%', borderRadius: 4, display: 'block' }}
+                      />
+                    </div>
+                  </>
+                ) : null}
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  <a href={resultUrl} download="background-removed.png" style={downloadStyle}>
+                    {t({ bn: 'PNG ডাউনলোড করুন', en: 'Download PNG' })}
+                  </a>
+                  {newBgColor ? (
+                    <>
+                      <button
+                        type="button"
+                        style={{ ...downloadStyle, border: 'none', cursor: bgDownloadBusy ? 'wait' : 'pointer', fontSize: 14 }}
+                        onClick={() => void downloadWithBackground('png')}
+                        disabled={bgDownloadBusy}
+                      >
+                        {bgDownloadBusy
+                          ? t({ bn: 'তৈরি হচ্ছে…', en: 'Preparing…' })
+                          : t({ bn: 'PNG ডাউনলোড করুন (নতুন ব্যাকগ্রাউন্ডসহ)', en: 'Download PNG (with new background)' })}
+                      </button>
+                      <button
+                        type="button"
+                        style={{ ...downloadStyle, border: 'none', cursor: bgDownloadBusy ? 'wait' : 'pointer', fontSize: 14 }}
+                        onClick={() => void downloadWithBackground('jpg')}
+                        disabled={bgDownloadBusy}
+                      >
+                        {bgDownloadBusy
+                          ? t({ bn: 'তৈরি হচ্ছে…', en: 'Preparing…' })
+                          : t({ bn: 'JPG ডাউনলোড করুন (নতুন ব্যাকগ্রাউন্ডসহ)', en: 'Download JPG (with new background)' })}
+                      </button>
+                    </>
+                  ) : null}
+                </div>
+                {bgDownloadError ? (
+                  <p style={errorStyle} role="alert">
+                    {t({ bn: 'নতুন ব্যাকগ্রাউন্ডসহ ছবিটি ডাউনলোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not download the image with the new background — please try again.' })}
+                  </p>
+                ) : null}
               </div>
             ) : null}
           </div>
           <p style={noteStyle}>
             {t({
-              bn: 'এটি সাধারণ সংস্করণ: শুধু একরঙা ব্যাকগ্রাউন্ড সরায়। জটিল ব্যাকগ্রাউন্ডের জন্য AI সংস্করণ পরে আসবে।',
-              en: 'This is the simple version: it removes only a solid-colour background. An AI version for complex backgrounds will come later.',
+              bn: 'এটি সাধারণ সংস্করণ: শুধু একরঙা ব্যাকগ্রাউন্ড সরায়। জটিল ব্যাকগ্রাউন্ডের জন্য উপরের AI ট্যাবটি ব্যবহার করুন।',
+              en: 'This is the simple version: it removes only a solid-colour background. For complex backgrounds, use the AI tab above.',
             })}
           </p>
+        </div>
+      ) : null}
+      </>
+      ) : null}
+      {mode === 'ai' ? (
+        <div style={{ marginTop: 14 }}>
+          <p style={noteStyle}>
+            {t({
+              bn: `AI সংস্করণ যেকোনো ব্যাকগ্রাউন্ড সরায় — মানুষ, পণ্য বা পোষা প্রাণীর ছবিতে ভালো কাজ করে। মডেল: ${BG_ONNX_CONFIG.modelName}। প্রথমবার মডেলটি ডাউনলোড হয় (~২৫ MB), তারপর একই পাতায় আবার ডাউনলোড লাগে না।`,
+              en: `The AI version removes any background — best on photos of people, products or pets. Model: ${BG_ONNX_CONFIG.modelName}. The model downloads once (~25 MB) on first use, then not again on the same page.`,
+            })}
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12, marginTop: 12 }}>
+            <div>
+              <label style={labelStyle} htmlFor="bg-ai-feather">
+                {t({ bn: 'কিনারা নরম করুন (feather): ', en: 'Edge feather: ' })}
+                {aiFeather}px
+              </label>
+              <input
+                id="bg-ai-feather"
+                style={{ ...inputStyle, padding: '10px 0' }}
+                type="range"
+                min="0"
+                max="10"
+                value={aiFeather}
+                onChange={(e) => setAiFeather(Number(e.target.value))}
+              />
+              <p style={noteStyle}>
+                {t({
+                  bn: 'বেশি মান হলে কিনারা নরম হয় (চুলের ক্ষেত্রে ভালো); কম মান হলে কিনারা ধারালো থাকে।',
+                  en: 'Higher values soften the edge (good for hair); lower values keep it sharp.',
+                })}
+              </p>
+            </div>
+          </div>
+          {aiStatus === 'loading' ? (
+            <div style={{ marginTop: 12 }} role="status">
+              <p style={{ margin: '0 0 6px', fontSize: 14 }}>
+                {t({
+                  bn: `AI মডেল ডাউনলোড হচ্ছে… ${formatBytes(aiLoadedBytes)}${aiTotalBytes ? ` / ${formatBytes(aiTotalBytes)}` : ''}`,
+                  en: `Downloading AI model… ${formatBytes(aiLoadedBytes)}${aiTotalBytes ? ` / ${formatBytes(aiTotalBytes)}` : ''}`,
+                })}
+              </p>
+              <div style={{ height: 10, borderRadius: 999, background: 'var(--line)', overflow: 'hidden' }}>
+                <div
+                  style={{
+                    height: '100%',
+                    width: aiTotalBytes ? `${Math.min(100, Math.round((aiLoadedBytes / aiTotalBytes) * 100))}%` : '8%',
+                    background: 'var(--teal)',
+                    transition: 'width 0.2s',
+                  }}
+                />
+              </div>
+            </div>
+          ) : null}
+          <div style={{ marginTop: 14 }}>
+            <button
+              className="ev-btn ev-btn-primary"
+              type="button"
+              style={{ minHeight: 44 }}
+              onClick={() => void handleAiRemove()}
+              disabled={!file || aiBusy}
+            >
+              {aiBusy
+                ? t({ bn: 'AI কাজ করছে…', en: 'AI is working…' })
+                : aiStatus === 'ready'
+                  ? t({ bn: 'AI দিয়ে ব্যাকগ্রাউন্ড সরান', en: 'Remove background with AI' })
+                  : t({ bn: 'AI মডেল ডাউনলোড করে ব্যাকগ্রাউন্ড সরান', en: 'Download AI model & remove background' })}
+            </button>
+          </div>
+          {aiError ? (
+            <p style={errorStyle} role="alert">
+              {t({
+                bn: `AI মডেল লোড করা যায়নি: ${aiError} — মডেলটি এখনো প্রকাশিত হয়নি, বা নেটওয়ার্কে সমস্যা হয়েছে। সাধারণ ট্যাবে একরঙা ব্যাকগ্রাউন্ড সরানো যাবে।`,
+                en: `The AI model could not be loaded: ${aiError} — the model is not published yet, or there is a network problem. The simple tab can still remove a solid-colour background.`,
+              })}
+            </p>
+          ) : null}
+          {aiResultUrl && file && aiResultBytes !== null ? (
+            <div style={resultStyle} role="status">
+              <p style={headlineStyle}>{t({ bn: 'AI ব্যাকগ্রাউন্ড সরিয়েছে', en: 'AI removed the background' })}</p>
+              <div style={statGridStyle}>
+                <div style={statTileStyle}>
+                  <p style={statLabelStyle}>{t({ bn: 'আসল ছবি', en: 'Original' })}</p>
+                  <p style={statValueStyle}>{formatBytes(file.size)}</p>
+                </div>
+                <div style={statTileStyle}>
+                  <p style={statLabelStyle}>{t({ bn: 'ফলাফল (PNG)', en: 'Result (PNG)' })}</p>
+                  <p style={statValueStyle}>{formatBytes(aiResultBytes)}</p>
+                </div>
+              </div>
+              <div style={{ ...checkerStyle, borderRadius: 8, padding: 4, marginTop: 12 }}>
+                <img
+                  src={aiResultUrl}
+                  alt={t({ bn: 'AI দিয়ে ব্যাকগ্রাউন্ড ছাড়া ছবি', en: 'Image without background (AI)' })}
+                  style={{ maxWidth: '100%', borderRadius: 4, display: 'block' }}
+                />
+              </div>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}>
+                <a href={aiResultUrl} download="background-removed-ai.png" style={downloadStyle}>
+                  {t({ bn: 'PNG ডাউনলোড করুন (স্ট্যান্ডার্ড)', en: 'Download PNG (standard)' })}
+                </a>
+                <button
+                  type="button"
+                  style={{ ...downloadStyle, background: 'var(--muted)', cursor: 'not-allowed', border: 'none' }}
+                  disabled
+                  title={t({ bn: 'HD আউটপুট ৩০ সেকেন্ডের Rewarded Ad দেখার পর চালু হবে — AdSense অনুমোদনের পর।', en: 'HD output unlocks after a 30-second Rewarded Ad — after AdSense approval.' })}
+                >
+                  {t({ bn: 'HD ডাউনলোড (শীঘ্রই)', en: 'HD download (coming soon)' })}
+                </button>
+              </div>
+              <p style={noteStyle}>
+                {t({
+                  bn: 'স্ট্যান্ডার্ড PNG ফ্রি। HD আউটপুট ৩০ সেকেন্ডের Rewarded Ad দেখার পর চালু হবে — AdSense অনুমোদনের পর।',
+                  en: 'Standard PNG is free. HD output unlocks after a 30-second Rewarded Ad — after AdSense approval.',
+                })}
+              </p>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </section>

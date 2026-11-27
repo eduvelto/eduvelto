@@ -123,6 +123,46 @@ export function removeBackgroundPixels(
 }
 
 /**
+ * Composite RGBA pixel data onto a solid background colour: every
+ * pixel is alpha-blended over `bg` and the result is fully opaque.
+ * Transparent pixels become exactly `bg`; opaque pixels are
+ * unchanged. Returns a NEW array; the input is never mutated.
+ * `data` must have length width * height * 4.
+ *
+ * This is what the "download with new background" buttons use: the
+ * PNG keeps the solid background as real pixels, and the JPG is
+ * flattened onto the same colour (JPEG has no alpha channel).
+ *
+ * Hand-check (bg white, 2x1 image):
+ *   px0 (255,0,0,0)   -> (255,255,255,255) (fully transparent -> bg);
+ *   px1 (255,0,0,128) -> (255,127,127,255) (half red over white).
+ */
+export function flattenOnBackground(
+  data: Uint8ClampedArray,
+  width: number,
+  height: number,
+  bg: RgbColor,
+): Uint8ClampedArray {
+  if (!Number.isInteger(width) || width <= 0 || !Number.isInteger(height) || height <= 0) {
+    throw new Error(`Image dimensions must be positive integers, got ${width}x${height}`);
+  }
+  if (data.length !== width * height * 4) {
+    throw new Error(
+      `Pixel data length ${data.length} does not match ${width}x${height}x4`,
+    );
+  }
+  const out = new Uint8ClampedArray(data.length);
+  for (let i = 0; i < data.length; i += 4) {
+    const a = data[i + 3] / 255;
+    out[i] = Math.round(data[i] * a + bg.r * (1 - a));
+    out[i + 1] = Math.round(data[i + 1] * a + bg.g * (1 - a));
+    out[i + 2] = Math.round(data[i + 2] * a + bg.b * (1 - a));
+    out[i + 3] = 255;
+  }
+  return out;
+}
+
+/**
  * Validate an uploaded file for this tool. Returns an error key
  * ('not-image' | 'too-large') or null when the file is acceptable.
  * The limit is 10 MB — larger images risk freezing a low-end phone.

@@ -60,6 +60,11 @@ describe('BackgroundRemoverTool rendered HTML', () => {
     expect(html).toContain('value="#ffffff"');
     expect(html).toContain('value="20"');
     expect(html).toContain('১০ MB');
+    // New-background picker (owner order, 27 Nov 2026): renders with the
+    // form; "Keep transparent" is the default (no colour chosen yet).
+    expect(html).toContain('id="bg-new-color"');
+    expect(html).toContain('নতুন ব্যাকগ্রাউন্ডের রং');
+    expect(html).toContain('স্বচ্ছ রাখুন');
     expect(html).not.toContain('<h1');
   });
 
@@ -70,6 +75,9 @@ describe('BackgroundRemoverTool rendered HTML', () => {
     expect(html).toContain('Background colour');
     expect(html).toContain('Tolerance');
     expect(html).toContain('Remove background');
+    expect(html).toContain('id="bg-new-color"');
+    expect(html).toContain('New background colour');
+    expect(html).toContain('Keep transparent');
     expect(html).not.toContain('ব্যাকগ্রাউন্ড সরান');
   });
 
@@ -80,5 +88,8 @@ describe('BackgroundRemoverTool rendered HTML', () => {
     expect(html).not.toContain('<img');
     expect(html).not.toContain('background-removed.png');
     expect(html).not.toContain('Download PNG');
+    // No background-changed download buttons before a result exists.
+    expect(html).not.toContain('নতুন ব্যাকগ্রাউন্ডসহ');
+    expect(html).not.toContain('with new background');
   });
 });

@@ -56,6 +56,16 @@ describe('PdfCompressorTool rendered HTML', () => {
     expect(html).toContain('id="pdf-compress-file"');
     expect(html).toContain('ছোট করুন');
     expect(html).toContain('আপলোড হয় না');
+    // Customizable options (owner order, 27 Nov 2026): presets, level,
+    // image quality, DPI and target-size mode render with the form.
+    // Defaults are Balanced / Web (quality 70, DPI 150).
+    expect(html).toContain('প্রিসেট');
+    expect(html).toContain('কমপ্রেশন লেভেল');
+    expect(html).toContain('id="pdf-compress-quality"');
+    expect(html).toContain('id="pdf-compress-dpi"');
+    expect(html).toContain('লক্ষ্য আকারের নিচে নামান');
+    expect(html).toContain('value="70"');
+    expect(html).toContain('value="150"');
   });
 
   it('empty state shows no download link and no result', async () => {
@@ -71,5 +81,10 @@ describe('PdfCompressorTool rendered HTML', () => {
     expect(html).toContain('Compress PDF');
     expect(html).toContain('PDF file');
     expect(html).not.toContain('পিডিএফ ছোট করুন');
+    expect(html).toContain('Presets');
+    expect(html).toContain('Compression level');
+    expect(html).toContain('Image quality');
+    expect(html).toContain('Max image resolution');
+    expect(html).toContain('Compress to under a target size');
   });
 });

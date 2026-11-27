@@ -13119,6 +13119,216 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/background-remover" />
   </url>
   <url>
+    <loc>https://eduvelto.com/bn/tools/character-counter</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/character-counter" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/character-counter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/character-counter" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/reading-time-calculator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/reading-time-calculator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/reading-time-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/reading-time-calculator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/text-sorter</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/text-sorter" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/text-sorter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/text-sorter" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/stopwatch</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/stopwatch" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/stopwatch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/stopwatch" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/world-clock</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/world-clock" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/world-clock" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/world-clock" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/time-zone-converter</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/time-zone-converter" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/time-zone-converter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/time-zone-converter" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/date-difference-calculator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/date-difference-calculator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/date-difference-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/date-difference-calculator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/time-duration-calculator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/time-duration-calculator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/time-duration-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/time-duration-calculator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/unix-timestamp-converter</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/unix-timestamp-converter" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/unix-timestamp-converter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/unix-timestamp-converter" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/ideal-weight-calculator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/ideal-weight-calculator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/ideal-weight-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/ideal-weight-calculator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/flashcard-maker</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/flashcard-maker" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/flashcard-maker" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/flashcard-maker" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/random-name-picker</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/random-name-picker" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/random-name-picker" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/random-name-picker" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/profit-margin-calculator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/profit-margin-calculator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/profit-margin-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/profit-margin-calculator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/simple-interest-calculator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/simple-interest-calculator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/simple-interest-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/simple-interest-calculator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/savings-goal-calculator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/savings-goal-calculator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/savings-goal-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/savings-goal-calculator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/fuel-cost-calculator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/fuel-cost-calculator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/fuel-cost-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/fuel-cost-calculator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/pdf-rotate</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/pdf-rotate" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/pdf-rotate" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/pdf-rotate" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/pdf-page-number-adder</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/pdf-page-number-adder" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/pdf-page-number-adder" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/pdf-page-number-adder" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/csv-to-excel</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/csv-to-excel" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/csv-to-excel" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/csv-to-excel" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/excel-to-csv</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/excel-to-csv" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/excel-to-csv" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/excel-to-csv" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/json-to-csv</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/json-to-csv" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/json-to-csv" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/json-to-csv" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/xml-formatter</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/xml-formatter" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/xml-formatter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/xml-formatter" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/markdown-to-html</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/markdown-to-html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/markdown-to-html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/markdown-to-html" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/html-to-markdown</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/html-to-markdown" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/html-to-markdown" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/html-to-markdown" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/qr-code-generator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/qr-code-generator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/qr-code-generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/qr-code-generator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/qr-code-reader</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/qr-code-reader" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/qr-code-reader" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/qr-code-reader" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/barcode-generator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/barcode-generator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/barcode-generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/barcode-generator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/password-generator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/password-generator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/password-generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/password-generator" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/password-strength-checker</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/password-strength-checker" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/password-strength-checker" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/password-strength-checker" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/random-number-generator</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/random-number-generator" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/random-number-generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/random-number-generator" />
+  </url>
+  <url>
     <loc>https://eduvelto.com/bn/books/hons-211001</loc>
     <lastmod>2026-11-27</lastmod>
     <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/books/hons-211001" />

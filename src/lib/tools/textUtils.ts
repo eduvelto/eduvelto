@@ -169,3 +169,125 @@ export function reverseText(text: string, mode: ReverseMode): string {
   if (mode === 'lines') return text.split('\n').reverse().join('\n');
   return [...text].reverse().join('');
 }
+
+/* ------------------------------------------------------------ Text sorting */
+
+export type SortMode = 'az' | 'za' | 'numeric' | 'length' | 'length-desc' | 'reverse' | 'shuffle';
+
+export interface SortLinesOptions {
+  mode: SortMode;
+  dedupe?: 'none' | 'first' | 'last';
+  ignoreCase?: boolean;
+  trim?: boolean;
+  blanks?: 'keep' | 'remove' | 'one';
+}
+
+export interface SortedLines {
+  lines: string[];
+  totalLines: number;
+  nonBlank: number;
+  distinct: number;
+  duplicateOccurrences: number;
+  duplicateGroups: number;
+}
+
+function banglaAwareCompare(a: string, b: string): number {
+  // Bangla-aware collation: Intl.Collator('bn') orders Bangla correctly;
+  // falls back gracefully for mixed text. Never sort Bangla with English collation.
+  return new Intl.Collator('bn').compare(a, b);
+}
+
+/**
+ * Sort/dedupe lines. `shuffle` uses crypto randomness when available
+ * (falls back to Math.random only for ordering, never for secrets).
+ * Hand-check: ["10","2","1"] numeric -> ["1","2","10"].
+ */
+export function sortTextLines(text: string, options: SortLinesOptions): SortedLines {
+  const { mode, dedupe = 'none', ignoreCase = false, trim = false, blanks = 'keep' } = options;
+  let lines = text.split('\n');
+  const totalLines = lines.length;
+  if (trim) lines = lines.map((l) => l.trim());
+  const key = (l: string) => (ignoreCase ? l.toLowerCase() : l);
+  const counts = new Map<string, number>();
+  for (const l of lines) counts.set(key(l), (counts.get(key(l)) ?? 0) + 1);
+  const nonBlank = lines.filter((l) => l.trim() !== '').length;
+  const distinct = new Set(lines.filter((l) => l.trim() !== '').map(key)).size;
+  let duplicateOccurrences = 0;
+  let duplicateGroups = 0;
+  counts.forEach((c) => {
+    if (c > 1) {
+      duplicateGroups += 1;
+      duplicateOccurrences += c - 1;
+    }
+  });
+  if (dedupe !== 'none') {
+    const seen = new Set<string>();
+    const kept: string[] = [];
+    const order = dedupe === 'last' ? [...lines].reverse() : lines;
+    for (const l of order) {
+      const k = key(l);
+      if (l.trim() === '' || !seen.has(k)) {
+        seen.add(k);
+        kept.push(l);
+      }
+    }
+    lines = dedupe === 'last' ? kept.reverse() : kept;
+  }
+  if (blanks === 'remove') lines = lines.filter((l) => l.trim() !== '');
+  else if (blanks === 'one') {
+    const out: string[] = [];
+    let prevBlank = false;
+    for (const l of lines) {
+      const blank = l.trim() === '';
+      if (blank && prevBlank) continue;
+      out.push(l);
+      prevBlank = blank;
+    }
+    lines = out;
+  }
+  const numericAware = (a: string, b: string): number => {
+    const na = Number(a);
+    const nb = Number(b);
+    if (Number.isFinite(na) && Number.isFinite(nb)) return na - nb;
+    return banglaAwareCompare(a, b);
+  };
+  switch (mode) {
+    case 'az':
+      lines = [...lines].sort(banglaAwareCompare);
+      break;
+    case 'za':
+      lines = [...lines].sort((a, b) => banglaAwareCompare(b, a));
+      break;
+    case 'numeric':
+      lines = [...lines].sort(numericAware);
+      break;
+    case 'length':
+      lines = [...lines].sort((a, b) => a.length - b.length || banglaAwareCompare(a, b));
+      break;
+    case 'length-desc':
+      lines = [...lines].sort((a, b) => b.length - a.length || banglaAwareCompare(a, b));
+      break;
+    case 'reverse':
+      lines = [...lines].reverse();
+      break;
+    case 'shuffle': {
+      lines = [...lines];
+      const cryptoObj = typeof globalThis.crypto !== 'undefined' ? globalThis.crypto : null;
+      for (let idx = lines.length - 1; idx > 0; idx -= 1) {
+        let j: number;
+        if (cryptoObj) {
+          const buf = new Uint32Array(1);
+          cryptoObj.getRandomValues(buf);
+          j = buf[0] % (idx + 1);
+        } else {
+          j = Math.floor(Math.random() * (idx + 1));
+        }
+        [lines[idx], lines[j]] = [lines[j], lines[idx]];
+      }
+      break;
+    }
+    default:
+      break;
+  }
+  return { lines, totalLines, nonBlank, distinct, duplicateOccurrences, duplicateGroups };
+}
