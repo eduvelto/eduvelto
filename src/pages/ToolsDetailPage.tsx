@@ -260,6 +260,27 @@ import { LineNumberAdderTool } from './tools/LineNumberAdderTool';
 import { WheelSpinnerTool } from './tools/WheelSpinnerTool';
 import { CoinFlipDiceRollerTool } from './tools/CoinFlipDiceRollerTool';
 import { WordsToNumberConverterTool } from './tools/WordsToNumberConverterTool';
+import { VolumeConverterTool } from './tools/VolumeConverterTool';
+import { DataStorageConverterTool } from './tools/DataStorageConverterTool';
+import { DataTransferSpeedConverterTool } from './tools/DataTransferSpeedConverterTool';
+import { PressureConverterTool } from './tools/PressureConverterTool';
+import { EnergyConverterTool } from './tools/EnergyConverterTool';
+import { PowerConverterTool } from './tools/PowerConverterTool';
+import { AngleConverterTool } from './tools/AngleConverterTool';
+import { TimeConverterTool } from './tools/TimeConverterTool';
+import { FrequencyConverterTool } from './tools/FrequencyConverterTool';
+import { FuelEconomyConverterTool } from './tools/FuelEconomyConverterTool';
+import { CookingMeasurementConverterTool } from './tools/CookingMeasurementConverterTool';
+import { ShoeSizeConverterTool } from './tools/ShoeSizeConverterTool';
+import { ClothingSizeConverterTool } from './tools/ClothingSizeConverterTool';
+import { DpiPpiCalculatorTool } from './tools/DpiPpiCalculatorTool';
+import { AspectRatioCalculatorTool } from './tools/AspectRatioCalculatorTool';
+import { PxToRemConverterTool } from './tools/PxToRemConverterTool';
+import { OnlineAlarmClockTool } from './tools/OnlineAlarmClockTool';
+import { WeekNumberCalculatorTool } from './tools/WeekNumberCalculatorTool';
+import { LeapYearCheckerTool } from './tools/LeapYearCheckerTool';
+import { JulianDateConverterTool } from './tools/JulianDateConverterTool';
+import { BanglaDateConverterTool } from './tools/BanglaDateConverterTool';
 import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
@@ -500,6 +521,28 @@ const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'wheel-spinner': WheelSpinnerTool,
   'coin-flip-dice-roller': CoinFlipDiceRollerTool,
   'words-to-number-converter': WordsToNumberConverterTool,
+  // Converters batch (21, 27 Nov 2026)
+  'volume-converter': VolumeConverterTool,
+  'data-storage-converter': DataStorageConverterTool,
+  'data-transfer-speed-converter': DataTransferSpeedConverterTool,
+  'pressure-converter': PressureConverterTool,
+  'energy-converter': EnergyConverterTool,
+  'power-converter': PowerConverterTool,
+  'angle-converter': AngleConverterTool,
+  'time-converter': TimeConverterTool,
+  'frequency-converter': FrequencyConverterTool,
+  'fuel-economy-converter': FuelEconomyConverterTool,
+  'cooking-measurement-converter': CookingMeasurementConverterTool,
+  'shoe-size-converter': ShoeSizeConverterTool,
+  'clothing-size-converter': ClothingSizeConverterTool,
+  'dpi-ppi-calculator': DpiPpiCalculatorTool,
+  'aspect-ratio-calculator': AspectRatioCalculatorTool,
+  'px-to-rem-converter': PxToRemConverterTool,
+  'online-alarm-clock': OnlineAlarmClockTool,
+  'week-number-calculator': WeekNumberCalculatorTool,
+  'leap-year-checker': LeapYearCheckerTool,
+  'julian-date-converter': JulianDateConverterTool,
+  'bangla-date-converter': BanglaDateConverterTool,
 };
 
 const gridStyle: CSSProperties = {
