@@ -116,13 +116,13 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03 + 18:01)', () => {
 
   it('rotates ALL our real features, each linked to its page', async () => {
     const features = featureItems();
-    // 12 core features + 257 live tools (owner 27 Nov 2026: every
+    // 12 core features + 267 live tools (owner 27 Nov 2026: every
     // feature in the banner, one by one; Lab Test Checker joined at
     // the 27 Nov deploy — owner lifted the MBBS-review gate 12:13;
     // 30 A-tools landed 27 Nov 2026; PDF to Word joined 27 Nov 2026;
-    // Math 25 + Text 24 + Converters 21 + Finance/Health 15 batches landed 27 Nov 2026)
-    // = 269 feature items.
-    expect(features.length).toBe(269);
+    // Math 25 + Text 24 + Converters 21 + Finance/Health 15 + Main 10 batches landed 27 Nov 2026)
+    // = 279 feature items.
+    expect(features.length).toBe(279);
     // The 12 core features (first 12, in rotation order).
     const core = features.slice(0, 12);
     expect(core.map((f) => f.id)).toEqual([
@@ -157,13 +157,13 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03 + 18:01)', () => {
     expect(htmlEn).toContain('23,259 questions');
   });
 
-  it('rotates all 257 live tools, one item each — including the Lab Test Checker (owner lifted the MBBS-review gate 27 Nov 12:13)', async () => {
+  it('rotates all 267 live tools, one item each — including the Lab Test Checker (owner lifted the MBBS-review gate 27 Nov 12:13)', async () => {
     const { TICKER_TOOL_ITEMS } = await import('../AnnouncementTicker');
-    expect(TICKER_TOOL_ITEMS.length).toBe(257);
+    expect(TICKER_TOOL_ITEMS.length).toBe(267);
     // Every tool item links to its real /tools/<slug> page.
     const { TOOLS_META } = await import('../../lib/toolsMeta');
     const liveSlugs = TOOLS_META.map((t) => t.slug);
-    expect(liveSlugs.length).toBe(257);
+    expect(liveSlugs.length).toBe(267);
     expect(TICKER_TOOL_ITEMS.map((t) => t.href)).toEqual(
       liveSlugs.map((s) => `/tools/${s}`),
     );

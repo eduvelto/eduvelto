@@ -296,6 +296,16 @@ import { CtrCalculatorTool } from './tools/CtrCalculatorTool';
 import { EngagementRateCalculatorTool } from './tools/EngagementRateCalculatorTool';
 import { YoutubeMoneyCalculatorTool } from './tools/YoutubeMoneyCalculatorTool';
 import { AdsenseRevenueCalculatorTool } from './tools/AdsenseRevenueCalculatorTool';
+import { WeatherTool } from './tools/WeatherTool';
+import { TranslateTool } from './tools/TranslateTool';
+import { FullFormsTool } from './tools/FullFormsTool';
+import { MathPhysicsFormulasTool } from './tools/MathPhysicsFormulasTool';
+import { PeriodicTableTool } from './tools/PeriodicTableTool';
+import { CountryCallingCodesTool } from './tools/CountryCallingCodesTool';
+import { DailyQuotesTool } from './tools/DailyQuotesTool';
+import { HtmlEntityTool } from './tools/HtmlEntityTool';
+import { CsvToJsonTool } from './tools/CsvToJsonTool';
+import { SqlFormatterTool } from './tools/SqlFormatterTool';
 import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
@@ -574,6 +584,17 @@ const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'engagement-rate-calculator': EngagementRateCalculatorTool,
   'youtube-money-calculator': YoutubeMoneyCalculatorTool,
   'adsense-revenue-calculator': AdsenseRevenueCalculatorTool,
+  // Main tables batch (10, 27 Nov 2026)
+  'weather': WeatherTool,
+  'translate': TranslateTool,
+  'full-forms-abbreviations': FullFormsTool,
+  'math-physics-formulas': MathPhysicsFormulasTool,
+  'periodic-table': PeriodicTableTool,
+  'country-calling-codes': CountryCallingCodesTool,
+  'daily-quotes-wishes': DailyQuotesTool,
+  'html-entity-encoder-decoder': HtmlEntityTool,
+  'csv-to-json-converter': CsvToJsonTool,
+  'sql-formatter': SqlFormatterTool,
 };
 
 const gridStyle: CSSProperties = {

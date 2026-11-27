@@ -831,7 +831,7 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'steps-to-calories-calculator': 'flame',
   'dog-age-calculator': 'heart',
   'cat-age-calculator': 'heart',
-  // Education & Student (36)
+  // Education & Student (38)
   'ssc-hsc-gpa-calculator': 'gradCap',
   'nu-cgpa-calculator': 'openBook',
   'international-gpa-calculator': 'globe',
@@ -869,6 +869,9 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'probability-calculator': 'chartCheck',
   'binary-hex-octal-calculator': 'code',
   'matrix-calculator': 'tableGrid',
+  // Main tables batch (10, 27 Nov 2026)
+  'math-physics-formulas': 'openBook',
+  'periodic-table': 'tableGrid',
   // Job & Career (10)
   'govt-job-age-calculator': 'idCard',
   'bcs-marks-calculator': 'trophy',
@@ -892,7 +895,7 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'assignment-cover-generator': 'bookStar',
   'percentage-converter': 'convert',
   'random-name-picker': 'users',
-  // Text, Language & Writing (43)
+  // Text, Language & Writing (44)
   'bijoy-to-unicode-converter': 'translate',
   'unicode-to-bijoy-converter': 'translate',
   'word-counter': 'countDoc',
@@ -937,7 +940,9 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'wheel-spinner': 'pie',
   'coin-flip-dice-roller': 'sparkles',
   'words-to-number-converter': 'convert',
-  // Developer & Web (23)
+  // Main tables batch (10, 27 Nov 2026)
+  'translate': 'translate',
+  // Developer & Web (26)
   'json-formatter': 'braces',
   'code-minifier-beautifier': 'code',
   'base64-encoder-decoder': 'code',
@@ -961,7 +966,11 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'html-to-markdown': 'diffDocs',
   'password-generator': 'key',
   'password-strength-checker': 'docLock',
-  // Daily Life, Islamic & Utility (51)
+  // Main tables batch (10, 27 Nov 2026)
+  'html-entity-encoder-decoder': 'code',
+  'csv-to-json-converter': 'braces',
+  'sql-formatter': 'braces',
+  // Daily Life, Islamic & Utility (55)
   'prayer-times': 'mosque',
   'hijri-date-converter': 'moonCalendar',
   'daily-quran-verse': 'openBook',
@@ -1015,6 +1024,11 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'leap-year-checker': 'calendarCheck',
   'julian-date-converter': 'calendarCheck',
   'bangla-date-converter': 'moonCalendar',
+  // Main tables batch (10, 27 Nov 2026)
+  'weather': 'sunrise',
+  'full-forms-abbreviations': 'openBook',
+  'country-calling-codes': 'phonePlus',
+  'daily-quotes-wishes': 'quote',
   // Video & Music (5)
   'video-compressor': 'filmCompress',
   'video-trimmer': 'scissors',
