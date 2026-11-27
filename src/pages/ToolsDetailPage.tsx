@@ -30,7 +30,8 @@ import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, LinkButton } from '../components/ui';
 import { toolBySlug } from '../lib/toolsMeta';
 import { toolGuideBySlug, toolGuideSectionsBySlug } from '../lib/toolsGuides';
-import { langUrl } from '../lib/langRouting';
+import { faqPageJsonLd, relatedToolsFor } from '../lib/toolSeo';
+import { langUrl, SITE_URL } from '../lib/langRouting';
 import { ToolIcon } from '../components/ToolIcon';
 import AdSlot from '../components/AdSlot';
 import LifePdfToolsPage from './LifePdfToolsPage';
@@ -557,9 +558,14 @@ export default function ToolsDetailPage() {
   const guide = toolGuideBySlug(meta.slug);
   const guideSections = toolGuideSectionsBySlug(meta.slug);
   const guideText = guide ? (lang === 'en' ? guide.guideEn : guide.guideBn) : null;
-  const related = meta.relatedSlugs
-    .map((relatedSlug) => toolBySlug(relatedSlug))
-    .filter((relatedMeta): relatedMeta is NonNullable<typeof relatedMeta> => Boolean(relatedMeta));
+  // Tool-SEO program (27 Nov 2026): 5 related tools, same-category first.
+  const related = relatedToolsFor(meta, 5);
+  // FAQPage JSON-LD from this tool's structured guide (same canonical
+  // as resolveRouteSeo). Renders only when the guide has FAQs; the
+  // body <script> is picked up by SSR/prerender like the head tags.
+  const faqJsonLd = guideSections
+    ? faqPageJsonLd(guideSections[lang].faq, `${SITE_URL}/${lang}/tools/${meta.slug}`)
+    : undefined;
   const ToolUI = TOOL_COMPONENTS[meta.slug];
 
   return (
@@ -603,6 +609,9 @@ export default function ToolsDetailPage() {
           </h2>
           <p style={guideStyle}>{guideText}</p>
         </>
+      ) : null}
+      {faqJsonLd ? (
+        <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
       ) : null}
       <AdSlot placement="in-content-2" />
       {related.length > 0 ? (
