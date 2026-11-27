@@ -96,7 +96,11 @@ function isPdfFile(file: File): boolean {
   return file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
 }
 
-export function PdfCompressorTool() {
+export function PdfCompressorTool({
+  // Optional entry point (used by tests to render the target-visible
+  // state): the UI itself toggles this via the "Custom size" chip.
+  initialTargetEnabled = false,
+}: { initialTargetEnabled?: boolean } = {}) {
   const { t } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
@@ -111,7 +115,7 @@ export function PdfCompressorTool() {
   const [quality, setQuality] = useState(70);
   const [maxDpi, setMaxDpi] = useState(150);
   const [preset, setPreset] = useState<PdfCompressPreset | 'custom'>('web');
-  const [targetEnabled, setTargetEnabled] = useState(false);
+  const [targetEnabled, setTargetEnabled] = useState(initialTargetEnabled);
   const [targetValue, setTargetValue] = useState('');
   const [targetUnit, setTargetUnit] = useState<'KB' | 'MB'>('MB');
   const [targetMet, setTargetMet] = useState<boolean | null>(null);
@@ -122,9 +126,17 @@ export function PdfCompressorTool() {
   function applyPreset(next: PdfCompressPreset): void {
     const p = PDF_COMPRESS_PRESETS[next];
     setPreset(next);
+    setTargetEnabled(false);
     setLevel(p.level);
     setQuality(Math.round(p.imageQuality * 100));
     setMaxDpi(p.maxDpi);
+  }
+
+  // "Custom size" sits alongside the presets (owner order, 27 Nov 2026):
+  // picking it turns the target-size mode on and shows its inputs.
+  function applyCustomSize(): void {
+    setPreset('custom');
+    setTargetEnabled(true);
   }
 
   function applyLevel(next: PdfCompressionLevel): void {
@@ -225,7 +237,15 @@ export function PdfCompressorTool() {
               {t({ bn: PDF_COMPRESS_PRESETS[p].labelBn, en: PDF_COMPRESS_PRESETS[p].labelEn })}
             </button>
           ))}
-          {preset === 'custom' ? (
+          <button
+            type="button"
+            style={chipStyle(preset === 'custom' && targetEnabled)}
+            aria-pressed={preset === 'custom' && targetEnabled}
+            onClick={applyCustomSize}
+          >
+            {t({ bn: 'কাস্টম সাইজ', en: 'Custom size' })}
+          </button>
+          {preset === 'custom' && !targetEnabled ? (
             <span style={{ alignSelf: 'center', fontSize: 14, color: 'var(--muted)' }}>
               {t({ bn: 'কাস্টম সেটিংস', en: 'Custom settings' })}
             </span>
@@ -295,36 +315,34 @@ export function PdfCompressorTool() {
           </p>
         </div>
         <div>
-          <label style={{ display: 'flex', gap: 6, alignItems: 'center', fontSize: 15, fontWeight: 600, color: 'var(--heading)' }}>
-            <input
-              type="checkbox"
-              checked={targetEnabled}
-              onChange={(e) => setTargetEnabled(e.target.checked)}
-            />
-            {t({ bn: 'লক্ষ্য আকারের নিচে নামান', en: 'Compress to under a target size' })}
-          </label>
           {targetEnabled ? (
-            <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-              <input
-                style={inputStyle}
-                type="number"
-                min="1"
-                inputMode="decimal"
-                value={targetValue}
-                onChange={(e) => setTargetValue(e.target.value)}
-                placeholder="500"
-                aria-label={t({ bn: 'লক্ষ্য আকার', en: 'Target size' })}
-              />
-              <select
-                style={{ ...inputStyle, maxWidth: 110 }}
-                value={targetUnit}
-                onChange={(e) => setTargetUnit(e.target.value as 'KB' | 'MB')}
-                aria-label={t({ bn: 'একক', en: 'Unit' })}
-              >
-                <option value="KB">KB</option>
-                <option value="MB">MB</option>
-              </select>
-            </div>
+            <>
+              <label style={labelStyle} htmlFor="pdf-compress-target">
+                {t({ bn: 'লক্ষ্য আকার', en: 'Target size' })}
+              </label>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <input
+                  id="pdf-compress-target"
+                  style={inputStyle}
+                  type="number"
+                  min="1"
+                  inputMode="decimal"
+                  value={targetValue}
+                  onChange={(e) => setTargetValue(e.target.value)}
+                  placeholder="500"
+                  aria-label={t({ bn: 'লক্ষ্য আকার', en: 'Target size' })}
+                />
+                <select
+                  style={{ ...inputStyle, maxWidth: 110 }}
+                  value={targetUnit}
+                  onChange={(e) => setTargetUnit(e.target.value as 'KB' | 'MB')}
+                  aria-label={t({ bn: 'একক', en: 'Unit' })}
+                >
+                  <option value="KB">KB</option>
+                  <option value="MB">MB</option>
+                </select>
+              </div>
+            </>
           ) : null}
           <p style={noteStyle}>
             {t({ bn: 'লক্ষ্য দিলে টুলটি মান ধাপে ধাপে কমিয়ে লক্ষ্যে পৌঁছানোর চেষ্টা করে। না পারলে সবচেয়ে ছোট সংস্করণটি দেয় ও জানিয়ে দেয়।', en: 'With a target, the tool steps the quality down to try to hit it. If it cannot, it gives the smallest version and says so.' })}

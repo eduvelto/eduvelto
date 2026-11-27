@@ -5,17 +5,24 @@
 // renders (PDF file input + compress button) in bn AND en, and that
 // the empty state shows no download link and no bogus before/after
 // sizes. The async compress logic is covered by the pdfCompressor
-// logic tests; this file covers the UI wiring only.
+// logic tests; this file covers the UI wiring only — including the
+// "Custom size" chip (owner order, 27 Nov 2026): it renders visibly
+// alongside the presets in both languages, the target inputs stay
+// hidden until it is picked, and the target-visible state (the exact
+// state the chip's click handler sets, rendered here via the
+// component's initialTargetEnabled entry point) shows the number
+// field + KB/MB selector. There is no jsdom in this repo, so the
+// click itself is not simulated; the engine's honest target-met /
+// target-missed states are covered by pdfCompressor.test.ts.
 
 import { describe, expect, it, vi } from 'vitest';
 import { renderToString } from 'react-dom/server';
-import React from 'react';
 
 vi.mock('../../../lib/auth', () => ({
   useAuth: () => ({ user: null, profile: null, saveProfile: vi.fn(() => Promise.resolve()) }),
 }));
 
-async function renderTool(storedLang?: string): Promise<string> {
+async function renderTool(storedLang?: string, initialTargetEnabled = false): Promise<string> {
   const store: Record<string, string> = {};
   if (storedLang) store['eduvelto-language'] = storedLang;
   (globalThis as unknown as { window: unknown }).window = {
@@ -39,8 +46,13 @@ async function renderTool(storedLang?: string): Promise<string> {
   const { PdfCompressorTool } = toolMod;
   const { LanguageProvider } = ctxMod;
   try {
+    // JSX (not React.createElement): createElement's overloads do not
+    // accept props on a component whose props parameter has a default
+    // value, while JSX checks the same component fine.
     return renderToString(
-      React.createElement(LanguageProvider, null, React.createElement(PdfCompressorTool)),
+      <LanguageProvider>
+        <PdfCompressorTool initialTargetEnabled={initialTargetEnabled} />
+      </LanguageProvider>,
     );
   } finally {
     delete (globalThis as unknown as { window?: unknown }).window;
@@ -63,9 +75,38 @@ describe('PdfCompressorTool rendered HTML', () => {
     expect(html).toContain('কমপ্রেশন লেভেল');
     expect(html).toContain('id="pdf-compress-quality"');
     expect(html).toContain('id="pdf-compress-dpi"');
-    expect(html).toContain('লক্ষ্য আকারের নিচে নামান');
+    // "Custom size" sits visibly alongside the presets — not behind a
+    // toggle — and the target inputs stay hidden until it is picked.
+    expect(html).toContain('ইমেইল (সবচেয়ে ছোট)');
+    expect(html).toContain('ওয়েব');
+    expect(html).toContain('প্রিন্ট মান');
+    expect(html).toContain('কাস্টম সাইজ');
+    expect(html).not.toContain('id="pdf-compress-target"');
+    expect(html).toContain('লক্ষ্য দিলে টুলটি মান ধাপে ধাপে কমিয়ে');
     expect(html).toContain('value="70"');
     expect(html).toContain('value="150"');
+  });
+
+  it('shows the target number + unit inputs in the Custom-size state (Bangla)', async () => {
+    const html = await renderTool(undefined, true);
+    expect(html).toContain('কাস্টম সাইজ');
+    expect(html).toContain('id="pdf-compress-target"');
+    expect(html).toContain('type="number"');
+    expect(html).toContain('placeholder="500"');
+    expect(html).toContain('>KB<');
+    expect(html).toContain('>MB<');
+    expect(html).toContain('লক্ষ্য আকার');
+  });
+
+  it('shows the target number + unit inputs in the Custom-size state (English)', async () => {
+    const html = await renderTool('en', true);
+    expect(html).toContain('Custom size');
+    expect(html).toContain('id="pdf-compress-target"');
+    expect(html).toContain('type="number"');
+    expect(html).toContain('placeholder="500"');
+    expect(html).toContain('>KB<');
+    expect(html).toContain('>MB<');
+    expect(html).toContain('Target size');
   });
 
   it('empty state shows no download link and no result', async () => {
@@ -85,6 +126,12 @@ describe('PdfCompressorTool rendered HTML', () => {
     expect(html).toContain('Compression level');
     expect(html).toContain('Image quality');
     expect(html).toContain('Max image resolution');
-    expect(html).toContain('Compress to under a target size');
+    // "Custom size" sits visibly alongside the presets — not behind a
+    // toggle — and the target inputs stay hidden until it is picked.
+    expect(html).toContain('Email (smallest)');
+    expect(html).toContain('Web');
+    expect(html).toContain('Print quality');
+    expect(html).toContain('Custom size');
+    expect(html).not.toContain('id="pdf-compress-target"');
   });
 });
