@@ -33,6 +33,21 @@ export async function onRequest(context) {
     return Response.redirect(`https://eduvelto.com${url.pathname}${url.search}`, 301);
   }
   const path = url.pathname;
+  // 28 Nov 2026 (completeness audit, owner-approved duplicate removal):
+  // the removed duplicate tools 301 to their canonical tools. This lives
+  // HERE, not in public/_redirects — the catch-all Function intercepts
+  // every request before _redirects rules are evaluated (verified live
+  // 28 Nov 2026: _redirects rules for these URLs returned 200, not 301).
+  const TOOL_REDIRECTS = {
+    '/bn/tools/pdf-page-extractor': '/bn/tools/pdf-splitter',
+    '/en/tools/pdf-page-extractor': '/en/tools/pdf-splitter',
+    '/bn/tools/jpg-to-pdf': '/bn/tools/image-to-pdf',
+    '/en/tools/jpg-to-pdf': '/en/tools/image-to-pdf',
+  };
+  const cleanPath = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+  if (TOOL_REDIRECTS[cleanPath]) {
+    return Response.redirect(new URL(`${TOOL_REDIRECTS[cleanPath]}${url.search}`, url), 301);
+  }
   // Static asset (has a file extension) — let Pages serve it normally.
   if (/\.[a-zA-Z0-9]+$/.test(path)) {
     return context.next();

@@ -9,9 +9,9 @@
 # incoming request"). Do not re-add it.
 # Genuine URL moves go here as explicit static rules, e.g.:
 # /old-path /new-path 301
-# 28 Nov 2026 (completeness audit, owner-approved duplicate removal):
-# the removed duplicate tools 301-redirect to their canonical tools.
-/bn/tools/pdf-page-extractor /bn/tools/pdf-splitter 301
-/en/tools/pdf-page-extractor /en/tools/pdf-splitter 301
-/bn/tools/jpg-to-pdf /bn/tools/image-to-pdf 301
-/en/tools/jpg-to-pdf /en/tools/image-to-pdf 301
+# NOTE (28 Nov 2026, verified live): the catch-all Pages Function
+# (functions/[[path]].js) intercepts every request BEFORE _redirects
+# rules are evaluated, so rules added here do NOT fire — URL moves
+# must be implemented in the Function's onRequest instead. The
+# duplicate-tool redirects (pdf-page-extractor -> pdf-splitter,
+# jpg-to-pdf -> image-to-pdf) live there.
