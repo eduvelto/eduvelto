@@ -52,8 +52,9 @@
 //   Reads the `books` + `chapters` collections via the Firestore
 //   REST `documents:runQuery` endpoint with a
 //   `reviewStatus == 'Published'` filter (chapters additionally
-//   `isPreview == true`, per the gatedContentRead rule), paged
-//   (limit 300, offset). The plain `documents.list` endpoint 403s unauthenticated: the
+//   `isPreview == true`, per the gatedContentRead rule), cursor-paged
+//   (limit 300, startAfter on __name__ — offset paging billed one read
+//   per skipped doc). The plain `documents.list` endpoint 403s unauthenticated: the
 //   live rules allow a list only when the query guarantees
 //   contentRead() (isPublished OR moderator OR author) for every
 //   returned doc, and an unfiltered list cannot prove that (verified
@@ -69,7 +70,10 @@
 // - dist/{bn,en}/books/<id>/index.html for every book (both langs)
 // - dist/index.html — a copy of the /bn home (the root / 301s to
 //   /bn in firebase.json; this copy is the belt-and-braces shell)
-// - dist/404.html — the NotFound page (noindex, from the fallback SEO)
+// - NO dist/404.html (P0-1, 27 Nov 2026): a top-level 404.html
+//   disables Pages' native SPA fallback — unknown paths and
+//   non-prerendered SPA routes get 200 + the shell + the client
+//   NotFoundPage (noindex) instead.
 // - dist/robots.txt — Allow /, Disallow /app/ + /login (+ the other
 //   login-gated / noindex routes), Sitemap line. NOTE: /books/ is
 //   deliberately NOT disallowed any more — book pages are public
@@ -80,7 +84,8 @@
 // - __INITIAL_DATA__ (Phase 2b, 25 Nov 2026): book pages carry a
 //   JSON data block with the book + its public preview chapters;
 //   /books + /library carry page 1 (50 books); /class carries the
-//   five class stats. The client reads it first and renders with
+//   per-level counts; / (home) carries the home aggregates (counts
+//   by type, Honours/Masters, total, top-8 popular) — P0-2. The client reads it first and renders with
 //   zero Firestore reads. The block is type="application/json"
 //   (CSP-safe — see src/lib/initialData.ts); never lesson/question
 //   content, never the whole library.
@@ -630,12 +635,18 @@ export function buildClassLevelCounts(books) {
  *  with the Published filter — chapters pass `isPreview == true`,
  *  because their rule is gatedContentRead() (contentRead AND
  *  (signedIn OR isPreview)), so an unauthenticated chapters list
- *  must guarantee isPreview too. Paged (limit 300, offset, ordered
- *  by __name__ for stable pages). 429 fails fast — quota, retry
- *  later or use --books-file; it never writes partial pages. */
+ *  must guarantee isPreview too. Cursor-paged (limit 300, startAfter
+ *  on __name__ — offset paging billed one read per skipped doc, 900
+ *  wasted reads per books fetch; see fetchCollectionFromRest). 429
+ *  fails fast — quota, retry later or use --books-file; it never
+ *  writes partial pages. */
 export async function fetchCollectionFromRest(projectId, collection, parseDoc, fetchImpl = fetch, extraFieldFilters = []) {
   const docs = [];
-  let offset = 0;
+  // Cursor paging on __name__ (the query orders by it ASC): unlike
+  // `offset`, a startAfter cursor bills ZERO reads for skipped docs.
+  // Offset paging paid 900 wasted reads per books fetch (offsets
+  // 0+300+600); cursor paging pays exactly the returned docs.
+  let lastName = null;
   const filters = [
     {
       fieldFilter: {
@@ -650,20 +661,25 @@ export async function fetchCollectionFromRest(projectId, collection, parseDoc, f
   ];
   const where = filters.length === 1 ? filters[0] : { compositeFilter: { op: 'AND', filters } };
   for (;;) {
+    const structuredQuery = {
+      from: [{ collectionId: collection }],
+      where,
+      orderBy: [{ field: { fieldPath: '__name__' }, direction: 'ASCENDING' }],
+      limit: 300,
+    };
+    if (lastName !== null) {
+      // startAfter a document reference: the value is the full resource
+      // name `projects/{project}/databases/(default)/documents/{collection}/{id}`.
+      structuredQuery.startAfter = {
+        values: [{ referenceValue: lastName }],
+      };
+    }
     const res = await fetchImpl(
       `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents:runQuery`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          structuredQuery: {
-            from: [{ collectionId: collection }],
-            where,
-            orderBy: [{ field: { fieldPath: '__name__' }, direction: 'ASCENDING' }],
-            limit: 300,
-            offset,
-          },
-        }),
+        body: JSON.stringify({ structuredQuery }),
       },
     );
     if (res.status === 429) {
@@ -683,18 +699,18 @@ export async function fetchCollectionFromRest(projectId, collection, parseDoc, f
     for (const el of page) {
       if (el.document) {
         docs.push(parseDoc(el.document));
+        lastName = el.document.name;
         count += 1;
       }
     }
     if (count < 300) break;
-    offset += count;
   }
   return docs;
 }
 
 /** Live REST read of the `books` collection (Spark, public read).
  *  Published rows only, via runQuery (see fetchCollectionFromRest).
- *  Paged (limit 300, offset). 429 fails fast — quota, retry later or
+ *  Cursor-paged (limit 300, startAfter on __name__). 429 fails fast — quota, retry later or
  *  use --books-file. Returns books sorted by id. */
 export async function fetchBooksFromRest(projectId, fetchImpl = fetch) {
   const books = await fetchCollectionFromRest(projectId, 'books', parseFirestoreRestDoc, fetchImpl);
@@ -1022,6 +1038,52 @@ export function buildLibraryPayload(path, books) {
 export function buildClassIndexPayload(path, books) {
   return { kind: 'class-index', path, levels: buildClassLevelCounts(books) };
 }
+
+// Home payload (P0-2, 27 Nov 2026): the aggregates the homepage
+// renders — counts by educationType, Honours/Masters counts, total,
+// global top-8 by questionCount. Built from the SAME books list the
+// prerender already loads (fixture or --live): zero extra Firestore
+// reads at build time, zero reads per homepage visit. Counts are
+// fresh per deploy, not live.
+// NOTE (rebase fix vs the P0-2 draft): the draft filtered on
+// `reviewStatus === 'Published'`, but neither normaliser carries
+// reviewStatus (normalizeBooksFixture and parseFirestoreRestDoc both
+// drop it) — that filter would have yielded 0 books on BOTH paths.
+// The input list is published-only by construction (the --live query
+// filters reviewStatus == Published; the fixture is the published
+// backup), so rows are kept unless explicitly non-Published.
+// Popular rows also carry the subtitle/meta fields the homepage
+// renders (classLevel/department/subject/chapterCount) — never full
+// Book rows.
+export function buildHomePayload(path, books) {
+  const published = books.filter((b) => b.reviewStatus === undefined || b.reviewStatus === 'Published');
+  const countsByType = {};
+  for (const b of published) {
+    const t = b.educationType ?? '';
+    countsByType[t] = (countsByType[t] ?? 0) + 1;
+  }
+  const popular = [...published]
+    .sort((a, b) => (b.questionCount ?? 0) - (a.questionCount ?? 0))
+    .slice(0, 8)
+    .map((b) => ({
+      id: b.id,
+      title: b.title,
+      questionCount: b.questionCount ?? 0,
+      classLevel: b.classLevel,
+      department: b.department,
+      subject: b.subject,
+      chapterCount: b.chapterCount,
+    }));
+  return {
+    kind: 'home',
+    path,
+    countsByType,
+    honoursCount: published.filter((b) => b.educationType === 'Higher' && b.program === 'Honours').length,
+    mastersCount: published.filter((b) => /master/i.test(b.program ?? '')).length,
+    totalCount: published.length,
+    popular,
+  };
+}
 /** Rewrite bare internal hrefs in rendered HTML to /{lang}/... .
  *  Only the segments in LINK_REWRITE_SEGMENTS are rewritten; asset
  *  paths and already-prefixed hrefs are untouched. */
@@ -1132,6 +1194,12 @@ async function main() {
     );
   }
   console.log(`Books: ${books.length} (${booksSource})`);
+  // P0-2 guard: an empty book list would prerender an empty home
+  // payload ("0 books" rendered as fact) and empty book pages — fail
+  // loudly instead, per the script's never-write-partial-pages rule.
+  if (books.length === 0) {
+    throw new Error('No books loaded — refusing to prerender with an empty book list (check the fixture path or the --live quota).');
+  }
 
   // --- Chapters (Phase 2b: __INITIAL_DATA__ book payloads, same
   // source as the books — never a second source of truth) ---
@@ -1300,12 +1368,14 @@ async function main() {
       const url = withLangPrefix(barePath, lang);
       // Phase 2b: hub payloads. /books + /library carry page 1 (50
       // books, default filters); /class carries the per-level
-      // book/subject counts. Every other static page needs no payload
+      // book/subject counts; / (home) carries the home aggregates
+      // (P0-2). Every other static page needs no payload
       // (no client Firestore reads on load) — its data is static or
       // login-gated.
       let initialData;
       if (barePath === '/books' || barePath === '/library') initialData = buildLibraryPayload(url, books);
       else if (barePath === '/class') initialData = buildClassIndexPayload(url, books);
+      else if (barePath === '/') initialData = buildHomePayload(url, books);
       const page = buildPage({ url, lang, initialData });
       writeFile(distDir, outPath(lang, barePath), page);
       rendered += 1;
@@ -1334,9 +1404,15 @@ async function main() {
     });
   }
 
-  // --- 404 (noindex fallback head from the SSR render of a junk URL) ---
-  const notFound = buildPage({ url: '/bn/__prerender_missing__', lang: 'bn' });
-  writeFile(distDir, '404.html', notFound);
+  // --- NO dist/404.html (P0-1, 27 Nov 2026): a top-level 404.html
+  // disables Cloudflare Pages' native SPA fallback, so unknown paths
+  // AND non-prerendered SPA routes (/login, /dashboard, ...) would
+  // get the static 404 page instead of the app shell. Unknown paths
+  // instead get 200 + the shell + the client NotFoundPage (noindex).
+  // The prerender used to write dist/404.html here; that write is
+  // removed for the same reason public/404.html was deleted. The
+  // noindex fallback head is still built (buildPage of a junk URL)
+  // only as a render check — it is not written to disk.
 
   // --- dist/index.html = the /bn home (root / 301s to /bn in firebase.json) ---
   copyFileSync(join(distDir, 'bn/index.html'), join(distDir, 'index.html'));

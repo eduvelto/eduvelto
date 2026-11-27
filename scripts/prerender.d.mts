@@ -44,10 +44,29 @@ export type PayloadClassLevel = {
   subjectCount: number;
 };
 
+export type PayloadHomePopularBook = {
+  id: string;
+  title: string;
+  questionCount: number;
+  classLevel?: string;
+  department?: string;
+  subject?: string;
+  chapterCount?: number;
+};
+
 export type InitialDataPayload =
   | { kind: 'book'; path: string; book: PrerenderBook; chapters: PrerenderChapter[] }
   | { kind: 'library'; path: string; books: PrerenderBook[]; lastDocId: string | null; hasMore: boolean }
-  | { kind: 'class-index'; path: string; levels: PayloadClassLevel[] };
+  | { kind: 'class-index'; path: string; levels: PayloadClassLevel[] }
+  | {
+      kind: 'home';
+      path: string;
+      countsByType: Record<string, number>;
+      honoursCount: number;
+      mastersCount: number;
+      totalCount: number;
+      popular: PayloadHomePopularBook[];
+    };
 
 export function escapeHtml(value: unknown): string;
 export function getGuideSlugs(source: string): string[];
@@ -94,6 +113,7 @@ export function toPayloadChapter(chapter: PrerenderChapter): PrerenderChapter;
 export function buildBookPayload(path: string, book: PrerenderBook, previewChapters: PrerenderChapter[]): Extract<InitialDataPayload, { kind: 'book' }>;
 export function buildLibraryPayload(path: string, books: PrerenderBook[]): Extract<InitialDataPayload, { kind: 'library' }>;
 export function buildClassIndexPayload(path: string, books: PrerenderBook[]): Extract<InitialDataPayload, { kind: 'class-index' }>;
+export function buildHomePayload(path: string, books: PrerenderBook[]): Extract<InitialDataPayload, { kind: 'home' }>;
 export function buildBookHead(book: PrerenderBook, lang: string): string;
 export function buildBookSummary(book: PrerenderBook, lang: string): string;
 export function buildBookSummaryHtml(book: PrerenderBook, lang: string): string;

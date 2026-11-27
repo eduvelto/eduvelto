@@ -4978,9 +4978,8 @@ service cloud.firestore {
     // qpgProOrders/{orderId}: bKash/Nagad TrxID upgrade orders.
     // Created as pending-review ONLY; the amount must match the plan
     // exactly — PRICING FINAL (owner 25 Nov 09:34): per-paper 49 /
-    // monthly 199 / annual tiers 150, 180, 210, 300, 450, 390, 75,
-    // 210, 450, 750, 900, 1050, 1200, 810, 1110, 1200, 1350, 1500
-    // (30% of the reference price, i.e. 70% off, rounded to the
+    // monthly 199 / annual tiers 300, 450, 390, 75, 210, 750, 1050,
+    // 1350 (30% of the reference price, i.e. 70% off, rounded to the
     // nearest ৳10 — owner 25 Nov 17:28: no other website's name
     // appears anywhere on the site).
     // Only a moderator may decide an order — and only the decide fields.

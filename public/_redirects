@@ -1,4 +1,11 @@
-# Cloudflare Pages SPA fallback: serve index.html for every route so the
-# client-side router handles /bn, /bn/learn, /en/tools/* etc.
-# (Equivalent of the Firebase Hosting rewrites in firebase.json.)
-/* /index.html 200
+# Cloudflare Pages: NO SPA catch-all here (see P0-1 spec, fast-program/I-platform).
+# Pages serves a prerendered file whenever one matches the path, and falls
+# back to the root shell for other paths (native SPA behaviour, active
+# because there is no top-level 404.html). A `/* /index.html 200` rule
+# would shadow EVERY prerendered page — Cloudflare follows redirect rules
+# even when a static asset matches the request
+# (developers.cloudflare.com/pages/configuration/redirects/: "Redirects
+# are always followed, regardless of whether or not an asset matches the
+# incoming request"). Do not re-add it.
+# Genuine URL moves go here as explicit static rules, e.g.:
+# /old-path /new-path 301

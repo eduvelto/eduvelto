@@ -8,6 +8,7 @@ import { AuthProvider } from './lib/auth';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { ThemeProvider } from './lib/theme';
 import { isNativeApp } from './lib/isNativeApp';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Service worker registration is BROWSER-ONLY (app audit, 24 Nov 2026,
 // owner brief item 8: the app is fully online-only, no service worker).
@@ -45,19 +46,25 @@ if (!isNativeApp()) {
 // summary stays visible before JS loads.
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* HelmetProvider (Phase 1, 25 Nov 2026): <SeoHead /> renders
-        through react-helmet-async; the same provider wraps the SSR
-        entry (src/entry-server.tsx). */}
-    <HelmetProvider>
-      <BrowserRouter>
-        <AuthProvider>
-          <ThemeProvider>
-            <LanguageProvider>
-              <App />
-            </LanguageProvider>
-          </ThemeProvider>
-        </AuthProvider>
-      </BrowserRouter>
-    </HelmetProvider>
+    {/* ErrorBoundary (P0-3, 27 Nov 2026): outermost, so a crash in any
+        provider or route shows the fallback UI instead of a blank page.
+        The fallback uses no providers/hooks, so it works even when a
+        provider is what crashed. */}
+    <ErrorBoundary>
+      {/* HelmetProvider (Phase 1, 25 Nov 2026): <SeoHead /> renders
+          through react-helmet-async; the same provider wraps the SSR
+          entry (src/entry-server.tsx). */}
+      <HelmetProvider>
+        <BrowserRouter>
+          <AuthProvider>
+            <ThemeProvider>
+              <LanguageProvider>
+                <App />
+              </LanguageProvider>
+            </ThemeProvider>
+          </AuthProvider>
+        </BrowserRouter>
+      </HelmetProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 );

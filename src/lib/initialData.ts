@@ -85,7 +85,38 @@ export interface PayloadClassLevel {
 export type InitialData =
   | { kind: 'book'; path: string; book: PayloadBook; chapters: PayloadChapter[] }
   | { kind: 'library'; path: string; books: PayloadBook[]; lastDocId: string | null; hasMore: boolean }
-  | { kind: 'class-index'; path: string; levels: PayloadClassLevel[] };
+  | { kind: 'class-index'; path: string; levels: PayloadClassLevel[] }
+  | { kind: 'home'; path: string; countsByType: Record<string, number>; honoursCount: number; mastersCount: number; totalCount: number; popular: HomePopularBook[] };
+
+/** One Popular-Books row as carried in the home payload: only the
+ *  fields the homepage renders (link id, title, subtitle fields,
+ *  chapter/question counts). The subtitle uses classLevel /
+ *  department / subject and the meta line uses chapterCount, so
+ *  those ride along as optional fields — never full Book rows. */
+export interface HomePopularBook {
+  id: string;
+  title: string;
+  questionCount: number;
+  classLevel?: string;
+  department?: string;
+  subject?: string;
+  chapterCount?: number;
+}
+
+/** Home payload (P0-2, 27 Nov 2026): the aggregates the homepage
+ *  renders — counts by educationType, Honours/Masters counts,
+ *  total, global top-8 by questionCount. Built by the prerender
+ *  from the books it already loads: zero extra reads at build time,
+ *  zero reads per homepage visit. Fresh per deploy, not live. */
+export interface HomePayload {
+  kind: 'home';
+  path: string;
+  countsByType: Record<string, number>;
+  honoursCount: number;
+  mastersCount: number;
+  totalCount: number;
+  popular: HomePopularBook[];
+}
 
 declare global {
   interface Window {
@@ -121,6 +152,27 @@ function isPayloadChapter(v: unknown): v is PayloadChapter {
   );
 }
 
+function isHomePopularBook(v: unknown): v is HomePopularBook {
+  if (!isRecord(v)) return false;
+  if (typeof v.id !== 'string' || v.id === '') return false;
+  if (typeof v.title !== 'string' || v.title === '') return false;
+  if (typeof v.questionCount !== 'number') return false;
+  for (const f of ['classLevel', 'department', 'subject'] as const) {
+    if (v[f] !== undefined && typeof v[f] !== 'string') return false;
+  }
+  if (v.chapterCount !== undefined && typeof v.chapterCount !== 'number') return false;
+  return true;
+}
+
+export function isHomePayload(v: unknown): v is HomePayload {
+  if (!isRecord(v)) return false;
+  if (v.kind !== 'home') return false;
+  if (typeof v.totalCount !== 'number' || typeof v.honoursCount !== 'number' || typeof v.mastersCount !== 'number') return false;
+  if (!isRecord(v.countsByType)) return false;
+  if (!Array.isArray(v.popular) || !v.popular.every(isHomePopularBook)) return false;
+  return Object.values(v.countsByType).every((n) => typeof n === 'number');
+}
+
 function isPayloadClassLevel(v: unknown): v is PayloadClassLevel {
   return (
     isRecord(v) &&
@@ -154,6 +206,8 @@ export function isInitialData(v: unknown): v is InitialData {
       );
     case 'class-index':
       return Array.isArray(v.levels) && v.levels.every(isPayloadClassLevel);
+    case 'home':
+      return isHomePayload(v);
     default:
       return false;
   }
@@ -294,4 +348,14 @@ export function takeClassIndexInitialData(): { levels: PayloadClassLevel[] } | n
   const slugs = new Set(d.levels.map((s) => s.slug));
   if (!CLASS_LEVELS.every((def) => slugs.has(def.slug))) return null;
   return { levels: d.levels };
+}
+
+/** Home seam: the payload's aggregates (counts + Popular Books),
+ *  or null — in which case the page must fetch live. Consumes the
+ *  payload on every call (even on mismatch — it belonged to another
+ *  page). Read the home payload once (null when this page was not
+ *  prerendered with one — dev server, preview, or an older deploy). */
+export function readHomePayload(): HomePayload | null {
+  const data = readInitialData();
+  return data !== null && isHomePayload(data) ? data : null;
 }

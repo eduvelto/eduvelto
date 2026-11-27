@@ -12,6 +12,7 @@
     "test:unit": "vitest run src/lib/__tests__/ --environment node",
     "emulators": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:start --only firestore,auth",
     "prerender": "vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build:pages": "npm run build && npm run prerender -- --live",
     "backup": "node scripts/backup-firestore.mjs",
     "audit": "node scripts/audit-site.mjs"
   },

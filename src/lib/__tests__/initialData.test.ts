@@ -15,6 +15,7 @@ import { join } from 'node:path';
 import {
   buildBookPayload,
   buildClassIndexPayload,
+  buildHomePayload,
   buildLibraryPayload,
   normalizeBooksFixture,
   normalizeChaptersFixture,
@@ -317,5 +318,29 @@ describe('prerender-built payloads pass the reader (shared shape)', () => {
     const got = mod.takeClassIndexInitialData();
     expect(got?.levels).toHaveLength(6);
     expect(got?.levels.find((l) => l.slug === 'hsc')?.bookCount).toBe(37);
+  });
+
+  it('a real home payload (counts + top-8, book-derived) validates', async () => {
+    const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
+    const { books } = normalizeBooksFixture(raw);
+    const payload = buildHomePayload('/bn', books);
+    expect(payload.kind).toBe('home');
+    expect(payload.totalCount).toBe(609);
+    expect(payload.honoursCount).toBe(439);
+    expect(payload.mastersCount).toBe(0);
+    expect(payload.countsByType).toEqual({ Higher: 439, Technical: 72, HSC: 37, Madrasa: 35, SSC: 26 });
+    expect(payload.popular).toHaveLength(8);
+    expect(payload.popular[0].questionCount).toBe(228);
+    setupDom({ pathname: '/bn', jsonText: JSON.stringify(payload) });
+    const mod = await loadReader();
+    const got = mod.readHomePayload();
+    expect(got?.totalCount).toBe(609);
+    expect(got?.popular).toHaveLength(8);
+  });
+
+  it('readHomePayload rejects a non-home payload', async () => {
+    setupDom({ pathname: '/bn/books', jsonText: JSON.stringify(BOOK_PAYLOAD) });
+    const mod = await loadReader();
+    expect(mod.readHomePayload()).toBeNull();
   });
 });

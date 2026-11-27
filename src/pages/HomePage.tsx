@@ -60,6 +60,7 @@ import HomeQuestionMakerPanel from '../components/HomeQuestionMakerPanel';
 import { useLanguage } from '../i18n/LanguageContext';
 import { listQuizAttempts, listSubjectProgress } from '../lib/progress';
 import { getAllPublishedBooksCached, type Book } from '../lib/content';
+import { readHomePayload, type HomePayload } from '../lib/initialData';
 import { loadHubOpportunities } from '../lib/opportunitiesData';
 import type { Opportunity } from '../lib/opportunities';
 import '../components/home-redesign.css';
@@ -479,6 +480,7 @@ export default function HomePage() {
   const [progressError, setProgressError] = useState(false);
   const [books, setBooks] = useState<Book[] | null>(null);
   const [booksError, setBooksError] = useState(false);
+  const [homeStats, setHomeStats] = useState<HomePayload | null>(null);
   const [opportunities, setOpportunities] = useState<Opportunity[] | null>(null);
   const [opportunitiesError, setOpportunitiesError] = useState(false);
   const navigate = useNavigate();
@@ -515,10 +517,12 @@ export default function HomePage() {
     };
   }, [user]);
 
-  // Public catalogue data for the new sections: the live published
-  // book list (one cached read, shared with the library) and the
-  // verified opportunity listings (Firestore Published, seed fallback
-  // — same source the hub itself renders).
+  // Public catalogue data for the new sections: the prerendered
+  // home payload FIRST (zero Firestore reads), the live published
+  // book list only when there is no payload (one cached read, shared
+  // with the library) — plus the verified opportunity listings
+  // (Firestore Published, seed fallback — same source the hub itself
+  // renders).
   useEffect(() => {
     let live = true;
     let retryTimer: ReturnType<typeof setTimeout> | undefined;
@@ -541,7 +545,15 @@ export default function HomePage() {
           }
         });
     };
-    loadBooks(0);
+    // P0-2: payload first — when present, no live book query runs at
+    // all. The payload is fresh per deploy; the live path is fresh
+    // per load.
+    const payload = readHomePayload();
+    if (payload) {
+      setHomeStats(payload);
+    } else {
+      loadBooks(0);
+    }
     loadHubOpportunities()
       .then(({ items }) => {
         if (live) setOpportunities(items);
@@ -562,11 +574,29 @@ export default function HomePage() {
   // hard-coded. educationType values are the loader's: Higher (অনার্স
   // ও মাস্টার্স), Technical, HSC, Madrasa, SSC. Class 1–5 / 6–8 have
   // no books (0) — the /class dashboards show the honest not-ready
-  // state for them.
-  const countByType = (type: string) => (books ?? []).filter((b) => b.educationType === type).length;
-  const honoursCount = (books ?? []).filter((b) => b.educationType === 'Higher' && b.program === 'Honours').length;
-  const mastersCount = (books ?? []).filter((b) => /master/i.test(b.program ?? '')).length;
-  const popularBooks = books ? [...books].sort((a, b) => b.questionCount - a.questionCount).slice(0, 8) : [];
+  // state for them. P0-2: when the prerendered home payload is
+  // present, the counts come from it (zero reads); the live path
+  // below is the dev/preview fallback. `booksLoaded` is explicit —
+  // the payload path never sets `books`, so `books === null` alone
+  // cannot tell "loading" from "loaded via payload".
+  const booksLoaded = homeStats !== null || books !== null;
+  const countByType = (type: string) =>
+    homeStats ? (homeStats.countsByType[type] ?? 0) : (books ?? []).filter((b) => b.educationType === type).length;
+  const honoursCount = homeStats
+    ? homeStats.honoursCount
+    : (books ?? []).filter((b) => b.educationType === 'Higher' && b.program === 'Honours').length;
+  const mastersCount = homeStats
+    ? homeStats.mastersCount
+    : (books ?? []).filter((b) => /master/i.test(b.program ?? '')).length;
+  const totalBooks = homeStats ? homeStats.totalCount : books ? books.length : null;
+  // Popular Books: payload entries carry id/title/questionCount (+
+  // subtitle/meta fields); the live path keeps full Book rows. Both
+  // render the same row (link /library/:id).
+  const popularBooks = homeStats
+    ? homeStats.popular
+    : books
+      ? [...books].sort((a, b) => b.questionCount - a.questionCount).slice(0, 8)
+      : [];
   const latestOpportunities = opportunities
     ? [...opportunities].sort((a, b) => (b.publishedDateMillis ?? -1) - (a.publishedDateMillis ?? -1)).slice(0, 3)
     : [];
@@ -586,7 +616,7 @@ export default function HomePage() {
     { to: '/library?type=Technical', icon: '⚙️', bn: 'Technical', en: 'Technical', descBn: 'কারিগরি শিক্ষার বই', descEn: 'Technical education books', count: countByType('Technical'), notReady: false },
     { to: '/class/honours-masters', icon: '🎓', bn: 'Honours', en: 'Honours', descBn: 'অনার্সের বই', descEn: 'Honours books', count: honoursCount, notReady: false },
     { to: '/class/honours-masters', icon: '🎓', bn: 'Masters', en: 'Masters', descBn: 'মাস্টার্সের বই', descEn: 'Masters books', count: mastersCount, notReady: false },
-    { to: '/library', icon: '📖', bn: 'Books', en: 'Books', descBn: 'ডিজিটাল লাইব্রেরি', descEn: 'Digital library', count: books ? books.length : null, notReady: false },
+    { to: '/library', icon: '📖', bn: 'Books', en: 'Books', descBn: 'ডিজিটাল লাইব্রেরি', descEn: 'Digital library', count: totalBooks, notReady: false },
     { to: '/library', icon: '▶️', bn: 'Lessons', en: 'Lessons', descBn: 'বইয়ের ভেতরে পাঠ', descEn: 'Lessons inside the books', count: null, notReady: false },
     { to: '/exam', icon: '📝', bn: 'Exams', en: 'Exams', descBn: 'মডেল টেস্ট ও MCQ পরীক্ষা', descEn: 'Model tests and MCQ exams', count: null, notReady: false },
   ];
@@ -661,11 +691,11 @@ export default function HomePage() {
               {t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — লাইব্রেরি থেকে দেখুন।', en: 'Could not load the book list — see the library.' })}{' '}
               <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
             </p>
-          ) : !books ? (
+          ) : !booksLoaded ? (
             <p className="ev-rd-sub">
               {t({ bn: 'বইয়ের তালিকা লোড হচ্ছে…', en: 'Loading the book list…' })}
             </p>
-          ) : books.length === 0 ? (
+          ) : totalBooks === 0 ? (
             <p className="ev-rd-sub">
               {t({ bn: 'এখনো কোনো বই নেই — লাইব্রেরি থেকে দেখুন।', en: 'No books yet — see the library.' })}{' '}
               <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
@@ -680,8 +710,8 @@ export default function HomePage() {
                   <p>{[b.classLevel, b.department, b.subject].filter(Boolean).join(' · ')}</p>
                   <span className="ev-rd-book-meta">
                     {lang === 'bn'
-                      ? `${bnNum(b.chapterCount)}টি অধ্যায় · ${bnNum(b.questionCount)}টি প্রশ্ন`
-                      : `${b.chapterCount} chapters · ${b.questionCount} questions`}
+                      ? `${bnNum(b.chapterCount ?? 0)}টি অধ্যায় · ${bnNum(b.questionCount)}টি প্রশ্ন`
+                      : `${b.chapterCount ?? 0} chapters · ${b.questionCount} questions`}
                   </span>
                 </article>
               ))}
@@ -1021,10 +1051,10 @@ export default function HomePage() {
             the book list did not load: an offline browser can resolve
             the Firestore query from an empty local cache, which would
             otherwise render a false "০ বই" (verified 24 Nov 2026). */}
-        {books && books.length > 0 && opportunities ? (
+        {totalBooks !== null && totalBooks > 0 && opportunities ? (
           <section className="ev-rd-stats" aria-label={t({ bn: 'Eduvelto-র পরিসংখ্যান', en: 'Eduvelto in numbers' })}>
             <div className="ev-rd-stat">
-              <strong>{bnNum(books.length)}</strong>
+              <strong>{bnNum(totalBooks)}</strong>
               <span>{t({ bn: 'বই', en: 'Books' })}</span>
             </div>
             <div className="ev-rd-stat">

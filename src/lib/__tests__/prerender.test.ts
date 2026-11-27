@@ -229,12 +229,12 @@ describe('Firestore REST parsing', () => {
     await expect(fetchBooksFromRest('eduvelto', stubFetch)).rejects.toThrow(/429/);
   });
 
-  it('pages through REST results via runQuery (Published filter, offset)', async () => {
+  it('pages through REST results via runQuery (Published filter, __name__ cursor)', async () => {
     const doc = (id: string) => ({
       name: `projects/p/databases/(default)/documents/books/${id}`,
       fields: { title: { stringValue: id } },
     });
-    // A full 300-doc page triggers the offset fetch; the last page is partial.
+    // A full 300-doc page triggers the cursor fetch; the last page is partial.
     const page1 = Array.from({ length: 300 }, (_, i) => ({ document: doc(`b-${String(i).padStart(3, '0')}`) }));
     const page2 = [{ document: doc('b-999') }];
     const calls: Array<{ url: string; init: unknown }> = [];
@@ -259,8 +259,15 @@ describe('Firestore REST parsing', () => {
         value: { stringValue: 'Published' },
       });
       expect(body.structuredQuery.limit).toBe(300);
+      // Cursor paging (P0-1): no offset — offset bills one read per
+      // skipped doc. The first page has no cursor; the second starts
+      // after the last doc of page 1.
+      expect(body.structuredQuery.offset).toBeUndefined();
     }
-    expect(JSON.parse((calls[1].init as { body: string }).body).structuredQuery.offset).toBe(300);
+    expect(JSON.parse((calls[0].init as { body: string }).body).structuredQuery.startAfter).toBeUndefined();
+    expect(JSON.parse((calls[1].init as { body: string }).body).structuredQuery.startAfter).toEqual({
+      values: [{ referenceValue: 'projects/p/databases/(default)/documents/books/b-299' }],
+    });
   });
 });
 

@@ -26,7 +26,8 @@
 // - Chapter/lesson: in-content (mid-lesson) + in-content-2 (end).
 // - Articles (no article routes exist yet — /blog is a Part 1 item):
 //   top-banner + in-content + in-content-2, ready when they land.
-// - Master switch ADS_MASTER_ENABLED is OFF by default. Ads stay off
+// - Master switch ADS_MASTER_ENABLED is ON since 23 Nov 2026 (owner
+//   order: "tumi on kore rhako auto cole moto"). Ads still stay off
 //   until Google approves the site AND real ad-unit IDs exist. The
 //   IDs-empty gate in ./ads.ts stays as a second, independent gate —
 //   both must pass before any ad renders.
