@@ -63,6 +63,7 @@ export default function FreeQuizPage() {
   const [downloaded, setDownloaded] = useState('');
   const [shareState, setShareState] = useState('');
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const certCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const finishRef = useRef<() => void>(() => {});
   const quizName = useMemo(() => {
     const n = freeQuizCategoryName(category);
@@ -149,16 +150,8 @@ export default function FreeQuizPage() {
         errorCorrectionLevel: 'M',
       });
       const canvas = await drawQuizCertificateCanvas(data, qrDataUrl);
+      certCanvasRef.current = canvas;
       setCert(data);
-      // Paint the same canvas into the preview slot.
-      requestAnimationFrame(() => {
-        const slot = canvasRef.current;
-        if (!slot) return;
-        slot.width = canvas.width;
-        slot.height = canvas.height;
-        const ctx = slot.getContext('2d');
-        if (ctx) ctx.drawImage(canvas, 0, 0);
-      });
     } catch {
       setCertError('cert');
     } finally {
@@ -209,6 +202,19 @@ export default function FreeQuizPage() {
       }
     }
   };
+
+  // Paint the drawn certificate into the preview slot once React has
+  // mounted it (the slot only exists after `cert` is set, so painting
+  // must happen in an effect — not in the same tick as setCert).
+  useEffect(() => {
+    const slot = canvasRef.current;
+    const canvas = certCanvasRef.current;
+    if (!cert || !slot || !canvas) return;
+    slot.width = canvas.width;
+    slot.height = canvas.height;
+    const ctx = slot.getContext('2d');
+    if (ctx) ctx.drawImage(canvas, 0, 0);
+  }, [cert]);
 
   const poolTotal = freeQuizPoolFor(category).length;
 
