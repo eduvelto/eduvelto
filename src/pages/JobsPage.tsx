@@ -4,8 +4,9 @@
 // categories (Step 5 — Step 2 §0.4/§2.1; was tier-grouped before) +
 // the common-preparation card + how to start. No question counts, no
 // mock counts — the live hub has no practice UI yet (the first verified
-// bank batch — 35 BCS English questions — is served once practice
-// ships). Tier 2/3 cards honestly say "Coming soon".
+// bank batches — 35 BCS English questions + 173 46th BCS PYQs, 208 in
+// total — are served once practice ships). Tier 2/3 cards honestly say
+// "Coming soon".
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -16,6 +17,7 @@ import JobModeSwitch from '../components/JobModeSwitch';
 import JobOnboarding from '../components/JobOnboarding';
 import SuggestionPdfCard from '../components/SuggestionPdfCard';
 import { useLanguage } from '../i18n/LanguageContext';
+import { RECENT_REPEATED_COUNT, bnDigits } from '../lib/jobAdmissionPrep';
 
 export default function JobsPage() {
   const { t } = useLanguage();
@@ -111,7 +113,7 @@ export default function JobsPage() {
             {t({ bn: 'সাম্প্রতিক ও বারবার আসা প্রশ্ন', en: 'Recent & Most Repeated Questions' })}
           </div>
           <p style={{ margin: '6px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-            {t({ bn: '৩৫টি যাচাইকৃত বিসিএস ইংরেজি প্রশ্ন — উত্তর ও ব্যাখ্যাসহ, বিষয় অনুযায়ী।', en: '35 verified BCS English questions — with answers and explanations, by topic.' })}
+            {t({ bn: `${bnDigits(RECENT_REPEATED_COUNT)}টি যাচাইকৃত প্রশ্ন — বিসিএস ইংরেজি ব্যাচ ১ + ৪৬তম বিসিএস প্রিলিমিনারি PYQ, উত্তর ও ব্যাখ্যাসহ, বিষয় অনুযায়ী।`, en: `${RECENT_REPEATED_COUNT} verified questions — BCS English Batch 1 + 46th BCS Preliminary PYQs, with answers and explanations, by topic.` })}
           </p>
           <p style={{ margin: 0 }}>
             <LinkButton to="/jobs/recent-repeated" variant="accent">

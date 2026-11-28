@@ -2,9 +2,10 @@
 // 10:23). Guards the honest scope: verified patterns only, no
 // guessed negative marking, no full mock where verified questions
 // do not cover the syllabus, and a Recent & Most Repeated
-// collection that holds ONLY the 35 bundled verified BCS English
-// questions (the 173 46th BCS PYQs are in the Firestore bank, not
-// the bundle — never faked into the count).
+// collection that holds ONLY the 208 bundled verified questions —
+// the 35 BCS English Batch-1 questions plus the 173 verified 46th
+// BCS Preliminary PYQs, published to the bundle 28 Nov 2026.
+// Nothing unverified is ever faked into the count.
 
 import { describe, expect, it } from 'vitest';
 import {
@@ -18,6 +19,11 @@ import {
   bundledVerifiedCount,
   syllabusMockPlan,
 } from '../jobAdmissionPrep';
+import {
+  PUBLIC_BCS_PYQ_QUESTIONS,
+  PUBLIC_BCS_PYQ_SUBJECTS,
+  publicBcsPyqCountBySubject,
+} from '../publicBcsPyq';
 
 describe('admission structure (28 Nov 2026)', () => {
   it('covers DU Ka/Kha/Ga, Medical & Dental, BUET/CKRUET, GST A/B/C and Agriculture', () => {
@@ -107,15 +113,27 @@ describe('syllabus-based exam engine (28 Nov 2026)', () => {
       const plan = syllabusMockPlan(slug)!;
       expect(plan.fullMockPossible, slug).toBe(false);
     }
-    // Only BCS English has verified questions in the bundle.
-    expect(bundledVerifiedCount('bcs', 'English Language & Literature')).toBe(35);
-    expect(bundledVerifiedCount('bcs', 'Bangla Language & Literature')).toBe(0);
+    // Bundled verified pool: 35 Batch-1 English + 173 46th BCS PYQs.
+    expect(bundledVerifiedCount('bcs', 'English Language & Literature')).toBe(66);
+    expect(bundledVerifiedCount('bcs', 'Bangla Language & Literature')).toBe(31);
+    expect(bundledVerifiedCount('bcs', 'Bangladesh Affairs')).toBe(29);
+    expect(bundledVerifiedCount('bcs', 'International Affairs')).toBe(19);
+    expect(bundledVerifiedCount('bcs', 'Computer & ICT')).toBe(15);
+    expect(bundledVerifiedCount('bcs', 'General Science')).toBe(14);
+    expect(bundledVerifiedCount('bcs', 'Ethics, Values & Good Governance')).toBe(10);
+    expect(bundledVerifiedCount('bcs', 'Geography, Environment & Disaster Management')).toBe(9);
+    expect(bundledVerifiedCount('bcs', 'Mathematical Reasoning')).toBe(8);
+    expect(bundledVerifiedCount('bcs', 'Mental Ability')).toBe(7);
     expect(bundledVerifiedCount('bank', 'Bangla')).toBe(0);
     expect(bundledVerifiedCount('primary-teacher', 'Bangla')).toBe(0);
     expect(bundledVerifiedCount('ntrca', 'Bangla')).toBe(0);
     const bcs = syllabusMockPlan('bcs')!;
-    expect(bcs.subjects.filter((s) => s.hasNoVerifiedQuestions)).toHaveLength(9);
-    expect(bcs.subjects.find((s) => s.nameEn === 'English Language & Literature')!.verifiedAvailable).toBe(35);
+    // Every BCS subject now has verified questions — but several are
+    // still below their marks (e.g. International 19 < 25, Math
+    // 8 < 20), so no full mock is publishable.
+    expect(bcs.subjects.filter((s) => s.hasNoVerifiedQuestions)).toHaveLength(0);
+    expect(bcs.subjects.find((s) => s.nameEn === 'English Language & Literature')!.verifiedAvailable).toBe(66);
+    expect(bcs.subjects.find((s) => s.nameEn === 'International Affairs')!.verifiedAvailable).toBe(19);
   });
 
   it('the one runnable mock is the BCS English section: 30 Q, 18 min, −0.50', () => {
@@ -144,27 +162,66 @@ describe('bnDigits (28 Nov 2026)', () => {
 });
 
 describe('Recent & Most Repeated collection (28 Nov 2026)', () => {
-  it('holds exactly the 35 bundled verified BCS English questions — nothing else', () => {
-    expect(RECENT_REPEATED_COUNT).toBe(35);
-    expect(RECENT_REPEATED_QUESTIONS).toHaveLength(35);
+  it('holds exactly the 208 bundled verified questions — 35 Batch-1 English + 173 46th BCS PYQs', () => {
+    expect(RECENT_REPEATED_COUNT).toBe(208);
+    expect(RECENT_REPEATED_QUESTIONS).toHaveLength(208);
     for (const r of RECENT_REPEATED_QUESTIONS) {
-      expect(r.examEn).toBe('BCS');
+      expect(r.examEn).toMatch(/^(BCS|46th BCS Preliminary)$/);
       expect(r.question.questionText.length).toBeGreaterThan(0);
       expect(r.question.options).toHaveLength(4);
-      // The published batch records no exam year — never guessed.
-      expect(r.year).toBeNull();
+      expect(r.question.explanation.length).toBeGreaterThan(0);
+      // The correct letter must point at one of the four options.
+      expect(['A', 'B', 'C', 'D']).toContain(r.question.correctLetter);
     }
     const ids = new Set(RECENT_REPEATED_QUESTIONS.map((r) => r.question.id));
-    expect(ids.size).toBe(35);
+    expect(ids.size).toBe(208);
+    // Batch 1: 35, no exam year recorded — never guessed.
+    const batch1 = RECENT_REPEATED_QUESTIONS.filter((r) => r.question.id.startsWith('bcs-eng-'));
+    expect(batch1).toHaveLength(35);
+    for (const r of batch1) {
+      expect(r.examEn).toBe('BCS');
+      expect(r.year).toBeNull();
+      expect(r.subtopic).toBeUndefined();
+    }
+    // PYQs: 173, recorded year 2024, each with its bank topic.
+    const pyq = RECENT_REPEATED_QUESTIONS.filter((r) => r.question.id.startsWith('PYQ-BCS46-'));
+    expect(pyq).toHaveLength(173);
+    for (const r of pyq) {
+      expect(r.examEn).toBe('46th BCS Preliminary');
+      expect(r.year).toBe(2024);
+      expect(r.subtopic).toBeTruthy();
+    }
   });
 
-  it('bank state is reported as the brief states it — and the 173 PYQs are NOT in the bundle count', () => {
+  it('the PYQ bundle file holds exactly the 173 verified questions, per subject', () => {
+    expect(PUBLIC_BCS_PYQ_QUESTIONS).toHaveLength(173);
+    expect(PUBLIC_BCS_PYQ_SUBJECTS).toHaveLength(10);
+    const total = PUBLIC_BCS_PYQ_SUBJECTS.reduce((sum, s) => sum + s.count, 0);
+    expect(total).toBe(173);
+    for (const s of PUBLIC_BCS_PYQ_SUBJECTS) {
+      // The table count must match the questions actually in the file.
+      expect(publicBcsPyqCountBySubject(s.subject)).toBe(s.count);
+    }
+    const ids = new Set(PUBLIC_BCS_PYQ_QUESTIONS.map((q) => q.id));
+    expect(ids.size).toBe(173);
+    const qnos = PUBLIC_BCS_PYQ_QUESTIONS.map((q) => q.paperQno).sort((a, b) => a - b);
+    expect(qnos[0]).toBe(2);
+    expect(qnos[qnos.length - 1]).toBe(200);
+    expect(new Set(qnos).size).toBe(173);
+    for (const q of PUBLIC_BCS_PYQ_QUESTIONS) {
+      expect(q.options).toHaveLength(4);
+      expect(q.explanation.length).toBeGreaterThan(0);
+      expect(q.options.map((o) => o.letter)).toEqual(['A', 'B', 'C', 'D']);
+    }
+  });
+
+  it('bank state is reported as the brief states it — and the 173 PYQs ARE now in the bundle count', () => {
     expect(BANK_STATE.jobVerified).toBe(1208);
     expect(BANK_STATE.jobNeedsReview).toBe(3568);
     expect(BANK_STATE.admissionVerified).toBe(0);
     expect(BANK_STATE.admissionPyq).toBe(0);
     expect(BANK_STATE.bcs46thPyqInBank).toBe(173);
-    // The collection count (35) is the bundle count, not the bank's 173.
-    expect(RECENT_REPEATED_COUNT).not.toBe(BANK_STATE.bcs46thPyqInBank);
+    // The collection count is the bundle count: 35 Batch-1 + 173 PYQs.
+    expect(RECENT_REPEATED_COUNT).toBe(35 + BANK_STATE.bcs46thPyqInBank);
   });
 });
