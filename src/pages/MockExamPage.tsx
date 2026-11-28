@@ -372,11 +372,11 @@ export default function MockExamPage() {
                     <p style={{ margin: 0, color: '#5A6478', fontSize: 14 }}>
                       {t({
                         bn: cat.category === 'admission'
-                          ? '৯৭৭টি ভর্তির খসড়া প্রশ্ন এখনো যাচাইয়ের অপেক্ষায় আছে — যাচাই হলে এখানে আসবে, তার আগে দেখানো হবে না।'
-                          : 'খসড়া প্রশ্ন যাচাইয়ের অপেক্ষায় আছে — যাচাই হলে এখানে আসবে, তার আগে দেখানো হবে না।',
+                          ? '৯৭৭টি ভর্তির খসড়া প্রশ্ন যাচাইয়ের অপেক্ষায় আছে — এখানে শুধু যাচাইকৃত প্রশ্ন দেখানো হয়।'
+                          : 'খসড়া প্রশ্ন যাচাইয়ের অপেক্ষায় আছে — এখানে শুধু যাচাইকৃত প্রশ্ন দেখানো হয়।',
                         en: cat.category === 'admission'
-                          ? '977 admission draft questions are still awaiting review — they will appear here once verified, never before.'
-                          : 'Draft questions are awaiting review — they will appear here once verified, never before.',
+                          ? '977 admission draft questions are awaiting review — only verified questions are shown here.'
+                          : 'Draft questions are awaiting review — only verified questions are shown here.',
                       })}
                     </p>
                   </>

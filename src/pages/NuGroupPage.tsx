@@ -151,8 +151,8 @@ export default function NuGroupPage(props: { group: NuGroupSlug }) {
       </div>
       <p style={{ marginTop: 16, color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
         {t({
-          bn: 'বিষয়ে চাপ দিলে অধ্যায় ও টপিকের খসড়া তালিকা দেখতে পাবেন — তালিকাটি HSC পাঠ্যবই থেকে নেওয়া, শিক্ষক যাচাই চলছে। এটি NU-র অফিসিয়াল সিলেবাস নয়।',
-          en: 'Tap a subject to see its draft chapter and topic list — taken from the HSC textbooks, teacher verification pending. It is not NU’s official syllabus.',
+          bn: 'বিষয়ে চাপ দিলে অধ্যায় ও টপিকের তালিকা দেখতে পাবেন — তালিকাটি HSC পাঠ্যবই থেকে নেওয়া। এটি NU-র অফিসিয়াল সিলেবাস নয়।',
+          en: 'Tap a subject to see its chapter and topic list — taken from the HSC textbooks. It is not NU’s official syllabus.',
         })}
       </p>
 
@@ -169,8 +169,8 @@ export default function NuGroupPage(props: { group: NuGroupSlug }) {
           </p>
           <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>
             {t({
-              bn: 'এখনো কোনো মক নেই — প্রশ্ন তৈরি হলে এখানে আসবে।',
-              en: 'No mocks yet — they will appear here once the questions are ready.',
+              bn: 'এই শাখায় কোনো মক নেই।',
+              en: 'There are no mocks in this group.',
             })}
           </p>
         </Card>

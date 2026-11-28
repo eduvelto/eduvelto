@@ -130,12 +130,12 @@ export default function JobPracticePage() {
         const [b, k] = await Promise.all([loadPracticeBundle(scope), loadBundleKey(scope)]);
         if (!alive) return;
         if (!b) {
-          setError(t({ bn: 'এই অনুশীলন সেটটি পাওয়া যায়নি — হয় ঠিকানাটি ভুল, নয় সেটটি এখনো প্রকাশিত হয়নি।', en: 'This practice set was not found — the address may be wrong, or the set has not been published yet.' }));
+          setError(t({ bn: 'এই অনুশীলন সেটটি পাওয়া যায়নি — ঠিকানাটি ভুল হতে পারে।', en: 'This practice set was not found — the address may be wrong.' }));
           setPhase('error');
           return;
         }
         if (b.status !== 'published') {
-          setError(t({ bn: 'এই অনুশীলন সেটটি এখনো প্রকাশিত হয়নি — শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'This practice set has not been published yet — it will be published after teacher review.' }));
+          setError(t({ bn: 'এই অনুশীলন সেটটি এখন প্রকাশিত নয়।', en: 'This practice set is not published right now.' }));
           setPhase('error');
           return;
         }
@@ -145,7 +145,7 @@ export default function JobPracticePage() {
           return;
         }
         if (b.questions.length === 0) {
-          setError(t({ bn: 'এই সেটে এখনো কোনো প্রশ্ন নেই।', en: 'This set has no questions yet.' }));
+          setError(t({ bn: 'এই সেটে কোনো প্রশ্ন নেই।', en: 'This set has no questions.' }));
           setPhase('error');
           return;
         }

@@ -154,14 +154,14 @@ export default function JobMockPage() {
         const m = await loadPublishedMock(mockId);
         if (!alive) return;
         if (!m) {
-          setError(t({ bn: 'এই মকটি পাওয়া যায়নি — হয় ঠিকানাটি ভুল, নয় মকটি এখনো প্রকাশিত হয়নি।', en: 'This mock was not found — either the address is wrong, or the mock is not published yet.' }));
+          setError(t({ bn: 'এই মকটি পাওয়া যায়নি — ঠিকানাটি ভুল হতে পারে।', en: 'This mock was not found — the address may be wrong.' }));
           setPhase('error');
           return;
         }
         const b = await loadMockBundle(m.bundleId);
         if (!alive) return;
         if (!b || b.questions.length === 0) {
-          setError(t({ bn: 'এই মকের প্রশ্ন এখনো তৈরি হয়নি — শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'This mock’s questions are not ready yet — they will be published after teacher review.' }));
+          setError(t({ bn: 'এই মকের প্রশ্ন এখন তৈরি হয়নি।', en: 'This mock’s questions are not ready right now.' }));
           setPhase('error');
           return;
         }
