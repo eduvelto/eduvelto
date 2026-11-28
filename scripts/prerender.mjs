@@ -284,6 +284,12 @@ export const PRERENDER_STATIC_PATHS = [
   '/pricing',
   '/omr-evaluator',
   '/custom-paper',
+  // 28 Nov 2026 (global batch, item 2 AI tools): the free quiz page
+  // is a real public route (/bn/free-quiz, FreeQuizPage) and the
+  // committed sitemap already lists it — it belongs in the prerender
+  // list too, so the sitemap test's derived set covers it (the
+  // committed sitemap had 2629 locs vs 2628 derived without it).
+  '/free-quiz',
 ];
 
 /** Top-level segments whose bare hrefs get rewritten to /{lang}/...
