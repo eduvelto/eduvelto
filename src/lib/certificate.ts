@@ -760,12 +760,16 @@ function drawFramedCertificate(
   // Footer: terracotta band with white text (heritage) or the
   // plain footer line (emerald / minimal / classic).
   if (template.footerBand) {
+    // Band sits low (top 1555, bottom 1650 = the inner gold frame)
+    // so the QR caption URL (baseline 1528, glyphs to ~1534) clears
+    // it with ~20px of cream — the sample's own spacing. A taller
+    // band (top 1520) covered all but the tops of that line.
     ctx.fillStyle = template.band === 'none' ? template.primary : template.band;
-    ctx.fillRect(104, 1520, W - 208, 130);
+    ctx.fillRect(104, 1555, W - 208, 95);
     ctx.textAlign = 'center';
     ctx.fillStyle = '#FFFFFF';
     ctx.font = '400 34px Poppins, "Hind Siliguri", sans-serif';
-    ctx.fillText(FRAMED_CERTIFICATE_FOOTER, cx, 1585);
+    ctx.fillText(FRAMED_CERTIFICATE_FOOTER, cx, 1602);
   } else {
     ctx.textAlign = 'center';
     ctx.fillStyle = MUTED;
