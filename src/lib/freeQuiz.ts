@@ -213,8 +213,11 @@ export interface CertificatePayload {
   n: string;
   /** Quiz name. */
   q: string;
-  /** Score out of 10. */
-  s: number;
+  /**
+   * Score out of 10 — quiz certificates only. OPTIONAL: maker
+   * certificates carry no score, so the field is absent.
+   */
+  s?: number;
   /** ISO date (YYYY-MM-DD). */
   d: string;
 }
@@ -258,15 +261,26 @@ export function decodeCertificatePayload(
       return null;
     if (typeof p.q !== 'string' || p.q.trim().length === 0 || p.q.length > 120)
       return null;
-    if (
-      typeof p.s !== 'number' ||
-      !Number.isInteger(p.s) ||
-      p.s < 0 ||
-      p.s > FREE_QUIZ_COUNT
-    )
-      return null;
+    // Score is optional (maker certificates have none) — validate
+    // it only when present.
+    if (p.s !== undefined) {
+      if (
+        typeof p.s !== 'number' ||
+        !Number.isInteger(p.s) ||
+        p.s < 0 ||
+        p.s > FREE_QUIZ_COUNT
+      )
+        return null;
+    }
     if (typeof p.d !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(p.d)) return null;
-    return { v: 1, id, n: p.n, q: p.q, s: p.s, d: p.d };
+    return {
+      v: 1,
+      id,
+      n: p.n,
+      q: p.q,
+      ...(p.s !== undefined ? { s: p.s as number } : {}),
+      d: p.d,
+    };
   } catch {
     return null;
   }

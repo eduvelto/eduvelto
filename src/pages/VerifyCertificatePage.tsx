@@ -78,9 +78,11 @@ export default function VerifyCertificatePage() {
         <p style={{ margin: '0 0 14px', fontSize: 18, fontWeight: 700, color: '#0A1F44' }}>
           {payload.q}
         </p>
-        <p style={{ margin: '0 0 4px', fontSize: 16 }}>
-          {t({ bn: `নম্বর: ${payload.s} / 10`, en: `Score: ${payload.s} / 10` })}
-        </p>
+        {payload.s !== undefined ? (
+          <p style={{ margin: '0 0 4px', fontSize: 16 }}>
+            {t({ bn: `নম্বর: ${payload.s} / 10`, en: `Score: ${payload.s} / 10` })}
+          </p>
+        ) : null}
         <p style={{ margin: '0 0 4px', fontSize: 15, color: 'var(--heading)' }}>
           {t({ bn: `তারিখ: ${payload.d}`, en: `Date: ${payload.d}` })}
         </p>
@@ -89,10 +91,15 @@ export default function VerifyCertificatePage() {
           <strong>{payload.id}</strong>
         </p>
         <p style={{ margin: '0 0 16px', fontSize: 13, color: 'var(--muted)', lineHeight: 1.7 }}>
-          {t({
-            bn: 'এই বিবরণ এই লিংক থেকেই যাচাই করা হয়েছে — Eduvelto-র সার্ভারে এই সার্টিফিকেটের কোনো রেকর্ড নেই। এটি একটি অনুশীলন সার্টিফিকেট; এর কোনো স্বীকৃত মূল্য নেই।',
-            en: 'These details were verified from this link itself — Eduvelto keeps no server record of this certificate. It is a practice certificate and carries no recognised value.',
-          })}
+          {payload.s !== undefined
+            ? t({
+                bn: 'এই বিবরণ এই লিংক থেকেই যাচাই করা হয়েছে — Eduvelto-র সার্ভারে এই সার্টিফিকেটের কোনো রেকর্ড নেই। এটি একটি অনুশীলন সার্টিফিকেট; এর কোনো স্বীকৃত মূল্য নেই।',
+                en: 'These details were verified from this link itself — Eduvelto keeps no server record of this certificate. It is a practice certificate and carries no recognised value.',
+              })
+            : t({
+                bn: 'এই বিবরণ এই লিংক থেকেই যাচাই করা হয়েছে — Eduvelto-র সার্ভারে এই সার্টিফিকেটের কোনো রেকর্ড নেই।',
+                en: 'These details were verified from this link itself — Eduvelto keeps no server record of this certificate.',
+              })}
         </p>
         <Link to="/free-quiz">
           <Button>{t({ bn: 'নিজের কুইজ খেলুন →', en: 'Take your own quiz →' })}</Button>

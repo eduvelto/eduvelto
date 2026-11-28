@@ -132,4 +132,62 @@ describe('verification id + payload', () => {
     ).toBeNull();
     expect(decodeCertificatePayload(encodeCertificatePayload(payload), 'bad-id')).toBeNull();
   });
+
+  it('round-trips a no-score payload (Certificate Maker: no score)', () => {
+    const noScore: CertificatePayload = {
+      v: 1,
+      id: 'EDU-2026-4821',
+      n: 'রহিম উদ্দিন',
+      q: 'English Spoken Course',
+      d: '2026-11-28',
+    };
+    const raw = encodeCertificatePayload(noScore);
+    const decoded = decodeCertificatePayload(raw, 'EDU-2026-4821');
+    expect(decoded).toEqual(noScore);
+    expect(decoded?.s).toBeUndefined();
+    const url = buildVerifyUrl(noScore);
+    const parsed = new URL(url);
+    expect(
+      decodeCertificatePayload(
+        parsed.searchParams.get('d'),
+        parsed.pathname.split('/').pop() ?? '',
+      ),
+    ).toEqual(noScore);
+  });
+
+  it('rejects a present-but-invalid score while accepting its absence', () => {
+    const base: CertificatePayload = {
+      v: 1,
+      id: 'EDU-2026-4821',
+      n: 'রহিম উদ্দিন',
+      q: 'English Spoken Course',
+      d: '2026-11-28',
+    };
+    // Non-integer, negative and out-of-range scores are still rejected.
+    expect(
+      decodeCertificatePayload(
+        encodeCertificatePayload({ ...base, s: 8.5 }),
+        base.id,
+      ),
+    ).toBeNull();
+    expect(
+      decodeCertificatePayload(
+        encodeCertificatePayload({ ...base, s: -1 }),
+        base.id,
+      ),
+    ).toBeNull();
+    expect(
+      decodeCertificatePayload(
+        encodeCertificatePayload({ ...base, s: '8' as unknown as number }),
+        base.id,
+      ),
+    ).toBeNull();
+    // A valid score still decodes exactly as before.
+    expect(
+      decodeCertificatePayload(
+        encodeCertificatePayload({ ...base, s: 0 }),
+        base.id,
+      ),
+    ).toEqual({ ...base, s: 0 });
+  });
 });

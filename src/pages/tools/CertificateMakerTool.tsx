@@ -1,39 +1,58 @@
 // Eduvelto — Certificate Maker tool UI (100-Tools Project, Phase 2).
 //
 // Renders inside ToolsDetailPage's PageShell (no own h1 / Breadcrumb).
-// FREE to make; the PDF download goes through the existing
-// <RewardedAdButton> — Free Download is live and downloads the PDF,
-// Unlock (Watch 30s Ad) stays disabled until AdSense approves (honest
+// FREE to make; the download goes through the existing
+// <RewardedAdButton> — Free Download is live and downloads the
+// chosen format, Unlock stays disabled until AdSense approves (honest
 // copy from src/lib/rewardedAd.ts; no ad API, no fake timer).
+// Ads policy (27 Nov 2026): PDF is a high-value download — 30s;
+// PNG is a lighter image download — 15s.
 //
 // CORRECTED SPEC (28 Nov 2026, quiz + certificate batch): the issuer
 // is ALWAYS Eduvelto — no issuer-name input, no person's name, no
 // signature of any person on the certificate. The issuer side is
-// only Eduvelto's name + the official Eduvelto seal.
+// only Eduvelto's name + logo + the "Issued by Eduvelto" line.
 //
-// jspdf is loaded with a dynamic import() only (never a static
-// import), so it stays out of the main bundle. Pure shaping /
-// validation / filename logic lives in src/lib/tools/certificateMaker.ts.
+// PREMIUM DESIGN (28 Nov 2026): the certificate is drawn by the
+// SHARED renderer in src/lib/certificate.ts — the exact same design
+// as the quiz certificate (2480×1754, wave header, ribbon +
+// rosette, logo, QR + verification ID). There is ONE
+// premium layout with 3 colour themes (gold-navy default, teal-gold,
+// maroon-gold) and an editable achievement line — the old template
+// selector and the old A4-at-200-DPI canvas are gone. The on-screen
+// preview IS the real shared canvas, so the preview is exactly what
+// downloads.
 //
-// NOTE (fixed 27 Nov 2026, A-tools spec-08): the PDF no longer uses
-// jspdf's built-in Latin font for the certificate text. The certificate
-// is drawn onto a canvas first (the browser renders Bangla via system
-// fonts), then embedded as an image in the PDF — so Bangla names now
-// render in the downloaded PDF exactly as in the on-screen preview.
-// Same pattern as textToPdfBengali in LifePdfToolsPage.
+// The verification ID is minted ONCE per certificate (kept in
+// state) and regenerates only on an explicit New certificate /
+// reset — never on keystrokes. The QR encodes the self-contained
+// verify URL (qrcode via dynamic import, as in FreeQuizPage);
+// the certificate carries no score and its footer never says
+// "Practice certificate" (that wording is quiz-only).
+//
+// jspdf / qrcode are loaded with dynamic import() only (never a
+// static import), so they stay out of the main bundle. Pure
+// validation / date logic lives in src/lib/tools/certificateMaker.ts.
 
-import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import RewardedAdButton from '../../components/RewardedAdButton';
 import {
-  CERTIFICATE_TEMPLATES,
-  buildCertificateFilename,
   formatCertificateDate,
-  getCertificateTemplateStyle,
   todayIsoDate,
   validateCertificateData,
-  type CertificateTemplate,
 } from '../../lib/tools/certificateMaker';
+import {
+  buildMakerCertificateData,
+  CERTIFICATE_THEMES,
+  certificateFileBase,
+  downloadCanvasPng,
+  downloadCertificatePdf,
+  drawQuizCertificateCanvas,
+  type CertificateThemeId,
+  type QuizCertificateData,
+} from '../../lib/certificate';
+import { makeVerificationId } from '../../lib/freeQuiz';
 
 const inputStyle: CSSProperties = {
   width: '100%',
@@ -114,9 +133,9 @@ const copyButtonStyle: CSSProperties = {
 
 /**
  * BD school occasion presets. The value fills the course / event
- * title. Since 27 Nov 2026 the PDF renders Bangla (canvas → image),
- * so a Bangla title works in the PDF too; presets stay in English
- * because schools usually print the event title in Latin script.
+ * title. The PDF embeds the canvas image, so a Bangla title works
+ * in the PDF too; presets stay in English because schools usually
+ * print the event title in Latin script.
  */
 const OCCASION_PRESETS: readonly { value: string; bn: string; en: string }[] = [
   { value: 'Annual Examination — Merit Position', bn: 'বার্ষিক পরীক্ষা — মেধা', en: 'Annual Exam — Merit' },
@@ -125,19 +144,7 @@ const OCCASION_PRESETS: readonly { value: string; bn: string; en: string }[] = [
   { value: 'Quran and Hadith Competition', bn: 'কুরআন ও হাদিস প্রতিযোগিতা', en: 'Quran & Hadith Competition' },
 ];
 
-function templateLabel(
-  template: CertificateTemplate,
-  t: (e: { bn: string; en: string }) => string,
-): string {
-  switch (template) {
-    case 'classic':
-      return t({ bn: 'ক্লাসিক', en: 'Classic' });
-    case 'modern':
-      return t({ bn: 'মডার্ন', en: 'Modern' });
-    case 'minimal':
-      return t({ bn: 'মিনিমাল', en: 'Minimal' });
-  }
-}
+type DownloadFormat = 'pdf' | 'png';
 
 export function CertificateMakerTool() {
   const { t, lang } = useLanguage();
@@ -147,105 +154,135 @@ export function CertificateMakerTool() {
   // (corrected spec, 28 Nov 2026).
   const issuer = 'Eduvelto';
   const [date, setDate] = useState(() => todayIsoDate());
-  const [template, setTemplate] = useState<CertificateTemplate>('classic');
+  // Customizations (28 Nov 2026): the achievement line above the
+  // course title, and the premium theme. Both flow into the shared
+  // renderer, so the preview canvas and the download are identical.
+  // The logo, verification ID + QR and the Eduvelto name are
+  // FIXED — there are no controls for them anywhere in this panel.
+  const [achievementLine, setAchievementLine] = useState(
+    'for successfully completing',
+  );
+  const [theme, setTheme] = useState<CertificateThemeId>('gold-navy');
+  const [format, setFormat] = useState<DownloadFormat>('pdf');
+  // ONE verification ID per certificate — minted when the form first
+  // becomes ready, kept in state, and regenerated only by an
+  // explicit New certificate action below, never on keystrokes.
+  const [verificationId, setVerificationId] = useState<string | null>(null);
+  const [cert, setCert] = useState<QuizCertificateData | null>(null);
+  const [previewBusy, setPreviewBusy] = useState(false);
+  const [previewError, setPreviewError] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [downloaded, setDownloaded] = useState(false);
   const [copied, setCopied] = useState(false);
+  const certCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const slotRef = useRef<HTMLCanvasElement | null>(null);
 
   // The "Copied" label resets whenever the certificate changes — no
-  // timer is used in this file (see the component test).
+  // timer is used for it (see the component test).
   useEffect(() => {
     setCopied(false);
-  }, [recipient, courseTitle, issuer, date, template]);
+  }, [recipient, courseTitle, issuer, date, verificationId, achievementLine, theme]);
 
   const missing = useMemo(
-    () =>
-      validateCertificateData({ recipient, courseTitle, issuer, date, template }),
-    [recipient, courseTitle, issuer, date, template],
+    () => validateCertificateData({ recipient, courseTitle, issuer, date }),
+    [recipient, courseTitle, issuer, date],
   );
-  const ready = missing.length === 0;
-  const style = getCertificateTemplateStyle(template);
-  const filename = buildCertificateFilename(recipient);
+  // The achievement line must not be blank — an empty line would
+  // leave a gap in the certificate.
+  const ready = missing.length === 0 && achievementLine.trim().length > 0;
 
-  /**
-   * Canvas-rendered PDF (A-tools spec-08, landed 27 Nov 2026): the
-   * certificate is drawn onto an A4-landscape canvas at 200 DPI, so
-   * the browser shapes Bangla text with system fonts, then embedded
-   * as a full-page image in jsPDF. The downloaded PDF now shows Bangla
-   * names exactly as the on-screen preview does.
-   */
-  function drawCertificateCanvas(): HTMLCanvasElement {
-    const canvas = document.createElement('canvas');
-    // A4 landscape at 200 DPI: 297 mm x 210 mm -> 2338 x 1654 px.
-    const W = 2338;
-    const H = 1654;
-    canvas.width = W;
-    canvas.height = H;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) throw new Error('Canvas is unavailable in this browser');
-    const mm = W / 297; // px per mm
-    const cx = W / 2;
-    ctx.fillStyle = style.backgroundColor;
-    ctx.fillRect(0, 0, W, H);
-    ctx.strokeStyle = style.borderColor;
-    ctx.lineWidth = 1.2 * mm;
-    ctx.strokeRect(10 * mm, 10 * mm, W - 20 * mm, H - 20 * mm);
-    ctx.lineWidth = 0.4 * mm;
-    ctx.strokeRect(13 * mm, 13 * mm, W - 26 * mm, H - 26 * mm);
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    const font = (px: number, bold: boolean): string =>
-      `${bold ? '700' : '400'} ${px}px "Noto Sans Bengali", "Hind Siliguri", sans-serif`;
-    // Title
-    ctx.fillStyle = style.accentColor;
-    ctx.font = font(74, true);
-    ctx.fillText(t({ bn: 'সার্টিফিকেট', en: 'Certificate' }), cx, 45 * mm);
-    // Divider
-    ctx.strokeStyle = style.accentColor;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(cx - 36 * mm, 58 * mm);
-    ctx.lineTo(cx + 36 * mm, 58 * mm);
-    ctx.stroke();
-    // Presented-to line
-    ctx.fillStyle = '#666666';
-    ctx.font = font(34, false);
-    ctx.fillText(t({ bn: 'এই সার্টিফিকেটটি দেওয়া হচ্ছে', en: 'This certificate is proudly presented to' }), cx, 68 * mm);
-    // Recipient name
-    ctx.fillStyle = style.nameColor;
-    ctx.font = font(78, true);
-    ctx.fillText(recipient.trim(), cx, 88 * mm);
-    // Course line
-    ctx.fillStyle = '#666666';
-    ctx.font = font(34, false);
-    ctx.fillText(t({ bn: 'সফলভাবে সম্পন্ন করেছেন', en: 'for successfully completing' }), cx, 106 * mm);
-    ctx.fillStyle = style.accentColor;
-    ctx.font = font(48, true);
-    ctx.fillText(courseTitle.trim(), cx, 120 * mm);
-    // Date + issuer (Eduvelto only — no person's name, no signature).
-    ctx.fillStyle = '#1a1a1a';
-    ctx.font = font(34, false);
-    ctx.fillText(formatCertificateDate(date), cx, 156 * mm);
-    ctx.fillText('Eduvelto', cx, 172 * mm);
-    ctx.font = font(24, false);
-    ctx.fillStyle = '#8a6d1b';
-    ctx.fillText('Official Seal — Eduvelto', cx, 182 * mm);
-    return canvas;
+  useEffect(() => {
+    if (ready && !verificationId) setVerificationId(makeVerificationId());
+  }, [ready, verificationId]);
+
+  // Debounced preview: render the REAL shared canvas whenever the
+  // form or the verification ID changes, so the preview IS the
+  // certificate that downloads. The 400 ms debounce keeps typing
+  // from re-rendering the 2480×1754 canvas on every keystroke.
+  useEffect(() => {
+    if (!ready || !verificationId) {
+      setCert(null);
+      certCanvasRef.current = null;
+      return;
+    }
+    let cancelled = false;
+    setPreviewBusy(true);
+    setPreviewError(false);
+    const timer = window.setTimeout(() => {
+      void (async () => {
+        try {
+          const data = buildMakerCertificateData(
+            recipient,
+            courseTitle,
+            date,
+            verificationId,
+            { achievementLine: achievementLine.trim(), theme },
+          );
+          const { default: QRCode } = await import('qrcode');
+          const qrDataUrl: string = await QRCode.toDataURL(data.verifyUrl, {
+            width: 360,
+            margin: 1,
+            errorCorrectionLevel: 'M',
+          });
+          const canvas = await drawQuizCertificateCanvas(data, qrDataUrl);
+          if (cancelled) return;
+          certCanvasRef.current = canvas;
+          setCert(data);
+        } catch {
+          if (!cancelled) setPreviewError(true);
+        } finally {
+          if (!cancelled) setPreviewBusy(false);
+        }
+      })();
+    }, 400);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [ready, recipient, courseTitle, date, verificationId, achievementLine, theme]);
+
+  // Paint the drawn certificate into the preview slot once React has
+  // mounted it (the slot only exists after `cert` is set, so painting
+  // must happen in an effect — not in the same tick as setCert).
+  useEffect(() => {
+    const slot = slotRef.current;
+    const canvas = certCanvasRef.current;
+    if (!cert || !slot || !canvas) return;
+    slot.width = canvas.width;
+    slot.height = canvas.height;
+    const ctx = slot.getContext('2d');
+    if (ctx) ctx.drawImage(canvas, 0, 0);
+  }, [cert]);
+
+  function handleNewCertificate(): void {
+    setRecipient('');
+    setCourseTitle('');
+    setDate(todayIsoDate());
+    setAchievementLine('for successfully completing');
+    setTheme('gold-navy');
+    setVerificationId(null);
+    setCert(null);
+    certCanvasRef.current = null;
+    setDownloaded(false);
+    setCopied(false);
+    setError(null);
+    setPreviewError(false);
   }
 
   async function handleDownload(): Promise<void> {
-    if (!ready || busy) return;
+    const canvas = certCanvasRef.current;
+    if (!ready || !cert || !canvas || busy) return;
     setBusy(true);
     setError(null);
     setDownloaded(false);
     try {
-      // Dynamic import only — jspdf stays out of the main bundle.
-      const { jsPDF } = await import('jspdf');
-      const canvas = drawCertificateCanvas();
-      const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-      doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 297, 210);
-      doc.save(filename);
+      const base = certificateFileBase(cert);
+      if (format === 'pdf') {
+        await downloadCertificatePdf(canvas, `${base}.pdf`);
+      } else {
+        downloadCanvasPng(canvas, `${base}.png`);
+      }
       setDownloaded(true);
     } catch {
       setError('failed');
@@ -262,8 +299,8 @@ export function CertificateMakerTool() {
         </h2>
         <p style={{ color: 'rgba(255, 255, 255, 0.92)', fontSize: 14, margin: 0 }}>
           {t({
-            bn: 'নাম ও কোর্সের নাম দিন — সার্টিফিকেট বানানো সম্পূর্ণ ফ্রি। পিডিএফ ডাউনলোড করতে ফ্রি ডাউনলোড চাপুন। সব কাজ আপনার ডিভাইসেই হয়। প্রদানকারী: Eduvelto।',
-            en: 'Enter the name and course — making the certificate is completely free. Press Free Download for the PDF. Everything happens on your device. Issued by: Eduvelto.',
+            bn: 'নাম ও কোর্সের নাম দিন — সার্টিফিকেট বানানো সম্পূর্ণ ফ্রি। ফরম্যাট বেছে ফ্রি ডাউনলোড চাপুন। সব কাজ আপনার ডিভাইসেই হয়। প্রদানকারী: Eduvelto।',
+            en: 'Enter the name and course — making the certificate is completely free. Choose a format and press Free Download. Everything happens on your device. Issued by: Eduvelto.',
           })}
         </p>
         <span style={trustChipStyle}>
@@ -298,6 +335,19 @@ export function CertificateMakerTool() {
           />
         </div>
         <div>
+          <label style={labelStyle} htmlFor="cert-achievement">
+            {t({ bn: 'অর্জনের লাইন', en: 'Achievement line' })}
+          </label>
+          <input
+            id="cert-achievement"
+            style={inputStyle}
+            type="text"
+            value={achievementLine}
+            onChange={(e) => setAchievementLine(e.target.value)}
+            placeholder={t({ bn: 'যেমন: for successfully completing', en: 'e.g. for successfully completing' })}
+          />
+        </div>
+        <div>
           <label style={labelStyle} htmlFor="cert-date">
             {t({ bn: 'তারিখ', en: 'Date' })}
           </label>
@@ -310,18 +360,18 @@ export function CertificateMakerTool() {
           />
         </div>
         <div>
-          <label style={labelStyle} htmlFor="cert-template">
-            {t({ bn: 'ডিজাইন', en: 'Template' })}
+          <label style={labelStyle} htmlFor="cert-theme">
+            {t({ bn: 'ডিজাইন', en: 'Design' })}
           </label>
           <select
-            id="cert-template"
+            id="cert-theme"
             style={inputStyle}
-            value={template}
-            onChange={(e) => setTemplate(e.target.value as CertificateTemplate)}
+            value={theme}
+            onChange={(e) => setTheme(e.target.value as CertificateThemeId)}
           >
-            {CERTIFICATE_TEMPLATES.map((tpl) => (
-              <option key={tpl} value={tpl}>
-                {templateLabel(tpl, t)}
+            {CERTIFICATE_THEMES.map((th) => (
+              <option key={th.id} value={th.id}>
+                {t({ bn: th.nameBn, en: th.nameEn })}
               </option>
             ))}
           </select>
@@ -355,56 +405,83 @@ export function CertificateMakerTool() {
           <p style={{ margin: '0 0 10px', fontSize: 14, fontWeight: 600, color: 'var(--heading)' }}>
             {t({ bn: 'প্রিভিউ', en: 'Preview' })}
           </p>
-          <div
-            style={{
-              border: `3px solid ${style.borderColor}`,
-              outline: `1px solid ${style.borderColor}`,
-              outlineOffset: 4,
-              background: style.backgroundColor,
-              borderRadius: 4,
-              padding: '28px 20px',
-              textAlign: 'center',
-            }}
-          >
-            <p style={{ margin: '0 0 8px', fontSize: 26, fontWeight: 700, color: style.accentColor, fontFamily: 'var(--font-head)' }}>
-              {t({ bn: 'সার্টিফিকেট', en: 'Certificate' })}
+          {previewBusy && !cert ? (
+            <p style={noteStyle} role="status">
+              {t({ bn: 'সার্টিফিকেট আঁকা হচ্ছে…', en: 'Drawing the certificate…' })}
             </p>
-            <div style={{ width: 72, margin: '0 auto 14px', borderTop: `2px solid ${style.accentColor}` }} />
-            <p style={{ margin: '0 0 8px', fontSize: 14, color: 'var(--muted)' }}>
-              {t({ bn: 'এই সার্টিফিকেটটি দেওয়া হচ্ছে', en: 'This certificate is proudly presented to' })}
+          ) : null}
+          {cert ? (
+            <>
+              <canvas
+                ref={slotRef}
+                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 4 }}
+                aria-label={t({ bn: 'সার্টিফিকেট প্রিভিউ', en: 'Certificate preview' })}
+              />
+              <p style={noteStyle}>
+                {t({
+                  bn: 'এটাই আসল সার্টিফিকেট — প্রিভিউয়ের ক্যানভাসটিই ডাউনলোড হবে। যাচাই আইডি: ',
+                  en: 'This is the real certificate — the preview canvas itself is what downloads. Verification ID: ',
+                })}
+                <strong>{cert.verificationId}</strong>
+              </p>
+              <p style={noteStyle}>
+                {t({
+                  bn: 'পিডিএফে বাংলা নাম প্রিভিউয়ের মতোই দেখাবে — সার্টিফিকেটটি ক্যানভাসে আঁকা হয়, তারপর পিডিএফে বসানো হয়। ফাইলের নাম: ',
+                  en: 'Bangla names render in the PDF just as in the preview — the certificate is drawn on a canvas, then placed in the PDF. File name: ',
+                })}
+                {`${certificateFileBase(cert)}.${format}`}
+              </p>
+            </>
+          ) : null}
+          {previewError ? (
+            <p style={errorStyle} role="alert">
+              {t({
+                bn: 'প্রিভিউ আঁকা যায়নি — আবার চেষ্টা করুন।',
+                en: 'Could not draw the preview — please try again.',
+              })}
             </p>
-            <p style={{ margin: '0 0 8px', fontSize: 30, fontWeight: 700, color: style.nameColor, fontFamily: 'var(--font-head)' }}>
-              {recipient.trim()}
-            </p>
-            <p style={{ margin: '0 0 8px', fontSize: 14, color: 'var(--muted)' }}>
-              {t({ bn: 'সফলভাবে সম্পন্ন করেছেন', en: 'for successfully completing' })}
-            </p>
-            <p style={{ margin: '0 0 14px', fontSize: 18, fontWeight: 700, color: style.accentColor }}>
-              {courseTitle.trim()}
-            </p>
-            <p style={{ margin: '0 0 4px', fontSize: 14, color: 'var(--heading)' }}>
-              {formatCertificateDate(date)}
-            </p>
-            <p style={{ margin: 0, fontSize: 14, color: 'var(--heading)' }}>Eduvelto</p>
-            <p style={{ margin: '4px 0 0', fontSize: 13, color: 'var(--muted)' }}>
-              {t({ bn: 'Eduvelto-র অফিসিয়াল সিল', en: 'Official Seal — Eduvelto' })}
-            </p>
+          ) : null}
+          <div style={{ marginTop: 12 }}>
+            <span style={{ ...labelStyle, marginBottom: 6 }}>
+              {t({ bn: 'ডাউনলোড ফরম্যাট', en: 'Download format' })}
+            </span>
+            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, color: 'var(--heading)' }}>
+                <input
+                  id="cert-format-pdf"
+                  type="radio"
+                  name="cert-format"
+                  value="pdf"
+                  checked={format === 'pdf'}
+                  onChange={() => setFormat('pdf')}
+                />
+                {t({ bn: 'পিডিএফ (প্রিন্টের জন্য)', en: 'PDF (for print)' })}
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, color: 'var(--heading)' }}>
+                <input
+                  id="cert-format-png"
+                  type="radio"
+                  name="cert-format"
+                  value="png"
+                  checked={format === 'png'}
+                  onChange={() => setFormat('png')}
+                />
+                {t({ bn: 'পিএনজি ছবি', en: 'PNG image' })}
+              </label>
+            </div>
           </div>
-          <p style={noteStyle}>
-            {t({
-              bn: 'পিডিএফে বাংলা নাম প্রিভিউয়ের মতোই দেখাবে — সার্টিফিকেটটি ক্যানভাসে আঁকা হয়, তারপর পিডিএফে বসানো হয়। ফাইলের নাম: ',
-              en: 'Bangla names render in the PDF just as in the preview — the certificate is drawn on a canvas, then placed in the PDF. File name: ',
-            })}
-            {filename}
-          </p>
           <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-            <RewardedAdButton lang={lang} onFreeDownload={() => void handleDownload()} />
+            <RewardedAdButton
+              lang={lang}
+              durationSeconds={format === 'pdf' ? 30 : 15}
+              onFreeDownload={() => void handleDownload()}
+            />
             <button
               type="button"
               className="ev-btn ev-btn-outline"
               style={copyButtonStyle}
               onClick={() => {
-                const summary = `${recipient.trim()} — ${courseTitle.trim()} — ${issuer.trim()}, ${formatCertificateDate(date)}`;
+                const summary = `${recipient.trim()} — ${courseTitle.trim()} — ${issuer.trim()}, ${formatCertificateDate(date)} — ${cert?.verificationId ?? verificationId ?? ''}`;
                 void navigator.clipboard.writeText(summary).then(
                   () => setCopied(true),
                   () => setCopied(false),
@@ -415,31 +492,39 @@ export function CertificateMakerTool() {
                 ? t({ bn: 'কপি হয়েছে', en: 'Copied' })
                 : t({ bn: 'সারাংশ কপি করুন', en: 'Copy summary' })}
             </button>
+            <button
+              type="button"
+              className="ev-btn ev-btn-outline"
+              style={copyButtonStyle}
+              onClick={handleNewCertificate}
+            >
+              {t({ bn: 'নতুন সার্টিফিকেট', en: 'New certificate' })}
+            </button>
           </div>
-            {busy ? (
-              <p style={noteStyle} role="status">
-                {t({ bn: 'পিডিএফ তৈরি হচ্ছে…', en: 'Making the PDF…' })}
-              </p>
-            ) : null}
-            {downloaded ? (
-              <p style={noteStyle} role="status">
-                {t({ bn: 'ডাউনলোড হয়েছে।', en: 'Downloaded.' })}
-              </p>
-            ) : null}
+          {busy ? (
+            <p style={noteStyle} role="status">
+              {t({ bn: 'ডাউনলোড তৈরি হচ্ছে…', en: 'Preparing the download…' })}
+            </p>
+          ) : null}
+          {downloaded ? (
+            <p style={noteStyle} role="status">
+              {t({ bn: 'ডাউনলোড হয়েছে।', en: 'Downloaded.' })}
+            </p>
+          ) : null}
         </div>
       ) : (
         <p style={errorStyle} role="alert">
           {t({
-            bn: 'সার্টিফিকেট দেখতে নাম, কোর্স ও সঠিক তারিখ দিন।',
-            en: 'Enter the name, course and a valid date to see the certificate.',
+            bn: 'সার্টিফিকেট দেখতে নাম, কোর্স, অর্জনের লাইন ও সঠিক তারিখ দিন।',
+            en: 'Enter the name, course, achievement line and a valid date to see the certificate.',
           })}
         </p>
       )}
       {error ? (
         <p style={errorStyle} role="alert">
           {t({
-            bn: 'পিডিএফ বানানো যায়নি — আবার চেষ্টা করুন।',
-            en: 'Could not make the PDF — please try again.',
+            bn: 'ডাউনলোড বানানো যায়নি — আবার চেষ্টা করুন।',
+            en: 'Could not make the download — please try again.',
           })}
         </p>
       ) : null}

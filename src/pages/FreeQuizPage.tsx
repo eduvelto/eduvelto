@@ -555,8 +555,8 @@ export default function FreeQuizPage() {
             </h2>
             <p style={{ color: 'var(--muted)', margin: '0 0 12px', lineHeight: 1.7, fontSize: 14 }}>
               {t({
-                bn: 'নামটি লিখুন — সার্টিফিকেটে ঠিক যেমন লিখবেন, তেমনই ছাপা হবে। সার্টিফিকেটে কোনো ব্যক্তির নাম বা স্বাক্ষর থাকে না — শুধু Eduvelto-র নাম, লোগো ও অফিসিয়াল সিল।',
-                en: 'Type your name — it prints on the certificate exactly as you type it. The certificate carries no person\u2019s name or signature — only Eduvelto\u2019s name, logo and official seal.',
+                bn: 'নামটি লিখুন — সার্টিফিকেটে ঠিক যেমন লিখবেন, তেমনই ছাপা হবে। সার্টিফিকেটে কোনো ব্যক্তির নাম বা স্বাক্ষর থাকে না — শুধু Eduvelto-র নাম ও লোগো।',
+                en: 'Type your name — it prints on the certificate exactly as you type it. The certificate carries no person\u2019s name or signature — only Eduvelto\u2019s name and logo.',
               })}
             </p>
             {!cert ? (
