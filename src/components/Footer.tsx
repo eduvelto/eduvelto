@@ -136,6 +136,11 @@ export default function Footer() {
               <LinkedinIcon />
             </a>
           </div>
+          {/* Product Hunt launch badge — 28 Nov 2026 launch (post 1333943),
+              embed code from the Pre-Launch Dashboard. */}
+          <a href="https://www.producthunt.com/products/eduvelto?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-eduvelto" target="_blank" rel="noopener noreferrer" aria-label="Eduvelto on Product Hunt" style={{ display: 'inline-block', marginTop: 14 }}>
+            <img alt="Eduvelto - 265 free tools for Bangladesh, in Bangla & English | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1333943&theme=neutral&t=1795825706433" style={{ display: 'block', maxWidth: '100%', height: 'auto' }} />
+          </a>
         </div>
         <div>
           <p className="ev-footer-heading">{t({ bn: 'শিখুন', en: 'Learn' })}</p>
