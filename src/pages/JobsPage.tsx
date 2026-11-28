@@ -87,6 +87,53 @@ export default function JobsPage() {
         </LinkButton>
       </p>
 
+      {/* Job & Admission Prep (owner order 28 Nov 2026, 10:23): the
+          free quiz IS the competition engine (10 unique shuffled
+          questions, timer, instant result + certificate) — linked
+          here alongside the Recent & Most Repeated collection and
+          the syllabus-based mock engine. */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginBottom: 20 }}>
+        <Card>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
+            {t({ bn: 'ফ্রি কুইজ প্রতিযোগিতা', en: 'Free Quiz Competition' })}
+          </div>
+          <p style={{ margin: '6px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+            {t({ bn: '১০টি যাচাইকৃত প্রশ্ন, ৫ মিনিটের টাইমার, তাৎক্ষণিক ফল ও সার্টিফিকেট — লগইন ছাড়াই।', en: '10 verified questions, a 5-minute timer, instant results and a certificate — no login needed.' })}
+          </p>
+          <p style={{ margin: 0 }}>
+            <LinkButton to="/free-quiz" variant="primary">
+              {t({ bn: 'কুইজ খেলুন →', en: 'Play the quiz →' })}
+            </LinkButton>
+          </p>
+        </Card>
+        <Card>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
+            {t({ bn: 'সাম্প্রতিক ও বারবার আসা প্রশ্ন', en: 'Recent & Most Repeated Questions' })}
+          </div>
+          <p style={{ margin: '6px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+            {t({ bn: '৩৫টি যাচাইকৃত বিসিএস ইংরেজি প্রশ্ন — উত্তর ও ব্যাখ্যাসহ, বিষয় অনুযায়ী।', en: '35 verified BCS English questions — with answers and explanations, by topic.' })}
+          </p>
+          <p style={{ margin: 0 }}>
+            <LinkButton to="/jobs/recent-repeated" variant="accent">
+              {t({ bn: 'প্রশ্ন দেখুন →', en: 'See the questions →' })}
+            </LinkButton>
+          </p>
+        </Card>
+        <Card>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
+            {t({ bn: 'সিলেবাস-ভিত্তিক মক টেস্ট', en: 'Syllabus-Based Mock Test' })}
+          </div>
+          <p style={{ margin: '6px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+            {t({ bn: 'অফিসিয়াল ধরন, আসল সময় ও নেগেটিভ মার্কিং — শুধু যাচাইকৃত প্রশ্ন দিয়ে।', en: 'Official pattern, real timing and negative marking — verified questions only.' })}
+          </p>
+          <p style={{ margin: 0 }}>
+            <LinkButton to="/jobs/syllabus-mock" variant="accent">
+              {t({ bn: 'মক দিন →', en: 'Take the mock →' })}
+            </LinkButton>
+          </p>
+        </Card>
+      </div>
+
       {/* Phase 3 (25 Nov 2026): ৳149 suggestion-PDF card — UI-only
           until verified content exists (sales gate in lib/orders.ts). */}
       <SuggestionPdfCard />

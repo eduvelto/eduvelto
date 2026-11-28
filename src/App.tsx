@@ -155,6 +155,9 @@ const LessonPage = lazy(() => import('./pages/LessonPage'));
 const QuizPage = lazy(() => import('./pages/QuizPage'));
 const QuizResultPage = lazy(() => import('./pages/QuizResultPage'));
 const FreeQuizPage = lazy(() => import('./pages/FreeQuizPage'));
+const RecentRepeatedPage = lazy(() => import('./pages/RecentRepeatedPage'));
+const SyllabusMockPage = lazy(() => import('./pages/SyllabusMockPage'));
+const AdmissionUnitPage = lazy(() => import('./pages/AdmissionUnitPage'));
 const VerifyCertificatePage = lazy(() => import('./pages/VerifyCertificatePage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 const AdminAds = lazy(() => import('./pages/AdminAds'));
@@ -591,6 +594,12 @@ export default function App() {
             group page, never the "science" tab. NU-Q6 (final):
             the dashboard is `/admissions/dashboard`. */}
         <Route path="admissions" element={<AdmissionsIndexPage />} />
+        {/* Job & Admission Prep (owner order 28 Nov 2026, 10:23):
+            admission unit hubs — structure only, patterns unverified.
+            One param route: static NU routes above rank higher, so
+            /admissions/national-university/* still wins. Unknown
+            combos render the page's honest "not built yet" state. */}
+        <Route path="admissions/:institution/:unit" element={<AdmissionUnitPage />} />
         <Route path="admissions/dashboard" element={<AdmissionsDashboardPage />} />
         <Route path="admissions/national-university" element={<NuHubPage />} />
         <Route path="admissions/national-university/humanities" element={<NuGroupPage group="humanities" />} />
@@ -612,6 +621,13 @@ export default function App() {
         <Route path="class/:slug" element={<ClassDashboardPage />} />
         {/* Job Preparation (B-1.3): /jobs → hub index, /jobs/common, /jobs/dashboard, /jobs/:exam[/:tab]. /jobs/common and /jobs/dashboard must come before /jobs/:exam. Step 6 subject/topic pages are 4- and 5-segment routes (/jobs/:exam/subjects/:subject[/:topic]) — they cannot match the 3-segment /jobs/:exam/:tab route. */}
         <Route path="jobs" element={<JobsPage />} />
+        {/* Job & Admission Prep (owner order 28 Nov 2026, 10:23):
+            Recent & Most Repeated (verified pool only) + the
+            syllabus-based mock engine. Static routes, before
+            /jobs/:exam/:tab below. */}
+        <Route path="jobs/recent-repeated" element={<RecentRepeatedPage />} />
+        <Route path="jobs/syllabus-mock" element={<SyllabusMockPage />} />
+        <Route path="jobs/syllabus-mock/:exam" element={<SyllabusMockPage />} />
         <Route path="jobs/common" element={<JobsCommonPage />} />
         <Route path="jobs/dashboard" element={<JobSeekerDashboardPage />} />
         <Route path="jobs/:exam/subjects/:subject" element={<JobSubjectPage />} />

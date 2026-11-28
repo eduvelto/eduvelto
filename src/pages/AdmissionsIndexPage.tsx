@@ -17,13 +17,9 @@ import { useLanguage } from '../i18n/LanguageContext';
 import AdmissionModeSwitch from '../components/AdmissionModeSwitch';
 import SuggestionPdfCard from '../components/SuggestionPdfCard';
 import { NU_DASHBOARD_ROUTE, NU_HUB_ROUTE } from '../lib/nuStructure';
+import { ADMISSION_STRUCTURE } from '../lib/jobAdmissionPrep';
 
 const LATER_INSTITUTIONS: { bn: string; en: string }[] = [
-  { bn: 'ঢাকা বিশ্ববিদ্যালয়', en: 'University of Dhaka' },
-  { bn: 'GST (গুচ্ছ)', en: 'GST (Cluster)' },
-  { bn: 'মেডিকেল ও ডেন্টাল', en: 'Medical and Dental' },
-  { bn: 'ইঞ্জিনিয়ারিং', en: 'Engineering' },
-  { bn: 'কৃষি', en: 'Agriculture' },
   { bn: 'নার্সিং', en: 'Nursing' },
   { bn: 'প্রাইভেট বিশ্ববিদ্যালয়', en: 'Private universities' },
 ];
@@ -57,6 +53,12 @@ export default function AdmissionsIndexPage() {
       <p style={{ marginTop: 20 }}>
         <LinkButton to={NU_DASHBOARD_ROUTE} variant="primary">
           {t({ bn: 'আমার ভর্তি ড্যাশবোর্ড', en: 'My admission dashboard' })} →
+        </LinkButton>{' '}
+        {/* Job & Admission Prep (owner order 28 Nov 2026, 10:23): the
+            free quiz is the competition engine — linked from the
+            admission hub too, not just from /jobs. */}
+        <LinkButton to="/free-quiz" variant="accent">
+          {t({ bn: 'ফ্রি কুইজ প্রতিযোগিতা →', en: 'Free quiz competition →' })}
         </LinkButton>
       </p>
 
@@ -81,6 +83,31 @@ export default function AdmissionsIndexPage() {
             {t({ bn: 'প্রস্তুতি শুরু করুন', en: 'Start preparing' })} →
           </LinkButton>
         </Card>
+        {ADMISSION_STRUCTURE.map((inst) => (
+          <Card key={inst.slug}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+              <strong style={{ fontSize: 16, color: 'var(--heading)' }}>{t({ bn: inst.bn, en: inst.en })}</strong>
+            </div>
+            <div style={{ marginTop: 10, display: 'grid', gap: 8 }}>
+              {inst.units.map((unit) => (
+                <div key={unit.slug} style={{ borderTop: '1px solid var(--hatch-widget-border)', paddingTop: 8 }}>
+                  <Link to={`/admissions/${inst.slug}/${unit.slug}`} style={{ fontWeight: 600 }}>
+                    {t({ bn: unit.bn, en: unit.en })} →
+                  </Link>
+                  <p style={{ margin: '4px 0 0', fontSize: 13, lineHeight: 1.7, color: 'var(--ink-soft)' }}>
+                    {t({
+                      bn: `বিষয়: ${unit.subjectsBn.join(' • ')}`,
+                      en: `Subjects: ${unit.subjectsEn.join(' • ')}`,
+                    })}
+                  </p>
+                  <p style={{ margin: '2px 0 0', fontSize: 13, color: 'var(--muted-ivory)' }}>
+                    {t({ bn: 'ধরন এখনো যাচাই হয়নি', en: 'Pattern not verified yet' })}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Card>
+        ))}
         {LATER_INSTITUTIONS.map((inst) => (
           <Card key={inst.bn} style={{ opacity: 0.85 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
