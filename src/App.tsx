@@ -816,6 +816,22 @@ export default function App() {
         {/* Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
             Sentences — Class 3, general version, no personal name. */}
         <Route path="guides/negative-sentences-class-3" element={<PublicGuidePage guide="negative-sentences-class-3" />} />
+        {/* FINISH BATCH 28 NOV — GUIDES A (1–5): 5 new tool-tied
+            Study Guides — PDF compress, CV for freshers, cover
+            letter, typing speed, compound interest. */}
+        <Route path="guides/pdf-compress-guide" element={<PublicGuidePage guide="pdf-compress-guide" />} />
+        <Route path="guides/cv-writing-freshers-guide" element={<PublicGuidePage guide="cv-writing-freshers-guide" />} />
+        <Route path="guides/cover-letter-writing-guide" element={<PublicGuidePage guide="cover-letter-writing-guide" />} />
+        <Route path="guides/typing-speed-improve-guide" element={<PublicGuidePage guide="typing-speed-improve-guide" />} />
+        <Route path="guides/compound-interest-calculation-guide" element={<PublicGuidePage guide="compound-interest-calculation-guide" />} />
+        {/* FINISH BATCH 28 NOV — GUIDES B (6–10): 5 new tool-tied
+            Study Guides — discount/VAT, image compress+resize,
+            percentage, BMR/TDEE, digital signature. */}
+        <Route path="guides/discount-vat-profit-calculation-guide" element={<PublicGuidePage guide="discount-vat-profit-calculation-guide" />} />
+        <Route path="guides/image-compress-resize-guide" element={<PublicGuidePage guide="image-compress-resize-guide" />} />
+        <Route path="guides/percentage-calculation-guide" element={<PublicGuidePage guide="percentage-calculation-guide" />} />
+        <Route path="guides/bmr-tdee-calorie-guide" element={<PublicGuidePage guide="bmr-tdee-calorie-guide" />} />
+        <Route path="guides/digital-signature-maker-guide" element={<PublicGuidePage guide="digital-signature-maker-guide" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches

@@ -1912,9 +1912,62 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'What a negative sentence is, when to use do not / does not / did not, and why the verb returns to its base form after do/does/did — a simple Class 3 guide with examples and practice. Draft lesson — awaiting teacher review.',
     crumbEn: 'Negative Sentences',
   },
-  // Finish batch, 28 Nov 2026 (guides 6–10): static entries follow the
+  // FINISH BATCH 28 NOV — GUIDES A (1–5): 5 new tool-tied Study
+  // Guides — PDF compress, CV for freshers, cover letter,
+  // typing speed, compound interest.
+  '/guides/pdf-compress-guide': {
+    title: 'PDF ফাইল ছোট করার নিয়ম | Eduvelto',
+    description:
+      'PDF ফাইলের আকার ছোট করার নিয়ম — কম্প্রেসের মাত্রা, ছবি চাপা, লক্ষ্য আকার ও মান ধরে রাখার উপায়। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'PDF ছোট করা',
+    titleEn: 'How to Compress a PDF File | Eduvelto',
+    descriptionEn:
+      'How to make a PDF file smaller — compression levels, image downsampling, target size and keeping quality. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Compress a PDF',
+  },
+  '/guides/cv-writing-freshers-guide': {
+    title: 'CV লেখার নিয়ম — ফ্রেশারদের জন্য | Eduvelto',
+    description:
+      'অভিজ্ঞতা ছাড়া CV লেখার নিয়ম — গঠন, শিক্ষা, দক্ষতা, প্রকল্প ও এক পাতার বিন্যাসের সহজ গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ফ্রেশারদের CV',
+    titleEn: 'How to Write a CV — For Freshers | Eduvelto',
+    descriptionEn:
+      'How to write a CV with no work experience — structure, education, skills, projects and a one-page layout. Draft lesson — awaiting teacher review.',
+    crumbEn: 'CV for Freshers',
+  },
+  '/guides/cover-letter-writing-guide': {
+    title: 'Cover Letter লেখার নিয়ম | Eduvelto',
+    description:
+      'চাকরির আবেদনের Cover Letter লেখার নিয়ম — গঠন, ভূমিকা, মূল অংশ, সমাপনী ও সাধারণ ভুল এড়ানোর উপায়। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'Cover Letter লেখা',
+    titleEn: 'How to Write a Cover Letter | Eduvelto',
+    descriptionEn:
+      'How to write a job-application cover letter — structure, opening, main part, closing and avoiding common mistakes. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Writing a Cover Letter',
+  },
+  '/guides/typing-speed-improve-guide': {
+    title: 'টাইপিং স্পিড বাড়ানোর উপায় | Eduvelto',
+    description:
+      'টাইপিং স্পিড বাড়ানোর উপায় — WPM হিসাব, হোম রো পদ্ধতি, বাংলা ও ইংরেজি অনুশীলন এবং নিয়মিত মাপার নিয়ম। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'টাইপিং স্পিড',
+    titleEn: 'How to Increase Your Typing Speed | Eduvelto',
+    descriptionEn:
+      'How to increase your typing speed — the WPM calculation, the home-row method, Bangla and English practice and regular testing. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Typing Speed',
+  },
+  '/guides/compound-interest-calculation-guide': {
+    title: 'চক্রবৃদ্ধি সুদ হিসাবের নিয়ম | Eduvelto',
+    description:
+      'চক্রবৃদ্ধি সুদ হিসাবের নিয়ম — সূত্র, মাসিক চক্রবৃদ্ধি, মাসিক কিস্তি ও উদাহরণসহ পুরো হিসাব। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'চক্রবৃদ্ধি সুদ',
+    titleEn: 'How to Calculate Compound Interest | Eduvelto',
+    descriptionEn:
+      'How to calculate compound interest — the formula, monthly compounding, monthly contributions and worked examples. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Compound Interest',
+  },
+  // Finish batch, 28 Nov 2026 (guides 1–10): static entries follow the
   // morning-batch pattern. NOTE: the seo.ts wording pass (item 3) will
-  // revisit the "খসড়া পাঠ" wording for ALL guides — these five entries
+  // revisit the "খসড়া পাঠ" wording for ALL guides — these ten entries
   // must be aligned with whatever wording that pass settles on.
   '/guides/discount-vat-profit-calculation-guide': {
     title: 'ছাড় ও ভ্যাট হিসাবের নিয়ম — দাম, লাভ ও মার্জিন | Eduvelto',
@@ -2742,9 +2795,9 @@ export function resolveRouteSeo(pathname: string, lang: SupportedLang = 'bn'): S
     // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1,
     // wave 2, wave 3, wave 4, wave 5 and wave 10; Phase 2, 25 Nov
     // 2026: 56 guides; trust/content batch, 28 Nov 2026: 66 guides;
-    // eleventh guide, 28 Nov 2026: 67 guides; finish batch, 28 Nov
-    // 2026 (guides 6–10): 72 guides):
-    // the hub lists the 72 public guides, the two real lessons and
+    // eleventh guide, 28 Nov 2026: 67 guides; finish batches A + B,
+    // 28 Nov 2026: 77 guides):
+    // the hub lists the 77 public guides, the two real lessons and
     // the BCS English practice hub — the same links the page renders,
     // in the same order.
     jsonLd.push({
@@ -3157,48 +3210,78 @@ export function resolveRouteSeo(pathname: string, lang: SupportedLang = 'bn'): S
         {
           '@type': 'ListItem',
           position: 68,
+          name: lang === 'bn' ? 'PDF ফাইল ছোট করার নিয়ম' : 'How to Compress a PDF File',
+          url: `${SITE_URL}/${lang}/guides/pdf-compress-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 69,
+          name: lang === 'bn' ? 'CV লেখার নিয়ম — ফ্রেশারদের জন্য' : 'How to Write a CV — For Freshers',
+          url: `${SITE_URL}/${lang}/guides/cv-writing-freshers-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 70,
+          name: lang === 'bn' ? 'Cover Letter লেখার নিয়ম' : 'How to Write a Cover Letter',
+          url: `${SITE_URL}/${lang}/guides/cover-letter-writing-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 71,
+          name: lang === 'bn' ? 'টাইপিং স্পিড বাড়ানোর উপায়' : 'How to Increase Your Typing Speed',
+          url: `${SITE_URL}/${lang}/guides/typing-speed-improve-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 72,
+          name: lang === 'bn' ? 'চক্রবৃদ্ধি সুদ হিসাবের নিয়ম' : 'How to Calculate Compound Interest',
+          url: `${SITE_URL}/${lang}/guides/compound-interest-calculation-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 73,
           name: lang === 'bn' ? 'ছাড় ও ভ্যাট হিসাবের নিয়ম — দাম, লাভ ও মার্জিন' : 'Discount & VAT Calculation Rules — Price, Profit & Margin',
           url: `${SITE_URL}/${lang}/guides/discount-vat-profit-calculation-guide`,
         },
         {
           '@type': 'ListItem',
-          position: 69,
+          position: 74,
           name: lang === 'bn' ? 'ছবি ছোট ও resize করার নিয়ম — কম্প্রেস ও আকার বদলানো' : 'How to Compress & Resize Images — Smaller Files, Right Size',
           url: `${SITE_URL}/${lang}/guides/image-compress-resize-guide`,
         },
         {
           '@type': 'ListItem',
-          position: 70,
+          position: 75,
           name: lang === 'bn' ? 'শতকরা হিসাবের নিয়ম — শতাংশ, দশমিক ও ভগ্নাংশ' : 'Percentage Calculation Rules — Percent, Decimal & Fraction',
           url: `${SITE_URL}/${lang}/guides/percentage-calculation-guide`,
         },
         {
           '@type': 'ListItem',
-          position: 71,
+          position: 76,
           name: lang === 'bn' ? 'BMR/TDEE — দিনে কত ক্যালরি দরকার' : 'BMR/TDEE — How Many Calories You Need in a Day',
           url: `${SITE_URL}/${lang}/guides/bmr-tdee-calorie-guide`,
         },
         {
           '@type': 'ListItem',
-          position: 72,
+          position: 77,
           name: lang === 'bn' ? 'ডিজিটাল স্বাক্ষর বানানো ও ব্যবহারের নিয়ম' : 'How to Make & Use a Digital Signature',
           url: `${SITE_URL}/${lang}/guides/digital-signature-maker-guide`,
         },
         {
           '@type': 'ListItem',
-          position: 73,
+          position: 78,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 74,
+          position: 79,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 75,
+          position: 80,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/${lang}/jobs/bcs/practice/english`,
         },

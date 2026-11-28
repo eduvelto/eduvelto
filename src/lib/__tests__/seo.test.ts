@@ -1356,7 +1356,7 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     }
   });
 
-  it('/learn hub emits an ItemList of its 72 guides + 2 lessons + the practice hub', () => {
+  it('/learn hub emits an ItemList of its 77 guides + 2 lessons + the practice hub', () => {
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
@@ -1427,6 +1427,11 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
       `${SITE_URL}/bn/guides/age-calculation-guide`,
       `${SITE_URL}/bn/guides/qr-code-image-tools-guide`,
       `${SITE_URL}/bn/guides/negative-sentences-class-3`,
+      `${SITE_URL}/bn/guides/pdf-compress-guide`,
+      `${SITE_URL}/bn/guides/cv-writing-freshers-guide`,
+      `${SITE_URL}/bn/guides/cover-letter-writing-guide`,
+      `${SITE_URL}/bn/guides/typing-speed-improve-guide`,
+      `${SITE_URL}/bn/guides/compound-interest-calculation-guide`,
       `${SITE_URL}/bn/guides/discount-vat-profit-calculation-guide`,
       `${SITE_URL}/bn/guides/image-compress-resize-guide`,
       `${SITE_URL}/bn/guides/percentage-calculation-guide`,
@@ -1541,8 +1546,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('all 72 guides resolve with draft wording and Article JSON-LD', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(72);
+  it('all 77 guides resolve with draft wording and Article JSON-LD', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(77);
     for (const guide of PUBLIC_GUIDES) {
       const seo = resolveRouteSeo(guide.path);
       expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
@@ -1557,7 +1562,7 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
       expect(article['headline']).toBe(seo!.title);
       expect(article['inLanguage']).toBe('bn');
       // Phase 2 (25 Nov 2026) + trust/content batch (28 Nov 2026):
-      // the 25 Study Guides are free and
+      // the 36 Study Guides are free and
       // carry their own updatedAt as datePublished/dateModified;
       // the 41 older guides keep 2026-11-24 and no dateModified.
       expect(article['isAccessibleForFree']).toBe(true);
@@ -1569,7 +1574,7 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('/guides hub emits an ItemList of its 31 Study Guides', () => {
+  it('/guides hub emits an ItemList of its 36 Study Guides', () => {
     const seo = resolveRouteSeo('/guides')!;
     const list = (seo.jsonLd as Array<Record<string, unknown>>).find(
       (o) => o['@type'] === 'ItemList',
@@ -1581,7 +1586,7 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
         (g) => `${SITE_URL}/bn${g.path}`,
       ),
     );
-    expect(items).toHaveLength(31);
+    expect(items).toHaveLength(36);
   });
 
 describe('/founder SEO (Phase 2, 25 Nov 2026)', () => {

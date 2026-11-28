@@ -9,10 +9,13 @@
 // tools' own logic (src/lib/tools/), 800+ words in Bn AND En each.
 // EXTENDED 28 Nov 2026, eleventh guide (owner order 11:44): +1,
 // 67 total — Negative Sentences, Class 3, general version.
-// EXTENDED 28 Nov 2026, finish batch B (owner order, code freeze
-// lifted 21:10): +5 tool-tied guides (6–10), 72 total —
-// discount/VAT, image compress+resize, percentage, BMR/TDEE,
-// digital signature; 800+ words in Bn AND En each.
+// EXTENDED 28 Nov 2026, finish batches A + B (owner order, code
+// freeze lifted 21:10): +10 tool-tied guides, 77 total —
+// A (1–5): PDF compress, CV for freshers, cover letter, typing
+// speed, compound interest; B (6–10): discount/VAT, image
+// compress+resize, percentage, BMR/TDEE, digital signature;
+// 800+ words in Bn AND En each, formulas grounded in the tools'
+// own logic (src/lib/tools/).
 //
 // 41 original public guides, visible to Googlebot WITHOUT login.
 // Static data ONLY — zero Firestore reads, no login. The prose is
