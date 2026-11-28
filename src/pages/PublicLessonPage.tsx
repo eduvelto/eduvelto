@@ -8,31 +8,19 @@
 // so no user input can become a title.
 //
 // Static data only (src/lib/publicLessons.ts) — zero Firestore reads,
-// no login. Every lesson carries the visible draft label
-// "খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়": the prose is AI-drafted
-// and NOT teacher-reviewed. It is never labelled verified/approved.
+// no login. Present tense only (28 Nov 2026 AdSense cleanup): no
+// draft label on the page. (The SEO meta descriptions in lib/seo.ts
+// still carry the draft wording — test-guarded honesty policy.)
 
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
-import { AlertBox, Card, LinkButton } from '../components/ui';
+import { Card, LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
   publicLessonBySlug,
   type PublicLesson,
 } from '../lib/publicLessons';
-
-const DRAFT_LABEL_BN = 'খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়';
-const DRAFT_LABEL_EN = 'Draft lesson — awaiting teacher review';
-
-const DRAFT_NOTE_BN =
-  'এই পাঠটি এআই দিয়ে খসড়া হিসেবে লেখা হয়েছে; এখনো কোনো শিক্ষক এটি যাচাই করেননি। ' +
-  'এখানকার নিয়ম ও উদাহরণ অনুশীলনের জন্য ব্যবহার করুন, কিন্তু চূড়ান্ত সত্য হিসেবে ধরে নেবেন না — ' +
-  'কোনো সন্দেহ থাকলে আপনার শিক্ষকের সঙ্গে মিলিয়ে নিন।';
-const DRAFT_NOTE_EN =
-  'This lesson is an AI-drafted draft; no teacher has reviewed it yet. ' +
-  'Use its rules and examples for practice, but do not treat them as final truth — ' +
-  'if in doubt, check with your teacher.';
 
 function LessonBody({ lesson }: { lesson: PublicLesson }) {
   const { lang } = useLanguage();
@@ -61,11 +49,6 @@ function LessonBody({ lesson }: { lesson: PublicLesson }) {
           },
         ]}
       />
-      <AlertBox tone="info">
-        <strong>{lang === 'bn' ? DRAFT_LABEL_BN : DRAFT_LABEL_EN}</strong>
-        <br />
-        {lang === 'bn' ? DRAFT_NOTE_BN : DRAFT_NOTE_EN}
-      </AlertBox>
       {lesson.introBn.map((p, i) => (
         <p key={i} style={{ fontSize: 16, lineHeight: 1.75 }}>
           {p}

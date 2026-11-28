@@ -673,9 +673,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'বিসিএস বাংলা',
     category: 'bcs',
     descriptionBn:
-      'বিসিএস প্রিলিমিনারিতে বাংলা ৩০ নম্বর — সাহিত্য ও ব্যাকরণের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বিসিএস প্রিলিমিনারিতে বাংলা ৩০ নম্বর — সাহিত্য ও ব্যাকরণের প্রস্তুতির গাইড।',
     descriptionEn:
-      'Bangla carries 30 marks in the BCS Preliminary — a guide to preparing literature and grammar. Draft lesson — awaiting teacher review.',
+      'Bangla carries 30 marks in the BCS Preliminary — a guide to preparing literature and grammar.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -698,9 +698,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'বিসিএস ইংরেজি',
     category: 'bcs',
     descriptionBn:
-      'বিসিএস প্রিলিমিনারিতে ইংরেজি ৩০ নম্বর — ব্যাকরণ, শব্দভান্ডার ও পড়ে বোঝার প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বিসিএস প্রিলিমিনারিতে ইংরেজি ৩০ নম্বর — ব্যাকরণ, শব্দভান্ডার ও পড়ে বোঝার প্রস্তুতির গাইড।',
     descriptionEn:
-      'English carries 30 marks in the BCS Preliminary — a guide to grammar, vocabulary and reading. Draft lesson — awaiting teacher review.',
+      'English carries 30 marks in the BCS Preliminary — a guide to grammar, vocabulary and reading.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -723,9 +723,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'বিসিএস গণিত',
     category: 'bcs',
     descriptionBn:
-      'বিসিএস প্রিলিমিনারিতে গাণিতিক যুক্তি ২০ ও মানসিক দক্ষতা ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বিসিএস প্রিলিমিনারিতে গাণিতিক যুক্তি ২০ ও মানসিক দক্ষতা ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড।',
     descriptionEn:
-      'Mathematical Reasoning 20 and Mental Ability 15 in the BCS Preliminary — a guide to both. Draft lesson — awaiting teacher review.',
+      'Mathematical Reasoning 20 and Mental Ability 15 in the BCS Preliminary — a guide to both.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -748,9 +748,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'বিসিএস বিজ্ঞান',
     category: 'bcs',
     descriptionBn:
-      'বিসিএস প্রিলিমিনারিতে সাধারণ বিজ্ঞান ১৫ ও কম্পিউটার ও আইসিটি ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বিসিএস প্রিলিমিনারিতে সাধারণ বিজ্ঞান ১৫ ও কম্পিউটার ও আইসিটি ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড।',
     descriptionEn:
-      'General Science 15 and Computer & ICT 15 in the BCS Preliminary — a guide to both. Draft lesson — awaiting teacher review.',
+      'General Science 15 and Computer & ICT 15 in the BCS Preliminary — a guide to both.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -773,9 +773,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'প্রাথমিক বাংলা-ইংরেজি',
     category: 'primary',
     descriptionBn:
-      'প্রাথমিক সহকারী শিক্ষক নিয়োগে বাংলা ২৫ ও ইংরেজি ২৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগে বাংলা ২৫ ও ইংরেজি ২৫ নম্বর — দুই অংশের প্রস্তুতির গাইড।',
     descriptionEn:
-      'Bangla 25 and English 25 in the Primary Assistant Teacher exam — a guide to both. Draft lesson — awaiting teacher review.',
+      'Bangla 25 and English 25 in the Primary Assistant Teacher exam — a guide to both.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -798,9 +798,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'প্রাথমিক গণিত-জিকে',
     category: 'primary',
     descriptionBn:
-      'প্রাথমিক সহকারী শিক্ষক নিয়োগে গণিত ২০ ও সাধারণ জ্ঞান ২০ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগে গণিত ২০ ও সাধারণ জ্ঞান ২০ নম্বর — দুই অংশের প্রস্তুতির গাইড।',
     descriptionEn:
-      'Mathematics 20 and General Knowledge 20 in the Primary Assistant Teacher exam — a guide to both. Draft lesson — awaiting teacher review.',
+      'Mathematics 20 and General Knowledge 20 in the Primary Assistant Teacher exam — a guide to both.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -823,9 +823,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'প্রাথমিক ভাইভা',
     category: 'primary',
     descriptionBn:
-      'প্রাথমিক সহকারী শিক্ষক নিয়োগের মৌখিক পরীক্ষা ১০ নম্বরের — ভাইভার প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগের মৌখিক পরীক্ষা ১০ নম্বরের — ভাইভার প্রস্তুতির গাইড।',
     descriptionEn:
-      'The Primary Assistant Teacher viva is 10 marks — a guide to preparing for it. Draft lesson — awaiting teacher review.',
+      'The Primary Assistant Teacher viva is 10 marks — a guide to preparing for it.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -848,9 +848,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'ব্যাংক গণিত',
     category: 'bank',
     descriptionBn:
-      'ব্যাংক নিয়োগ পরীক্ষায় গণিত ২০ নম্বর — ৬০ মিনিটের পরীক্ষায় গণিতে ভালো করার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ব্যাংক নিয়োগ পরীক্ষায় গণিত ২০ নম্বর — ৬০ মিনিটের পরীক্ষায় গণিতে ভালো করার গাইড।',
     descriptionEn:
-      'Mathematics carries 20 marks in bank recruitment exams — a guide to doing well in 60 minutes. Draft lesson — awaiting teacher review.',
+      'Mathematics carries 20 marks in bank recruitment exams — a guide to doing well in 60 minutes.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -872,9 +872,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'ব্যাংক ইংরেজি-জিকে',
     category: 'bank',
     descriptionBn:
-      'ব্যাংক নিয়োগ পরীক্ষায় ইংরেজি ২৫, সাধারণ জ্ঞান ২০ ও কম্পিউটার ১০ নম্বর — তিন অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ব্যাংক নিয়োগ পরীক্ষায় ইংরেজি ২৫, সাধারণ জ্ঞান ২০ ও কম্পিউটার ১০ নম্বর — তিন অংশের প্রস্তুতির গাইড।',
     descriptionEn:
-      'English 25, General Knowledge 20 and Computer 10 in bank recruitment exams — a guide to all three. Draft lesson — awaiting teacher review.',
+      'English 25, General Knowledge 20 and Computer 10 in bank recruitment exams — a guide to all three.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -897,9 +897,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'NTRCA লিখিত',
     category: 'ntrca',
     descriptionBn:
-      'NTRCA শিক্ষক নিবন্ধনের লিখিত পরীক্ষা ১০০ নম্বর, ৩ ঘণ্টা — নিজের বিষয়ে লিখিত প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'NTRCA শিক্ষক নিবন্ধনের লিখিত পরীক্ষা ১০০ নম্বর, ৩ ঘণ্টা — নিজের বিষয়ে লিখিত প্রস্তুতির গাইড।',
     descriptionEn:
-      'The NTRCA written exam is 100 marks in 3 hours — a guide to preparing it in your own subject. Draft lesson — awaiting teacher review.',
+      'The NTRCA written exam is 100 marks in 3 hours — a guide to preparing it in your own subject.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -922,9 +922,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'NTRCA ভাইভা',
     category: 'ntrca',
     descriptionBn:
-      'NTRCA-র মৌখিক পরীক্ষা ২০ নম্বরের — ভাইভা ও নিজের বিষয়ের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'NTRCA-র মৌখিক পরীক্ষা ২০ নম্বরের — ভাইভা ও নিজের বিষয়ের প্রস্তুতির গাইড।',
     descriptionEn:
-      'The NTRCA viva is 20 marks — a guide to the viva and your own subject. Draft lesson — awaiting teacher review.',
+      'The NTRCA viva is 20 marks — a guide to the viva and your own subject.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -947,9 +947,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'GST ভর্তি',
     category: 'admission',
     descriptionBn:
-      'GST গুচ্ছভুক্ত বিশ্ববিদ্যালয়ে ভর্তির প্রস্তুতি — পাঠ্যবই-ভিত্তিক পড়া ও সময়-পরিকল্পনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'GST গুচ্ছভুক্ত বিশ্ববিদ্যালয়ে ভর্তির প্রস্তুতি — পাঠ্যবই-ভিত্তিক পড়া ও সময়-পরিকল্পনার গাইড।',
     descriptionEn:
-      'Preparing for admission to GST cluster universities — a guide to textbook study and time planning. Draft lesson — awaiting teacher review.',
+      'Preparing for admission to GST cluster universities — a guide to textbook study and time planning.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [
@@ -974,9 +974,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'ঢাবি ভর্তি',
     category: 'admission',
     descriptionBn:
-      'ঢাকা বিশ্ববিদ্যালয়ে ভর্তির প্রস্তুতি — পাঠ্যবই-ভিত্তিক পড়া ও সময়-পরিকল্পনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ঢাকা বিশ্ববিদ্যালয়ে ভর্তির প্রস্তুতি — পাঠ্যবই-ভিত্তিক পড়া ও সময়-পরিকল্পনার গাইড।',
     descriptionEn:
-      'Preparing for admission to the University of Dhaka — a guide to textbook study and time planning. Draft lesson — awaiting teacher review.',
+      'Preparing for admission to the University of Dhaka — a guide to textbook study and time planning.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [
@@ -1001,9 +1001,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'NCTB বই',
     category: 'nctb',
     descriptionBn:
-      'NCTB-র পাঠ্যবই দিয়ে কীভাবে পড়বেন — অধ্যায় পড়া, নোট বানানো ও পুনরালোচনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'NCTB-র পাঠ্যবই দিয়ে কীভাবে পড়বেন — অধ্যায় পড়া, নোট বানানো ও পুনরালোচনার গাইড।',
     descriptionEn:
-      'How to study with NCTB textbooks — a guide to reading chapters, making notes and revising. Draft lesson — awaiting teacher review.',
+      'How to study with NCTB textbooks — a guide to reading chapters, making notes and revising.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
@@ -1026,9 +1026,9 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
     crumbBn: 'NCTB পুনরালোচনা',
     category: 'nctb',
     descriptionBn:
-      'পরীক্ষার আগে NCTB-র বই দিয়ে পুনরালোচনা — নোট, প্রশ্ন সমাধান ও সময়-পরিকল্পনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পরীক্ষার আগে NCTB-র বই দিয়ে পুনরালোচনা — নোট, প্রশ্ন সমাধান ও সময়-পরিকল্পনার গাইড।',
     descriptionEn:
-      'Revising with NCTB books before an exam — a guide to notes, question practice and time planning. Draft lesson — awaiting teacher review.',
+      'Revising with NCTB books before an exam — a guide to notes, question practice and time planning.',
     readTimeMinutes: 6,
     updatedAt: '2026-11-25',
     needsReview: [],
