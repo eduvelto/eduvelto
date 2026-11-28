@@ -372,7 +372,7 @@ export function JobsSection() {
         <h2 className="ev-section-h2">{t({ bn: 'চাকরির প্রস্তুতি', en: 'Job Preparation' })}</h2>
       </Reveal>
       <p style={{ color: 'var(--muted-ivory)', margin: '-8px 0 14px', fontSize: 14 }}>
-        {t({ bn: 'চাকরির পরীক্ষার প্রস্তুতি — সিলেবাস, MCQ ব্যাংক, মক টেস্ট ও ভাইভা প্রস্তুতি এক জায়গায় থাকবে। কনটেন্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'Preparation for job exams — syllabus, MCQ bank, mock tests and viva preparation will be in one place. Content is published only after teacher review.' })}      </p>
+        {t({ bn: 'চাকরির পরীক্ষার প্রস্তুতি — সিলেবাস, MCQ ব্যাংক, মক টেস্ট ও ভাইভা প্রস্তুতি এক জায়গায়।', en: 'Preparation for job exams — syllabus, MCQ bank, mock tests and viva preparation in one place.' })}      </p>
       <JobCategoryGroups />
       <div style={grid}>
         <CommonPrepCard />

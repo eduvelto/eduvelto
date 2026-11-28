@@ -10,8 +10,8 @@
 // (brand-SEO wave 5): 35 guides now. EXTENDED 24 Nov 2026
 // (brand-SEO wave 10): 41 guides now. Static data only
 // (publicLessons.ts + publicGuides.ts) — zero Firestore reads, no
-// login. The lessons and guides are drafts awaiting teacher review —
-// the hub says so plainly, and each page carries its own draft label.
+// login. Present tense only (28 Nov 2026 AdSense cleanup): the hub no
+// longer carries a draft label.
 // REVISED 24 Nov 2026 (brand-SEO wave 8): hardcoded light text colours
 // (#57616A / #142B3B / #68747B) replaced with design-system tokens
 // (muted-ivory / heading / muted) — light values are identical, dark
@@ -30,8 +30,8 @@ export default function LearnHubPage() {
     <PageShell titleBn="পাঠ ও গাইড" titleEn="Lessons and guides" wide maxWidth={1240}>
       <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px', fontSize: 15, lineHeight: 1.7 }}>
         {t({
-          bn: 'বিনামূল্যে পাঠ ও গাইড — বিসিএস, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, ইংরেজি ব্যাকরণ, বৃত্তি, CV, বাজেট পরিকল্পনা, পুনরালোচনা, নোট, সময় ব্যবস্থাপনা, ইংরেজি লেখা, অনলাইন নিরাপত্তা, বাংলা বানান, কম্পিউটার, পরীক্ষার দিন, MCQ, মনে রাখা, চাকরিপ্রার্থীর রুটিন, সুস্থ অভ্যাস ও ডিজিটাল দক্ষতা, লক্ষ্য নির্ধারণ, মনোযোগ ধরে রাখা, ঘুম ও পড়াশোনা, পড়া বুঝে পড়া, ফোন দিয়ে পড়া ও ক্লাসে প্রশ্ন করা, আর Eduvelto ব্যবহারের গাইড (ফ্রি লাইব্রেরি, চাকরির অনুশীলন, AI অ্যাসিস্ট্যান্ট, অপরচুনিটি হাব, লাইফ সার্ভিস ও ইংরেজিতে কথা বলা)। পাঠ ও গাইডগুলো খসড়া হিসেবে দেওয়া আছে; শিক্ষক যাচাইয়ের পর চূড়ান্ত হবে।',
-          en: 'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV writing, budget planning, revision, note-taking, time management, English writing, online safety, Bangla spelling, computer basics, exam day, MCQ techniques, memory techniques, job-seeker routine, healthy habits and digital skills, goal setting, staying focused, sleep and study, reading comprehension, learning with your phone and asking questions in class, and guides to using Eduvelto (free library, job practice, AI assistant, opportunity hub, life services and spoken English). The lessons and guides are drafts awaiting teacher review.',
+          bn: 'বিনামূল্যে পাঠ ও গাইড — বিসিএস, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, ইংরেজি ব্যাকরণ, বৃত্তি, CV, বাজেট পরিকল্পনা, পুনরালোচনা, নোট, সময় ব্যবস্থাপনা, ইংরেজি লেখা, অনলাইন নিরাপত্তা, বাংলা বানান, কম্পিউটার, পরীক্ষার দিন, MCQ, মনে রাখা, চাকরিপ্রার্থীর রুটিন, সুস্থ অভ্যাস ও ডিজিটাল দক্ষতা, লক্ষ্য নির্ধারণ, মনোযোগ ধরে রাখা, ঘুম ও পড়াশোনা, পড়া বুঝে পড়া, ফোন দিয়ে পড়া ও ক্লাসে প্রশ্ন করা, আর Eduvelto ব্যবহারের গাইড (ফ্রি লাইব্রেরি, চাকরির অনুশীলন, AI অ্যাসিস্ট্যান্ট, অপরচুনিটি হাব, লাইফ সার্ভিস ও ইংরেজিতে কথা বলা)।',
+          en: 'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV writing, budget planning, revision, note-taking, time management, English writing, online safety, Bangla spelling, computer basics, exam day, MCQ techniques, memory techniques, job-seeker routine, healthy habits and digital skills, goal setting, staying focused, sleep and study, reading comprehension, learning with your phone and asking questions in class, and guides to using Eduvelto (free library, job practice, AI assistant, opportunity hub, life services and spoken English).',
         })}
       </p>
 
@@ -48,12 +48,6 @@ export default function LearnHubPage() {
             </div>
             <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {lang === 'bn' ? guide.bodyBn[0] : (guide.bodyEn?.[0] ?? guide.bodyBn[0])}
-            </p>
-            <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13 }}>
-              {t({
-                bn: 'খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়',
-                en: 'Draft lesson — awaiting teacher review',
-              })}
             </p>
           </Card>
         ))}
@@ -72,12 +66,6 @@ export default function LearnHubPage() {
             </div>
             <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {lesson.introBn[0]}
-            </p>
-            <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13 }}>
-              {t({
-                bn: 'খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়',
-                en: 'Draft lesson — awaiting teacher review',
-              })}
             </p>
           </Card>
         ))}

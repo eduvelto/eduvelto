@@ -2,14 +2,13 @@
 // design doc §5.4).
 //
 // `/admissions/national-university/:group/subjects/:subject/:topic` —
-// one topic: its draft lesson stub + an honest "0 questions" state.
-// The lesson body is a stub until a verified teacher writes it
-// (0 verified teachers today — the publish gate, NU-7). Practice
-// (NU-8), favorites (NU-13) and progress (NU-10/11) do not exist
-// yet, so they appear as plain-text notes — never as buttons that
-// do nothing. The group-40 block has no topic page: its card on the
-// group page is not a link, and an unknown slug shows an honest
-// "not found" card (design §5.2's wrong-slug pattern).
+// one topic: its lesson (shown only when published — every lesson
+// is a draft stub today, so the card is hidden) + an honest
+// "no questions" state. Practice (NU-8), favorites (NU-13) and
+// progress (NU-10/11) do not exist yet, so they are not shown at all —
+// never as buttons that do nothing. The group-40 block has no topic
+// page: its card on the group page is not a link, and an unknown slug
+// shows an honest "not found" card (design §5.2's wrong-slug pattern).
 
 import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
@@ -19,7 +18,6 @@ import { useNotFoundMeta } from '../lib/useNotFoundMeta';
 import { NU_GROUPS, type NuGroupSlug } from '../lib/nuProfile';
 import { NU_HUB_ROUTE } from '../lib/nuStructure';
 import {
-  NU_LESSON_STUB_BODY_BN,
   NU_SYLLABUS_DRAFT_BANNER_BN,
   nuSubjectRoute,
   nuSyllabusChaptersForSubject,
@@ -96,7 +94,7 @@ export default function NuTopicPage() {
         <p style={{ margin: 0, lineHeight: 1.8, color: '#5D4037' }}>
           {t({
             bn: NU_SYLLABUS_DRAFT_BANNER_BN,
-            en: 'This syllabus structure is a draft — taken from the HSC textbooks, teacher verification is pending; the list may change. It is not NU’s official syllabus.',
+            en: 'This syllabus structure is taken from the HSC textbooks; the list may change. It is not NU’s official syllabus.',
           })}
         </p>
       </div>
@@ -111,31 +109,27 @@ export default function NuTopicPage() {
         })}
       </p>
 
-      <Card>
-        <h3 style={{ marginTop: 0, fontSize: 18, color: '#142B3B' }}>
-          {t({ bn: lesson?.titleBn ?? topicDoc.nameBn, en: topicDoc.nameBn })}
-        </h3>
-        <p style={{ color: '#444', lineHeight: 1.8, margin: '0 0 8px' }}>
-          {t({ bn: NU_LESSON_STUB_BODY_BN, en: 'This topic’s lesson is being prepared — a short note and explanation will be published here after teacher verification.' })}
-        </p>
-        <p style={{ color: '#8A6100', fontSize: 13, margin: 0 }}>
-          {t({ bn: 'খসড়া — যাচাই চলছে', en: 'Draft — verification pending' })}
-        </p>
-      </Card>
+      {/* Lesson card — shown ONLY when a real (published) lesson exists.
+          Every NU lesson today is a draft stub, so the card is hidden
+          rather than showing a "being prepared" note (AdSense-review
+          cleanup, 28 Nov 2026). */}
+      {lesson?.status === 'published' ? (
+        <Card>
+          <h3 style={{ marginTop: 0, fontSize: 18, color: '#142B3B' }}>
+            {t({ bn: lesson.titleBn, en: topicDoc.nameBn })}
+          </h3>
+          <p style={{ color: '#444', lineHeight: 1.8, margin: '0 0 8px' }}>
+            {t({ bn: lesson.bodyBn, en: lesson.bodyBn })}
+          </p>
+        </Card>
+      ) : null}
 
       <div style={{ marginTop: 16 }}>
         <EmptyState
-          bn="এই টপিকের প্রশ্ন তৈরি হচ্ছে — এখনো ০টি প্রশ্ন।"
-          en="Questions for this topic are being prepared — 0 questions so far."
+          bn="এই টপিকে এখন কোনো প্রশ্ন নেই।"
+          en="There are no questions for this topic right now."
         />
       </div>
-
-      <p style={{ marginTop: 16, color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
-        {t({
-          bn: 'অনুশীলন (NU-৮), ফেভারিট (NU-১৩) ও এই টপিকে আমার অগ্রগতি (NU-১০/১১) পরের ধাপে আসবে — প্রশ্ন তৈরি ও শিক্ষক যাচাইয়ের পরে।',
-          en: 'Practice (NU-8), favorites (NU-13) and my progress on this topic (NU-10/11) arrive in later steps — after the questions are written and teacher-verified.',
-        })}
-      </p>
 
       {siblings.length > 0 ? (
         <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>

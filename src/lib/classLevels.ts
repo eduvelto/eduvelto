@@ -180,6 +180,10 @@ export function classFilterOptions(
   for (const def of CLASS_LEVELS) {
     // Cascade: when a type is chosen, only levels of that type are offered.
     if (typeFilter && def.educationType !== typeFilter) continue;
+    // A level with no educationType and no classLevels has no books
+    // at all (Class 6–8 today) — hide it from the public filter
+    // (28 Nov 2026 AdSense cleanup).
+    if (!def.educationType && def.classLevels.length === 0) continue;
     options.push({ value: `level:${def.slug}`, labelBn: def.bn, labelEn: def.en, levelSlug: def.slug });
   }
   const extras = [...new Set(presentClassLevels.filter((c) => c && !covered.has(c)))].sort();

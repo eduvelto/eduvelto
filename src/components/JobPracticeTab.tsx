@@ -61,9 +61,11 @@ export default function JobPracticeTab({ def }: { def: JobExamDef }) {
     return (
       <Reveal>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'অনুশীলন প্রশ্ন তৈরি হচ্ছে', en: 'Practice questions are being prepared' })}</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'টপিকভিত্তিক অনুশীলন', en: 'Topic-wise practice' })}</div>
           <p style={{ margin: '8px 0 12px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-            {t({ bn: 'টপিকভিত্তিক MCQ (উত্তর ও ব্যাখ্যাসহ) শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'Topic-wise MCQs (with answers and explanations) will be published after teacher review.' })}
+            {!user
+              ? t({ bn: 'টপিকভিত্তিক MCQ (উত্তর ও ব্যাখ্যাসহ) দেখতে লগইন করুন।', en: 'Log in to see topic-wise MCQs (with answers and explanations).' })
+              : t({ bn: 'এই পরীক্ষার কোনো টপিকভিত্তিক অনুশীলন সেট এখন নেই।', en: 'This exam has no topic-wise practice set right now.' })}
           </p>
           {!user ? (
             <p style={{ margin: 0 }}>

@@ -49,8 +49,8 @@ export default function AboutPage() {
       </p>
       <p style={{ lineHeight: 1.7 }}>
         {t({
-          bn: 'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম। এখানে পাঠ, পরীক্ষা ও ডিজিটাল লাইব্রেরি এক জায়গায় — ভবিষ্যতে স্মার্ট পড়ার পরিকল্পনা ও ব্যক্তিগত AI শিক্ষকসহ — বাংলায় ও ইংরেজিতে — যাতে দেশের যেকোনো প্রান্তের শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে.',
-          en: 'Eduvelto is a free digital education platform for Bangladesh. It brings together lessons, exams and a digital library in one place — with smart study planning and a personal AI teacher planned for the future — in Bangla and in English — so that a student anywhere in the country can learn, grow and achieve, without cost standing in the way.',
+          bn: 'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম। এখানে পাঠ, পরীক্ষা ও ডিজিটাল লাইব্রেরি এক জায়গায় — বাংলায় ও ইংরেজিতে — যাতে দেশের যেকোনো প্রান্তের শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে.',
+          en: 'Eduvelto is a free digital education platform for Bangladesh. It brings together lessons, exams and a digital library in one place — in Bangla and in English — so that a student anywhere in the country can learn, grow and achieve, without cost standing in the way.',
         })}
       </p>
       <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '28px 0 12px' }}>{t({ bn: 'যা যা আছে', en: 'What Eduvelto offers' })}</h2>
@@ -83,12 +83,12 @@ export default function AboutPage() {
           wave 1, trust draft §1): the counts are the live library
           numbers (609 books / 2,307 chapters / 23,346 questions),
           the 35 published BCS English questions and the 7 Opportunity
-          Hub listings. Classes 1–5 and 6–8 have no books yet — the
-          page says so plainly instead of implying full coverage. */}
+          Hub listings. Only classes with books are named (28 Nov 2026:
+          Class 1–5 and 6–8 have no books, so they are not listed). */}
       <p style={{ marginTop: 20, lineHeight: 1.7 }}>
         {t({
-          bn: 'আজ Eduvelto-তে আছে: ডিজিটাল লাইব্রেরিতে ৬০৯টি বই, ২,৩০৭টি অধ্যায় ও ২৩,২৫৯টি প্রশ্ন; বিসিএস ইংরেজির ৩৫টি যাচাইকৃত প্রশ্ন; Opportunity Hub-এ ৭টি যাচাইকৃত সুযোগের তালিকা। শ্রেণি ৯–১০, এইচএসসি ও অনার্স–মাস্টার্সের বই লাইব্রেরিতে আছে; শ্রেণি ১–৫ ও ৬–৮-এর বই এখনো আসেনি — আসছে। পরীক্ষা MCQ ও লিখিত — দুই ধরনেরই আছে। পড়া ও পরীক্ষা দেওয়ার জন্য লগইন করতে হয়; লাইব্রেরি ও তথ্যভিত্তিক পাতা সবার জন্য উন্মুক্ত।',
-          en: 'Eduvelto today: a digital library of 609 books, 2,307 chapters and 23,259 questions; 35 verified BCS English questions; 7 verified Opportunity Hub listings. Books for Class 9–10, HSC and Honours–Masters are in the library; Class 1–5 and 6–8 books have not arrived yet — they are coming. Exams are MCQ and written. Reading and taking exams needs a login; the library and information pages are open to everyone.',
+          bn: 'আজ Eduvelto-তে আছে: ডিজিটাল লাইব্রেরিতে ৬০৯টি বই, ২,৩০৭টি অধ্যায় ও ২৩,২৫৯টি প্রশ্ন; বিসিএস ইংরেজির ৩৫টি যাচাইকৃত প্রশ্ন; Opportunity Hub-এ ৭টি যাচাইকৃত সুযোগের তালিকা। শ্রেণি ৯–১০, এইচএসসি ও অনার্স–মাস্টার্সের বই লাইব্রেরিতে আছে। পরীক্ষা MCQ ও লিখিত — দুই ধরনেরই আছে। পড়া ও পরীক্ষা দেওয়ার জন্য লগইন করতে হয়; লাইব্রেরি ও তথ্যভিত্তিক পাতা সবার জন্য উন্মুক্ত।',
+          en: 'Eduvelto today: a digital library of 609 books, 2,307 chapters and 23,259 questions; 35 verified BCS English questions; 7 verified Opportunity Hub listings. Books for Class 9–10, HSC and Honours–Masters are in the library. Exams are MCQ and written. Reading and taking exams needs a login; the library and information pages are open to everyone.',
         })}
       </p>
 

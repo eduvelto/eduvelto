@@ -4,8 +4,8 @@
 // Guides in src/lib/publicGuides.ts (PHASE2_GUIDES). Same static
 // data, same detail component (PublicGuidePage) as the 41 /learn
 // guides — this hub is only a filtered view, not a parallel system.
-// Static data only — zero Firestore reads, no login. The guides are
-// drafts awaiting teacher review — the hub says so plainly.
+// Static data only — zero Firestore reads, no login. Present tense
+// only (28 Nov 2026 AdSense cleanup): no draft label on the hub.
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
@@ -39,8 +39,8 @@ export default function GuidesHubPage() {
     <PageShell titleBn="স্টাডি গাইড" titleEn="Study Guides" wide maxWidth={1240}>
       <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px', fontSize: 15, lineHeight: 1.7 }}>
         {t({
-          bn: 'বিসিএস, প্রাথমিক শিক্ষক, ব্যাংক, NTRCA, ভর্তি পরীক্ষা ও NCTB বই দিয়ে পড়ার বিস্তারিত গাইড — বাংলায় ও ইংরেজিতে, সম্পূর্ণ বিনামূল্যে। প্রতিটি গাইড ৭০০+ শব্দের বিস্তারিত লেখা। গাইডগুলো খসড়া হিসেবে দেওয়া আছে; শিক্ষক যাচাইয়ের পর চূড়ান্ত হবে। পরীক্ষার তারিখ, ফি ও নিয়মের ক্ষেত্রে সবসময় সংশ্লিষ্ট কর্তৃপক্ষের অফিসিয়াল বিজ্ঞপ্তি যাচাই করুন।',
-          en: 'In-depth guides for BCS, primary teacher, bank, NTRCA, admission tests and studying with NCTB books — in Bangla and in English, completely free. Every guide is a detailed 700+ word article. The guides are drafts awaiting teacher review. Always verify exam dates, fees and rules against the official circular.',
+          bn: 'বিসিএস, প্রাথমিক শিক্ষক, ব্যাংক, NTRCA, ভর্তি পরীক্ষা ও NCTB বই দিয়ে পড়ার বিস্তারিত গাইড — বাংলায় ও ইংরেজিতে, সম্পূর্ণ বিনামূল্যে। প্রতিটি গাইড ৭০০+ শব্দের বিস্তারিত লেখা। পরীক্ষার তারিখ, ফি ও নিয়মের ক্ষেত্রে সবসময় সংশ্লিষ্ট কর্তৃপক্ষের অফিসিয়াল বিজ্ঞপ্তি যাচাই করুন।',
+          en: 'In-depth guides for BCS, primary teacher, bank, NTRCA, admission tests and studying with NCTB books — in Bangla and in English, completely free. Every guide is a detailed 700+ word article. Always verify exam dates, fees and rules against the official circular.',
         })}
       </p>
 
@@ -63,12 +63,14 @@ export default function GuidesHubPage() {
                   <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                     {lang === 'bn' ? guide.descriptionBn : guide.descriptionEn}
                   </p>
-                  <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13 }}>
-                    {t({
-                      bn: `খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়${guide.readTimeMinutes ? ` · পড়ার সময়: প্রায় ${guide.readTimeMinutes} মিনিট` : ''}`,
-                      en: `Draft lesson — awaiting teacher review${guide.readTimeMinutes ? ` · Reading time: about ${guide.readTimeMinutes} minutes` : ''}`,
-                    })}
-                  </p>
+                  {guide.readTimeMinutes ? (
+                    <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13 }}>
+                      {t({
+                        bn: `পড়ার সময়: প্রায় ${guide.readTimeMinutes} মিনিট`,
+                        en: `Reading time: about ${guide.readTimeMinutes} minutes`,
+                      })}
+                    </p>
+                  ) : null}
                 </Card>
               ))}
             </div>

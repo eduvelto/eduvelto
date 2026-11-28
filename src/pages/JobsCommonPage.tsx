@@ -221,7 +221,7 @@ export default function JobsCommonPage() {
                 )}
               </>
             ) : (
-              <Chip tone="gold">{t({ bn: 'এই সপ্তাহের মক এখনো প্রকাশিত হয়নি', en: "This week's mock is not published yet" })}</Chip>
+              <Chip tone="gold">{t({ bn: 'এই সপ্তাহের মক এখন প্রকাশিত নয়', en: "This week's mock is not published right now" })}</Chip>
             )}
           </Card>
         </Reveal>
@@ -281,8 +281,8 @@ export default function JobsCommonPage() {
       </Reveal>
       <p style={{ color: 'var(--muted-ivory)', margin: '-8px 0 14px', fontSize: 14, lineHeight: 1.7 }}>
         {t({
-          bn: 'প্রাথমিক তালিকা — ৪টি পরীক্ষার অফিসিয়াল সিলেবাস মিলিয়ে চূড়ান্ত হবে। প্রতি টপিকে লক্ষ্য ~৫০টি প্রশ্ন। কমন টপিকের কোনো প্রশ্ন এখনো প্রকাশিত হয়নি।',
-          en: 'Preliminary list — to be finalised against the 4 exams’ official syllabuses. Target ~50 questions per topic. No common-topic questions are published yet.',
+          bn: '৪টি পরীক্ষার অফিসিয়াল সিলেবাসের ভিত্তিতে সাজানো তালিকা — প্রতি টপিকে লক্ষ্য ~৫০টি প্রশ্ন। কমন টপিকের কোনো প্রশ্ন এখন প্রকাশিত নয়।',
+          en: 'A list arranged against the 4 exams’ official syllabuses. Target ~50 questions per topic. No common-topic questions are published right now.',
         })}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
@@ -314,8 +314,8 @@ export default function JobsCommonPage() {
         <Card>
           <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
             {t({
-              bn: 'কমন টপিকের প্রশ্ন শিক্ষক যাচাইয়ের পর প্রকাশিত হবে। প্রতিটি প্রশ্নে ট্যাগ থাকবে — কোন কোন পরীক্ষায় প্রযোজ্য।',
-              en: 'Common-topic questions will be published after teacher review. Every question will be tagged with the exams it applies to.',
+              bn: 'কমন টপিকের প্রশ্ন যাচাই করে প্রকাশ করা হয়। প্রতিটি প্রশ্নে ট্যাগ থাকে — কোন কোন পরীক্ষায় প্রযোজ্য।',
+              en: 'Common-topic questions are published after review. Every question is tagged with the exams it applies to.',
             })}
           </p>
           <p style={{ margin: '12px 0 0' }}>

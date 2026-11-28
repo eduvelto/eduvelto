@@ -88,7 +88,7 @@ export default function NuSubjectPage() {
         <p style={{ margin: 0, lineHeight: 1.8, color: '#5D4037' }}>
           {t({
             bn: NU_SYLLABUS_DRAFT_BANNER_BN,
-            en: 'This syllabus structure is a draft — taken from the HSC textbooks, teacher verification is pending; the list may change. It is not NU’s official syllabus.',
+            en: 'This syllabus structure is taken from the HSC textbooks; the list may change. It is not NU’s official syllabus.',
           })}
         </p>
       </div>
@@ -98,8 +98,8 @@ export default function NuSubjectPage() {
       </h2>
       <p style={{ margin: '0 0 16px', color: '#57616A', lineHeight: 1.8 }}>
         {t({
-          bn: `এই বিষয়ে ${subj.marks} নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত। উৎস: ${subj.syllabusSource}। অধ্যায় ${chapters.length}টি · টপিক ${topicsTotal}টি (খসড়া)।`,
-          en: `${subj.marks} marks in this subject — verified from the circular. Source: ${subj.syllabusSource}. ${chapters.length} chapters · ${topicsTotal} topics (draft).`,
+          bn: `এই বিষয়ে ${subj.marks} নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত। উৎস: ${subj.syllabusSource}। অধ্যায় ${chapters.length}টি · টপিক ${topicsTotal}টি।`,
+          en: `${subj.marks} marks in this subject — verified from the circular. Source: ${subj.syllabusSource}. ${chapters.length} chapters · ${topicsTotal} topics.`,
         })}
       </p>
 
@@ -124,9 +124,6 @@ export default function NuSubjectPage() {
                   </Link>
                   <p style={{ color: '#57616A', fontSize: 13, lineHeight: 1.7, margin: '6px 0 0' }}>
                     {topic.detailBn}
-                  </p>
-                  <p style={{ color: '#8A6100', fontSize: 12, margin: '6px 0 0' }}>
-                    {t({ bn: 'খসড়া — যাচাই চলছে', en: 'Draft — verification pending' })}
                   </p>
                 </Card>
               ))}

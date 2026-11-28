@@ -232,7 +232,7 @@ export default function FounderPage() {
             পড়ালেখার পাশাপাশি তিনি বাবার ব্যবসা দেখাশোনা করেন। তাঁর বিশ্বাস — মানসম্মত শিক্ষা
             বাংলাদেশের প্রত্যেক শিক্ষার্থীর জন্য বিনামূল্যে পৌঁছে দেওয়া উচিত, বাংলায় ও ইংরেজিতে।
             সেই লক্ষ্যেই তিনি Eduvelto গড়েছেন — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও স্মার্ট পড়ার
-            পরিকল্পনা এক জায়গায়, ভবিষ্যতে ব্যক্তিগত AI শিক্ষকসহ, যাতে দেশের যেকোনো প্রান্তের
+            পরিকল্পনা এক জায়গায়, যাতে দেশের যেকোনো প্রান্তের
             শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে।
           </p>
         ) : (
@@ -244,8 +244,7 @@ export default function FounderPage() {
             studies, he helps look after his father&apos;s business. He founded Eduvelto with a
             simple belief: quality education should be free and within reach of every student in
             Bangladesh — in Bangla and in English. Eduvelto brings together lessons, exams, a
-            digital library and smart study planning — with a personal AI teacher planned for the
-            future — so that a student anywhere in the country can learn, grow and achieve,
+            digital library and smart study planning — so that a student anywhere in the country can learn, grow and achieve,
             without cost standing in the way.
           </p>
         )}
@@ -317,7 +316,7 @@ export default function FounderPage() {
             {t({ bn: 'পড়ার রুটিন', en: 'Study routine' })} <StatusChip label={t({ bn: 'পরিকল্পিত — তৈরি হয়নি', en: 'Planned — not built yet' })} kind="planned" />
           </li>
           <li>
-            <Link to="/ai-teacher">{t({ bn: 'AI শিক্ষক', en: 'AI Teacher' })}</Link>{' '}
+            {t({ bn: 'AI শিক্ষক', en: 'AI Teacher' })}{' '}
             <StatusChip label={t({ bn: 'পরিকল্পিত — শুধু ডেমো, আসল AI নয়', en: 'Planned — demo only, not live AI' })} kind="planned" />
           </li>
           <li>

@@ -128,8 +128,8 @@ export default function ClassSubjectPage() {
       ) : null}
       {books !== null && subjectBooks.length === 0 && !error ? (
         <EmptyState
-          bn="এই শ্রেণিতে এই বিষয়ের কোনো বই এখনো প্রকাশিত হয়নি।"
-          en="No books for this subject in this class yet."
+          bn="এই শ্রেণিতে এই বিষয়ের কোনো বই নেই।"
+          en="No books for this subject in this class."
         />
       ) : null}
       {subjectBooks.length > 0 ? (

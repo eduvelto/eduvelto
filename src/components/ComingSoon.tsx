@@ -1,10 +1,11 @@
-// Eduvelto — Coming Soon state for class levels with no books yet
-// (Class 1–5 and Class 6–8, owner briefs 21 Nov 13:14 + 13:20, BINDING).
+// Eduvelto — empty state for class levels with no books yet
+// (Class 6–8, owner briefs 21 Nov 13:14 + 13:20, BINDING).
 //
 // Beautiful, student-friendly, and HONEST: it never shows fake books,
-// counts, subjects, chapters or progress. It says plainly what is being
-// prepared, what will arrive, and gives the student somewhere useful to
-// go instead (Library / Exams / All classes) — no dead ends.
+// counts, subjects, chapters or progress. Present tense only
+// (28 Nov 2026 AdSense cleanup): it says plainly that the level has
+// no books, and gives the student somewhere useful to go instead
+// (Library / Exams / All classes) — no dead ends, no "coming soon".
 //
 // Two sizes: ComingSoonHero for the class dashboard Home tab, and
 // ComingSoonCompact for the Books / Subjects / Practice / Tests tab
@@ -68,25 +69,24 @@ export function ComingSoonHero({ def }: { def: ClassLevelDef }) {
     <section
       className="ev-coming-soon-hero"
       style={{ backgroundColor: def.accentSoft }}
-      aria-label={t({ bn: `${def.bn} — শীঘ্রই আসছে`, en: `${def.en} — Coming soon` })}
+      aria-label={t({ bn: `${def.bn}`, en: `${def.en}` })}
     >
       <BookSproutArt accent={def.accent} size={132} />
       {/* h1 (24 Nov 2026, brand-SEO wave 1, F-06): this hero renders
-          ONLY for class levels with no books (Class 1–5, Class 6–8),
-          whose dashboards otherwise had no h1 at all — PageShell
-          hides its title here. The h1 states the level + the honest
-          coming-soon status; the paragraph below says plainly that
-          no books exist yet. */}
+          ONLY for class levels with no books (Class 6–8), whose
+          dashboards otherwise had no h1 at all — PageShell hides its
+          title here. Present tense only (28 Nov 2026 AdSense cleanup):
+          the level is named, no "coming soon" promise is made. */}
       <h1 style={{ color: '#142B3B', fontSize: 24, margin: '14px 0 6px' }}>
-        {t({ bn: `${def.bn} — শীঘ্রই আসছে!`, en: `${def.en} — Coming soon` })}
+        {t({ bn: `${def.bn}`, en: `${def.en}` })}
       </h1>
       <p style={{ margin: '0 auto', maxWidth: 560, color: '#57616A', fontSize: 15, lineHeight: 1.8 }}>
-        {t({ bn: `${def.bn}-এর কোনো বই এখনো লাইব্রেরিতে আসেনি — বই, পাঠ, অনুশীলন প্রশ্ন ও পরীক্ষা এখন তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে — ততদিন একটু অপেক্ষা করো, আমরা কাজ করছি!`, en: `No books for ${def.en} have reached the library yet — books, lessons, practice questions and tests are being prepared. They will appear here as soon as they are published.` })}
+        {t({ bn: `${def.bn}-এর কোনো বই লাইব্রেরিতে নেই। লাইব্রেরিতে থাকা বই, পাঠ ও পরীক্ষা দেখুন।`, en: `No books for ${def.en} are in the library. See the books, lessons and tests in the library.` })}
       </p>
-      <div className="ev-coming-soon-chips" aria-label={t({ bn: 'যা আসছে', en: 'What is coming' })}>
+      <div className="ev-coming-soon-chips" aria-label={t({ bn: 'এই শ্রেণির উপকরণ', en: 'What this level has' })}>
         {COMING_ITEMS.map((it) => (
           <span key={it.bn} className="ev-coming-soon-chip">
-            {t(it)} <span className="ev-coming-soon-chip-soon">{t({ bn: 'আসছে', en: 'Coming' })}</span>
+            {t(it)}
           </span>
         ))}
       </div>
@@ -122,10 +122,10 @@ export function ComingSoonCompact({
       </span>
       <div>
         <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>
-          {t({ bn: `${def.bn} — ${whatBn} শীঘ্রই আসছে`, en: `${def.en} — ${whatEn} coming soon` })}
+          {t({ bn: `${def.bn} — ${whatBn} নেই`, en: `${def.en} — no ${whatEn}` })}
         </div>
         <p style={{ margin: '6px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-          {t({ bn: `এই শ্রেণির ${whatBn} এখনো প্রকাশিত হয়নি — তৈরি হচ্ছে, প্রকাশিত হলেই এখানে দেখাবে।`, en: `${whatEn} for this class is not published yet.` })}
+          {t({ bn: `এই শ্রেণির ${whatBn} লাইব্রেরিতে নেই। লাইব্রেরিতে থাকা বই দেখুন।`, en: `No ${whatEn} for this class in the library. See the books in the library.` })}
         </p>
         <Link to="/library" style={{ fontWeight: 600, color: '#12766E' }}>
           {t({ bn: 'লাইব্রেরি দেখুন →', en: 'Browse library →' })}

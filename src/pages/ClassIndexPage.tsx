@@ -136,7 +136,10 @@ export default function ClassIndexPage() {
       {loaded && totalBooks > 0 ? (
         <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12, marginBottom: 24 }}>
-            {perClass.map(({ def, books: bc, subjects: sc }, i) => (
+            {/* 28 Nov 2026 (AdSense cleanup): only classes with live
+                books/subjects are listed — a class with no content
+                (Class 6–8 today) is hidden, not shown as empty. */}
+            {perClass.filter(({ books: bc, subjects: sc }) => bc > 0 || sc > 0).map(({ def, books: bc, subjects: sc }, i) => (
               <ClassCard key={def.slug} def={def} bookCount={bc} subjectCount={sc} delayMs={Math.min(i, 4) * 60} />
             ))}
           </div>

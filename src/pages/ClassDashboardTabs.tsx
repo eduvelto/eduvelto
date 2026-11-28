@@ -138,8 +138,8 @@ export function BooksTab({ data }: { data: ClassTabData }) {
     // "coming soon" variant.
     return (
       <EmptyState
-        bn="এই শ্রেণির কোনো বই এখনো প্রকাশিত হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
-        en="No books for this class are published yet. Content will appear here once it is published."
+        bn="এই শ্রেণির কোনো বই নেই।"
+        en="This class has no books."
       />
     );
   }
@@ -179,8 +179,8 @@ export function SubjectsTab({ data }: { data: ClassTabData }) {
     // "coming soon" variant.
     return (
       <EmptyState
-        bn="এই শ্রেণির কোনো বিষয় এখনো নেই। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
-        en="No subjects for this class yet. Content will appear here once it is published."
+        bn="এই শ্রেণির কোনো বিষয় নেই।"
+        en="This class has no subjects."
       />
     );
   }
@@ -233,8 +233,8 @@ export function PracticeTab({ data }: { data: ClassTabData }) {
     // "coming soon" variant.
     return (
       <EmptyState
-        bn="এই শ্রেণির কোনো অনুশীলন প্রশ্ন এখনো তৈরি হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
-        en="No practice questions for this class yet. Content will appear here once it is published."
+        bn="এই শ্রেণির কোনো অনুশীলন প্রশ্ন নেই।"
+        en="This class has no practice questions."
       />
     );
   }
@@ -282,8 +282,8 @@ export function TestsTab({ data }: { data: ClassTabData }) {
       // no "coming soon" variant for classes without books.
       return (
         <EmptyState
-          bn="এই শ্রেণির কোনো পরীক্ষা এখনো তৈরি হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
-          en="No tests for this class yet. Content will appear here once it is published."
+          bn="এই শ্রেণির কোনো পরীক্ষা নেই।"
+          en="This class has no tests."
         />
       );
     }
@@ -305,8 +305,8 @@ export function TestsTab({ data }: { data: ClassTabData }) {
     // no "coming soon" variant for classes without books.
     return (
       <EmptyState
-        bn="এই শ্রেণির কোনো পরীক্ষা এখনো তৈরি হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।"
-        en="No tests for this class yet. Content will appear here once it is published."
+        bn="এই শ্রেণির কোনো পরীক্ষা নেই।"
+        en="This class has no tests."
       />
     );
   }

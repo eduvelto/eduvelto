@@ -99,16 +99,6 @@ export default function WhyEduveltoPage() {
       </div>
 
       <h2 style={{ fontSize: 20, color: NAVY, margin: '28px 0 12px' }}>
-        {t({ bn: 'যা এখনো তৈরি হয়নি', en: 'Not built yet' })}
-      </h2>
-      <p style={{ lineHeight: 1.8 }}>
-        {t({
-          bn: 'ব্যক্তিগত AI শিক্ষক, স্মার্ট পড়ার পরিকল্পনা (রুটিন) ও ভিডিও লেসন — এগুলো এখনো তৈরি হয়নি, তাই এখানে কাজ করছে বলে দেখানো হয়নি। তৈরি হলে এখানেই জানানো হবে।',
-          en: 'A personal AI teacher, smart study planning (routine) and video lessons — these are not built yet, so they are not shown here as working. When they are ready, it will be announced here.',
-        })}
-      </p>
-
-      <h2 style={{ fontSize: 20, color: NAVY, margin: '28px 0 12px' }}>
         {t({ bn: 'সচরাচর জিজ্ঞাসা', en: 'Frequently asked questions' })}
       </h2>
       <div style={{ lineHeight: 1.8 }}>

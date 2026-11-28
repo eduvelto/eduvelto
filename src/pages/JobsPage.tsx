@@ -51,8 +51,8 @@ export default function JobsPage() {
         </h1>
         <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontSize: 15, lineHeight: 1.7 }}>
           {t({
-            bn: 'চাকরির পরীক্ষার সিলেবাস, MCQ ব্যাংক, মক টেস্ট, বিগত প্রশ্ন ও ভাইভা প্রস্তুতি — সব এক জায়গায় থাকবে। কনটেন্ট যাচাইকৃত শিক্ষকের যাচাইয়ের পর প্রকাশিত হবে।',
-            en: 'Syllabus, MCQ bank, mock tests, previous questions and viva preparation for job exams — will all be in one place. Content is published only after verified-teacher review.',
+            bn: 'চাকরির পরীক্ষার সিলেবাস, MCQ ব্যাংক, মক টেস্ট, বিগত প্রশ্ন ও ভাইভা প্রস্তুতি — সব এক জায়গায়।',
+            en: 'Syllabus, MCQ bank, mock tests, previous questions and viva preparation for job exams — all in one place.',
           })}
         </p>
       </section>
@@ -182,7 +182,7 @@ export default function JobsPage() {
               {t({ bn: 'কাঠামো দেখুন', en: 'See the structure' })}
             </div>
             <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>
-              {t({ bn: 'প্রতিটি পরীক্ষার হাবে সিলেবাস, অনুশীলন, মক টেস্ট ও ভাইভা প্রস্তুতির জায়গা দেখুন।', en: 'Each exam hub shows where the syllabus, practice, mock tests and viva preparation will live.' })}
+              {t({ bn: 'প্রতিটি পরীক্ষার হাবে সিলেবাস, অনুশীলন, মক টেস্ট ও ভাইভা প্রস্তুতি দেখুন।', en: 'Each exam hub shows the syllabus, practice, mock tests and viva preparation.' })}
             </p>
           </Card>
         </Reveal>
@@ -190,10 +190,10 @@ export default function JobsPage() {
           <Card>
             <span className="ev-step-num" aria-hidden="true">{t({ bn: '৩', en: '3' })}</span>
             <div style={{ fontWeight: 700, color: 'var(--heading)', marginTop: 10 }}>
-              {t({ bn: 'যাচাইয়ের পর প্রকাশ', en: 'Published after verification' })}
+              {t({ bn: 'যাচাই করে প্রকাশ', en: 'Reviewed, then published' })}
             </div>
             <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>
-              {t({ bn: 'সিলেবাস, প্রশ্ন ও মক টেস্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে — তখন এখানেই অনুশীলন করতে পারবেন।', en: 'Syllabus, questions and mock tests will be published after teacher review — then you can practise right here.' })}
+              {t({ bn: 'সিলেবাস, প্রশ্ন ও মক টেস্ট যাচাই করে প্রকাশ করা হয় — প্রকাশিত উপকরণ এখানেই অনুশীলন করতে পারবেন।', en: 'Syllabus, questions and mock tests are published after review — you can practise the published material right here.' })}
             </p>
           </Card>
         </Reveal>

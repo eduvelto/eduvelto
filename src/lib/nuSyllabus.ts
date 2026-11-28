@@ -481,10 +481,12 @@ export function nuTopicRoute(group: NuGroupSlug, subjectSlug: string, topicSlug:
   return `/admissions/national-university/${group}/subjects/${subjectSlug}/${topicSlug}`;
 }
 
-/** The draft banner shown on every page that renders this structure
- * while `syllabusVerified` is false. */
+/** The banner shown on every page that renders this structure.
+ * Present tense only (28 Nov 2026 AdSense cleanup): it states the
+ * source and that this is not NU's official syllabus — no "draft /
+ * verification pending" promise. */
 export const NU_SYLLABUS_DRAFT_BANNER_BN =
-  'এই সিলেবাস-কাঠামো খসড়া — HSC পাঠ্যবই থেকে নেওয়া, শিক্ষক যাচাই চলছে; তালিকা পরিবর্তন হতে পারে। এটি NU-র অফিসিয়াল সিলেবাস নয়।';
+  'এই সিলেবাস-কাঠামো HSC পাঠ্যবই থেকে নেওয়া; তালিকা পরিবর্তন হতে পারে। এটি NU-র অফিসিয়াল সিলেবাস নয়।';
 
 // ---------- validators (mirrors of firestore.rules) ----------
 

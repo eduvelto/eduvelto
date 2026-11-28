@@ -28,10 +28,10 @@
 //  - Popular Books: REAL library books only (sorted by question
 //    count — the section says so), text cards, never fake covers.
 //  - Updates: REAL dated items only (latest verified opportunity
-//    listings); empty state when there are none. No invented news.
-//  - AI panel: the WORKING /ai-assistant tools are the primary action;
-//    /ai-teacher is a SCRIPTED DEMO, not live AI — the panel says so.
-//    No "AI Chat" as a live feature.
+//    listings); the panel is hidden when there are none (28 Nov 2026).
+//    No invented news.
+//  - AI panel: the LIVE /ai-assistant (live AI chat since 28 Nov 2026)
+//    is the primary action. No demo link on the homepage.
 //  - Class 1–5 / 6–8 have NO books: their tiles/dashboards show the
 //    honest not-ready state, never wrong-class books.
 //  - Testimonials: OMITTED — no real testimonial exists.
@@ -223,10 +223,8 @@ const SECTIONS = [
 ];
 
 // The six hubs (owner brief §4 + mockups). Every destination is
-// live. The AI hub opens the working /ai-assistant tools (AI Life
-// Assistant rebase, 24 Nov 2026); /ai-teacher is a scripted demo,
-// honestly labelled, linked from the assistant page and the AI panel —
-// live AI chat does not exist yet.
+// live. The AI hub opens the live /ai-assistant (live AI chat since
+// 28 Nov 2026); no demo link is shown on the homepage.
 const HUBS = [
   {
     id: 'education',
@@ -285,11 +283,9 @@ const HUBS = [
     titleEn: 'AI Life Assistant',
     descBn: 'আপনার ব্যক্তিগত AI সহকারী',
     descEn: 'Your personal AI assistant',
-    // AI Life Assistant rebase (24 Nov 2026): the hub card now opens the
-    // WORKING tools (/ai-assistant — calculators, letters, CV, budget),
-    // not the scripted /ai-teacher demo. The demo stays one tap away
-    // from the assistant page, and live AI chat is still honestly
-    // labelled as not launched yet.
+    // AI Life Assistant rebase (24 Nov 2026): the hub card opens the
+    // LIVE /ai-assistant (live AI chat since 28 Nov 2026). No demo
+    // link is shown on the homepage.
     noteBn: 'হিসাব, চিঠি, সিভি ও দরকারি টুল — এখনই ব্যবহার করুন',
     noteEn: 'Calculators, letters, CV and daily tools — use now',
   },
@@ -809,26 +805,21 @@ export default function HomePage() {
     ),
     services: (
       <>
-        {/* AI টুলস ও সহায়তা — honest: the WORKING tools live at
-            /ai-assistant (calculators, letters, CV, budget — no fake AI).
-            /ai-teacher is a scripted demo (it says so on the page
-            itself). Live AI chat is NOT available yet; the panel never
-            claims otherwise. */}
+        {/* AI টুলস ও সহায়তা — the WORKING tools live at
+            /ai-assistant (live AI chat + calculators, letters, CV,
+            budget — connected since 28 Nov 2026). No demo link here. */}
         <section className="ev-rd-section" aria-label={t({ bn: 'AI টুলস ও সহায়তা', en: 'AI Tools & Assistance' })}>
           <div className="ev-rd-ai">
             <h2>{t({ bn: '🤖 AI টুলস ও সহায়তা', en: '🤖 AI Tools & Assistance' })}</h2>
             <p>
               {t({
-                bn: 'AI সহায়ক এখনই ব্যবহার করতে পারেন — হিসাব, চিঠি-আবেদন, সিভি, বাজেট ও দরকারি টুল। AI Teacher (পড়াশোনার জন্য) এখনো একটি স্ক্রিপ্ট করা প্রদর্শনী — আসল AI চ্যাট এখনো চালু হয়নি।',
-                en: 'You can use the AI Assistant right now — calculators, letters and applications, CV, budget and daily tools. AI Teacher (for study) is still a scripted demo — live AI chat has not launched yet.',
+                bn: 'AI সহায়ক এখনই ব্যবহার করতে পারেন — হিসাব, চিঠি-আবেদন, সিভি, বাজেট ও দরকারি টুল।',
+                en: 'You can use the AI Assistant right now — calculators, letters and applications, CV, budget and daily tools.',
               })}
             </p>
             <div className="ev-rd-ai-actions">
               <Link to="/ai-assistant" className="ev-btn ev-btn-primary">
                 {t({ bn: 'AI সহায়ক ব্যবহার করুন →', en: 'Use the AI Assistant →' })}
-              </Link>
-              <Link to="/ai-teacher" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
-                {t({ bn: 'AI Teacher প্রদর্শনী দেখুন', en: 'See the AI Teacher demo' })}
               </Link>
               <Link to="/jobs/bcs/practice/english" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
                 {t({ bn: 'বিসিএস ইংরেজি অনুশীলন (ফ্রি)', en: 'BCS English practice (free)' })}
@@ -1109,11 +1100,12 @@ export default function HomePage() {
         ) : null}
 
         {/* Three panels (desktop) / stacked panels (mobile). */}
-        <section className="ev-home-panels ev-rd-section" aria-label={t({ bn: 'আপডেট, অগ্রগতি ও জনপ্রিয়', en: 'Updates, progress and popular' })}>
+        <section className="ev-home-panels ev-rd-section" aria-label={t({ bn: latestOpportunities.length > 0 ? 'আপডেট, অগ্রগতি ও জনপ্রিয়' : 'অগ্রগতি ও জনপ্রিয়', en: latestOpportunities.length > 0 ? 'Updates, progress and popular' : 'Progress and popular' })}>
           {/* সর্বশেষ আপডেট — REAL dated items only: the latest verified
-              opportunity listings. No verified circular exists yet, so
-              no circular is listed; when the list is empty the honest
-              empty state shows. */}
+              opportunity listings. The whole panel is hidden when the
+              list is empty — no empty state is shown (AdSense-review
+              cleanup, 28 Nov 2026). */}
+          {latestOpportunities.length > 0 ? (
           <div className="ev-home-panel">
             <div className="ev-home-panel-head">
               <h2>
@@ -1121,30 +1113,21 @@ export default function HomePage() {
               </h2>
               <Link to="/opportunities">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
             </div>
-            {opportunitiesError ? (
-              <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 0', fontSize: 14, lineHeight: 1.7 }}>
-                {t({ bn: 'আপডেট লোড করা যায়নি — সুযোগ হাব থেকে দেখুন।', en: 'Could not load updates — see the Opportunity Hub.' })}
-              </p>
-            ) : latestOpportunities.length > 0 ? (
-              <ul className="ev-rd-updates">
-                {latestOpportunities.map((o) => (
-                  <li key={o.docId}>
-                    <span className="ev-rd-update-date" aria-hidden="true">
-                      {o.publishedDateMillis ? formatBnDate(o.publishedDateMillis) : '—'}
-                    </span>
-                    <div>
-                      <Link to={`/opportunities/${o.docId}`}>{lang === 'bn' ? o.titleBn : o.titleEn}</Link>
-                      <span>{t({ bn: 'সুযোগ হাব', en: 'Opportunity Hub' })}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 0', fontSize: 14, lineHeight: 1.7 }}>
-                {t({ bn: 'এখনো কোনো আপডেট নেই। নতুন নিয়োগ ও ভর্তি বিজ্ঞপ্তি প্রকাশিত হলে এখানে দেখা যাবে।', en: 'No updates yet. New job and admission circulars will appear here once published.' })}
-              </p>
-            )}
+            <ul className="ev-rd-updates">
+              {latestOpportunities.map((o) => (
+                <li key={o.docId}>
+                  <span className="ev-rd-update-date" aria-hidden="true">
+                    {o.publishedDateMillis ? formatBnDate(o.publishedDateMillis) : '—'}
+                  </span>
+                  <div>
+                    <Link to={`/opportunities/${o.docId}`}>{lang === 'bn' ? o.titleBn : o.titleEn}</Link>
+                    <span>{t({ bn: 'সুযোগ হাব', en: 'Opportunity Hub' })}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
+          ) : null}
 
           {/* আপনার পড়াশোনার অগ্রগতি — real data only. */}
           <div className="ev-home-panel">

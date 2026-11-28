@@ -210,10 +210,11 @@ export default function LibraryPage() {
     };
   }, [searching]);
 
-  // Class options list EVERY class level — including Class 1–5 and Class
-  // 6–8, which have zero books (owner brief 21 Nov 13:20). Levels are
-  // offered as `level:<slug>` options; any extra classLevel found in live
-  // data that no level covers stays as a raw option.
+  // Class options list levels that have live books. A level with no
+  // educationType and no classLevels (Class 6–8 today) has zero books
+  // and is hidden from the filter (28 Nov 2026 AdSense cleanup) —
+  // levels are offered as `level:<slug>` options; any extra classLevel
+  // found in live data that no level covers stays as a raw option.
   const classes = classFilterOptions(ALL_CLASS_LEVELS, typeFilter || null);
   const departments = useMemo(() => {
     if (classFilter.startsWith('level:')) {
@@ -286,11 +287,13 @@ export default function LibraryPage() {
       ) : null}
       {/* 27 Nov 2026 (landing/content, worker D spec §C): 0/609 books are
           syllabus-verified — say so plainly until the per-book fix lands
-          and a book earns its own label. */}
+          and a book earns its own label. Present tense only
+          (28 Nov 2026 AdSense cleanup): no "once review is complete"
+          promise. */}
       <AlertBox tone="info">
         {t({
-          bn: 'সিলেবাস যাচাই চলছে — এখনো কোনো বই সিলেবাস-যাচাইকৃত নয়। লাইব্রেরির বইগুলোর সিলেবাস যাচাই চলছে। এখনো কোনো বইকে সিলেবাস-যাচাইকৃত বলা হয় না — বইয়ের প্রশ্নগুলো অনুশীলনের জন্য ব্যবহার করুন, পরীক্ষার সিলেবাসের সঙ্গে নিজে মিলিয়ে নিন। যাচাই শেষ হলে প্রতিটি বইয়ে ‘সিলেবাস-যাচাইকৃত’ লেখা থাকবে।',
-          en: 'Syllabus review in progress — no book is syllabus-verified yet. Syllabus review of the library books is in progress. No book is labelled syllabus-verified yet — use the questions for practice and check them against your exam syllabus. Verified books will carry a ‘Syllabus-verified’ label once review is complete.',
+          bn: 'লাইব্রেরির বইগুলোর সিলেবাস যাচাই চলছে — এখনো কোনো বই সিলেবাস-যাচাইকৃত নয়। বইয়ের প্রশ্নগুলো অনুশীলনের জন্য ব্যবহার করুন, পরীক্ষার সিলেবাসের সঙ্গে নিজে মিলিয়ে নিন।',
+          en: 'Syllabus review of the library books is in progress — no book is syllabus-verified yet. Use the questions for practice and check them against your exam syllabus.',
         })}
       </AlertBox>
       {/* Audit m04 (24 Nov 2026): skeletons alone read as "not
@@ -383,7 +386,7 @@ export default function LibraryPage() {
                 {t({ bn: `${selectedLevel.bn}`, en: `${selectedLevel.en}` })}
               </div>
               <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 15, lineHeight: 1.7 }}>
-                {t({ bn: `${selectedLevel.bn}-এর বই এখনো লাইব্রেরিতে প্রকাশিত হয়নি — বই, পাঠ ও প্রশ্ন তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে।`, en: `No books for ${selectedLevel.en} are published yet — books, lessons and questions are being prepared.` })}
+                {t({ bn: `${selectedLevel.bn}-এর কোনো বই লাইব্রেরিতে নেই।`, en: `No books for ${selectedLevel.en} are in the library.` })}
               </p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <Link to={`/class/${selectedLevel.slug}`} style={{ fontWeight: 600 }}>

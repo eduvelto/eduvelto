@@ -11,7 +11,6 @@
 // Ads: none on this page (directive §4 — no ads on AI pages).
 
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -88,8 +87,8 @@ export default function AiAssistantPage() {
           role: 'assistant',
           kind: 'notice',
           text: t({
-            bn: 'লাইভ AI এখনো যুক্ত হয়নি। নিচের টুলগুলো ব্যবহার করুন — এগুলো এখনই কাজ করে।',
-            en: 'Live AI is not connected yet. Use the tools below — they work right now.',
+            bn: 'লাইভ AI সংযুক্ত নেই। নিচের টুলগুলো ব্যবহার করুন — এগুলো এখনই কাজ করে।',
+            en: 'Live AI is not connected. Use the tools below — they work right now.',
           }),
         },
       ]);
@@ -118,8 +117,8 @@ export default function AiAssistantPage() {
       {!connected ? (
         <AlertBox tone="info">
           {t({
-            bn: 'লাইভ AI এখনো যুক্ত হয়নি — সংযুক্ত হলে এই পাতাতেই প্রশ্নের উত্তর দেবে। আপাতত নিচের ১০টি টুল ব্যবহার করুন — এগুলো এখনই কাজ করে, লগইন লাগে না, আপনার লেখা কোথাও পাঠানো হয় না।',
-            en: 'Live AI is not connected yet — once connected it will answer questions right on this page. For now, use the 10 tools below — they work right now, need no login, and nothing you type is sent anywhere.',
+            bn: 'লাইভ AI এই পাতায় সংযুক্ত নেই — নিচের ১০টি টুল ব্যবহার করুন — এগুলো এখনই কাজ করে, লগইন লাগে না, আপনার লেখা কোথাও পাঠানো হয় না।',
+            en: 'Live AI is not connected on this page — use the 10 tools below — they work right now, need no login, and nothing you type is sent anywhere.',
           })}
         </AlertBox>
       ) : (
@@ -152,7 +151,7 @@ export default function AiAssistantPage() {
           <p style={{ color: 'var(--muted, #5b6472)' }}>
             {connected
               ? t({ bn: 'যেমন: "একটি ছুটির আবেদন লিখে দাও" বা "১০,০০০ টাকায় ১২ মাসের কিস্তি কত?"', en: 'For example: "Write me a leave application" or "What is the instalment on ৳10,000 over 12 months?"' })
-              : t({ bn: 'AI সংযুক্ত হলে এখানে প্রশ্ন লিখতে পারবেন। আপাতত নিচের টুলগুলো ব্যবহার করুন।', en: 'Once AI is connected you will be able to ask questions here. For now, use the tools below.' })}
+              : t({ bn: 'AI সংযুক্ত নেই — নিচের টুলগুলো ব্যবহার করুন।', en: 'AI is not connected — use the tools below.' })}
           </p>
         ) : (
           <div style={{ display: 'grid', gap: 10, marginBottom: 12 }}>
@@ -186,7 +185,7 @@ export default function AiAssistantPage() {
             placeholder={
               connected
                 ? t({ bn: 'প্রশ্ন লিখুন…', en: 'Write your question…' })
-                : t({ bn: 'AI সংযুক্ত হলে প্রশ্ন লিখতে পারবেন', en: 'You can ask once AI is connected' })
+                : t({ bn: 'AI সংযুক্ত নেই', en: 'AI is not connected' })
             }
             aria-label={t({ bn: 'প্রশ্ন', en: 'Question' })}
           />
@@ -240,15 +239,6 @@ export default function AiAssistantPage() {
         ) : null}
       </div>
 
-      <div style={{ marginTop: 28 }}>
-        <AlertBox tone="info">
-          {t({
-            bn: 'AI শিক্ষক (পড়াশোনার জন্য) আলাদা পাতায় আছে — ',
-            en: 'The AI Teacher (for study) is on a separate page — ',
-          })}
-          <Link to="/ai-teacher">{t({ bn: 'AI শিক্ষক দেখুন', en: 'See the AI Teacher' })}</Link>
-        </AlertBox>
-      </div>
     </PageShell>
   );
 }
