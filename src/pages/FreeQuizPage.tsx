@@ -13,7 +13,7 @@
 // Practice quiz only — never a real exam or a mock.
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, ProgressBar } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -35,6 +35,16 @@ import {
   drawQuizCertificateCanvas,
   type QuizCertificateData,
 } from '../lib/certificate';
+import {
+  buildFacebookShareUrl,
+  buildReferralLink,
+  buildReferralWhatsAppUrl,
+  buildWhatsAppShareUrl,
+  createReferral,
+  recordReferralVisit,
+  validateBkashNumber,
+  validateReferralName,
+} from '../lib/referrals';
 
 type Phase = 'pick' | 'playing' | 'done';
 
@@ -217,6 +227,80 @@ export default function FreeQuizPage() {
   }, [cert]);
 
   const poolTotal = freeQuizPoolFor(category).length;
+
+  // Share-and-win (owner order 28 Nov 2026, 12:53).
+  const [searchParams] = useSearchParams();
+  const incomingRef = searchParams.get('ref') ?? '';
+  const [linkName, setLinkName] = useState('');
+  const [linkCode, setLinkCode] = useState('');
+  const [linkBusy, setLinkBusy] = useState(false);
+  const [linkError, setLinkError] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
+  const [entryName, setEntryName] = useState('');
+  const [entryBkash, setEntryBkash] = useState('');
+  const [entryRef, setEntryRef] = useState(incomingRef);
+  const [entryNameError, setEntryNameError] = useState('');
+  const [entryBkashError, setEntryBkashError] = useState('');
+
+  // Count this visit once if the visitor came through a referral
+  // link (guarded inside recordReferralVisit: at most once per
+  // browser per day, silent on unknown codes).
+  useEffect(() => {
+    if (!incomingRef) return;
+    void recordReferralVisit(incomingRef);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [incomingRef]);
+
+  const createLink = async () => {
+    if (!linkName.trim() || linkBusy) return;
+    setLinkBusy(true);
+    setLinkError(false);
+    try {
+      const code = await createReferral(linkName);
+      setLinkCode(code);
+      setCopied(false);
+      setCopyError(false);
+      setEntryRef((r) => r || code);
+    } catch {
+      setLinkError(true);
+    } finally {
+      setLinkBusy(false);
+    }
+  };
+
+  const copyLink = async () => {
+    if (!linkCode) return;
+    try {
+      await navigator.clipboard.writeText(buildReferralLink(linkCode));
+      setCopied(true);
+      setCopyError(false);
+    } catch {
+      setCopied(false);
+      setCopyError(true);
+    }
+  };
+
+  const submitEntry = () => {
+    const nameErr = validateReferralName(entryName);
+    const bkashErr = validateBkashNumber(entryBkash);
+    setEntryNameError(nameErr ? 'name' : '');
+    setEntryBkashError(bkashErr ?? '');
+    if (nameErr || bkashErr) return;
+    window.open(
+      buildReferralWhatsAppUrl(entryName, entryBkash, entryRef.trim()),
+      '_blank',
+      'noopener,noreferrer',
+    );
+  };
+
+  const referralLink = linkCode ? buildReferralLink(linkCode) : '';
+  const referralShareText = linkCode
+    ? t({
+        bn: `Eduvelto-র ফ্রি কুইজ খেলুন — ১০টি প্রশ্ন, ৫ মিনিট, যাচাইকৃত প্রশ্নভাণ্ডার থেকে। আমার লিংক দিয়ে খেলুন: ${referralLink}`,
+        en: `Play Eduvelto's free quiz — 10 questions, 5 minutes, from the verified question bank. Play through my link: ${referralLink}`,
+      })
+    : '';
 
   return (
     <PageShell titleBn="ফ্রি কুইজ" titleEn="Free Quiz">
@@ -582,6 +666,192 @@ export default function FreeQuizPage() {
           </p>
         </>
       ) : null}
+
+      {/* Share-and-win (owner order 28 Nov 2026, 12:53) — under the quiz. */}
+      <Card style={{ marginTop: 24, borderTop: '4px solid #C9A227' }}>
+        <h2 style={{ fontSize: 19, margin: '0 0 8px', color: 'var(--heading)' }}>
+          {t({ bn: 'শেয়ার করুন, জিতুন ৳১০০ মোবাইল রিচার্জ', en: 'Share and win ৳100 mobile recharge' })}
+        </h2>
+        <p style={{ margin: '0 0 16px', lineHeight: 1.7, color: 'var(--muted)' }}>
+          {t({
+            bn: 'কুইজটি বন্ধুদের সঙ্গে শেয়ার করুন — প্রতি মাসে ৫ জন বিজয়ী পাবেন ৳১০০ মোবাইল রিচার্জ। আপনার লিংক দিয়ে যত বেশি মানুষ আসবে, জেতার সুযোগ তত বেশি।',
+            en: 'Share the quiz with your friends — 5 winners every month each get ৳100 mobile recharge. The more visitors come through your link, the better your chance of winning.',
+          })}
+        </p>
+
+        <h3 style={{ fontSize: 16, margin: '0 0 8px', color: 'var(--heading)' }}>
+          {t({ bn: '১. আপনার শেয়ার লিংক বানান', en: '1. Create your share link' })}
+        </h3>
+        {!linkCode ? (
+          <>
+            <label
+              htmlFor="referral-name"
+              style={{ display: 'block', fontSize: 14, fontWeight: 600, marginBottom: 6, color: 'var(--heading)' }}
+            >
+              {t({ bn: 'আপনার নাম', en: 'Your name' })}
+            </label>
+            <input
+              id="referral-name"
+              className="ev-input"
+              type="text"
+              value={linkName}
+              onChange={(e) => setLinkName(e.target.value)}
+              placeholder={t({ bn: 'যেমন: রহিম উদ্দিন', en: 'e.g. Rahim Uddin' })}
+              style={{ maxWidth: 420 }}
+            />
+            <div style={{ marginTop: 12 }}>
+              <Button size="lg" disabled={!linkName.trim() || linkBusy} onClick={() => void createLink()} loading={linkBusy}>
+                {t({ bn: 'আমার শেয়ার লিংক বানান', en: 'Create my share link' })}
+              </Button>
+            </div>
+            {linkError ? (
+              <AlertBox tone="error">
+                {t({
+                  bn: 'লিংক বানানো যায়নি — ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।',
+                  en: 'Could not create the link — please check your connection and try again.',
+                })}
+              </AlertBox>
+            ) : null}
+          </>
+        ) : (
+          <>
+            <p style={{ margin: '0 0 8px', lineHeight: 1.7 }}>
+              {t({ bn: 'আপনার শেয়ার লিংক:', en: 'Your share link:' })}
+              <br />
+              <strong style={{ wordBreak: 'break-all' }}>{referralLink}</strong>
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              <Button onClick={() => void copyLink()}>
+                {t({ bn: 'লিংক কপি করুন', en: 'Copy link' })}
+              </Button>
+              <a
+                href={buildWhatsAppShareUrl(referralShareText)}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+              >
+                <Button variant="outline">{t({ bn: 'WhatsApp-এ শেয়ার করুন', en: 'Share on WhatsApp' })}</Button>
+              </a>
+              <a
+                href={buildFacebookShareUrl(referralLink, referralShareText)}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+              >
+                <Button variant="outline">{t({ bn: 'Facebook-এ শেয়ার করুন', en: 'Share on Facebook' })}</Button>
+              </a>
+            </div>
+            {copied ? (
+              <p style={{ color: 'var(--muted)', fontSize: 14, margin: '10px 0 0' }} role="status">
+                {t({ bn: 'লিংক কপি হয়েছে।', en: 'Link copied.' })}
+              </p>
+            ) : null}
+            {copyError ? (
+              <p style={{ color: 'var(--error)', fontSize: 14, margin: '10px 0 0' }} role="alert">
+                {t({ bn: 'কপি করা যায়নি — লিংকটি চেপে ধরে কপি করুন।', en: 'Could not copy — please long-press the link to copy it.' })}
+              </p>
+            ) : null}
+          </>
+        )}
+
+        <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: 'var(--heading)' }}>
+          {t({ bn: '২. অংশ নিতে ফরমটি পূরণ করুন', en: '2. Fill in the form to enter' })}
+        </h3>
+        <p style={{ margin: '0 0 12px', lineHeight: 1.7, fontSize: 14, color: 'var(--muted)' }}>
+          {t({
+            bn: 'নাম ও বিকাশ নম্বর দিন — জমা দিলে WhatsApp খুলবে, সেখানেই আপনার এন্ট্রি পাঠাবেন।',
+            en: 'Give your name and bKash number — submitting opens WhatsApp, where you send your entry.',
+          })}
+        </p>
+        <label
+          htmlFor="entry-name"
+          style={{ display: 'block', fontSize: 14, fontWeight: 600, marginBottom: 6, color: 'var(--heading)' }}
+        >
+          {t({ bn: 'আপনার নাম', en: 'Your name' })}
+        </label>
+        <input
+          id="entry-name"
+          className="ev-input"
+          type="text"
+          value={entryName}
+          onChange={(e) => {
+            setEntryName(e.target.value);
+            setEntryNameError('');
+          }}
+          placeholder={t({ bn: 'যেমন: রহিম উদ্দিন', en: 'e.g. Rahim Uddin' })}
+          style={{ maxWidth: 420 }}
+        />
+        {entryNameError ? (
+          <p style={{ color: 'var(--error)', fontSize: 14, margin: '6px 0 0' }} role="alert">
+            {t({ bn: 'নাম লিখুন।', en: 'Please type your name.' })}
+          </p>
+        ) : null}
+        <label
+          htmlFor="entry-bkash"
+          style={{ display: 'block', fontSize: 14, fontWeight: 600, margin: '14px 0 6px', color: 'var(--heading)' }}
+        >
+          {t({ bn: 'বিকাশ নম্বর', en: 'bKash number' })}
+        </label>
+        <input
+          id="entry-bkash"
+          className="ev-input"
+          type="tel"
+          inputMode="numeric"
+          value={entryBkash}
+          onChange={(e) => {
+            setEntryBkash(e.target.value);
+            setEntryBkashError('');
+          }}
+          placeholder={t({ bn: 'যেমন: 01712345678', en: 'e.g. 01712345678' })}
+          style={{ maxWidth: 420 }}
+        />
+        {entryBkashError === 'empty' ? (
+          <p style={{ color: 'var(--error)', fontSize: 14, margin: '6px 0 0' }} role="alert">
+            {t({ bn: 'বিকাশ নম্বর লিখুন।', en: 'Please type your bKash number.' })}
+          </p>
+        ) : null}
+        {entryBkashError === 'invalid' ? (
+          <p style={{ color: 'var(--error)', fontSize: 14, margin: '6px 0 0' }} role="alert">
+            {t({
+              bn: 'বিকাশ নম্বর ১১ সংখ্যার হতে হবে এবং 01 দিয়ে শুরু হতে হবে।',
+              en: 'The bKash number must be 11 digits starting with 01.',
+            })}
+          </p>
+        ) : null}
+        <label
+          htmlFor="entry-ref"
+          style={{ display: 'block', fontSize: 14, fontWeight: 600, margin: '14px 0 6px', color: 'var(--heading)' }}
+        >
+          {t({ bn: 'রেফারেল কোড', en: 'Referral code' })}
+        </label>
+        <input
+          id="entry-ref"
+          className="ev-input"
+          type="text"
+          value={entryRef}
+          onChange={(e) => setEntryRef(e.target.value)}
+          placeholder={t({ bn: 'যেমন: aK3xQ9', en: 'e.g. aK3xQ9' })}
+          style={{ maxWidth: 420 }}
+        />
+        <div style={{ marginTop: 14 }}>
+          <Button size="lg" onClick={submitEntry}>
+            {t({ bn: 'WhatsApp-এ এন্ট্রি পাঠান', en: 'Send entry on WhatsApp' })}
+          </Button>
+        </div>
+
+        <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--muted)', margin: '20px 0 0' }}>
+          {t({
+            bn: 'শর্তাবলি: প্রতি মাসে ৫ জন বিজয়ী, প্রত্যেকে ৳১০০ মোবাইল রিচার্জ পাবেন — দেওয়া বিকাশ নম্বরেই। বিজয়ীদের ওই নম্বরেই যোগাযোগ করা হবে।',
+            en: 'Terms: 5 winners every month, each gets ৳100 mobile recharge — to the bKash number given. Winners are contacted on that number.',
+          })}
+        </p>
+        <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--muted)', margin: '10px 0 0' }}>
+          {t({
+            bn: 'সততার কথা: ভিজিটর সংখ্যা শুধু একটি নির্দেশক — এটি বাড়িয়ে দেখানো যায়, তাই এটি প্রতারণা-প্রমাণ নয়। বিজয়ী বাছাই করা হয় সংখ্যা ও যাচাই মিলিয়ে; শুধু লিংকে ক্লিক গোনা হয়, শেয়ারটি নিজে যাচাই করা হয় না।',
+            en: 'An honest note: visitor counts are only a guide — they can be inflated and are not fraud-proof. Winners are picked by count plus a sanity check; only link clicks are counted, the share itself is not verified.',
+          })}
+        </p>
+      </Card>
     </PageShell>
   );
 }
