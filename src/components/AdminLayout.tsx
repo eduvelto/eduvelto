@@ -81,6 +81,7 @@ const NAV_SECTIONS: NavSection[] = [
       { to: '/admin/analytics', bn: 'সাইট বিশ্লেষণ', en: 'Site Analytics' },
       { to: '/admin/analytics', bn: 'ব্যবহারকারী বৃদ্ধি', en: 'User Growth' },
       { to: '/admin/analytics', bn: 'পারফরম্যান্স রিপোর্ট', en: 'Performance Report' },
+      { to: '/admin/referrals', bn: 'রেফারেল লিডারবোর্ড', en: 'Referral Leaderboard' },
     ],
   },
   {

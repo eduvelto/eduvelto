@@ -283,9 +283,11 @@ describe('Step 18 — backup / recovery (emulator)', () => {
     // + reports left), and the 15 dead social/gamification +
     // moderationQueue collections left with their rules blocks.
     // studyPlans STAYS: its owner-only rules block is live.)
-    expect(preflight.total).toBe(91);
+    // Referral tracking 28 Nov 2026: 91 → 92 — the `quizReferrals`
+    // collection joined BACKUP_COLLECTIONS with the /free-quiz share.
+    expect(preflight.total).toBe(92);
     expect(preflight.perCollection).toHaveLength(BACKUP_COLLECTIONS.length);
-    expect(preflight.readsPercent).toBeCloseTo(91 / 500, 5);
+    expect(preflight.readsPercent).toBeCloseTo(92 / 500, 5);
     const backup = await buildBackup(db, OWNER_UID);
     expect(validateBackup(backup).ok).toBe(true);
     expect(Object.keys(backup.data).sort()).toEqual([...BACKUP_COLLECTIONS].sort());

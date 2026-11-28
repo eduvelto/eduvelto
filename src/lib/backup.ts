@@ -39,7 +39,10 @@
  *     joined at the Step 18 merge: counters + the four Step 15
  *     admin collections = 81, then +2 at the forced-app-update
  *     merge (`appVersion` + `config`), +1 at the homepage-redesign
- *     merge (`newsletterSubscribers`), 24 Nov 2026).
+ *     merge (`newsletterSubscribers`), 24 Nov 2026; the count has
+ *     since grown past 84 through later merges (bank, Job Prep,
+ *     Phase 3, QPG) to 88, +1 on 28 Nov 2026 (`quizReferrals`) = 89
+ *     — see BACKUP_COLLECTIONS for the live list).
  *     `settings` is read doc-by-doc (features + ads) because the rules
  *     have no collection-level match for it (Step 18, F-2). `config` is
  *     read doc-by-doc too (appVersion): its read rule is
@@ -269,6 +272,10 @@ export const BACKUP_COLLECTIONS: string[] = [
   'qpgContributions',
   'qpgContributorStats',
   'qpgCustomOrders',
+  // Added 28 Nov 2026 (referral tracking — the /free-quiz share
+  // referral codes + visitor counts must be backed up or the
+  // leaderboard history is lost. Read is owner/admin only.)
+  'quizReferrals',
 ];
 
 /**

@@ -2349,6 +2349,29 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // ---------- quiz referrals (28 Nov 2026 — /free-quiz share)
+    // Anyone (signed out included) may create a referral doc
+    // {code, name, createdAt, firstSeen, lastSeen, count: 0} and may
+    // bump the counter (count +1 and lastSeen only). Read is
+    // owner/admin only; delete is never allowed client-side. Counts
+    // are a guide, not fraud-proof — no CAPTCHA/rate-limit exists
+    // on the free Spark plan.
+    match /quizReferrals/{code} {
+      allow read: if isAdmin();
+      allow create: if code.size() == 6
+        && onlyKeys(['code', 'name', 'createdAt', 'firstSeen', 'lastSeen', 'count'])
+        && request.resource.data.code == code
+        && isStr(request.resource.data.name, 100)
+        && request.resource.data.count == 0
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.firstSeen is timestamp
+        && request.resource.data.lastSeen is timestamp;
+      allow update: if changedKeys().hasOnly(['count', 'lastSeen'])
+        && request.resource.data.count == resource.data.count + 1
+        && request.resource.data.lastSeen is timestamp;
+      allow delete: if false;
+    }
+
     // ---------- donations (Phase 3, 25 Nov 2026 — "Support Eduvelto")
     // Anyone (signed out included) may record a donation with
     // exactly {name, amount, trxId, createdAt} — name 1–100 chars,

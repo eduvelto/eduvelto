@@ -184,6 +184,7 @@ const AdminJobCorrectionsPage = lazy(() => import('./pages/AdminJobCorrectionsPa
 const AdminJobDomainsPage = lazy(() => import('./pages/AdminJobDomainsPage'));
 const AdminAdmissionsPage = lazy(() => import('./pages/AdminAdmissionsPage'));
 const AdminAnalyticsPage = lazy(() => import('./pages/AdminAnalyticsPage'));
+const AdminReferralsPage = lazy(() => import('./pages/AdminReferralsPage'));
 const AdminSettingsPage = lazy(() => import('./pages/AdminSettingsPage'));
 const OwnerSecurityPage = lazy(() => import('./pages/OwnerSecurityPage'));
 const AdminContentPage = lazy(() => import('./pages/AdminContentPage'));
@@ -1017,6 +1018,7 @@ export default function App() {
           <Route path="admissions/syllabus" element={<AdminNuSyllabusPage />} />
           <Route path="admissions/questions" element={<NuQuestionWorkbenchGuard><AdminNuQuestionsPage /></NuQuestionWorkbenchGuard>} />
           <Route path="analytics" element={<AdminAnalyticsPage />} />
+          <Route path="referrals" element={<AdminReferralsPage />} />
           <Route path="settings" element={<AdminSettingsPage />} />
           <Route path="security" element={<OwnerSecurityPage />} />
           <Route path="content" element={<AdminContentPage />} />
