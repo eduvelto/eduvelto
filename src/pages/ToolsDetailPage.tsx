@@ -307,6 +307,13 @@ import { DailyQuotesTool } from './tools/DailyQuotesTool';
 import { HtmlEntityTool } from './tools/HtmlEntityTool';
 import { CsvToJsonTool } from './tools/CsvToJsonTool';
 import { SqlFormatterTool } from './tools/SqlFormatterTool';
+// Global batch (28 Nov 2026, owner order): 6 browser-side tools.
+import { CurrencyConverterTool } from './tools/CurrencyConverterTool';
+import { ScreenRecorderTool } from './tools/ScreenRecorderTool';
+import { InternetSpeedTestTool } from './tools/InternetSpeedTestTool';
+import { SignatureMakerTool } from './tools/SignatureMakerTool';
+import { ImageToTextOcrTool } from './tools/ImageToTextOcrTool';
+import { FocusWorkspaceTool } from './tools/FocusWorkspaceTool';
 import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
@@ -594,6 +601,13 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'html-entity-encoder-decoder': HtmlEntityTool,
   'csv-to-json-converter': CsvToJsonTool,
   'sql-formatter': SqlFormatterTool,
+  // Global batch (28 Nov 2026, owner order): 6 browser-side tools.
+  'currency-converter': CurrencyConverterTool,
+  'screen-recorder': ScreenRecorderTool,
+  'internet-speed-test': InternetSpeedTestTool,
+  'signature-maker': SignatureMakerTool,
+  'image-to-text-ocr': ImageToTextOcrTool,
+  'focus-workspace': FocusWorkspaceTool,
 };
 
 const gridStyle: CSSProperties = {

@@ -542,6 +542,39 @@ const ICON_PATHS = {
       <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" />
     </>
   ),
+  // Global batch (28 Nov 2026): screen recorder, speed test, signature,
+  record: (
+    <>
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none" />
+    </>
+  ),
+  gauge: (
+    <>
+      <path d="M5 19a9 9 0 1 1 14 0" />
+      <path d="M12 13l4-5" />
+      <circle cx="12" cy="13" r="1.6" fill="currentColor" stroke="none" />
+      <path d="M5 19h14" />
+    </>
+  ),
+  penSign: (
+    <>
+      <path d="M3 21c2-1 4-1 6 0s4 1 6 0 4-1 6 0" />
+      <path d="M14 3l7 7-3 3-7-7z" />
+      <path d="M11 6l7 7" />
+    </>
+  ),
+  scanText: (
+    <>
+      <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2" />
+      <path d="M7 9h10M7 13h10M7 17h6" />
+    </>
+  ),
+  soundWaves: (
+    <>
+      <path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10v4" />
+    </>
+  ),
   sparkles: (
     <>
       <path d="M12 3l1.8 4.7L18.5 9l-4.7 1.8L12 15.5l-1.8-4.7L5.5 9l4.7-1.3L12 3z" />
@@ -1033,6 +1066,13 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'video-format-converter': 'filmConvert',
   'video-to-audio-converter': 'filmMusic',
   'music-player': 'musicNote',
+  // Global batch (28 Nov 2026, owner order): 6 browser-side tools.
+  'currency-converter': 'globe',
+  'screen-recorder': 'record',
+  'internet-speed-test': 'gauge',
+  'signature-maker': 'penSign',
+  'image-to-text-ocr': 'scanText',
+  'focus-workspace': 'soundWaves',
 };
 
 // Category fallback — used only for a slug with no explicit entry

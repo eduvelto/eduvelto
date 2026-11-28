@@ -938,10 +938,10 @@ export default function HomePage() {
             </Link>
             {/* 28 Nov 2026 (AdSense-readiness): direct Tools Hub link
                 in the hero — the hub had no link anywhere on the
-                homepage or in the header. 265 free tools (28 Nov 2026
+                homepage or in the header. 271 free tools (28 Nov 2026
                 audit count; TOOLS_META.length). */}
             <Link to="/tools" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
-              {t({ bn: '🛠 ২৬৫টি ফ্রি টুল', en: '🛠 265 free tools' })}
+              {t({ bn: '🛠 ২৭১টি ফ্রি টুল', en: '🛠 271 free tools' })}
             </Link>
           </div>
         </section>
@@ -949,12 +949,12 @@ export default function HomePage() {
         {/* Free Tools Hub (28 Nov 2026 AdSense-readiness): a prominent
             tools section at the very top of the homepage — the hub
             existed at /tools but had no link anywhere on the homepage
-            or in the header. 265 free tools (28 Nov 2026 audit count;
+            or in the header. 271 free tools (28 Nov 2026 audit count;
             TOOLS_META.length). Popular-tool cards link straight to
             their /tools/<slug> pages. */}
         <section className="ev-rd-section" aria-label={t({ bn: 'ফ্রি টুলস', en: 'Free Tools' })}>
           <div className="ev-rd-head">
-            <h2>{t({ bn: '🛠 ২৬৫টি ফ্রি টুল', en: '🛠 265 free tools' })}</h2>
+            <h2>{t({ bn: '🛠 ২৭১টি ফ্রি টুল', en: '🛠 271 free tools' })}</h2>
             <Link to="/tools">{t({ bn: 'সব টুল দেখুন →', en: 'See all tools →' })}</Link>
           </div>
           <p className="ev-rd-sub">
