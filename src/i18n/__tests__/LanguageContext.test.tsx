@@ -107,11 +107,21 @@ describe('LanguageContext — full-site language (24 Nov 2026 brief)', () => {
   });
 
   it('ignores an invalid ?lang= value', async () => {
+    // 'de' is registered but NOT live (28 Nov 2026 phased rollout), so
+    // it is ignored like an unknown code — 'fr' is live now, do NOT
+    // use it here.
     const { html } = await renderProbe(
       { bn: 'হোম', en: 'Home' },
-      { search: '?lang=fr', stored: 'en' },
+      { search: '?lang=de', stored: 'en' },
     );
     expect(html).toContain('data-lang="en"');
+  });
+
+  it('?lang=hi adopts Hindi and renders the phased translation', async () => {
+    const { html } = await renderProbe({ bn: 'হোম', en: 'Home' }, { search: '?lang=hi' });
+    expect(html).toContain('data-lang="hi"');
+    // 'Home' is in the phased dictionary (216 keys) — Hindi, not English.
+    expect(html).toContain('होम');
   });
 
   it('tabLang stays an alias of lang', async () => {

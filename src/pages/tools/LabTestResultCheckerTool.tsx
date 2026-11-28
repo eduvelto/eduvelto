@@ -17,6 +17,7 @@
 // stay free.
 
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import type { Lang } from '../../i18n/strings';
 import { useLanguage } from '../../i18n/LanguageContext';
 import {
   LAB_HISTORY_KEY,
@@ -81,7 +82,7 @@ const BAND_COLORS: Record<ResultBand, { bg: string; fg: string; border: string }
   critical: { bg: '#fce8e6', fg: '#a50e0e', border: '#f5a9a2' },
 };
 
-function bandLabel(band: ResultBand, lang: 'bn' | 'en'): string {
+function bandLabel(band: ResultBand, lang: Lang): string {
   if (lang === 'bn') {
     return band === 'normal' ? 'স্বাভাবিক' : band === 'low' ? 'কম' : band === 'high' ? 'বেশি' : 'জরুরি — খুব বেশি/কম';
   }
@@ -727,7 +728,7 @@ export function LabTestResultCheckerTool() {
 
 function ResultCard(props: {
   result: ReturnType<typeof interpretTest>;
-  lang: 'bn' | 'en';
+  lang: Lang;
   t: (entry: { bn: string; en: string }) => string;
   onSave?: () => void;
   savedNote: boolean;
@@ -845,7 +846,7 @@ function ResultCard(props: {
 
 function TestDetail(props: {
   test: LabTest;
-  lang: 'bn' | 'en';
+  lang: Lang;
   t: (entry: { bn: string; en: string }) => string;
   onCheck: (id: string) => void;
 }) {

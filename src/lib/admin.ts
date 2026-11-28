@@ -36,6 +36,7 @@
 // open on purpose are listed in the spec ("Review findings applied").
 
 import { getAuth } from 'firebase/auth';
+import type { Lang } from '../i18n/strings';
 import {
   addDoc,
   collection,
@@ -200,7 +201,7 @@ export function formatBnNumber(n: number): string {
 
 /** Human-readable time from a Firestore Timestamp, Date, string or null.
  *  `lang` picks the locale: Bangla month names/digits in 'bn', English in 'en'. */
-export function formatTime(value: unknown, lang: 'bn' | 'en' = 'bn'): string {
+export function formatTime(value: unknown, lang: Lang = 'bn'): string {
   try {
     if (value == null) return '—';
     let d: Date | null = null;
@@ -247,7 +248,7 @@ function byNewest(a: { createdAt: unknown }, b: { createdAt: unknown }): number 
  * code is logged to the console for debugging; the UI never shows a
  * bare error code. `lang` picks the message language.
  */
-export function friendlyAdminError(error: unknown, lang: 'bn' | 'en' = 'bn'): string {
+export function friendlyAdminError(error: unknown, lang: Lang = 'bn'): string {
   const code =
     error instanceof Error ? error.message : typeof error === 'string' ? error : 'unknown';
   if (typeof console !== 'undefined') console.error('[Eduvelto admin] error:', code, error);

@@ -17,6 +17,7 @@
  * Pure functions only: no network, no storage, no DOM.
  */
 
+import type { Lang } from '../../i18n/strings';
 export interface HijriDate {
   year: number;
   /** 1-12. */
@@ -39,7 +40,7 @@ export const HIJRI_MONTHS: readonly { bn: string; en: string }[] = [
   { bn: 'জিলহজ', en: 'Dhul-Hijjah' },
 ];
 
-export function hijriMonthName(month: number, lang: 'bn' | 'en'): string {
+export function hijriMonthName(month: number, lang: Lang): string {
   if (month < 1 || month > 12) return '';
   return lang === 'bn' ? HIJRI_MONTHS[month - 1].bn : HIJRI_MONTHS[month - 1].en;
 }
@@ -128,7 +129,7 @@ export function hijriToGregorian(h: HijriDate): { year: number; month: number; d
 }
 
 /** "12 Ramadan 1447" style formatting. */
-export function formatHijri(h: HijriDate, lang: 'bn' | 'en'): string {
+export function formatHijri(h: HijriDate, lang: Lang): string {
   return `${h.day} ${hijriMonthName(h.month, lang)} ${h.year}`;
 }
 

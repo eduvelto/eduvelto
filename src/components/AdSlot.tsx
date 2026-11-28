@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { bnEn } from '../i18n/strings';
 import {
   ADSENSE_CLIENT_ID,
   AD_SLOT_IDS,
@@ -334,7 +335,7 @@ export default function AdSlot(props: {
         >
           {t({ bn: 'বিজ্ঞাপনের স্থান · নমুনা', en: 'Ad space · sample' })}
         </span>
-        <span>{PLACEHOLDER_SIZE_LABEL[placement][lang]}</span>
+        <span>{PLACEHOLDER_SIZE_LABEL[placement][bnEn(lang)]}</span>
       </div>
     );
     if (placement === 'sidebar') {

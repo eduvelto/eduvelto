@@ -10,11 +10,11 @@
 // Mobile (≤860px): logo + notification bell + avatar (signed in) +
 // hamburger opening the full menu (sections as accordions + secondary
 // links). The header is shared chrome, so the new nav appears on every
-// page, not only the homepage. A language toggle button (globe icon +
-// "EN"/"বাং") sits at the top-right beside the profile on desktop and
-// mobile alike — it switches the WHOLE website between Bangla and
-// English (language system, 24 Nov 2026; supersedes the 22 Nov 2026
-// tabs-only rule).
+// page, not only the homepage. A language dropdown (globe icon +
+// current language's native name) sits at the top-right beside the
+// profile on desktop and mobile alike — it switches the WHOLE website
+// between the 8 live languages (phased rollout, 28 Nov 2026;
+// supersedes the 24 Nov 2026 two-language toggle).
 //
 // HONESTY: there is NO notifications system in this codebase — the
 // bell was removed entirely (28 Nov 2026 completeness audit) rather
@@ -32,6 +32,7 @@ import { loginState } from '../lib/loginReturn';
 import { useAuth } from '../lib/auth';
 import { useTheme } from '../lib/theme';
 import { useLanguage } from '../i18n/LanguageContext';
+import { LIVE_LANGS, languageDef } from '../i18n/languages';
 import { langSwitchTarget, langUrl, withoutLangParam } from '../lib/langRouting';
 import SupportButton from './SupportModal';
 import type { Lang } from '../i18n/strings';
@@ -131,41 +132,102 @@ function LanguageIcon() {
 }
 
 /**
- * Header language toggle (language system, 24 Nov 2026 — SUPERSEDES
- * the 22 Nov 2026 tabs-only rule): an icon button at the top-right,
- * beside the profile, that switches the WHOLE website between Bangla
- * and English. The visible label is the TARGET language (EN when the
- * site is Bangla, বাং when the site is English). It reads/writes the
- * same `lang` as the Settings language selector, so the two stay in
- * sync. Rendered twice (desktop actions + mobile actions) — CSS
+ * Header language dropdown (phased 8-language rollout, 28 Nov 2026 —
+ * SUPERSEDES the 24 Nov 2026 two-language toggle): a globe-icon button
+ * at the top-right, beside the profile, showing the CURRENT language's
+ * native name, opening a menu of all 8 live languages (native name +
+ * English name). Picking one switches the WHOLE website to that
+ * language — same page under the new /:lang prefix. It reads/writes
+ * the same `lang` as the Settings language selector, so the two stay
+ * in sync. Rendered twice (desktop actions + mobile actions) — CSS
  * shows exactly one per viewport.
  */
-function LangToggleButton() {
-  const { tabLang, setLanguage, t } = useLanguage();
+function LangDropdown() {
+  const { lang, setLanguage, t } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
-  const next: Lang = tabLang === 'bn' ? 'en' : 'bn';
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLSpanElement | null>(null);
+
+  // Close on Escape / outside click (same pattern as the nav dropdowns).
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false);
+    }
+    function onClick(e: MouseEvent) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onClick);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClick);
+    };
+  }, [open ]);
+
+  function pick(next: Lang) {
+    setOpen(false);
+    if (next === lang) return;
+    setLanguage(next);
+    // Phase 1 (25 Nov 2026): the /:lang URL is the source of
+    // truth — move the same public page under the new prefix.
+    // Private routes have no prefix: there the state change
+    // alone applies and the URL is left alone.
+    const target = langSwitchTarget(location.pathname, next);
+    // ?lang= fix (26 Nov 2026): never carry a legacy ?lang=
+    // param into the new URL — the /:lang path is the carrier.
+    if (target) navigate(`${target}${withoutLangParam(location.search)}`, { replace: true });
+  }
+
+  const current = languageDef(lang);
   return (
-    <button
-      type="button"
-      className="ev-header-lang-btn"
-      aria-label={t({ bn: 'ভাষা বদলান', en: 'Change language' })}
-      title={t({ bn: 'ভাষা বদলান', en: 'Change language' })}
-      onClick={() => {
-        setLanguage(next);
-        // Phase 1 (25 Nov 2026): the /:lang URL is the source of
-        // truth — move the same public page under the new prefix.
-        // Private routes have no prefix: there the state change
-        // alone applies and the URL is left alone.
-        const target = langSwitchTarget(location.pathname, next);
-        // ?lang= fix (26 Nov 2026): never carry a legacy ?lang=
-        // param into the new URL — the /:lang path is the carrier.
-        if (target) navigate(`${target}${withoutLangParam(location.search)}`, { replace: true });
-      }}
-    >
-      <LanguageIcon />
-      <span>{tabLang === 'bn' ? 'EN' : 'বাং'}</span>
-    </button>
+    <span ref={wrapRef} style={{ position: 'relative', display: 'inline-flex' }}>
+      <button
+        type="button"
+        className="ev-header-lang-btn"
+        aria-label={t({ bn: 'ভাষা বদলান', en: 'Change language' })}
+        title={t({ bn: 'ভাষা বদলান', en: 'Change language' })}
+        aria-expanded={open}
+        aria-haspopup="true"
+        onClick={() => setOpen((o) => !o)}
+      >
+        <LanguageIcon />
+        <span>{current.nameNative}</span>
+        <ChevronIcon open={open} />
+      </button>
+      {open ? (
+        <div className="ev-hnav-panel" role="menu" style={{ left: 'auto', right: 0, minWidth: 220 }}>
+          {LIVE_LANGS.map((code) => {
+            const def = languageDef(code);
+            return (
+              <button
+                key={code}
+                type="button"
+                role="menuitem"
+                className="ev-hnav-panel-link"
+                aria-current={code === lang}
+                style={{
+                  width: '100%',
+                  background: 'none',
+                  border: 0,
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  fontWeight: code === lang ? 700 : 400,
+                }}
+                onClick={() => pick(code)}
+              >
+                <span>{def.nameNative}</span>
+                <span style={{ color: 'var(--muted)', fontSize: 13 }}>
+                  {def.nameEn}
+                  {code === lang ? ' ✓' : ''}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+    </span>
   );
 }
 
@@ -245,7 +307,7 @@ const SECONDARY: MenuItem[] = [
  *
  * Rendered TWICE — once as a direct <header> child (desktop, >=861px)
  * and once inside the <nav> (mobile menu, <=860px) — CSS shows exactly
- * one per viewport (same pattern as LangToggleButton). The `suffix`
+ * one per viewport (same pattern as LangDropdown). The `suffix`
  * keeps the search input id unique across the two copies.
  *
  * bn/en layout parity (27 Nov 2026, Image Compressor report): these
@@ -305,8 +367,8 @@ function HeaderActions({ suffix }: { suffix: string }) {
       >
         {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
       </button>
-      {/* Language toggle — top-right, beside the profile (owner rule 22 Nov 2026). */}
-      <LangToggleButton />
+      {/* Language dropdown — top-right, beside the profile (8 live languages, 28 Nov 2026). */}
+      <LangDropdown />
       {/* Phase 3 (25 Nov 2026): prominent gold Support button —
           opens the quick donate modal (full page at /:lang/support). */}
       <SupportButton />
@@ -394,8 +456,8 @@ export default function HeaderNav() {
         >
           {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
         </button>
-        {/* Language toggle — top-right, beside the profile (owner rule 22 Nov 2026). */}
-        <LangToggleButton />
+        {/* Language dropdown — top-right, beside the profile (8 live languages, 28 Nov 2026). */}
+        <LangDropdown />
         {loading ? null : user ? (
           <Link to="/profile" className="ev-header-avatar" aria-label={t({ bn: 'প্রোফাইল', en: 'Profile' })}>
             {initial}

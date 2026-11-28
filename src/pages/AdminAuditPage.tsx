@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import type { Lang } from '../i18n/strings';
 import { PageShell } from '../components/PageShell';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
@@ -33,7 +34,7 @@ const FILTERS = [
   'support-thread-viewed',
 ] as const;
 
-function dayKey(value: unknown, lang: 'bn' | 'en'): string {
+function dayKey(value: unknown, lang: Lang): string {
   try {
     let d: Date | null = null;
     if (typeof value === 'object' && value !== null && 'toDate' in value) {

@@ -29,6 +29,7 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, LinkButton } from '../components/ui';
 import { toolBySlug } from '../lib/toolsMeta';
+import { toolMetaForLang } from '../lib/toolsMetaI18n';
 import { toolGuideBySlug, toolGuideSectionsBySlug } from '../lib/toolsGuides';
 import { faqPageJsonLd, relatedToolsFor } from '../lib/toolSeo';
 import { langUrl, SITE_URL } from '../lib/langRouting';
@@ -675,27 +676,33 @@ export default function ToolsDetailPage() {
 
   const guide = toolGuideBySlug(meta.slug);
   const guideSections = toolGuideSectionsBySlug(meta.slug);
-  const guideText = guide ? (lang === 'en' ? guide.guideEn : guide.guideBn) : null;
+  // Guides stay bn/en in this phase (28 Nov 2026): Bangla for bn,
+  // English for every other language (the honest fallback).
+  const guideText = guide ? (lang === 'bn' ? guide.guideBn : guide.guideEn) : null;
   // Tool-SEO program (27 Nov 2026): 5 related tools, same-category first.
   const related = relatedToolsFor(meta, 5);
   // FAQPage JSON-LD from this tool's structured guide (same canonical
   // as resolveRouteSeo). Renders only when the guide has FAQs; the
   // body <script> is picked up by SSR/prerender like the head tags.
   const faqJsonLd = guideSections
-    ? faqPageJsonLd(guideSections[lang].faq, `${SITE_URL}/${lang}/tools/${meta.slug}`)
+    ? faqPageJsonLd(guideSections[lang === 'bn' ? 'bn' : 'en'].faq, `${SITE_URL}/${lang}/tools/${meta.slug}`)
     : undefined;
   const ToolUI = TOOL_COMPONENTS[meta.slug];
+  // Phased 8-language rollout (28 Nov 2026): the top-20 tools resolve
+  // their title/description/crumb through the overlay; other tools
+  // fall back to English.
+  const tm = toolMetaForLang(meta, lang);
 
   return (
-    <PageShell titleBn={meta.titleBn} titleEn={meta.titleEn}>
+    <PageShell titleBn={meta.titleBn} titleEn={tm.title}>
       <Breadcrumb
         items={[
           { label: t({ bn: 'টুলস', en: 'Tools' }), to: '/tools' },
-          { label: lang === 'bn' ? meta.crumbBn : meta.crumbEn },
+          { label: tm.crumb },
         ]}
       />
       <p className="ev-tool-desc" style={{ fontSize: 16, lineHeight: 1.7 }}>
-        {t({ bn: meta.descriptionBn, en: meta.descriptionEn })}
+        {t({ bn: meta.descriptionBn, en: tm.description })}
       </p>
       {/* Share / copy-link (28 Nov 2026): one shared button on every
           tool page — native share sheet where available, otherwise
@@ -703,7 +710,7 @@ export default function ToolsDetailPage() {
       <div style={{ margin: '4px 0 16px' }}>
         <ShareButton
           url={`${SITE_URL}/${lang}/tools/${meta.slug}`}
-          title={lang === 'bn' ? meta.titleBn : meta.titleEn}
+          title={tm.title}
         />
       </div>
       {ToolUI ? (
@@ -765,22 +772,25 @@ export default function ToolsDetailPage() {
         <>
           <h2 style={sectionTitleStyle}>{t({ bn: 'সম্পর্কিত টুলস', en: 'Related tools' })}</h2>
           <div style={gridStyle}>
-            {related.map((relatedMeta) => (
-              <Link
-                key={relatedMeta.slug}
-                to={langUrl(`/tools/${relatedMeta.slug}`, lang)}
-                className="ev-card ev-card-hover"
-                style={{ display: 'block', textDecoration: 'none', color: 'var(--heading)', minHeight: 44 }}
-              >
-                <ToolIcon slug={relatedMeta.slug} category={relatedMeta.category} size={36} style={{ marginBottom: 10 }} />
-                <strong style={{ display: 'block', fontSize: 16 }}>
-                  {t({ bn: relatedMeta.titleBn, en: relatedMeta.titleEn })}
-                </strong>
-                <span style={{ display: 'block', color: 'var(--muted)', fontSize: 14, marginTop: 8 }}>
-                  {t({ bn: relatedMeta.descriptionBn, en: relatedMeta.descriptionEn })}
-                </span>
-              </Link>
-            ))}
+            {related.map((relatedMeta) => {
+              const rel = toolMetaForLang(relatedMeta, lang);
+              return (
+                <Link
+                  key={relatedMeta.slug}
+                  to={langUrl(`/tools/${relatedMeta.slug}`, lang)}
+                  className="ev-card ev-card-hover"
+                  style={{ display: 'block', textDecoration: 'none', color: 'var(--heading)', minHeight: 44 }}
+                >
+                  <ToolIcon slug={relatedMeta.slug} category={relatedMeta.category} size={36} style={{ marginBottom: 10 }} />
+                  <strong style={{ display: 'block', fontSize: 16 }}>
+                    {t({ bn: relatedMeta.titleBn, en: rel.title })}
+                  </strong>
+                  <span style={{ display: 'block', color: 'var(--muted)', fontSize: 14, marginTop: 8 }}>
+                    {t({ bn: relatedMeta.descriptionBn, en: rel.description })}
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </>
       ) : null}

@@ -48,15 +48,19 @@ export function applicationCategoryFor(category: ToolCategory): string {
 export function toolWebApplicationJsonLd(
   meta: ToolMeta,
   canonical: string,
-  lang: 'bn' | 'en',
+  lang: string,
   description: string,
+  /** Phased 8-language rollout (28 Nov 2026): the resolved tool name
+   *  (overlay title for the top-20 tools) — defaults to the bn/en
+   *  meta title when omitted. */
+  name?: string,
 ): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     '@id': `${canonical}#webapp`,
     url: canonical,
-    name: lang === 'bn' ? meta.titleBn : meta.titleEn,
+    name: name ?? (lang === 'bn' ? meta.titleBn : meta.titleEn),
     description,
     applicationCategory: applicationCategoryFor(meta.category),
     operatingSystem: 'Web',

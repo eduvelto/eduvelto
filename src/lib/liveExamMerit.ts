@@ -30,6 +30,7 @@
  */
 
 import { doc, getDoc } from 'firebase/firestore';
+import type { Lang } from '../i18n/strings';
 import { db } from '../firebase';
 
 /** The reused collection (public-read, moderator-write). */
@@ -186,7 +187,7 @@ export function parseLiveMeritSnapshot(
 }
 
 /** "১২:৩৪" / "12:34" (mm:ss) — "—" when no time was recorded. */
-export function formatMeritTime(timeSeconds: number | null, lang: 'bn' | 'en' = 'bn'): string {
+export function formatMeritTime(timeSeconds: number | null, lang: Lang = 'bn'): string {
   if (timeSeconds === null || timeSeconds === undefined) return '—';
   const total = Math.max(0, Math.floor(timeSeconds));
   const mm = String(Math.floor(total / 60)).padStart(2, '0');

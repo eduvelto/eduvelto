@@ -48,6 +48,7 @@
  */
 
 import { WEEKLY_MOCK_CYCLE, jobRulesConfig } from './jobExams';
+import type { Lang } from '../i18n/strings';
 
 /** Mock kinds (Step 3 §2.10). 'previous' is NOT a mock kind here:
  * previous-year sets run as PRACTICE (Step 8 decision #4) — a
@@ -455,7 +456,7 @@ export function jobMockPatternSummaryBn(snapshot: JobMockRulesSnapshot, question
 export function jobMockPatternSummary(
   snapshot: JobMockRulesSnapshot,
   questionCountOverride: number | undefined,
-  lang: 'bn' | 'en',
+  lang: Lang,
 ): string {
   // Step 9 closure (N3): the snapshot count is the definition's
   // DECLARED count — the frozen manifest is the authority, and the

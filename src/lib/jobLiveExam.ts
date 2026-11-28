@@ -26,6 +26,7 @@
  *   until the §3.8 gates pass (see `PERSONALISED_SELECTION_GATES`).
  */
 
+import type { Lang } from '../i18n/strings';
 import {
   jobExamPattern,
   type JobExamPattern,
@@ -287,7 +288,7 @@ export function variantIdFromMock(mock: JobMockWithId): number | null {
 /** Set-kind label (Bangla-first). Every shippable Live Exam set
  * is shared (variant); 'personalised' is defined but never
  * offered until the gates below pass. */
-export function liveExamSetKindLabel(kind: LiveExamSetKind, lang: 'bn' | 'en' = 'bn'): string {
+export function liveExamSetKindLabel(kind: LiveExamSetKind, lang: Lang = 'bn'): string {
   if (kind === 'personalised') {
     return lang === 'bn' ? 'ব্যক্তিগত সেট — আপনার জন্য আলাদা প্রশ্ন' : 'Personalised set — questions picked for you';
   }

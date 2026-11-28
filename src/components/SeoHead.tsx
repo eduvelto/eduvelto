@@ -30,7 +30,7 @@
 // import this TS module).
 
 import { Helmet } from 'react-helmet-async';
-import { alternateLangUrl, hreflangUrls, stripLangPrefix, type SupportedLang } from '../lib/langRouting';
+import { SUPPORTED_LANGS, alternateLangUrl, hreflangUrls, stripLangPrefix, type SupportedLang } from '../lib/langRouting';
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, OG_IMAGE_URL, ogLocaleForLang } from '../lib/seo';
 
 export type SeoHeadProps = {
@@ -64,16 +64,23 @@ export function SeoHead({ title, description, canonical, lang, ogType, ogImage, 
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
       {/* No fragment wrapper: react-helmet-async drops fragment
-          children, so each alternate is a direct conditional child. */}
-      {hreflang ? <link rel="alternate" hrefLang="bn" href={hreflang.bn} /> : null}
-      {hreflang ? <link rel="alternate" hrefLang="en" href={hreflang.en} /> : null}
+          children, so each alternate is a direct conditional child.
+          Phased 8-language rollout (28 Nov 2026): one hreflang link
+          per live language + x-default -> bn. */}
+      {hreflang
+        ? SUPPORTED_LANGS.map((l) => (
+            <link key={l} rel="alternate" hrefLang={l} href={hreflang[l]} />
+          ))
+        : null}
       {hreflang ? <link rel="alternate" hrefLang="x-default" href={hreflang.xDefault} /> : null}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={ogType ?? 'website'} />
       <meta property="og:url" content={canonical} />
       <meta property="og:locale" content={ogLocale.locale} />
-      <meta property="og:locale:alternate" content={ogLocale.alternate} />
+      {ogLocale.alternates.map((alt) => (
+        <meta key={alt} property="og:locale:alternate" content={alt} />
+      ))}
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
       <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />

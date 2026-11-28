@@ -60,6 +60,7 @@
  * /login with a return state.
  */
 
+import type { Lang } from '../i18n/strings';
 import { loadBundleKey, loadPracticeBundle, type PracticeBundleWithId } from './jobPractice';
 import { jobExamBySlug } from './jobExams';
 import {
@@ -238,7 +239,7 @@ function pad2(n: number): string {
 /** "২ দিন ০৪:১২:৩৩" / "2d 04:12:33" — days shown only when > 0. */
 export function formatLiveExamCountdown(
   parts: CountdownParts,
-  lang: 'bn' | 'en' = 'bn',
+  lang: Lang = 'bn',
 ): string {
   const clock =
     lang === 'bn'
@@ -249,7 +250,7 @@ export function formatLiveExamCountdown(
 }
 
 /** One instant in Dhaka time, e.g. "২৬ নভে, ২০২৬, সকাল ১০:০০". */
-export function formatLiveExamInstant(millis: number, lang: 'bn' | 'en' = 'bn'): string {
+export function formatLiveExamInstant(millis: number, lang: Lang = 'bn'): string {
   return new Intl.DateTimeFormat(lang === 'bn' ? 'bn-BD' : 'en-GB', {
     timeZone: 'Asia/Dhaka',
     day: 'numeric',

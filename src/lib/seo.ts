@@ -48,13 +48,16 @@ import { NU_GROUPS } from './nuProfile';
 import { OPPORTUNITY_SEED } from './opportunitySeed';
 import { isPublished } from './opportunities';
 import { PUBLIC_GUIDE_META } from './publicGuideMeta';
-import { SITE_URL, canonicalUrl, hreflangUrls, stripLangPrefix } from './langRouting';
+import { SITE_URL, SUPPORTED_LANGS, canonicalUrl, hreflangUrls, stripLangPrefix, type SupportedLang } from './langRouting';
 import {
   PUBLIC_ACADEMIC_QUESTIONS,
   publicAcademicChaptersFor,
 } from './publicAcademic';
 import { QPG_GENERAL_CLASSES, qpgSubjectsFor } from './questionPaper';
 import { toolBySlug } from './toolsMeta';
+import { routeSeoForLang, toolMetaForLang, TOOL_DESC_SUFFIX, TOOLS_CRUMB } from './toolsMetaI18n';
+import { isPhasedLang } from '../i18n/phasedStrings';
+import { bnEn } from '../i18n/strings';
 import { toolWebApplicationJsonLd } from './toolSeo';
 
 export { SITE_URL };
@@ -142,7 +145,7 @@ export const WEBSITE_JSON_LD = {
   alternateName: 'এডুভেল্টো',
   url: SITE_URL,
   description: 'A Smarter World of Learning — a free digital education platform from Bangladesh.',
-  inLanguage: ['bn', 'en'],
+  inLanguage: ['bn', 'en', 'hi', 'ar', 'es', 'pt', 'fr', 'id'],
   publisher: { '@id': 'https://eduvelto.com#organization' },
 };
 
@@ -217,6 +220,18 @@ function removeMetaByName(name: string): void {
   document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`)?.remove();
 }
 
+function setMetaByPropertyAll(property: string, contents: string[]): void {
+  document
+    .querySelectorAll<HTMLMetaElement>(`meta[property="${property}"]`)
+    .forEach((el) => el.remove());
+  for (const content of contents) {
+    const el = document.createElement('meta');
+    el.setAttribute('property', property);
+    el.setAttribute('content', content);
+    document.head.appendChild(el);
+  }
+}
+
 function setMetaByProperty(property: string, content: string): void {
   let el = document.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
   if (!el) {
@@ -251,16 +266,30 @@ function setLink(rel: string, hreflang: string, href: string): void {
 }
 
 /** OG locale pair for a page language (SEO review IMP-34, 24 Nov 2026):
- * a share must carry the page's own locale, with the other language
- * as the alternate — the static shell (bn_BD) was wrong on EN pages.
- * Pure + exported for tests. */
-export function ogLocaleForLang(lang: 'bn' | 'en'): { locale: string; alternate: string } {
-  return lang === 'bn'
-    ? { locale: 'bn_BD', alternate: 'en_US' }
-    : { locale: 'en_US', alternate: 'bn_BD' };
+ * a share must carry the page's own locale, with the other languages
+ * as alternates — the static shell (bn_BD) was wrong on EN pages.
+ * Phased 8-language rollout (28 Nov 2026): ar_EG, hi_IN, es_ES,
+ * pt_BR, fr_FR, id_ID join bn_BD/en_US. Pure + exported for tests. */
+export const OG_LOCALE_FOR_LANG: Record<SupportedLang, string> = {
+  bn: 'bn_BD',
+  en: 'en_US',
+  hi: 'hi_IN',
+  ar: 'ar_EG',
+  es: 'es_ES',
+  pt: 'pt_BR',
+  fr: 'fr_FR',
+  id: 'id_ID',
+};
+
+export function ogLocaleForLang(lang: SupportedLang): { locale: string; alternates: string[] } {
+  const locale = OG_LOCALE_FOR_LANG[lang] ?? 'en_US';
+  return {
+    locale,
+    alternates: SUPPORTED_LANGS.filter((l) => l !== lang).map((l) => OG_LOCALE_FOR_LANG[l]),
+  };
 }
 
-export function useSeo(seo: SeoData, lang: 'bn' | 'en' = 'bn'): void {
+export function useSeo(seo: SeoData, lang: SupportedLang = 'bn'): void {
   useEffect(() => {
     document.title = seo.title;
     setMetaByName('description', seo.description);
@@ -270,10 +299,11 @@ export function useSeo(seo: SeoData, lang: 'bn' | 'en' = 'bn'): void {
     setMetaByProperty('og:url', seo.canonical);
     // OG locale follows the page language (IMP-34): setMetaByProperty
     // updates the static shell tags in place (bn_BD + en_US alternate
-    // for the default bn home shell; swapped on EN pages).
+    // for the default bn home shell; swapped on EN pages). The other
+    // seven languages are emitted as further og:locale:alternate tags.
     const ogLocale = ogLocaleForLang(lang);
     setMetaByProperty('og:locale', ogLocale.locale);
-    setMetaByProperty('og:locale:alternate', ogLocale.alternate);
+    setMetaByPropertyAll('og:locale:alternate', ogLocale.alternates);
     if (seo.ogImage) {
       setMetaByProperty('og:image', seo.ogImage);
       setMetaByProperty('og:image:width', String(OG_IMAGE_WIDTH));
@@ -291,12 +321,12 @@ export function useSeo(seo: SeoData, lang: 'bn' | 'en' = 'bn'): void {
     if (seo.robots) setMetaByName('robots', seo.robots);
     else removeMetaByName('robots');
     setCanonical(seo.canonical);
-    // hreflang (Phase 1, 25 Nov 2026, SSG + bilingual): reciprocal
-    // /bn + /en URLs, x-default -> the Bangla URL. The canonical
-    // itself is already lang-prefixed (see resolveRouteSeo).
+    // hreflang (Phase 1, 25 Nov 2026, SSG + bilingual; widened to 8
+    // languages 28 Nov 2026): reciprocal URLs for all 8 languages,
+    // x-default -> the Bangla URL. The canonical itself is already
+    // lang-prefixed (see resolveRouteSeo).
     const hreflang = hreflangUrls(seo.canonical, lang);
-    setLink('alternate', 'bn', hreflang.bn);
-    setLink('alternate', 'en', hreflang.en);
+    for (const l of SUPPORTED_LANGS) setLink('alternate', l, hreflang[l]);
     setLink('alternate', 'x-default', hreflang.xDefault);
 
     const scripts: HTMLScriptElement[] = [];
@@ -872,6 +902,16 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     descriptionEn:
       '141 free tools — PDF, images, calculators, health, study and job preparation. Everything runs in your browser; files are never uploaded. Eduvelto.',
     crumbEn: 'Tools',
+  },
+  '/free-quiz': {
+    title: 'ফ্রি কুইজ — ১০টি প্রশ্ন, যাচাইকৃত প্রশ্নভাণ্ডার | Eduvelto',
+    description:
+      'Eduvelto-র ফ্রি কুইজ — ১০টি প্রশ্ন, ৫ মিনিট, যাচাইকৃত প্রশ্নভাণ্ডার থেকে। সম্পূর্ণ বিনামূল্যে।',
+    crumb: 'ফ্রি কুইজ',
+    titleEn: 'Free Quiz — 10 Questions from Verified Questions | Eduvelto',
+    descriptionEn:
+      'Eduvelto free quiz — 10 questions, 5 minutes, from the verified question bank. Completely free.',
+    crumbEn: 'Free Quiz',
   },
   '/life/budget': {
     title: 'বাজেট প্ল্যানার — আয়-ব্যয়ের হিসাব | Eduvelto',
@@ -2231,7 +2271,7 @@ function nuSubjectEntry(groupSlug: string, subjectSlug: string): RouteSeoEntry |
 }
 
 /** Breadcrumb names for a static path, by walking its prefixes. */
-function crumbsForStatic(path: string, lang: 'bn' | 'en' = 'bn'): string[] {
+function crumbsForStatic(path: string, lang: SupportedLang = 'bn'): string[] {
   const segs = path.split('/').filter(Boolean);
   const out: string[] = [];
   let acc = '';
@@ -2243,9 +2283,12 @@ function crumbsForStatic(path: string, lang: 'bn' | 'en' = 'bn'): string[] {
   return out;
 }
 
-function breadcrumbFor(path: string, crumbs: string[], lang: 'bn' | 'en' = 'bn'): unknown {
+function breadcrumbFor(path: string, crumbs: string[], lang: SupportedLang = 'bn'): unknown {
+  // Phased 8-language rollout (28 Nov 2026): the "Home" root crumb
+  // uses the translated home crumb when one exists.
+  const homeName = routeSeoForLang('/', lang)?.crumb ?? (lang === 'bn' ? 'হোম' : 'Home');
   const items: unknown[] = [
-    { '@type': 'ListItem', position: 1, name: lang === 'bn' ? 'হোম' : 'Home', item: `${SITE_URL}/${lang}/` },
+    { '@type': 'ListItem', position: 1, name: homeName, item: `${SITE_URL}/${lang}/` },
   ];
   const parts = path.split('/').filter(Boolean);
   let acc = '';
@@ -2276,7 +2319,7 @@ const OPPORTUNITY_SEO_TITLES: Record<string, { bn: string; en: string }> = {
  * not content pages). /founder resolves here since Phase 2
  * (25 Nov 2026) — its SEO moved from FounderPage's useSeo.
  */
-export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): SeoData | null {
+export function resolveRouteSeo(pathname: string, lang: SupportedLang = 'bn'): SeoData | null {
   // Phase 1 (25 Nov 2026): public routes live under /:lang. A lang
   // prefix in the URL is the source of truth for the page language;
   // a bare legacy path keeps the passed lang (back-compat for the
@@ -2330,7 +2373,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
       entry = jobExamEntry(jobMatch[1], tab);
       if (!entry) return null;
       crumbs = lang === 'bn' ? ['চাকরি প্রস্তুতি', entry.crumb] : ['Job Preparation', entry.crumbEn];
-      const tabName = tab ? JOB_TABS.find((t) => t.slug === tab)?.[lang] : undefined;
+      const tabName = tab ? JOB_TABS.find((t) => t.slug === tab)?.[bnEn(lang)] : undefined;
       if (tabName) crumbs.push(tabName);
     }
   }
@@ -2454,6 +2497,9 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         // same short free-tool suffix (mirrors the /opportunities
         // verification suffix above). Longest meta description is
         // 99 chars, so the suffixed total stays <=128 (bn) / <=123 (en).
+        // Phased 8-language rollout (28 Nov 2026): the top-20 tools
+        // resolve their title/description/crumb through the overlay
+        // (toolsMetaI18n.ts); other tools fall back to English.
         entry = {
           title: `${tool.titleBn} | Eduvelto`,
           description: `${tool.descriptionBn} — বিনামূল্যের টুল। Eduvelto।`,
@@ -2462,7 +2508,22 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
           descriptionEn: `${tool.descriptionEn} — a free Eduvelto tool.`,
           crumbEn: tool.crumbEn,
         };
-        crumbs = lang === 'bn' ? ['টুলস', tool.crumbBn] : ['Tools', tool.crumbEn];
+        if (isPhasedLang(lang)) {
+          const tm = toolMetaForLang(tool, lang);
+          const displayTitle = `${tm.title} | Eduvelto`;
+          const displayDesc = `${tm.description}${TOOL_DESC_SUFFIX[lang]}`;
+          entry = {
+            title: displayTitle,
+            description: displayDesc,
+            crumb: tm.crumb,
+            titleEn: displayTitle,
+            descriptionEn: displayDesc,
+            crumbEn: tm.crumb,
+          };
+          crumbs = [TOOLS_CRUMB[lang], tm.crumb];
+        } else {
+          crumbs = lang === 'bn' ? ['টুলস', tool.crumbBn] : ['Tools', tool.crumbEn];
+        }
       } else {
         return null;
       }
@@ -2498,6 +2559,23 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   if (!entry) return null;
   if (crumbs.length === 0)
     crumbs = (lang === 'bn' ? STATIC_CRUMBS[path] : STATIC_CRUMBS_EN[path]) ?? crumbsForStatic(path, lang);
+
+  // Phased 8-language rollout (28 Nov 2026): the 6 phased core pages
+  // carry translated titles/descriptions/crumbs (toolsMetaI18n.ts).
+  // The overlay also replaces the page's own (last) breadcrumb.
+  const phasedRoute = routeSeoForLang(path, lang);
+  if (phasedRoute) {
+    entry = {
+      ...entry,
+      title: phasedRoute.title,
+      description: phasedRoute.description,
+      crumb: phasedRoute.crumb,
+      titleEn: phasedRoute.title,
+      descriptionEn: phasedRoute.description,
+      crumbEn: phasedRoute.crumb,
+    };
+    if (crumbs.length > 0) crumbs = [...crumbs.slice(0, -1), phasedRoute.crumb];
+  }
 
   const canonical = entry.bareCanonical
     ? `${SITE_URL}${path}`
@@ -2554,6 +2632,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
           canonical,
           lang,
           lang === 'bn' ? entry.description : entry.descriptionEn,
+          toolMetaForLang(tool, lang).title,
         ),
       );
     }
@@ -3149,13 +3228,16 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
  * the junk URL. RouteSeo applies it whenever resolveRouteSeo returns
  * null. It never changes what the user sees.
  */
-export function resolveFallbackSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): SeoData | null {
+export function resolveFallbackSeo(pathname: string, lang: SupportedLang = 'bn'): SeoData | null {
   const stripped = stripLangPrefix(pathname.replace(/\/+$/, '') || '/');
   if (stripped.lang) lang = stripped.lang;
   const home = STATIC_ROUTES['/'];
+  // Phased 8-language rollout (28 Nov 2026): the fallback is the HOME
+  // title/description — in the page's own language when translated.
+  const homeOverlay = routeSeoForLang('/', lang);
   return {
-    title: lang === 'bn' ? home.title : home.titleEn,
-    description: lang === 'bn' ? home.description : home.descriptionEn,
+    title: homeOverlay?.title ?? (lang === 'bn' ? home.title : home.titleEn),
+    description: homeOverlay?.description ?? (lang === 'bn' ? home.description : home.descriptionEn),
     canonical: `${SITE_URL}/${lang}/`,
     ogType: 'website',
     ogImage: OG_IMAGE_URL,
@@ -3193,7 +3275,7 @@ export type BookSeoDoc = {
 
 export function bookSeoData(
   book: BookSeoDoc,
-  lang: 'bn' | 'en' = 'bn',
+  lang: SupportedLang = 'bn',
 ): { title: string; description: string; canonical: string; path: string; jsonLd: unknown[] } {
   const path = `/books/${book.id}`;
   const title = `${book.title} | Eduvelto`;
@@ -3250,7 +3332,7 @@ export function bookSeoData(
 // The book's own title is never translated.
 // ---------------------------------------------------------------------------
 
-export function buildBookSummary(book: BookSeoDoc, lang: 'bn' | 'en' = 'bn'): string {
+export function buildBookSummary(book: BookSeoDoc, lang: SupportedLang = 'bn'): string {
   const facts: string[] = [];
   if (book.subject) facts.push(book.subject);
   if (book.classLevel) facts.push(book.classLevel);

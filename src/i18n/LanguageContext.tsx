@@ -7,10 +7,14 @@
 // navigation tab labels. Bangla is the default.
 //
 // How this is enforced — a single choke point, do not work around it:
-// - `lang` is the selected language ('bn' | 'en'). Every existing
-//   consumer (`t()`, `<T>`, and all direct `lang === 'bn' ? … : …`
+// - `lang` is the selected language (one of the 8 live codes:
+//   'bn' | 'en' | 'hi' | 'ar' | 'es' | 'pt' | 'fr' | 'id'). Every
+//   existing consumer (`t()`, `<T>`, and all direct `lang === 'bn' ? … : …`
 //   ternaries, date locales, number formats) therefore renders in the
-//   selected language with no edits at those sites.
+//   selected language with no edits at those sites — non-Bangla
+//   ternaries fall back to their English branch, and `t()` consults
+//   the phased dictionary (./phasedStrings) first for the six new
+//   languages, falling back to English, then Bangla.
 // - `tabLang` is kept as an alias of `lang` (the header toggle and the
 //   greeting bar read it; they now switch the whole site).
 // - Persistence, in priority order: the /:lang URL segment (the ONLY
@@ -20,11 +24,16 @@
 //   `users.language` (adopted at login — survives logout/login and
 //   follows the user cross-device; firestore.rules already allow a
 //   user to update their own `language` field, so NO rules change was
-//   needed) → this browser's localStorage (`eduvelto-language`, the
-//   logged-out-visitor fallback) → `'bn'`.
-// - `t()` / `<T>` fall back to the Bangla string when an English string
-//   is missing or empty — never render blank.
-// - `document.documentElement.lang` follows `lang` (screen readers, SEO).
+//   needed — BUT the rules allow only 'bn' | 'en', so the profile
+//   save is skipped for the six new languages and the device choice
+//   (localStorage + `eduvelto-lang` cookie) carries those) → this
+//   browser's localStorage (`eduvelto-language`, the logged-out-visitor
+//   fallback) + the `eduvelto-lang` cookie (same value, also read by
+//   the server-side first-visit geo redirect so it never loops) → `'bn'`.
+// - `t()` / `<T>` fall back to the English string when a phased
+//   translation is missing, then to Bangla — never render blank.
+// - `document.documentElement.lang` follows `lang` (screen readers, SEO)
+//   and `document.documentElement.dir` is 'rtl' for Arabic, 'ltr' otherwise.
 // - Book / lesson / exam CONTENT keeps its own language per subject
 //   (English-department packs stay English-with-Bangla-explanation);
 //   book original names, author names and user-written content are
@@ -37,12 +46,11 @@ import type { Lang } from './strings';
 import { useAuth } from '../lib/auth';
 // Spec-09 language architecture (landed 27 Nov 2026): the registry in
 // ./languages is the single source of truth for which language codes
-// exist. Only the LIVE_LANGS (bn/en — the ones with content) are
-// accepted here; the other 8 registry codes resolve but are NOT live,
-// so they fall back to 'bn' until their content phases land. Lang
-// stays 'bn' | 'en' and langRouting is untouched — widening routing
-// without content would break the site.
+// exist. Phased 8-language rollout (28 Nov 2026, owner order): the
+// LIVE_LANGS are bn, en, hi, ar, es, pt, fr, id — de/ja stay NOT live.
 import { LIVE_LANGS, resolveLang } from './languages';
+import { isRtl } from './languages';
+import { phasedString } from './phasedStrings';
 import {
   isSupportedLang,
   langSwitchTarget,
@@ -52,9 +60,32 @@ import {
 } from '../lib/langRouting';
 
 const STORAGE_KEY = 'eduvelto-language';
+/** First-visit geo redirect (functions/[[path]].js) + setLanguage()
+ *  write this cookie so the server-side redirect never loops and the
+ *  root redirect can honour the choice before localStorage exists. */
+export const LANG_COOKIE = 'eduvelto-lang';
+
+export function writeLangCookie(lang: Lang): void {
+  try {
+    document.cookie = `${LANG_COOKIE}=${lang}; Path=/; Max-Age=31536000; SameSite=Lax`;
+  } catch {
+    // ignore — localStorage still carries the choice.
+  }
+}
+
+function readLangCookie(): Lang | null {
+  try {
+    const m = document.cookie.match(/(?:^|; )eduvelto-lang=([^;]+)/);
+    if (!m) return null;
+    const resolved = resolveLang(decodeURIComponent(m[1]));
+    return (LIVE_LANGS as readonly string[]).includes(resolved) ? (resolved as Lang) : null;
+  } catch {
+    return null;
+  }
+}
 
 export function getStoredLanguage(): Lang | null {
-  return readStored();
+  return readStored() ?? readLangCookie();
 }
 
 function readStored(): Lang | null {
@@ -62,7 +93,7 @@ function readStored(): Lang | null {
     const v = window.localStorage.getItem(STORAGE_KEY);
     if (!v) return null;
     // Via the registry: unknown codes resolve to 'bn'; non-live codes
-    // (es/ar/hi/…) are not accepted yet and fall through to 'bn'.
+    // (de/ja) are not accepted yet and fall through to 'bn'.
     const resolved = resolveLang(v);
     return (LIVE_LANGS as readonly string[]).includes(resolved) ? (resolved as Lang) : null;
   } catch {
@@ -143,7 +174,7 @@ export type LanguageState = {
   tabLang: Lang;
   setLanguage: (next: Lang) => void;
   /** Adopt the language from a /:lang URL navigation (LangLayout).
-   *  Sets state + localStorage only — it never rewrites the URL and
+   *  Sets state + localStorage + cookie — it never rewrites the URL and
    *  never saves the profile (the URL is already the choice). */
   syncLanguageFromPath: (next: Lang) => void;
   /** Pick the string in the selected language (Bangla fallback). */
@@ -180,6 +211,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       } catch {
         // ignore
       }
+      writeLangCookie(fromUrl);
       // Old shared link: adopt the language, then strip the param
       // (legacy paths are left for LegacyRedirect to consume).
       stripLegacyLangParamAtStartup();
@@ -210,6 +242,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
           } catch {
             // ignore
           }
+          writeLangCookie(profile.language);
           return profile.language;
         }
         return current;
@@ -217,9 +250,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, [user?.uid, profile?.language]);
 
-  // Screen readers and search engines see the active language.
+  // Screen readers and search engines see the active language; Arabic
+  // pages render right-to-left (28 Nov 2026, phased rollout).
   useEffect(() => {
     document.documentElement.lang = lang;
+    document.documentElement.dir = isRtl(lang) ? 'rtl' : 'ltr';
   }, [lang]);
 
   const syncLanguageFromPath = useCallback((next: Lang) => {
@@ -231,6 +266,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       } catch {
         // ignore
       }
+      writeLangCookie(next);
       return next;
     });
   }, []);
@@ -243,10 +279,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       } catch {
         // Private mode / storage blocked: the in-memory choice still applies.
       }
+      // Cookie twin of the localStorage choice — the server-side
+      // first-visit geo redirect reads it so it never redirects twice.
+      writeLangCookie(next);
       // ?lang= fix (26 Nov 2026): navigate the /:lang path, never
       // write ?lang= to the URL.
       navigateToLang(next);
-      if (user) {
+      // Profile save is bn/en ONLY (28 Nov 2026): firestore.rules
+      // allow language in ['bn', 'en'] — saving hi/ar/… would be
+      // rejected server-side. The device choice (localStorage +
+      // cookie) carries the six new languages instead.
+      if (user && (next === 'bn' || next === 'en')) {
         // Fire-and-forget: the UI already switched; the profile save only
         // makes the choice follow the user to other devices.
         void saveProfile({ language: next }).catch(() => {});
@@ -255,10 +298,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     [user, saveProfile],
   );
 
-  // Selected language, falling back to Bangla when an English string is
-  // missing or empty — never render blank.
+  // Selected language, falling back through the phased dictionary to
+  // English, then Bangla, when a string is missing — never blank.
   const t = useCallback(
-    (entry: LangEntry) => (lang === 'bn' ? entry.bn : entry.en || entry.bn),
+    (entry: LangEntry) => phasedString(lang, entry.en, entry.bn),
     [lang],
   );
 
@@ -277,16 +320,17 @@ export function useLanguage(): LanguageState {
 }
 
 /**
- * Render text in the selected language (Bangla fallback when the English
- * string is missing). `<TabT>` is a back-compat alias with the same output.
+ * Render text in the selected language (phased dictionary → English →
+ * Bangla fallback when a string is missing). `<TabT>` is a back-compat
+ * alias with the same output.
  */
 export function T({ bn, en }: LangEntry) {
   const { lang } = useLanguage();
-  return <>{lang === 'bn' ? bn : en || bn}</>;
+  return <>{phasedString(lang, en, bn)}</>;
 }
 
 /** Render a navigation TAB label in the selected language (alias of `<T>`). */
 export function TabT({ bn, en }: LangEntry) {
   const { tabLang } = useLanguage();
-  return <>{tabLang === 'bn' ? bn : en || bn}</>;
+  return <>{phasedString(tabLang, en, bn)}</>;
 }

@@ -1,8 +1,27 @@
 // Eduvelto UI strings — Bangla first (bn), English second (en).
 // All UI copy lives here, never hard-coded in components, so the bn/en
 // toggle is one lookup. Content (lessons, quizzes) is data, not strings.
+//
+// Phased 8-language rollout (owner order 28 Nov 2026): Lang is the 8
+// live codes (bn, en, hi, ar, es, pt, fr, id). de/ja stay NOT live.
+// Per-language strings for the phased pages live in
+// ./phasedStrings.ts, keyed by the English string — t() consults that
+// table first for the six new languages and falls back to English,
+// then Bangla, so nothing ever renders blank.
 
-export type Lang = 'bn' | 'en';
+import { phasedString } from './phasedStrings';
+import type { LiveLang } from './languages';
+
+export type Lang = LiveLang;
+
+/**
+ * Narrow an 8-language Lang to the bn/en pair older helpers take.
+ * Non-Bangla languages fall back to English (never Bangla, never a
+ * guessed translation) — phased rollout, 28 Nov 2026.
+ */
+export function bnEn(lang: Lang): 'bn' | 'en' {
+  return lang === 'bn' ? 'bn' : 'en';
+}
 
 export const strings = {
   appName: { bn: 'Eduvelto', en: 'Eduvelto' },
@@ -331,5 +350,5 @@ export const strings = {
 } as const;
 
 export function t(lang: Lang, entry: { bn: string; en: string }): string {
-  return entry[lang];
+  return phasedString(lang, entry.en, entry.bn);
 }

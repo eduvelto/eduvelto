@@ -7,6 +7,7 @@
  * Pure functions only: no storage, no DOM.
  */
 
+import type { Lang } from '../../i18n/strings';
 export interface TimeZoneOption {
   /** IANA time-zone identifier. */
   zone: string;
@@ -47,7 +48,7 @@ export function isKnownZone(zone: string): boolean {
  * `locale` is 'bn' for Bangla digits/months or 'en'. Falls back to
  * UTC formatting if the zone is unknown to this browser.
  */
-export function formatInZone(date: Date, zone: string, locale: 'bn' | 'en' = 'en'): string {
+export function formatInZone(date: Date, zone: string, locale: Lang = 'en'): string {
   try {
     return new Intl.DateTimeFormat(locale === 'bn' ? 'bn-BD' : 'en-GB', {
       timeZone: zone,

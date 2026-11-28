@@ -17,6 +17,7 @@
 // (ui/premium-polish: stat strip, group cards, result cards, skeletons, retry.)
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import type { Lang } from '../i18n/strings';
 import { Link, useLocation } from 'react-router-dom';
 import { loginState } from '../lib/loginReturn';
 import { PageShell, EmptyState } from '../components/PageShell';
@@ -71,7 +72,7 @@ function groupByBook(quizzes: Quiz[]): BookGroup[] {
   return groups;
 }
 
-function formatDate(a: QuizAttempt, lang: 'bn' | 'en'): string {
+function formatDate(a: QuizAttempt, lang: Lang): string {
   const c = a.createdAt;
   let d: Date | null = null;
   if (c instanceof Date) d = c;

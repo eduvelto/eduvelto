@@ -7,6 +7,7 @@
 // only a legacy prose guide keep rendering that prose paragraph.
 import type { CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { bnEn } from '../../i18n/strings';
 import type { ToolGuideSections } from '../../lib/toolsGuides';
 
 const sectionTitleStyle: CSSProperties = {
@@ -26,11 +27,12 @@ const faqQuestionStyle: CSSProperties = {
 
 export default function ToolGuide({ guide }: { guide: ToolGuideSections }) {
   const { lang } = useLanguage();
-  const content = guide[lang];
-  const howToLabel = lang === 'en' ? 'How to use it' : 'কীভাবে ব্যবহার করবেন';
-  const formulaLabel = lang === 'en' ? 'Formula' : 'সূত্র';
-  const exampleLabel = lang === 'en' ? 'Worked example' : 'উদাহরণ';
-  const faqLabel = lang === 'en' ? 'Frequently asked questions' : 'সচরাচর প্রশ্ন';
+  // Guides stay bn/en in this phase — new languages read the English guide.
+  const content = guide[bnEn(lang)];
+  const howToLabel = lang === 'bn' ? 'কীভাবে ব্যবহার করবেন' : 'How to use it';
+  const formulaLabel = lang === 'bn' ? 'সূত্র' : 'Formula';
+  const exampleLabel = lang === 'bn' ? 'উদাহরণ' : 'Worked example';
+  const faqLabel = lang === 'bn' ? 'সচরাচর প্রশ্ন' : 'Frequently asked questions';
 
   return (
     <section aria-label={content.title}>

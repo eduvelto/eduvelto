@@ -9,10 +9,12 @@
 
 import { describe, expect, it } from 'vitest';
 import {
+  SUPPORTED_LANGS,
   alternateLangUrl,
   canonicalUrl,
   getGuideSlugs,
   hreflangUrls,
+  isSupportedLang,
   langSwitchTarget,
   legacyRedirectTarget,
   parseLangSegment,
@@ -21,6 +23,28 @@ import {
   withLangPrefix,
   withoutLangParam,
 } from '../langRouting';
+
+describe('SUPPORTED_LANGS — phased 8-language rollout (28 Nov 2026)', () => {
+  it('is exactly the 8 live codes, in order', () => {
+    expect([...SUPPORTED_LANGS]).toEqual(['bn', 'en', 'hi', 'ar', 'es', 'pt', 'fr', 'id']);
+  });
+
+  it('accepts the 6 new languages as path segments, not de/ja/ko', () => {
+    for (const code of ['hi', 'ar', 'es', 'pt', 'fr', 'id']) {
+      expect(isSupportedLang(code)).toBe(true);
+      expect(parseLangSegment(`/${code}/tools`)).toBe(code);
+    }
+    for (const code of ['de', 'ja', 'ko', 'xx']) {
+      expect(isSupportedLang(code)).toBe(false);
+      expect(parseLangSegment(`/${code}/tools`)).toBeNull();
+    }
+  });
+
+  it('switches a page to a new language under the same path', () => {
+    expect(langSwitchTarget('/bn/tools/pdf-merger', 'hi')).toBe('/hi/tools/pdf-merger');
+    expect(langSwitchTarget('/en/about', 'ar')).toBe('/ar/about');
+  });
+});
 
 describe('stripLangPrefix / parseLangSegment', () => {
   it('splits /:lang from the bare path', () => {
@@ -51,10 +75,16 @@ describe('withLangPrefix / canonicalUrl / hreflangUrls', () => {
     expect(canonicalUrl('/', 'en')).toBe('https://eduvelto.com/en');
   });
 
-  it('emits reciprocal hreflang with x-default -> bn', () => {
+  it('emits reciprocal hreflang for all 8 languages with x-default -> bn', () => {
     const h = hreflangUrls('/jobs/bcs', 'en');
     expect(h.bn).toBe('https://eduvelto.com/bn/jobs/bcs');
     expect(h.en).toBe('https://eduvelto.com/en/jobs/bcs');
+    expect(h.hi).toBe('https://eduvelto.com/hi/jobs/bcs');
+    expect(h.ar).toBe('https://eduvelto.com/ar/jobs/bcs');
+    expect(h.es).toBe('https://eduvelto.com/es/jobs/bcs');
+    expect(h.pt).toBe('https://eduvelto.com/pt/jobs/bcs');
+    expect(h.fr).toBe('https://eduvelto.com/fr/jobs/bcs');
+    expect(h.id).toBe('https://eduvelto.com/id/jobs/bcs');
     expect(h.xDefault).toBe('https://eduvelto.com/bn/jobs/bcs');
   });
 
@@ -67,12 +97,32 @@ describe('withLangPrefix / canonicalUrl / hreflangUrls', () => {
 });
 
 describe('resolveRootLang', () => {
-  it('follows ?lang > localStorage > profile > bn', () => {
+  it('follows ?lang > localStorage > profile > browser > bn', () => {
     expect(resolveRootLang({ queryLang: 'en', storedLang: 'bn', profileLang: 'bn' })).toBe('en');
     expect(resolveRootLang({ queryLang: null, storedLang: 'en', profileLang: 'bn' })).toBe('en');
     expect(resolveRootLang({ queryLang: null, storedLang: null, profileLang: 'en' })).toBe('en');
     expect(resolveRootLang({})).toBe('bn');
-    expect(resolveRootLang({ queryLang: 'fr', storedLang: 'xx', profileLang: null })).toBe('bn');
+    // 'de' is registered but NOT live (28 Nov 2026 phased rollout) —
+    // it falls through, like an unknown code.
+    expect(resolveRootLang({ queryLang: 'de', storedLang: 'xx', profileLang: null })).toBe('bn');
+  });
+
+  it('uses the browser language only when nothing else is set', () => {
+    expect(resolveRootLang({ browserLang: 'hi-IN' })).toBe('hi');
+    expect(resolveRootLang({ browserLang: 'es-MX' })).toBe('es');
+    expect(resolveRootLang({ browserLang: 'pt-BR' })).toBe('pt');
+    expect(resolveRootLang({ browserLang: 'ar-EG' })).toBe('ar');
+    expect(resolveRootLang({ browserLang: 'fr-FR' })).toBe('fr');
+    expect(resolveRootLang({ browserLang: 'id-ID' })).toBe('id');
+    expect(resolveRootLang({ browserLang: 'en-US' })).toBe('en');
+    expect(resolveRootLang({ browserLang: 'bn-BD' })).toBe('bn');
+    // A stored choice beats the browser language.
+    expect(resolveRootLang({ storedLang: 'bn', browserLang: 'es-ES' })).toBe('bn');
+    // Unsupported browser languages (de, ja, ko) fall through to bn.
+    expect(resolveRootLang({ browserLang: 'de-DE' })).toBe('bn');
+    expect(resolveRootLang({ browserLang: 'ja-JP' })).toBe('bn');
+    expect(resolveRootLang({ browserLang: 'ko-KR' })).toBe('bn');
+    expect(resolveRootLang({ browserLang: null })).toBe('bn');
   });
 });
 

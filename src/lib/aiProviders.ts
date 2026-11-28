@@ -19,6 +19,7 @@
 // any other personal data. The chat UI warns users not to paste
 // personal or sensitive information.
 
+import type { Lang } from '../i18n/strings';
 export type ProviderId = 'gemini' | 'groq' | 'openrouter' | 'openai' | 'anthropic';
 
 export interface ProviderDescriptor {
@@ -129,7 +130,7 @@ export type AskResult =
   | { kind: 'error'; messageBn: string; messageEn: string };
 
 export interface AskOptions {
-  lang?: 'bn' | 'en';
+  lang?: Lang;
   /** Test seam: unit tests pass a proxy URL here. Production never
    *  sets it — the URL comes from the build environment only. */
   proxyUrl?: string;

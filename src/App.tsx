@@ -27,7 +27,7 @@ import { AppLoadingScreen } from './components/AppLoadingScreen';
 import { RouteSeo } from './components/RouteSeo';
 import { NuQuestionWorkbenchGuard } from './components/NuQuestionWorkbenchGuard';
 import { T, getStoredLanguage, useLanguage } from './i18n/LanguageContext';
-import { legacyRedirectTarget, resolveRootLang } from './lib/langRouting';
+import { isSupportedLang, legacyRedirectTarget, resolveRootLang } from './lib/langRouting';
 import { setupNativeBackButton } from './lib/nativeBackButton';
 import { setupPushNotifications } from './lib/pushNotifications';
 // SCALE (10k users): route-level code splitting. Before this change the
@@ -279,12 +279,15 @@ function DashboardRedirect() {
 }
 
 
-// BILINGUAL ROUTING (Phase 1, 25 Nov 2026, SSG + bilingual):
-// public content lives under /:lang (bn | en). Root '/' redirects
-// (?lang > localStorage > user profile, default bn); legacy public
-// URLs redirect to /bn/... — in-app via LegacyRedirect below, and
-// for direct loads via the firebase.json 301s (which evaluate
-// BEFORE rewrites). /app, /admin, /ceo, /login, /register,
+// BILINGUAL ROUTING (Phase 1, 25 Nov 2026, SSG + bilingual; widened
+// to 8 languages 28 Nov 2026, owner order: bn, en, hi, ar, es, pt,
+// fr, id):
+// public content lives under /:lang (bn | en | hi | ar | es | pt | fr
+// | id). Root '/' redirects
+// (?lang > localStorage > user profile > browser language, default bn);
+// legacy public URLs redirect to /bn/... — in-app via LegacyRedirect
+// below, and for direct loads via the firebase.json 301s (which
+// evaluate BEFORE rewrites). /app, /admin, /ceo, /login, /register,
 // /profile, /dashboard, /student, /teacher, /guardian, /directory,
 // /subjects, /quiz, /exam, /routine, /progress and /social stay
 // OUTSIDE /:lang (client-only / login-gated) and never redirect.
@@ -298,6 +301,7 @@ function RootRedirect() {
     queryLang: params.get('lang'),
     storedLang: getStoredLanguage(),
     profileLang: profile?.language ?? null,
+    browserLang: typeof navigator !== 'undefined' ? navigator.language : null,
   });
   params.delete('lang');
   const suffix = params.toString() ? `?${params.toString()}` : '';
@@ -309,7 +313,7 @@ function LangLayout() {
   const location = useLocation();
   const { syncLanguageFromPath } = useLanguage();
   useEffect(() => {
-    if (lang === 'bn' || lang === 'en') syncLanguageFromPath(lang);
+    if (isSupportedLang(lang)) syncLanguageFromPath(lang);
   }, [lang, syncLanguageFromPath]);
   // ?lang= fix (26 Nov 2026): an old shared link to a prefixed URL
   // (e.g. /bn/jobs/bcs?lang=en) redirects to the clean path — the
@@ -318,13 +322,12 @@ function LangLayout() {
   if (params.has('lang')) {
     params.delete('lang');
     const suffix = params.toString() ? `?${params.toString()}` : '';
-    const target =
-      lang === 'bn' || lang === 'en'
-        ? `${location.pathname}${suffix}`
-        : (legacyRedirectTarget(location.pathname) ?? `/bn${location.pathname}`) + suffix;
+    const target = isSupportedLang(lang)
+      ? `${location.pathname}${suffix}`
+      : (legacyRedirectTarget(location.pathname) ?? `/bn${location.pathname}`) + suffix;
     return <Navigate to={target} replace />;
   }
-  if (lang !== 'bn' && lang !== 'en') {
+  if (!isSupportedLang(lang)) {
     // A non-language first segment reached the :lang route (a legacy
     // URL the static redirect routes did not outrank): send it
     // through the legacy mapping, else to /bn + the same path.
@@ -341,7 +344,7 @@ function LegacyRedirect() {
   // language — the param is consumed here, never passed through.
   const params = new URLSearchParams(location.search);
   const queryLang = params.get('lang');
-  const lang = queryLang === 'bn' || queryLang === 'en' ? queryLang : 'bn';
+  const lang = isSupportedLang(queryLang) ? queryLang : 'bn';
   params.delete('lang');
   const suffix = params.toString() ? `?${params.toString()}` : '';
   const target = legacyRedirectTarget(location.pathname, lang) ?? '/bn';

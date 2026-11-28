@@ -48,6 +48,58 @@ export async function onRequest(context) {
   if (TOOL_REDIRECTS[cleanPath]) {
     return Response.redirect(new URL(`${TOOL_REDIRECTS[cleanPath]}${url.search}`, url), 301);
   }
+  // FIRST-VISIT GEO-LANGUAGE REDIRECT (28 Nov 2026, phased 8-language
+  // rollout). ONLY when ALL of these hold:
+  //   - the path is exactly '/' (never a deeper path),
+  //   - NO `eduvelto-lang` cookie is present (a returning visitor, or
+  //     anyone who already picked a language, is never redirected —
+  //     this is what prevents loops),
+  //   - no explicit ?lang= is given (an explicit choice always wins),
+  //   - the user-agent is NOT a bot (bots must always see the same
+  //     URL — a redirect would split crawling and hide content),
+  //   - Cloudflare supplies a country (context.request.cf.country).
+  // The redirect is a 302 (temporary — it must never be cached as
+  // permanent) to /<lang>/, and it SETS the `eduvelto-lang` cookie on
+  // the redirect response, so the next visit goes straight to the
+  // language URL. Placed AFTER host unification + tool redirects and
+  // BEFORE asset/prerender logic.
+  //
+  // COUNTRY -> LANGUAGE MAP (ISO 3166-1 alpha-2, context.request.cf.country):
+  //   BD -> bn (Bangladesh — the default audience)
+  //   IN -> hi
+  //   SA, AE, EG, QA, KW, OM, JO, LB, IQ, YE, MA, DZ, TN, LY, SD -> ar
+  //   ES, MX, AR, CL, CO, PE, VE, UY, PY, BO, GT, CU, DO, HN, NI, SV,
+  //     CR, PA, EC -> es
+  //   BR, PT -> pt
+  //   FR, BE, LU, MC -> fr (NOT CA — Canada's French speakers are a
+  //     minority and CA -> en, the site's second language)
+  //   ID -> id
+  //   everything else -> en
+  const GEO_LANG_BY_COUNTRY = {
+    BD: 'bn',
+    IN: 'hi',
+    SA: 'ar', AE: 'ar', EG: 'ar', QA: 'ar', KW: 'ar', OM: 'ar', JO: 'ar',
+    LB: 'ar', IQ: 'ar', YE: 'ar', MA: 'ar', DZ: 'ar', TN: 'ar', LY: 'ar', SD: 'ar',
+    ES: 'es', MX: 'es', AR: 'es', CL: 'es', CO: 'es', PE: 'es', VE: 'es',
+    UY: 'es', PY: 'es', BO: 'es', GT: 'es', CU: 'es', DO: 'es', HN: 'es',
+    NI: 'es', SV: 'es', CR: 'es', PA: 'es', EC: 'es',
+    BR: 'pt', PT: 'pt',
+    FR: 'fr', BE: 'fr', LU: 'fr', MC: 'fr',
+    ID: 'id',
+  };
+  const BOT_RE = /bot|crawler|spider|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot/i;
+  if (cleanPath === '/') {
+    const cookies = context.request.headers.get('cookie') ?? '';
+    const hasLangCookie = /(?:^|;\s*)eduvelto-lang=/.test(cookies);
+    const ua = context.request.headers.get('user-agent') ?? '';
+    const country = context.request.cf?.country;
+    if (!hasLangCookie && !url.searchParams.has('lang') && country && !BOT_RE.test(ua)) {
+      const geoLang = GEO_LANG_BY_COUNTRY[country] ?? 'en';
+      const redirect = Response.redirect(new URL(`/${geoLang}/${url.search}`, url), 302);
+      redirect.headers.set('Set-Cookie', `eduvelto-lang=${geoLang}; Path=/; Max-Age=31536000; SameSite=Lax`);
+      return redirect;
+    }
+  }
   // Static asset (has a file extension) — let Pages serve it normally.
   if (/\.[a-zA-Z0-9]+$/.test(path)) {
     return context.next();

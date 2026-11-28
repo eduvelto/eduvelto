@@ -661,6 +661,10 @@
       },
       {
         "destination": "/index.html",
+        "source": "/free-quiz"
+      },
+      {
+        "destination": "/index.html",
         "source": "/search"
       }
     ]

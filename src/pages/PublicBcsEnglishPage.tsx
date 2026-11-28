@@ -16,6 +16,7 @@
 // doc IDs (bundles audit 22 Nov 2026, read-back 13/13).
 
 import { Link, useParams } from 'react-router-dom';
+import type { Lang } from '../i18n/strings';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, Card, Chip, LinkButton } from '../components/ui';
@@ -56,7 +57,7 @@ function isCategory(s: string | undefined): s is PublicBcsCategory {
   return s === 'grammar' || s === 'vocabulary' || s === 'reading';
 }
 
-function topicName(topic: PublicBcsTopic, lang: 'bn' | 'en'): string {
+function topicName(topic: PublicBcsTopic, lang: Lang): string {
   const t = PUBLIC_BCS_TOPICS.find((x) => x.topic === topic);
   return lang === 'bn' ? (t?.nameBn ?? topic) : (t?.nameEn ?? topic);
 }
@@ -68,7 +69,7 @@ function QuestionCard({
 }: {
   q: PublicBcsQuestion;
   num: number;
-  lang: 'bn' | 'en';
+  lang: Lang;
 }) {
   const correct = q.options.find((o) => o.letter === q.correctLetter);
   return (

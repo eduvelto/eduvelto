@@ -10,7 +10,10 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import {
+  PHASED_BARE_PATHS,
+  PHASED_LANGS,
   PRERENDER_STATIC_PATHS,
+  TOP_20_TOOL_SLUGS,
   buildBookHead,
   buildBookSummary,
   buildBookSummaryHtml,
@@ -28,6 +31,8 @@ import {
   getGuideSlugs,
   getToolPaths,
   insertInitialDataScript,
+  isPhasedPath,
+  langsForPath,
   normalizeBooksFixture,
   normalizeChaptersFixture,
   parseChapterRestDoc,
@@ -51,10 +56,11 @@ describe('PRERENDER_STATIC_PATHS', () => {
     const sitemapPaths = readSitemapPaths();
     // 27 Nov 2026: the committed sitemap is the PRERENDER-GENERATED
     // one (bn canonicals, 2,629 locs as of 28 Nov 2026, incl. the
-    // /free-quiz entry + the 10 global-batch tools), not the old hand-maintained
-    // 283-URL static list. Derive the expected set the same way
-    // scripts/prerender.mjs builds it: static paths + academic
-    // practice paths + tool paths, plus one page per book.
+    // /free-quiz entry + the 10 global-batch tools + the sibling's
+    // convert-pair tools), not the old hand-maintained 283-URL static
+    // list. Derive the expected set the same way scripts/prerender.mjs
+    // builds it: static paths + academic practice paths + tool paths,
+    // plus one page per book.
     // Tool paths are DERIVED from toolsMeta.ts (like the Academic
     // practice paths) — they are prerendered + sitemapped via
     // getToolPaths(), not hand-listed in PRERENDER_STATIC_PATHS.
@@ -313,6 +319,58 @@ describe('buildSitemapXml / buildRobotsTxt', () => {
     expect(robots).toContain('Disallow: /exam');
     expect(robots).toContain('Disallow: /progress');
     expect(robots).toContain('Disallow: /routine');
+  });
+});
+
+describe('phased 8-language prerender (28 Nov 2026)', () => {
+  it('PHASED_LANGS is exactly the 8 live codes', () => {
+    expect([...PHASED_LANGS]).toEqual(['bn', 'en', 'hi', 'ar', 'es', 'pt', 'fr', 'id']);
+  });
+
+  it('PHASED_BARE_PATHS is the 6 core pages + the top-20 tools (26 paths)', () => {
+    expect(PHASED_BARE_PATHS).toHaveLength(26);
+    for (const p of ['/', '/tools', '/free-quiz', '/about', '/support', '/contact']) {
+      expect(PHASED_BARE_PATHS).toContain(p);
+    }
+    expect(TOP_20_TOOL_SLUGS).toHaveLength(20);
+    for (const slug of TOP_20_TOOL_SLUGS) {
+      expect(PHASED_BARE_PATHS).toContain(`/tools/${slug}`);
+    }
+  });
+
+  it('langsForPath gives 8 languages to phased paths, bn/en to everything else', () => {
+    expect(langsForPath('/')).toEqual(PHASED_LANGS);
+    expect(langsForPath('/tools/pdf-merger')).toEqual(PHASED_LANGS);
+    expect(langsForPath('/free-quiz')).toEqual(PHASED_LANGS);
+    expect(isPhasedPath('/tools/pdf-merger')).toBe(true);
+    expect(isPhasedPath('/jobs/bcs')).toBe(false);
+    expect(isPhasedPath('/tools/word-counter')).toBe(true);
+    expect(isPhasedPath('/tools/sql-formatter')).toBe(false);
+    expect(langsForPath('/jobs/bcs')).toEqual(['bn', 'en']);
+    expect(langsForPath('/tools/sql-formatter')).toEqual(['bn', 'en']);
+  });
+
+  it('buildSitemapXml emits all 8 alternates for a phased URL, bn/en for the rest', () => {
+    const xml = buildSitemapXml([
+      {
+        loc: 'https://eduvelto.com/bn/free-quiz',
+        bn: 'https://eduvelto.com/bn/free-quiz',
+        en: 'https://eduvelto.com/en/free-quiz',
+        hi: 'https://eduvelto.com/hi/free-quiz',
+        ar: 'https://eduvelto.com/ar/free-quiz',
+        es: 'https://eduvelto.com/es/free-quiz',
+        pt: 'https://eduvelto.com/pt/free-quiz',
+        fr: 'https://eduvelto.com/fr/free-quiz',
+        id: 'https://eduvelto.com/id/free-quiz',
+      },
+      { loc: 'https://eduvelto.com/bn/jobs/bcs', bn: 'https://eduvelto.com/bn/jobs/bcs', en: 'https://eduvelto.com/en/jobs/bcs' },
+    ]);
+    for (const lang of ['bn', 'en', 'hi', 'ar', 'es', 'pt', 'fr', 'id']) {
+      expect(xml).toContain(`hreflang="${lang}" href="https://eduvelto.com/${lang}/free-quiz"`);
+    }
+    expect(xml).toContain('hreflang="x-default" href="https://eduvelto.com/bn/free-quiz"');
+    // The bn/en-only URL must NOT gain phased alternates.
+    expect(xml).not.toContain('https://eduvelto.com/hi/jobs/bcs');
   });
 });
 

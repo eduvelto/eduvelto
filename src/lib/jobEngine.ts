@@ -84,6 +84,7 @@
  */
 
 import { serverTimestamp } from 'firebase/firestore';
+import type { Lang } from '../i18n/strings';
 import { JOB_RULES_CONFIGS } from './jobExams';
 import {
   type JobQuestionBundle,
@@ -971,7 +972,7 @@ export function jobTopicLabelBn(topicId: string): string {
  * humanized English topic name in both languages (there is no
  * Bangla topic-name source — see the note above); only the
  * unknown-topic fallback differs by language. */
-export function jobTopicLabel(topicId: string, lang: 'bn' | 'en'): string {
+export function jobTopicLabel(topicId: string, lang: Lang): string {
   const humanize = (s: string): string =>
     s
       .split('-')

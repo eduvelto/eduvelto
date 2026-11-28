@@ -657,12 +657,6 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-          <p className="ev-rd-sub" style={{ marginTop: 10 }}>
-            {t({
-              bn: 'শ্রেণি ১–৫ ও ৬–৮-এর বই এখনো লাইব্রেরিতে আসেনি — সেগুলোর পাতায় সৎভাবে জানানো আছে।',
-              en: 'Class 1–5 and 6–8 books have not reached the library yet — their pages say so honestly.',
-            })}
-          </p>
         </section>
 
 

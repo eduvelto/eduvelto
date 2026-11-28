@@ -1,5 +1,6 @@
-// Eduvelto — bilingual routing helpers (Phase 1, SSG + bilingual,
-// 25 Nov 2026, feature/ssg-bilingual-support).
+// Eduvelto — 8-language routing helpers (Phase 1, SSG + bilingual,
+// 25 Nov 2026, feature/ssg-bilingual-support; widened to 8 languages
+// 28 Nov 2026, owner order: bn, en, hi, ar, es, pt, fr, id).
 //
 // Pure functions, no DOM / router imports, so they are unit-testable
 // and reusable from App.tsx, LanguageContext, seo.ts, adsConfig and
@@ -25,16 +26,32 @@
 //   mapping both layers implement; the firebase.json test asserts
 //   the two agree on the sampled routes.
 
-export type SupportedLang = 'bn' | 'en';
+export type SupportedLang = 'bn' | 'en' | 'hi' | 'ar' | 'es' | 'pt' | 'fr' | 'id';
 
-export const SUPPORTED_LANGS: readonly SupportedLang[] = ['bn', 'en'];
+/** The 8 live languages (owner order 28 Nov 2026): bn + en + the six
+ *  phased languages. de/ja stay NOT ready; ko stays out entirely. */
+export const SUPPORTED_LANGS: readonly SupportedLang[] = ['bn', 'en', 'hi', 'ar', 'es', 'pt', 'fr', 'id'];
 export const DEFAULT_LANG: SupportedLang = 'bn';
 
 /** Canonical site origin. seo.ts re-exports this (single source). */
 export const SITE_URL = 'https://eduvelto.com';
 
 export function isSupportedLang(value: unknown): value is SupportedLang {
-  return value === 'bn' || value === 'en';
+  return (
+    typeof value === 'string' && (SUPPORTED_LANGS as readonly string[]).includes(value)
+  );
+}
+
+/** Map a browser language tag (navigator.language, e.g. 'hi-IN',
+ *  'es-MX', 'pt-BR') to one of the 8 supported languages, or null.
+ *  Only the primary subtag is used: 'es-MX' -> 'es', 'pt-PT' -> 'pt',
+ *  'ar-EG' -> 'ar', 'en-US' -> 'en', 'bn-BD' -> 'bn'. Anything else
+ *  (de, ja, ko, fr-CA, …) returns null — the caller falls back. */
+export function browserLangToSupported(tag: string | null | undefined): SupportedLang | null {
+  if (!tag) return null;
+  const primary = tag.split('-')[0]?.toLowerCase();
+  if (!primary) return null;
+  return isSupportedLang(primary) ? primary : null;
 }
 
 /** First path segment when it is a supported language, else null. */
@@ -74,19 +91,20 @@ export function canonicalUrl(path: string, lang: SupportedLang): string {
   return `${SITE_URL}${withLangPrefix(path, lang)}`;
 }
 
-/** Reciprocal hreflang set for a page: bn + en variants and
+/** Reciprocal hreflang set for a page: all 8 language variants and
 //  x-default, which always points at the Bangla URL. Accepts a bare
 //  path or an absolute canonical URL. */
 export function hreflangUrls(
   pathOrCanonical: string,
   _lang: SupportedLang,
-): { bn: string; en: string; xDefault: string } {
+): Record<SupportedLang, string> & { xDefault: string } {
   const bare = pathOrCanonical.startsWith('http')
     ? stripLangPrefix(new URL(pathOrCanonical).pathname).path
     : stripLangPrefix(pathOrCanonical).path;
-  const bn = canonicalUrl(bare, 'bn');
-  const en = canonicalUrl(bare, 'en');
-  return { bn, en, xDefault: bn };
+  const out = {} as Record<SupportedLang, string> & { xDefault: string };
+  for (const lang of SUPPORTED_LANGS) out[lang] = canonicalUrl(bare, lang);
+  out.xDefault = out.bn;
+  return out;
 }
 
 /** Swap (or add) the /:lang segment of an absolute canonical URL. */
@@ -120,7 +138,9 @@ export function withoutLangParam(search: string): string {
 }
 
 /** Root '/' redirect language. Priority (owner order for the root
-//  redirect): ?lang > localStorage > user profile, default 'bn'.
+//  redirect): ?lang > localStorage > user profile > browser language
+//  (navigator.language mapped to one of the 8 — used ONLY when no
+//  ?lang, no stored and no profile language), default 'bn'.
 //  NOTE: this differs deliberately from LanguageProvider's runtime
 //  priority (?lang > profile > localStorage) — at first landing the
 //  profile is not loaded yet, so the stored device choice is the
@@ -130,10 +150,13 @@ export function resolveRootLang(opts: {
   queryLang?: string | null;
   storedLang?: string | null;
   profileLang?: string | null;
+  browserLang?: string | null;
 }): SupportedLang {
   if (isSupportedLang(opts.queryLang)) return opts.queryLang;
   if (isSupportedLang(opts.storedLang)) return opts.storedLang;
   if (isSupportedLang(opts.profileLang)) return opts.profileLang;
+  const fromBrowser = browserLangToSupported(opts.browserLang);
+  if (fromBrowser) return fromBrowser;
   return DEFAULT_LANG;
 }
 

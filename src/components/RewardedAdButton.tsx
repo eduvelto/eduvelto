@@ -8,6 +8,7 @@
 // real official AdSense/GPT Rewarded Ad API replaces the placeholder.
 
 import { REWARDED_AD_COPY, useRewardedAd, type RewardedAdDuration, type RewardedAdLang } from '../lib/rewardedAd';
+import { bnEn } from '../i18n/strings';
 
 interface RewardedAdButtonProps {
   lang?: RewardedAdLang;
@@ -32,11 +33,13 @@ interface RewardedAdButtonProps {
 export default function RewardedAdButton({ lang = 'en', onFreeDownload, durationSeconds = 30, disabled = false }: RewardedAdButtonProps) {
   const { available } = useRewardedAd();
   const copy = REWARDED_AD_COPY;
-  const unlockCopy = durationSeconds === 15 ? copy.unlock15[lang] : copy.unlock[lang];
+  // Ad copy exists in bn/en only — new languages fall back to English.
+  const l = bnEn(lang);
+  const unlockCopy = durationSeconds === 15 ? copy.unlock15[l] : copy.unlock[l];
   return (
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
       <button className="ev-btn ev-btn-primary" type="button" style={{ minHeight: 44 }} onClick={onFreeDownload} disabled={disabled}>
-        {copy.freeDownload[lang]}
+        {copy.freeDownload[l]}
       </button>
       <button
         className="ev-btn ev-btn-ghost"
@@ -44,12 +47,12 @@ export default function RewardedAdButton({ lang = 'en', onFreeDownload, duration
         style={{ minHeight: 44 }}
         disabled={!available}
         aria-disabled={!available}
-        title={copy.comingSoon[lang]}
+        title={copy.comingSoon[l]}
       >
         {unlockCopy}
       </button>
       {!available ? (
-        <span style={{ color: 'var(--muted)', fontSize: 14 }}>{copy.comingSoon[lang]}</span>
+        <span style={{ color: 'var(--muted)', fontSize: 14 }}>{copy.comingSoon[l]}</span>
       ) : null}
     </div>
   );

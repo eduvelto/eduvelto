@@ -20,6 +20,7 @@
 // drafts, never invented questions.
 
 import { useMemo, useState } from 'react';
+import type { Lang } from '../i18n/strings';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
@@ -43,13 +44,13 @@ function toBnDigits(n: number): string {
   return String(n).replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]);
 }
 
-function classLabel(classId: string, lang: 'bn' | 'en'): string {
+function classLabel(classId: string, lang: Lang): string {
   const c: QpgClassLevel | undefined = QPG_GENERAL_CLASSES.find((x) => x.id === classId);
   if (c) return lang === 'bn' ? c.nameBn : c.nameEn;
   return classId;
 }
 
-function subjectLabel(classId: string, subjectId: string, lang: 'bn' | 'en'): string {
+function subjectLabel(classId: string, subjectId: string, lang: Lang): string {
   const s = qpgSubjectsFor('general', classId).find((x) => x.id === subjectId);
   if (s) return lang === 'bn' ? s.nameBn : s.nameEn;
   return subjectId;
@@ -61,7 +62,7 @@ const VERIFIED_BADGE_EN = 'Verified practice questions — NCTB lesson-based (no
 /** Pool-truth caveat: Class 9 was verified against the Dakhil editions
  *  and Class 11–12 against standard references + syllabus (no HSC book
  *  in the workspace). Shown on the class subject pages (landing 27 Nov 2026). */
-function VerificationCaveat({ classId, lang }: { classId: string; lang: 'bn' | 'en' }) {
+function VerificationCaveat({ classId, lang }: { classId: string; lang: Lang }) {
   if (classId === 'class-9' || classId === 'class-10') {
     return (
       <p style={{ fontSize: 14, lineHeight: 1.7, margin: '0 0 16px', color: 'var(--muted)' }}>
@@ -83,7 +84,7 @@ function VerificationCaveat({ classId, lang }: { classId: string; lang: 'bn' | '
   return null;
 }
 
-function VerifiedNote({ lang }: { lang: 'bn' | 'en' }) {
+function VerifiedNote({ lang }: { lang: Lang }) {
   return (
     <AlertBox tone="info">
       {lang === 'bn'
@@ -233,7 +234,7 @@ function QuestionCard({
   num: number;
   chosen: 'A' | 'B' | 'C' | 'D' | undefined;
   onChoose: (letter: 'A' | 'B' | 'C' | 'D') => void;
-  lang: 'bn' | 'en';
+  lang: Lang;
 }) {
   const answered = chosen !== undefined;
   return (

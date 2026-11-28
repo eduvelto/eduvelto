@@ -35,6 +35,7 @@
 //    it never invents a bundle or presents a drill as available
 //    when it is not.
 
+import type { Lang } from '../i18n/strings';
 import { jobTopicLabel, jobTopicLabelBn, type JobAttemptAnswer } from './jobEngine';
 
 /** The fields the analysis reads from a stored attempt doc.
@@ -133,7 +134,7 @@ export function formatDurationBn(totalSeconds: number): string {
 /** Duration in the selected language: "1 min 30 sec" / "45 sec" in
  * English, "1 মিনিট 30 সেকেন্ড" / "45 সেকেন্ড" in Bangla
  * (formatDurationBn is the Bangla wrapper). */
-export function formatDuration(totalSeconds: number, lang: 'bn' | 'en'): string {
+export function formatDuration(totalSeconds: number, lang: Lang): string {
   if (lang === 'bn') return formatDurationBn(totalSeconds);
   const s = Math.max(0, Math.round(totalSeconds));
   const m = Math.floor(s / 60);
@@ -171,7 +172,7 @@ export function marksPerQuestion(attempt: JobAttemptSummary): number {
 
 export function negativeMarkingExplanation(
   attempt: JobAttemptSummary,
-  lang: 'bn' | 'en' = 'bn',
+  lang: Lang = 'bn',
 ): NegativeMarkingExplanation {
   const penalty = attempt.negativeMarkingUsed ?? null;
   const mpq = marksPerQuestion(attempt);
@@ -416,7 +417,7 @@ export interface AttemptTrend {
 export function attemptTrend(
   attempts: JobAttemptSummary[],
   kindLabel: 'মক' | 'অনুশীলন',
-  lang: 'bn' | 'en' = 'bn',
+  lang: Lang = 'bn',
 ): AttemptTrend {
   const kindEn = kindLabel === 'মক' ? 'mock' : 'practice';
   if (attempts.length === 0) {
@@ -530,7 +531,7 @@ export interface TimeManagementSummary {
 /** Time summary across attempts. Slowest/fastest topics need at
  * least 2 questions in the aggregated pool, so a single odd
  * question cannot crown a topic. */
-export function timeManagementSummary(attempts: JobAttemptSummary[], lang: 'bn' | 'en' = 'bn'): TimeManagementSummary {
+export function timeManagementSummary(attempts: JobAttemptSummary[], lang: Lang = 'bn'): TimeManagementSummary {
   const allAnswers = attempts.flatMap((a) => a.answers);
   const totalQuestions = allAnswers.length;
   const totalTime = allAnswers.reduce(
@@ -701,7 +702,7 @@ export function correctVsWrongTime(answers: JobAttemptAnswer[]): CorrectVsWrongT
  * observation generated from THIS attempt's actual data — the
  * weakest topic + what the wrong answers cost. Never a generic
  * motivational template, never an invented benchmark. */
-export function resultObservation(attempt: JobAttemptSummary, lang: 'bn' | 'en' = 'bn'): string {
+export function resultObservation(attempt: JobAttemptSummary, lang: Lang = 'bn'): string {
   if (attempt.answers.length === 0 || attempt.unansweredCount === attempt.answers.length) {
     return lang === 'bn'
       ? 'কোনো প্রশ্নের উত্তর দেওয়া হয়নি — পরেরবার অন্তত কিছু প্রশ্নের উত্তর দেওয়ার চেষ্টা করুন।'

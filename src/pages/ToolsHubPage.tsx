@@ -25,6 +25,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
 import { ToolIcon } from '../components/ToolIcon';
 import { TOOLS_META, TOOL_CATEGORY_META } from '../lib/toolsMeta';
+import { toolMetaForLang } from '../lib/toolsMetaI18n';
 import { langUrl } from '../lib/langRouting';
 
 // Category order follows the order in toolsMeta.ts (10 categories
@@ -51,7 +52,9 @@ export default function ToolsHubPage() {
   const q = query.trim().toLowerCase();
 
   // Client-side filter over the same TOOLS_META list, matching the
-  // title + description in the current language.
+  // title + description in the current language. Phased 8-language
+  // rollout (28 Nov 2026): the top-20 tools match on their translated
+  // title/description too.
   const sections = useMemo(
     () =>
       CATEGORIES.map((category) => ({
@@ -60,8 +63,8 @@ export default function ToolsHubPage() {
           (tool) =>
             tool.category === category.key &&
             (q === '' ||
-              (lang === 'bn' ? tool.titleBn : tool.titleEn).toLowerCase().includes(q) ||
-              (lang === 'bn' ? tool.descriptionBn : tool.descriptionEn).toLowerCase().includes(q)),
+              toolMetaForLang(tool, lang).title.toLowerCase().includes(q) ||
+              toolMetaForLang(tool, lang).description.toLowerCase().includes(q)),
         ),
       })).filter((section) => section.tools.length > 0),
     [q, lang],
@@ -224,7 +227,7 @@ export default function ToolsHubPage() {
                 }}
               >
                 {tools.map((tool) => {
-                  const title = lang === 'bn' ? tool.titleBn : tool.titleEn;
+                  const tm = toolMetaForLang(tool, lang);
                   return (
                     <Link
                       key={tool.slug}
@@ -234,10 +237,10 @@ export default function ToolsHubPage() {
                     >
                       <ToolIcon slug={tool.slug} category={tool.category} size={44} style={{ marginBottom: 10 }} />
                       <strong style={{ display: 'block', fontSize: 16, fontFamily: 'var(--font-head)' }}>
-                        {title}
+                        {tm.title}
                       </strong>
                       <span className="tools-hub-desc" style={{ display: 'block', color: 'var(--muted)', fontSize: 14, marginTop: 6, lineHeight: 1.5 }}>
-                        {t({ bn: tool.descriptionBn, en: tool.descriptionEn })}
+                        {t({ bn: tool.descriptionBn, en: tm.description })}
                       </span>
                       <span style={{ display: 'block', color: 'var(--teal-text)', fontWeight: 700, fontSize: 14, marginTop: 10 }}>
                         {t({ bn: 'খুলুন →', en: 'Open →' })}

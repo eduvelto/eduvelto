@@ -228,6 +228,10 @@ const SITEMAP_URLS = [
   '/contact',
   // Phase 3 (25 Nov 2026): real /:lang/support page.
   '/support',
+  // Phased 8-language rollout (28 Nov 2026): /free-quiz is a real
+  // public page with SEO + prerender + sitemap entry (was missing
+  // from all three before). Sitemap grows 283 -> 284 URLs.
+  '/free-quiz',
   // 7-day sprint, Day 6 (26 Nov 2026): real /:lang/suggestions
   // page — the Suggestion PDF Store (coming soon, no PDF for
   // sale yet). Sitemap grows 143 -> 144 URLs.
@@ -675,11 +679,13 @@ describe('resolveRouteSeo — public routes', () => {
 
   it('sitemap.xml lists exactly the prerendered public routes (no drift)', () => {
     // 27 Nov 2026: the committed sitemap is the PRERENDER-GENERATED
-    // one (bn canonicals, 2,747 locs) — the old hand-maintained
-    // 283-URL SITEMAP_URLS list is now the SEO route list only, not
-    // the sitemap. Derive the expected locs the same way
-    // scripts/prerender.mjs builds them: static + academic practice
-    // + tool paths, plus one page per book from the 24 Nov backup.
+    // one (bn canonicals, 2,629 locs as of 28 Nov 2026, incl. the
+    // /free-quiz entry + the sibling's convert-pair tools) — the old
+    // hand-maintained 284-URL SITEMAP_URLS list is now the SEO route
+    // list only, not the sitemap. Derive the expected locs the same
+    // way scripts/prerender.mjs builds them: static + academic
+    // practice + tool paths, plus one page per book from the 24 Nov
+    // backup.
     const xml = readFileSync(
       fileURLToPath(new URL('../../../public/sitemap.xml', import.meta.url)),
       'utf8',
@@ -1038,8 +1044,8 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     );
     const blocks = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => m[1]);
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-    // One <url> block per <loc> (2,617 in the prerender-generated
-    // sitemap, 28 Nov 2026) — the old SITEMAP_URLS count (283) is the
+    // One <url> block per <loc> (2,629 in the prerender-generated
+    // sitemap, 28 Nov 2026) — the old SITEMAP_URLS count (284) is the
     // SEO route list, not the sitemap, since the sitemap went
     // prerender-generated.
     expect(blocks.length).toBe(locs.length);
@@ -1823,8 +1829,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 283 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides + /support, Phase 3 + 6 Day 1 audit fix, 26 Nov 2026 + 1 Day 6 /suggestions store + 106 100-tools, Phase 1, 26 Nov 2026 + 35 100-tools, Phase 2 batch 2, 27 Nov 2026 − 2 owner-approved duplicate tools removed 28 Nov 2026)', () => {
-    expect(SITEMAP_URLS.length).toBe(283);
+  it('sitemap has 284 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides + /support, Phase 3 + 6 Day 1 audit fix, 26 Nov 2026 + 1 Day 6 /suggestions store + 106 100-tools, Phase 1, 26 Nov 2026 + 35 100-tools, Phase 2 batch 2, 27 Nov 2026 − 2 owner-approved duplicate tools removed 28 Nov 2026 + 1 /free-quiz, phased 8-language rollout, 28 Nov 2026)', () => {
+    expect(SITEMAP_URLS.length).toBe(284);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {
@@ -2059,9 +2065,39 @@ describe('SEO review (24 Nov 2026, owner order "SEO korco j sob review koro")', 
     expect(WEBSITE_JSON_LD.url).toBe(SITE_URL);
   });
 
-  it('og:locale follows the page language, with the other as alternate (IMP-34)', () => {
-    expect(ogLocaleForLang('bn')).toEqual({ locale: 'bn_BD', alternate: 'en_US' });
-    expect(ogLocaleForLang('en')).toEqual({ locale: 'en_US', alternate: 'bn_BD' });
+  it('og:locale follows the page language, with the other 7 as alternates (IMP-34; 8-language rollout, 28 Nov 2026)', () => {
+    expect(ogLocaleForLang('bn')).toEqual({
+      locale: 'bn_BD',
+      alternates: ['en_US', 'hi_IN', 'ar_EG', 'es_ES', 'pt_BR', 'fr_FR', 'id_ID'],
+    });
+    expect(ogLocaleForLang('en')).toEqual({
+      locale: 'en_US',
+      alternates: ['bn_BD', 'hi_IN', 'ar_EG', 'es_ES', 'pt_BR', 'fr_FR', 'id_ID'],
+    });
+    expect(ogLocaleForLang('ar')).toEqual({
+      locale: 'ar_EG',
+      alternates: ['bn_BD', 'en_US', 'hi_IN', 'es_ES', 'pt_BR', 'fr_FR', 'id_ID'],
+    });
+    expect(ogLocaleForLang('hi')).toEqual({
+      locale: 'hi_IN',
+      alternates: ['bn_BD', 'en_US', 'ar_EG', 'es_ES', 'pt_BR', 'fr_FR', 'id_ID'],
+    });
+    expect(ogLocaleForLang('es')).toEqual({
+      locale: 'es_ES',
+      alternates: ['bn_BD', 'en_US', 'hi_IN', 'ar_EG', 'pt_BR', 'fr_FR', 'id_ID'],
+    });
+    expect(ogLocaleForLang('pt')).toEqual({
+      locale: 'pt_BR',
+      alternates: ['bn_BD', 'en_US', 'hi_IN', 'ar_EG', 'es_ES', 'fr_FR', 'id_ID'],
+    });
+    expect(ogLocaleForLang('fr')).toEqual({
+      locale: 'fr_FR',
+      alternates: ['bn_BD', 'en_US', 'hi_IN', 'ar_EG', 'es_ES', 'pt_BR', 'id_ID'],
+    });
+    expect(ogLocaleForLang('id')).toEqual({
+      locale: 'id_ID',
+      alternates: ['bn_BD', 'en_US', 'hi_IN', 'ar_EG', 'es_ES', 'pt_BR', 'fr_FR'],
+    });
   });
 });
 

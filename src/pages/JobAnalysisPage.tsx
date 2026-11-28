@@ -19,6 +19,7 @@
 // convention); dates follow the selected language (bn-BD / en-GB).
 
 import { useEffect, useMemo, useState } from 'react';
+import type { Lang } from '../i18n/strings';
 import { Link, useLocation } from 'react-router-dom';
 import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
@@ -52,7 +53,7 @@ import {
 const MUTED = '#68747B';
 const PAGE_SIZE = 10;
 
-function formatDate(millis: number | null, lang: 'bn' | 'en'): string {
+function formatDate(millis: number | null, lang: Lang): string {
   if (millis === null) return lang === 'bn' ? 'তারিখ নেই' : 'No date';
   return new Date(millis).toLocaleDateString(lang === 'bn' ? 'bn-BD' : 'en-GB', {
     day: 'numeric',

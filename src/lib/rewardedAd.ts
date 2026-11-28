@@ -17,6 +17,8 @@
 // ad-network call may ever be added to this file;
 // src/lib/__tests__/rewardedAd.test.ts enforces that.
 
+import type { Lang } from '../i18n/strings';
+
 export const REWARDED_AD_STATUS = 'not-available' as const;
 
 export type RewardedAdReason = 'adsense-review';
@@ -55,7 +57,9 @@ export const REWARDED_AD_COPY = {
   },
 } as const;
 
-export type RewardedAdLang = 'bn' | 'en';
+// Widened to the 8 live languages (28 Nov 2026 phased rollout);
+// RewardedAdButton narrows to bn/en internally via bnEn().
+export type RewardedAdLang = Lang;
 
 /**
  * Intended rewarded-ad duration for a download action (ads rollout,
