@@ -12,14 +12,21 @@
 // pattern are not offered — unknown slugs show an honest message.
 //
 // The engine serves questions ONLY from the bundled verified pool:
-// BCS English has 35 verified questions; every other subject shows
-// "এই বিষয়ে যাচাইকৃত প্রশ্ন এখনো নেই" instead of serving drafts.
-// NO full mock is runnable on verified questions alone. The one
-// runnable mock is the BCS English SECTION mock: 30 unique shuffled
-// questions, 18 minutes (official pace: 120 min / 200 questions =
-// 36 s per question), −0.50 per wrong answer, instant result with
-// explanations. The result is labelled practice only — never a real
-// exam result (same binding label as the job engine).
+// BCS now has verified questions in all 10 subjects (English 66,
+// Bangla 31, Bangladesh Affairs 29, International Affairs 19,
+// Computer & ICT 15, General Science 14, Ethics 10, Geography 9,
+// Mathematics 8, Mental Ability 7) — still not enough per subject
+// for a full mock, so the table shows the real per-subject counts
+// and no full mock is offered; a subject with zero verified
+// questions would show "এই বিষয়ে যাচাইকৃত প্রশ্ন এখনো নেই"
+// instead of serving drafts. NO full mock is runnable on verified
+// questions alone. The one runnable mock is the BCS English
+// SECTION mock: 30 unique shuffled questions drawn
+// from the 35 Batch-1 English questions, 18 minutes (official pace:
+// 120 min / 200 questions = 36 s per question), −0.50 per wrong
+// answer, instant result with explanations. The result is labelled
+// practice only — never a real exam result (same binding label as
+// the job engine).
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -29,6 +36,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { PUBLIC_BCS_ENGLISH_QUESTIONS, PUBLIC_BCS_READING_PASSAGE, type PublicBcsQuestion } from '../lib/publicBcsEnglish';
 import {
   BANK_STATE,
+  RECENT_REPEATED_COUNT,
   SYLLABUS_MOCK_EXAMS,
   bnDigits,
   syllabusMockPlan,
@@ -214,8 +222,8 @@ export default function SyllabusMockPage() {
           {plan.fullMockPossible ? null : (
             <AlertBox tone="info">
               {t({
-                bn: `পূর্ণ মক এখনো দেওয়া যাচ্ছে না — সব বিষয়ে যাচাইকৃত প্রশ্ন নেই। ব্যাংকে যাচাইকৃত প্রশ্ন ${bnDigits(BANK_STATE.jobVerified)}টি, কিন্তু পাবলিক বান্ডেলে এখন শুধু বিসিএস ইংরেজির ${bnDigits(PUBLIC_BCS_ENGLISH_QUESTIONS.length)}টি প্রশ্ন আছে।`,
-                en: `A full mock is not available yet — not every subject has verified questions. The bank holds ${BANK_STATE.jobVerified} verified questions, but the public bundle currently has only the ${PUBLIC_BCS_ENGLISH_QUESTIONS.length} BCS English questions.`,
+                bn: `পূর্ণ মক এখনো দেওয়া যাচ্ছে না — সব বিষয়ে যাচাইকৃত প্রশ্ন যথেষ্ট নেই। ব্যাংকে যাচাইকৃত প্রশ্ন ${bnDigits(BANK_STATE.jobVerified)}টি, কিন্তু পাবলিক বান্ডেলে এখন ${bnDigits(RECENT_REPEATED_COUNT)}টি যাচাইকৃত প্রশ্ন আছে (বিসিএস ইংরেজি ব্যাচ ১-এর ৩৫টি + ৪৬তম বিসিএস প্রিলিমিনারি PYQ ১৭৩টি) — সব বিষয়ে পূর্ণ মকের জন্য যথেষ্ট নয়।`,
+                en: `A full mock is not available yet — not every subject has enough verified questions. The bank holds ${BANK_STATE.jobVerified} verified questions, but the public bundle now has ${RECENT_REPEATED_COUNT} verified questions (35 BCS English Batch 1 + 173 46th BCS Preliminary PYQs) — not enough in every subject for a full mock.`,
               })}
             </AlertBox>
           )}

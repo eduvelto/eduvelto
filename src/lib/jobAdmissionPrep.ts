@@ -20,13 +20,13 @@
 //     (NU keeps its own verified hub and is NOT in this structure.)
 //  3. RECENT & MOST REPEATED — from the bank ONLY, and only what is
 //     already published in the public bundle: the 35 owner-verified
-//     BCS English questions (Batch 1, published 22 Nov 2026). The
-//     173 verified 46th BCS Preliminary PYQs live in the Firestore
-//     bank and are NOT in the public bundle, so they are NOT listed
-//     here — the collection page says so plainly instead of faking
-//     the count. Nothing is scraped from the web; no unverified
-//     question is added. Year is null: the published batch records
-//     no exam year, so no year is guessed.
+//     BCS English questions (Batch 1, published 22 Nov 2026) PLUS
+//     the 173 verified 46th BCS Preliminary PYQs (exam 26 Apr 2024,
+//     Set-02), published to the bundle 28 Nov 2026 — 208 in total.
+//     Nothing is scraped from the web; no unverified question is
+//     added. Year is null for the Batch-1 questions (the published
+//     batch records no exam year, so none is guessed); the PYQs
+//     carry their recorded year, 2024.
 //  4. SYLLABUS-BASED EXAM ENGINE — syllabusMockPlan() derives the
 //     pattern ONLY from the verified JOB_RULES_CONFIGS
 //     (src/lib/jobExams.ts): BCS 50th (200 marks, 120 min, −0.50),
@@ -37,14 +37,18 @@
 //     19th NTRCA pattern is UNRESOLVED, so ntrca resolves to the
 //     last-verified 18th config and says so. Unknown slugs return
 //     null — never a guessed pattern. The engine serves questions
-//     ONLY from the bundled verified pool: BCS English has 35;
-//     every other subject has 0, and the UI must say so honestly
-//     ("এই বিষয়ে যাচাইকৃত প্রশ্ন এখনো নেই") instead of serving
-//     drafts. NO full mock is publishable on verified questions
-//     alone — fullMockPossible is false for every exam. The one
-//     runnable mock is the BCS English SECTION mock: 30 of the 35
-//     verified questions, 18 minutes (official pace 120 min / 200
-//     questions = 36 s per question), −0.50 per wrong answer.
+//     ONLY from the bundled verified pool: BCS now has verified
+//     questions in all 10 subjects (English 66, Bangla 31, Bangladesh
+//     Affairs 29, International Affairs 19, Computer & ICT 15,
+//     General Science 14, Ethics 10, Geography 9, Mathematics 8,
+//     Mental Ability 7); every other exam's subjects have 0, and the
+//     UI must say so honestly ("এই বিষয়ে যাচাইকৃত প্রশ্ন এখনো নেই")
+//     instead of serving drafts. NO full mock is publishable on
+//     verified questions alone — fullMockPossible is false for every
+//     exam. The one runnable mock is the BCS English SECTION mock:
+//     30 questions drawn from the 35 Batch-1 English questions, 18
+//     minutes (official pace 120 min / 200 questions = 36 s per
+//     question), −0.50 per wrong answer.
 //
 // BANK STATE (owner brief, 28 Nov 2026 — Firestore bank figures,
 // NOT re-counted from the bundle; the bundle holds far less):
@@ -59,6 +63,13 @@ import {
   type PublicBcsQuestion,
   type PublicBcsTopic,
 } from './publicBcsEnglish';
+import {
+  PUBLIC_BCS_PYQ_QUESTIONS,
+  PUBLIC_BCS_PYQ_SUBJECTS,
+  publicBcsPyqCountBySubject,
+  type PublicBcsPyqQuestion,
+  type PublicBcsPyqSubject,
+} from './publicBcsPyq';
 
 /* ------------------------------------------------------------------ */
 /* Admission structure (navigation only — no patterns, no questions)   */
@@ -235,10 +246,26 @@ export function bnDigits(n: number | string): string {
 /* ------------------------------------------------------------------ */
 
 /** Verified questions the public bundle can serve, keyed by exam
- *  slug + the rulesConfig subject's English name. Only BCS English
- *  exists (35 owner-verified questions); everything else is 0. */
+ *  slug + the rulesConfig subject's English name. BCS has verified
+ *  questions in all 10 subjects: the 35 Batch-1 English questions
+ *  plus the 173 verified 46th BCS Preliminary PYQs (31 of them
+ *  English, so English totals 66). Every other exam's subjects
+ *  are 0. Counts are derived from the bundled arrays, never
+ *  hand-typed — a miscount in a source file shows up here. */
 export const BUNDLED_VERIFIED_BY_SUBJECT: Record<string, Record<string, number>> = {
-  bcs: { 'English Language & Literature': PUBLIC_BCS_ENGLISH_QUESTIONS.length },
+  bcs: {
+    'Bangla Language & Literature': publicBcsPyqCountBySubject('bangla'),
+    'English Language & Literature':
+      PUBLIC_BCS_ENGLISH_QUESTIONS.length + publicBcsPyqCountBySubject('english'),
+    'Bangladesh Affairs': publicBcsPyqCountBySubject('bangladesh-affairs'),
+    'International Affairs': publicBcsPyqCountBySubject('international-affairs'),
+    'Geography, Environment & Disaster Management': publicBcsPyqCountBySubject('geography'),
+    'General Science': publicBcsPyqCountBySubject('general-science'),
+    'Computer & ICT': publicBcsPyqCountBySubject('ict'),
+    'Mathematical Reasoning': publicBcsPyqCountBySubject('mathematics'),
+    'Mental Ability': publicBcsPyqCountBySubject('mental-ability'),
+    'Ethics, Values & Good Governance': publicBcsPyqCountBySubject('ethics'),
+  },
 };
 
 export function bundledVerifiedCount(examSlug: string, subjectNameEn: string): number {
@@ -263,7 +290,9 @@ export interface SyllabusSubjectPlan {
 export interface SectionMockPlan {
   subjectNameEn: string;
   subjectNameBn: string;
-  /** Questions served (30 of the 35 verified BCS English). */
+  /** Questions served (30 drawn from the 35 Batch-1 BCS English
+   *  questions — the section mock's serving pool, not the whole
+   *  bundled English pool of 66). */
   questionCount: number;
   /** Minutes at the official pace (120 min / 200 Q = 36 s/Q). */
   timeMinutes: number;
@@ -304,8 +333,9 @@ export function syllabusMockPlan(examSlug: string): SyllabusMockPlan | null {
     };
   });
   const totalMarks = rules.subjects.reduce((sum, s) => sum + s.marks, 0);
-  // The only servable section today: BCS English — 30 of the 35
-  // verified questions, at the official pace (36 s/question).
+  // The only servable section today: BCS English — 30 questions
+  // drawn from the 35 Batch-1 English questions, at the official
+  // pace (36 s/question).
   let sectionMock: SectionMockPlan | null = null;
   if (examSlug === 'bcs') {
     const english = subjects.find((s) => s.nameEn === 'English Language & Literature');
@@ -342,19 +372,25 @@ export const SYLLABUS_MOCK_EXAMS = ['bcs', 'bank', 'primary-teacher', 'ntrca'] a
 /* ------------------------------------------------------------------ */
 
 export interface RecentRepeatedQuestion {
-  question: PublicBcsQuestion;
-  topic: PublicBcsTopic;
+  question: PublicBcsQuestion | PublicBcsPyqQuestion;
+  /** Filter key: a Batch-1 English topic, or a PYQ subject. */
+  topic: PublicBcsTopic | PublicBcsPyqSubject;
   topicBn: string;
   topicEn: string;
   examBn: string;
   examEn: string;
-  /** Null: the published batch records no exam year — never guessed. */
+  /** The PYQ's own free-text topic (e.g. 'সংবিধান'); Batch-1
+   *  questions have none — their topic IS the filter key. */
+  subtopic?: string;
+  /** Null for Batch 1: the published batch records no exam year —
+   *  never guessed. 2024 for the PYQs: their year IS recorded. */
   year: number | null;
 }
 
-/** The whole collection: 35 verified BCS English questions. */
-export const RECENT_REPEATED_QUESTIONS: RecentRepeatedQuestion[] =
-  PUBLIC_BCS_ENGLISH_QUESTIONS.map((q) => {
+/** The whole collection: 35 verified BCS English Batch-1 questions
+ *  + the 173 verified 46th BCS Preliminary PYQs = 208. */
+export const RECENT_REPEATED_QUESTIONS: RecentRepeatedQuestion[] = [
+  ...PUBLIC_BCS_ENGLISH_QUESTIONS.map((q) => {
     const topic = PUBLIC_BCS_TOPICS.find((t) => t.topic === q.topic)!;
     return {
       question: q,
@@ -365,12 +401,27 @@ export const RECENT_REPEATED_QUESTIONS: RecentRepeatedQuestion[] =
       examEn: 'BCS',
       year: null,
     };
-  });
+  }),
+  ...PUBLIC_BCS_PYQ_QUESTIONS.map((q) => {
+    const subject = PUBLIC_BCS_PYQ_SUBJECTS.find((s) => s.subject === q.subject)!;
+    return {
+      question: q,
+      topic: q.subject,
+      topicBn: subject.nameBn,
+      topicEn: subject.nameEn,
+      examBn: '৪৬তম বিসিএস প্রিলিমিনারি',
+      examEn: '46th BCS Preliminary',
+      subtopic: q.topic,
+      year: 2024,
+    };
+  }),
+];
 
 export const RECENT_REPEATED_COUNT = RECENT_REPEATED_QUESTIONS.length;
 
-/** Questions of one topic, for the collection's topic filter. */
-export function recentRepeatedByTopic(topic: PublicBcsTopic): RecentRepeatedQuestion[] {
+/** Questions of one topic (or one PYQ subject), for the
+ *  collection's filter. */
+export function recentRepeatedByTopic(topic: PublicBcsTopic | PublicBcsPyqSubject): RecentRepeatedQuestion[] {
   return RECENT_REPEATED_QUESTIONS.filter((r) => r.topic === topic);
 }
 
@@ -392,6 +443,7 @@ export const BANK_STATE = {
   admissionVerified: 0,
   admissionPyq: 0,
   /** Verified 46th BCS Preliminary PYQs in the Firestore bank —
-   *  not yet published to the public bundle. */
+   *  published to the public bundle on 28 Nov 2026 as well (see
+   *  RECENT_REPEATED_QUESTIONS: 35 Batch-1 + these 173 = 208). */
   bcs46thPyqInBank: 173,
 } as const;
