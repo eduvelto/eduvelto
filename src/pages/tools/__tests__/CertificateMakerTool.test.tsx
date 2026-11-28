@@ -7,9 +7,11 @@
 // state shows no preview, and that the download path is the
 // <RewardedAdButton> (Free Download live, Unlock disabled). The
 // certificate is drawn by the SHARED renderer in
-// src/lib/certificate.ts — one premium design, no template selector
-// (templates removed 28 Nov 2026). Pure shaping / validation /
-// date logic is covered by src/lib/__tests__/tools/certificateMaker.test.ts.
+// src/lib/certificate.ts — FIVE templates (wave default, emerald
+// royal, modern minimal, heritage, classic gold), picked from a
+// live-thumbnail picker; the old 3 colour variants are superseded
+// (28 Nov 2026). Pure shaping / validation / date logic is covered
+// by src/lib/__tests__/tools/certificateMaker.test.ts.
 // Rendering is covered only by source smoke checks: the component
 // must load qrcode via dynamic import() and never import jspdf
 // statically (the PDF comes from the shared downloadCertificatePdf).
@@ -65,18 +67,26 @@ describe('CertificateMakerTool rendered HTML', () => {
     expect(html).not.toContain('প্রদানকারী প্রতিষ্ঠান');
     expect(html).toContain('id="cert-date"');
     expect(html).toContain('id="cert-occasion"');
-    // Customization panel (28 Nov 2026): achievement line + theme.
+    // Customization panel (28 Nov 2026): achievement line + the
+    // 5-template picker (live thumbnails, wave default).
     expect(html).toContain('id="cert-achievement"');
-    expect(html).toContain('id="cert-theme"');
     expect(html).toContain('অর্জনের লাইন');
-    expect(html).toContain('সোনালি ও নেভি');
-    expect(html).toContain('টিল ও সোনালি');
-    expect(html).toContain('মেরুন ও সোনালি');
-    // One premium design only (28 Nov 2026): no template selector.
-    expect(html).not.toContain('id="cert-template"');
-    expect(html).not.toContain('ক্লাসিক');
-    expect(html).not.toContain('মডার্ন');
-    expect(html).not.toContain('মিনিমাল');
+    expect(html).toContain('id="cert-template-label"');
+    expect(html).toContain('data-template="wave"');
+    expect(html).toContain('data-template="emerald-royal"');
+    expect(html).toContain('data-template="modern-minimal"');
+    expect(html).toContain('data-template="heritage"');
+    expect(html).toContain('data-template="classic-gold"');
+    expect(html).toContain('ওয়েভ');
+    expect(html).toContain('এমারাল্ড রয়্যাল');
+    expect(html).toContain('মডার্ন মিনিমাল');
+    expect(html).toContain('হেরিটেজ');
+    expect(html).toContain('ক্লাসিক গোল্ড');
+    // The old 3 colour variants are superseded — none of them remain.
+    expect(html).not.toContain('id="cert-theme"');
+    expect(html).not.toContain('সোনালি ও নেভি');
+    expect(html).not.toContain('টিল ও সোনালি');
+    expect(html).not.toContain('মেরুন ও সোনালি');
     expect(html).toContain('প্রাপকের নাম');
     expect(html).toContain('কোর্স / অনুষ্ঠানের নাম');
     expect(html).toContain('প্রদানকারী: Eduvelto');
@@ -91,22 +101,32 @@ describe('CertificateMakerTool rendered HTML', () => {
     expect(html).not.toContain('Issuer name');
     expect(html).toContain('Issued by: Eduvelto');
     expect(html).toContain('Achievement line');
-    // '&' is HTML-escaped in the serialized option text.
-    expect(html).toContain('Gold &amp; Navy');
-    expect(html).toContain('Teal &amp; Gold');
-    expect(html).toContain('Maroon &amp; Gold');
-    expect(html).not.toContain('Classic');
-    expect(html).not.toContain('Modern');
-    expect(html).not.toContain('Minimal');
+    expect(html).toContain('Wave');
+    expect(html).toContain('Emerald Royal');
+    expect(html).toContain('Modern Minimal');
+    expect(html).toContain('Heritage');
+    expect(html).toContain('Classic Gold');
+    // Old colour-variant names are gone in English too.
+    expect(html).not.toContain('Gold &amp; Navy');
+    expect(html).not.toContain('Teal &amp; Gold');
+    expect(html).not.toContain('Maroon &amp; Gold');
     expect(html).not.toContain('প্রাপকের নাম');
   });
 
-  it('empty initial state shows no preview and no download button', async () => {
+  it('empty initial state shows no preview and no download controls', async () => {
     const html = await renderTool();
-    expect(html).not.toContain('প্রিভিউ');
-    // The intro copy mentions "ফ্রি ডাউনলোড" in prose, so pin the
-    // absence of the actual button instead of the phrase.
-    expect(html).not.toContain('<button');
+    // No main preview canvas yet (the template thumbnails carry
+    // "…ডিজাইনের প্রিভিউ" aria-labels, so pin the main preview's
+    // own label instead of the bare word).
+    expect(html).not.toContain('সার্টিফিকেট প্রিভিউ');
+    // No download section yet (no format radios, no rewarded button).
+    expect(html).not.toContain('id="cert-format-pdf"');
+    expect(html).not.toContain('id="cert-format-png"');
+    // ...but the template picker buttons DO render with an empty
+    // form (thumbnails use placeholder data), so the user can pick
+    // a design before typing anything.
+    expect(html).toContain('data-template="wave"');
+    expect(html).toContain('data-template="classic-gold"');
   });
 
   it('uses the shared certificate renderer with a dynamic QR import, never a static jspdf import', () => {
@@ -124,15 +144,25 @@ describe('CertificateMakerTool rendered HTML', () => {
     expect(src).toContain('RewardedAdButton');
     // Customizations flow into the shared renderer (preview canvas
     // and download are the same canvas): the achievement line and
-    // the theme are passed to buildMakerCertificateData and the
+    // the template are passed to buildMakerCertificateData and the
     // preview re-renders when either changes.
     expect(src).toContain('achievementLine');
-    expect(src).toContain('CERTIFICATE_THEMES');
-    expect(src).toContain("{ achievementLine: achievementLine.trim(), theme }");
-    expect(src).toContain('achievementLine, theme]);');
-    // One design only: no template selector, no old 2338×1654 canvas.
-    expect(src).not.toContain('cert-template');
-    expect(src).not.toContain('CertificateTemplate');
+    expect(src).toContain('CERTIFICATE_TEMPLATES');
+    expect(src).toContain("{ achievementLine: achievementLine.trim(), template }");
+    expect(src).toContain('achievementLine, template]);');
+    // Five templates with LIVE thumbnails from the shared renderer
+    // (real renders, not static icons): each template is drawn into
+    // a thumbnail canvas, and the wave is the default + reset value.
+    expect(src).toContain('data-template={tpl.id}');
+    expect(src).toContain('thumbRefs');
+    expect(src).toContain("useState<CertificateTemplateId>('wave')");
+    expect(src).toContain("setTemplate('wave')");
+    expect(src).toContain('{ ...data, template: tpl.id }');
+    // No colour-variant theme selector remains.
+    expect(src).not.toContain('cert-theme');
+    expect(src).not.toContain('CertificateThemeId');
+    expect(src).not.toContain('CERTIFICATE_THEMES');
+    expect(src).not.toContain('getCertificateTheme');
     expect(src).not.toContain('2338');
     expect(src).not.toContain('getCertificateTemplateStyle');
   });

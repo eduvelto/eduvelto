@@ -14,14 +14,15 @@
 // only Eduvelto's name + logo + the "Issued by Eduvelto" line.
 //
 // PREMIUM DESIGN (28 Nov 2026): the certificate is drawn by the
-// SHARED renderer in src/lib/certificate.ts — the exact same design
-// as the quiz certificate (2480×1754, wave header, ribbon +
-// rosette, logo, QR + verification ID). There is ONE
-// premium layout with 3 colour themes (gold-navy default, teal-gold,
-// maroon-gold) and an editable achievement line — the old template
-// selector and the old A4-at-200-DPI canvas are gone. The on-screen
-// preview IS the real shared canvas, so the preview is exactly what
-// downloads.
+// SHARED renderer in src/lib/certificate.ts — five templates
+// (wave default — the same design as the quiz certificate — plus
+// emerald-royal, modern-minimal, heritage, classic-gold). The
+// template picker shows a LIVE thumbnail of each template, rendered
+// by the shared renderer from the current form data, so the
+// thumbnail IS the design that downloads. The on-screen preview IS
+// the real shared canvas, so the preview is exactly what downloads.
+// The previous 3 colour variants of the wave layout are superseded
+// by these 5 templates and removed.
 //
 // The verification ID is minted ONCE per certificate (kept in
 // state) and regenerates only on an explicit New certificate /
@@ -44,12 +45,12 @@ import {
 } from '../../lib/tools/certificateMaker';
 import {
   buildMakerCertificateData,
-  CERTIFICATE_THEMES,
+  CERTIFICATE_TEMPLATES,
   certificateFileBase,
   downloadCanvasPng,
   downloadCertificatePdf,
   drawQuizCertificateCanvas,
-  type CertificateThemeId,
+  type CertificateTemplateId,
   type QuizCertificateData,
 } from '../../lib/certificate';
 import { makeVerificationId } from '../../lib/freeQuiz';
@@ -155,14 +156,23 @@ export function CertificateMakerTool() {
   const issuer = 'Eduvelto';
   const [date, setDate] = useState(() => todayIsoDate());
   // Customizations (28 Nov 2026): the achievement line above the
-  // course title, and the premium theme. Both flow into the shared
-  // renderer, so the preview canvas and the download are identical.
-  // The logo, verification ID + QR and the Eduvelto name are
-  // FIXED — there are no controls for them anywhere in this panel.
+  // course title, and the certificate template (5 templates, wave
+  // default). Both flow into the shared renderer, so the preview
+  // canvas and the download are identical. The logo, verification
+  // ID + QR and the Eduvelto name are FIXED — there are no controls
+  // for them anywhere in this panel.
   const [achievementLine, setAchievementLine] = useState(
     'for successfully completing',
   );
-  const [theme, setTheme] = useState<CertificateThemeId>('gold-navy');
+  const [template, setTemplate] = useState<CertificateTemplateId>('wave');
+  // QR for the template thumbnails — minted from the same
+  // verification ID as the main preview (or the placeholder ID
+  // before the form is ready), so the thumbnails show the real
+  // bottom row including the QR.
+  const [thumbQr, setThumbQr] = useState<string | null>(null);
+  const thumbRefs = useRef<
+    Partial<Record<CertificateTemplateId, HTMLCanvasElement | null>>
+  >({});
   const [format, setFormat] = useState<DownloadFormat>('pdf');
   // ONE verification ID per certificate — minted when the form first
   // becomes ready, kept in state, and regenerated only by an
@@ -182,7 +192,7 @@ export function CertificateMakerTool() {
   // timer is used for it (see the component test).
   useEffect(() => {
     setCopied(false);
-  }, [recipient, courseTitle, issuer, date, verificationId, achievementLine, theme]);
+  }, [recipient, courseTitle, issuer, date, verificationId, achievementLine, template]);
 
   const missing = useMemo(
     () => validateCertificateData({ recipient, courseTitle, issuer, date }),
@@ -217,7 +227,7 @@ export function CertificateMakerTool() {
             courseTitle,
             date,
             verificationId,
-            { achievementLine: achievementLine.trim(), theme },
+            { achievementLine: achievementLine.trim(), template },
           );
           const { default: QRCode } = await import('qrcode');
           const qrDataUrl: string = await QRCode.toDataURL(data.verifyUrl, {
@@ -240,7 +250,73 @@ export function CertificateMakerTool() {
       cancelled = true;
       window.clearTimeout(timer);
     };
-  }, [ready, recipient, courseTitle, date, verificationId, achievementLine, theme]);
+  }, [ready, recipient, courseTitle, date, verificationId, achievementLine, template]);
+
+  // Thumbnail QR: one QR for the template thumbnails, from the
+  // same verification ID as the main preview (placeholder ID before
+  // the form is ready, so the thumbnails render even with an empty
+  // form). Generated once per ID — never on keystrokes.
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const { default: QRCode } = await import('qrcode');
+        const qrDataUrl: string = await QRCode.toDataURL(
+          `https://eduvelto.com/verify/${verificationId ?? 'EDU-2026-0000'}`,
+          { width: 360, margin: 1, errorCorrectionLevel: 'M' },
+        );
+        if (!cancelled) setThumbQr(qrDataUrl);
+      } catch {
+        // Thumbnails still render without a QR; the design shows.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [verificationId]);
+
+  // LIVE template thumbnails: each of the five templates rendered
+  // by the SAME shared renderer from the current form data (or
+  // placeholder name / title while the form is empty), scaled into
+  // a small canvas. These are real renders of each design, not
+  // static icons. Debounced like the main preview; a failed render
+  // leaves the previous thumbnail in place.
+  useEffect(() => {
+    let cancelled = false;
+    const timer = window.setTimeout(() => {
+      void (async () => {
+        try {
+          const data = buildMakerCertificateData(
+            recipient.trim() || 'Your Name',
+            courseTitle.trim() || 'Course Title',
+            date,
+            verificationId ?? 'EDU-2026-0000',
+            { achievementLine: achievementLine.trim() || 'for successfully completing' },
+          );
+          for (const tpl of CERTIFICATE_TEMPLATES) {
+            const canvas = await drawQuizCertificateCanvas(
+              { ...data, template: tpl.id },
+              thumbQr,
+            );
+            if (cancelled) return;
+            const slot = thumbRefs.current[tpl.id];
+            if (slot) {
+              slot.width = 320;
+              slot.height = 226;
+              const thumbCtx = slot.getContext('2d');
+              if (thumbCtx) thumbCtx.drawImage(canvas, 0, 0, 320, 226);
+            }
+          }
+        } catch {
+          // Leave the previous thumbnails in place.
+        }
+      })();
+    }, 400);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [recipient, courseTitle, date, achievementLine, verificationId, thumbQr]);
 
   // Paint the drawn certificate into the preview slot once React has
   // mounted it (the slot only exists after `cert` is set, so painting
@@ -260,7 +336,7 @@ export function CertificateMakerTool() {
     setCourseTitle('');
     setDate(todayIsoDate());
     setAchievementLine('for successfully completing');
-    setTheme('gold-navy');
+    setTemplate('wave');
     setVerificationId(null);
     setCert(null);
     certCanvasRef.current = null;
@@ -359,22 +435,69 @@ export function CertificateMakerTool() {
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
-        <div>
-          <label style={labelStyle} htmlFor="cert-theme">
+        <div style={{ gridColumn: '1 / -1' }}>
+          <span style={labelStyle} id="cert-template-label">
             {t({ bn: 'ডিজাইন', en: 'Design' })}
-          </label>
-          <select
-            id="cert-theme"
-            style={inputStyle}
-            value={theme}
-            onChange={(e) => setTheme(e.target.value as CertificateThemeId)}
+          </span>
+          <div
+            role="radiogroup"
+            aria-labelledby="cert-template-label"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+              gap: 10,
+            }}
           >
-            {CERTIFICATE_THEMES.map((th) => (
-              <option key={th.id} value={th.id}>
-                {t({ bn: th.nameBn, en: th.nameEn })}
-              </option>
-            ))}
-          </select>
+            {CERTIFICATE_TEMPLATES.map((tpl) => {
+              const selected = template === tpl.id;
+              return (
+                <button
+                  key={tpl.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={selected}
+                  data-template={tpl.id}
+                  onClick={() => setTemplate(tpl.id)}
+                  style={{
+                    padding: 6,
+                    borderRadius: 10,
+                    border: selected
+                      ? '3px solid #C9A227'
+                      : '1px solid var(--line)',
+                    background: selected
+                      ? 'var(--teal-soft)'
+                      : 'var(--surface)',
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                  }}
+                >
+                  <canvas
+                    ref={(el) => {
+                      thumbRefs.current[tpl.id] = el;
+                    }}
+                    width={320}
+                    height={226}
+                    style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 6 }}
+                    aria-label={t({ bn: `${tpl.nameBn} ডিজাইনের প্রিভিউ`, en: `${tpl.nameEn} design preview` })}
+                  />
+                  <span
+                    style={{
+                      display: 'block',
+                      marginTop: 6,
+                      fontSize: 13,
+                      fontWeight: selected ? 700 : 600,
+                      color: 'var(--heading)',
+                    }}
+                  >
+                    {t({ bn: tpl.nameBn, en: tpl.nameEn })}
+                    {selected
+                      ? t({ bn: ' ✓', en: ' ✓' })
+                      : ''}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
         <div>
           <label style={labelStyle} htmlFor="cert-occasion">

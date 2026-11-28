@@ -48,85 +48,174 @@ export interface QuizCertificateData {
    */
   achievementLine?: string;
   /**
-   * Premium theme — a colour map over the SAME layout (same wave
-   * header, ribbon, rosette, logo, fonts; only header / ribbon /
-   * accent colours differ). Defaults to 'gold-navy'; the quiz always
-   * uses the default.
+   * Template — which of the five designs to draw. Defaults to
+   * 'wave' (the quiz design); the maker lets the user pick any of
+   * the five. The quiz always uses the default.
    */
-  theme?: CertificateThemeId;
+  template?: CertificateTemplateId;
 }
 
 /**
- * Premium certificate themes — variants of the SAME wave layout,
- * not the old classic/modern/minimal templates (removed 28 Nov
- * 2026). Only the header / ribbon / accent colours differ; the wave
- * layout, logo and fonts are identical in all three.
- * Gold stays the accent in every theme so all three look premium.
+ * Five certificate templates, all drawn by the SHARED renderer in
+ * this file (owner order 28 Nov 2026). The WAVE is the original
+ * premium design (navy wave header, ribbon + rosette) and stays
+ * the quiz certificate's design. The other four are framed designs
+ * matched to the Pillow sample mocks in ~/workspace/your_files/:
+ * emerald-royal (emerald band, Bangla-first title), modern-minimal
+ * (white body, single gold frame, English-first), heritage
+ * (terracotta band + footer band, Bangla-first), classic-gold
+ * (navy band, English-first). The previous three colour variants
+ * of the wave layout are superseded by these five templates and
+ * removed.
+ *
+ * Common to all five: QR + verification ID, NO seal, NO signature
+ * lines, NO issuer person's name. The recipient name is script
+ * italic serif on the wave and BOLD serif on the other four.
  */
-export type CertificateThemeId = 'gold-navy' | 'teal-gold' | 'maroon-gold';
+export type CertificateTemplateId =
+  | 'wave'
+  | 'emerald-royal'
+  | 'modern-minimal'
+  | 'heritage'
+  | 'classic-gold';
 
-export interface CertificateTheme {
-  id: CertificateThemeId;
+export interface CertificateTemplate {
+  id: CertificateTemplateId;
   nameEn: string;
   nameBn: string;
-  /** Primary (wave header + ribbon) colour. */
-  navy: string;
+  /** Title order: Bangla-first for emerald / heritage. */
+  titleOrder: 'bn-first' | 'en-first';
+  /** Outer band colour; 'none' for the white minimal body. */
+  band: string | 'none';
+  /** Page body colour inside the band. */
+  body: string;
+  /** Primary colour (title / name on bn-first templates). */
+  primary: string;
   /** Darker shade of the primary, for the recipient name. */
-  navyDeep: string;
-  /** Accent (title, rosette, rules). */
+  primaryDeep: string;
+  /** Recipient-name colour (bold serif on framed templates). */
+  nameColor: string;
+  /** Accent (gold rules, borders, rosette). */
   gold: string;
   /** Darker gold, for secondary text. */
   goldDark: string;
-  /** Page background. */
-  ivory: string;
+  /** Teal used for the Bangla subtitle on en-first templates. */
+  teal: string;
   ink: string;
   muted: string;
+  /** Corner ornament on the gold frame. */
+  corner: 'diamond' | 'circle' | 'square' | 'none';
+  /** Terracotta footer band (heritage only). */
+  footerBand: boolean;
+  /** Verification-ID block position. */
+  idPosition: 'center' | 'right';
 }
 
-export const CERTIFICATE_THEMES: readonly CertificateTheme[] = [
+export const CERTIFICATE_TEMPLATES: readonly CertificateTemplate[] = [
   {
-    id: 'gold-navy',
-    nameEn: 'Gold & Navy',
-    nameBn: 'সোনালি ও নেভি',
-    navy: '#0A1F44',
-    navyDeep: '#071633',
+    id: 'wave',
+    nameEn: 'Wave',
+    nameBn: 'ওয়েভ',
+    titleOrder: 'en-first',
+    band: '#0A1F44',
+    body: '#FDFBF3',
+    primary: '#0A1F44',
+    primaryDeep: '#071633',
+    nameColor: '#071633',
     gold: '#C9A227',
     goldDark: '#8A6D1B',
-    ivory: '#FDFBF3',
+    teal: '#17807A',
     ink: '#1A1A1A',
     muted: '#5B6B8C',
+    corner: 'none',
+    footerBand: false,
+    idPosition: 'center',
   },
   {
-    id: 'teal-gold',
-    nameEn: 'Teal & Gold',
-    nameBn: 'টিল ও সোনালি',
-    navy: '#0B4F4A',
-    navyDeep: '#07332F',
-    gold: '#C9A227',
+    id: 'emerald-royal',
+    nameEn: 'Emerald Royal',
+    nameBn: 'এমারাল্ড রয়্যাল',
+    titleOrder: 'bn-first',
+    band: '#0B3D2E',
+    body: '#F7F5EC',
+    primary: '#0B4D33',
+    primaryDeep: '#073325',
+    nameColor: '#0B4D33',
+    gold: '#D9A441',
     goldDark: '#8A6D1B',
-    ivory: '#FDFBF3',
+    teal: '#17807A',
     ink: '#1A1A1A',
-    muted: '#4E6B68',
+    muted: '#6B7280',
+    corner: 'diamond',
+    footerBand: false,
+    idPosition: 'center',
   },
   {
-    id: 'maroon-gold',
-    nameEn: 'Maroon & Gold',
-    nameBn: 'মেরুন ও সোনালি',
-    navy: '#5B1F2A',
-    navyDeep: '#3D121B',
-    gold: '#C9A227',
+    id: 'modern-minimal',
+    nameEn: 'Modern Minimal',
+    nameBn: 'মডার্ন মিনিমাল',
+    titleOrder: 'en-first',
+    band: 'none',
+    body: '#FFFFFF',
+    primary: '#142B3B',
+    primaryDeep: '#0F2230',
+    nameColor: '#142B3B',
+    gold: '#D9A441',
     goldDark: '#8A6D1B',
-    ivory: '#FDFBF3',
+    teal: '#17807A',
     ink: '#1A1A1A',
-    muted: '#6E5560',
+    muted: '#6B7280',
+    corner: 'square',
+    footerBand: false,
+    idPosition: 'right',
+  },
+  {
+    id: 'heritage',
+    nameEn: 'Heritage',
+    nameBn: 'হেরিটেজ',
+    titleOrder: 'bn-first',
+    band: '#B4552D',
+    body: '#FBF3DF',
+    primary: '#B4552D',
+    primaryDeep: '#7A3416',
+    nameColor: '#3D1F0F',
+    gold: '#D9A441',
+    goldDark: '#8A6D1B',
+    teal: '#17807A',
+    ink: '#1A1A1A',
+    muted: '#6B7280',
+    corner: 'circle',
+    footerBand: true,
+    idPosition: 'center',
+  },
+  {
+    id: 'classic-gold',
+    nameEn: 'Classic Gold',
+    nameBn: 'ক্লাসিক গোল্ড',
+    titleOrder: 'en-first',
+    band: '#142B3B',
+    body: '#F4F1E9',
+    primary: '#142B3B',
+    primaryDeep: '#0F2230',
+    nameColor: '#142B3B',
+    gold: '#D9A441',
+    goldDark: '#8A6D1B',
+    teal: '#17807A',
+    ink: '#1A1A1A',
+    muted: '#6B7280',
+    corner: 'diamond',
+    footerBand: false,
+    idPosition: 'center',
   },
 ];
 
-/** Resolve a theme id; unknown ids fall back to the gold-navy default. */
-export function getCertificateTheme(
-  id: CertificateThemeId = 'gold-navy',
-): CertificateTheme {
-  return CERTIFICATE_THEMES.find((t) => t.id === id) ?? CERTIFICATE_THEMES[0];
+/** Resolve a template id; unknown ids fall back to the wave default. */
+export function getCertificateTemplate(
+  id: CertificateTemplateId = 'wave',
+): CertificateTemplate {
+  return (
+    CERTIFICATE_TEMPLATES.find((t) => t.id === id) ?? CERTIFICATE_TEMPLATES[0]
+  );
 }
 
 /** Default footer line for quiz certificates. */
@@ -171,7 +260,7 @@ export function buildQuizCertificateData(
  * rendered certificate shows no score line. The caller owns the
  * verification ID — mint it once with makeVerificationId() and keep
  * it in state, so the ID never changes on keystrokes. `opts` carries
- * the maker's customizations (achievement line + theme); both flow
+ * the maker's customizations (achievement line + template); both flow
  * into the preview canvas and the download, which are the same canvas.
  */
 export function buildMakerCertificateData(
@@ -179,7 +268,7 @@ export function buildMakerCertificateData(
   courseTitle: string,
   dateIso: string,
   verificationId: string,
-  opts?: { achievementLine?: string; theme?: CertificateThemeId },
+  opts?: { achievementLine?: string; template?: CertificateTemplateId },
 ): QuizCertificateData {
   const payload: CertificatePayload = {
     v: 1,
@@ -196,7 +285,7 @@ export function buildMakerCertificateData(
     verifyUrl: `https://eduvelto.com/verify/${verificationId}?d=${encodeCertificatePayload(payload)}`,
     footerNote: MAKER_CERTIFICATE_FOOTER,
     achievementLine: opts?.achievementLine,
-    theme: opts?.theme,
+    template: opts?.template,
   };
 }
 
@@ -293,7 +382,7 @@ function drawWaveEdge(ctx: CanvasRenderingContext2D, W: number): void {
 
 function drawGuilloche(
   ctx: CanvasRenderingContext2D,
-  theme: CertificateTheme,
+  theme: CertificateTemplate,
   x0: number,
   x1: number,
   y0: number,
@@ -302,7 +391,7 @@ function drawGuilloche(
   // Faint wavy lines across the body — decorative only, low opacity
   // so the text stays perfectly readable.
   ctx.save();
-  ctx.strokeStyle = theme.navy;
+  ctx.strokeStyle = theme.primary;
   ctx.globalAlpha = 0.05;
   ctx.lineWidth = 1.5;
   const rows = 12;
@@ -329,7 +418,7 @@ function drawGuilloche(
  */
 function drawRosette(
   ctx: CanvasRenderingContext2D,
-  theme: CertificateTheme,
+  theme: CertificateTemplate,
   cx: number,
   cy: number,
   logo: HTMLImageElement | null,
@@ -361,7 +450,7 @@ function drawRosette(
   // Centre content, top to bottom: small logo, "QUIZ", "AWARDS".
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = theme.navy;
+  ctx.fillStyle = theme.primary;
   ctx.font = '700 24px Poppins, "Hind Siliguri", sans-serif';
   if (logo) {
     const scale = Math.min(
@@ -388,9 +477,12 @@ function drawRosette(
 
 /**
  * Script detection for the recipient name (Bangla range
- * U+0980–U+09FF). Latin names get an elegant italic serif; Bangla
- * names get a bold Bangla sans. A mixed name (any Bangla character)
- * uses the Bangla stack, which also shapes Latin cleanly.
+ * U+0980–U+09FF). On the WAVE template Latin names get an elegant
+ * italic serif; Bangla names get a bold Bangla sans. On the four
+ * framed templates the name is BOLD serif in the template's name
+ * colour — Latin in bold Noto Serif Bengali / Georgia, Bangla in
+ * bold Noto Sans Bengali / Hind Siliguri. A mixed name (any Bangla
+ * character) uses the Bangla stack, which also shapes Latin cleanly.
  *
  * Fonts, checked against what the site loads (index.html): the site
  * loads Noto Serif Bengali (600/700, no italic file — the browser
@@ -399,11 +491,287 @@ function drawRosette(
  * the loaded fonts: Noto Serif Bengali for Latin italic serif,
  * Hind Siliguri for Bangla.
  */
-export function recipientNameFont(name: string): string {
-  if (/[\u0980-\u09FF]/.test(name)) {
+export function recipientNameFont(
+  name: string,
+  template: CertificateTemplateId = 'wave',
+): string {
+  const isBn = /[\u0980-\u09FF]/.test(name);
+  if (template !== 'wave') {
+    if (isBn) {
+      return '700 100px "Noto Sans Bengali", "Hind Siliguri", sans-serif';
+    }
+    return '700 100px "Noto Serif Bengali", Georgia, "DejaVu Serif", serif';
+  }
+  if (isBn) {
     return '700 120px "Noto Sans Bengali", "Hind Siliguri", sans-serif';
   }
   return 'italic 700 120px "Noto Serif Bengali", Georgia, "DejaVu Serif", serif';
+}
+
+/**
+ * Format an ISO date (YYYY-MM-DD) as "28 November 2026" for the
+ * framed templates (their samples show the long date). Falls back
+ * to the raw string when it does not parse. The wave template keeps
+ * the raw ISO date, exactly as before.
+ */
+export function formatCertificateDateLong(isoDate: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate.trim());
+  if (!m) return isoDate;
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
+  const month = months[Number(m[2]) - 1];
+  const day = Number(m[3]);
+  if (!month || day < 1 || day > 31) return isoDate;
+  return `${day} ${month} ${m[1]}`;
+}
+
+/** Footer line printed on the four framed templates (and in the
+ *  heritage footer band, in white). */
+export const FRAMED_CERTIFICATE_FOOTER =
+  'Eduvelto • Free Education for Bangladesh • eduvelto.com';
+
+function setLetterSpacing(
+  ctx: CanvasRenderingContext2D,
+  px: string,
+): void {
+  try {
+    (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = px;
+  } catch {
+    // Older browsers ignore letter spacing; the text still renders.
+  }
+}
+
+/**
+ * Draw one of the four FRAMED templates — matched proportionally
+ * to the 1600×1131 Pillow sample mocks (scale ×1.55 to 2480×1754):
+ * outer band + gold double border with corner ornaments, logo
+ * top-centre, letterspaced EDUVELTO, title (Bangla-first for
+ * emerald / heritage, English-first for minimal / classic), bold
+ * serif recipient name with a gold rule, course line, date, QR
+ * bottom-left with ONE clean "Scan to verify" caption + URL, and
+ * the verification ID (centre, or bottom-right on minimal).
+ * Heritage gets its terracotta footer band with white text.
+ * NO seal, NO signature lines anywhere. The score line appears
+ * only when a score exists (quiz); the maker has none, so it is
+ * omitted there.
+ */
+function drawFramedCertificate(
+  ctx: CanvasRenderingContext2D,
+  template: CertificateTemplate,
+  data: QuizCertificateData,
+  logo: HTMLImageElement | null,
+  qr: HTMLImageElement | null,
+): void {
+  const W = 2480;
+  const H = 1754;
+  const cx = W / 2;
+  const GOLD = template.gold;
+  const INK = template.ink;
+  const MUTED = template.muted;
+
+  // Outer band (none on minimal — the body is the whole page).
+  if (template.band !== 'none') {
+    ctx.fillStyle = template.band;
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = template.body;
+    ctx.fillRect(44, 44, W - 88, H - 88);
+  } else {
+    ctx.fillStyle = template.body;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // Gold double border + corner ornaments (minimal: one thin frame
+  // with small gold corner squares instead).
+  if (template.id === 'modern-minimal') {
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(44, 44, W - 88, H - 88);
+    ctx.fillStyle = GOLD;
+    for (const [ox, oy] of [[44, 44], [W - 44, 44], [44, H - 44], [W - 44, H - 44]] as const) {
+      ctx.fillRect(ox - 9, oy - 9, 18, 18);
+    }
+  } else {
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 6;
+    ctx.strokeRect(80, 80, W - 160, H - 160);
+    ctx.lineWidth = 3;
+    ctx.strokeRect(104, 104, W - 208, H - 208);
+    for (const [ox, oy] of [[80, 80], [W - 80, 80], [80, H - 80], [W - 80, H - 80]] as const) {
+      if (template.corner === 'diamond') {
+        ctx.fillStyle = GOLD;
+        ctx.beginPath();
+        ctx.moveTo(ox, oy - 22);
+        ctx.lineTo(ox + 22, oy);
+        ctx.lineTo(ox, oy + 22);
+        ctx.lineTo(ox - 22, oy);
+        ctx.closePath();
+        ctx.fill();
+      } else if (template.corner === 'circle') {
+        ctx.fillStyle = GOLD;
+        ctx.beginPath();
+        ctx.arc(ox, oy, 16, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = template.goldDark;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(ox, oy, 16, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.strokeStyle = GOLD;
+      }
+    }
+  }
+
+  // Logo top-centre (wordmark is the EDUVELTO text below, so a
+  // missing logo leaves no gap in the design).
+  if (logo) {
+    const lh = 150;
+    const lw = (logo.naturalWidth / logo.naturalHeight) * lh;
+    ctx.drawImage(logo, cx - lw / 2, 130, lw, lh);
+  }
+
+  // Letterspaced EDUVELTO + short gold rule.
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = template.primary;
+  ctx.font = '800 62px Poppins, "Hind Siliguri", sans-serif';
+  setLetterSpacing(ctx, '22px');
+  ctx.fillText('EDUVELTO', cx, 350);
+  setLetterSpacing(ctx, '0px');
+  ctx.strokeStyle = GOLD;
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(cx - 170, 428);
+  ctx.lineTo(cx + 170, 428);
+  ctx.stroke();
+
+  // Title — Bangla-first (emerald / heritage) or English-first
+  // (minimal / classic), exactly as in the samples.
+  let y = 540;
+  if (template.titleOrder === 'bn-first') {
+    ctx.fillStyle = template.primary;
+    ctx.font = '700 88px "Hind Siliguri", "Noto Sans Bengali", sans-serif';
+    ctx.fillText('সাফল্যের সনদপত্র', cx, y);
+    y += 105;
+    ctx.fillStyle = MUTED;
+    ctx.font = '700 54px "Noto Serif Bengali", Georgia, serif';
+    ctx.fillText('Certificate of Achievement', cx, y);
+    y += 95;
+  } else {
+    ctx.fillStyle = template.primary;
+    ctx.font = '700 88px "Noto Serif Bengali", Georgia, "DejaVu Serif", serif';
+    ctx.fillText('Certificate of Achievement', cx, y);
+    y += 105;
+    ctx.fillStyle = template.teal;
+    ctx.font = '700 50px "Hind Siliguri", "Noto Sans Bengali", sans-serif';
+    ctx.fillText('সাফল্যের সনদপত্র', cx, y);
+    y += 95;
+  }
+
+  // Presented-to line + BOLD serif recipient name + gold rule.
+  ctx.fillStyle = MUTED;
+  ctx.font = '400 40px "Hind Siliguri", Poppins, sans-serif';
+  ctx.fillText('This certificate is proudly presented to', cx, y);
+  y += 95;
+  ctx.fillStyle = template.nameColor;
+  ctx.font = recipientNameFont(data.recipientName, template.id);
+  const nameLines = wrapText(ctx, data.recipientName, W - 500);
+  for (const line of nameLines) {
+    ctx.fillText(line, cx, y);
+    y += 122;
+  }
+  y += 18;
+  ctx.strokeStyle = GOLD;
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(cx - 230, y);
+  ctx.lineTo(cx + 230, y);
+  ctx.stroke();
+  y += 70;
+
+  // Course line: achievement line + course title as one wrapped
+  // line, then the score (quiz only) and the long-form date.
+  ctx.fillStyle = INK;
+  ctx.font = '400 44px "Hind Siliguri", Poppins, sans-serif';
+  const courseText = `${data.achievementLine ?? 'for successfully completing'} ${data.quizName}`.trim();
+  const courseLines = wrapText(ctx, courseText, W - 500);
+  for (const line of courseLines) {
+    ctx.fillText(line, cx, y);
+    y += 58;
+  }
+  y += 18;
+  if (data.score !== undefined && data.total !== undefined) {
+    ctx.fillStyle = template.primary;
+    ctx.font = '700 44px "Hind Siliguri", Poppins, sans-serif';
+    ctx.fillText(`Score: ${data.score} out of ${data.total}`, cx, y);
+    y += 62;
+  }
+  ctx.fillStyle = MUTED;
+  ctx.font = '400 38px "Hind Siliguri", Poppins, sans-serif';
+  ctx.fillText(formatCertificateDateLong(data.dateIso), cx, y);
+
+  // Bottom row: QR bottom-left with ONE clean caption + URL.
+  // (The minimal sample mock doubled the caption — that glitch is
+  // NOT reproduced; the caption is drawn exactly once here.)
+  const qrSize = template.footerBand ? 190 : 210;
+  const qrX = 170;
+  const qrTop = template.footerBand ? 1270 : 1290;
+  if (qr) {
+    ctx.drawImage(qr, qrX, qrTop, qrSize, qrSize);
+  }
+  ctx.textAlign = 'left';
+  ctx.fillStyle = MUTED;
+  ctx.font = '400 28px Poppins, "Hind Siliguri", sans-serif';
+  ctx.fillText('Scan to verify', qrX, qrTop + qrSize + 34);
+  ctx.font = '400 24px Poppins, "Hind Siliguri", sans-serif';
+  ctx.fillText(`eduvelto.com/verify/${data.verificationId}`, qrX, qrTop + qrSize + 68);
+
+  // Verification ID: centre (emerald / heritage / classic) or
+  // bottom-right (minimal).
+  if (template.idPosition === 'right') {
+    ctx.textAlign = 'right';
+    ctx.fillStyle = MUTED;
+    ctx.font = '700 32px Poppins, "Hind Siliguri", sans-serif';
+    setLetterSpacing(ctx, '4px');
+    ctx.fillText('VERIFICATION ID', W - 170, 1330);
+    setLetterSpacing(ctx, '0px');
+    ctx.fillStyle = template.primary;
+    ctx.font = '700 56px Poppins, "Hind Siliguri", sans-serif';
+    ctx.fillText(data.verificationId, W - 170, 1400);
+    ctx.fillStyle = MUTED;
+    ctx.font = '400 30px Poppins, "Hind Siliguri", sans-serif';
+    ctx.fillText('Verify at eduvelto.com/verify', W - 170, 1462);
+  } else {
+    ctx.textAlign = 'center';
+    ctx.fillStyle = MUTED;
+    ctx.font = '700 32px Poppins, "Hind Siliguri", sans-serif';
+    setLetterSpacing(ctx, '4px');
+    ctx.fillText('VERIFICATION ID', cx, 1330);
+    setLetterSpacing(ctx, '0px');
+    ctx.fillStyle = template.primary;
+    ctx.font = '700 56px Poppins, "Hind Siliguri", sans-serif';
+    ctx.fillText(data.verificationId, cx, 1400);
+    ctx.fillStyle = MUTED;
+    ctx.font = '400 30px Poppins, "Hind Siliguri", sans-serif';
+    ctx.fillText('Verify at eduvelto.com/verify', cx, 1462);
+  }
+
+  // Footer: terracotta band with white text (heritage) or the
+  // plain footer line (emerald / minimal / classic).
+  if (template.footerBand) {
+    ctx.fillStyle = template.band === 'none' ? template.primary : template.band;
+    ctx.fillRect(104, 1520, W - 208, 130);
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '400 34px Poppins, "Hind Siliguri", sans-serif';
+    ctx.fillText(FRAMED_CERTIFICATE_FOOTER, cx, 1585);
+  } else {
+    ctx.textAlign = 'center';
+    ctx.fillStyle = MUTED;
+    ctx.font = '400 30px Poppins, "Hind Siliguri", sans-serif';
+    ctx.fillText(FRAMED_CERTIFICATE_FOOTER, cx, 1614);
+  }
 }
 
 export async function drawQuizCertificateCanvas(
@@ -435,14 +803,20 @@ export async function drawQuizCertificateCanvas(
   canvas.height = H;
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('Canvas is unavailable in this browser');
-  // Theme colours — the default (gold-navy) keeps the original
-  // palette's navy + gold; themes differ ONLY in header / ribbon /
-  // accent colours, never in layout.
-  const theme = getCertificateTheme(data.theme);
-  const NAVY = theme.navy;
-  const NAVY_DEEP = theme.navyDeep;
+  // Template dispatch — the wave is the default (and the quiz's
+  // only design); the four framed templates share one renderer.
+  const template = getCertificateTemplate(data.template);
+  if (template.id !== 'wave') {
+    drawFramedCertificate(ctx, template, data, logo, qr);
+    return canvas;
+  }
+  // Theme colours — the wave keeps the original palette's navy +
+  // gold; the template's primary IS the wave navy.
+  const theme = template;
+  const NAVY = theme.primary;
+  const NAVY_DEEP = theme.primaryDeep;
   const GOLD = theme.gold;
-  const IVORY = theme.ivory;
+  const IVORY = theme.body;
   const INK = theme.ink;
   const MUTED = theme.muted;
   // Body text is centred clear of the left ribbon.
