@@ -1860,6 +1860,18 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'How to create and scan QR codes and compress images — links, Wi-Fi, contact details and safe use. Draft lesson — awaiting teacher review.',
     crumbEn: 'QR & Images',
   },
+  // Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
+  // Sentences — Class 3, general version, no personal name.
+  '/guides/negative-sentences-class-3': {
+    title: 'না-বোধক বাক্য — Negative Sentences (Class 3) | Eduvelto',
+    description:
+      'না-বোধক বাক্য কী, do not / does not / did not কখন বসে, আর do/does/did-এর পর ক্রিয়া কেন মূল রূপে ফেরে — তৃতীয় শ্রেণির সহজ গাইড, উদাহরণ ও অনুশীলনসহ। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'না-বোধক বাক্য',
+    titleEn: 'Negative Sentences — না-বোধক বাক্য (Class 3) | Eduvelto',
+    descriptionEn:
+      'What a negative sentence is, when to use do not / does not / did not, and why the verb returns to its base form after do/does/did — a simple Class 3 guide with examples and practice. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Negative Sentences',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -2596,8 +2608,9 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   if (path === '/learn') {
     // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1,
     // wave 2, wave 3, wave 4, wave 5 and wave 10; Phase 2, 25 Nov
-    // 2026: 56 guides; trust/content batch, 28 Nov 2026: 66 guides):
-    // the hub lists the 66 public guides, the two real lessons and
+    // 2026: 56 guides; trust/content batch, 28 Nov 2026: 66 guides;
+    // eleventh guide, 28 Nov 2026: 67 guides):
+    // the hub lists the 67 public guides, the two real lessons and
     // the BCS English practice hub — the same links the page renders,
     // in the same order.
     jsonLd.push({
@@ -3004,18 +3017,24 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         {
           '@type': 'ListItem',
           position: 67,
+          name: lang === 'bn' ? 'না-বোধক বাক্য — Negative Sentences (Class 3)' : 'Negative Sentences — না-বোধক বাক্য (Class 3)',
+          url: `${SITE_URL}/${lang}/guides/negative-sentences-class-3`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 68,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 68,
+          position: 69,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 69,
+          position: 70,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/${lang}/jobs/bcs/practice/english`,
         },
@@ -3024,7 +3043,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   }
   if (path === '/guides') {
     // ItemList (Phase 2, 25 Nov 2026; trust/content batch, 28 Nov
-    // 2026: 25 guides): the Study Guides hub lists the long-form
+    // 2026; eleventh guide, 28 Nov 2026: 26 guides): the Study Guides hub lists the long-form
     // bilingual guides — built from the same data the page renders,
     // in the same order, so the JSON-LD can never drift from the page.
     jsonLd.push({

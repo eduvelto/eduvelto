@@ -1291,4 +1291,34 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
       { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
     ],
   },
+  // Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
+  // Sentences for Class 3 — the general site version, no personal
+  // name anywhere. do/does/did + not, the V1 golden rule, am/is/are
+  // + not, can/will + not, never, a mistakes table and practice
+  // with an answer key. 700+ words in Bangla AND English.
+  {
+    slug: 'negative-sentences-class-3',
+    path: '/guides/negative-sentences-class-3',
+    titleBn: 'না-বোধক বাক্য — Negative Sentences (Class 3)',
+    titleEn: 'Negative Sentences — না-বোধক বাক্য (Class 3)',
+    crumbBn: 'না-বোধক বাক্য',
+    category: 'nctb',
+    descriptionBn:
+      'না-বোধক বাক্য কী, do not / does not / did not কখন বসে, আর do/does/did-এর পর ক্রিয়া কেন মূল রূপে ফেরে — তৃতীয় শ্রেণির সহজ গাইড, উদাহরণ ও অনুশীলনসহ।',
+    descriptionEn:
+      'What a negative sentence is, when to use do not / does not / did not, and why the verb returns to its base form after do/does/did — a simple Class 3 guide with examples and practice.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/learn/english-grammar-basics', bn: 'ইংরেজি ব্যাকরণের মূল নিয়ম', en: 'English Grammar Basics' },
+      { to: '/learn/bcs-english-tense', bn: 'টেন্স — পাঠ', en: 'Tense — Lesson' },
+      { to: '/learn/english-writing-basics', bn: 'ইংরেজি লেখার মূল নিয়ম', en: 'English Writing Basics' },
+      { to: '/learn/english-vocabulary-building', bn: 'ইংরেজি শব্দভান্ডার গড়া', en: 'English Vocabulary Building' },
+      { to: '/guides/nctb-books-study-method', bn: 'NCTB বই দিয়ে পড়ার পদ্ধতি', en: 'How to Study with NCTB Books' },
+      { to: '/jobs/bcs/practice/english', bn: 'বিসিএস ইংরেজি অনুশীলন', en: 'BCS English practice' },
+      { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
 ];

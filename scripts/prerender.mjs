@@ -216,6 +216,9 @@ export const PRERENDER_STATIC_PATHS = [
   '/guides/bmi-healthy-weight-guide',
   '/guides/age-calculation-guide',
   '/guides/qr-code-image-tools-guide',
+  // Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
+  // Sentences — Class 3, general version.
+  '/guides/negative-sentences-class-3',
   '/learn',
   '/admissions',
   '/admissions/national-university',

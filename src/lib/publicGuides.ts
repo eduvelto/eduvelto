@@ -7,6 +7,8 @@
 // EXTENDED 28 Nov 2026, trust/content batch (owner order): +10
 // tool-tied guides, 66 total — every formula/rule grounded in the
 // tools' own logic (src/lib/tools/), 800+ words in Bn AND En each.
+// EXTENDED 28 Nov 2026, eleventh guide (owner order 11:44): +1,
+// 67 total — Negative Sentences, Class 3, general version.
 //
 // 41 original public guides, visible to Googlebot WITHOUT login.
 // Static data ONLY — zero Firestore reads, no login. The prose is

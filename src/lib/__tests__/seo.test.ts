@@ -1350,7 +1350,7 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     }
   });
 
-  it('/learn hub emits an ItemList of its 66 guides + 2 lessons + the practice hub', () => {
+  it('/learn hub emits an ItemList of its 67 guides + 2 lessons + the practice hub', () => {
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
@@ -1420,6 +1420,7 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
       `${SITE_URL}/bn/guides/bmi-healthy-weight-guide`,
       `${SITE_URL}/bn/guides/age-calculation-guide`,
       `${SITE_URL}/bn/guides/qr-code-image-tools-guide`,
+      `${SITE_URL}/bn/guides/negative-sentences-class-3`,
       `${SITE_URL}/bn/learn/bcs-english-tense`,
       `${SITE_URL}/bn/learn/bcs-english-preposition`,
       `${SITE_URL}/bn/jobs/bcs/practice/english`,
@@ -1529,8 +1530,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('all 66 guides resolve with draft wording and Article JSON-LD', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(66);
+  it('all 67 guides resolve with draft wording and Article JSON-LD', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(67);
     for (const guide of PUBLIC_GUIDES) {
       const seo = resolveRouteSeo(guide.path);
       expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
@@ -1557,7 +1558,7 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('/guides hub emits an ItemList of its 25 Study Guides', () => {
+  it('/guides hub emits an ItemList of its 26 Study Guides', () => {
     const seo = resolveRouteSeo('/guides')!;
     const list = (seo.jsonLd as Array<Record<string, unknown>>).find(
       (o) => o['@type'] === 'ItemList',
@@ -1569,7 +1570,7 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
         (g) => `${SITE_URL}/bn${g.path}`,
       ),
     );
-    expect(items).toHaveLength(25);
+    expect(items).toHaveLength(26);
   });
 
 describe('/founder SEO (Phase 2, 25 Nov 2026)', () => {

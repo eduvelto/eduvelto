@@ -787,6 +787,9 @@ export default function App() {
         <Route path="guides/bmi-healthy-weight-guide" element={<PublicGuidePage guide="bmi-healthy-weight-guide" />} />
         <Route path="guides/age-calculation-guide" element={<PublicGuidePage guide="age-calculation-guide" />} />
         <Route path="guides/qr-code-image-tools-guide" element={<PublicGuidePage guide="qr-code-image-tools-guide" />} />
+        {/* Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
+            Sentences — Class 3, general version, no personal name. */}
+        <Route path="guides/negative-sentences-class-3" element={<PublicGuidePage guide="negative-sentences-class-3" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches

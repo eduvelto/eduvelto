@@ -7,10 +7,11 @@
 // EXTENDED 25 Nov 2026, Phase 2: 56 guides — the 15 bilingual
 // Study Guides at /guides/<slug>, 700+ words in Bangla AND English).
 // EXTENDED 28 Nov 2026, trust/content batch (owner order): 66 guides
+// EXTENDED 28 Nov 2026, eleventh guide (owner order 11:44): 67 guides
 // — 10 new tool-tied Study Guides at /guides/<slug>, 800+ words in
 // Bangla AND English each, every formula grounded in the tools' logic.
 //
-// The 66 guides are static public data, so the tests guard what
+// The 67 guides are static public data, so the tests guard what
 // matters most: exactly 35 guides with unique slugs/paths, 400–700
 // words each (pinned to the content pack's counts), every internal
 // link pointing at a real route, the draft status never claimed as
@@ -32,8 +33,8 @@ import { PUBLIC_GUIDE_META } from '../publicGuideMeta';
 
 describe('public guides — meta/body split (25 Nov 2026, entry-chunk budget)', () => {
   it('meta + bodies cover the same 66 slugs as the joined PUBLIC_GUIDES', () => {
-    expect(PUBLIC_GUIDE_META).toHaveLength(66);
-    expect(Object.keys(PUBLIC_GUIDE_BODIES)).toHaveLength(66);
+    expect(PUBLIC_GUIDE_META).toHaveLength(67);
+    expect(Object.keys(PUBLIC_GUIDE_BODIES)).toHaveLength(67);
     const slugs = PUBLIC_GUIDES.map((g) => g.slug);
     expect(PUBLIC_GUIDE_META.map((m) => m.slug).sort()).toEqual([...slugs].sort());
     expect(Object.keys(PUBLIC_GUIDE_BODIES).sort()).toEqual([...slugs].sort());
@@ -226,6 +227,9 @@ const REAL_ROUTES = new Set([
   '/guides/bmi-healthy-weight-guide',
   '/guides/age-calculation-guide',
   '/guides/qr-code-image-tools-guide',
+  // Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
+  // Sentences — Class 3.
+  '/guides/negative-sentences-class-3',
   '/tools/ssc-hsc-gpa-calculator',
   '/tools/nu-cgpa-calculator',
   '/tools/cgpa-to-percentage-converter',
@@ -261,11 +265,11 @@ const REAL_ROUTES = new Set([
 ]);
 
 describe('public guides', () => {
-  it('has exactly the 66 guides, with unique slugs, paths and titles', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(66);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(66);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(66);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(66);
+  it('has exactly the 67 guides, with unique slugs, paths and titles', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(67);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(67);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(67);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(67);
     for (const g of PUBLIC_GUIDES) {
       // Old guides live at /learn/<slug>; Phase 2 Study Guides at /guides/<slug>.
       expect(g.path).toBe(
@@ -287,7 +291,7 @@ describe('public guides', () => {
   });
 
   it('Phase 2 Study Guides are 700+ words in Bangla AND English', () => {
-    expect(PHASE2_GUIDES).toHaveLength(25);
+    expect(PHASE2_GUIDES).toHaveLength(26);
     for (const g of PHASE2_GUIDES) {
       expect(publicGuideWordCount(g), `${g.slug} Bn words`).toBeGreaterThanOrEqual(700);
       expect(publicGuideWordCountEn(g), `${g.slug} En words`).toBeGreaterThanOrEqual(700);
@@ -510,7 +514,7 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
     'bcs-science-ict-preparation',
   ];
 
-  it('has the planned distribution: BCS 5, Primary 3, Bank 2, NTRCA 2, Admission 4, NCTB 2, Tools 5, Finance 1, Health 1', () => {
+  it('has the planned distribution: BCS 5, Primary 3, Bank 2, NTRCA 2, Admission 4, NCTB 3, Tools 5, Finance 1, Health 1', () => {
     const counts = new Map<string, number>();
     for (const g of PHASE2_GUIDES) counts.set(g.category!, (counts.get(g.category!) ?? 0) + 1);
     expect(Object.fromEntries(counts)).toEqual({
@@ -519,7 +523,7 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
       bank: 2,
       ntrca: 2,
       admission: 4,
-      nctb: 2,
+      nctb: 3,
       tools: 5,
       finance: 1,
       health: 1,
@@ -673,5 +677,38 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
     const ageCalc = publicGuideBySlug('age-calculation-guide')!;
     expect(ageCalc.bodyBn.join(' ')).toContain('২৬ বছর ১০ মাস ১২ দিন');
     expect(ageCalc.bodyEn!.join(' ')).toContain('26 years, 10 months and 12 days');
+  });
+
+  it('eleventh guide (28 Nov 2026, 11:44): Negative Sentences — Class 3, general version', () => {
+    // Owner order 28 Nov 2026 — the site guide is the GENERAL
+    // version: no personal name anywhere in it.
+    const g = publicGuideBySlug('negative-sentences-class-3')!;
+    expect(g.category).toBe('nctb');
+    expect(g.updatedAt).toBe('2026-11-28');
+    expect(g.path).toBe('/guides/negative-sentences-class-3');
+    expect(publicGuideWordCount(g)).toBeGreaterThanOrEqual(700);
+    expect(publicGuideWordCountEn(g)).toBeGreaterThanOrEqual(700);
+    const bn = g.bodyBn.join(' ');
+    const en = g.bodyEn!.join(' ');
+    expect(bn).not.toContain('মিজান');
+    expect(en).not.toContain('Mizan');
+    // The briefed content, all present in both languages.
+    expect(bn).toContain('The fisherman does not repair his net');
+    expect(bn).toContain('The fisherman did not repair his net');
+    expect(en).toContain('The fisherman does not repair his net');
+    expect(en).toContain('The fisherman did not repair his net');
+    expect(bn).toContain('সোনালি নিয়ম');
+    expect(bn).toContain('মূল রূপে');
+    expect(bn).toContain('cannot');
+    expect(bn).toContain('never');
+    expect(bn).toContain('উত্তরমালা');
+    expect(en).toContain('golden rule');
+    expect(en).toContain('base form');
+    expect(en).toContain('Answer key');
+    // The V1 rule: no -s/-es/-ed after do/does/did.
+    expect(bn).toContain('He does not go');
+    expect(bn).toContain('She did not play');
+    expect(en).toContain('He does not go');
+    expect(en).toContain('She did not play');
   });
 });
