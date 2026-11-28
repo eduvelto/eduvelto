@@ -6,6 +6,11 @@
 // Unlock (Watch 30s Ad) stays disabled until AdSense approves (honest
 // copy from src/lib/rewardedAd.ts; no ad API, no fake timer).
 //
+// CORRECTED SPEC (28 Nov 2026, quiz + certificate batch): the issuer
+// is ALWAYS Eduvelto — no issuer-name input, no person's name, no
+// signature of any person on the certificate. The issuer side is
+// only Eduvelto's name + the official Eduvelto seal.
+//
 // jspdf is loaded with a dynamic import() only (never a static
 // import), so it stays out of the main bundle. Pure shaping /
 // validation / filename logic lives in src/lib/tools/certificateMaker.ts.
@@ -138,7 +143,9 @@ export function CertificateMakerTool() {
   const { t, lang } = useLanguage();
   const [recipient, setRecipient] = useState('');
   const [courseTitle, setCourseTitle] = useState('');
-  const [issuer, setIssuer] = useState('');
+  // Issuer is fixed: Eduvelto only — no person's name, no signature
+  // (corrected spec, 28 Nov 2026).
+  const issuer = 'Eduvelto';
   const [date, setDate] = useState(() => todayIsoDate());
   const [template, setTemplate] = useState<CertificateTemplate>('classic');
   const [busy, setBusy] = useState(false);
@@ -216,11 +223,14 @@ export function CertificateMakerTool() {
     ctx.fillStyle = style.accentColor;
     ctx.font = font(48, true);
     ctx.fillText(courseTitle.trim(), cx, 120 * mm);
-    // Date + issuer
+    // Date + issuer (Eduvelto only — no person's name, no signature).
     ctx.fillStyle = '#1a1a1a';
     ctx.font = font(34, false);
     ctx.fillText(formatCertificateDate(date), cx, 156 * mm);
-    ctx.fillText(issuer.trim(), cx, 172 * mm);
+    ctx.fillText('Eduvelto', cx, 172 * mm);
+    ctx.font = font(24, false);
+    ctx.fillStyle = '#8a6d1b';
+    ctx.fillText('Official Seal — Eduvelto', cx, 182 * mm);
     return canvas;
   }
 
@@ -252,8 +262,8 @@ export function CertificateMakerTool() {
         </h2>
         <p style={{ color: 'rgba(255, 255, 255, 0.92)', fontSize: 14, margin: 0 }}>
           {t({
-            bn: 'নাম, কোর্স ও প্রতিষ্ঠানের নাম দিন — সার্টিফিকেট বানানো সম্পূর্ণ ফ্রি। পিডিএফ ডাউনলোড করতে ফ্রি ডাউনলোড চাপুন। সব কাজ আপনার ডিভাইসেই হয়।',
-            en: 'Enter the name, course and issuer — making the certificate is completely free. Press Free Download for the PDF. Everything happens on your device.',
+            bn: 'নাম ও কোর্সের নাম দিন — সার্টিফিকেট বানানো সম্পূর্ণ ফ্রি। পিডিএফ ডাউনলোড করতে ফ্রি ডাউনলোড চাপুন। সব কাজ আপনার ডিভাইসেই হয়। প্রদানকারী: Eduvelto।',
+            en: 'Enter the name and course — making the certificate is completely free. Press Free Download for the PDF. Everything happens on your device. Issued by: Eduvelto.',
           })}
         </p>
         <span style={trustChipStyle}>
@@ -285,19 +295,6 @@ export function CertificateMakerTool() {
             value={courseTitle}
             onChange={(e) => setCourseTitle(e.target.value)}
             placeholder={t({ bn: 'যেমন: ইংরেজি স্পোকেন কোর্স', en: 'e.g. English Spoken Course' })}
-          />
-        </div>
-        <div>
-          <label style={labelStyle} htmlFor="cert-issuer">
-            {t({ bn: 'প্রদানকারী প্রতিষ্ঠান', en: 'Issuer name' })}
-          </label>
-          <input
-            id="cert-issuer"
-            style={inputStyle}
-            type="text"
-            value={issuer}
-            onChange={(e) => setIssuer(e.target.value)}
-            placeholder={t({ bn: 'যেমন: Eduvelto', en: 'e.g. Eduvelto' })}
           />
         </div>
         <div>
@@ -388,7 +385,10 @@ export function CertificateMakerTool() {
             <p style={{ margin: '0 0 4px', fontSize: 14, color: 'var(--heading)' }}>
               {formatCertificateDate(date)}
             </p>
-            <p style={{ margin: 0, fontSize: 14, color: 'var(--heading)' }}>{issuer.trim()}</p>
+            <p style={{ margin: 0, fontSize: 14, color: 'var(--heading)' }}>Eduvelto</p>
+            <p style={{ margin: '4px 0 0', fontSize: 13, color: 'var(--muted)' }}>
+              {t({ bn: 'Eduvelto-র অফিসিয়াল সিল', en: 'Official Seal — Eduvelto' })}
+            </p>
           </div>
           <p style={noteStyle}>
             {t({
@@ -430,8 +430,8 @@ export function CertificateMakerTool() {
       ) : (
         <p style={errorStyle} role="alert">
           {t({
-            bn: 'সার্টিফিকেট দেখতে নাম, কোর্স, প্রতিষ্ঠান ও সঠিক তারিখ দিন।',
-            en: 'Enter the name, course, issuer and a valid date to see the certificate.',
+            bn: 'সার্টিফিকেট দেখতে নাম, কোর্স ও সঠিক তারিখ দিন।',
+            en: 'Enter the name, course and a valid date to see the certificate.',
           })}
         </p>
       )}

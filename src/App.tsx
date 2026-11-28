@@ -154,6 +154,8 @@ const ChapterPage = lazy(() => import('./pages/ChapterPage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
 const QuizPage = lazy(() => import('./pages/QuizPage'));
 const QuizResultPage = lazy(() => import('./pages/QuizResultPage'));
+const FreeQuizPage = lazy(() => import('./pages/FreeQuizPage'));
+const VerifyCertificatePage = lazy(() => import('./pages/VerifyCertificatePage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 const AdminAds = lazy(() => import('./pages/AdminAds'));
 const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage'));
@@ -870,6 +872,13 @@ export default function App() {
             (the page gates it). Not prerendered, not in the
             sitemap (schedule is dynamic). */}
         <Route path="live-exam" element={<LiveExamPage />} />
+        {/* Free Quiz + certificate verification (owner order 28 Nov
+            2026): public, no login, no Firestore — same
+            locale-prefixed duplicate-routes pattern as /exam. The
+            verify route always renders its page (valid payload or
+            on-page "could not be verified"), never a 404. */}
+        <Route path="free-quiz" element={<FreeQuizPage />} />
+        <Route path="verify/:id" element={<VerifyCertificatePage />} />
         <Route path="progress" element={<ProgressPage />} />
         <Route path="routine" element={<RoutinePage />} />
         <Route path="social" element={<SocialPage />} />
@@ -1009,6 +1018,8 @@ export default function App() {
           <Route path="approvals" element={<CeoApprovalsPage />} />
         </Route>
         <Route path="/exam" element={<ExamPage />} />
+        <Route path="/free-quiz" element={<FreeQuizPage />} />
+        <Route path="/verify/:id" element={<VerifyCertificatePage />} />
         <Route path="/mock-exam" element={<MockExamPage />} />
         <Route path="/live-exam" element={<LiveExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />

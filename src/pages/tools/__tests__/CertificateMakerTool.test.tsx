@@ -1,10 +1,12 @@
 // Eduvelto — server-rendered HTML evidence for CertificateMakerTool.
 //
 // renderToString runs in plain node (no jsdom): it proves the form
-// (recipient / course / issuer / date / template) renders in bn AND
-// en, that the empty state shows no preview, and that the download
-// path is the <RewardedAdButton> (Free Download live, Unlock
-// disabled). Pure shaping / validation / filename logic is covered by
+// (recipient / course / date / template — issuer is FIXED to Eduvelto
+// since 28 Nov 2026, corrected spec: no issuer-name input, no
+// person's name, no signature) renders in bn AND en, that the empty
+// state shows no preview, and that the download path is the
+// <RewardedAdButton> (Free Download live, Unlock disabled). Pure
+// shaping / validation / filename logic is covered by
 // src/lib/__tests__/tools/certificateMaker.test.ts. jspdf rendering
 // is covered only by a source smoke check: the component must load
 // jspdf via dynamic import() and never via a static import.
@@ -55,12 +57,14 @@ describe('CertificateMakerTool rendered HTML', () => {
     const html = await renderTool();
     expect(html).toContain('id="cert-recipient"');
     expect(html).toContain('id="cert-course"');
-    expect(html).toContain('id="cert-issuer"');
+    // Corrected spec (28 Nov 2026): no issuer input at all.
+    expect(html).not.toContain('id="cert-issuer"');
+    expect(html).not.toContain('প্রদানকারী প্রতিষ্ঠান');
     expect(html).toContain('id="cert-date"');
     expect(html).toContain('id="cert-template"');
     expect(html).toContain('প্রাপকের নাম');
     expect(html).toContain('কোর্স / অনুষ্ঠানের নাম');
-    expect(html).toContain('প্রদানকারী প্রতিষ্ঠান');
+    expect(html).toContain('প্রদানকারী: Eduvelto');
     expect(html).toContain('তারিখ');
     expect(html).toContain('ক্লাসিক');
     expect(html).toContain('মডার্ন');
@@ -72,7 +76,8 @@ describe('CertificateMakerTool rendered HTML', () => {
     const html = await renderTool('en');
     expect(html).toContain('Recipient name');
     expect(html).toContain('Course / event title');
-    expect(html).toContain('Issuer name');
+    expect(html).not.toContain('Issuer name');
+    expect(html).toContain('Issued by: Eduvelto');
     expect(html).toContain('Classic');
     expect(html).toContain('Modern');
     expect(html).toContain('Minimal');

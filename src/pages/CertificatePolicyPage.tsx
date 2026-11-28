@@ -49,14 +49,17 @@ export default function CertificatePolicyPage() {
           <p style={{ margin: 0 }}>
             <strong>
               Eduvelto issues no certificate, diploma, testimonial or any other kind of recognised
-              qualification (credential) — not now, and not on completing any course or exam.
+              qualification (credential) — not now, and not on completing any course or exam. The
+              only certificates on Eduvelto are free practice-quiz certificates: a self-contained
+              record of a practice score, whose details live only in its own verify link — they
+              carry no recognised value with any employer, institution or authority.
             </strong>
           </p>
         }
       >
         <p style={{ margin: 0 }}>
           <strong>
-            Eduvelto কোনো সার্টিফিকেট, ডিপ্লোমা, সনদ বা অন্য কোনো ধরনের স্বীকৃত যোগ্যতা (credential) দেয় না — এখনো নয়, কোনো কোর্স বা পরীক্ষা শেষেও নয়।
+            Eduvelto কোনো সার্টিফিকেট, ডিপ্লোমা, সনদ বা অন্য কোনো ধরনের স্বীকৃত যোগ্যতা (credential) দেয় না — এখনো নয়, কোনো কোর্স বা পরীক্ষা শেষেও নয়। Eduvelto-তে একমাত্র সার্টিফিকেট হলো ফ্রি অনুশীলন-কুইজের সার্টিফিকেট: অনুশীলন নম্বরের একটি স্বয়ংসম্পূর্ণ রেকর্ড, যার তথ্য শুধু এর যাচাই লিংকেই থাকে — চাকরিদাতা, শিক্ষা প্রতিষ্ঠান বা কোনো কর্তৃপক্ষের কাছে এর কোনো স্বীকৃত মূল্য নেই।
           </strong>
         </p>
       </Section>
@@ -84,13 +87,13 @@ export default function CertificatePolicyPage() {
         en="Will certificates be issued in future?"
         childrenEn={
           <ul style={{ margin: 0, paddingLeft: 20 }}>
-            <li>No certificates will be issued in future unless this policy is updated. If this policy changes, it will be announced on this page with a new date.</li>
+            <li>No recognised certificate will be issued in future unless this policy is updated. If this policy changes, it will be announced on this page with a new date. The free practice-quiz certificate (28 November 2026) is not a recognised qualification — it is a self-contained practice record only.</li>
             <li>If anyone claims to issue certificates in Eduvelto’s name, that is not from Eduvelto — if you receive such a claim, report it to the email on the contact page (ahmmizan23@gmail.com).</li>
           </ul>
         }
       >
         <ul style={{ margin: 0, paddingLeft: 20 }}>
-          <li>ভবিষ্যতে সার্টিফিকেট দেওয়া হবে না, যতক্ষণ না এই নীতি হালনাগাদ করা হয়। এই নীতি বদলালে এই পাতায় নতুন তারিখসহ জানানো হবে।</li>
+          <li>ভবিষ্যতে স্বীকৃত সার্টিফিকেট দেওয়া হবে না, যতক্ষণ না এই নীতি হালনাগাদ করা হয়। এই নীতি বদলালে এই পাতায় নতুন তারিখসহ জানানো হবে। ফ্রি অনুশীলন-কুইজের সার্টিফিকেট (২৮ নভেম্বর ২০২৬) কোনো স্বীকৃত যোগ্যতা নয় — এটি শুধু অনুশীলনের স্বয়ংসম্পূর্ণ রেকর্ড।</li>
           <li>কেউ যদি Eduvelto-র নামে সার্টিফিকেট দেওয়ার কথা বলে, তা Eduvelto-র পক্ষ থেকে নয় — এমন দাবি পেলে যোগাযোগ পাতার ইমেইলে (ahmmizan23@gmail.com) জানান।</li>
         </ul>
       </Section>

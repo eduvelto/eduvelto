@@ -85,6 +85,9 @@ export default function DailyQuizWidget() {
             </button>{' '}
             <Link to="/jobs/bcs/practice/english" style={{ fontWeight: 600, fontSize: 14 }}>
               {t({ bn: 'সব ৩৫টি প্রশ্ন দেখুন →', en: 'See all 35 questions →' })}
+            </Link>{' '}
+            <Link to="/free-quiz" style={{ fontWeight: 600, fontSize: 14 }}>
+              {t({ bn: '১০ প্রশ্নের কুইজ + সার্টিফিকেট →', en: '10-question quiz + certificate →' })}
             </Link>
           </div>
         ) : phase === 'playing' && q ? (
