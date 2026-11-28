@@ -14,6 +14,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import EditorialBadge from '../components/EditorialBadge';
 import { Breadcrumb } from '../components/Breadcrumb';
 import ShareButton from '../components/ShareButton';
 import { AlertBox, Button, Card } from '../components/ui';
@@ -405,6 +406,11 @@ export default function OpportunityCvBuilderPage() {
       <p style={{ marginTop: 16 }}>
         <Link to="/opportunities">{lang === 'bn' ? '← সব সুযোগ দেখুন' : '← See all opportunities'}</Link>
       </p>
+      {/* Editorial verification badge (owner order 28 Nov 2026):
+          this page is also the /tools/cv-builder and
+          /tools/cover-letter-builder hub — it carries the badge
+          like every other tool page. */}
+      <EditorialBadge />
     </PageShell>
   );
 }

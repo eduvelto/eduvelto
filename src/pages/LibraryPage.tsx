@@ -296,6 +296,16 @@ export default function LibraryPage() {
           en: 'Syllabus review of the library books is in progress — no book is syllabus-verified yet. Use the questions for practice and check them against your exam syllabus.',
         })}
       </AlertBox>
+      {/* 28 Nov 2026 (SEO/meta batch): say plainly, on the page
+          itself, that Class 6–8 books have not arrived in the
+          library yet — the syllabus banner above does not say it,
+          and the class filter alone does not either. */}
+      <p style={{ margin: '0 0 16px', fontSize: 15, lineHeight: 1.7 }}>
+        {t({
+          bn: 'শ্রেণি ৬–৮-এর বই এখনো লাইব্রেরিতে আসেনি।',
+          en: 'Class 6–8 books have not arrived in the library yet.',
+        })}
+      </p>
       {/* Audit m04 (24 Nov 2026): skeletons alone read as "not
           built yet" — say plainly that the library is loading. */}
       {loading && pages.length === 0 && !error && !levelEmpty ? (

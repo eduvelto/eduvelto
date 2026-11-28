@@ -7,6 +7,7 @@
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
+import EditorialBadge from '../components/EditorialBadge';
 import { Breadcrumb } from '../components/Breadcrumb';
 import ShareButton from '../components/ShareButton';
 import {
@@ -369,6 +370,10 @@ export default function LifeConvertersPage() {
       </p>
       <CurrencySection />
       <UnitSection />
+      {/* Editorial verification badge (owner order 28 Nov 2026):
+          this page is also the /tools/unit-converter hub — it
+          carries the badge like every other tool page. */}
+      <EditorialBadge />
     </PageShell>
   );
 }

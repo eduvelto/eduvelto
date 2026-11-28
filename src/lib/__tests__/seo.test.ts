@@ -109,6 +109,7 @@ import { CLASS_LEVELS } from '../classLevels';
 import { OPPORTUNITY_SEED } from '../opportunitySeed';
 import { isPublished } from '../opportunities';
 import { PUBLIC_GUIDES } from '../publicGuides';
+import { TOOLS_META } from '../toolsMeta';
 
 const FORBIDDEN_RANK_CLAIM = /(^|[^ক])১ নম্বর|#1|number 1|নম্বর ১|নাম্বার ১|নাম্বার ওয়ান/i;
 
@@ -1546,14 +1547,32 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('all 77 guides resolve with draft wording and Article JSON-LD', () => {
+  it('all 77 guides resolve with Article JSON-LD and wording matching their review state', () => {
     expect(PUBLIC_GUIDES).toHaveLength(77);
+    // 28 Nov 2026 (SEO/meta batch): published guides carry the
+    // owner-ordered editorial badge, so the meta matches the badge
+    // — except the guides whose metadata records review-needed
+    // passages (needsReview: GST + DU admission), which keep the
+    // honest draft wording and never claim verification.
+    let draftCount = 0;
     for (const guide of PUBLIC_GUIDES) {
       const seo = resolveRouteSeo(guide.path);
       expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
-      expect(seo!.description, guide.path).toContain('খসড়া পাঠ');
-      expect(seo!.description, guide.path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
-      expect(seo!.description, guide.path).not.toContain('যাচাইকৃত');
+      const en = resolveRouteSeo(guide.path, 'en')!;
+      if ((guide.needsReview?.length ?? 0) > 0) {
+        draftCount++;
+        expect(seo!.description, guide.path).toContain('খসড়া পাঠ');
+        expect(seo!.description, guide.path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
+        expect(seo!.description, guide.path).not.toContain('যাচাইকৃত');
+        expect(en.description, guide.path).toContain('awaiting teacher review');
+        expect(en.description, guide.path).not.toContain('Verified:');
+      } else {
+        expect(seo!.description, guide.path).toContain('যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম');
+        expect(seo!.description, guide.path).not.toContain('খসড়া পাঠ');
+        expect(seo!.description, guide.path).not.toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
+        expect(en.description, guide.path).toContain('Verified: Eduvelto Education & Research Team');
+        expect(en.description, guide.path).not.toContain('awaiting teacher review');
+      }
       expect(seo!.robots, guide.path).toBeUndefined();
       expect(jsonLdTypes(seo!)).toContain('Article');
       const article = (seo!.jsonLd as Array<Record<string, unknown>>).find(
@@ -1572,6 +1591,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
       const hub = guide.path.startsWith('/guides/') ? 'গাইড' : 'পাঠ';
       expect(breadcrumbNames(seo!)).toEqual(['হোম', hub, guide.crumbBn]);
     }
+    // Only GST + DU admission record review-needed passages.
+    expect(draftCount).toBe(2);
   });
 
   it('/guides hub emits an ItemList of its 36 Study Guides', () => {
@@ -1588,6 +1609,35 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     );
     expect(items).toHaveLength(36);
   });
+
+describe('resolveRouteSeo — tools hub live count (28 Nov 2026, SEO/meta batch)', () => {
+  it('/tools hub meta uses the live registry count, never a hardcoded number', () => {
+    // The meta must derive from TOOLS_META.length at build time:
+    // the hardcoded "১৪১টি" went stale while the registry grew to
+    // 275, and the visible copy already said 275.
+    const count = TOOLS_META.length;
+    expect(count).toBeGreaterThan(0);
+    const bnDigits = String(count).replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[+d]);
+    const bn = resolveRouteSeo('/bn/tools')!;
+    expect(bn.description).toContain(`${bnDigits}টি ফ্রি টুল`);
+    expect(bn.description).not.toContain('১৪১টি');
+    const en = resolveRouteSeo('/tools', 'en')!;
+    expect(en.description).toContain(`${count} free tools`);
+    expect(en.description).not.toContain('141 free tools');
+  });
+
+  it('/learn hub no longer makes a blanket draft claim about its guides', () => {
+    // The hub lists 67 published, badge-carrying guides plus the 2
+    // unreviewed lessons — a blanket "খসড়া পাঠ" claim was false
+    // for the guides. The verified BCS English question count stays.
+    const bn = resolveRouteSeo('/learn')!;
+    expect(bn.description).not.toContain('খসড়া পাঠ');
+    expect(bn.description).toContain('৩৫টি যাচাইকৃত প্রশ্ন');
+    const en = resolveRouteSeo('/learn', 'en')!;
+    expect(en.description).not.toContain('awaiting teacher review');
+    expect(en.description).toContain('35 verified questions');
+  });
+});
 
 describe('/founder SEO (Phase 2, 25 Nov 2026)', () => {
   it('resolves in both languages with profile ogType + founder photo', () => {
@@ -1895,7 +1945,7 @@ describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
     expect(en).not.toMatch(/best/i);
   });
 
-  it('the 7 wave-2 guides resolve with draft wording, Article JSON-LD and real breadcrumbs', () => {
+  it('the 7 wave-2 guides resolve with verified wording, Article JSON-LD and real breadcrumbs', () => {
     const wave2: Array<{ path: string; crumbBn: string; crumbEn: string }> = [
       { path: '/learn/revision-strategy', crumbBn: 'পুনরালোচনার কৌশল', crumbEn: 'Revision Strategy' },
       { path: '/learn/note-taking-guide', crumbBn: 'নোট নেওয়ার কৌশল', crumbEn: 'Note-Taking Techniques' },
@@ -1908,9 +1958,9 @@ describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
     for (const { path, crumbBn, crumbEn } of wave2) {
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for ${path}`).not.toBeNull();
-      expect(seo!.description, path).toContain('খসড়া পাঠ');
-      expect(seo!.description, path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
-      expect(seo!.description, path).not.toContain('যাচাইকৃত');
+      expect(seo!.description, path).toContain('যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম');
+      expect(seo!.description, path).not.toContain('খসড়া পাঠ');
+      expect(seo!.description, path).not.toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
       expect(seo!.robots, path).toBeUndefined();
       expect(jsonLdTypes(seo!)).toContain('Article');
       const article = (seo!.jsonLd as Array<Record<string, unknown>>).find(
@@ -1922,7 +1972,8 @@ describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
       expect(breadcrumbNames(seo!)).toEqual(['হোম', 'পাঠ', crumbBn]);
       const en = resolveRouteSeo(path, 'en')!;
       expect(en.title, path).not.toMatch(/best/i);
-      expect(en.description, path).toContain('awaiting teacher review');
+      expect(en.description, path).toContain('Verified: Eduvelto Education & Research Team');
+      expect(en.description, path).not.toContain('awaiting teacher review');
       expect(breadcrumbNames(en)).toEqual(['Home', 'Lessons', crumbEn]);
     }
   });
@@ -1942,7 +1993,7 @@ describe('resolveRouteSeo — brand-SEO wave 3 (24 Nov 2026)', () => {
     }
   });
 
-  it('the 6 wave-3 guides resolve with draft wording, Article JSON-LD and real breadcrumbs', () => {
+  it('the 6 wave-3 guides resolve with verified wording, Article JSON-LD and real breadcrumbs', () => {
     const wave3: Array<{ path: string; crumbBn: string; crumbEn: string }> = [
       { path: '/learn/exam-day-strategy', crumbBn: 'পরীক্ষার দিনের কৌশল', crumbEn: 'Exam Day Strategy' },
       { path: '/learn/mcq-answering-techniques', crumbBn: 'MCQ উত্তর দেওয়ার কৌশল', crumbEn: 'MCQ Answering Techniques' },
@@ -1954,9 +2005,9 @@ describe('resolveRouteSeo — brand-SEO wave 3 (24 Nov 2026)', () => {
     for (const { path, crumbBn, crumbEn } of wave3) {
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for ${path}`).not.toBeNull();
-      expect(seo!.description, path).toContain('খসড়া পাঠ');
-      expect(seo!.description, path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
-      expect(seo!.description, path).not.toContain('যাচাইকৃত');
+      expect(seo!.description, path).toContain('যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম');
+      expect(seo!.description, path).not.toContain('খসড়া পাঠ');
+      expect(seo!.description, path).not.toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
       expect(seo!.robots, path).toBeUndefined();
       expect(jsonLdTypes(seo!)).toContain('Article');
       const article = (seo!.jsonLd as Array<Record<string, unknown>>).find(
@@ -1968,7 +2019,8 @@ describe('resolveRouteSeo — brand-SEO wave 3 (24 Nov 2026)', () => {
       expect(breadcrumbNames(seo!)).toEqual(['হোম', 'পাঠ', crumbBn]);
       const en = resolveRouteSeo(path, 'en')!;
       expect(en.title, path).not.toMatch(/best/i);
-      expect(en.description, path).toContain('awaiting teacher review');
+      expect(en.description, path).toContain('Verified: Eduvelto Education & Research Team');
+      expect(en.description, path).not.toContain('awaiting teacher review');
       expect(breadcrumbNames(en)).toEqual(['Home', 'Lessons', crumbEn]);
     }
   });
@@ -1988,7 +2040,7 @@ describe('resolveRouteSeo — brand-SEO wave 4 (24 Nov 2026)', () => {
     }
   });
 
-  it('the 6 wave-4 guides resolve with draft wording, Article JSON-LD and real breadcrumbs', () => {
+  it('the 6 wave-4 guides resolve with verified wording, Article JSON-LD and real breadcrumbs', () => {
     const wave4: Array<{ path: string; crumbBn: string; crumbEn: string }> = [
       { path: '/learn/exam-anxiety-management', crumbBn: 'পরীক্ষার উদ্বেগ', crumbEn: 'Exam Anxiety' },
       { path: '/learn/presentation-skills', crumbBn: 'উপস্থাপনা দক্ষতা', crumbEn: 'Presentation Skills' },
@@ -2000,9 +2052,9 @@ describe('resolveRouteSeo — brand-SEO wave 4 (24 Nov 2026)', () => {
     for (const { path, crumbBn, crumbEn } of wave4) {
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for ${path}`).not.toBeNull();
-      expect(seo!.description, path).toContain('খসড়া পাঠ');
-      expect(seo!.description, path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
-      expect(seo!.description, path).not.toContain('যাচাইকৃত');
+      expect(seo!.description, path).toContain('যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম');
+      expect(seo!.description, path).not.toContain('খসড়া পাঠ');
+      expect(seo!.description, path).not.toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
       expect(seo!.robots, path).toBeUndefined();
       expect(jsonLdTypes(seo!)).toContain('Article');
       const article = (seo!.jsonLd as Array<Record<string, unknown>>).find(
@@ -2014,7 +2066,8 @@ describe('resolveRouteSeo — brand-SEO wave 4 (24 Nov 2026)', () => {
       expect(breadcrumbNames(seo!)).toEqual(['হোম', 'পাঠ', crumbBn]);
       const en = resolveRouteSeo(path, 'en')!;
       expect(en.title, path).not.toMatch(/best/i);
-      expect(en.description, path).toContain('awaiting teacher review');
+      expect(en.description, path).toContain('Verified: Eduvelto Education & Research Team');
+      expect(en.description, path).not.toContain('awaiting teacher review');
       expect(breadcrumbNames(en)).toEqual(['Home', 'Lessons', crumbEn]);
     }
   });
