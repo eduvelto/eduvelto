@@ -1038,8 +1038,8 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     );
     const blocks = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => m[1]);
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-    // One <url> block per <loc> (2,747 in the prerender-generated
-    // sitemap, 27 Nov 2026) — the old SITEMAP_URLS count (283) is the
+    // One <url> block per <loc> (2,617 in the prerender-generated
+    // sitemap, 28 Nov 2026) — the old SITEMAP_URLS count (283) is the
     // SEO route list, not the sitemap, since the sitemap went
     // prerender-generated.
     expect(blocks.length).toBe(locs.length);
@@ -1051,9 +1051,10 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       // 24 Nov 2026 homepage redesign, 2026-11-25 for URLs added or
       // changed by the 25 Nov 2026 Phase 2 build, 2026-11-26 for URLs
       // added by the 26 Nov 2026 Day 1 audit fix, 2026-11-27 for URLs
-      // added by the 27 Nov 2026 100-tools batch 2. (Was a single
-      // pinned date before this revision added new URLs.)
-      expect(['2026-11-23', '2026-11-24', '2026-11-25', '2026-11-26', '2026-11-27']).toContain(
+      // added by the 27 Nov 2026 100-tools batch 2, 2026-11-28 for
+      // URLs added by the 28 Nov 2026 trust/content batch. (Was a
+      // single pinned date before this revision added new URLs.)
+      expect(['2026-11-23', '2026-11-24', '2026-11-25', '2026-11-26', '2026-11-27', '2026-11-28']).toContain(
         block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
       );
     }
@@ -1349,7 +1350,7 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     }
   });
 
-  it('/learn hub emits an ItemList of its 56 guides + 2 lessons + the practice hub', () => {
+  it('/learn hub emits an ItemList of its 66 guides + 2 lessons + the practice hub', () => {
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
@@ -1409,6 +1410,16 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
       `${SITE_URL}/bn/guides/du-admission-preparation`,
       `${SITE_URL}/bn/guides/nctb-books-study-method`,
       `${SITE_URL}/bn/guides/nctb-revision-before-exams`,
+      `${SITE_URL}/bn/guides/ssc-hsc-gpa-calculation-guide`,
+      `${SITE_URL}/bn/guides/nu-cgpa-calculation-guide`,
+      `${SITE_URL}/bn/guides/land-measurement-bangladesh-guide`,
+      `${SITE_URL}/bn/guides/govt-job-age-calculation-guide`,
+      `${SITE_URL}/bn/guides/bcs-exam-pattern-strategy-guide`,
+      `${SITE_URL}/bn/guides/safe-pdf-usage-guide`,
+      `${SITE_URL}/bn/guides/loan-emi-calculation-guide`,
+      `${SITE_URL}/bn/guides/bmi-healthy-weight-guide`,
+      `${SITE_URL}/bn/guides/age-calculation-guide`,
+      `${SITE_URL}/bn/guides/qr-code-image-tools-guide`,
       `${SITE_URL}/bn/learn/bcs-english-tense`,
       `${SITE_URL}/bn/learn/bcs-english-preposition`,
       `${SITE_URL}/bn/jobs/bcs/practice/english`,
@@ -1518,8 +1529,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('all 56 guides resolve with draft wording and Article JSON-LD', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(56);
+  it('all 66 guides resolve with draft wording and Article JSON-LD', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(66);
     for (const guide of PUBLIC_GUIDES) {
       const seo = resolveRouteSeo(guide.path);
       expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
@@ -1533,7 +1544,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
       )!;
       expect(article['headline']).toBe(seo!.title);
       expect(article['inLanguage']).toBe('bn');
-      // Phase 2 (25 Nov 2026): the 15 Study Guides are free and
+      // Phase 2 (25 Nov 2026) + trust/content batch (28 Nov 2026):
+      // the 25 Study Guides are free and
       // carry their own updatedAt as datePublished/dateModified;
       // the 41 older guides keep 2026-11-24 and no dateModified.
       expect(article['isAccessibleForFree']).toBe(true);
@@ -1545,7 +1557,7 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('/guides hub emits an ItemList of its 15 Study Guides', () => {
+  it('/guides hub emits an ItemList of its 25 Study Guides', () => {
     const seo = resolveRouteSeo('/guides')!;
     const list = (seo.jsonLd as Array<Record<string, unknown>>).find(
       (o) => o['@type'] === 'ItemList',
@@ -1557,7 +1569,7 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
         (g) => `${SITE_URL}/bn${g.path}`,
       ),
     );
-    expect(items).toHaveLength(15);
+    expect(items).toHaveLength(25);
   });
 
 describe('/founder SEO (Phase 2, 25 Nov 2026)', () => {

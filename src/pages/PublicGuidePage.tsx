@@ -20,6 +20,7 @@
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
+import EditorialBadge from '../components/EditorialBadge';
 import { AlertBox, LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import { publicGuideBySlug, type PublicGuide } from '../lib/publicGuides';
@@ -106,6 +107,10 @@ export default function PublicGuidePage({ guide }: { guide: string }) {
             : 'BCS English practice (login required)'}
         </Link>
       </p>
+      {/* Editorial verification badge (owner order 28 Nov 2026):
+          article pages only — never on question banks, books or
+          exam pages. */}
+      <EditorialBadge />
     </PageShell>
   );
 }

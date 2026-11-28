@@ -4,6 +4,9 @@
 // EXTENDED 24 Nov 2026, brand-SEO wave 4: +6 guides, 29 total).
 // EXTENDED 24 Nov 2026, brand-SEO wave 5: +6 guides, 35 total).
 // EXTENDED 24 Nov 2026, brand-SEO wave 10: +6 guides, 41 total).
+// EXTENDED 28 Nov 2026, trust/content batch (owner order): +10
+// tool-tied guides, 66 total — every formula/rule grounded in the
+// tools' own logic (src/lib/tools/), 800+ words in Bn AND En each.
 //
 // 41 original public guides, visible to Googlebot WITHOUT login.
 // Static data ONLY — zero Firestore reads, no login. The prose is
@@ -135,6 +138,6 @@ export function publicGuideWordCountEn(guide: PublicGuide): number {
   return texts.join(' ').split(/\s+/).filter(Boolean).length;
 }
 
-/** Phase 2 Study Guides (the /guides blog): the 15 long-form
+/** Phase 2 Study Guides (the /guides blog): the 25 long-form
  *  bilingual articles, in data order. */
 export const PHASE2_GUIDES: PublicGuide[] = PUBLIC_GUIDES.filter((g) => g.path.startsWith('/guides/'));

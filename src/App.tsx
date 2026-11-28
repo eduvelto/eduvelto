@@ -12,6 +12,7 @@ import {
 } from './lib/adsConfig';
 import AdSlot from './components/AdSlot';
 import BottomNav from './components/BottomNav';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import HeaderNav from './components/HeaderNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
@@ -491,6 +492,11 @@ export default function App() {
     bannerReservePx,
     bannerCollapsed: bottomBannerCollapsed,
   });
+  // Cookie consent banner height (owner order 28 Nov 2026): the
+  // banner reports its measured height so the shell can reserve it
+  // in the bottom padding (--ev-cookie) — page content and footer
+  // buttons scroll clear of the banner while it is visible.
+  const [cookieBannerHeightPx, setCookieBannerHeightPx] = useState(0);
   // Admin + CEO panels render their own shell (sidebar/top bar/bottom
   // nav) — the public header, footer and BottomNav are hidden there.
   const isAdminShell = location.pathname.startsWith('/admin') || location.pathname.startsWith('/ceo');
@@ -498,8 +504,11 @@ export default function App() {
     <div
       className="ev-app-shell"
       style={
-        effectiveBannerReservePx > 0
-          ? ({ '--ev-banner': `${effectiveBannerReservePx}px` } as React.CSSProperties)
+        effectiveBannerReservePx > 0 || cookieBannerHeightPx > 0
+          ? ({
+              '--ev-banner': `${effectiveBannerReservePx}px`,
+              '--ev-cookie': `${cookieBannerHeightPx}px`,
+            } as React.CSSProperties)
           : undefined
       }
     >
@@ -762,6 +771,20 @@ export default function App() {
         <Route path="guides/du-admission-preparation" element={<PublicGuidePage guide="du-admission-preparation" />} />
         <Route path="guides/nctb-books-study-method" element={<PublicGuidePage guide="nctb-books-study-method" />} />
         <Route path="guides/nctb-revision-before-exams" element={<PublicGuidePage guide="nctb-revision-before-exams" />} />
+        {/* Trust/content batch (owner order 28 Nov 2026): 10 new
+            tool-tied Study Guides, 800+ words in Bangla AND English
+            each, grounded in the tools' own formulas — same pattern
+            as the 15 Phase 2 guides above. */}
+        <Route path="guides/ssc-hsc-gpa-calculation-guide" element={<PublicGuidePage guide="ssc-hsc-gpa-calculation-guide" />} />
+        <Route path="guides/nu-cgpa-calculation-guide" element={<PublicGuidePage guide="nu-cgpa-calculation-guide" />} />
+        <Route path="guides/land-measurement-bangladesh-guide" element={<PublicGuidePage guide="land-measurement-bangladesh-guide" />} />
+        <Route path="guides/govt-job-age-calculation-guide" element={<PublicGuidePage guide="govt-job-age-calculation-guide" />} />
+        <Route path="guides/bcs-exam-pattern-strategy-guide" element={<PublicGuidePage guide="bcs-exam-pattern-strategy-guide" />} />
+        <Route path="guides/safe-pdf-usage-guide" element={<PublicGuidePage guide="safe-pdf-usage-guide" />} />
+        <Route path="guides/loan-emi-calculation-guide" element={<PublicGuidePage guide="loan-emi-calculation-guide" />} />
+        <Route path="guides/bmi-healthy-weight-guide" element={<PublicGuidePage guide="bmi-healthy-weight-guide" />} />
+        <Route path="guides/age-calculation-guide" element={<PublicGuidePage guide="age-calculation-guide" />} />
+        <Route path="guides/qr-code-image-tools-guide" element={<PublicGuidePage guide="qr-code-image-tools-guide" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches
@@ -1002,6 +1025,12 @@ export default function App() {
           <BottomNav bottomOffsetPx={effectiveBannerReservePx} />
         )}
         {bannerPlacement ? <AdSlot placement={bannerPlacement} onUnfilled={handleBottomBannerUnfilled} onFilled={handleBottomBannerFilled} /> : null}
+        {/* Cookie consent banner (owner order 28 Nov 2026): first
+            visit only, LocalStorage-gated inside the component.
+            Hidden on /admin* and /ceo* like the Footer/BottomNav. */}
+        {isAdminShell ? null : (
+          <CookieConsentBanner onHeightChange={setCookieBannerHeightPx} />
+        )}
         </>
       )}
     </div>

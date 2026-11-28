@@ -1,6 +1,6 @@
 // Eduvelto — Study Guides hub (Phase 2, 25 Nov 2026).
 //
-// /guides — the list page for the 15 long-form bilingual Study
+// /guides — the list page for the 25 long-form bilingual Study
 // Guides in src/lib/publicGuides.ts (PHASE2_GUIDES). Same static
 // data, same detail component (PublicGuidePage) as the 41 /learn
 // guides — this hub is only a filtered view, not a parallel system.
@@ -13,7 +13,7 @@ import { Card } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PHASE2_GUIDES, type PublicGuideCategory } from '../lib/publicGuides';
 
-const CATEGORY_ORDER: PublicGuideCategory[] = ['bcs', 'primary', 'bank', 'ntrca', 'admission', 'nctb'];
+const CATEGORY_ORDER: PublicGuideCategory[] = ['bcs', 'primary', 'bank', 'ntrca', 'admission', 'nctb', 'tools', 'finance', 'health'];
 
 const CATEGORY_BN: Record<PublicGuideCategory, string> = {
   bcs: 'বিসিএস',
@@ -22,6 +22,9 @@ const CATEGORY_BN: Record<PublicGuideCategory, string> = {
   ntrca: 'NTRCA',
   admission: 'ভর্তি প্রস্তুতি',
   nctb: 'NCTB পড়ার পদ্ধতি',
+  tools: 'টুল ব্যবহারের গাইড',
+  finance: 'অর্থ ও হিসাব',
+  health: 'স্বাস্থ্য',
 };
 
 const CATEGORY_EN: Record<PublicGuideCategory, string> = {
@@ -31,6 +34,9 @@ const CATEGORY_EN: Record<PublicGuideCategory, string> = {
   ntrca: 'NTRCA',
   admission: 'Admission Preparation',
   nctb: 'NCTB Study Methods',
+  tools: 'Tool Guides',
+  finance: 'Money & Calculation',
+  health: 'Health',
 };
 
 export default function GuidesHubPage() {

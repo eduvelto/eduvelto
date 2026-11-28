@@ -21,7 +21,16 @@ export interface PublicGuideLink {
   en: string;
 }
 
-export type PublicGuideCategory = 'bcs' | 'primary' | 'bank' | 'ntrca' | 'admission' | 'nctb';
+export type PublicGuideCategory =
+  | 'bcs'
+  | 'primary'
+  | 'bank'
+  | 'ntrca'
+  | 'admission'
+  | 'nctb'
+  | 'tools'
+  | 'finance'
+  | 'health';
 
 /** A public guide WITHOUT its body text. */
 export interface PublicGuideMeta {
@@ -1041,6 +1050,245 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
       { to: '/learn/time-management-students', bn: 'শিক্ষার্থীদের সময় ব্যবস্থাপনা', en: 'Time Management for Students' },
       { to: '/learn/exam-anxiety-management', bn: 'পরীক্ষার উদ্বেগ সামলানো', en: 'Exam Anxiety Management' },
       { to: '/books', bn: 'ডিজিটাল লাইব্রেরি', en: 'Digital library' },
+    ],
+  },
+  // Trust/content batch (owner order 28 Nov 2026): 10 new tool-tied
+  // Study Guides, 800+ words in Bangla AND English each. Every
+  // formula/rule in these articles matches the tool's own logic
+  // (src/lib/tools/): GPA grade points, CGPA credit weighting,
+  // land units, age rules, EMI formula, WHO BMI bands, QR kinds.
+  // The BCS article states ONLY the verified 50th-syllabus pattern
+  // (BPSC, 9 Dec 2025, official PDF read 24 Nov 2026) — no viva
+  // marks, because the sources disagree (200 vs 100).
+  {
+    slug: 'ssc-hsc-gpa-calculation-guide',
+    path: '/guides/ssc-hsc-gpa-calculation-guide',
+    titleBn: 'SSC/HSC GPA হিসাবের নিয়ম — গ্রেড পয়েন্ট ও চতুর্থ বিষয়',
+    titleEn: 'SSC/HSC GPA Calculation Rules — Grade Points & the 4th Subject',
+    crumbBn: 'GPA হিসাব',
+    category: 'admission',
+    descriptionBn:
+      'SSC ও HSC-তে GPA কীভাবে হিসাব হয় — গ্রেড পয়েন্ট তালিকা, ৬টি মূল বিষয় ও চতুর্থ বিষয়ের অতিরিক্ত নম্বরের নিয়ম।',
+    descriptionEn:
+      'How GPA is calculated in SSC and HSC — the grade-point table, the 6 main subjects and the 4th-subject extra-points rule.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/ssc-hsc-gpa-calculator', bn: 'SSC/HSC GPA ক্যালকুলেটর', en: 'SSC/HSC GPA Calculator' },
+      { to: '/tools/nu-cgpa-calculator', bn: 'NU CGPA ক্যালকুলেটর', en: 'NU CGPA Calculator' },
+      { to: '/tools/cgpa-to-percentage-converter', bn: 'CGPA থেকে শতাংশ', en: 'CGPA to Percentage Converter' },
+      { to: '/tools/grade-analyzer', bn: 'গ্রেড বিশ্লেষক', en: 'Grade Analyzer' },
+      { to: '/guides/nu-cgpa-calculation-guide', bn: 'জাতীয় বিশ্ববিদ্যালয় CGPA গাইড', en: 'National University CGPA Guide' },
+      { to: '/learn/mcq-answering-techniques', bn: 'MCQ উত্তর দেওয়ার কৌশল', en: 'MCQ answering techniques' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'nu-cgpa-calculation-guide',
+    path: '/guides/nu-cgpa-calculation-guide',
+    titleBn: 'জাতীয় বিশ্ববিদ্যালয় CGPA হিসাবের গাইড — ক্রেডিট ও গ্রেড',
+    titleEn: 'National University CGPA Guide — Credits & Grades',
+    crumbBn: 'NU CGPA',
+    category: 'admission',
+    descriptionBn:
+      'জাতীয় বিশ্ববিদ্যালয়ে CGPA কীভাবে হিসাব হয় — ৪.০০ স্কেল, ক্রেডিট-ওজনযুক্ত গড় ও গ্রেড পয়েন্ট তালিকা।',
+    descriptionEn:
+      'How CGPA is calculated at National University — the 4.00 scale, the credit-weighted average and the grade-point table.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/nu-cgpa-calculator', bn: 'NU CGPA ক্যালকুলেটর', en: 'NU CGPA Calculator' },
+      { to: '/tools/ssc-hsc-gpa-calculator', bn: 'SSC/HSC GPA ক্যালকুলেটর', en: 'SSC/HSC GPA Calculator' },
+      { to: '/tools/cgpa-to-percentage-converter', bn: 'CGPA থেকে শতাংশ', en: 'CGPA to Percentage Converter' },
+      { to: '/tools/international-gpa-calculator', bn: 'আন্তর্জাতিক GPA ক্যালকুলেটর', en: 'International GPA Calculator' },
+      { to: '/guides/ssc-hsc-gpa-calculation-guide', bn: 'SSC/HSC GPA হিসাবের নিয়ম', en: 'SSC/HSC GPA Calculation Rules' },
+      { to: '/learn/nu-admission-guide', bn: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি গাইড', en: 'National University Admission Guide' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'land-measurement-bangladesh-guide',
+    path: '/guides/land-measurement-bangladesh-guide',
+    titleBn: 'জমি মাপার হিসাব — শতক, কাঠা, বিঘা, একর',
+    titleEn: 'Land Measurement in Bangladesh — Decimal, Katha, Bigha, Acre',
+    crumbBn: 'জমি মাপা',
+    category: 'tools',
+    descriptionBn:
+      'বাংলাদেশের জমির একক — শতক, কাঠা, বিঘা, একর, হেক্টর ও বর্গফুটের মধ্যে রূপান্তরের নিয়ম ও হিসাব।',
+    descriptionEn:
+      'Bangladesh land units — how to convert between decimal, katha, bigha, acre, hectare and square feet.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/land-measurement', bn: 'জমি মাপার ক্যালকুলেটর', en: 'Land Measurement Calculator' },
+      { to: '/tools/area-calculator', bn: 'ক্ষেত্রফল ক্যালকুলেটর', en: 'Area Calculator' },
+      { to: '/tools/unit-converter', bn: 'একক রূপান্তরকারী', en: 'Unit Converter' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'govt-job-age-calculation-guide',
+    path: '/guides/govt-job-age-calculation-guide',
+    titleBn: 'সরকারি চাকরিতে বয়স হিসাব — বয়সসীমা ও যোগ্যতা',
+    titleEn: 'Government Job Age Calculation — Age Limits & Eligibility',
+    crumbBn: 'চাকরির বয়স',
+    category: 'tools',
+    descriptionBn:
+      'সরকারি চাকরির আবেদনে বয়স কীভাবে হিসাব হয় — সাধারণ সীমা ৩০ বছর, মুক্তিযোদ্ধা কোটা ৩২ বছর ও আবেদনের নিয়ম।',
+    descriptionEn:
+      'How age is counted for government job applications — the general 30-year limit, the 32-year freedom-fighter quota and the rules.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/govt-job-age-calculator', bn: 'সরকারি চাকরির বয়স ক্যালকুলেটর', en: 'Government Job Age Calculator' },
+      { to: '/tools/age-calculator', bn: 'বয়স ক্যালকুলেটর', en: 'Age Calculator' },
+      { to: '/jobs', bn: 'চাকরির প্রস্তুতি', en: 'Job preparation' },
+      { to: '/learn/bcs-preparation-guide', bn: 'বিসিএস প্রিলিমিনারি প্রস্তুতি গাইড', en: 'BCS Preliminary Preparation Guide' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'bcs-exam-pattern-strategy-guide',
+    path: '/guides/bcs-exam-pattern-strategy-guide',
+    titleBn: 'বিসিএস পরীক্ষার ধরন ও প্রস্তুতির কৌশল — ৫০তম সিলেবাস',
+    titleEn: 'BCS Exam Pattern & Preparation Strategy — 50th Syllabus',
+    crumbBn: 'BCS ধরন',
+    category: 'bcs',
+    descriptionBn:
+      '৫০তম BCS সিলেবাসের যাচাইকৃত পরীক্ষার ধরন — প্রিলিমিনারি ২০০ নম্বর, লিখিত ৯০০/১১০০ নম্বর ও প্রস্তুতির কৌশল।',
+    descriptionEn:
+      'The verified 50th BCS syllabus pattern — Preliminary 200 marks, Written 900/1,100 marks, and how to prepare.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/bcs-marks-calculator', bn: 'BCS নম্বর ক্যালকুলেটর', en: 'BCS Marks Calculator' },
+      { to: '/tools/negative-marking-calculator', bn: 'নেগেটিভ মার্কিং ক্যালকুলেটর', en: 'Negative Marking Calculator' },
+      { to: '/jobs/bcs', bn: 'বিসিএস প্রস্তুতি হাব', en: 'BCS preparation hub' },
+      { to: '/guides/bcs-bangla-preparation', bn: 'বিসিএস বাংলা প্রস্তুতি', en: 'BCS Bangla Preparation' },
+      { to: '/guides/bcs-english-preparation', bn: 'বিসিএস ইংরেজি প্রস্তুতি', en: 'BCS English Preparation' },
+      { to: '/guides/bcs-math-mental-ability', bn: 'বিসিএস গণিত ও মানসিক দক্ষতা', en: 'BCS Maths & Mental Ability' },
+      { to: '/learn/bcs-preparation-guide', bn: 'বিসিএস প্রিলিমিনারি প্রস্তুতি গাইড', en: 'BCS Preliminary Preparation Guide' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'safe-pdf-usage-guide',
+    path: '/guides/safe-pdf-usage-guide',
+    titleBn: 'নিরাপদে PDF ব্যবহারের নিয়ম — পাসওয়ার্ড, ভাগ করা ও চাপা',
+    titleEn: 'Safe PDF Usage Rules — Passwords, Splitting & Compressing',
+    crumbBn: 'নিরাপদ PDF',
+    category: 'tools',
+    descriptionBn:
+      'PDF ফাইল নিরাপদে ব্যবহারের নিয়ম — AES-২৫৬ পাসওয়ার্ড সুরক্ষা, ফাইল ভাগ করা, একত্র করা ও আকার কমানো।',
+    descriptionEn:
+      'Rules for using PDF files safely — AES-256 password protection, splitting, merging and compressing.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/pdf-password-protector', bn: 'PDF পাসওয়ার্ড সুরক্ষা', en: 'PDF Password Protector' },
+      { to: '/tools/pdf-splitter', bn: 'PDF ভাগ করা', en: 'PDF Splitter' },
+      { to: '/tools/pdf-merger', bn: 'PDF একত্র করা', en: 'PDF Merger' },
+      { to: '/tools/pdf-compressor', bn: 'PDF কম্প্রেসর', en: 'PDF Compressor' },
+      { to: '/tools/image-to-pdf', bn: 'ছবি থেকে PDF', en: 'Image to PDF' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'loan-emi-calculation-guide',
+    path: '/guides/loan-emi-calculation-guide',
+    titleBn: 'লোন EMI হিসাবের গাইড — কিস্তি, সুদ ও মোট খরচ',
+    titleEn: 'Loan EMI Calculation Guide — Instalment, Interest & Total Cost',
+    crumbBn: 'EMI হিসাব',
+    category: 'finance',
+    descriptionBn:
+      'লোনের মাসিক কিস্তি (EMI) কীভাবে হিসাব হয় — সূত্র, সুদের হার, মেয়াদ ও মোট পরিশোধের হিসাব।',
+    descriptionEn:
+      'How a loan EMI is calculated — the formula, the interest rate, the term and the total amount paid.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/loan-emi-calculator', bn: 'লোন EMI ক্যালকুলেটর', en: 'Loan EMI Calculator' },
+      { to: '/tools/mortgage-calculator', bn: 'মর্টগেজ ক্যালকুলেটর', en: 'Mortgage Calculator' },
+      { to: '/tools/bank-emi-dps-fdr-calculator', bn: 'ব্যাংক EMI/DPS/FDR ক্যালকুলেটর', en: 'Bank EMI/DPS/FDR Calculator' },
+      { to: '/tools/compound-interest-calculator', bn: 'চক্রবৃদ্ধি সুদ ক্যালকুলেটর', en: 'Compound Interest Calculator' },
+      { to: '/tools/simple-interest-calculator', bn: 'সরল সুদ ক্যালকুলেটর', en: 'Simple Interest Calculator' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'bmi-healthy-weight-guide',
+    path: '/guides/bmi-healthy-weight-guide',
+    titleBn: 'BMI ও সুস্থ ওজন — হিসাব, সীমা ও স্বাস্থ্যকর ওজন',
+    titleEn: 'BMI & Healthy Weight — Calculation, Ranges & Healthy Weight',
+    crumbBn: 'BMI ও ওজন',
+    category: 'health',
+    descriptionBn:
+      'BMI কীভাবে হিসাব হয় — WHO-র সীমা (১৮.৫–২৪.৯), সুস্থ ওজনের পরিসর ও ওজন নিয়ে সঠিক ধারণা।',
+    descriptionEn:
+      'How BMI is calculated — the WHO ranges (18.5–24.9), the healthy weight range and the right way to think about weight.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/bmi-calculator', bn: 'BMI ক্যালকুলেটর', en: 'BMI Calculator' },
+      { to: '/tools/ideal-weight-calculator', bn: 'আদর্শ ওজন ক্যালকুলেটর', en: 'Ideal Weight Calculator' },
+      { to: '/tools/bmr-calculator', bn: 'BMR ক্যালকুলেটর', en: 'BMR Calculator' },
+      { to: '/tools/calorie-tdee-calculator', bn: 'ক্যালোরি (TDEE) ক্যালকুলেটর', en: 'Calorie (TDEE) Calculator' },
+      { to: '/life/health', bn: 'স্বাস্থ্য বিভাগ', en: 'Health section' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'age-calculation-guide',
+    path: '/guides/age-calculation-guide',
+    titleBn: 'বয়স হিসাবের নিয়ম — বছর, মাস, দিন ও মোট দিন',
+    titleEn: 'Age Calculation Rules — Years, Months, Days & Total Days',
+    crumbBn: 'বয়স হিসাব',
+    category: 'tools',
+    descriptionBn:
+      'জন্মতারিখ থেকে বয়স কীভাবে হিসাব হয় — বছর-মাস-দিনের নিয়ম, অধিবর্ষ ও বয়সসীমার হিসাব।',
+    descriptionEn:
+      'How age is calculated from a date of birth — the years-months-days rule, leap years and age-limit checks.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/age-calculator', bn: 'বয়স ক্যালকুলেটর', en: 'Age Calculator' },
+      { to: '/tools/govt-job-age-calculator', bn: 'সরকারি চাকরির বয়স ক্যালকুলেটর', en: 'Government Job Age Calculator' },
+      { to: '/tools/date-difference-calculator', bn: 'তারিখের ব্যবধান ক্যালকুলেটর', en: 'Date Difference Calculator' },
+      { to: '/tools/bangla-date-converter', bn: 'বাংলা তারিখ রূপান্তরকারী', en: 'Bangla Date Converter' },
+      { to: '/guides/govt-job-age-calculation-guide', bn: 'সরকারি চাকরিতে বয়স হিসাব', en: 'Government Job Age Calculation' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'qr-code-image-tools-guide',
+    path: '/guides/qr-code-image-tools-guide',
+    titleBn: 'QR কোড ও ছবির টুল ব্যবহারের গাইড — তৈরি, পড়া ও কম্প্রেস',
+    titleEn: 'QR Code & Image Tools Guide — Create, Scan & Compress',
+    crumbBn: 'QR ও ছবি',
+    category: 'tools',
+    descriptionBn:
+      'QR কোড তৈরি ও পড়া এবং ছবি কম্প্রেস করার নিয়ম — লিংক, Wi-Fi, যোগাযোগের তথ্য ও নিরাপদ ব্যবহার।',
+    descriptionEn:
+      'How to create and scan QR codes and compress images — links, Wi-Fi, contact details and safe use.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/qr-code-generator', bn: 'QR কোড জেনারেটর', en: 'QR Code Generator' },
+      { to: '/tools/qr-code-reader', bn: 'QR কোড রিডার', en: 'QR Code Reader' },
+      { to: '/tools/image-compressor', bn: 'ছবি কম্প্রেসর', en: 'Image Compressor' },
+      { to: '/tools/barcode-generator', bn: 'বারকোড জেনারেটর', en: 'Barcode Generator' },
+      { to: '/life/converters', bn: 'রূপান্তরকারী টুলস', en: 'Converter tools' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
     ],
   },
 ];

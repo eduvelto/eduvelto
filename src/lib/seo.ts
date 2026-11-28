@@ -1756,6 +1756,110 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Revising with NCTB books before an exam — a guide to notes, question practice and time planning. Draft lesson — awaiting teacher review.',
     crumbEn: 'NCTB Revision',
   },
+  // Trust/content batch (owner order 28 Nov 2026): 10 new tool-tied
+  // Study Guides — same draft-wording policy as every other guide
+  // in this file (the page itself carries the editorial badge; the
+  // meta description keeps the honest draft wording, test-guarded).
+  '/guides/ssc-hsc-gpa-calculation-guide': {
+    title: 'SSC/HSC GPA হিসাবের নিয়ম — গ্রেড পয়েন্ট ও চতুর্থ বিষয় | Eduvelto',
+    description:
+      'SSC ও HSC-তে GPA কীভাবে হিসাব হয় — গ্রেড পয়েন্ট তালিকা, ৬টি মূল বিষয় ও চতুর্থ বিষয়ের অতিরিক্ত নম্বরের নিয়ম। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'GPA হিসাব',
+    titleEn: 'SSC/HSC GPA Calculation Rules — Grade Points & the 4th Subject | Eduvelto',
+    descriptionEn:
+      'How GPA is calculated in SSC and HSC — the grade-point table, the 6 main subjects and the 4th-subject extra-points rule. Draft lesson — awaiting teacher review.',
+    crumbEn: 'GPA Calculation',
+  },
+  '/guides/nu-cgpa-calculation-guide': {
+    title: 'জাতীয় বিশ্ববিদ্যালয় CGPA হিসাবের গাইড — ক্রেডিট ও গ্রেড | Eduvelto',
+    description:
+      'জাতীয় বিশ্ববিদ্যালয়ে CGPA কীভাবে হিসাব হয় — ৪.০০ স্কেল, ক্রেডিট-ওজনযুক্ত গড় ও গ্রেড পয়েন্ট তালিকা। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'NU CGPA',
+    titleEn: 'National University CGPA Guide — Credits & Grades | Eduvelto',
+    descriptionEn:
+      'How CGPA is calculated at National University — the 4.00 scale, the credit-weighted average and the grade-point table. Draft lesson — awaiting teacher review.',
+    crumbEn: 'NU CGPA',
+  },
+  '/guides/land-measurement-bangladesh-guide': {
+    title: 'জমি মাপার হিসাব — শতক, কাঠা, বিঘা, একর | Eduvelto',
+    description:
+      'বাংলাদেশের জমির একক — শতক, কাঠা, বিঘা, একর, হেক্টর ও বর্গফুটের মধ্যে রূপান্তরের নিয়ম ও হিসাব। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'জমি মাপা',
+    titleEn: 'Land Measurement in Bangladesh — Decimal, Katha, Bigha, Acre | Eduvelto',
+    descriptionEn:
+      'Bangladesh land units — how to convert between decimal, katha, bigha, acre, hectare and square feet. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Land Measurement',
+  },
+  '/guides/govt-job-age-calculation-guide': {
+    title: 'সরকারি চাকরিতে বয়স হিসাব — বয়সসীমা ও যোগ্যতা | Eduvelto',
+    description:
+      'সরকারি চাকরির আবেদনে বয়স কীভাবে হিসাব হয় — সাধারণ সীমা ৩০ বছর, মুক্তিযোদ্ধা কোটা ৩২ বছর ও আবেদনের নিয়ম। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'চাকরির বয়স',
+    titleEn: 'Government Job Age Calculation — Age Limits & Eligibility | Eduvelto',
+    descriptionEn:
+      'How age is counted for government job applications — the general 30-year limit, the 32-year freedom-fighter quota and the rules. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Job Age',
+  },
+  '/guides/bcs-exam-pattern-strategy-guide': {
+    title: 'বিসিএস পরীক্ষার ধরন ও প্রস্তুতির কৌশল — ৫০তম সিলেবাস | Eduvelto',
+    description:
+      '৫০তম BCS সিলেবাসের পরীক্ষার ধরন — প্রিলিমিনারি ২০০ নম্বর, লিখিত ৯০০/১১০০ নম্বর ও প্রস্তুতির কৌশল। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'BCS ধরন',
+    titleEn: 'BCS Exam Pattern & Preparation Strategy — 50th Syllabus | Eduvelto',
+    descriptionEn:
+      'The 50th BCS syllabus pattern — Preliminary 200 marks, Written 900/1,100 marks, and how to prepare. Draft lesson — awaiting teacher review.',
+    crumbEn: 'BCS Pattern',
+  },
+  '/guides/safe-pdf-usage-guide': {
+    title: 'নিরাপদে PDF ব্যবহারের নিয়ম — পাসওয়ার্ড, ভাগ করা ও চাপা | Eduvelto',
+    description:
+      'PDF ফাইল নিরাপদে ব্যবহারের নিয়ম — AES-২৫৬ পাসওয়ার্ড সুরক্ষা, ফাইল ভাগ করা, একত্র করা ও আকার কমানো। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'নিরাপদ PDF',
+    titleEn: 'Safe PDF Usage Rules — Passwords, Splitting & Compressing | Eduvelto',
+    descriptionEn:
+      'Rules for using PDF files safely — AES-256 password protection, splitting, merging and compressing. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Safe PDF Use',
+  },
+  '/guides/loan-emi-calculation-guide': {
+    title: 'লোন EMI হিসাবের গাইড — কিস্তি, সুদ ও মোট খরচ | Eduvelto',
+    description:
+      'লোনের মাসিক কিস্তি (EMI) কীভাবে হিসাব হয় — সূত্র, সুদের হার, মেয়াদ ও মোট পরিশোধের হিসাব। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'EMI হিসাব',
+    titleEn: 'Loan EMI Calculation Guide — Instalment, Interest & Total Cost | Eduvelto',
+    descriptionEn:
+      'How a loan EMI is calculated — the formula, the interest rate, the term and the total amount paid. Draft lesson — awaiting teacher review.',
+    crumbEn: 'EMI Calculation',
+  },
+  '/guides/bmi-healthy-weight-guide': {
+    title: 'BMI ও সুস্থ ওজন — হিসাব, সীমা ও স্বাস্থ্যকর ওজন | Eduvelto',
+    description:
+      'BMI কীভাবে হিসাব হয় — WHO-র সীমা (১৮.৫–২৪.৯), সুস্থ ওজনের পরিসর ও ওজন নিয়ে সঠিক ধারণা। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'BMI ও ওজন',
+    titleEn: 'BMI & Healthy Weight — Calculation, Ranges & Healthy Weight | Eduvelto',
+    descriptionEn:
+      'How BMI is calculated — the WHO ranges (18.5–24.9), the healthy weight range and the right way to think about weight. Draft lesson — awaiting teacher review.',
+    crumbEn: 'BMI & Weight',
+  },
+  '/guides/age-calculation-guide': {
+    title: 'বয়স হিসাবের নিয়ম — বছর, মাস, দিন ও মোট দিন | Eduvelto',
+    description:
+      'জন্মতারিখ থেকে বয়স কীভাবে হিসাব হয় — বছর-মাস-দিনের নিয়ম, অধিবর্ষ ও বয়সসীমার হিসাব। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'বয়স হিসাব',
+    titleEn: 'Age Calculation Rules — Years, Months, Days & Total Days | Eduvelto',
+    descriptionEn:
+      'How age is calculated from a date of birth — the years-months-days rule, leap years and age-limit checks. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Age Calculation',
+  },
+  '/guides/qr-code-image-tools-guide': {
+    title: 'QR কোড ও ছবির টুল ব্যবহারের গাইড — তৈরি, পড়া ও কম্প্রেস | Eduvelto',
+    description:
+      'QR কোড তৈরি ও পড়া এবং ছবি কম্প্রেস করার নিয়ম — লিংক, Wi-Fi, যোগাযোগের তথ্য ও নিরাপদ ব্যবহার। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'QR ও ছবি',
+    titleEn: 'QR Code & Image Tools Guide — Create, Scan & Compress | Eduvelto',
+    descriptionEn:
+      'How to create and scan QR codes and compress images — links, Wi-Fi, contact details and safe use. Draft lesson — awaiting teacher review.',
+    crumbEn: 'QR & Images',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -2492,9 +2596,10 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   if (path === '/learn') {
     // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1,
     // wave 2, wave 3, wave 4, wave 5 and wave 10; Phase 2, 25 Nov
-    // 2026: 56 guides): the hub lists the 56 public guides, the
-    // two real lessons and the BCS English practice hub — the same
-    // links the page renders, in the same order.
+    // 2026: 56 guides; trust/content batch, 28 Nov 2026: 66 guides):
+    // the hub lists the 66 public guides, the two real lessons and
+    // the BCS English practice hub — the same links the page renders,
+    // in the same order.
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'ItemList',
@@ -2839,18 +2944,78 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         {
           '@type': 'ListItem',
           position: 57,
+          name: lang === 'bn' ? 'SSC/HSC GPA হিসাবের নিয়ম — গ্রেড পয়েন্ট ও চতুর্থ বিষয়' : 'SSC/HSC GPA Calculation Rules — Grade Points & the 4th Subject',
+          url: `${SITE_URL}/${lang}/guides/ssc-hsc-gpa-calculation-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 58,
+          name: lang === 'bn' ? 'জাতীয় বিশ্ববিদ্যালয় CGPA হিসাবের গাইড — ক্রেডিট ও গ্রেড' : 'National University CGPA Guide — Credits & Grades',
+          url: `${SITE_URL}/${lang}/guides/nu-cgpa-calculation-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 59,
+          name: lang === 'bn' ? 'জমি মাপার হিসাব — শতক, কাঠা, বিঘা, একর' : 'Land Measurement in Bangladesh — Decimal, Katha, Bigha, Acre',
+          url: `${SITE_URL}/${lang}/guides/land-measurement-bangladesh-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 60,
+          name: lang === 'bn' ? 'সরকারি চাকরিতে বয়স হিসাব — বয়সসীমা ও যোগ্যতা' : 'Government Job Age Calculation — Age Limits & Eligibility',
+          url: `${SITE_URL}/${lang}/guides/govt-job-age-calculation-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 61,
+          name: lang === 'bn' ? 'বিসিএস পরীক্ষার ধরন ও প্রস্তুতির কৌশল — ৫০তম সিলেবাস' : 'BCS Exam Pattern & Preparation Strategy — 50th Syllabus',
+          url: `${SITE_URL}/${lang}/guides/bcs-exam-pattern-strategy-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 62,
+          name: lang === 'bn' ? 'নিরাপদে PDF ব্যবহারের নিয়ম — পাসওয়ার্ড, ভাগ করা ও চাপা' : 'Safe PDF Usage Rules — Passwords, Splitting & Compressing',
+          url: `${SITE_URL}/${lang}/guides/safe-pdf-usage-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 63,
+          name: lang === 'bn' ? 'লোন EMI হিসাবের গাইড — কিস্তি, সুদ ও মোট খরচ' : 'Loan EMI Calculation Guide — Instalment, Interest & Total Cost',
+          url: `${SITE_URL}/${lang}/guides/loan-emi-calculation-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 64,
+          name: lang === 'bn' ? 'BMI ও সুস্থ ওজন — হিসাব, সীমা ও স্বাস্থ্যকর ওজন' : 'BMI & Healthy Weight — Calculation, Ranges & Healthy Weight',
+          url: `${SITE_URL}/${lang}/guides/bmi-healthy-weight-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 65,
+          name: lang === 'bn' ? 'বয়স হিসাবের নিয়ম — বছর, মাস, দিন ও মোট দিন' : 'Age Calculation Rules — Years, Months, Days & Total Days',
+          url: `${SITE_URL}/${lang}/guides/age-calculation-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 66,
+          name: lang === 'bn' ? 'QR কোড ও ছবির টুল ব্যবহারের গাইড — তৈরি, পড়া ও কম্প্রেস' : 'QR Code & Image Tools Guide — Create, Scan & Compress',
+          url: `${SITE_URL}/${lang}/guides/qr-code-image-tools-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 67,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 58,
+          position: 68,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 59,
+          position: 69,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/${lang}/jobs/bcs/practice/english`,
         },
@@ -2858,10 +3023,10 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     });
   }
   if (path === '/guides') {
-    // ItemList (Phase 2, 25 Nov 2026): the Study Guides hub lists
-    // the 15 long-form bilingual guides — built from the same data
-    // the page renders, in the same order, so the JSON-LD can never
-    // drift from the page.
+    // ItemList (Phase 2, 25 Nov 2026; trust/content batch, 28 Nov
+    // 2026: 25 guides): the Study Guides hub lists the long-form
+    // bilingual guides — built from the same data the page renders,
+    // in the same order, so the JSON-LD can never drift from the page.
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'ItemList',

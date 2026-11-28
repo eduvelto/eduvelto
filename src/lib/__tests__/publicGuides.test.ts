@@ -6,8 +6,11 @@
 // EXTENDED 24 Nov 2026, brand-SEO wave 10: 41 guides;
 // EXTENDED 25 Nov 2026, Phase 2: 56 guides — the 15 bilingual
 // Study Guides at /guides/<slug>, 700+ words in Bangla AND English).
+// EXTENDED 28 Nov 2026, trust/content batch (owner order): 66 guides
+// — 10 new tool-tied Study Guides at /guides/<slug>, 800+ words in
+// Bangla AND English each, every formula grounded in the tools' logic.
 //
-// The 56 guides are static public data, so the tests guard what
+// The 66 guides are static public data, so the tests guard what
 // matters most: exactly 35 guides with unique slugs/paths, 400–700
 // words each (pinned to the content pack's counts), every internal
 // link pointing at a real route, the draft status never claimed as
@@ -28,9 +31,9 @@ import { PUBLIC_GUIDE_BODIES } from '../publicGuideBodies';
 import { PUBLIC_GUIDE_META } from '../publicGuideMeta';
 
 describe('public guides — meta/body split (25 Nov 2026, entry-chunk budget)', () => {
-  it('meta + bodies cover the same 56 slugs as the joined PUBLIC_GUIDES', () => {
-    expect(PUBLIC_GUIDE_META).toHaveLength(56);
-    expect(Object.keys(PUBLIC_GUIDE_BODIES)).toHaveLength(56);
+  it('meta + bodies cover the same 66 slugs as the joined PUBLIC_GUIDES', () => {
+    expect(PUBLIC_GUIDE_META).toHaveLength(66);
+    expect(Object.keys(PUBLIC_GUIDE_BODIES)).toHaveLength(66);
     const slugs = PUBLIC_GUIDES.map((g) => g.slug);
     expect(PUBLIC_GUIDE_META.map((m) => m.slug).sort()).toEqual([...slugs].sort());
     expect(Object.keys(PUBLIC_GUIDE_BODIES).sort()).toEqual([...slugs].sort());
@@ -211,14 +214,58 @@ const REAL_ROUTES = new Set([
   '/jobs/viva',
   '/books',
   '/admissions',
+  // Trust/content batch (28 Nov 2026): the 10 new guide paths + the
+  // live tool routes the new articles link to.
+  '/guides/ssc-hsc-gpa-calculation-guide',
+  '/guides/nu-cgpa-calculation-guide',
+  '/guides/land-measurement-bangladesh-guide',
+  '/guides/govt-job-age-calculation-guide',
+  '/guides/bcs-exam-pattern-strategy-guide',
+  '/guides/safe-pdf-usage-guide',
+  '/guides/loan-emi-calculation-guide',
+  '/guides/bmi-healthy-weight-guide',
+  '/guides/age-calculation-guide',
+  '/guides/qr-code-image-tools-guide',
+  '/tools/ssc-hsc-gpa-calculator',
+  '/tools/nu-cgpa-calculator',
+  '/tools/cgpa-to-percentage-converter',
+  '/tools/grade-analyzer',
+  '/tools/international-gpa-calculator',
+  '/tools/land-measurement',
+  '/tools/area-calculator',
+  '/tools/unit-converter',
+  '/tools/govt-job-age-calculator',
+  '/tools/age-calculator',
+  '/tools/bcs-marks-calculator',
+  '/tools/negative-marking-calculator',
+  '/tools/pdf-password-protector',
+  '/tools/pdf-splitter',
+  '/tools/pdf-merger',
+  '/tools/pdf-compressor',
+  '/tools/image-to-pdf',
+  '/tools/loan-emi-calculator',
+  '/tools/mortgage-calculator',
+  '/tools/bank-emi-dps-fdr-calculator',
+  '/tools/compound-interest-calculator',
+  '/tools/simple-interest-calculator',
+  '/tools/bmi-calculator',
+  '/tools/ideal-weight-calculator',
+  '/tools/bmr-calculator',
+  '/tools/calorie-tdee-calculator',
+  '/tools/date-difference-calculator',
+  '/tools/bangla-date-converter',
+  '/tools/qr-code-generator',
+  '/tools/qr-code-reader',
+  '/tools/image-compressor',
+  '/tools/barcode-generator',
 ]);
 
 describe('public guides', () => {
-  it('has exactly the 56 guides, with unique slugs, paths and titles', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(56);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(56);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(56);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(56);
+  it('has exactly the 66 guides, with unique slugs, paths and titles', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(66);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(66);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(66);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(66);
     for (const g of PUBLIC_GUIDES) {
       // Old guides live at /learn/<slug>; Phase 2 Study Guides at /guides/<slug>.
       expect(g.path).toBe(
@@ -240,7 +287,7 @@ describe('public guides', () => {
   });
 
   it('Phase 2 Study Guides are 700+ words in Bangla AND English', () => {
-    expect(PHASE2_GUIDES).toHaveLength(15);
+    expect(PHASE2_GUIDES).toHaveLength(25);
     for (const g of PHASE2_GUIDES) {
       expect(publicGuideWordCount(g), `${g.slug} Bn words`).toBeGreaterThanOrEqual(700);
       expect(publicGuideWordCountEn(g), `${g.slug} En words`).toBeGreaterThanOrEqual(700);
@@ -463,16 +510,19 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
     'bcs-science-ict-preparation',
   ];
 
-  it('has the planned distribution: BCS 4, Primary 3, Bank 2, NTRCA 2, Admission 2, NCTB 2', () => {
+  it('has the planned distribution: BCS 5, Primary 3, Bank 2, NTRCA 2, Admission 4, NCTB 2, Tools 5, Finance 1, Health 1', () => {
     const counts = new Map<string, number>();
     for (const g of PHASE2_GUIDES) counts.set(g.category!, (counts.get(g.category!) ?? 0) + 1);
     expect(Object.fromEntries(counts)).toEqual({
-      bcs: 4,
+      bcs: 5,
       primary: 3,
       bank: 2,
       ntrca: 2,
-      admission: 2,
+      admission: 4,
       nctb: 2,
+      tools: 5,
+      finance: 1,
+      health: 1,
     });
   });
 
@@ -484,7 +534,8 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
       expect(g.descriptionBn!.length).toBeGreaterThan(40);
       expect(g.descriptionEn!.length).toBeGreaterThan(40);
       expect(g.readTimeMinutes).toBe(6);
-      expect(g.updatedAt).toBe('2026-11-25');
+      // Phase 2 wave (25 Nov 2026) + trust/content batch (28 Nov 2026).
+      expect(['2026-11-25', '2026-11-28']).toContain(g.updatedAt);
       expect(Array.isArray(g.needsReview)).toBe(true);
       // Only the GST/DU articles rest on a deliberate omission
       // (no verifiable dates/fees/marks split); the other 13 are
@@ -552,5 +603,75 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
       expect(oldSlugs.has(g.slug)).toBe(false);
       expect(oldTitles.has(g.titleBn)).toBe(false);
     }
+  });
+
+  it('trust/content batch (28 Nov 2026): the 10 tool-tied guides are 800+ words in Bn AND En', () => {
+    // Owner order 28 Nov 2026 — every formula/rule grounded in the
+    // tools' own logic (src/lib/tools/), never from memory.
+    const TRUST_SLUGS = [
+      'ssc-hsc-gpa-calculation-guide',
+      'nu-cgpa-calculation-guide',
+      'land-measurement-bangladesh-guide',
+      'govt-job-age-calculation-guide',
+      'bcs-exam-pattern-strategy-guide',
+      'safe-pdf-usage-guide',
+      'loan-emi-calculation-guide',
+      'bmi-healthy-weight-guide',
+      'age-calculation-guide',
+      'qr-code-image-tools-guide',
+    ];
+    expect(TRUST_SLUGS).toHaveLength(10);
+    for (const slug of TRUST_SLUGS) {
+      const g = publicGuideBySlug(slug)!;
+      expect(g, slug).toBeDefined();
+      expect(g.updatedAt).toBe('2026-11-28');
+      expect(publicGuideWordCount(g), `${slug} Bn words`).toBeGreaterThanOrEqual(800);
+      expect(publicGuideWordCountEn(g), `${slug} En words`).toBeGreaterThanOrEqual(800);
+      expect(g.links.some((l) => l.to.startsWith('/tools/')), `${slug} links a tool`).toBe(true);
+    }
+  });
+
+  it('trust/content batch: the grounded facts match the tools exactly', () => {
+    // GPA: grade points + worked example from sscHscGpa.ts.
+    const gpa = publicGuideBySlug('ssc-hsc-gpa-calculation-guide')!;
+    expect(gpa.bodyBn.join(' ')).toContain('২৪.৫ + ৩.০ = ২৭.৫');
+    expect(gpa.bodyBn.join(' ')).toContain('৪.৫৮');
+    expect(gpa.bodyEn!.join(' ')).toContain('24.5 + 3.0 = 27.5');
+    expect(gpa.bodyEn!.join(' ')).toContain('4.58');
+    // NU CGPA: credit-weighted example from nuCgpa.ts.
+    const cgpa = publicGuideBySlug('nu-cgpa-calculation-guide')!;
+    expect(cgpa.bodyBn.join(' ')).toContain('৩০.২৫ ÷ ৮ = ৩.৭৮');
+    expect(cgpa.bodyEn!.join(' ')).toContain('30.25 ÷ 8 = 3.78');
+    // Land: base units from landMeasurement.ts.
+    const land = publicGuideBySlug('land-measurement-bangladesh-guide')!;
+    expect(land.bodyBn.join(' ')).toContain('১ শতক মানে ৪৩৫.৬ বর্গফুট');
+    expect(land.bodyBn.join(' ')).toContain('১ বিঘা মানে ২০ কাঠা');
+    expect(land.bodyEn!.join(' ')).toContain('1 decimal means 435.6 square feet');
+    // Govt job age: limits from govtJobAge.ts (verify vs the circular).
+    const age = publicGuideBySlug('govt-job-age-calculation-guide')!;
+    expect(age.bodyBn.join(' ')).toContain('সাধারণ সীমা ৩০ বছর');
+    expect(age.bodyBn.join(' ')).toContain('মুক্তিযোদ্ধা কোটা ৩২ বছর');
+    expect(age.bodyEn!.join(' ')).toContain('general 30-year limit');
+    // BCS: ONLY the verified 50th-syllabus pattern; viva marks are
+    // NEVER written (sources disagree 200 vs 100).
+    const bcs = publicGuideBySlug('bcs-exam-pattern-strategy-guide')!;
+    expect(bcs.bodyBn.join(' ')).toContain('বাংলা ভাষা ও সাহিত্য ৩০, ইংরেজি ভাষা ও সাহিত্য ৩০, বাংলাদেশ বিষয়াবলি ২৫, আন্তর্জাতিক বিষয়াবলি ২৫, ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা ১০, সাধারণ বিজ্ঞান ১৫, কম্পিউটার ও তথ্যপ্রযুক্তি ১৫, গাণিতিক যুক্তি ২০, মানসিক দক্ষতা ১৫, নৈতিকতা, মূল্যবোধ ও সুশাসন ১৫');
+    expect(bcs.bodyBn.join(' ')).toContain('ভুল উত্তরের জন্য ০.৫০ নম্বর কাটা যায়');
+    expect(bcs.bodyBn.join(' ')).toContain('সাধারণ ক্যাডারের জন্য লিখিত পরীক্ষা মোট ৯০০ নম্বরের');
+    expect(bcs.bodyBn.join(' ')).toContain('মৌখিক পরীক্ষার নম্বর সম্পর্কে এই গাইডে কোনো সংখ্যা লেখা হয়নি');
+    expect(bcs.bodyEn!.join(' ')).toContain('Bangla Language & Literature 30, English Language & Literature 30, Bangladesh Affairs 25, International Affairs 25, Geography, Environment and Disaster Management 10, General Science 15, Computer and ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics, Values and Good Governance 15');
+    expect(bcs.bodyEn!.join(' ')).toContain('No number for the Viva marks is written in this guide');
+    // EMI: worked example from emiEngine.ts (verified by hand).
+    const emi = publicGuideBySlug('loan-emi-calculation-guide')!;
+    expect(emi.bodyBn.join(' ')).toContain('২৩,৫৩৭ টাকা');
+    expect(emi.bodyEn!.join(' ')).toContain('23,537 taka');
+    // BMI: WHO bands from bodyMetrics.ts.
+    const bmi = publicGuideBySlug('bmi-healthy-weight-guide')!;
+    expect(bmi.bodyBn.join(' ')).toContain('১৮.৫ থেকে ২৪.৯ হলে স্বাভাবিক ওজন');
+    expect(bmi.bodyEn!.join(' ')).toContain('18.5 to 24.9 means normal weight');
+    // Age: hand-check from ageEngine.ts.
+    const ageCalc = publicGuideBySlug('age-calculation-guide')!;
+    expect(ageCalc.bodyBn.join(' ')).toContain('২৬ বছর ১০ মাস ১২ দিন');
+    expect(ageCalc.bodyEn!.join(' ')).toContain('26 years, 10 months and 12 days');
   });
 });

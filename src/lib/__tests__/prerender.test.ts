@@ -107,14 +107,14 @@ describe('PRERENDER_STATIC_PATHS', () => {
     // join now — reading it here would find 0 slugs).
     const source = readFileSync(join(process.cwd(), 'src', 'lib', 'publicGuideMeta.ts'), 'utf8');
     const slugs = getGuideSlugs(source);
-    expect(slugs.length).toBe(56);
+    expect(slugs.length).toBe(66);
     for (const slug of slugs) expect(typeof slug).toBe('string');
-    // Phase 2 (25 Nov 2026): the 15 Study Guides live at
-    // /guides/<slug>, not /learn/<slug> — the coverage check uses
-    // each guide's own path.
+    // Phase 2 (25 Nov 2026) + trust/content batch (28 Nov 2026):
+    // the 25 Study Guides live at /guides/<slug>, not /learn/<slug>
+    // — the coverage check uses each guide's own path.
     const paths = getGuidePaths(source);
-    expect(paths.length).toBe(56);
-    expect(new Set(paths).size).toBe(56);
+    expect(paths.length).toBe(66);
+    expect(new Set(paths).size).toBe(66);
     for (const p of paths) {
       expect(PRERENDER_STATIC_PATHS, `guide not prerendered: ${p}`).toContain(p);
     }

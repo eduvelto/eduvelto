@@ -33,6 +33,7 @@ import { toolGuideBySlug, toolGuideSectionsBySlug } from '../lib/toolsGuides';
 import { faqPageJsonLd, relatedToolsFor } from '../lib/toolSeo';
 import { langUrl, SITE_URL } from '../lib/langRouting';
 import { ToolIcon } from '../components/ToolIcon';
+import EditorialBadge from '../components/EditorialBadge';
 import AdSlot from '../components/AdSlot';
 import ShareButton from '../components/ShareButton';
 import LifePdfToolsPage from './LifePdfToolsPage';
@@ -745,6 +746,10 @@ export default function ToolsDetailPage() {
           </div>
         </>
       ) : null}
+      {/* Editorial verification badge (owner order 28 Nov 2026):
+          tool pages only — never on question banks, books or exam
+          pages. One component covers all 265 tools. */}
+      <EditorialBadge />
     </PageShell>
   );
 }

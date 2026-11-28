@@ -97,7 +97,7 @@
 // in src/lib/seo.ts. /founder IS in the list since Phase 2
 // (25 Nov 2026): its SEO moved from FounderPage's client-side
 // useSeo into src/lib/seo.ts. Guide detail pages ARE covered:
-// /learn/<slug> x41 + /guides/<slug> x15.)
+// /learn/<slug> x41 + /guides/<slug> x25.)
 
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -203,6 +203,19 @@ export const PRERENDER_STATIC_PATHS = [
   '/guides/du-admission-preparation',
   '/guides/nctb-books-study-method',
   '/guides/nctb-revision-before-exams',
+  // Trust/content batch (owner order 28 Nov 2026): 10 new tool-tied
+  // Study Guides — same explicit-route pattern as the 15 Phase 2
+  // guides above.
+  '/guides/ssc-hsc-gpa-calculation-guide',
+  '/guides/nu-cgpa-calculation-guide',
+  '/guides/land-measurement-bangladesh-guide',
+  '/guides/govt-job-age-calculation-guide',
+  '/guides/bcs-exam-pattern-strategy-guide',
+  '/guides/safe-pdf-usage-guide',
+  '/guides/loan-emi-calculation-guide',
+  '/guides/bmi-healthy-weight-guide',
+  '/guides/age-calculation-guide',
+  '/guides/qr-code-image-tools-guide',
   '/learn',
   '/admissions',
   '/admissions/national-university',
