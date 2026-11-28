@@ -115,6 +115,31 @@ service cloud.firestore {
     function isStr(v, max) { return v is string && v.size() > 0 && v.size() <= max; }
     function isReqStr(v) { return v is string && v.size() > 0; }
     function isOptStr(v, max) { return v == null || (v is string && v.size() <= max); }
+    // Range checks (compaction 27 Nov 2026): the default in the
+    // >= / <= legs is unobservable — the is int / is number leg
+    // short-circuits first when the field is missing, and returns
+    // the stored value (never the default) when present.
+    function isIntRange(d, f, lo, hi) { return d.get(f, null) is int && d.get(f, 0) >= lo && d.get(f, 0) <= hi; }
+    function isNumRange(d, f, lo, hi) { return d.get(f, null) is number && d.get(f, 0) >= lo && d.get(f, 0) <= hi; }
+    function isPosInt(d, f) { return d.get(f, null) is int && d.get(f, 0) >= 1; }
+    function isNonNegInt(d, f) { return d.get(f, null) is int && d.get(f, -1) >= 0; }
+    // (map, field) abbreviations (compaction 27 Nov 2026): each wraps
+    // the identical d.get() expression, so the call is exactly
+    // equivalent to the inline form it replaces.
+    function isStrF(d, f, max) { return isStr(d.get(f, null), max); }
+    function isOptStrF(d, f, max) { return isOptStr(d.get(f, null), max); }
+    function isStrType(d, f) { return d.get(f, null) is string; }
+    function isIntType(d, f) { return d.get(f, null) is int; }
+    function isListType(d, f) { return d.get(f, null) is list; }
+    function isTsType(d, f) { return d.get(f, null) is timestamp; }
+    function isOptList(d, f) { return d.get(f, null) == null || d.get(f, null) is list; }
+    // Null-or-empty-list, takes the VALUE so a 3x d.get() collapses to one call.
+    function isNullOrEmptyList(v) { return v == null || (v is list && v.size() == 0); }
+    function isOptMap(d, f) { return d.get(f, null) == null || d.get(f, null) is map; }
+    function isOptNum(d, f) { return d.get(f, null) == null || d.get(f, null) is number; }
+    function isOptPosInt(d, f) { return d.get(f, null) == null || (d.get(f, null) is int && d.get(f, 0) >= 1); }
+    function isOptNonNegInt(d, f) { return d.get(f, null) == null || (d.get(f, null) is int && d.get(f, -1) >= 0); }
+    function isOptIntRange(d, f, lo, hi) { return d.get(f, null) == null || (d.get(f, null) is int && d.get(f, 0) >= lo && d.get(f, 0) <= hi); }
     // changedKeys — extracted 23 Nov 2026 (rules-size refactor): the
     // diff().affectedKeys() expression appeared verbatim at 62 call
     // sites. One function, identical semantics (pure expression, no
@@ -215,12 +240,9 @@ service cloud.firestore {
     // carry negativeMarkingVerified == false.
     function validJobRulesConfig(c) {
       return c == null || (c is map
-        && (c.get('questionCount', null) == null
-            || (c.get('questionCount', null) is int && c.get('questionCount', null) >= 1))
-        && (c.get('timeMinutes', null) == null
-            || (c.get('timeMinutes', null) is int && c.get('timeMinutes', null) >= 1))
-        && (c.get('marksPerQuestion', null) == null
-            || (c.get('marksPerQuestion', null) is int && c.get('marksPerQuestion', null) >= 1))
+        && isOptPosInt(c, 'questionCount')
+        && isOptPosInt(c, 'timeMinutes')
+        && isOptPosInt(c, 'marksPerQuestion')
         && (c.get('negativeMarking', null) == null
             || (c.get('negativeMarking', null) is number && c.get('negativeMarking', null) >= 0
                 && (c.get('marksPerQuestion', null) == null
@@ -232,21 +254,18 @@ service cloud.firestore {
             || c.get('negativeMarkingVerified', null) is bool)
         && (c.get('negativeMarkingVerified', null) != false
             || c.get('negativeMarking', null) == null)
-        && (c.get('passMark', null) == null
-            || (c.get('passMark', null) is int && c.get('passMark', null) >= 0))
-        && (c.get('passPercent', null) == null
-            || (c.get('passPercent', null) is int && c.get('passPercent', null) >= 0
-                && c.get('passPercent', null) <= 100))
-        && (c.get('subjects', null) == null || c.get('subjects', null) is list)
+        && isOptNonNegInt(c, 'passMark')
+        && isOptIntRange(c, 'passPercent', 0, 100)
+        && isOptList(c, 'subjects')
         && (c.get('patternLabel', null) == null
             || c.get('patternLabel', null) in ['verified', 'last-verified-18th', 'circular-based'])
         && (c.get('patternStatus', null) == null
             || c.get('patternStatus', null) in jobPatternStatuses())
         && (c.get('patternStatus', null) != 'verified'
             || c.get('negativeMarkingVerified', null) != false)
-        && (c.get('applicableCycle', null) == null || c.get('applicableCycle', null) is string)
-        && (c.get('patternSource', null) == null || c.get('patternSource', null) is string)
-        && (c.get('patternVerifiedAt', null) == null || c.get('patternVerifiedAt', null) is timestamp));
+        && (c.get('applicableCycle', null) == null || isStrType(c, 'applicableCycle'))
+        && (c.get('patternSource', null) == null || isStrType(c, 'patternSource'))
+        && (c.get('patternVerifiedAt', null) == null || isTsType(c, 'patternVerifiedAt')));
     }
     // rulesConfigHistory integrity (Step 5 closure, P0-2 — this is the
     // fix for the Step 3 draft's "history enforced in admin-UI code"
@@ -282,7 +301,7 @@ service cloud.firestore {
       return hist[hist.size() - 1];
     }
     function validJobRulesConfigHistoryChange(oldDoc, newDoc) {
-      return newDoc.get('rulesConfigHistory', null) is list
+      return isListType(newDoc, 'rulesConfigHistory')
         && ((newDoc.get('rulesConfigHistory', null) == oldDoc.get('rulesConfigHistory', null)
               && newDoc.get('rulesConfig', null) == oldDoc.get('rulesConfig', null))
             || (newDoc.get('rulesConfigHistory', null).size()
@@ -549,9 +568,9 @@ service cloud.firestore {
           || (newDoc.get('verifiedBy', null) == uid()
               && uid() != oldDoc.get('authorId', '')))
         && (newDoc.get('status', '') != 'published'
-            || (newDoc.get('verifiedBy', null) is string
+            || (isStrType(newDoc, 'verifiedBy')
                 && newDoc.get('verifiedBy', null) != oldDoc.get('authorId', '')
-                && newDoc.get('verifiedAt', null) is timestamp));
+                && isTsType(newDoc, 'verifiedAt')));
     }
     // PUBLISH-TRANSITION GUARD (Step 6 fold-in, ChatGPT P1-03): the
     // publication fields (status / reviewStatus / verifiedBy /
@@ -596,17 +615,16 @@ service cloud.firestore {
     // unchanged from an already-valid doc).
     function validJobSubject(d) {
       return jobExamSlugOk(d)
-        && isStr(d.get('nameBn', null), 100)
-        && isStr(d.get('nameEn', null), 100)
-        && d.get('order', null) is int && d.get('order', null) >= 1
-        && (d.get('marks', null) == null
-            || (d.get('marks', null) is int && d.get('marks', null) >= 0))
-        && isOptStr(d.get('syllabusSource', null), 500)
+        && isStrF(d, 'nameBn', 100)
+        && isStrF(d, 'nameEn', 100)
+        && isPosInt(d, 'order')
+        && isOptNonNegInt(d, 'marks')
+        && isOptStrF(d, 'syllabusSource', 500)
         // Step 6 fold-in: the seed carries `slug` and `applicableCycle`
         // — validate them instead of ignoring them (a slug that is not
         // kebab, or an applicableCycle that is not a string, is denied).
         && (d.get('slug', null) == null
-            || (d.get('slug', null) is string && d.get('slug', null).matches('^[a-z0-9-]+$')))
+            || (isStrType(d, 'slug') && d.get('slug', null).matches('^[a-z0-9-]+$')))
         && (isOptStrNoMax(d, 'applicableCycle'))
         // Step 6 fold-in, ChatGPT P2-02: configVersion is an optional
         // string when present (the seed stamps it; a rules-created
@@ -618,35 +636,33 @@ service cloud.firestore {
     function validJobChapter(d) {
       return jobExamSlugOk(d)
         && isJobSubjectId(d.get('subjectId', null))
-        && isStr(d.get('nameBn', null), 200)
-        && isStr(d.get('nameEn', null), 200)
-        && isOptStr(d.get('descriptionBn', null), 1000)
-        && isOptStr(d.get('descriptionEn', null), 1000)
-        && d.get('order', null) is int && d.get('order', null) >= 1
+        && isStrF(d, 'nameBn', 200)
+        && isStrF(d, 'nameEn', 200)
+        && isOptStrF(d, 'descriptionBn', 1000)
+        && isOptStrF(d, 'descriptionEn', 1000)
+        && isPosInt(d, 'order')
         && jobContentStateOk(d);
     }
     function validJobTopic(d) {
       return jobExamSlugOk(d)
         && isJobSubjectId(d.get('subjectId', null))
         && isJobChapterId(d.get('chapterId', null))
-        && isStr(d.get('nameBn', null), 200)
-        && isStr(d.get('nameEn', null), 200)
-        && d.get('order', null) is int && d.get('order', null) >= 1
+        && isStrF(d, 'nameBn', 200)
+        && isStrF(d, 'nameEn', 200)
+        && isPosInt(d, 'order')
         && d.get('isCommon', null) is bool
         && (d.get('commonExams', null) == null
-            || (d.get('commonExams', null) is list
+            || (isListType(d, 'commonExams')
                 && d.get('commonExams', null).toSet().hasOnly(jobExamSlugs())))
         // BINDING (Step 3 §2.5): common means in at least 3 of the 4
         // Tier-1 exams — counted on DISTINCT slugs, so
         // ['bcs', 'bcs', 'bcs'] does not pass.
         && (d.get('isCommon', null) != true
-            || (d.get('commonExams', null) is list
+            || (isListType(d, 'commonExams')
                 && d.get('commonExams', null).toSet().size() >= 3))
         && d.get('commonStatus', null) in ['preliminary', 'verified']
-        && (d.get('questionTarget', null) == null
-            || (d.get('questionTarget', null) is int && d.get('questionTarget', null) >= 0))
-        && d.get('publishedQuestionCount', null) is int
-        && d.get('publishedQuestionCount', null) >= 0
+        && isOptNonNegInt(d, 'questionTarget')
+        && isNonNegInt(d, 'publishedQuestionCount')
         && jobContentStateOk(d);
     }
     function validJobLesson(d) {
@@ -667,11 +683,11 @@ service cloud.firestore {
         && (isOptStrNoMax(d, 'subjectId'))
         && (isOptStrNoMax(d, 'chapterId'))
         && (isOptStrNoMax(d, 'topicId'))
-        && isStr(d.get('titleBn', null), 200)
-        && isStr(d.get('titleEn', null), 200)
-        && isStr(d.get('body', null), 100000)
-        && isOptStr(d.get('bodyEn', null), 100000)
-        && d.get('order', null) is int && d.get('order', null) >= 1
+        && isStrF(d, 'titleBn', 200)
+        && isStrF(d, 'titleEn', 200)
+        && isStrF(d, 'body', 100000)
+        && isOptStrF(d, 'bodyEn', 100000)
+        && isPosInt(d, 'order')
         && jobContentStateOk(d);
     }
 
@@ -862,22 +878,21 @@ service cloud.firestore {
         && d.get('subjectId', '').matches('^' + d.get('examSlug', '') + '__[a-z0-9-]+$')
         && d.get('chapterId', '').matches('^' + d.get('subjectId', '') + '__[a-z0-9-]+$')
         && d.get('topicId', '').matches('^' + d.get('chapterId', '') + '__[a-z0-9-]+$')
-        && isStr(d.get('questionText', null), 2000)
-        && d.get('options', null) is list && d.get('options', null).size() == 4
+        && isStrF(d, 'questionText', 2000)
+        && isListType(d, 'options') && d.get('options', null).size() == 4
         && d.get('correctLetter', null) in ['A', 'B', 'C', 'D']
-        && isStr(d.get('explanation', null), 2000)
-        && (d.get('whyWrong', null) == null || d.get('whyWrong', null) is map)
+        && isStrF(d, 'explanation', 2000)
+        && isOptMap(d, 'whyWrong')
         && d.get('difficulty', null) in ['easy', 'medium', 'hard']
         && d.get('isPreviousYear', null) is bool
         && (d.get('isPreviousYear', null) != true
-            || (d.get('examYear', null) is int
-                && d.get('examYear', null) >= 1900 && d.get('examYear', null) <= 2100
-                && d.get('sourceUrl', null) is string))
-        && isStr(d.get('source', null), 500)
+            || (isIntRange(d, 'examYear', 1900, 2100)
+                && isStrType(d, 'sourceUrl')))
+        && isStrF(d, 'source', 500)
         && (isOptStrNoMax(d, 'sourceUrl'))
         && jobQuestionStateOk(d)
-        && isStr(d.get('duplicateHash', null), 200)
-        && d.get('version', null) is int && d.get('version', null) >= 1
+        && isStrF(d, 'duplicateHash', 200)
+        && isPosInt(d, 'version')
         && (isOptStrNoMax(d, 'rejectionReason'))
         && (isOptStrNoMax(d, 'reviewerId'))
         && (isOptStrNoMax(d, 'configVersion'))
@@ -896,28 +911,25 @@ service cloud.firestore {
       return d.get('kind', null) in ['topic', 'mock', 'daily', 'weekly', 'previous']
         && d.get('examSlug', null) in jobExamSlugs()
         && d.get('examSlug', null) != 'it-professional'
-        && (d.get('kind', null) != 'topic' || d.get('topicId', null) is string)
-        && (d.get('kind', null) != 'mock' || d.get('mockId', null) is string)
-        && (d.get('kind', null) != 'daily' || d.get('mockId', null) is string)
-        && (d.get('kind', null) != 'weekly' || d.get('mockId', null) is string)
-        && (d.get('kind', null) != 'previous' || d.get('year', null) is int)
-        && isStr(d.get('titleBn', null), 200)
-        && isStr(d.get('titleEn', null), 200)
-        && d.get('questions', null) is list
+        && (d.get('kind', null) != 'topic' || isStrType(d, 'topicId'))
+        && (d.get('kind', null) != 'mock' || isStrType(d, 'mockId'))
+        && (d.get('kind', null) != 'daily' || isStrType(d, 'mockId'))
+        && (d.get('kind', null) != 'weekly' || isStrType(d, 'mockId'))
+        && (d.get('kind', null) != 'previous' || isIntType(d, 'year'))
+        && isStrF(d, 'titleBn', 200)
+        && isStrF(d, 'titleEn', 200)
+        && isListType(d, 'questions')
         && d.get('questions', null).size() <= 200
-        && d.get('questionCount', null) is int
-        && d.get('questionCount', null) >= 1
-        && d.get('questionCount', null) <= 200
+        && isIntRange(d, 'questionCount', 1, 200)
         && d.get('questionCount', null) == d.get('questions', null).size()
-        && d.get('sourceQuestionIds', null) is list
+        && isListType(d, 'sourceQuestionIds')
         && jobQuestionStateOk(d)
         && (isOptStrNoMax(d, 'configVersion'))
         // Step 8 fold-in (finding 5): the bundle generation an
         // attempt binds to — optional here (older bundles may lack
         // it) but validated when present; the ATTEMPT rule requires
         // the bundle to carry it and match.
-        && (d.get('bundleVersion', null) == null
-            || (d.get('bundleVersion', null) is int && d.get('bundleVersion', null) >= 1));
+        && isOptPosInt(d, 'bundleVersion');
     }
     // Field-shape of an answer key. Per-answer checks are NOT
     // possible in rules (no list indexing); buildJobBundle() in the
@@ -926,7 +938,7 @@ service cloud.firestore {
     // nothing and scores nothing).
     function validJobQuestionKey(d, bundleId) {
       return d.get('bundleId', null) == bundleId
-        && d.get('answers', null) is list
+        && isListType(d, 'answers')
         && d.get('answers', null).size() >= 1
         && d.get('answers', null).size() <= 200
         && (isOptStrNoMax(d, 'configVersion'))
@@ -940,7 +952,7 @@ service cloud.firestore {
     // score a newer bundle). The bundle must exist.
     function jobKeyMatchesBundle(d, bundleId, bundle) {
       return bundle.questionCount == d.get('answers', []).size()
-        && d.get('configVersion', null) is string
+        && isStrType(d, 'configVersion')
         && bundle.get('configVersion', null) == d.get('configVersion', null);
     }
     // A practice (topic) bundle's key is readable signed-in for
@@ -1207,7 +1219,7 @@ service cloud.firestore {
     // and serverVerifiedScore must be absent or null (a future
     // server scorer would be its only writer).
     function validJobAttemptCore(d, attemptId) {
-        return d.get('answers', null) is list
+        return isListType(d, 'answers')
         && d.get('answers', []).size() >= 1
         && d.get('score', null) is number
         && d.get('totalMarks', null) is number && d.get('totalMarks', 0) > 0
@@ -1222,21 +1234,19 @@ service cloud.firestore {
             || d.get('negativeMarkingUsed', -1) == 0.5)
         && d.get('negativeDeduction', -1)
              == d.get('wrongCount', 0) * d.get('negativeMarkingUsed', -1)
-        && isStr(d.get('markingSchemeVersion', null), 100)
-        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
-        && d.get('correctCount', null) is int && d.get('correctCount', -1) >= 0
-        && d.get('wrongCount', null) is int && d.get('wrongCount', -1) >= 0
-        && d.get('unansweredCount', null) is int && d.get('unansweredCount', -1) >= 0
+        && isStrF(d, 'markingSchemeVersion', 100)
+        && isPosInt(d, 'bundleVersion')
+        && isNonNegInt(d, 'correctCount')
+        && isNonNegInt(d, 'wrongCount')
+        && isNonNegInt(d, 'unansweredCount')
         && d.get('correctCount', 0) + d.get('wrongCount', 0) + d.get('unansweredCount', 0)
              == d.get('answers', []).size()
-        && d.get('accuracy', null) is number
-        && d.get('accuracy', -1) >= 0 && d.get('accuracy', 101) <= 100
-        && d.get('percentage', null) is number
-        && d.get('percentage', -101) >= -100 && d.get('percentage', 101) <= 100
+        && isNumRange(d, 'accuracy', 0, 100)
+        && isNumRange(d, 'percentage', -100, 100)
         && d.get('timeSpentSeconds', null) is number
         && d.get('timeSpentSeconds', -1) >= 0
-        && d.get('startedAt', null) is timestamp
-        && d.get('submittedAt', null) is timestamp
+        && isTsType(d, 'startedAt')
+        && isTsType(d, 'submittedAt')
         && d.get('startedAt', null) <= d.get('submittedAt', null)
         && d.get('submittedAt', null) <= request.time
         && d.get('status', '') == 'submitted'
@@ -1246,9 +1256,9 @@ service cloud.firestore {
         && d.get('resultType', '') == 'practice'
         && d.get('submissionIntegrity', '') == 'client_calculated'
         && d.get('serverVerifiedScore', null) == null
-        && (d.get('audit', null) == null || d.get('audit', null) is map)
-        && (d.get('answerHashes', null) == null || d.get('answerHashes', null) is list)
-        && (d.get('anomalyFlags', null) == null || d.get('anomalyFlags', null) is list)
+        && isOptMap(d, 'audit')
+        && isOptList(d, 'answerHashes')
+        && isOptList(d, 'anomalyFlags')
         && d.get('sessionId', '') == attemptId;
     }
     function validJobAttemptCreate(d, userId, attemptId, bundle, sessAfter) {
@@ -1278,11 +1288,11 @@ service cloud.firestore {
         // is no longer valid in this collection.
         && d.get('kind', null) == 'practice'
         && d.get('mockId', null) == null
-        && d.get('bundleId', null) is string
+        && isStrType(d, 'bundleId')
         && (d.get('subjectId', null) == null
-            || (d.get('subjectId', null) is string && d.get('subjectId', '').size() <= 200))
+            || (isStrType(d, 'subjectId') && d.get('subjectId', '').size() <= 200))
         && (d.get('topicId', null) == null
-            || (d.get('topicId', null) is string && d.get('topicId', '').size() <= 200))
+            || (isStrType(d, 'topicId') && d.get('topicId', '').size() <= 200))
                 && validJobAttemptCore(d, attemptId)
         // The bundle must exist, be Published, and match the attempt
         // (same exam, fitting kind, same mock when a mock) — and the
@@ -1330,11 +1340,11 @@ service cloud.firestore {
              'submittedAt', 'createdAt', 'updatedAt', 'revision'])
         && d.get('kind', null) == 'practice'
         && d.get('mockId', null) == null
-        && d.get('bundleId', null) is string
+        && isStrType(d, 'bundleId')
         && d.get('status', '') == 'in-progress'
-        && d.get('startedAt', null) is timestamp
+        && isTsType(d, 'startedAt')
         && d.get('endsAt', null) == null
-        && d.get('questionRefs', null) is list
+        && isListType(d, 'questionRefs')
         && d.get('questionRefs', []).size() >= 1
         && d.get('answers', null) is map
         // Step 8 fold-in (finding 6): the answers map is exactly one
@@ -1347,19 +1357,19 @@ service cloud.firestore {
         // keys ARE the refs' n values (see the size check above),
         // so membership is exactly "inside the stored order".
         && d.get('answers', {}).size() == d.get('questionRefs', []).size()
-        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && isPosInt(d, 'currentQuestion')
         && string(d.get('currentQuestion', 0)) in d.get('answers', {}).keys()
-        && d.get('lastSyncedAt', null) is timestamp
+        && isTsType(d, 'lastSyncedAt')
         // Step 8 fold-in (finding 6): revision starts at 1 and is
         // bumped by exactly 1 per write (see validJobSessionUpdate)
         // — a stale client write is rejected, so two tabs/devices
         // cannot silently overwrite each other's answers.
-        && d.get('revision', null) is int && d.get('revision', 0) == 1
-        && d.get('lastSyncedAt', null) is timestamp
+        && isIntType(d, 'revision') && d.get('revision', 0) == 1
+        && isTsType(d, 'lastSyncedAt')
         && d.get('clientEndsAtMillis', null) == null
         && d.get('submittedAt', null) == null
-        && d.get('createdAt', null) is timestamp
-        && d.get('updatedAt', null) is timestamp
+        && isTsType(d, 'createdAt')
+        && isTsType(d, 'updatedAt')
         && bundle.status == 'published'
         && bundle.examSlug == d.get('examSlug', null)
         && jobBundleKindFitsAttemptKind(bundle.kind, d.get('kind', null));
@@ -1384,16 +1394,16 @@ service cloud.firestore {
     // exceed the subset size (see validJobSessionCreate).
     function validJobSessionUpdateCore(d, old) {
       return d.get('status', '') in ['in-progress', 'submitted', 'abandoned']
-        && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
+        && ((d.get('status', '') == 'submitted' && isTsType(d, 'submittedAt'))
             || (d.get('status', '') != 'submitted' && d.get('submittedAt', null) == null))
         && d.get('answers', null) is map
         && d.get('answers', {}).size() <= old.get('questionRefs', []).size()
-        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && isPosInt(d, 'currentQuestion')
         && string(d.get('currentQuestion', 0)) in d.get('answers', {}).keys()
-        && d.get('revision', null) is int
+        && isIntType(d, 'revision')
         && d.get('revision', -1) == old.get('revision', 0) + 1
-        && d.get('lastSyncedAt', null) is timestamp
-        && d.get('updatedAt', null) is timestamp;
+        && isTsType(d, 'lastSyncedAt')
+        && isTsType(d, 'updatedAt');
     }
     function validJobSessionUpdate(d, old) {
       return validJobSessionUpdateCore(d, old)
@@ -1444,26 +1454,26 @@ service cloud.firestore {
              'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
              'submittedAt', 'createdAt', 'updatedAt', 'revision'])
         && d.get('kind', null) == 'mock'
-        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
-        && d.get('bundleId', null) is string
-        && d.get('definitionId', null) is string && d.get('definitionId', '').size() > 0
-        && d.get('questionSetId', null) is string && d.get('questionSetId', '').size() > 0
-        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
+        && isStrType(d, 'mockId') && d.get('mockId', '').size() > 0
+        && isStrType(d, 'bundleId')
+        && isStrType(d, 'definitionId') && d.get('definitionId', '').size() > 0
+        && isStrType(d, 'questionSetId') && d.get('questionSetId', '').size() > 0
+        && isPosInt(d, 'bundleVersion')
         && d.get('status', '') == 'in-progress'
         && d.get('startedAt', null) == request.time
         && d.get('endsAt', null) == null
-        && d.get('questionRefs', null) is list
+        && isListType(d, 'questionRefs')
         && d.get('questionRefs', []).size() >= 1
         && d.get('answers', null) is map
         && d.get('answers', {}).size() == d.get('questionRefs', []).size()
-        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && isPosInt(d, 'currentQuestion')
         && d.get('currentQuestion', 0) <= d.get('questionRefs', []).size()
-        && d.get('revision', null) is int && d.get('revision', 0) == 1
-        && d.get('lastSyncedAt', null) is timestamp
-        && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number)
+        && isIntType(d, 'revision') && d.get('revision', 0) == 1
+        && isTsType(d, 'lastSyncedAt')
+        && isOptNum(d, 'clientEndsAtMillis')
         && d.get('submittedAt', null) == null
-        && d.get('createdAt', null) is timestamp
-        && d.get('updatedAt', null) is timestamp
+        && isTsType(d, 'createdAt')
+        && isTsType(d, 'updatedAt')
         // The bundle must be Published and match the session
         // (same exam, mock-type kind, same mock) — and the
         // session runs the bundle's CURRENT generation.
@@ -1536,9 +1546,9 @@ service cloud.firestore {
     //    immutable — they are not in the match's affectedKeys.
     function jobExamEndsAtIsExact(old, d, def) {
       return def.get('rulesSnapshot', null) is map
-        && def.rulesSnapshot.get('timeMinutes', null) is int
-        && d.get('endsAt', null) is timestamp
-        && old.get('startedAt', null) is timestamp
+        && isIntType(def.rulesSnapshot, 'timeMinutes')
+        && isTsType(d, 'endsAt')
+        && isTsType(old, 'startedAt')
         && d.get('endsAt', null) == old.get('startedAt', null)
              + duration.value(def.rulesSnapshot.timeMinutes * 60, 's');
     }
@@ -1553,7 +1563,7 @@ service cloud.firestore {
         && ((d.get('status', '') != 'submitted' && d.get('answers', {}) == old.get('answers', {}))
             || old.get('endsAt', null) == null
             || request.time < old.get('endsAt', null))
-        && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number);
+        && isOptNum(d, 'clientEndsAtMillis');
     }
     // Exam attempt create (Step 9, Design G + ChatGPT fold-in
     // §1(c)/§1(e)/H.3/H.4). Created ONCE at submit with status
@@ -1608,11 +1618,11 @@ service cloud.firestore {
              'submissionIntegrity'])
         && d.get('userId', '') == userId
         && d.get('kind', null) == 'mock'
-        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
-        && d.get('bundleId', null) is string
+        && isStrType(d, 'mockId') && d.get('mockId', '').size() > 0
+        && isStrType(d, 'bundleId')
         && d.get('subjectId', null) == null
         && d.get('topicId', null) == null
-        && d.get('questionSetId', null) is string && d.get('questionSetId', '').size() > 0
+        && isStrType(d, 'questionSetId') && d.get('questionSetId', '').size() > 0
                 && validJobAttemptCore(d, attemptId)
         && bundle.get('status', null) == 'published'
         && bundle.get('examSlug', null) == d.get('examSlug', null)
@@ -1736,18 +1746,9 @@ service cloud.firestore {
     // email + education details in bulk — full records are owner/admin
     // only. Moderator access to user data is re-scoped when moderators
     // are onboarded (minimal per-case projection, audit-logged).
-    match /users/{userId} {
-      allow read: if isOwner(userId) || isAdmin();
-      // DASHBOARDS (Step 5, branch draft): self-service roles are
-      // student / teacher / parent ONLY — admin / moderator / owner can
-      // never be self-assigned (the old rule allowed student only, so
-      // teacher + guardian registration was impossible). A teacher or
-      // guardian profile is created with verificationStatus 'pending'
-      // (verification is a human Admin decision afterwards); a student
-      // NEVER carries verificationStatus (no student verification exists
-      // — owner decision 21 Nov 06:53 + 07:02, 100% free, manual only).
-      // isActive is still never set at creation (missing = active).
-      allow create: if isOwner(userId)
+    // validUsersCreate(d, userId) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validUsersCreate(d, userId) {
+      return isOwner(userId)
         // CHATGPT STEP 4 REVIEW (P0 — permitted-key allowlist): the
         // create rule previously validated known fields but did not
         // restrict the key set — a student could smuggle arbitrary
@@ -1775,37 +1776,37 @@ service cloud.firestore {
         // 'verificationStatus' is in the allowlist because teacher /
         // guardian registration writes it — but its VALUE is pinned by
         // the clause below: absent, or teacher/parent + 'pending' only.
-        && request.resource.data.role in ['student', 'teacher', 'parent']
-        && (!('verificationStatus' in request.resource.data)
-            || (request.resource.data.role in ['teacher', 'parent']
-                && request.resource.data.verificationStatus == 'pending'))
-        && !('isActive' in request.resource.data)
-        && isStr(request.resource.data.displayName, 100)
+        && d.role in ['student', 'teacher', 'parent']
+        && (!('verificationStatus' in d)
+            || (d.role in ['teacher', 'parent']
+                && d.verificationStatus == 'pending'))
+        && !('isActive' in d)
+        && isStr(d.displayName, 100)
         // Public user IDs (owner order 22 Nov 2026): a profile may
         // carry publicIdNumber ONLY equal to the counter's current
         // `next` — the number the allocation transaction claims.
         // Absent = fallback (no number yet); the clause short-circuits
         // so a missing counter never blocks a plain create. A claimed
         // number with a missing counter is denied (get() yields 0).
-        && (!('publicIdNumber' in request.resource.data)
-            || (request.resource.data.publicIdNumber is int
-                && request.resource.data.publicIdNumber >= 1
-                && request.resource.data.publicIdNumber
+        && (!('publicIdNumber' in d)
+            || (d.publicIdNumber is int
+                && d.publicIdNumber >= 1
+                && d.publicIdNumber
                      == get(/databases/$(database)/documents/counters/publicUserIds).data.get('next', 0)))
-        && request.resource.data.email is string
-        && request.resource.data.language in ['bn', 'en']
-        && isOptStr(request.resource.data.get('board', null), 200)
-        && isOptStr(request.resource.data.get('institution', null), 200)
-        && isOptStr(request.resource.data.get('academicSession', null), 50)
-        && isOptStr(request.resource.data.get('curriculum', null), 200)
-        && isOptStr(request.resource.data.get('classLevel', null), 100)
-        && isOptStr(request.resource.data.get('department', null), 100)
-        && isOptStr(request.resource.data.get('semester', null), 50)
-        && isOptStr(request.resource.data.get('phone', null), 20)
-        && isOptStr(request.resource.data.get('teachingLevel', null), 100)
-        && isOptStr(request.resource.data.get('qualifications', null), 500)
-        && (!('jobMode' in request.resource.data)
-            || request.resource.data.jobMode in ['beginner', 'advanced'])
+        && d.email is string
+        && d.language in ['bn', 'en']
+        && isOptStrF(d, 'board', 200)
+        && isOptStrF(d, 'institution', 200)
+        && isOptStrF(d, 'academicSession', 50)
+        && isOptStrF(d, 'curriculum', 200)
+        && isOptStrF(d, 'classLevel', 100)
+        && isOptStrF(d, 'department', 100)
+        && isOptStrF(d, 'semester', 50)
+        && isOptStrF(d, 'phone', 20)
+        && isOptStrF(d, 'teachingLevel', 100)
+        && isOptStrF(d, 'qualifications', 500)
+        && (!('jobMode' in d)
+            || d.jobMode in ['beginner', 'advanced'])
         // Step 4 — Job profile fields (Step 3 §2.25/§3.1): same
         // validations as the self-update rule below, so no invalid
         // value can sneak in at creation either.
@@ -1815,20 +1816,23 @@ service cloud.firestore {
         // MISSING-vs-NULL (deliberate, all five fields): optional on
         // create; absent or null = undecided; removable (delete → absent
         // = undecided); 0 is an EXPLICIT zero goal, never "unset".
-        && validJobProfileFields(request.resource.data)
-        && (!('subjects' in request.resource.data)
-            || (request.resource.data.subjects is list
-                && request.resource.data.subjects.size() <= 20))
-        && (!('experienceYears' in request.resource.data)
-            || (request.resource.data.experienceYears is number
-                && request.resource.data.experienceYears >= 0
-                && request.resource.data.experienceYears <= 60))
+        && validJobProfileFields(d)
+        && (!('subjects' in d)
+            || (d.subjects is list
+                && d.subjects.size() <= 20))
+        && (!('experienceYears' in d)
+            || (d.experienceYears is number
+                && d.experienceYears >= 0
+                && d.experienceYears <= 60))
         // NU-4 (§19.2.15, §12.3): the four NU profile fields. Each is
         // optional; a present value must be in its allowlist. role /
         // verificationStatus / isActive stay excluded (above) — an NU
         // field can never smuggle a role escalation in (NU-T1/T2).
-        && validNuProfileFields(request.resource.data);
-      allow update: if isOwner(userId)
+        && validNuProfileFields(d);
+    }
+    // validUsersUpdateOwner(d, userId) — compaction 27 Nov 2026: the update allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validUsersUpdateOwner(d, userId) {
+      return isOwner(userId)
         // The update may touch ONLY these fields; role, verificationStatus
         // and isActive are excluded, so they cannot change here.
         // DASHBOARDS (Step 5): the academic fields added are semester,
@@ -1848,10 +1852,10 @@ service cloud.firestore {
                        'admissionTargetInstitution', 'admissionTargetGroup',
                        'admissionMode', 'admissionOnboarded',
                        'language', 'lastActiveAt', 'updatedAt'])
-        && isOptStr(request.resource.data.displayName, 100)
-        && isOptStr(request.resource.data.get('phone', null), 20)
-        && (!('jobMode' in request.resource.data)
-            || request.resource.data.jobMode in ['beginner', 'advanced'])
+        && isOptStr(d.displayName, 100)
+        && isOptStrF(d, 'phone', 20)
+        && (!('jobMode' in d)
+            || d.jobMode in ['beginner', 'advanced'])
         // Step 4 — Job profile fields (Step 3 §3.1, exact spec):
         // enrolledCategories ≤10 UNIQUE slugs from the 10-category
         // enum (duplicates fail); targetExam null or one of the 14 hub
@@ -1862,13 +1866,51 @@ service cloud.firestore {
         // fields (affectedKeys().hasOnly, above) — no unexpected field
         // can ride in on a Job update. MISSING-vs-NULL: all five
         // fields optional, nullable, removable; 0 = explicit zero goal.
-        && validJobProfileFields(request.resource.data)
-        && (!('experienceYears' in request.resource.data)
-            || (request.resource.data.experienceYears is number
-                && request.resource.data.experienceYears >= 0
-                && request.resource.data.experienceYears <= 60))
+        && validJobProfileFields(d)
+        && (!('experienceYears' in d)
+            || (d.experienceYears is number
+                && d.experienceYears >= 0
+                && d.experienceYears <= 60))
         // NU-4: per-field allowlists on self-update (same as create).
-        && validNuProfileFields(request.resource.data);
+        && validNuProfileFields(d);
+    }
+    // validUsersUpdateAdmin(d, old) — compaction 27 Nov 2026: the update allow below, extracted verbatim with request.resource.data -> d and resource.data -> old (pure substitution; semantics identical).
+    function validUsersUpdateAdmin(d, old) {
+      return isAdmin()
+        && old.role != 'owner'
+        // L4 (Step 17, 23 Nov 2026): an admin could update a FELLOW
+        // admin's doc — demote them, suspend them. Staff docs are
+        // now owner-only: an admin manages students / teachers /
+        // parents, never another admin or moderator.
+        && (!(old.role in ['admin', 'moderator']) || isOwnerRole())
+        && changedKeys()
+             .hasOnly(['role', 'verificationStatus', 'isActive', 'suspendedReason',
+                       'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (!('role' in d)
+            || d.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
+        && (!('verificationStatus' in d)
+            || d.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
+        && validVerificationTransition()
+        && (!('isActive' in d) || d.isActive is bool)
+        && (!('suspendedReason' in d)
+            || d.suspendedReason is string
+            || d.suspendedReason == null)
+        && (!('verificationStatus' in changedKeys())
+            || d.verifiedBy == uid());
+    }
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      // DASHBOARDS (Step 5, branch draft): self-service roles are
+      // student / teacher / parent ONLY — admin / moderator / owner can
+      // never be self-assigned (the old rule allowed student only, so
+      // teacher + guardian registration was impossible). A teacher or
+      // guardian profile is created with verificationStatus 'pending'
+      // (verification is a human Admin decision afterwards); a student
+      // NEVER carries verificationStatus (no student verification exists
+      // — owner decision 21 Nov 06:53 + 07:02, 100% free, manual only).
+      // isActive is still never set at creation (missing = active).
+      allow create: if validUsersCreate(request.resource.data, userId);
+      allow update: if validUsersUpdateOwner(request.resource.data, userId);
       // Admin/Owner change role / verificationStatus / isActive, and only
       // they may do so — and only to valid enum values.
       // OWNER PROTECTION (spec §3): a users doc whose role is 'owner' is
@@ -1884,27 +1926,7 @@ service cloud.firestore {
       // cannot be overwritten by an admin. verificationStatus may change
       // ONLY together with verifiedBy == the caller (the decision path in
       // admin.ts sets it) — an admin cannot silently verify anyone.
-      allow update: if isAdmin()
-        && resource.data.role != 'owner'
-        // L4 (Step 17, 23 Nov 2026): an admin could update a FELLOW
-        // admin's doc — demote them, suspend them. Staff docs are
-        // now owner-only: an admin manages students / teachers /
-        // parents, never another admin or moderator.
-        && (!(resource.data.role in ['admin', 'moderator']) || isOwnerRole())
-        && changedKeys()
-             .hasOnly(['role', 'verificationStatus', 'isActive', 'suspendedReason',
-                       'verifiedBy', 'verifiedAt', 'updatedAt'])
-        && (!('role' in request.resource.data)
-            || request.resource.data.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
-        && (!('verificationStatus' in request.resource.data)
-            || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
-        && validVerificationTransition()
-        && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
-        && (!('suspendedReason' in request.resource.data)
-            || request.resource.data.suspendedReason is string
-            || request.resource.data.suspendedReason == null)
-        && (!('verificationStatus' in changedKeys())
-            || request.resource.data.verifiedBy == uid());
+      allow update: if validUsersUpdateAdmin(request.resource.data, resource.data);
       // DASHBOARDS (Step 7, branch draft): applying an APPROVED teacher
       // change request. An Admin may set a teacher's approved subjects /
       // teachingLevel / classLevel — ONLY those three fields, and only on
@@ -1921,8 +1943,8 @@ service cloud.firestore {
             || (request.resource.data.subjects is list
                 && request.resource.data.subjects.size() > 0
                 && request.resource.data.subjects.size() <= 20))
-        && isOptStr(request.resource.data.get('teachingLevel', null), 100)
-        && isOptStr(request.resource.data.get('classLevel', null), 100);
+        && isOptStrF(request.resource.data, 'teachingLevel', 100)
+        && isOptStrF(request.resource.data, 'classLevel', 100);
       // The owner updates ANY user's doc (highest authority — this is
       // what lets the owner rename a user, test (i1)). The owner may
       // touch profile fields + the admin fields, but may NEVER create a
@@ -2009,6 +2031,34 @@ service cloud.firestore {
     // marks + correct flags inside `answers`, and the totals). An MCQ
     // attempt (markingStatus 'auto') can never be rewritten, and no one
     // may touch quizId or the submitted answer text once submitted.
+    // validQuizAttemptCreate(d, userId) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validQuizAttemptCreate(d, userId) {
+      return isOwner(userId) && callerActive()
+        && d.quizId is string
+        && d.userId == uid()
+        && d.status == 'submitted'
+        && d.markingStatus in ['auto', 'pending']
+        && d.scored is bool
+        && ((d.markingStatus == 'auto' && d.scored == false)
+            || (d.markingStatus == 'pending' && d.scored == true))
+        && d.answers is list
+        && d.score is number
+        && d.score >= 0
+        && d.totalMarks is number
+        && d.totalMarks > 0
+        && d.score <= d.totalMarks
+        && d.percentage is number
+        && d.percentage >= 0
+        && d.percentage <= 100
+        && exists(/databases/$(database)/documents/quizzes/$(d.quizId))
+        && d.answers.size() <= get(/databases/$(database)/documents/quizzes/$(d.quizId)).data.questions.size()
+        && ((get(/databases/$(database)/documents/quizzes/$(d.quizId)).data.totalMarks is number
+            && get(/databases/$(database)/documents/quizzes/$(d.quizId)).data.totalMarks > 0
+            && d.totalMarks == get(/databases/$(database)/documents/quizzes/$(d.quizId)).data.totalMarks)
+          || (!(get(/databases/$(database)/documents/quizzes/$(d.quizId)).data.totalMarks is number
+              && get(/databases/$(database)/documents/quizzes/$(d.quizId)).data.totalMarks > 0)
+            && d.totalMarks <= d.answers.size() * 10));
+    }
     match /users/{userId}/quizAttempts/{attemptId} {
       // Readable by the owner, and by Moderator/Admin — a moderator must
       // be able to read a written attempt to mark it (Step 4).
@@ -2022,31 +2072,7 @@ service cloud.firestore {
       // created UNSCORED (scored == false) and is scored by the owner
       // update below, a written attempt is created scored (scored == true)
       // and is marked only by a moderator.
-      allow create: if isOwner(userId) && callerActive()
-        && request.resource.data.quizId is string
-        && request.resource.data.userId == uid()
-        && request.resource.data.status == 'submitted'
-        && request.resource.data.markingStatus in ['auto', 'pending']
-        && request.resource.data.scored is bool
-        && ((request.resource.data.markingStatus == 'auto' && request.resource.data.scored == false)
-            || (request.resource.data.markingStatus == 'pending' && request.resource.data.scored == true))
-        && request.resource.data.answers is list
-        && request.resource.data.score is number
-        && request.resource.data.score >= 0
-        && request.resource.data.totalMarks is number
-        && request.resource.data.totalMarks > 0
-        && request.resource.data.score <= request.resource.data.totalMarks
-        && request.resource.data.percentage is number
-        && request.resource.data.percentage >= 0
-        && request.resource.data.percentage <= 100
-        && exists(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId))
-        && request.resource.data.answers.size() <= get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.questions.size()
-        && ((get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks is number
-            && get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks > 0
-            && request.resource.data.totalMarks == get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks)
-          || (!(get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks is number
-              && get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks > 0)
-            && request.resource.data.totalMarks <= request.resource.data.answers.size() * 10));
+      allow create: if validQuizAttemptCreate(request.resource.data, userId);
       allow update: if isModerator()
         && resource.data.markingStatus == 'pending'
         && changedKeys()
@@ -2453,8 +2479,8 @@ service cloud.firestore {
         && request.resource.data.status == 'pending'
         && isStr(request.resource.data.fullName, 100)
         && isStr(request.resource.data.institution, 200)
-        && isOptStr(request.resource.data.get('post', null), 100)
-        && isOptStr(request.resource.data.get('institutionContact', null), 100)
+        && isOptStrF(request.resource.data, 'post', 100)
+        && isOptStrF(request.resource.data, 'institutionContact', 100)
         // L1 (Step 17, 23 Nov 2026): the create had NO key allowlist,
         // so a forged application could smuggle `checks`, `verifiedAt`
         // or `decision` past the form. Exactly the 18 keys admin.ts
@@ -2541,7 +2567,7 @@ service cloud.firestore {
         && request.resource.data.requestedClasses is list
         && request.resource.data.requestedClasses.size() > 0
         && request.resource.data.requestedClasses.size() <= 20
-        && isOptStr(request.resource.data.get('requestedTeachingLevel', null), 100)
+        && isOptStrF(request.resource.data, 'requestedTeachingLevel', 100)
         && request.resource.data.reason is string
         && request.resource.data.reason.size() >= 10;
       allow update: if isAdmin()
@@ -2759,28 +2785,32 @@ service cloud.firestore {
     //   A guardian NEVER reads the child's users doc or messages through
     //   this collection — the snapshot carries only name + academic
     //   fields, and the rules tests prove the users-doc read is denied.
+    // validParentLinkCreate(d, linkId) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validParentLinkCreate(d, linkId) {
+      return signedIn() && callerActive()
+        && linkId == uid() + '_' + d.studentId
+        && d.parentId == uid()
+        && d.studentId is string
+        && d.studentId != uid()
+        && d.status == 'pending'
+        && isStr(d.guardianDisplayName, 100)
+        && isStr(d.relationship, 50)
+        && isOptStrF(d, 'guardianContact', 20)
+        && isStr(d.childDisplayName, 100)
+        && isStr(d.childClassLevel, 100)
+        && isOptStrF(d, 'childInstitution', 200)
+        && isOptStrF(d, 'childEducationType', 50)
+        && isOptStrF(d, 'childDepartment', 100)
+        && isOptStrF(d, 'childProgram', 100)
+        && isOptStrF(d, 'childBoard', 200);
+    }
     match /parentLinks/{linkId} {
       // `resource == null` first: reading a link that does not exist
       // (e.g. a stale id) must return "not found", not a permission
       // error — same Null-value guard as teacherVerifications above.
       allow read: if signedIn()
         && (resource == null || resource.data.parentId == uid() || resource.data.studentId == uid() || isAdmin());
-      allow create: if signedIn() && callerActive()
-        && linkId == uid() + '_' + request.resource.data.studentId
-        && request.resource.data.parentId == uid()
-        && request.resource.data.studentId is string
-        && request.resource.data.studentId != uid()
-        && request.resource.data.status == 'pending'
-        && isStr(request.resource.data.guardianDisplayName, 100)
-        && isStr(request.resource.data.relationship, 50)
-        && isOptStr(request.resource.data.get('guardianContact', null), 20)
-        && isStr(request.resource.data.childDisplayName, 100)
-        && isStr(request.resource.data.childClassLevel, 100)
-        && isOptStr(request.resource.data.get('childInstitution', null), 200)
-        && isOptStr(request.resource.data.get('childEducationType', null), 50)
-        && isOptStr(request.resource.data.get('childDepartment', null), 100)
-        && isOptStr(request.resource.data.get('childProgram', null), 100)
-        && isOptStr(request.resource.data.get('childBoard', null), 200);
+      allow create: if validParentLinkCreate(request.resource.data, linkId);
       allow update: if signedIn() && callerActive()
         && resource.data.studentId == uid()
         && resource.data.status == 'pending'
@@ -2810,7 +2840,7 @@ service cloud.firestore {
              .hasOnly(['status', 'verifiedBy', 'verifiedAt', 'decidedBy', 'decisionReason', 'updatedAt'])
         && request.resource.data.verifiedBy == uid()
         && (request.resource.data.get('decidedBy', null) == null || request.resource.data.decidedBy == uid())
-        && isOptStr(request.resource.data.get('decisionReason', null), 500);
+        && isOptStrF(request.resource.data, 'decisionReason', 500);
       allow update: if isAdmin()
         && resource.data.status in ['pending', 'confirmed']
         && request.resource.data.status == 'rejected'
@@ -2921,41 +2951,49 @@ service cloud.firestore {
     //   bottom-banner is DELIBERATELY absent from this allowlist: the
     //   persistent banner can never be turned off (owner brief
     //   20 Nov 21:52), so there is no field for it to be stored in.
-    match /settings/features {
-      allow read: if signedIn();
-      allow create: if isOwnerRole()
-        && request.resource.data.keys().toSet().hasOnly(
+    // validSettingsFeaturesCreate(d) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validSettingsFeaturesCreate(d) {
+      return isOwnerRole()
+        && d.keys().toSet().hasOnly(
              ['ai-teacher', 'video-uploads', 'comments', 'social', 'games',
               'health', 'career', 'offline-downloads', 'live-classes',
               'video-ads', 'paid-subscriptions', 'updatedAt'])
-        && request.resource.data.get('ai-teacher', false) is bool
-        && request.resource.data.get('video-uploads', false) is bool
-        && request.resource.data.get('comments', false) is bool
-        && request.resource.data.get('social', false) is bool
-        && request.resource.data.get('games', false) is bool
-        && request.resource.data.get('health', false) is bool
-        && request.resource.data.get('career', false) is bool
-        && request.resource.data.get('offline-downloads', false) is bool
-        && request.resource.data.get('live-classes', false) is bool
-        && request.resource.data.get('video-ads', false) is bool
-        && request.resource.data.get('paid-subscriptions', false) is bool
-        && request.resource.data.updatedAt is timestamp;
-      allow update: if isOwnerRole()
+        && d.get('ai-teacher', false) is bool
+        && d.get('video-uploads', false) is bool
+        && d.get('comments', false) is bool
+        && d.get('social', false) is bool
+        && d.get('games', false) is bool
+        && d.get('health', false) is bool
+        && d.get('career', false) is bool
+        && d.get('offline-downloads', false) is bool
+        && d.get('live-classes', false) is bool
+        && d.get('video-ads', false) is bool
+        && d.get('paid-subscriptions', false) is bool
+        && d.updatedAt is timestamp;
+    }
+    // validSettingsFeaturesUpdate(d) — compaction 27 Nov 2026: the update allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validSettingsFeaturesUpdate(d) {
+      return isOwnerRole()
         && changedKeys()
              .hasOnly(['ai-teacher', 'video-uploads', 'comments', 'social', 'games',
                        'health', 'career', 'offline-downloads', 'live-classes',
                        'video-ads', 'paid-subscriptions', 'updatedAt'])
-        && request.resource.data.get('ai-teacher', false) is bool
-        && request.resource.data.get('video-uploads', false) is bool
-        && request.resource.data.get('comments', false) is bool
-        && request.resource.data.get('social', false) is bool
-        && request.resource.data.get('games', false) is bool
-        && request.resource.data.get('health', false) is bool
-        && request.resource.data.get('career', false) is bool
-        && request.resource.data.get('offline-downloads', false) is bool
-        && request.resource.data.get('live-classes', false) is bool
-        && request.resource.data.get('video-ads', false) is bool
-        && request.resource.data.get('paid-subscriptions', false) is bool;
+        && d.get('ai-teacher', false) is bool
+        && d.get('video-uploads', false) is bool
+        && d.get('comments', false) is bool
+        && d.get('social', false) is bool
+        && d.get('games', false) is bool
+        && d.get('health', false) is bool
+        && d.get('career', false) is bool
+        && d.get('offline-downloads', false) is bool
+        && d.get('live-classes', false) is bool
+        && d.get('video-ads', false) is bool
+        && d.get('paid-subscriptions', false) is bool;
+    }
+    match /settings/features {
+      allow read: if signedIn();
+      allow create: if validSettingsFeaturesCreate(request.resource.data);
+      allow update: if validSettingsFeaturesUpdate(request.resource.data);
       allow delete: if false;
     }
     match /settings/ads {
@@ -3074,6 +3112,128 @@ service cloud.firestore {
     //     because create pins authorId to the creator (or leaves it
     //     absent); a student can never create an author identity —
     //     create requires Moderator.
+    // validJobExamCreate(d, examSlug) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validJobExamCreate(d, examSlug) {
+      return isModerator()
+        && d.slug == examSlug
+        && d.categoryId in jobCategoryIds()
+        && d.tier in [1, 2, 3]
+        && isDraftStatus(d.reviewStatus)
+        && d.status == 'draft'
+        && isStr(d.nameBn, 100)
+        && validJobRulesConfig(d.rulesConfig)
+        // A new draft starts with an empty history — no fabricated entries.
+        && (!('rulesConfigHistory' in d)
+            || d.rulesConfigHistory == [])
+        // The creator is the author (or the doc has no author yet —
+        // the seed carries createdBy 'seed' and no authorId).
+        && (!('authorId' in d)
+            || d.authorId == uid())
+        && (!('createdBy' in d)
+            || d.createdBy is string)
+        && d.patternStatus in jobPatternStatuses()
+        && (d.applicableCycle == null
+            || d.applicableCycle is string)
+        && d.get('scopeStatus', 'defined') in ['defined', 'scope_pending']
+        && (!('createdAt' in d) || d.createdAt is timestamp)
+        && (!('updatedAt' in d) || d.updatedAt is timestamp);
+    }
+    // validJobExamUpdateModerator(d, old) — compaction 27 Nov 2026: the update allow below, extracted verbatim with request.resource.data -> d and resource.data -> old (pure substitution; semantics identical).
+    function validJobExamUpdateModerator(d, old) {
+      return isModerator()
+        // Protected config pinned FIRST: a config-change write fails
+        // here on one equality instead of paying for a full diff()
+        // of two big docs (expression budget — rules tests a3/b6).
+        && d.get('rulesConfig', null) == old.get('rulesConfig', null)
+        && d.get('rulesConfigHistory', null) == old.get('rulesConfigHistory', null)
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'fullBn', 'fullEn', 'orgBn', 'orgEn',
+                       'stepsBn', 'stepsEn', 'officialUrl', 'accent', 'accentSoft',
+                       'accentDeep', 'descriptionBn', 'descriptionEn',
+                       'syllabusSource', 'reviewStatus', 'updatedAt'])
+        // Draft stays a draft — workflow may advance between draft
+        // states, but a Moderator can never publish, and a Published
+        // doc cannot be touched by a Moderator at all.
+        && isDraftStatus(old.reviewStatus)
+        && isDraftStatus(d.reviewStatus)
+        && d.status == 'draft'
+        && isStr(d.nameBn, 100)
+        && isOptStrF(d, 'nameEn', 100)
+        && isOptStrF(d, 'fullBn', 200)
+        && isOptStrF(d, 'fullEn', 200)
+        && isOptStrF(d, 'orgBn', 200)
+        && isOptStrF(d, 'orgEn', 200)
+        && isOptStrF(d, 'stepsBn', 200)
+        && isOptStrF(d, 'stepsEn', 200)
+        && (d.get('officialUrl', null) == null
+            || isStrType(d, 'officialUrl'))
+        && isOptStrF(d, 'accent', 20)
+        && isOptStrF(d, 'accentSoft', 20)
+        && isOptStrF(d, 'accentDeep', 20)
+        && isOptStrF(d, 'descriptionBn', 500)
+        && isOptStrF(d, 'descriptionEn', 500)
+        && (d.get('syllabusSource', null) == null
+            || isStrType(d, 'syllabusSource'))
+        && (!('updatedAt' in d) || d.updatedAt is timestamp);
+    }
+    // validJobExamUpdateAdminConfig(d, old) — compaction 27 Nov 2026: the update allow below, extracted verbatim with request.resource.data -> d and resource.data -> old (pure substitution; semantics identical).
+    function validJobExamUpdateAdminConfig(d, old) {
+      return isAdmin()
+        && d.get('rulesConfig', null) != old.get('rulesConfig', null)
+        && validJobRulesConfig(d.rulesConfig)
+        && validJobRulesConfigHistoryChange(old, d)
+        && isListType(d, 'rulesConfigHistory')
+        && d.status == old.status
+        && d.reviewStatus == old.reviewStatus
+        && d.slug == old.slug
+        && d.categoryId == old.categoryId
+        && d.tier == old.tier
+        && d.get('authorId', null) == old.get('authorId', null)
+        && d.get('createdBy', null) == old.get('createdBy', null)
+        && d.get('createdAt', null) == old.get('createdAt', null)
+        && d.get('scopeStatus', 'defined') == old.get('scopeStatus', 'defined')
+        && d.get('patternStatus', null) == old.get('patternStatus', null)
+        && d.get('applicableCycle', null) == old.get('applicableCycle', null)
+        && (!('updatedAt' in d) || d.updatedAt is timestamp);
+    }
+    // validJobExamUpdateAdmin(d, old, examSlug) — compaction 27 Nov 2026: the update allow below, extracted verbatim with request.resource.data -> d and resource.data -> old (pure substitution; semantics identical).
+    function validJobExamUpdateAdmin(d, old, examSlug) {
+      return isAdmin()
+        && d.get('rulesConfig', null) == old.get('rulesConfig', null)
+        && d.get('rulesConfigHistory', null) == old.get('rulesConfigHistory', null)
+        && d.slug == examSlug
+        && d.categoryId in jobCategoryIds()
+        && d.tier in [1, 2, 3]
+        && isJobExamReviewState(d.reviewStatus)
+        && d.status in ['draft', 'published']
+        && jobExamStatesConsistent(d)
+        && d.get('authorId', null) == old.get('authorId', null)
+        && d.get('createdBy', null) == old.get('createdBy', null)
+        && d.get('createdAt', null) == old.get('createdAt', null)
+        && (!('patternStatus' in d)
+            || d.patternStatus in jobPatternStatuses())
+        && (d.get('applicableCycle', null) == null
+            || isStrType(d, 'applicableCycle'))
+        && d.get('scopeStatus', 'defined') in ['defined', 'scope_pending']
+        && isStr(d.nameBn, 100)
+        && isOptStrF(d, 'nameEn', 100)
+        && isOptStrF(d, 'fullBn', 200)
+        && isOptStrF(d, 'fullEn', 200)
+        && isOptStrF(d, 'orgBn', 200)
+        && isOptStrF(d, 'orgEn', 200)
+        && isOptStrF(d, 'stepsBn', 200)
+        && isOptStrF(d, 'stepsEn', 200)
+        && (d.get('officialUrl', null) == null
+            || isStrType(d, 'officialUrl'))
+        && isOptStrF(d, 'accent', 20)
+        && isOptStrF(d, 'accentSoft', 20)
+        && isOptStrF(d, 'accentDeep', 20)
+        && isOptStrF(d, 'descriptionBn', 500)
+        && isOptStrF(d, 'descriptionEn', 500)
+        && (d.get('syllabusSource', null) == null
+            || isStrType(d, 'syllabusSource'))
+        && (!('updatedAt' in d) || d.updatedAt is timestamp);
+    }
     match /jobExams/{examSlug} {
       // Read order is deliberate (22 Nov 2026 — rules test e5): the
       // get()-free checks come first, so a list query over Published
@@ -3090,70 +3250,14 @@ service cloud.firestore {
       allow read: if resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
-      allow create: if isModerator()
-        && request.resource.data.slug == examSlug
-        && request.resource.data.categoryId in jobCategoryIds()
-        && request.resource.data.tier in [1, 2, 3]
-        && isDraftStatus(request.resource.data.reviewStatus)
-        && request.resource.data.status == 'draft'
-        && isStr(request.resource.data.nameBn, 100)
-        && validJobRulesConfig(request.resource.data.rulesConfig)
-        // A new draft starts with an empty history — no fabricated entries.
-        && (!('rulesConfigHistory' in request.resource.data)
-            || request.resource.data.rulesConfigHistory == [])
-        // The creator is the author (or the doc has no author yet —
-        // the seed carries createdBy 'seed' and no authorId).
-        && (!('authorId' in request.resource.data)
-            || request.resource.data.authorId == uid())
-        && (!('createdBy' in request.resource.data)
-            || request.resource.data.createdBy is string)
-        && request.resource.data.patternStatus in jobPatternStatuses()
-        && (request.resource.data.applicableCycle == null
-            || request.resource.data.applicableCycle is string)
-        && request.resource.data.get('scopeStatus', 'defined') in ['defined', 'scope_pending']
-        && (!('createdAt' in request.resource.data) || request.resource.data.createdAt is timestamp)
-        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow create: if validJobExamCreate(request.resource.data, examSlug);
       // Moderator: content fields only (see the block comment above).
       // NO keys().hasOnly() here: checking the whole 29-key set costs
       // ~29x29 pairwise comparisons and blows the 1000-expression
       // budget (rules tests a3/b6, 22 Nov 2026). diff() reports only
       // the CHANGED keys, so its hasOnly is cheap — and the draft /
       // status pins below stop any publish or Published-doc touch.
-      allow update: if isModerator()
-        // Protected config pinned FIRST: a config-change write fails
-        // here on one equality instead of paying for a full diff()
-        // of two big docs (expression budget — rules tests a3/b6).
-        && request.resource.data.get('rulesConfig', null) == resource.data.get('rulesConfig', null)
-        && request.resource.data.get('rulesConfigHistory', null) == resource.data.get('rulesConfigHistory', null)
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'fullBn', 'fullEn', 'orgBn', 'orgEn',
-                       'stepsBn', 'stepsEn', 'officialUrl', 'accent', 'accentSoft',
-                       'accentDeep', 'descriptionBn', 'descriptionEn',
-                       'syllabusSource', 'reviewStatus', 'updatedAt'])
-        // Draft stays a draft — workflow may advance between draft
-        // states, but a Moderator can never publish, and a Published
-        // doc cannot be touched by a Moderator at all.
-        && isDraftStatus(resource.data.reviewStatus)
-        && isDraftStatus(request.resource.data.reviewStatus)
-        && request.resource.data.status == 'draft'
-        && isStr(request.resource.data.nameBn, 100)
-        && isOptStr(request.resource.data.get('nameEn', null), 100)
-        && isOptStr(request.resource.data.get('fullBn', null), 200)
-        && isOptStr(request.resource.data.get('fullEn', null), 200)
-        && isOptStr(request.resource.data.get('orgBn', null), 200)
-        && isOptStr(request.resource.data.get('orgEn', null), 200)
-        && isOptStr(request.resource.data.get('stepsBn', null), 200)
-        && isOptStr(request.resource.data.get('stepsEn', null), 200)
-        && (request.resource.data.get('officialUrl', null) == null
-            || request.resource.data.get('officialUrl', null) is string)
-        && isOptStr(request.resource.data.get('accent', null), 20)
-        && isOptStr(request.resource.data.get('accentSoft', null), 20)
-        && isOptStr(request.resource.data.get('accentDeep', null), 20)
-        && isOptStr(request.resource.data.get('descriptionBn', null), 500)
-        && isOptStr(request.resource.data.get('descriptionEn', null), 500)
-        && (request.resource.data.get('syllabusSource', null) == null
-            || request.resource.data.get('syllabusSource', null) is string)
-        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow update: if validJobExamUpdateModerator(request.resource.data, resource.data);
       // Admin, rule A — config change. A config write may change ONLY
       // rulesConfig, rulesConfigHistory and updatedAt: status,
       // reviewStatus, slug, category and all content fields stay exactly
@@ -3167,61 +3271,11 @@ service cloud.firestore {
       // evaluation well inside the 1000-expression budget: the
       // config-change path pays for validJobRulesConfig + the history
       // rule, and the content path pays for neither.
-      allow update: if isAdmin()
-        && request.resource.data.get('rulesConfig', null) != resource.data.get('rulesConfig', null)
-        && validJobRulesConfig(request.resource.data.rulesConfig)
-        && validJobRulesConfigHistoryChange(resource.data, request.resource.data)
-        && request.resource.data.get('rulesConfigHistory', null) is list
-        && request.resource.data.status == resource.data.status
-        && request.resource.data.reviewStatus == resource.data.reviewStatus
-        && request.resource.data.slug == resource.data.slug
-        && request.resource.data.categoryId == resource.data.categoryId
-        && request.resource.data.tier == resource.data.tier
-        && request.resource.data.get('authorId', null) == resource.data.get('authorId', null)
-        && request.resource.data.get('createdBy', null) == resource.data.get('createdBy', null)
-        && request.resource.data.get('createdAt', null) == resource.data.get('createdAt', null)
-        && request.resource.data.get('scopeStatus', 'defined') == resource.data.get('scopeStatus', 'defined')
-        && request.resource.data.get('patternStatus', null) == resource.data.get('patternStatus', null)
-        && request.resource.data.get('applicableCycle', null) == resource.data.get('applicableCycle', null)
-        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow update: if validJobExamUpdateAdminConfig(request.resource.data, resource.data);
       // Admin, rule B — content / status change. Config and history are
       // pinned unchanged here; a config change goes through rule A with
       // its history entry. Provenance stays immutable.
-      allow update: if isAdmin()
-        && request.resource.data.get('rulesConfig', null) == resource.data.get('rulesConfig', null)
-        && request.resource.data.get('rulesConfigHistory', null) == resource.data.get('rulesConfigHistory', null)
-        && request.resource.data.slug == examSlug
-        && request.resource.data.categoryId in jobCategoryIds()
-        && request.resource.data.tier in [1, 2, 3]
-        && isJobExamReviewState(request.resource.data.reviewStatus)
-        && request.resource.data.status in ['draft', 'published']
-        && jobExamStatesConsistent(request.resource.data)
-        && request.resource.data.get('authorId', null) == resource.data.get('authorId', null)
-        && request.resource.data.get('createdBy', null) == resource.data.get('createdBy', null)
-        && request.resource.data.get('createdAt', null) == resource.data.get('createdAt', null)
-        && (!('patternStatus' in request.resource.data)
-            || request.resource.data.patternStatus in jobPatternStatuses())
-        && (request.resource.data.get('applicableCycle', null) == null
-            || request.resource.data.get('applicableCycle', null) is string)
-        && request.resource.data.get('scopeStatus', 'defined') in ['defined', 'scope_pending']
-        && isStr(request.resource.data.nameBn, 100)
-        && isOptStr(request.resource.data.get('nameEn', null), 100)
-        && isOptStr(request.resource.data.get('fullBn', null), 200)
-        && isOptStr(request.resource.data.get('fullEn', null), 200)
-        && isOptStr(request.resource.data.get('orgBn', null), 200)
-        && isOptStr(request.resource.data.get('orgEn', null), 200)
-        && isOptStr(request.resource.data.get('stepsBn', null), 200)
-        && isOptStr(request.resource.data.get('stepsEn', null), 200)
-        && (request.resource.data.get('officialUrl', null) == null
-            || request.resource.data.get('officialUrl', null) is string)
-        && isOptStr(request.resource.data.get('accent', null), 20)
-        && isOptStr(request.resource.data.get('accentSoft', null), 20)
-        && isOptStr(request.resource.data.get('accentDeep', null), 20)
-        && isOptStr(request.resource.data.get('descriptionBn', null), 500)
-        && isOptStr(request.resource.data.get('descriptionEn', null), 500)
-        && (request.resource.data.get('syllabusSource', null) == null
-            || request.resource.data.get('syllabusSource', null) is string)
-        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow update: if validJobExamUpdateAdmin(request.resource.data, resource.data, examSlug);
       allow delete: if isAdmin();
     }
 
@@ -3271,38 +3325,42 @@ service cloud.firestore {
     // pass 35 display-only / sections 20+20+20+40 / no viva / no rank)
     // are enforced here so a wrong config can never be published by a
     // direct write. Students read published configs only.
+    // validNuExamConfigCreateUpdate(d) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validNuExamConfigCreateUpdate(d) {
+      return isAdmin()
+        && d.examType in ['NU_ADMISSION', 'NU_DAILY']
+        && d.questionMode == 'MCQ'
+        && d.marking is map
+        && d.marking.correct == 1
+        && d.marking.incorrect == 0
+        && d.marking.unanswered == 0
+        && d.marking.negativeMarking == false
+        && d.vivaEnabled == false
+        && d.officialRankEnabled == false
+        && d.configVersion is int
+        && d.configVersion >= 1
+        && d.circularVersion is string
+        && d.status in ['draft', 'published', 'withdrawn']
+        && ((d.examType == 'NU_ADMISSION'
+            && d.totalQuestions == 100
+            && d.durationSeconds == 3600
+            && d.sections is map
+            && d.sections.bangla == 20
+            && d.sections.english == 20
+            && d.sections.generalKnowledge == 20
+            && d.sections.groupSubjects == 40
+            && d.sections.groupSubjectsDetail == null)
+          || (d.examType == 'NU_DAILY'
+            && d.totalQuestions is int
+            && d.totalQuestions >= 20
+            && d.totalQuestions <= 30
+            && d.durationSeconds is int
+            && d.durationSeconds >= 1200
+            && d.durationSeconds <= 1800));
+    }
     match /nuExamConfigs/{configId} {
       allow read: if resource.data.status == 'published' || isAdmin();
-      allow create, update: if isAdmin()
-        && request.resource.data.examType in ['NU_ADMISSION', 'NU_DAILY']
-        && request.resource.data.questionMode == 'MCQ'
-        && request.resource.data.marking is map
-        && request.resource.data.marking.correct == 1
-        && request.resource.data.marking.incorrect == 0
-        && request.resource.data.marking.unanswered == 0
-        && request.resource.data.marking.negativeMarking == false
-        && request.resource.data.vivaEnabled == false
-        && request.resource.data.officialRankEnabled == false
-        && request.resource.data.configVersion is int
-        && request.resource.data.configVersion >= 1
-        && request.resource.data.circularVersion is string
-        && request.resource.data.status in ['draft', 'published', 'withdrawn']
-        && ((request.resource.data.examType == 'NU_ADMISSION'
-            && request.resource.data.totalQuestions == 100
-            && request.resource.data.durationSeconds == 3600
-            && request.resource.data.sections is map
-            && request.resource.data.sections.bangla == 20
-            && request.resource.data.sections.english == 20
-            && request.resource.data.sections.generalKnowledge == 20
-            && request.resource.data.sections.groupSubjects == 40
-            && request.resource.data.sections.groupSubjectsDetail == null)
-          || (request.resource.data.examType == 'NU_DAILY'
-            && request.resource.data.totalQuestions is int
-            && request.resource.data.totalQuestions >= 20
-            && request.resource.data.totalQuestions <= 30
-            && request.resource.data.durationSeconds is int
-            && request.resource.data.durationSeconds >= 1200
-            && request.resource.data.durationSeconds <= 1800));
+      allow create, update: if validNuExamConfigCreateUpdate(request.resource.data);
       allow delete: if false;
     }
 
@@ -3537,19 +3595,19 @@ service cloud.firestore {
     // 1200–1800s; practice = 1–100 questions (no fixed config).
     // startedAt must be the server timestamp (request.time) — a
     // client clock can never anchor a deadline.
-    match /users/{uid}/nuAttempts/{attemptId} {
-      allow read: if isOwner(uid) || isAdmin();
-      allow create: if isOwner(uid)
-        && request.resource.data.userId == uid
-        && request.resource.data.status == 'not_started'
-        && request.resource.data.kind in ['practice', 'mock', 'daily']
-        && request.resource.data.questionIds is list
-        && request.resource.data.startedAt == request.time
-        && request.resource.data.configSnapshot is map
-        && ((request.resource.data.kind == 'mock'
-            && request.resource.data.questionIds.size() == 100
-            && request.resource.data.configSnapshot.totalQuestions == 100
-            && request.resource.data.configSnapshot.durationSeconds == 3600
+    // validNuAttemptCreate(d, uid) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validNuAttemptCreate(d, uid) {
+      return isOwner(uid)
+        && d.userId == uid
+        && d.status == 'not_started'
+        && d.kind in ['practice', 'mock', 'daily']
+        && d.questionIds is list
+        && d.startedAt == request.time
+        && d.configSnapshot is map
+        && ((d.kind == 'mock'
+            && d.questionIds.size() == 100
+            && d.configSnapshot.totalQuestions == 100
+            && d.configSnapshot.durationSeconds == 3600
             // NU-4 correction to the §19.3.5 sketch: deadlineAt CANNOT
             // be required to equal request.time + 3600s exactly — a
             // client can never know request.time to the millisecond, so
@@ -3561,22 +3619,26 @@ service cloud.firestore {
             // deadline the student themself set... see the honest-limit
             // note in the NU-4 report: a client-set deadline is
             // enforced only as an upper bound by the rules.)
-            && request.resource.data.deadlineAt is timestamp
-            && request.resource.data.deadlineAt > request.time
-            && request.resource.data.deadlineAt <= request.time + duration.value(3600, 's'))
-          || (request.resource.data.kind == 'daily'
-            && request.resource.data.questionIds.size() >= 20
-            && request.resource.data.questionIds.size() <= 30
-            && request.resource.data.configSnapshot.totalQuestions >= 20
-            && request.resource.data.configSnapshot.totalQuestions <= 30
-            && request.resource.data.configSnapshot.durationSeconds >= 1200
-            && request.resource.data.configSnapshot.durationSeconds <= 1800
-            && request.resource.data.deadlineAt is timestamp
-            && request.resource.data.deadlineAt > request.time
-            && request.resource.data.deadlineAt <= request.time + duration.value(request.resource.data.configSnapshot.durationSeconds, 's'))
-          || (request.resource.data.kind == 'practice'
-            && request.resource.data.questionIds.size() >= 1
-            && request.resource.data.questionIds.size() <= 100));
+            && d.deadlineAt is timestamp
+            && d.deadlineAt > request.time
+            && d.deadlineAt <= request.time + duration.value(3600, 's'))
+          || (d.kind == 'daily'
+            && d.questionIds.size() >= 20
+            && d.questionIds.size() <= 30
+            && d.configSnapshot.totalQuestions >= 20
+            && d.configSnapshot.totalQuestions <= 30
+            && d.configSnapshot.durationSeconds >= 1200
+            && d.configSnapshot.durationSeconds <= 1800
+            && d.deadlineAt is timestamp
+            && d.deadlineAt > request.time
+            && d.deadlineAt <= request.time + duration.value(d.configSnapshot.durationSeconds, 's'))
+          || (d.kind == 'practice'
+            && d.questionIds.size() >= 1
+            && d.questionIds.size() <= 100));
+    }
+    match /users/{uid}/nuAttempts/{attemptId} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow create: if validNuAttemptCreate(request.resource.data, uid);
       allow update: if isOwner(uid)
         && resource.data.status != 'submitted'
         && request.time <= resource.data.deadlineAt
@@ -3633,29 +3695,33 @@ service cloud.firestore {
     // themselves are enforced by the question update Rule B (NU-7);
     // the rules below pin who may write the records and that they
     // can never change.
+    // validNuReviewCreate(d) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validNuReviewCreate(d) {
+      return (isAdmin() || isVerifiedTeacher())
+        && d.reviewerId == uid()
+        && d.questionId is string
+        && d.decision in ['approved', 'rejected', 'changes_requested']
+        && (!('reason' in d)
+            || d.reason is string)
+        && (d.decision == 'approved'
+            || d.get('reason', '').size() >= 10)
+        && exists(/databases/$(database)/documents/nuQuestions/$(d.questionId))
+        && get(/databases/$(database)/documents/nuQuestions/$(d.questionId)).data.createdBy != uid()
+        && d.questionVersion is int
+        && d.questionVersion == get(/databases/$(database)/documents/nuQuestions/$(d.questionId)).data.version
+        && get(/databases/$(database)/documents/nuQuestions/$(d.questionId)).data.status == 'under_review'
+        && get(/databases/$(database)/documents/nuQuestions/$(d.questionId)).data.reviewedBy == uid()
+        && d.checks is map
+        && d.checks.questionCorrect is bool
+        && d.checks.correctAnswerCorrect is bool
+        && d.checks.explanationCorrect is bool
+        && d.checks.sourceCorrect is bool
+        && d.reviewedAt is timestamp
+        && d.reviewedAt == request.time;
+    }
     match /nuReviews/{reviewId} {
       allow read: if isAdmin() || (signedIn() && resource.data.reviewerId == uid());
-      allow create: if (isAdmin() || isVerifiedTeacher())
-        && request.resource.data.reviewerId == uid()
-        && request.resource.data.questionId is string
-        && request.resource.data.decision in ['approved', 'rejected', 'changes_requested']
-        && (!('reason' in request.resource.data)
-            || request.resource.data.reason is string)
-        && (request.resource.data.decision == 'approved'
-            || request.resource.data.get('reason', '').size() >= 10)
-        && exists(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId))
-        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.createdBy != uid()
-        && request.resource.data.questionVersion is int
-        && request.resource.data.questionVersion == get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.version
-        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'under_review'
-        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.reviewedBy == uid()
-        && request.resource.data.checks is map
-        && request.resource.data.checks.questionCorrect is bool
-        && request.resource.data.checks.correctAnswerCorrect is bool
-        && request.resource.data.checks.explanationCorrect is bool
-        && request.resource.data.checks.sourceCorrect is bool
-        && request.resource.data.reviewedAt is timestamp
-        && request.resource.data.reviewedAt == request.time;
+      allow create: if validNuReviewCreate(request.resource.data);
       allow update, delete: if false;
     }
     match /nuPublications/{publicationId} {
@@ -3909,10 +3975,8 @@ service cloud.firestore {
     // running sessions keep their stored questionSetId.
     function validJobExamDefinitionRulesSnapshot(s, kind) {
       return s is map
-        && s.get('questionCount', null) is int
-        && s.get('questionCount', 0) >= 1 && s.get('questionCount', 0) <= 200
-        && s.get('timeMinutes', null) is int
-        && s.get('timeMinutes', 0) >= 1 && s.get('timeMinutes', 0) <= 600
+        && isIntRange(s, 'questionCount', 1, 200)
+        && isIntRange(s, 'timeMinutes', 1, 600)
         && (kind != 'daily'
             || (s.get('questionCount', 0) >= 20 && s.get('questionCount', 0) <= 30
                 && s.get('timeMinutes', 0) >= 20 && s.get('timeMinutes', 0) <= 30))
@@ -3923,23 +3987,22 @@ service cloud.firestore {
             || s.get('negativeMarking', null) == 0.5)
         && s.get('negativeMarkingVerified', null) is bool
         && (s.get('passPercent', null) == null
-            || (s.get('passPercent', null) is number
-                && s.get('passPercent', 0) >= 0 && s.get('passPercent', 0) <= 100))
-        && isStr(s.get('scoringConfigVersion', null), 100);
+            || (isNumRange(s, 'passPercent', 0, 100)))
+        && isStrF(s, 'scoringConfigVersion', 100);
     }
     function validJobExamDefinition(d, mockId) {
       return jobExamSlugOk(d)
-        && isStr(d.get('titleBn', null), 200)
-        && isStr(d.get('titleEn', null), 200)
+        && isStrF(d, 'titleBn', 200)
+        && isStrF(d, 'titleEn', 200)
         && d.get('kind', null) in ['daily', 'weekly', 'full']
-        && isStr(d.get('bundleId', null), 200)
-        && isStr(d.get('questionSetId', null), 200)
+        && isStrF(d, 'bundleId', 200)
+        && isStrF(d, 'questionSetId', 200)
         && validJobExamDefinitionRulesSnapshot(d.get('rulesSnapshot', null), d.get('kind', null))
         && ((d.get('kind', null) == 'daily'
-              && d.get('scheduleDate', null) is string
+              && isStrType(d, 'scheduleDate')
               && mockId == 'daily__' + d.get('scheduleDate', ''))
             || (d.get('kind', null) == 'weekly'
-              && d.get('scheduleDate', null) is string
+              && isStrType(d, 'scheduleDate')
               && mockId.matches('^weekly__[0-9]{4}-W[0-9]{2}$'))
             || (d.get('kind', null) == 'full'
               && d.get('scheduleDate', null) == null
@@ -3949,8 +4012,7 @@ service cloud.firestore {
             || (d.get('kind', null) != 'weekly' && d.get('examSlugCycle', null) == null))
         && d.get('status', null) in ['draft', 'published', 'archived']
         && d.get('retakeAllowed', null) is bool
-        && (d.get('maxAttempts', null) == null
-            || (d.get('maxAttempts', null) is int && d.get('maxAttempts', 0) >= 1))
+        && isOptPosInt(d, 'maxAttempts')
         && (isOptTs(d, 'publishedAt'))
         && (isOptStrNoMax(d, 'publishedBy'))
         && (isOptTs(d, 'createdAt'))
@@ -4007,13 +4069,12 @@ service cloud.firestore {
     // stored questionSetId and are unaffected.
     function validJobQuestionSetManifest(d) {
       return jobExamSlugOk(d)
-        && isStr(d.get('mockId', null), 200)
-        && d.get('version', null) is int && d.get('version', 0) >= 1
-        && d.get('questionCount', null) is int
-        && d.get('questionCount', 0) >= 1 && d.get('questionCount', 0) <= 200
-        && d.get('questionRefs', null) is list
+        && isStrF(d, 'mockId', 200)
+        && isPosInt(d, 'version')
+        && isIntRange(d, 'questionCount', 1, 200)
+        && isListType(d, 'questionRefs')
         && d.get('questionRefs', []).size() == d.get('questionCount', 0)
-        && isStr(d.get('markingSchemeVersion', null), 100)
+        && isStrF(d, 'markingSchemeVersion', 100)
         && d.get('status', null) in ['draft', 'published', 'archived']
         && (isOptTs(d, 'publishedAt'))
         && (isOptStrNoMax(d, 'publishedBy'))
@@ -4082,16 +4143,15 @@ service cloud.firestore {
         && d.get('uid', '') == uid()
         && lockId == uid() + '_' + d.get('examSlug', '')
         && d.get('examSlug', null) in jobExamSlugs()
-        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
-        && d.get('definitionId', null) is string && d.get('definitionId', '').size() > 0
-        && d.get('activeSessionId', null) is string && d.get('activeSessionId', '').size() > 0
+        && isStrType(d, 'mockId') && d.get('mockId', '').size() > 0
+        && isStrType(d, 'definitionId') && d.get('definitionId', '').size() > 0
+        && isStrType(d, 'activeSessionId') && d.get('activeSessionId', '').size() > 0
         && d.get('status', '') == 'in_progress'
-        && d.get('durationSeconds', null) is int
-        && d.get('durationSeconds', 0) >= 60 && d.get('durationSeconds', 0) <= 7200
-        && d.get('createdAt', null) is timestamp
+        && isIntRange(d, 'durationSeconds', 60, 7200)
+        && isTsType(d, 'createdAt')
         && d.get('createdAt', null) <= request.time
         && d.get('createdAt', null) > request.time - duration.value(5, 'm')
-        && d.get('updatedAt', null) is timestamp
+        && isTsType(d, 'updatedAt')
         && def.get('status', null) == 'published'
         && def.get('rulesSnapshot', null) is map
         && def.get('rulesSnapshot', null).get('timeMinutes', null) is int
@@ -4149,8 +4209,8 @@ service cloud.firestore {
              && getAfter(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(resource.data.get('activeSessionId', ''))).data.status in ['submitted', 'abandoned'])
             || ((resource.data.get('status', '') == 'terminal'
                  || (resource.data.get('status', '') == 'in_progress'
-                     && resource.data.get('createdAt', null) is timestamp
-                     && resource.data.get('durationSeconds', null) is int
+                     && isTsType(resource.data, 'createdAt')
+                     && isIntType(resource.data, 'durationSeconds')
                      && request.time > resource.data.get('createdAt', null)
                           + duration.value(resource.data.get('durationSeconds', 0), 's')
                           + duration.value(15, 'm')))
@@ -4247,27 +4307,51 @@ service cloud.firestore {
     // previous__{examSlug}__{year}; the topic/mock/daily/weekly
     // patterns are enforced here, 'previous' in the lib (rules
     // cannot convert the year int to a string).
-    match /jobQuestionBundles/{bundleId} {
-      allow read: if (signedIn() && resource.data.get('status', '') == 'published')
-        || isModerator();
-      allow create: if isModerator()
-        && !('correctLetter' in request.resource.data)
-        && !('explanation' in request.resource.data)
-        && !('correctText' in request.resource.data)
-        && (request.resource.data.get('kind', '') != 'topic'
-            || bundleId == 'topic__' + request.resource.data.get('topicId', ''))
-        && (request.resource.data.get('kind', '') != 'mock'
-            || bundleId == 'mock__' + request.resource.data.get('mockId', ''))
-        && (request.resource.data.get('kind', '') != 'daily'
-            || bundleId == 'daily__' + request.resource.data.get('mockId', ''))
-        && (request.resource.data.get('kind', '') != 'weekly'
-            || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
+    // validJobQuestionBundleCreate(d, bundleId) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validJobQuestionBundleCreate(d, bundleId) {
+      return isModerator()
+        && !('correctLetter' in d)
+        && !('explanation' in d)
+        && !('correctText' in d)
+        && (d.get('kind', '') != 'topic'
+            || bundleId == 'topic__' + d.get('topicId', ''))
+        && (d.get('kind', '') != 'mock'
+            || bundleId == 'mock__' + d.get('mockId', ''))
+        && (d.get('kind', '') != 'daily'
+            || bundleId == 'daily__' + d.get('mockId', ''))
+        && (d.get('kind', '') != 'weekly'
+            || bundleId == 'weekly__' + d.get('mockId', ''))
         && onlyKeys(['kind', 'examSlug',
              'topicId', 'mockId', 'year', 'titleBn', 'titleEn',
              'questions', 'questionCount', 'status', 'reviewStatus',
              'publishedAt', 'publishedBy', 'sourceQuestionIds',
              'configVersion', 'bundleVersion', 'createdAt', 'updatedAt'])
-        && validJobQuestionBundle(request.resource.data);
+        && validJobQuestionBundle(d);
+    }
+    // validJobQuestionBundleUpdate(d, old, bundleId) — compaction 27 Nov 2026: the update allow below, extracted verbatim with request.resource.data -> d and resource.data -> old (pure substitution; semantics identical).
+    function validJobQuestionBundleUpdate(d, old, bundleId) {
+      return isModerator()
+        && !('correctLetter' in d)
+        && !('explanation' in d)
+        && !('correctText' in d)
+        && (d.get('kind', '') != 'topic'
+            || bundleId == 'topic__' + d.get('topicId', ''))
+        && (d.get('kind', '') != 'mock'
+            || bundleId == 'mock__' + d.get('mockId', ''))
+        && (d.get('kind', '') != 'daily'
+            || bundleId == 'daily__' + d.get('mockId', ''))
+        && (d.get('kind', '') != 'weekly'
+            || bundleId == 'weekly__' + d.get('mockId', ''))
+        && validJobQuestionBundle(d)
+        && (old.get('status', '') != 'published'
+            || changedKeys()
+                 .hasOnly(['titleBn', 'titleEn', 'status', 'reviewStatus',
+                           'publishedAt', 'publishedBy', 'updatedAt']));
+    }
+    match /jobQuestionBundles/{bundleId} {
+      allow read: if (signedIn() && resource.data.get('status', '') == 'published')
+        || isModerator();
+      allow create: if validJobQuestionBundleCreate(request.resource.data, bundleId);
       // Update: a PUBLISHED bundle is content-frozen (Step 7
       // fold-in, ChatGPT P1-06) — its questions are the snapshot
       // live attempts were scored against, so questions /
@@ -4277,23 +4361,7 @@ service cloud.firestore {
       // metadata move. To correct a published bundle, unpublish it
       // first (status draft), edit as a draft, republish. A draft
       // bundle edits freely (same conditions as create).
-      allow update: if isModerator()
-        && !('correctLetter' in request.resource.data)
-        && !('explanation' in request.resource.data)
-        && !('correctText' in request.resource.data)
-        && (request.resource.data.get('kind', '') != 'topic'
-            || bundleId == 'topic__' + request.resource.data.get('topicId', ''))
-        && (request.resource.data.get('kind', '') != 'mock'
-            || bundleId == 'mock__' + request.resource.data.get('mockId', ''))
-        && (request.resource.data.get('kind', '') != 'daily'
-            || bundleId == 'daily__' + request.resource.data.get('mockId', ''))
-        && (request.resource.data.get('kind', '') != 'weekly'
-            || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
-        && validJobQuestionBundle(request.resource.data)
-        && (resource.data.get('status', '') != 'published'
-            || changedKeys()
-                 .hasOnly(['titleBn', 'titleEn', 'status', 'reviewStatus',
-                           'publishedAt', 'publishedBy', 'updatedAt']));
+      allow update: if validJobQuestionBundleUpdate(request.resource.data, resource.data, bundleId);
       allow delete: if isAdmin();
     }
 
@@ -4642,33 +4710,61 @@ service cloud.firestore {
     // bundle's kind, so a practice receipt can never unlock an
     // exam key. Never issue an exam receipt while the exam is in
     // progress: both exam anchors require status 'submitted'.
-    match /jobReceipts/{receiptId} {
-      allow read: if (signedIn() && resource.data.get('userId', '') == uid()) || isAdmin();
-      allow create: if signedIn() && callerActive()
-        && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
+    // validJobReceiptCreate(d, receiptId) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validJobReceiptCreate(d, receiptId) {
+      return signedIn() && callerActive()
+        && receiptId == uid() + '_' + d.get('bundleId', '')
         && onlyKeys(['userId', 'bundleId',
              'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
-        && request.resource.data.get('userId', '') == uid()
-        && request.resource.data.get('bundleId', null) is string
-        && request.resource.data.get('bundleId', '').size() <= 200
-        && request.resource.data.get('attemptId', null) is string
-        && request.resource.data.get('attemptId', '').size() <= 200
-        && request.resource.data.get('purpose', null) in ['practice_review', 'exam_review']
-        && request.resource.data.get('bundleVersion', null) is int
-        && request.resource.data.get('bundleVersion', 0) >= 1
+        && d.get('userId', '') == uid()
+        && isStrType(d, 'bundleId')
+        && d.get('bundleId', '').size() <= 200
+        && isStrType(d, 'attemptId')
+        && d.get('attemptId', '').size() <= 200
+        && d.get('purpose', null) in ['practice_review', 'exam_review']
+        && isPosInt(d, 'bundleVersion')
         // Trusted timestamp (P0-03): createdAt must be a real
         // timestamp no later than now and no older than 5 minutes
         // — a client cannot future-date a receipt to stretch its
         // window, nor backdate one to hide its age.
-        && request.resource.data.get('createdAt', null) is timestamp
-        && request.resource.data.get('createdAt', null) <= request.time
-        && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
+        && isTsType(d, 'createdAt')
+        && d.get('createdAt', null) <= request.time
+        && d.get('createdAt', null) > request.time - duration.value(5, 'm')
         // Anchor (Step 7 P0-06 + Step 9 Design G + H.1): the
         // purpose decides the anchor — see validJobReceiptAnchor
         // (shared by create and by the re-issue update below).
-        && validJobReceiptAnchor(request.resource.data)
+        && validJobReceiptAnchor(d)
         && reqBundleExists()
-        && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(d.get('bundleId', ''))).data.status == 'published';
+    }
+    // validJobReceiptUpdate(d, old, receiptId) — compaction 27 Nov 2026: the update allow below, extracted verbatim with request.resource.data -> d and resource.data -> old (pure substitution; semantics identical).
+    function validJobReceiptUpdate(d, old, receiptId) {
+      return signedIn() && callerActive()
+        && receiptId == uid() + '_' + d.get('bundleId', '')
+        && d.get('userId', '') == uid()
+        && old.get('userId', '') == uid()
+        && old.get('bundleId', '') == d.get('bundleId', '')
+        && onlyKeys(['userId', 'bundleId',
+             'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
+        && isStrType(d, 'bundleId')
+        && d.get('bundleId', '').size() <= 200
+        && isStrType(d, 'attemptId')
+        && d.get('attemptId', '').size() <= 200
+        && d.get('purpose', null) in ['practice_review', 'exam_review']
+        && isPosInt(d, 'bundleVersion')
+        // Trusted timestamp (P0-03, same as create): the re-issued
+        // receipt must carry a fresh createdAt — an old timestamp
+        // re-issued would reopen an expired window.
+        && isTsType(d, 'createdAt')
+        && d.get('createdAt', null) <= request.time
+        && d.get('createdAt', null) > request.time - duration.value(5, 'm')
+        && validJobReceiptAnchor(d)
+        && reqBundleExists()
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(d.get('bundleId', ''))).data.status == 'published';
+    }
+    match /jobReceipts/{receiptId} {
+      allow read: if (signedIn() && resource.data.get('userId', '') == uid()) || isAdmin();
+      allow create: if validJobReceiptCreate(request.resource.data, receiptId);
       // Anchored re-issue (Step 9 closure, open question 1): a
       // retake's setDoc on the existing receipt doc-ID is an UPDATE
       // — allowed only when the new doc re-anchors to a newly
@@ -4676,29 +4772,7 @@ service cloud.firestore {
       // createdAt. userId and bundleId are immutable (the receipt
       // can never change owner or bundle); attemptId, purpose,
       // bundleVersion and createdAt move with the new submission.
-      allow update: if signedIn() && callerActive()
-        && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
-        && request.resource.data.get('userId', '') == uid()
-        && resource.data.get('userId', '') == uid()
-        && resource.data.get('bundleId', '') == request.resource.data.get('bundleId', '')
-        && onlyKeys(['userId', 'bundleId',
-             'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
-        && request.resource.data.get('bundleId', null) is string
-        && request.resource.data.get('bundleId', '').size() <= 200
-        && request.resource.data.get('attemptId', null) is string
-        && request.resource.data.get('attemptId', '').size() <= 200
-        && request.resource.data.get('purpose', null) in ['practice_review', 'exam_review']
-        && request.resource.data.get('bundleVersion', null) is int
-        && request.resource.data.get('bundleVersion', 0) >= 1
-        // Trusted timestamp (P0-03, same as create): the re-issued
-        // receipt must carry a fresh createdAt — an old timestamp
-        // re-issued would reopen an expired window.
-        && request.resource.data.get('createdAt', null) is timestamp
-        && request.resource.data.get('createdAt', null) <= request.time
-        && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
-        && validJobReceiptAnchor(request.resource.data)
-        && reqBundleExists()
-        && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
+      allow update: if validJobReceiptUpdate(request.resource.data, resource.data, receiptId);
       allow delete: if isAdmin();
     }
     // users/{uid}/jobAttempts — FULL attempt (Step 8, Step 3 §2.11).
@@ -4828,23 +4902,23 @@ service cloud.firestore {
         && d.get('uid', '') == userId
         && d.get('event', '') in ['mock_started', 'mock_submitted',
              'mock_abandoned', 'mock_submit_failed']
-        && d.get('examSlug', null) is string
+        && isStrType(d, 'examSlug')
         && d.get('examSlug', '').size() > 0
         && d.get('examSlug', '').size() <= 200
-        && d.get('mockId', null) is string
+        && isStrType(d, 'mockId')
         && d.get('mockId', '').size() > 0
         && d.get('mockId', '').size() <= 200
-        && d.get('sessionId', null) is string
+        && isStrType(d, 'sessionId')
         && d.get('sessionId', '').size() > 0
         && d.get('sessionId', '').size() <= 200
-        && d.get('bundleId', null) is string
+        && isStrType(d, 'bundleId')
         && d.get('bundleId', '').size() > 0
         && d.get('bundleId', '').size() <= 200
         && (d.get('detail', null) == null
-            || (d.get('detail', null) is string
+            || (isStrType(d, 'detail')
                 && d.get('detail', '').size() <= 500))
         // Trusted timestamp (P0-03): no future-dating, no backdating.
-        && d.get('createdAt', null) is timestamp
+        && isTsType(d, 'createdAt')
         && d.get('createdAt', null) <= request.time
         && d.get('createdAt', null) > request.time - duration.value(5, 'm');
     }
@@ -4911,7 +4985,7 @@ service cloud.firestore {
         && isOptTs(d, 'mfaEnrolledAt')
         && isOptTs(d, 'backupCodesUpdatedAt')
         && isOptTs(d, 'updatedAt')
-        && (d.get('knownDeviceIds', null) == null || d.get('knownDeviceIds', null) is list);
+        && isOptList(d, 'knownDeviceIds');
     }
     match /ownerSecurity/{ownerId} {
       allow get, delete: if isOwnerRole() && isOwner(ownerId);
@@ -4994,51 +5068,59 @@ service cloud.firestore {
     // onlyKeys). The buyer may decrement remainingUses on their OWN
     // approved single-paper order by exactly 1 (one clean download),
     // only while > 0 and unexpired — the rules enforce the shape.
-    match /qpgProOrders/{orderId} {
-      allow read: if signedIn() && (resource.data.uid == uid() || isModerator());
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.uid == uid()
-        && request.resource.data.plan in ['per-paper', 'monthly',
+    // validQpgProOrderCreate(d) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validQpgProOrderCreate(d) {
+      return signedIn() && callerActive()
+        && d.uid == uid()
+        && d.plan in ['per-paper', 'monthly',
           'class-6-8', 'class-9-10', 'class-11-12',
           'per-subject', 'subject-teacher',
           'bundle-6-8', 'bundle-6-10',
           'coaching-6-12']
-        && ((request.resource.data.plan == 'per-paper' && request.resource.data.amountBdt == 49)
-          || (request.resource.data.plan == 'monthly' && request.resource.data.amountBdt == 199)
-          || (request.resource.data.plan == 'class-6-8' && request.resource.data.amountBdt == 300)
-          || (request.resource.data.plan == 'class-9-10' && request.resource.data.amountBdt == 450)
-          || (request.resource.data.plan == 'class-11-12' && request.resource.data.amountBdt == 390)
-          || (request.resource.data.plan == 'per-subject' && request.resource.data.amountBdt == 75)
-          || (request.resource.data.plan == 'subject-teacher' && request.resource.data.amountBdt == 210)
-          || (request.resource.data.plan == 'bundle-6-8' && request.resource.data.amountBdt == 750)
-          || (request.resource.data.plan == 'bundle-6-10' && request.resource.data.amountBdt == 1050)
-          || (request.resource.data.plan == 'coaching-6-12' && request.resource.data.amountBdt == 1350))
-        && request.resource.data.paymentMethod in ['bkash', 'nagad']
-        && isStr(request.resource.data.trxId, 30)
-        && request.resource.data.trxId.size() >= 6
-        && isStr(request.resource.data.senderLast3, 3)
-        && request.resource.data.senderLast3.size() == 3
-        && isOptStr(request.resource.data.get('senderWhatsapp', null), 20)
-        && isOptStr(request.resource.data.get('couponCode', null), 20)
-        && request.resource.data.source in ['onsite', 'whatsapp']
-        && request.resource.data.status == 'pending-review'
-        && request.resource.data.createdAt is timestamp
+        && ((d.plan == 'per-paper' && d.amountBdt == 49)
+          || (d.plan == 'monthly' && d.amountBdt == 199)
+          || (d.plan == 'class-6-8' && d.amountBdt == 300)
+          || (d.plan == 'class-9-10' && d.amountBdt == 450)
+          || (d.plan == 'class-11-12' && d.amountBdt == 390)
+          || (d.plan == 'per-subject' && d.amountBdt == 75)
+          || (d.plan == 'subject-teacher' && d.amountBdt == 210)
+          || (d.plan == 'bundle-6-8' && d.amountBdt == 750)
+          || (d.plan == 'bundle-6-10' && d.amountBdt == 1050)
+          || (d.plan == 'coaching-6-12' && d.amountBdt == 1350))
+        && d.paymentMethod in ['bkash', 'nagad']
+        && isStr(d.trxId, 30)
+        && d.trxId.size() >= 6
+        && isStr(d.senderLast3, 3)
+        && d.senderLast3.size() == 3
+        && isOptStrF(d, 'senderWhatsapp', 20)
+        && isOptStrF(d, 'couponCode', 20)
+        && d.source in ['onsite', 'whatsapp']
+        && d.status == 'pending-review'
+        && d.createdAt is timestamp
         && onlyKeys(['uid', 'plan', 'amountBdt', 'paymentMethod', 'trxId', 'senderLast3', 'senderWhatsapp', 'couponCode', 'status', 'source', 'createdAt']);
-      allow update: if isModerator()
-        && resource.data.status == 'pending-review'
-        && request.resource.data.status in ['approved', 'rejected']
-        && request.resource.data.decidedBy == uid()
-        && request.resource.data.decidedAt is timestamp
-        && isOptTs(request.resource.data, 'proStart')
-        && isOptTs(request.resource.data, 'proEnd')
+    }
+    // validQpgProOrderUpdate(d, old) — compaction 27 Nov 2026: the update allow below, extracted verbatim with request.resource.data -> d and resource.data -> old (pure substitution; semantics identical).
+    function validQpgProOrderUpdate(d, old) {
+      return isModerator()
+        && old.status == 'pending-review'
+        && d.status in ['approved', 'rejected']
+        && d.decidedBy == uid()
+        && d.decidedAt is timestamp
+        && isOptTs(d, 'proStart')
+        && isOptTs(d, 'proEnd')
         // An approval MUST carry the unlock window (and one credit
         // for a single-paper order) — otherwise the buyer paid and
         // got nothing. A rejection carries neither.
-        && (request.resource.data.status == 'rejected'
-          || (request.resource.data.proStart is timestamp
-            && request.resource.data.proEnd is timestamp
-            && (request.resource.data.plan != 'per-paper' || request.resource.data.remainingUses == 1)))
+        && (d.status == 'rejected'
+          || (d.proStart is timestamp
+            && d.proEnd is timestamp
+            && (d.plan != 'per-paper' || d.remainingUses == 1)))
         && changedKeys().hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionNote', 'proStart', 'proEnd', 'remainingUses']);
+    }
+    match /qpgProOrders/{orderId} {
+      allow read: if signedIn() && (resource.data.uid == uid() || isModerator());
+      allow create: if validQpgProOrderCreate(request.resource.data);
+      allow update: if validQpgProOrderUpdate(request.resource.data, resource.data);
       // Buyer single-paper credit decrement (one clean download).
       allow update: if signedIn() && callerActive()
         && resource.data.uid == uid()
@@ -5103,9 +5185,9 @@ service cloud.firestore {
     function validFeedbackQuestionError(d) {
       return d.get('status', '') == 'pending'
         && d.get('errorType', '') in ['wrong-answer', 'wrong-explanation', 'typo', 'out-of-syllabus', 'other']
-        && isStr(d.get('questionId', null), 200)
-        && isStr(d.get('questionText', null), 200)
-        && isStr(d.get('description', null), 1000)
+        && isStrF(d, 'questionId', 200)
+        && isStrF(d, 'questionText', 200)
+        && isStrF(d, 'description', 1000)
         && d.get('flaggedForCorrection', null) == false
         && d.get('decidedBy', null) == null
         && d.get('decidedAt', null) == null
@@ -5114,18 +5196,18 @@ service cloud.firestore {
     }
     function validFeedbackContact(d) {
       return d.get('status', '') == 'pending'
-        && isStr(d.get('name', null), 100)
-        && isStr(d.get('message', null), 5000)
-        && isOptStr(d.get('email', null), 200)
+        && isStrF(d, 'name', 100)
+        && isStrF(d, 'message', 5000)
+        && isOptStrF(d, 'email', 200)
         && onlyKeys(['type', 'reporterUid', 'status', 'name', 'message', 'email', 'createdAt', 'updatedAt']);
     }
     function validFeedbackReport(d) {
       return d.get('status', '') == 'open'
         && d.get('reason', '') in ['spam', 'abuse', 'copyright', 'personal-info', 'other']
         && d.get('targetType', '') in ['post', 'comment', 'socialPost', 'user', 'message']
-        && d.get('targetId', null) is string
-        && d.get('targetAuthorId', null) is string
-        && isOptStr(d.get('details', null), 2000)
+        && isStrType(d, 'targetId')
+        && isStrType(d, 'targetAuthorId')
+        && isOptStrF(d, 'details', 2000)
         && onlyKeys(['type', 'reporterUid', 'status', 'reason', 'targetType', 'targetId', 'targetAuthorId', 'details', 'createdAt', 'updatedAt']);
     }
     function validFeedbackCreate(d) {
@@ -5139,8 +5221,8 @@ service cloud.firestore {
         && d.get('status', '') in ['valid', 'invalid']
         && d.get('flaggedForCorrection', null) == (d.get('status', '') == 'valid')
         && d.get('decidedBy', null) == uid()
-        && d.get('decidedAt', null) is timestamp
-        && isOptStr(d.get('decisionNote', null), 500)
+        && isTsType(d, 'decidedAt')
+        && isOptStrF(d, 'decisionNote', 500)
         && changedKeys().hasOnly(['status', 'flaggedForCorrection', 'decidedBy', 'decidedAt', 'decisionNote', 'updatedAt']);
     }
     function validFeedbackUpdate(old, d) {
@@ -5163,9 +5245,9 @@ service cloud.firestore {
       allow create: if signedIn() && callerActive()
         && request.resource.data.ownerUid == uid()
         && isStr(request.resource.data.title, 200)
-        && isOptStr(request.resource.data.get('subject', null), 100)
-        && isOptStr(request.resource.data.get('classLabel', null), 100)
-        && isOptStr(request.resource.data.get('setCode', null), 10)
+        && isOptStrF(request.resource.data, 'subject', 100)
+        && isOptStrF(request.resource.data, 'classLabel', 100)
+        && isOptStrF(request.resource.data, 'setCode', 10)
         && request.resource.data.layout in ['separate', 'whole-paper']
         && request.resource.data.paperRef is map
         && request.resource.data.slides is list
@@ -5191,30 +5273,34 @@ service cloud.firestore {
     // this collection. A submission claiming to be a board question
     // without a verifiable source is rejected at review (the client
     // validator blocks a bare claim at submit).
+    // validQpgContributionCreate(d) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validQpgContributionCreate(d) {
+      return signedIn() && callerActive()
+        && d.contributorUid == uid()
+        && isStr(d.contributorName, 100)
+        && isOptStrF(d, 'institution', 200)
+        && d.stream in ['general', 'madrasah']
+        && isStr(d.classId, 100)
+        && isStr(d.subjectId, 100)
+        && isStr(d.chapterId, 200)
+        && isStr(d.topic, 200)
+        && d.type in ['mcq', 'cq', 'short', 'multi-completion', 'situation-set', 'picture-based']
+        && isStr(d.questionText, 5000)
+        && d.options is list
+        && d.options.size() <= 4
+        && isStr(d.explanation, 5000)
+        && isOptStrF(d, 'source', 500)
+        && d.difficulty in ['easy', 'medium', 'hard']
+        && d.cognitiveLevel in ['unspecified', 'knowledge', 'comprehension', 'application', 'higher']
+        && d.nature in ['unspecified', 'mathematical', 'theoretical']
+        && d.ownWordingConfirmed == true
+        && d.status == 'pending_review'
+        && d.createdAt is timestamp
+        && onlyKeys(['contributorUid', 'contributorName', 'institution', 'stream', 'classId', 'subjectId', 'chapterId', 'topic', 'type', 'questionText', 'options', 'correctAnswer', 'explanation', 'source', 'difficulty', 'cognitiveLevel', 'nature', 'ownWordingConfirmed', 'status', 'createdAt']);
+    }
     match /qpgContributions/{contributionId} {
       allow read: if signedIn() && (resource.data.contributorUid == uid() || isModerator());
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.contributorUid == uid()
-        && isStr(request.resource.data.contributorName, 100)
-        && isOptStr(request.resource.data.get('institution', null), 200)
-        && request.resource.data.stream in ['general', 'madrasah']
-        && isStr(request.resource.data.classId, 100)
-        && isStr(request.resource.data.subjectId, 100)
-        && isStr(request.resource.data.chapterId, 200)
-        && isStr(request.resource.data.topic, 200)
-        && request.resource.data.type in ['mcq', 'cq', 'short', 'multi-completion', 'situation-set', 'picture-based']
-        && isStr(request.resource.data.questionText, 5000)
-        && request.resource.data.options is list
-        && request.resource.data.options.size() <= 4
-        && isStr(request.resource.data.explanation, 5000)
-        && isOptStr(request.resource.data.get('source', null), 500)
-        && request.resource.data.difficulty in ['easy', 'medium', 'hard']
-        && request.resource.data.cognitiveLevel in ['unspecified', 'knowledge', 'comprehension', 'application', 'higher']
-        && request.resource.data.nature in ['unspecified', 'mathematical', 'theoretical']
-        && request.resource.data.ownWordingConfirmed == true
-        && request.resource.data.status == 'pending_review'
-        && request.resource.data.createdAt is timestamp
-        && onlyKeys(['contributorUid', 'contributorName', 'institution', 'stream', 'classId', 'subjectId', 'chapterId', 'topic', 'type', 'questionText', 'options', 'correctAnswer', 'explanation', 'source', 'difficulty', 'cognitiveLevel', 'nature', 'ownWordingConfirmed', 'status', 'createdAt']);
+      allow create: if validQpgContributionCreate(request.resource.data);
       allow update: if isModerator()
         && resource.data.status == 'pending_review'
         && request.resource.data.status in ['approved', 'rejected']
@@ -5264,29 +5350,33 @@ service cloud.firestore {
     // ৳49/paper; only a moderator moves the status forward
     // (pending_payment → paid → building → delivered), one step at
     // a time, never backwards.
+    // validQpgCustomOrderCreate(d) — compaction 27 Nov 2026: the create allow below, extracted verbatim with request.resource.data -> d (pure substitution; semantics identical).
+    function validQpgCustomOrderCreate(d) {
+      return signedIn() && callerActive()
+        && d.uid == uid()
+        && isStr(d.buyerName, 100)
+        && isOptStrF(d, 'buyerWhatsapp', 20)
+        && isStr(d.className, 100)
+        && isStr(d.subject, 100)
+        && isOptStrF(d, 'chapters', 1000)
+        && isOptStrF(d, 'questionTypes', 1000)
+        && d.totalMarks is int
+        && d.totalMarks > 0
+        && isOptStrF(d, 'markDistribution', 2000)
+        && isOptStrF(d, 'examTitle', 200)
+        && isOptStrF(d, 'institutionName', 200)
+        && isStr(d.dateNeeded, 50)
+        && isOptStrF(d, 'instructions', 2000)
+        && d.priceBdt == 49
+        && isOptStrF(d, 'trxId', 30)
+        && d.status == 'pending_payment'
+        && d.source in ['onsite', 'whatsapp']
+        && d.submittedAt is timestamp
+        && onlyKeys(['uid', 'buyerName', 'buyerWhatsapp', 'className', 'subject', 'chapters', 'questionTypes', 'totalMarks', 'markDistribution', 'examTitle', 'institutionName', 'dateNeeded', 'instructions', 'priceBdt', 'trxId', 'status', 'source', 'submittedAt']);
+    }
     match /qpgCustomOrders/{orderId} {
       allow read: if signedIn() && (resource.data.uid == uid() || isModerator());
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.uid == uid()
-        && isStr(request.resource.data.buyerName, 100)
-        && isOptStr(request.resource.data.get('buyerWhatsapp', null), 20)
-        && isStr(request.resource.data.className, 100)
-        && isStr(request.resource.data.subject, 100)
-        && isOptStr(request.resource.data.get('chapters', null), 1000)
-        && isOptStr(request.resource.data.get('questionTypes', null), 1000)
-        && request.resource.data.totalMarks is int
-        && request.resource.data.totalMarks > 0
-        && isOptStr(request.resource.data.get('markDistribution', null), 2000)
-        && isOptStr(request.resource.data.get('examTitle', null), 200)
-        && isOptStr(request.resource.data.get('institutionName', null), 200)
-        && isStr(request.resource.data.dateNeeded, 50)
-        && isOptStr(request.resource.data.get('instructions', null), 2000)
-        && request.resource.data.priceBdt == 49
-        && isOptStr(request.resource.data.get('trxId', null), 30)
-        && request.resource.data.status == 'pending_payment'
-        && request.resource.data.source in ['onsite', 'whatsapp']
-        && request.resource.data.submittedAt is timestamp
-        && onlyKeys(['uid', 'buyerName', 'buyerWhatsapp', 'className', 'subject', 'chapters', 'questionTypes', 'totalMarks', 'markDistribution', 'examTitle', 'institutionName', 'dateNeeded', 'instructions', 'priceBdt', 'trxId', 'status', 'source', 'submittedAt']);
+      allow create: if validQpgCustomOrderCreate(request.resource.data);
       allow update: if isModerator()
         && ((resource.data.status == 'pending_payment' && request.resource.data.status == 'paid')
           || (resource.data.status == 'paid' && request.resource.data.status == 'building')
