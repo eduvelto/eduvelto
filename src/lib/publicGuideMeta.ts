@@ -1321,4 +1321,125 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
       { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
     ],
   },
+  // FINISH BATCH 28 NOV — GUIDES B (6–10). Five tool-tied guides,
+  // 800+ words in Bangla AND English each. Every formula is grounded
+  // in the tools' own logic (src/lib/tools/): discount/VAT/profit
+  // from discountVatProfit.ts, image sizes from imageCompressor.ts /
+  // imageResizer.ts, percentages from the percentage-converter tool
+  // guide, BMR/TDEE from bodyMetrics.ts (Mifflin-St Jeor), and the
+  // signature facts from the Signature Maker tool's honest label.
+  {
+    slug: 'discount-vat-profit-calculation-guide',
+    path: '/guides/discount-vat-profit-calculation-guide',
+    titleBn: 'ছাড় ও ভ্যাট হিসাবের নিয়ম — দাম, লাভ ও মার্জিন',
+    titleEn: 'Discount & VAT Calculation Rules — Price, Profit & Margin',
+    crumbBn: 'ছাড় ও ভ্যাট',
+    category: 'finance',
+    descriptionBn:
+      'ছাড়, ভ্যাট ও লাভের হিসাব কীভাবে হয় — ২,০০০ টাকায় ২৫% ছাড়, ভ্যাটসহ ও ভ্যাটছাড়া দাম, আর মার্জিন ও মার্কআপের পার্থক্য।',
+    descriptionEn:
+      'How discount, VAT and profit are calculated — 25% off 2,000 taka, VAT-inclusive and VAT-exclusive prices, and margin versus markup.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/discount-vat-profit-calculator', bn: 'ছাড়, ভ্যাট ও লাভ ক্যালকুলেটর', en: 'Discount, VAT & Profit Calculator' },
+      { to: '/guides/percentage-calculation-guide', bn: 'শতকরা হিসাবের নিয়ম', en: 'Percentage Calculation Rules' },
+      { to: '/guides/loan-emi-calculation-guide', bn: 'লোন EMI হিসাবের গাইড', en: 'Loan EMI Calculation Guide' },
+      { to: '/tools/simple-interest-calculator', bn: 'সরল সুদ ক্যালকুলেটর', en: 'Simple Interest Calculator' },
+      { to: '/tools/compound-interest-calculator', bn: 'চক্রবৃদ্ধি সুদ ক্যালকুলেটর', en: 'Compound Interest Calculator' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'image-compress-resize-guide',
+    path: '/guides/image-compress-resize-guide',
+    titleBn: 'ছবি ছোট ও resize করার নিয়ম — কম্প্রেস ও আকার বদলানো',
+    titleEn: 'How to Compress & Resize Images — Smaller Files, Right Size',
+    crumbBn: 'ছবি ছোট করা',
+    category: 'tools',
+    descriptionBn:
+      'ছবির ফাইল ছোট করা ও প্রস্থ-উচ্চতা বদলানোর নিয়ম — মানের সেটিং, টেলিটক ও পাসপোর্ট ছবির প্রিসেট, আর কোন টুল কখন ব্যবহার করবেন।',
+    descriptionEn:
+      'How to shrink an image file and change its width and height — quality settings, Teletalk and passport photo presets, and which tool to use when.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/image-compressor', bn: 'ছবি কম্প্রেসর', en: 'Image Compressor' },
+      { to: '/tools/image-resizer', bn: 'ছবির আকার বদলানো', en: 'Image Resizer' },
+      { to: '/guides/qr-code-image-tools-guide', bn: 'QR কোড ও ছবির টুল ব্যবহারের গাইড', en: 'QR Code & Image Tools Guide' },
+      { to: '/guides/safe-pdf-usage-guide', bn: 'নিরাপদে PDF ব্যবহারের নিয়ম', en: 'Safe PDF Usage Rules' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'percentage-calculation-guide',
+    path: '/guides/percentage-calculation-guide',
+    titleBn: 'শতকরা হিসাবের নিয়ম — শতাংশ, দশমিক ও ভগ্নাংশ',
+    titleEn: 'Percentage Calculation Rules — Percent, Decimal & Fraction',
+    crumbBn: 'শতকরা হিসাব',
+    category: 'tools',
+    descriptionBn:
+      'শতকরা হিসাবের নিয়ম — X-এর Y% কত, X, Y-এর কত %, বাড়ানো-কমানো, আর শতাংশ, দশমিক ও ভগ্নাংশের মধ্যে রূপান্তর।',
+    descriptionEn:
+      'Percentage calculation rules — what Y% of X is, what percent X is of Y, increases and decreases, and converting between percent, decimal and fraction.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/percentage-converter', bn: 'শতাংশ কনভার্টার', en: 'Percentage Converter' },
+      { to: '/tools/discount-vat-profit-calculator', bn: 'ছাড়, ভ্যাট ও লাভ ক্যালকুলেটর', en: 'Discount, VAT & Profit Calculator' },
+      { to: '/guides/discount-vat-profit-calculation-guide', bn: 'ছাড় ও ভ্যাট হিসাবের নিয়ম', en: 'Discount & VAT Calculation Rules' },
+      { to: '/guides/loan-emi-calculation-guide', bn: 'লোন EMI হিসাবের গাইড', en: 'Loan EMI Calculation Guide' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'bmr-tdee-calorie-guide',
+    path: '/guides/bmr-tdee-calorie-guide',
+    titleBn: 'BMR/TDEE — দিনে কত ক্যালরি দরকার',
+    titleEn: 'BMR/TDEE — How Many Calories You Need in a Day',
+    crumbBn: 'BMR ও ক্যালোরি',
+    category: 'health',
+    descriptionBn:
+      'BMR ও TDEE কীভাবে হিসাব হয় — Mifflin-St Jeor সূত্র, কাজের ধরন অনুযায়ী গুণক, আর দৈনিক ক্যালোরির চাহিদা বের করার নিয়ম।',
+    descriptionEn:
+      'How BMR and TDEE are calculated — the Mifflin-St Jeor equation, activity multipliers, and how to work out your daily calorie need.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/bmr-calculator', bn: 'BMR ক্যালকুলেটর', en: 'BMR Calculator' },
+      { to: '/tools/calorie-tdee-calculator', bn: 'ক্যালোরি (TDEE) ক্যালকুলেটর', en: 'Calorie (TDEE) Calculator' },
+      { to: '/tools/bmi-calculator', bn: 'BMI ক্যালকুলেটর', en: 'BMI Calculator' },
+      { to: '/tools/ideal-weight-calculator', bn: 'আদর্শ ওজন ক্যালকুলেটর', en: 'Ideal Weight Calculator' },
+      { to: '/guides/bmi-healthy-weight-guide', bn: 'BMI ও সুস্থ ওজন', en: 'BMI & Healthy Weight' },
+      { to: '/life/health', bn: 'স্বাস্থ্য বিভাগ', en: 'Health section' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'digital-signature-maker-guide',
+    path: '/guides/digital-signature-maker-guide',
+    titleBn: 'ডিজিটাল স্বাক্ষর বানানো ও ব্যবহারের নিয়ম',
+    titleEn: 'How to Make & Use a Digital Signature',
+    crumbBn: 'ডিজিটাল স্বাক্ষর',
+    category: 'tools',
+    descriptionBn:
+      'আঁকা বা টাইপ করা স্বাক্ষর বানিয়ে PDF-এ বসানোর নিয়ম — কোথায় ব্যবহার করা যায়, আর কেন এটি প্রত্যয়িত বা আইনি ডিজিটাল স্বাক্ষর নয়।',
+    descriptionEn:
+      'How to make a drawn or typed signature and place it on a PDF — where it can be used, and why it is not a certified or legal digital signature.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/signature-maker', bn: 'স্বাক্ষর তৈরি ও পিডিএফ সাইন', en: 'Signature Maker & PDF Sign' },
+      { to: '/tools/pdf-watermark', bn: 'PDF ওয়াটারমার্ক', en: 'PDF Watermark' },
+      { to: '/tools/pdf-merger', bn: 'PDF একত্র করা', en: 'PDF Merger' },
+      { to: '/tools/image-resizer', bn: 'ছবির আকার বদলানো', en: 'Image Resizer' },
+      { to: '/guides/image-compress-resize-guide', bn: 'ছবি ছোট ও resize করার নিয়ম', en: 'How to Compress & Resize Images' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
 ];
