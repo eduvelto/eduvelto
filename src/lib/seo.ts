@@ -1912,6 +1912,60 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'What a negative sentence is, when to use do not / does not / did not, and why the verb returns to its base form after do/does/did — a simple Class 3 guide with examples and practice. Draft lesson — awaiting teacher review.',
     crumbEn: 'Negative Sentences',
   },
+  // Finish batch, 28 Nov 2026 (guides 6–10): static entries follow the
+  // morning-batch pattern. NOTE: the seo.ts wording pass (item 3) will
+  // revisit the "খসড়া পাঠ" wording for ALL guides — these five entries
+  // must be aligned with whatever wording that pass settles on.
+  '/guides/discount-vat-profit-calculation-guide': {
+    title: 'ছাড় ও ভ্যাট হিসাবের নিয়ম — দাম, লাভ ও মার্জিন | Eduvelto',
+    description:
+      'ছাড়, ভ্যাট ও লাভের হিসাব কীভাবে হয় — ২,০০০ টাকায় ২৫% ছাড়, ভ্যাটসহ ও ভ্যাটছাড়া দাম, আর মার্জিন ও মার্কআপের পার্থক্য। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ছাড় ও ভ্যাট',
+    titleEn: 'Discount & VAT Calculation Rules — Price, Profit & Margin | Eduvelto',
+    descriptionEn:
+      'How discount, VAT and profit are calculated — 25% off 2,000 taka, VAT-inclusive and VAT-exclusive prices, and margin versus markup. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Discount & VAT',
+  },
+  '/guides/image-compress-resize-guide': {
+    title: 'ছবি ছোট ও resize করার নিয়ম — কম্প্রেস ও আকার বদলানো | Eduvelto',
+    description:
+      'ছবির ফাইল ছোট করা ও প্রস্থ-উচ্চতা বদলানোর নিয়ম — মানের সেটিং, টেলিটক ও পাসপোর্ট ছবির প্রিসেট, আর কোন টুল কখন ব্যবহার করবেন। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ছবি ছোট করা',
+    titleEn: 'How to Compress & Resize Images — Smaller Files, Right Size | Eduvelto',
+    descriptionEn:
+      'How to shrink an image file and change its width and height — quality settings, Teletalk and passport photo presets, and which tool to use when. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Image Compression',
+  },
+  '/guides/percentage-calculation-guide': {
+    title: 'শতকরা হিসাবের নিয়ম — শতাংশ, দশমিক ও ভগ্নাংশ | Eduvelto',
+    description:
+      'শতকরা হিসাবের নিয়ম — X-এর Y% কত, X, Y-এর কত %, বাড়ানো-কমানো, আর শতাংশ, দশমিক ও ভগ্নাংশের মধ্যে রূপান্তর। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'শতকরা হিসাব',
+    titleEn: 'Percentage Calculation Rules — Percent, Decimal & Fraction | Eduvelto',
+    descriptionEn:
+      'Percentage calculation rules — what Y% of X is, what percent X is of Y, increases and decreases, and converting between percent, decimal and fraction. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Percentage',
+  },
+  '/guides/bmr-tdee-calorie-guide': {
+    title: 'BMR/TDEE — দিনে কত ক্যালরি দরকার | Eduvelto',
+    description:
+      'BMR ও TDEE কীভাবে হিসাব হয় — Mifflin-St Jeor সূত্র, কাজের ধরন অনুযায়ী গুণক, আর দৈনিক ক্যালোরির চাহিদা বের করার নিয়ম। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'BMR ও ক্যালোরি',
+    titleEn: 'BMR/TDEE — How Many Calories You Need in a Day | Eduvelto',
+    descriptionEn:
+      'How BMR and TDEE are calculated — the Mifflin-St Jeor equation, activity multipliers, and how to work out your daily calorie need. Draft lesson — awaiting teacher review.',
+    crumbEn: 'BMR & Calories',
+  },
+  '/guides/digital-signature-maker-guide': {
+    title: 'ডিজিটাল স্বাক্ষর বানানো ও ব্যবহারের নিয়ম | Eduvelto',
+    description:
+      'আঁকা বা টাইপ করা স্বাক্ষর বানিয়ে PDF-এ বসানোর নিয়ম — কোথায় ব্যবহার করা যায়, আর কেন এটি প্রত্যয়িত বা আইনি ডিজিটাল স্বাক্ষর নয়। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ডিজিটাল স্বাক্ষর',
+    titleEn: 'How to Make & Use a Digital Signature | Eduvelto',
+    descriptionEn:
+      'How to make a drawn or typed signature and place it on a PDF — where it can be used, and why it is not a certified or legal digital signature. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Digital Signature',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -2688,8 +2742,9 @@ export function resolveRouteSeo(pathname: string, lang: SupportedLang = 'bn'): S
     // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1,
     // wave 2, wave 3, wave 4, wave 5 and wave 10; Phase 2, 25 Nov
     // 2026: 56 guides; trust/content batch, 28 Nov 2026: 66 guides;
-    // eleventh guide, 28 Nov 2026: 67 guides):
-    // the hub lists the 67 public guides, the two real lessons and
+    // eleventh guide, 28 Nov 2026: 67 guides; finish batch, 28 Nov
+    // 2026 (guides 6–10): 72 guides):
+    // the hub lists the 72 public guides, the two real lessons and
     // the BCS English practice hub — the same links the page renders,
     // in the same order.
     jsonLd.push({
@@ -3102,18 +3157,48 @@ export function resolveRouteSeo(pathname: string, lang: SupportedLang = 'bn'): S
         {
           '@type': 'ListItem',
           position: 68,
+          name: lang === 'bn' ? 'ছাড় ও ভ্যাট হিসাবের নিয়ম — দাম, লাভ ও মার্জিন' : 'Discount & VAT Calculation Rules — Price, Profit & Margin',
+          url: `${SITE_URL}/${lang}/guides/discount-vat-profit-calculation-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 69,
+          name: lang === 'bn' ? 'ছবি ছোট ও resize করার নিয়ম — কম্প্রেস ও আকার বদলানো' : 'How to Compress & Resize Images — Smaller Files, Right Size',
+          url: `${SITE_URL}/${lang}/guides/image-compress-resize-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 70,
+          name: lang === 'bn' ? 'শতকরা হিসাবের নিয়ম — শতাংশ, দশমিক ও ভগ্নাংশ' : 'Percentage Calculation Rules — Percent, Decimal & Fraction',
+          url: `${SITE_URL}/${lang}/guides/percentage-calculation-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 71,
+          name: lang === 'bn' ? 'BMR/TDEE — দিনে কত ক্যালরি দরকার' : 'BMR/TDEE — How Many Calories You Need in a Day',
+          url: `${SITE_URL}/${lang}/guides/bmr-tdee-calorie-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 72,
+          name: lang === 'bn' ? 'ডিজিটাল স্বাক্ষর বানানো ও ব্যবহারের নিয়ম' : 'How to Make & Use a Digital Signature',
+          url: `${SITE_URL}/${lang}/guides/digital-signature-maker-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 73,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 69,
+          position: 74,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 70,
+          position: 75,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/${lang}/jobs/bcs/practice/english`,
         },
@@ -3122,7 +3207,8 @@ export function resolveRouteSeo(pathname: string, lang: SupportedLang = 'bn'): S
   }
   if (path === '/guides') {
     // ItemList (Phase 2, 25 Nov 2026; trust/content batch, 28 Nov
-    // 2026; eleventh guide, 28 Nov 2026: 26 guides): the Study Guides hub lists the long-form
+    // 2026; eleventh guide, 28 Nov 2026: 26 guides; finish batch,
+    // 28 Nov 2026 (guides 6–10): 31 guides): the Study Guides hub lists the long-form
     // bilingual guides — built from the same data the page renders,
     // in the same order, so the JSON-LD can never drift from the page.
     jsonLd.push({

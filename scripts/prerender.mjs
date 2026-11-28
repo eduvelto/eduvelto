@@ -225,6 +225,13 @@ export const PRERENDER_STATIC_PATHS = [
   // Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
   // Sentences — Class 3, general version.
   '/guides/negative-sentences-class-3',
+  // Finish batch (28 Nov 2026): 5 more tool-tied Study Guides
+  // (guides 6–10) — same explicit-route pattern.
+  '/guides/discount-vat-profit-calculation-guide',
+  '/guides/image-compress-resize-guide',
+  '/guides/percentage-calculation-guide',
+  '/guides/bmr-tdee-calorie-guide',
+  '/guides/digital-signature-maker-guide',
   '/learn',
   '/admissions',
   '/admissions/national-university',
