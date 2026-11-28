@@ -34,7 +34,13 @@ import { setupPushNotifications } from './lib/pushNotifications';
 // included, for every visitor). Now the first load is only the shell +
 // Home; each route's chunk loads on demand. The header, auth and ad
 // shell stay static — they are small and needed on every page.
-const HomePage = lazy(() => import('./pages/HomePage'));
+// EXCEPTION (28 Nov 2026 AdSense-readiness): HomePage is a STATIC
+// import, not lazy — while it was lazy, renderToString could not
+// resolve it during prerender, so the prerendered homepage body was
+// the Suspense fallback ("লোড হচ্ছে…") instead of the real hero,
+// hubs and tools. Eager HomePage means the prerender carries the
+// real homepage content; every other route stays lazy.
+import HomePage from './pages/HomePage';
 const ClassIndexPage = lazy(() => import('./pages/ClassIndexPage'));
 const ClassDashboardPage = lazy(() => import('./pages/ClassDashboardPage'));
 const ClassSubjectPage = lazy(() => import('./pages/ClassSubjectPage'));
@@ -444,6 +450,11 @@ export default function App() {
   // banner's height (+ safe-area inset) as bottom padding, so the fixed
   // banner never covers content, buttons or essential controls. When
   // ads are not configured there is no reservation and no gap.
+  // 28 Nov 2026 (AdSense-readiness): the reservation applies ONLY
+  // once AdSense actually fills the banner (or on a preview host,
+  // where the placeholder always shows). An unfilled / not-yet-filled
+  // banner is a zero-footprint <ins> — reserving its height would
+  // leave a tall empty gap at the bottom of every page.
   const bannerPlacement = getBannerPlacementForPath(location.pathname);
   const bannerLive = bannerPlacement !== null && adsActive(bannerPlacement);
   const bannerReservePx =
@@ -460,14 +471,23 @@ export default function App() {
   // collapse via onUnfilled (below); a new banner placement remounts
   // the slot, so the flag resets with it.
   const [bottomBannerCollapsed, setBottomBannerCollapsed] = useState(false);
+  // True once AdSense reports the bottom banner FILLED (28 Nov 2026
+  // AdSense-readiness) — the page reserves the banner height only
+  // then; before the fill the slot is zero-footprint and no gap is
+  // reserved. Resets with the placement, like the collapsed flag.
+  const [bottomBannerFilled, setBottomBannerFilled] = useState(false);
   useEffect(() => {
     setBottomBannerCollapsed(false);
+    setBottomBannerFilled(false);
   }, [bannerPlacement]);
   const handleBottomBannerUnfilled = useCallback(() => {
     setBottomBannerCollapsed(true);
   }, []);
+  const handleBottomBannerFilled = useCallback(() => {
+    setBottomBannerFilled(true);
+  }, []);
   const effectiveBannerReservePx = getBottomNavOffsetPx({
-    bannerVisible,
+    bannerVisible: bannerVisible && (bottomBannerFilled || isPreviewHost()),
     bannerReservePx,
     bannerCollapsed: bottomBannerCollapsed,
   });
@@ -528,7 +548,13 @@ export default function App() {
         {appVersionStatus === 'update-available' ? (
           <AppVersionUpdateBar config={appVersionConfig} />
         ) : null}
-        <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>{t(strings.common.loading)}</p></main>}>
+        {/* 28 Nov 2026 (AdSense-readiness): the Suspense fallback is a
+            static brand block — NO "লোড হচ্ছে…" text. It is the
+            prerendered shell for every lazy route (the homepage
+            included, while its chunk loads), and a loading line there
+            reads as a stuck page. HomePage itself is now eager, so
+            the homepage prerender carries the real content. */}
+        <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '48px 16px', textAlign: 'center' }}><div style={{ fontSize: 24, fontWeight: 800 }}>Eduvelto</div><div style={{ marginTop: 8, fontSize: 14, color: 'var(--muted)' }}>শেখো, এগিয়ে যাও, স্বপ্ন গড়ো</div></main>}>
         <Routes>
         <Route path="/" element={<RootRedirect />} />
         <Route path=":lang" element={<LangLayout />}>
@@ -975,7 +1001,7 @@ export default function App() {
         {isAdminShell ? null : (
           <BottomNav bottomOffsetPx={effectiveBannerReservePx} />
         )}
-        {bannerPlacement ? <AdSlot placement={bannerPlacement} onUnfilled={handleBottomBannerUnfilled} /> : null}
+        {bannerPlacement ? <AdSlot placement={bannerPlacement} onUnfilled={handleBottomBannerUnfilled} onFilled={handleBottomBannerFilled} /> : null}
         </>
       )}
     </div>

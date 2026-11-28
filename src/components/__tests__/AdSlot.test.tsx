@@ -108,21 +108,31 @@ describe('AdSlot rendered HTML', () => {
     expect(html).not.toContain('বিজ্ঞাপনের স্থান');
   });
 
-  it('real ad label is the bilingual "বিজ্ঞাপন (Advertisement)" in both languages', async () => {
-    // Wave 9 (ChatGPT C2 fold-in): the label above a REAL ad unit is one
-    // bilingual string in both language contexts, so the ad is
-    // recognisable whatever language the page is in. State 'ad' needs
-    // real IDs — stub the build env, then reset modules so ads.ts reads
-    // them fresh (same pattern as renderSlot's dynamic import).
+  it('real ad renders the <ins> with NO label until AdSense fills it', async () => {
+    // 28 Nov 2026 (AdSense-readiness): the label above a REAL ad unit
+    // is the bilingual "বিজ্ঞাপন (Advertisement)" — but it appears ONLY
+    // once AdSense reports data-ad-status="filled". Effects never run
+    // under renderToString, so this SSR markup is the pre-fill state:
+    // the <ins> is present (so push() works) but there is no label, no
+    // box, no reserved space — the wrapper is zero-footprint
+    // (height:0 + overflow:hidden). An unapproved account therefore
+    // never shows an empty "বিজ্ঞাপন" box while the request is in
+    // flight. State 'ad' needs real IDs — stub the build env, then
+    // reset modules so ads.ts reads them fresh (same pattern as
+    // renderSlot's dynamic import).
     vi.stubEnv('VITE_ADSENSE_CLIENT_ID', 'ca-pub-6571267788512484');
     vi.stubEnv('VITE_ADSENSE_SLOT_BOTTOM_BANNER', '4705646629');
     try {
       const htmlBn = await renderSlot(PRODUCTION_HOST, 'bottom-banner');
-      expect(htmlBn).toContain('বিজ্ঞাপন (Advertisement)');
+      expect(htmlBn).toContain('data-ad-placement="bottom-banner"');
       expect(htmlBn).toContain('data-ad-slot="4705646629"');
       expect(htmlBn).toContain('adsbygoogle');
+      expect(htmlBn).not.toContain('বিজ্ঞাপন (Advertisement)');
+      expect(htmlBn).toContain('height:0');
+      expect(htmlBn).toContain('overflow:hidden');
       const htmlEn = await renderSlot(PRODUCTION_HOST, 'bottom-banner', { stored: 'en' });
-      expect(htmlEn).toContain('বিজ্ঞাপন (Advertisement)');
+      expect(htmlEn).not.toContain('বিজ্ঞাপন (Advertisement)');
+      expect(htmlEn).toContain('height:0');
     } finally {
       vi.unstubAllEnvs();
     }

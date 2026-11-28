@@ -2,7 +2,8 @@
 //
 // Owner-approved mockups (desktop + mobile, "same arokom hobe"):
 // a LIGHT header — white background, forest text — replacing the old
-// forest-navy header. Nav: Home (blue pill), Job Preparation,
+// forest-navy header. Nav: Home (blue pill), Tools — 265 free tools
+// (blue pill, 28 Nov 2026 AdSense-readiness), Job Preparation,
 // Admission Preparation, Academic Learning, Professional Skills
 // (dropdowns), search icon, dark-mode toggle, Login / Register
 // (signed out) or profile + Dashboard + Log out (signed in).
@@ -109,6 +110,13 @@ function HomeIcon() {
   return (
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5z" />
+    </svg>
+  );
+}
+function ToolsIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
     </svg>
   );
 }
@@ -417,6 +425,15 @@ export default function HeaderNav() {
       <nav aria-label={t({ bn: 'প্রধান মেনু', en: 'Main menu' })} id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
         <NavLink to={langUrl('/', tabLang)} end className={({ isActive }) => `ev-hnav-home${isActive ? ' ev-hnav-home-active' : ''}`}>
           <HomeIcon /> {tTab({ bn: 'হোম', en: 'Home' })}
+        </NavLink>
+        {/* Tools Hub (28 Nov 2026 AdSense-readiness): a prominent
+            direct link to /tools — the hub existed but had no link
+            anywhere in the header or on the homepage. 265 free tools
+            (28 Nov 2026 audit count; TOOLS_META.length). Same blue
+            pill as Home; the nav wraps, so a second row at narrow
+            widths is acceptable. */}
+        <NavLink to={langUrl('/tools', tabLang)} className={({ isActive }) => `ev-hnav-home${isActive ? ' ev-hnav-home-active' : ''}`}>
+          <ToolsIcon /> {tTab({ bn: '২৬৫টি ফ্রি টুল', en: '265 free tools' })}
         </NavLink>
         {MENUS.map((menu) => {
           const open = openMenu === menu.id;

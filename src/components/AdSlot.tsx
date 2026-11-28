@@ -15,18 +15,23 @@ import {
 
 // Eduvelto — one AdSense ad unit.
 //
-// Three render states (see lib/adsConfig.ts getAdRenderState):
+// Four render states (see lib/adsConfig.ts getAdRenderState):
 // - 'ad': master switch ON + real AdSense IDs → the real <ins> unit,
 //   non-personalised ads requested (child safety: PERSONALISED_ADS is
-//   always false). Every real ad carries a plain "বিজ্ঞাপন
-//   (Advertisement)" label above it (the same bilingual string in
-//   both languages, so the ad is recognisable whatever language the
-//   page is in). The label is deliberately unstyled — small muted
-//   text, no background, no border, no padding that could read as a
-//   button — clearly an ad, never styled like a Download / Next /
-//   Continue button. If AdSense reports the unit unfilled
-//   (data-ad-status), the whole slot collapses to nothing (no empty
-//   box, no blank strip).
+//   always false). Until AdSense actually fills the unit, the slot
+//   is COMPLETELY INVISIBLE — no label, no box, no border, no
+//   margin, no reserved space (28 Nov 2026 AdSense-readiness: an
+//   unapproved account shows an empty "বিজ্ঞাপন (Advertisement)"
+//   box ~300px tall for up to 5s, which reads as a broken page).
+//   The plain "বিজ্ঞাপন (Advertisement)" label appears ONLY once
+//   AdSense reports data-ad-status="filled", above the filled ad
+//   (the same bilingual string in both languages, so the ad is
+//   recognisable whatever language the page is in). The label is
+//   deliberately unstyled — small muted text, no background, no
+//   border, no padding that could read as a button — clearly an ad,
+//   never styled like a Download / Next / Continue button. If
+//   AdSense reports the unit unfilled (data-ad-status), the whole
+//   slot collapses to nothing (no empty box, no blank strip).
 // - 'placeholder': not live, but this is a preview host (Firebase
 //   preview channel / localhost) → a clearly labelled "বিজ্ঞাপনের স্থান
 //   · নমুনা" box, so placements can be verified without faking an ad.
@@ -180,6 +185,13 @@ export default function AdSlot(props: {
    * bottom instead of floating over the empty gap.
    */
   onUnfilled?: (unfilled: boolean) => void;
+  /**
+   * Called (once, with true) when AdSense reports this unit FILLED.
+   * App.tsx passes it for the bottom banner only, so the page reserves
+   * the banner's height only once a real ad is showing — never for an
+   * empty slot (28 Nov 2026 AdSense-readiness).
+   */
+  onFilled?: (filled: boolean) => void;
 }) {
   const { placement } = props;
   const { t, lang } = useLanguage();
@@ -188,6 +200,14 @@ export default function AdSlot(props: {
   // True once AdSense reports this unit unfilled — the whole slot
   // (label included) collapses to nothing.
   const [unfilled, setUnfilled] = useState(false);
+  // True once AdSense reports this unit FILLED (data-ad-status).
+  // The label + wrapper chrome render ONLY in this state — before
+  // the fill the slot is a zero-footprint bare <ins> (no label, no
+  // box, no border, no margin), so an unapproved account never shows
+  // an empty "বিজ্ঞাপন" box. The <ins> itself is never remounted:
+  // only the label sibling and the wrapper style change, so a fill
+  // that lands is never lost.
+  const [filled, setFilled] = useState(false);
 
   const state = getAdRenderState(placement);
 
@@ -245,8 +265,19 @@ export default function AdSlot(props: {
     // treat it as unfilled and collapse (label included). A slow
     // fill that answers within 5s is untouched; a fill that lands
     // after the collapse never re-opens the slot.
+    // 28 Nov 2026 (AdSense-readiness): the slot is ALSO the fill
+    // signal — data-ad-status="filled" turns the label + wrapper
+    // chrome on (see the render below). Before that moment the slot
+    // is a zero-footprint bare <ins>: the AdSense library sizes the
+    // <ins> to ~280px while the request is in flight, so showing
+    // the wrapper at all would reserve a tall empty box.
     const check = () => {
-      if (ins.getAttribute('data-ad-status') === 'unfilled') {
+      const status = ins.getAttribute('data-ad-status');
+      if (status === 'filled') {
+        setFilled(true);
+        props.onFilled?.(true);
+      }
+      if (status === 'unfilled') {
         setUnfilled(true);
         // Tell the layout (App.tsx) the banner is gone, so the mobile
         // bottom nav drops to the viewport bottom instead of floating
@@ -272,7 +303,7 @@ export default function AdSlot(props: {
       obs.disconnect();
       window.clearTimeout(timer);
     };
-  }, [state, props.onUnfilled]);
+  }, [state, props.onUnfilled, props.onFilled]);
 
   // Not live and not a preview host: render nothing at all.
   if (state === 'none') return null;
@@ -316,14 +347,38 @@ export default function AdSlot(props: {
   }
 
   // Real ad (master ON + configured). Unfilled units collapse to
-  // nothing — see the observer above.
+  // nothing — see the observer above. Before AdSense fills the unit,
+  // the slot is a zero-footprint bare <ins> (28 Nov 2026
+  // AdSense-readiness): no label, no box, no border, no margin, no
+  // reserved space. The label + wrapper chrome appear only once
+  // AdSense reports filled — the <ins> itself is never remounted,
+  // so a fill that lands is never lost.
   if (unfilled) return null;
   const isBanner = isBannerPlacement(placement);
   const isSmall = placement === 'bottom-banner-small';
 
+  // The responsive wrapper classes (sidebar desktop-only, mobile
+  // mobile-only) are applied in BOTH states: they are the breakpoint
+  // gate (display:none outside the breakpoint), and dropping them
+  // pre-fill would let a hidden slot gain width and push.
   let wrapperClass: string | undefined;
+  if (placement === 'sidebar') {
+    wrapperClass = 'ev-ad-slot-sidebar';
+  } else if (placement === 'mobile') {
+    wrapperClass = 'ev-ad-slot-mobile';
+  }
+
   let wrapperStyle: React.CSSProperties;
-  if (isBanner) {
+  if (!filled) {
+    // Zero-footprint pre-fill wrapper: the <ins> MUST stay in the
+    // document with width > 0 (the push gate) and must NOT be
+    // display:none (the library refuses to fill a hidden unit), so
+    // the wrapper collapses around it with height 0 + overflow
+    // hidden instead of hiding it. No margin/border/background/
+    // padding, and for the banner no fixed positioning either —
+    // nothing visible, nothing reserved.
+    wrapperStyle = { height: 0, overflow: 'hidden' };
+  } else if (isBanner) {
     // Persistent banner: fixed to the viewport bottom, outside the
     // router outlet (App.tsx). The small exam banner is capped at 50px
     // and uses the horizontal format — it must never grow taller.
@@ -346,10 +401,8 @@ export default function AdSlot(props: {
   } else if (placement === 'top-banner') {
     wrapperStyle = { margin: '12px auto', maxWidth: 728, width: '100%', textAlign: 'center' };
   } else if (placement === 'sidebar') {
-    wrapperClass = 'ev-ad-slot-sidebar';
     wrapperStyle = { textAlign: 'center' };
   } else if (placement === 'mobile') {
-    wrapperClass = 'ev-ad-slot-mobile';
     wrapperStyle = { margin: '12px 0', textAlign: 'center' };
   } else if (placement === 'in-content' || placement === 'in-content-2') {
     wrapperStyle = { margin: '12px auto', maxWidth: 300, width: '100%', textAlign: 'center' };
@@ -358,8 +411,10 @@ export default function AdSlot(props: {
   }
 
   return (
-    <div className={wrapperClass} style={wrapperStyle} data-ad-placement={placement} aria-label={t({ bn: 'বিজ্ঞাপন (Advertisement)', en: 'বিজ্ঞাপন (Advertisement)' })}>
-      <div style={AD_LABEL_STYLE}>{t({ bn: 'বিজ্ঞাপন (Advertisement)', en: 'বিজ্ঞাপন (Advertisement)' })}</div>
+    <div className={wrapperClass} style={wrapperStyle} data-ad-placement={placement} aria-label={filled ? t({ bn: 'বিজ্ঞাপন (Advertisement)', en: 'বিজ্ঞাপন (Advertisement)' }) : undefined}>
+      {filled ? (
+        <div style={AD_LABEL_STYLE}>{t({ bn: 'বিজ্ঞাপন (Advertisement)', en: 'বিজ্ঞাপন (Advertisement)' })}</div>
+      ) : null}
       <ins
         ref={(el) => {
           insRef.current = el;

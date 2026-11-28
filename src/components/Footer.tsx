@@ -167,7 +167,12 @@ export default function Footer() {
           <Link to="/install">{t({ bn: 'অ্যাপ ইনস্টল / আপডেট', en: 'Install / update app' })}</Link>
           <Link to="/health">{t({ bn: 'স্বাস্থ্য', en: 'Health' })}</Link>
           <Link to="/life">{t({ bn: 'জীবন সেবা', en: 'Life Services' })}</Link>
-          <Link to="/ai-teacher">{t({ bn: 'AI Teacher (পরিকল্পনায় আছে)', en: 'AI Teacher (planned)' })}</Link>
+          {/* 28 Nov 2026 (AdSense-readiness): the /ai-teacher footer link
+              ("AI Teacher (পরিকল্পনায় আছে)") is removed — the page is a
+              working scripted demo, not a planned feature, so the
+              "planned" label was wrong. The route stays live and is
+              still linked from the homepage services tab and the AI
+              Assistant page, both honestly labelled as a demo. */}
           <Link to="/ai-assistant">{t({ bn: 'AI সহায়ক', en: 'AI Assistant' })}</Link>
         </div>
         <div>

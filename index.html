@@ -92,11 +92,12 @@
            bundle loads, the page was blank white (notably on slow 3G).
            This static block paints immediately; React replaces it on
            boot. Pure HTML + inline style — no script, so the CSP hash in
-           firebase.json is unaffected. -->
+           firebase.json is unaffected. 28 Nov 2026 (AdSense-readiness):
+           brand only, NO "লোড হচ্ছে…" line — a loading line on the
+           very first paint reads as a stuck page on slow connections. -->
       <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0A1F44;color:#F4F1E9;font-family:system-ui,sans-serif;text-align:center;padding:24px">
         <div style="font-size:28px;font-weight:800;color:#fff">Eduvelto</div>
         <div style="color:#D9A441;font-size:13px;letter-spacing:2px;margin:6px 0 20px">শেখো, এগিয়ে যাও, স্বপ্ন গড়ো</div>
-        <div style="font-size:16px">লোড হচ্ছে…</div>
       </div>
     </div>
     <script>

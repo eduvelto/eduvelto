@@ -40,7 +40,8 @@
 //    Achieve". "One Platform. Endless Possibilities." is a proposal
 //    only and is NOT used as the tagline.
 //  - Progress ring: REAL signed-in user data only. Never a fake %.
-//  - /skills still lands on the shared Coming Soon page until built.
+//  - /skills redirects to /tools (28 Nov 2026 audit) — no Coming
+//    Soon page remains in the public site.
 //  - One top-banner ad slot below the hero (ads placement plan 22 Nov
 //    2026). It renders nothing until AdSense is configured; the global
 //    bottom banner in App.tsx still applies. No ads above the fold.
@@ -306,6 +307,22 @@ const HUBS = [
   },
 ];
 
+// Popular free tools (28 Nov 2026 AdSense-readiness): the homepage
+// had NO tools section and NO link to the Tools Hub at all — the
+// hub existed at /tools but was unreachable from the homepage.
+// These 6 are the most-used tools (titles + slugs verified against
+// src/lib/toolsMeta.ts); the hub count is 265 — the 28 Nov 2026
+// audit removed 2 duplicates (pdf-page-extractor, jpg-to-pdf), so
+// 265 is the real count (TOOLS_META.length), not 267.
+const POPULAR_TOOLS = [
+  { slug: 'pdf-merger', icon: '📄', bn: 'পিডিএফ মার্জার', en: 'PDF Merger' },
+  { slug: 'image-compressor', icon: '🖼️', bn: 'ছবি কম্প্রেসর', en: 'Image Compressor' },
+  { slug: 'bmi-calculator', icon: '⚖️', bn: 'বিএমআই ক্যালকুলেটর', en: 'BMI Calculator' },
+  { slug: 'qr-code-generator', icon: '🔳', bn: 'কিউআর কোড জেনারেটর', en: 'QR Code Generator' },
+  { slug: 'word-counter', icon: '🔤', bn: 'শব্দ গণনা', en: 'Word Counter' },
+  { slug: 'age-calculator', icon: '🎂', bn: 'বয়স ক্যালকুলেটর', en: 'Age Calculator' },
+];
+
 // Feature strip (desktop) / quick access (mobile). ONLY live features
 // appear here — not-yet-live features are removed from the homepage
 // face entirely (23 Nov 2026, AdSense cleanup), never shown as Coming
@@ -325,7 +342,7 @@ const QUICK = [
   { icon: <QuizIcon />, bn: 'পরীক্ষা', en: 'Exams', to: '/exam' },
   { icon: <BriefcaseIcon size={22} />, bn: 'ক্যারিয়ার', en: 'Career', to: '/opportunities/career-guidance' },
   { icon: <ChartIcon />, bn: 'ক্যালকুলেটর', en: 'Calculator', to: '/life/calculators' },
-  { icon: <GlobeIcon size={22} />, bn: 'টুলস', en: 'Tools', to: '/life' },
+  { icon: <GlobeIcon size={22} />, bn: 'টুলস', en: 'Tools', to: '/tools' },
   { icon: <BookIcon size={22} />, bn: 'প্রশ্নব্যাংক', en: 'Question Bank', to: '/library' },
   { icon: <ChartIcon />, bn: 'ফলাফল', en: 'Results', to: '/progress' },
 ];
@@ -672,8 +689,13 @@ export default function HomePage() {
               <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
             </p>
           ) : !booksLoaded ? (
+            // 28 Nov 2026 (AdSense-readiness): NO loading text — the
+            // prerendered homepage shows this branch (the book payload
+            // loads after SSR), so it must read as real content: a
+            // direct link to the library. On the client the books
+            // arrive in ~1s and replace it.
             <p className="ev-rd-sub">
-              {t({ bn: 'বইয়ের তালিকা লোড হচ্ছে…', en: 'Loading the book list…' })}
+              <Link to="/library">{t({ bn: 'লাইব্রেরি থেকে সব বই দেখুন →', en: 'See all books in the library →' })}</Link>
             </p>
           ) : totalBooks === 0 ? (
             <p className="ev-rd-sub">
@@ -923,6 +945,40 @@ export default function HomePage() {
             <Link to="/about" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
               {t({ bn: 'জানুন Eduvelto সম্পর্কে', en: 'About Eduvelto' })}
             </Link>
+            {/* 28 Nov 2026 (AdSense-readiness): direct Tools Hub link
+                in the hero — the hub had no link anywhere on the
+                homepage or in the header. 265 free tools (28 Nov 2026
+                audit count; TOOLS_META.length). */}
+            <Link to="/tools" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
+              {t({ bn: '🛠 ২৬৫টি ফ্রি টুল', en: '🛠 265 free tools' })}
+            </Link>
+          </div>
+        </section>
+
+        {/* Free Tools Hub (28 Nov 2026 AdSense-readiness): a prominent
+            tools section at the very top of the homepage — the hub
+            existed at /tools but had no link anywhere on the homepage
+            or in the header. 265 free tools (28 Nov 2026 audit count;
+            TOOLS_META.length). Popular-tool cards link straight to
+            their /tools/<slug> pages. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'ফ্রি টুলস', en: 'Free Tools' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '🛠 ২৬৫টি ফ্রি টুল', en: '🛠 265 free tools' })}</h2>
+            <Link to="/tools">{t({ bn: 'সব টুল দেখুন →', en: 'See all tools →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
+            {t({
+              bn: 'পিডিএফ, ছবি, ক্যালকুলেটর, কিউআর কোড — দৈনন্দিন কাজের সব টুল, সম্পূর্ণ ফ্রি, লগইন ছাড়াই।',
+              en: 'PDF, images, calculators, QR codes — every everyday tool, completely free, no login needed.',
+            })}
+          </p>
+          <div className="ev-rd-opp-tiles">
+            {POPULAR_TOOLS.map((tool) => (
+              <Link key={tool.slug} to={`/tools/${tool.slug}`} className="ev-rd-opp-tile">
+                <span aria-hidden="true">{tool.icon}</span>
+                {t({ bn: tool.bn, en: tool.en })}
+              </Link>
+            ))}
           </div>
         </section>
 
