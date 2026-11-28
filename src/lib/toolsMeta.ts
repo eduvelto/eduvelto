@@ -7,10 +7,12 @@
 // the guide bodies live in ./toolsGuides.ts and are pulled in
 // only by the lazy tool pages. Keep this file LIGHT.
 //
-// Source of truth for all 141 tools: 10 categories x 10 tools
-// + 5 video/music tools + 35 second-batch tools
+// Source of truth for all tools (live count: TOOLS_META.length —
+// 275 on 28 Nov 2026; never hardcode the count in copy, see
+// lib/seo.ts /tools entry): 10 categories x 10 tools
+// + 5 video/music tools + 35 second-batch tools + later batches
 // (see ~/workspace/eduorbit/final-100-tools.md).
-// Related slugs must always resolve to one of the 141 slugs below.
+// Related slugs must always resolve to one of the slugs below.
 
 export type ToolCategory =
   | 'pdf'

@@ -14,9 +14,16 @@
 // Static data ONLY — zero Firestore reads, no login. The prose is
 // ORIGINAL, written in the site's own words for these pages. It is
 // NOT copied from any textbook, guide or question bank, and it
-// contains no library book text. Each guide carries the visible
-// draft label "খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়": the advice
-// is NOT teacher-reviewed. It is never labelled verified/approved.
+// contains no library book text. Review state (28 Nov 2026):
+// the visible draft label was REMOVED by owner order (AdSense
+// cleanup 5277853) and every guide page now carries the
+// owner-ordered editorial badge "যাচাইকৃত: Eduvelto শিক্ষা ও
+// গবেষণা টিম"; the SEO meta matches the badge — except GST +
+// DU admission, whose needsReview passages are still recorded
+// in publicGuideMeta.ts and keep draft wording in meta. The
+// advice itself has NOT had individual teacher review; factual
+// claims are either verified or general advice (empty
+// needsReview), or explicitly recorded as review-needed.
 //
 // Word counts (publicGuideWordCount, all body + warning paragraphs):
 // BCS 441, bank 427, primary 409, NTRCA 451, NU 454, grammar 425,

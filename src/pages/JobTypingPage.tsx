@@ -5,6 +5,7 @@
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import EditorialBadge from '../components/EditorialBadge';
 import ShareButton from '../components/ShareButton';
 import JobTypingSimulator from '../components/JobTypingSimulator';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -22,6 +23,10 @@ export default function JobTypingPage() {
         <ShareButton />
       </div>
       <JobTypingSimulator />
+      {/* Editorial verification badge (owner order 28 Nov 2026):
+          this page is also the /tools/typing-speed-test hub — it
+          carries the badge like every other tool page. */}
+      <EditorialBadge />
     </PageShell>
   );
 }

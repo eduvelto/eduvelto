@@ -54,7 +54,7 @@ import {
   publicAcademicChaptersFor,
 } from './publicAcademic';
 import { QPG_GENERAL_CLASSES, qpgSubjectsFor } from './questionPaper';
-import { toolBySlug } from './toolsMeta';
+import { TOOLS_META, toolBySlug } from './toolsMeta';
 import { routeSeoForLang, toolMetaForLang, TOOL_DESC_SUFFIX, TOOLS_CRUMB } from './toolsMetaI18n';
 import { isPhasedLang } from '../i18n/phasedStrings';
 import { bnEn } from '../i18n/strings';
@@ -891,16 +891,19 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumbEn: 'Life Services',
   },
   // 100-tools project, Phase 1 (26 Nov 2026) + batch 2 (27 Nov 2026):
-  // the Tools hub. The 141 tool pages are dynamic (resolveRouteSeo
+  // the Tools hub. The tool pages are dynamic (resolveRouteSeo
   // /tools/:slug below) — only the hub gets a STATIC_ROUTES entry.
+  // The count is read from the tool registry (TOOLS_META.length) at
+  // module load, so the meta can never go stale again the way the
+  // hardcoded "১৪১টি" did (28 Nov 2026: registry at 275, meta at 141).
   '/tools': {
     title: 'ফ্রি টুলস — PDF, ছবি, হিসাব ও পড়াশোনা | Eduvelto',
     description:
-      '১৪১টি ফ্রি টুল — PDF, ছবি, হিসাব, স্বাস্থ্য, পড়াশোনা ও চাকরির প্রস্তুতি। সব কাজ আপনার ব্রাউজারেই হয়, ফাইল কোথাও আপলোড হয় না। Eduvelto।',
+      `${bnDigits(TOOLS_META.length)}টি ফ্রি টুল — PDF, ছবি, হিসাব, স্বাস্থ্য, পড়াশোনা ও চাকরির প্রস্তুতি। সব কাজ আপনার ব্রাউজারেই হয়, ফাইল কোথাও আপলোড হয় না। Eduvelto।`,
     crumb: 'টুলস',
     titleEn: 'Free Tools — PDF, Images, Calculators & Study | Eduvelto',
     descriptionEn:
-      '141 free tools — PDF, images, calculators, health, study and job preparation. Everything runs in your browser; files are never uploaded. Eduvelto.',
+      `${TOOLS_META.length} free tools — PDF, images, calculators, health, study and job preparation. Everything runs in your browser; files are never uploaded. Eduvelto.`,
     crumbEn: 'Tools',
   },
   '/free-quiz': {
@@ -1199,116 +1202,121 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn': {
     title: 'পাঠ ও গাইড — ফ্রি প্রস্তুতি | Eduvelto',
     description:
-      'ফ্রি পাঠ ও গাইড — চাকরি ও ভর্তি প্রস্তুতি, ইংরেজি, CV, পড়ার কৌশল ও জীবনদক্ষতা। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়; বিসিএস ইংরেজি — ৩৫টি যাচাইকৃত প্রশ্ন।',
+      'ফ্রি পাঠ ও গাইড — চাকরি ও ভর্তি প্রস্তুতি, ইংরেজি, CV, পড়ার কৌশল ও জীবনদক্ষতা। বিসিএস ইংরেজি — ৩৫টি যাচাইকৃত প্রশ্ন।',
     crumb: 'পাঠ',
     titleEn: 'Lessons & Guides — Free Preparation | Eduvelto',
     descriptionEn:
-      'Free lessons and guides — job preparation, English, CV and study techniques. Draft lessons awaiting teacher review; BCS English — 35 verified questions.',
+      'Free lessons and guides — job preparation, English, CV and study techniques. BCS English — 35 verified questions.',
     crumbEn: 'Lessons',
   },
   // Public guides (24 Nov 2026, brand-SEO wave 1; EXTENDED wave 2
   // and wave 3: 23 original static guides, no login, zero Firestore
-  // reads (see src/lib/publicGuides.ts). Every guide is a draft awaiting
-  // teacher review — the description says so plainly, like the two
-  // BCS English lessons above; never "যাচাইকৃত"/"অনুমোদিত".
+  // reads (see src/lib/publicGuides.ts). The guides are published
+  // articles carrying the owner-ordered editorial badge
+  // ("যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম", 28 Nov 2026), so
+  // the description matches the badge — except the two guides
+  // whose metadata records review-needed passages (GST + DU
+  // admission, needsReview), which keep the draft wording.
+  // The two BCS English lessons above are different: no badge,
+  // no teacher review — their draft wording stays.
   '/learn/bcs-preparation-guide': {
     title: 'বিসিএস প্রিলিমিনারি প্রস্তুতি গাইড | Eduvelto',
     description:
-      'বিসিএস প্রিলিমিনারি প্রস্তুতি কীভাবে শুরু করবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বিসিএস প্রিলিমিনারি প্রস্তুতি কীভাবে শুরু করবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল। Eduvelto-র ফ্রি গাইড — যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'বিসিএস প্রস্তুতি',
     titleEn: 'BCS Preliminary Preparation Guide | Eduvelto',
     descriptionEn:
-      'How to start preparing for the BCS Preliminary exam — the exam pattern and a study plan, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to start preparing for the BCS Preliminary exam — the exam pattern and a study plan, in Eduvelto’s free guide. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'BCS Preparation',
   },
   '/learn/bank-job-preparation': {
     title: 'ব্যাংক চাকরির প্রস্তুতি গাইড | Eduvelto',
     description:
-      'ব্যাংকে চাকরির পরীক্ষার প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ব্যাংকে চাকরির পরীক্ষার প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ব্যাংক চাকরি',
     titleEn: 'Bank Job Preparation Guide | Eduvelto',
     descriptionEn:
-      'How to prepare for bank job exams — the exam pattern, a study plan and common mistakes, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to prepare for bank job exams — the exam pattern, a study plan and common mistakes, in Eduvelto’s free guide. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Bank Jobs',
   },
   '/learn/primary-teacher-preparation': {
     title: 'প্রাথমিক সহকারী শিক্ষক নিয়োগ প্রস্তুতি গাইড | Eduvelto',
     description:
-      'প্রাথমিক সহকারী শিক্ষক নিয়োগ প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগ প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও ভুল। Eduvelto-র ফ্রি গাইড — যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'প্রাথমিক শিক্ষক',
     titleEn: 'Primary Teacher Preparation Guide | Eduvelto',
     descriptionEn:
-      'How to prepare for the primary assistant teacher exam — the exam pattern and a study plan, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to prepare for the primary assistant teacher exam — exam pattern and study plan, in Eduvelto’s free guide. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Primary Teacher',
   },
   '/learn/ntrca-preparation': {
     title: 'NTRCA শিক্ষক নিবন্ধন পরীক্ষার প্রস্তুতি গাইড | Eduvelto',
     description:
-      'NTRCA শিক্ষক নিবন্ধন পরীক্ষার প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'NTRCA শিক্ষক নিবন্ধন পরীক্ষার প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও ভুল। Eduvelto-র ফ্রি গাইড — যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'NTRCA প্রস্তুতি',
     titleEn: 'NTRCA Teacher Registration Exam Preparation Guide | Eduvelto',
     descriptionEn:
-      'How to prepare for the NTRCA teacher registration exam — the exam pattern and a study plan, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to prepare for the NTRCA teacher registration exam — exam pattern and study plan, in Eduvelto’s free guide. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'NTRCA Preparation',
   },
   '/learn/nu-admission-guide': {
     title: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি গাইড | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তি — ধরণ, মেধাতালিকা ও প্রস্তুতি। ২০২৬–২৭ শিক্ষাবর্ষের বিজ্ঞপ্তি এখনো প্রকাশিত হয়নি; খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তি — ধরণ, মেধাতালিকা ও প্রস্তুতি। ২০২৬–২৭ শিক্ষাবর্ষের বিজ্ঞপ্তি এখনো প্রকাশিত হয়নি; যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি',
     titleEn: 'National University Admission Guide | Eduvelto',
     descriptionEn:
-      'National University admission — pattern, merit list and preparation. The 2026–27 circular is not published yet. Draft lesson — awaiting teacher review.',
+      'National University admission — pattern, merit list and preparation. The 2026–27 circular is not published yet. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'National University Admission',
   },
   '/learn/english-grammar-basics': {
     title: 'ইংরেজি ব্যাকরণ — Parts of Speech ও Tense | Eduvelto',
     description:
-      'ইংরেজি ব্যাকরণের মৌলিক বিষয় সহজ বাংলায় — Parts of Speech, Tense ও বাক্য গঠন। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ইংরেজি ব্যাকরণের মৌলিক বিষয় সহজ বাংলায় — Parts of Speech, Tense ও বাক্য গঠন। Eduvelto-র ফ্রি গাইড — যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ইংরেজি ব্যাকরণ',
     titleEn: 'English Grammar Basics — Parts of Speech & Tense | Eduvelto',
     descriptionEn:
-      'English grammar basics in simple Bangla — Parts of Speech, Tense and sentence structure. Draft lesson — awaiting teacher review.',
+      'English grammar basics in simple Bangla — Parts of Speech, Tense and sentence structure. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'English Grammar',
   },
   '/learn/scholarship-guide': {
     title: 'বৃত্তি গাইড — আবেদন, কাগজপত্র ও সময়সীমা | Eduvelto',
     description:
-      'স্কলারশিপ কীভাবে কাজ করে, আবেদন ও কাগজপত্র — Commonwealth Shared Scholarships-এর উদাহরণসহ Eduvelto-র ফ্রি গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'স্কলারশিপ কীভাবে কাজ করে, আবেদন ও কাগজপত্র — Commonwealth Shared Scholarships-এর উদাহরণসহ Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'বৃত্তি গাইড',
     titleEn: 'Scholarship Guide — Applications & Documents | Eduvelto',
     descriptionEn:
-      'How scholarships work — applications and documents, with the Commonwealth Shared Scholarships as an example. Draft lesson — awaiting teacher review.',
+      'How scholarships work — applications and documents, with the Commonwealth Shared Scholarships as an example. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Scholarship Guide',
   },
   '/learn/what-is-ai': {
     title: 'AI কী? শিক্ষার্থীদের জন্য সহজ ব্যাখ্যা | Eduvelto',
     description:
-      'AI বা কৃত্রিম বুদ্ধিমত্তা কী, পড়াশোনায় AI কীভাবে ব্যবহার করবেন, আর এর সীমা ও সততার নিয়ম — Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'AI বা কৃত্রিম বুদ্ধিমত্তা কী, পড়াশোনায় AI কীভাবে ব্যবহার করবেন, আর এর সীমা ও সততার নিয়ম — Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'AI কী?',
     titleEn: 'What Is AI? A Simple Explanation for Students | Eduvelto',
     descriptionEn:
-      'What AI is, how to use it in your studies, and its limits and honesty rules. Draft lesson — awaiting teacher review.',
+      'What AI is, how to use it in your studies, and its limits and honesty rules. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'What Is AI?',
   },
   '/learn/cv-writing-guide': {
     title: 'CV লেখার গাইড — বাংলাদেশি চাকরির জন্য | Eduvelto',
     description:
-      'বাংলাদেশে চাকরির জন্য ভালো CV কীভাবে লিখবেন — গঠন, প্রয়োজনীয় তথ্য ও সাধারণ ভুল নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বাংলাদেশে চাকরির জন্য ভালো CV কীভাবে লিখবেন — গঠন, প্রয়োজনীয় তথ্য ও সাধারণ ভুল নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'CV লেখা',
     titleEn: 'CV Writing Guide — For Jobs in Bangladesh | Eduvelto',
     descriptionEn:
-      'How to write a good CV for jobs in Bangladesh — structure and essential information. Draft lesson — awaiting teacher review.',
+      'How to write a good CV for jobs in Bangladesh — structure and essential information. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'CV Writing',
   },
   '/learn/budget-planner-guide': {
     title: 'শিক্ষার্থীর মাসিক বাজেট পরিকল্পনা গাইড | Eduvelto',
     description:
-      'শিক্ষার্থী হিসেবে মাসের খরচ কীভাবে পরিকল্পনা করবেন — আয়, জরুরি খরচ ও সঞ্চয়ের সহজ নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'শিক্ষার্থী হিসেবে মাসের খরচ কীভাবে পরিকল্পনা করবেন — আয়, জরুরি খরচ ও সঞ্চয়ের সহজ নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'মাসিক বাজেট',
     titleEn: 'Student Monthly Budget Planning Guide | Eduvelto',
     descriptionEn:
-      'How to plan a month’s expenses as a student — income, essential spending and saving. Draft lesson — awaiting teacher review.',
+      'How to plan a month’s expenses as a student — income, essential spending and saving. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Monthly Budget',
   },
   // Public guides, wave 2 (24 Nov 2026, brand-SEO wave 2): 7 more
@@ -1318,71 +1326,71 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn/revision-strategy': {
     title: 'পরীক্ষার আগে পুনরালোচনার কৌশল | Eduvelto',
     description:
-      'পরীক্ষার আগে পুনরালোচনা কীভাবে করবেন — পরিকল্পনা, নিজের নোট ও নিজেকে যাচাই নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পরীক্ষার আগে পুনরালোচনা কীভাবে করবেন — পরিকল্পনা, নিজের নোট ও নিজেকে যাচাই নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'পুনরালোচনার কৌশল',
     titleEn: 'Revision Strategy Before Exams | Eduvelto',
     descriptionEn:
-      'How to revise before an exam — planning, your own notes and self-testing. Draft lesson — awaiting teacher review.',
+      'How to revise before an exam — planning, your own notes and self-testing. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Revision Strategy',
   },
   '/learn/note-taking-guide': {
     title: 'কার্যকর নোট নেওয়ার কৌশল | Eduvelto',
     description:
-      'কার্যকর নোট কীভাবে নেবেন — নিজের ভাষায় লেখা, মূল ধারণা, চিহ্ন ও নিয়মিত ঝালিয়ে নেওয়া নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'কার্যকর নোট কীভাবে নেবেন — নিজের ভাষায় লেখা, মূল ধারণা, চিহ্ন ও নিয়মিত ঝালিয়ে নেওয়া নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'নোট নেওয়ার কৌশল',
     titleEn: 'Effective Note-Taking Techniques | Eduvelto',
     descriptionEn:
-      'How to take effective notes — writing in your own words, main ideas, marks and regular review, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to take notes — writing in your own words, main ideas, marks and regular review, in Eduvelto’s free guide. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Note-Taking Techniques',
   },
   '/learn/time-management-students': {
     title: 'শিক্ষার্থীদের সময় ব্যবস্থাপনা | Eduvelto',
     description:
-      'শিক্ষার্থী হিসেবে সময় কীভাবে ব্যবস্থাপনা করবেন — রুটিন, ছোট ভাগে পড়া ও বিশ্রাম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'শিক্ষার্থী হিসেবে সময় কীভাবে ব্যবস্থাপনা করবেন — রুটিন, ছোট ভাগে পড়া ও বিশ্রাম নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'সময় ব্যবস্থাপনা',
     titleEn: 'Time Management for Students | Eduvelto',
     descriptionEn:
-      'How to manage time as a student — a routine, short study blocks and rest. Draft lesson — awaiting teacher review.',
+      'How to manage time as a student — a routine, short study blocks and rest. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Time Management',
   },
   '/learn/english-writing-basics': {
     title: 'ইংরেজি লেখার মৌলিক নিয়ম | Eduvelto',
     description:
-      'ইংরেজি লেখার মৌলিক নিয়ম — ছোট বাক্য, Subject-Verb মিল ও যতিচিহ্ন, নিজের লেখা উদাহরণসহ। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ইংরেজি লেখার মৌলিক নিয়ম — ছোট বাক্য, Subject-Verb মিল ও যতিচিহ্ন, নিজের লেখা উদাহরণসহ। Eduvelto-র ফ্রি গাইড — যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ইংরেজি লেখা',
     titleEn: 'English Writing Basics | Eduvelto',
     descriptionEn:
-      'English writing basics in simple Bangla — short sentences, subject-verb agreement and punctuation. Draft lesson — awaiting teacher review.',
+      'English writing basics in simple Bangla — short sentences, subject-verb agreement and punctuation. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'English Writing',
   },
   '/learn/online-safety-guide': {
     title: 'অনলাইনে নিরাপদ থাকার নিয়ম | Eduvelto',
     description:
-      'অনলাইনে নিরাপদ থাকার নিয়ম — শক্তিশালী পাসওয়ার্ড, OTP না দেওয়া ও অচেনা লিংক নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'অনলাইনে নিরাপদ থাকার নিয়ম — শক্তিশালী পাসওয়ার্ড, OTP না দেওয়া ও অচেনা লিংক নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'অনলাইন নিরাপত্তা',
     titleEn: 'Online Safety Guide for Students | Eduvelto',
     descriptionEn:
-      'How to stay safe online — strong passwords, never sharing OTP codes and unknown links. Draft lesson — awaiting teacher review.',
+      'How to stay safe online — strong passwords, never sharing OTP codes and unknown links. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Online Safety',
   },
   '/learn/bangla-spelling-common-mistakes': {
     title: 'বাংলা বানানের সাধারণ ভুল | Eduvelto',
     description:
-      'বাংলা বানানের সাধারণ ভুল — কি-কী, ণ-ন, ষ-স ও আধুনিক বানানের নিয়ম, নিজের লেখা উদাহরণসহ। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বাংলা বানানের সাধারণ ভুল — কি-কী, ণ-ন, ষ-স ও আধুনিক বানানের নিয়ম, নিজের লেখা উদাহরণসহ। Eduvelto-র ফ্রি গাইড — যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'বাংলা বানান',
     titleEn: 'Common Bangla Spelling Mistakes | Eduvelto',
     descriptionEn:
-      'Common Bangla spelling mistakes and the simple rules that prevent them. Draft lesson — awaiting teacher review.',
+      'Common Bangla spelling mistakes and the simple rules that prevent them. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Bangla Spelling',
   },
   '/learn/computer-basics-students': {
     title: 'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা | Eduvelto',
     description:
-      'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা — ফাইল ও ফোল্ডার, লেখালেখি, ব্রাউজার ও ইমেইল নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা — ফাইল ও ফোল্ডার, লেখালেখি, ব্রাউজার ও ইমেইল নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'কম্পিউটারের মৌলিক ধারণা',
     titleEn: 'Computer and Internet Basics for Students | Eduvelto',
     descriptionEn:
-      'Computer and internet basics for students — files and folders, word processing and browsers. Draft lesson — awaiting teacher review.',
+      'Computer and internet basics for students — files and folders, word processing and browsers. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Computer Basics',
   },
   // Public guides, wave 3 (24 Nov 2026, brand-SEO wave 3): 6 more
@@ -1394,248 +1402,250 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn/exam-day-strategy': {
     title: 'পরীক্ষার দিনের কৌশল | Eduvelto',
     description:
-      'পরীক্ষার দিন কী করবেন — আগের রাতের প্রস্তুতি, সকালের পরিকল্পনা ও উত্তর দেওয়ার নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পরীক্ষার দিন কী করবেন — আগের রাতের প্রস্তুতি, সকালের পরিকল্পনা ও উত্তর দেওয়ার নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'পরীক্ষার দিনের কৌশল',
     titleEn: 'Exam Day Strategy | Eduvelto',
     descriptionEn:
-      'What to do on exam day — the night-before preparation, the morning plan and answering rules. Draft lesson — awaiting teacher review.',
+      'What to do on exam day — the night-before preparation, the morning plan and answering rules. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Exam Day Strategy',
   },
   '/learn/mcq-answering-techniques': {
     title: 'MCQ উত্তর দেওয়ার কৌশল | Eduvelto',
     description:
-      'MCQ প্রশ্নের উত্তর দেওয়ার কৌশল — পুরো প্রশ্ন পড়া, ভুল অপশন বাদ দেওয়া ও সময়ের হিসাব নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'MCQ প্রশ্নের উত্তর দেওয়ার কৌশল — পুরো প্রশ্ন পড়া, ভুল অপশন বাদ দেওয়া ও সময়ের হিসাব নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'MCQ উত্তর দেওয়ার কৌশল',
     titleEn: 'MCQ Answering Techniques | Eduvelto',
     descriptionEn:
-      'Techniques for answering MCQ questions — reading the full question, eliminating wrong options and managing time. Draft lesson — awaiting teacher review.',
+      'Techniques for answering MCQ questions — reading the full question, eliminating wrong options and managing time. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'MCQ Answering Techniques',
   },
   '/learn/memory-techniques-students': {
     title: 'মনে রাখার কৌশল | Eduvelto',
     description:
-      'পড়া মনে রাখার কৌশল — বুঝে পড়া, সংযোগ তৈরি করা ও নিজেকে যাচাই করা নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পড়া মনে রাখার কৌশল — বুঝে পড়া, সংযোগ তৈরি করা ও নিজেকে যাচাই করা নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'মনে রাখার কৌশল',
     titleEn: 'Memory Techniques for Students | Eduvelto',
     descriptionEn:
-      'Techniques for remembering what you study — understanding first, making connections and self-testing. Draft lesson — awaiting teacher review.',
+      'Techniques for remembering what you study — understanding first, making connections and self-testing. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Memory Techniques',
   },
   '/learn/study-routine-job-seekers': {
     title: 'চাকরিপ্রার্থীদের পড়ার রুটিন | Eduvelto',
     description:
-      'চাকরিপ্রার্থীদের পড়ার রুটিন — কাজের পাশে পড়ার সময় বের করা ও সপ্তাহের পরিকল্পনা নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'চাকরিপ্রার্থীদের পড়ার রুটিন — কাজের পাশে পড়ার সময় বের করা ও সপ্তাহের পরিকল্পনা নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'চাকরিপ্রার্থীদের রুটিন',
     titleEn: 'Study Routine for Job Seekers | Eduvelto',
     descriptionEn:
-      'A study routine for job seekers — finding study time beside work and a weekly plan. Draft lesson — awaiting teacher review.',
+      'A study routine for job seekers — finding study time beside work and a weekly plan. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Job Seeker Routine',
   },
   '/learn/healthy-habits-students': {
     title: 'শিক্ষার্থীদের সুস্থ অভ্যাস | Eduvelto',
     description:
-      'শিক্ষার্থীদের সুস্থ অভ্যাস — নিয়মিত ঘুম, খাওয়া, নড়াচড়া ও মনের চাপ সামলানো নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'শিক্ষার্থীদের সুস্থ অভ্যাস — নিয়মিত ঘুম, খাওয়া, নড়াচড়া ও মনের চাপ সামলানো নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'সুস্থ অভ্যাস',
     titleEn: 'Healthy Habits for Students | Eduvelto',
     descriptionEn:
-      'Healthy habits for students — regular sleep, meals, movement and handling stress. Draft lesson — awaiting teacher review.',
+      'Healthy habits for students — regular sleep, meals, movement and handling stress. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Healthy Habits',
   },
   '/learn/digital-skills-basics': {
     title: 'ডিজিটাল দক্ষতার মৌলিক ধারণা | Eduvelto',
     description:
-      'ডিজিটাল দক্ষতার মৌলিক ধারণা — টাইপ করা, লেখালেখি, স্প্রেডশিটে হিসাব ও তথ্য খোঁজা নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ডিজিটাল দক্ষতার মৌলিক ধারণা — টাইপ করা, লেখালেখি, স্প্রেডশিটে হিসাব ও তথ্য খোঁজা নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ডিজিটাল দক্ষতা',
     titleEn: 'Digital Skills Basics for Students | Eduvelto',
     descriptionEn:
-      'Digital skills basics for students — typing, word processing, spreadsheets and searching for information. Draft lesson — awaiting teacher review.',
+      'Digital skills basics for students — typing, word processing, spreadsheets and searching for information. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Digital Skills',
   },
   '/learn/exam-anxiety-management': {
     title: 'পরীক্ষার উদ্বেগ সামলানো | Eduvelto',
     description:
-      'পরীক্ষার উদ্বেগ সামলানো — কারণ চেনা, প্রস্তুতি শক্ত করা ও হলে শান্ত থাকার নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পরীক্ষার উদ্বেগ সামলানো — কারণ চেনা, প্রস্তুতি শক্ত করা ও হলে শান্ত থাকার নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'পরীক্ষার উদ্বেগ',
     titleEn: 'Exam Anxiety Management | Eduvelto',
     descriptionEn:
-      'Exam anxiety management — causes of worry, stronger preparation, breathing habits and staying calm in the exam hall. Draft lesson — awaiting teacher review.',
+      'Exam anxiety management — causes of worry, stronger preparation, breathing and staying calm in the exam hall. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Exam Anxiety',
   },
   '/learn/presentation-skills': {
     title: 'উপস্থাপনা দক্ষতা | Eduvelto',
     description:
-      'উপস্থাপনা দক্ষতা — বিষয় জানা, গঠন সাজানো, অনুশীলন, শরীরের ভাষা ও প্রশ্নের উত্তর নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'উপস্থাপনা দক্ষতা — বিষয় জানা, গঠন সাজানো, অনুশীলন, শরীরের ভাষা ও প্রশ্নের উত্তর নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'উপস্থাপনা দক্ষতা',
     titleEn: 'Presentation Skills for Students | Eduvelto',
     descriptionEn:
-      'Presentation skills for students — topic, structure, practice, body language and answering questions. Draft lesson — awaiting teacher review.',
+      'Presentation skills for students — topic, structure, practice, body language and answering questions. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Presentation Skills',
   },
   '/learn/group-study-guide': {
     title: 'দলগত পড়াশোনা | Eduvelto',
     description:
-      'দলগত পড়াশোনা — দল গঠন, নিয়ম, একে অন্যকে শেখানো, প্রশ্নোত্তর ও মনোযোগ নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'দলগত পড়াশোনা — দল গঠন, নিয়ম, একে অন্যকে শেখানো, প্রশ্নোত্তর ও মনোযোগ নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'দলগত পড়াশোনা',
     titleEn: 'Group Study Guide | Eduvelto',
     descriptionEn:
-      'Group study guide — forming a group, setting rules, teaching each other and staying focused. Draft lesson — awaiting teacher review.',
+      'Group study guide — forming a group, setting rules, teaching each other and staying focused. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Group Study',
   },
   '/learn/english-vocabulary-building': {
     title: 'ইংরেজি শব্দভান্ডার গড়া | Eduvelto',
     description:
-      'ইংরেজি শব্দভান্ডার গড়া — প্রতিদিন নতুন শব্দ, বাক্যে ব্যবহার, শব্দের খাতা ও ঝালিয়ে নেওয়া নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ইংরেজি শব্দভান্ডার গড়া — প্রতিদিন নতুন শব্দ, বাক্যে ব্যবহার, শব্দের খাতা ও ঝালিয়ে নেওয়া নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ইংরেজি শব্দভান্ডার',
     titleEn: 'English Vocabulary Building | Eduvelto',
     descriptionEn:
-      'English vocabulary building — a few new words daily, using them in sentences, a word notebook and revision. Draft lesson — awaiting teacher review.',
+      'English vocabulary building — a few new words daily, using them in sentences, a word notebook and revision. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'English Vocabulary',
   },
   '/learn/effective-reading-habits': {
     title: 'কার্যকর পড়ার অভ্যাস | Eduvelto',
     description:
-      'কার্যকর পড়ার অভ্যাস — উদ্দেশ্য, শান্ত পরিবেশ, নোট নেওয়া, প্রশ্ন করা ও ভাগে ভাগে পড়া নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'কার্যকর পড়ার অভ্যাস — উদ্দেশ্য, শান্ত পরিবেশ, নোট নেওয়া, প্রশ্ন করা ও ভাগে ভাগে পড়া নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'পড়ার অভ্যাস',
     titleEn: 'Effective Reading Habits | Eduvelto',
     descriptionEn:
-      'Effective reading habits — purpose, quiet place, notes, quizzing yourself and reading in parts. Draft lesson — awaiting teacher review.',
+      'Effective reading habits — purpose, quiet place, notes, quizzing yourself and reading in parts. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Reading Habits',
   },
   '/learn/self-motivation-students': {
     title: 'নিজেকে অনুপ্রাণিত রাখা | Eduvelto',
     description:
-      'নিজেকে অনুপ্রাণিত রাখা — লক্ষ্য মনে রাখা, ছোট ধাপে ভাগ করা, রুটিন ও অগ্রগতি নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'নিজেকে অনুপ্রাণিত রাখা — লক্ষ্য মনে রাখা, ছোট ধাপে ভাগ করা, রুটিন ও অগ্রগতি নিয়ে Eduvelto-র ফ্রি গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'নিজেকে অনুপ্রাণিত রাখা',
     titleEn: 'Self-Motivation for Students | Eduvelto',
     descriptionEn:
-      'Self-motivation for students — your goal, small steps, a routine and tracking progress. Draft lesson — awaiting teacher review.',
+      'Self-motivation for students — your goal, small steps, a routine and tracking progress. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Self-Motivation',
   },
   '/learn/how-to-use-free-library': {
     title: 'ফ্রি লাইব্রেরি ব্যবহার করা | Eduvelto',
     description:
-      'Eduvelto-র ফ্রি লাইব্রেরি কীভাবে ব্যবহার করবেন — বই খোঁজা, অধ্যায় পড়া, বুকমার্ক ও অগ্রগতি। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'Eduvelto-র ফ্রি লাইব্রেরি কীভাবে ব্যবহার করবেন — বই খোঁজা, অধ্যায় পড়া, বুকমার্ক ও অগ্রগতি। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ফ্রি লাইব্রেরি',
     titleEn: 'How to Use the Free Library | Eduvelto',
     descriptionEn:
-      'How to use Eduvelto’s free library — finding books, reading chapters, bookmarks and progress. Draft lesson — awaiting teacher review.',
+      'How to use Eduvelto’s free library — finding books, reading chapters, bookmarks and progress. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Free Library',
   },
   '/learn/how-to-use-job-practice': {
     title: 'চাকরির অনুশীলন ব্যবহার করা | Eduvelto',
     description:
-      'Eduvelto-তে চাকরির অনুশীলন কীভাবে করবেন — বিষয়ভিত্তিক অনুশীলন, ভুল উত্তর দেখা ও পরিকল্পনা। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'Eduvelto-তে চাকরির অনুশীলন কীভাবে করবেন — বিষয়ভিত্তিক অনুশীলন, ভুল উত্তর দেখা ও পরিকল্পনা। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'চাকরির অনুশীলন',
     titleEn: 'How to Use Job Practice | Eduvelto',
     descriptionEn:
-      'How to practise for job exams on Eduvelto — subject-wise practice, reviewing wrong answers and planning. Draft lesson — awaiting teacher review.',
+      'How to practise for job exams on Eduvelto — subject-wise practice, reviewing wrong answers and planning. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Job Practice',
   },
   '/learn/how-to-use-ai-assistant': {
     title: 'AI লাইফ অ্যাসিস্ট্যান্ট ব্যবহার করা | Eduvelto',
     description:
-      'Eduvelto-র AI লাইফ অ্যাসিস্ট্যান্ট কীভাবে ব্যবহার করবেন — হিসাব, রূপান্তর, পরিকল্পনা ও চিঠি লেখার সরঞ্জাম। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'Eduvelto-র AI লাইফ অ্যাসিস্ট্যান্ট কীভাবে ব্যবহার করবেন — হিসাব, রূপান্তর, পরিকল্পনা ও চিঠি লেখার সরঞ্জাম। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'AI অ্যাসিস্ট্যান্ট',
     titleEn: 'How to Use the AI Life Assistant | Eduvelto',
     descriptionEn:
-      'How to use Eduvelto’s AI Life Assistant — calculators, converters, planners and letter-writing tools. Draft lesson — awaiting teacher review.',
+      'How to use Eduvelto’s AI Life Assistant — calculators, converters, planners and letter-writing tools. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'AI Assistant',
   },
   '/learn/how-to-use-opportunity-hub': {
     title: 'অপরচুনিটি হাব ব্যবহার করা | Eduvelto',
     description:
-      'Eduvelto-র অপরচুনিটি হাব কীভাবে ব্যবহার করবেন — সুযোগ খোঁজা, CV তৈরি ও সাক্ষাৎকারের প্রস্তুতি। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'Eduvelto-র অপরচুনিটি হাব কীভাবে ব্যবহার করবেন — সুযোগ খোঁজা, CV তৈরি ও সাক্ষাৎকারের প্রস্তুতি। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'অপরচুনিটি হাব',
     titleEn: 'How to Use the Opportunity Hub | Eduvelto',
     descriptionEn:
-      'How to use Eduvelto’s Opportunity Hub — finding opportunities, building a CV and preparing for interviews. Draft lesson — awaiting teacher review.',
+      'How to use Eduvelto’s Opportunity Hub — finding opportunities, building a CV and preparing for interviews. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Opportunity Hub',
   },
   '/learn/how-to-use-life-services': {
     title: 'লাইফ সার্ভিস ব্যবহার করা | Eduvelto',
     description:
-      'Eduvelto-র লাইফ সার্ভিস কীভাবে ব্যবহার করবেন — বাজেট, হিসাব, রূপান্তর, পরিকল্পনা ও দরকারি তথ্য। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'Eduvelto-র লাইফ সার্ভিস কীভাবে ব্যবহার করবেন — বাজেট, হিসাব, রূপান্তর, পরিকল্পনা ও দরকারি তথ্য। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'লাইফ সার্ভিস',
     titleEn: 'How to Use Everyday Life Services | Eduvelto',
     descriptionEn:
-      'How to use Eduvelto’s Everyday Life Services — budget, calculators, converters, planning and useful information. Draft lesson — awaiting teacher review.',
+      'How to use Eduvelto’s Everyday Life Services — budget, calculators, converters, planning and useful information. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Life Services',
   },
   '/learn/spoken-english-practice': {
     title: 'ইংরেজিতে কথা বলার অনুশীলন | Eduvelto',
     description:
-      'ইংরেজিতে কথা বলার অনুশীলন কীভাবে করবেন — প্রতিদিন বলা, আয়নার সামনে অনুশীলন ও ভুলকে ভয় না পাওয়া। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ইংরেজিতে কথা বলার অনুশীলন কীভাবে করবেন — প্রতিদিন বলা, আয়নার সামনে অনুশীলন ও ভুলকে ভয় না পাওয়া। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ইংরেজিতে কথা বলা',
     titleEn: 'Spoken English Practice | Eduvelto',
     descriptionEn:
-      'How to practise speaking English — speaking every day, mirror practice and not fearing mistakes. Draft lesson — awaiting teacher review.',
+      'How to practise speaking English — speaking every day, mirror practice and not fearing mistakes. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Spoken English',
   },
   '/learn/goal-setting-students': {
     title: 'শিক্ষার্থীদের লক্ষ্য নির্ধারণ | Eduvelto',
     description:
-      'শিক্ষার্থীদের লক্ষ্য নির্ধারণ কীভাবে করবেন — ছোট লক্ষ্য, পরিকল্পনা ও অগ্রগতি দেখা। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'শিক্ষার্থীদের লক্ষ্য নির্ধারণ কীভাবে করবেন — ছোট লক্ষ্য, পরিকল্পনা ও অগ্রগতি দেখা। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'লক্ষ্য নির্ধারণ',
     titleEn: 'Goal Setting for Students | Eduvelto',
     descriptionEn:
-      'How students can set goals — small goals, planning and tracking progress. Draft lesson — awaiting teacher review.',
+      'How students can set goals — small goals, planning and tracking progress. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Goal Setting',
   },
   '/learn/staying-focused-studying': {
     title: 'পড়ায় মনোযোগ ধরে রাখা | Eduvelto',
     description:
-      'পড়ায় মনোযোগ ধরে রাখার উপায় — মনোযোগ নষ্ট হয় যেসব কারণে, সেগুলো সামলানো ও বিরতি নেওয়া। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পড়ায় মনোযোগ ধরে রাখার উপায় — মনোযোগ নষ্ট হয় যেসব কারণে, সেগুলো সামলানো ও বিরতি নেওয়া। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'মনোযোগ ধরে রাখা',
     titleEn: 'Staying Focused While Studying | Eduvelto',
     descriptionEn:
-      'How to stay focused while studying — handling distractions and taking breaks. Draft lesson — awaiting teacher review.',
+      'How to stay focused while studying — handling distractions and taking breaks. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Staying Focused',
   },
   '/learn/sleep-and-study': {
     title: 'ঘুম ও পড়াশোনা | Eduvelto',
     description:
-      'ঘুম ও পড়াশোনার সম্পর্ক — নিয়মিত ঘুমের অভ্যাস, পরীক্ষার আগের রাত ও বিশ্রাম। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ঘুম ও পড়াশোনার সম্পর্ক — নিয়মিত ঘুমের অভ্যাস, পরীক্ষার আগের রাত ও বিশ্রাম। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ঘুম ও পড়াশোনা',
     titleEn: 'Sleep and Study | Eduvelto',
     descriptionEn:
-      'Sleep and study — regular sleep habits, the night before an exam and rest. Draft lesson — awaiting teacher review.',
+      'Sleep and study — regular sleep habits, the night before an exam and rest. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Sleep and Study',
   },
   '/learn/reading-comprehension-strategies': {
     title: 'পড়া বুঝে পড়ার কৌশল | Eduvelto',
     description:
-      'পড়া বুঝে পড়ার কৌশল — প্রশ্ন করা, সারাংশ লেখা ও নিজের ভাষায় বোঝানো। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পড়া বুঝে পড়ার কৌশল — প্রশ্ন করা, সারাংশ লেখা ও নিজের ভাষায় বোঝানো। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'পড়া বুঝে পড়া',
     titleEn: 'Reading Comprehension Strategies | Eduvelto',
     descriptionEn:
-      'Reading comprehension strategies — asking questions, summarising and explaining in your own words. Draft lesson — awaiting teacher review.',
+      'Reading comprehension strategies — asking questions, summarising and explaining in your own words. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Reading Comprehension',
   },
   '/learn/learning-with-phone': {
     title: 'ফোন দিয়ে পড়াশোনা | Eduvelto',
     description:
-      'ফোন দিয়ে পড়াশোনা — নোট, সময় ধরে পড়া, ভিডিও দেখা ও মনোযোগ নষ্ট না করা। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ফোন দিয়ে পড়াশোনা — নোট, সময় ধরে পড়া, ভিডিও দেখা ও মনোযোগ নষ্ট না করা। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ফোন দিয়ে পড়া',
     titleEn: 'Learning with Your Phone | Eduvelto',
     descriptionEn:
-      'Learning with your phone — notes, timed study, watching lessons and avoiding distractions. Draft lesson — awaiting teacher review.',
+      'Learning with your phone — notes, timed study, watching lessons and avoiding distractions. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Learning with Phone',
   },
   '/learn/asking-questions-class': {
     title: 'ক্লাসে প্রশ্ন করা | Eduvelto',
     description:
-      'ক্লাসে প্রশ্ন করার উপায় — কখন প্রশ্ন করবেন, কীভাবে গুছিয়ে বলবেন ও ভয় কাটাবেন। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ক্লাসে প্রশ্ন করার উপায় — কখন প্রশ্ন করবেন, কীভাবে গুছিয়ে বলবেন ও ভয় কাটাবেন। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ক্লাসে প্রশ্ন করা',
     titleEn: 'Asking Questions in Class | Eduvelto',
     descriptionEn:
-      'How to ask questions in class — when to ask, how to phrase it and how to lose the fear. Draft lesson — awaiting teacher review.',
+      'How to ask questions in class — when to ask, how to phrase it and how to lose the fear. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Asking Questions',
   },  // Study Guides blog (Phase 2, 25 Nov 2026): the 15 long-form
   // bilingual guides in src/lib/publicGuides.ts (path /guides/<slug>).
   // Same data file, same detail page, same Article JSON-LD as the
-  // /learn guides — NOT a parallel system. Every guide is a draft
-  // awaiting teacher review — the description says so plainly,
-  // never "যাচাইকৃত"/"অনুমোদিত".
+  // /learn guides — NOT a parallel system. Same review state as
+  // the /learn guides: published articles carrying the
+  // owner-ordered editorial badge, so the description matches the
+  // badge — except GST + DU admission, whose metadata records
+  // review-needed passages (needsReview) and keep draft wording.
   '/guides': {
     title: 'স্টাডি গাইড | Eduvelto',
     description:
@@ -1649,111 +1659,111 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/guides/bcs-bangla-preparation': {
     title: 'বিসিএস বাংলা প্রস্তুতি — সাহিত্য ও ব্যাকরণ | Eduvelto',
     description:
-      'বিসিএস প্রিলিমিনারিতে বাংলা ৩০ নম্বর — সাহিত্য ও ব্যাকরণের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বিসিএস প্রিলিমিনারিতে বাংলা ৩০ নম্বর — সাহিত্য ও ব্যাকরণের প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'বিসিএস বাংলা',
     titleEn: 'BCS Bangla Preparation — Literature & Grammar | Eduvelto',
     descriptionEn:
-      'Bangla carries 30 marks in the BCS Preliminary — a guide to preparing literature and grammar. Draft lesson — awaiting teacher review.',
+      'Bangla carries 30 marks in the BCS Preliminary — a guide to preparing literature and grammar. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'BCS Bangla',
   },
   '/guides/bcs-english-preparation': {
     title: 'বিসিএস ইংরেজি প্রস্তুতি — ব্যাকরণ ও শব্দভান্ডার | Eduvelto',
     description:
-      'বিসিএস প্রিলিমিনারিতে ইংরেজি ৩০ নম্বর — ব্যাকরণ, শব্দভান্ডার ও পড়ে বোঝার প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বিসিএস প্রিলিমিনারিতে ইংরেজি ৩০ নম্বর — ব্যাকরণ, শব্দভান্ডার ও পড়ে বোঝার প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'বিসিএস ইংরেজি',
     titleEn: 'BCS English Preparation — Grammar & Vocabulary | Eduvelto',
     descriptionEn:
-      'English carries 30 marks in the BCS Preliminary — a guide to grammar, vocabulary and reading. Draft lesson — awaiting teacher review.',
+      'English carries 30 marks in the BCS Preliminary — a guide to grammar, vocabulary and reading. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'BCS English',
   },
   '/guides/bcs-math-mental-ability': {
     title: 'বিসিএস গণিত ও মানসিক দক্ষতা প্রস্তুতি | Eduvelto',
     description:
-      'বিসিএস প্রিলিমিনারিতে গাণিতিক যুক্তি ২০ ও মানসিক দক্ষতা ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বিসিএস প্রিলিমিনারিতে গাণিতিক যুক্তি ২০ ও মানসিক দক্ষতা ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'বিসিএস গণিত',
     titleEn: 'BCS Maths & Mental Ability Preparation | Eduvelto',
     descriptionEn:
-      'Mathematical Reasoning 20 and Mental Ability 15 in the BCS Preliminary — a guide to both. Draft lesson — awaiting teacher review.',
+      'Mathematical Reasoning 20 and Mental Ability 15 in the BCS Preliminary — a guide to both. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'BCS Math & Mental Ability',
   },
   '/guides/bcs-science-ict-preparation': {
     title: 'বিসিএস বিজ্ঞান ও আইসিটি প্রস্তুতি | Eduvelto',
     description:
-      'বিসিএস প্রিলিমিনারিতে সাধারণ বিজ্ঞান ১৫ ও কম্পিউটার ও আইসিটি ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বিসিএস প্রিলিমিনারিতে সাধারণ বিজ্ঞান ১৫ ও কম্পিউটার ও আইসিটি ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'বিসিএস বিজ্ঞান',
     titleEn: 'BCS Science & ICT Preparation | Eduvelto',
     descriptionEn:
-      'General Science 15 and Computer & ICT 15 in the BCS Preliminary — a guide to both. Draft lesson — awaiting teacher review.',
+      'General Science 15 and Computer & ICT 15 in the BCS Preliminary — a guide to both. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'BCS Science & ICT',
   },
   '/guides/primary-bangla-english-preparation': {
     title: 'প্রাথমিক শিক্ষক বাংলা ও ইংরেজি প্রস্তুতি | Eduvelto',
     description:
-      'প্রাথমিক সহকারী শিক্ষক নিয়োগে বাংলা ২৫ ও ইংরেজি ২৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগে বাংলা ২৫ ও ইংরেজি ২৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'প্রাথমিক বাংলা-ইংরেজি',
     titleEn: 'Primary Teacher Bangla & English Preparation | Eduvelto',
     descriptionEn:
-      'Bangla 25 and English 25 in the Primary Assistant Teacher exam — a guide to both. Draft lesson — awaiting teacher review.',
+      'Bangla 25 and English 25 in the Primary Assistant Teacher exam — a guide to both. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Primary Bangla & English',
   },
   '/guides/primary-math-gk-preparation': {
     title: 'প্রাথমিক শিক্ষক গণিত ও সাধারণ জ্ঞান প্রস্তুতি | Eduvelto',
     description:
-      'প্রাথমিক সহকারী শিক্ষক নিয়োগে গণিত ২০ ও সাধারণ জ্ঞান ২০ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগে গণিত ২০ ও সাধারণ জ্ঞান ২০ নম্বর — দুই অংশের প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'প্রাথমিক গণিত-জিকে',
     titleEn: 'Primary Teacher Maths & GK Preparation | Eduvelto',
     descriptionEn:
-      'Mathematics 20 and General Knowledge 20 in the Primary Assistant Teacher exam — a guide to both. Draft lesson — awaiting teacher review.',
+      'Mathematics 20 and General Knowledge 20 in the Primary Assistant Teacher exam — a guide to both. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Primary Math & GK',
   },
   '/guides/primary-viva-preparation': {
     title: 'প্রাথমিক শিক্ষক ভাইভা প্রস্তুতি | Eduvelto',
     description:
-      'প্রাথমিক সহকারী শিক্ষক নিয়োগের মৌখিক পরীক্ষা ১০ নম্বরের — ভাইভার প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগের মৌখিক পরীক্ষা ১০ নম্বরের — ভাইভার প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'প্রাথমিক ভাইভা',
     titleEn: 'Primary Teacher Viva Preparation | Eduvelto',
     descriptionEn:
-      'The Primary Assistant Teacher viva is 10 marks — a guide to preparing for it. Draft lesson — awaiting teacher review.',
+      'The Primary Assistant Teacher viva is 10 marks — a guide to preparing for it. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Primary Viva',
   },
   '/guides/bank-math-preparation': {
     title: 'ব্যাংক চাকরির গণিত প্রস্তুতি | Eduvelto',
     description:
-      'ব্যাংক নিয়োগ পরীক্ষায় গণিত ২০ নম্বর — ৬০ মিনিটের পরীক্ষায় গণিতে ভালো করার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ব্যাংক নিয়োগ পরীক্ষায় গণিত ২০ নম্বর — ৬০ মিনিটের পরীক্ষায় গণিতে ভালো করার গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ব্যাংক গণিত',
     titleEn: 'Bank Job Maths Preparation | Eduvelto',
     descriptionEn:
-      'Mathematics carries 20 marks in bank recruitment exams — a guide to doing well in 60 minutes. Draft lesson — awaiting teacher review.',
+      'Mathematics carries 20 marks in bank recruitment exams — a guide to doing well in 60 minutes. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Bank Math',
   },
   '/guides/bank-english-gk-preparation': {
     title: 'ব্যাংক ইংরেজি ও সাধারণ জ্ঞান প্রস্তুতি | Eduvelto',
     description:
-      'ব্যাংক নিয়োগ পরীক্ষায় ইংরেজি ২৫, সাধারণ জ্ঞান ২০ ও কম্পিউটার ১০ নম্বর — তিন অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ব্যাংক নিয়োগ পরীক্ষায় ইংরেজি ২৫, সাধারণ জ্ঞান ২০ ও কম্পিউটার ১০ নম্বর — তিন অংশের প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'ব্যাংক ইংরেজি-জিকে',
     titleEn: 'Bank English & GK Preparation | Eduvelto',
     descriptionEn:
-      'English 25, General Knowledge 20 and Computer 10 in bank recruitment exams — a guide to all three. Draft lesson — awaiting teacher review.',
+      'English 25, General Knowledge 20 and Computer 10 in bank recruitment exams — a guide to all three. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Bank English & GK',
   },
   '/guides/ntrca-written-exam-preparation': {
     title: 'NTRCA লিখিত পরীক্ষার প্রস্তুতি | Eduvelto',
     description:
-      'NTRCA শিক্ষক নিবন্ধনের লিখিত পরীক্ষা ১০০ নম্বর, ৩ ঘণ্টা — নিজের বিষয়ে লিখিত প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'NTRCA শিক্ষক নিবন্ধনের লিখিত পরীক্ষা ১০০ নম্বর, ৩ ঘণ্টা — নিজের বিষয়ে লিখিত প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'NTRCA লিখিত',
     titleEn: 'NTRCA Written Exam Preparation | Eduvelto',
     descriptionEn:
-      'The NTRCA written exam is 100 marks in 3 hours — a guide to preparing it in your own subject. Draft lesson — awaiting teacher review.',
+      'The NTRCA written exam is 100 marks in 3 hours — a guide to preparing it in your own subject. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'NTRCA Written',
   },
   '/guides/ntrca-viva-subject-preparation': {
     title: 'NTRCA ভাইভা ও বিষয়ভিত্তিক প্রস্তুতি | Eduvelto',
     description:
-      'NTRCA-র মৌখিক পরীক্ষা ২০ নম্বরের — ভাইভা ও নিজের বিষয়ের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'NTRCA-র মৌখিক পরীক্ষা ২০ নম্বরের — ভাইভা ও নিজের বিষয়ের প্রস্তুতির গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'NTRCA ভাইভা',
     titleEn: 'NTRCA Viva & Subject Preparation | Eduvelto',
     descriptionEn:
-      'The NTRCA viva is 20 marks — a guide to the viva and your own subject. Draft lesson — awaiting teacher review.',
+      'The NTRCA viva is 20 marks — a guide to the viva and your own subject. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'NTRCA Viva',
   },
   '/guides/gst-admission-preparation': {
@@ -1779,21 +1789,21 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/guides/nctb-books-study-method': {
     title: 'NCTB বই দিয়ে পড়ার পদ্ধতি | Eduvelto',
     description:
-      'NCTB-র পাঠ্যবই দিয়ে কীভাবে পড়বেন — অধ্যায় পড়া, নোট বানানো ও পুনরালোচনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'NCTB-র পাঠ্যবই দিয়ে কীভাবে পড়বেন — অধ্যায় পড়া, নোট বানানো ও পুনরালোচনার গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'NCTB বই',
     titleEn: 'How to Study with NCTB Books | Eduvelto',
     descriptionEn:
-      'How to study with NCTB textbooks — a guide to reading chapters, making notes and revising. Draft lesson — awaiting teacher review.',
+      'How to study with NCTB textbooks — a guide to reading chapters, making notes and revising. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'NCTB Study Method',
   },
   '/guides/nctb-revision-before-exams': {
     title: 'NCTB বই দিয়ে পরীক্ষার আগে পুনরালোচনা | Eduvelto',
     description:
-      'পরীক্ষার আগে NCTB-র বই দিয়ে পুনরালোচনা — নোট, প্রশ্ন সমাধান ও সময়-পরিকল্পনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পরীক্ষার আগে NCTB-র বই দিয়ে পুনরালোচনা — নোট, প্রশ্ন সমাধান ও সময়-পরিকল্পনার গাইড। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'NCTB পুনরালোচনা',
     titleEn: 'NCTB Revision Before Exams | Eduvelto',
     descriptionEn:
-      'Revising with NCTB books before an exam — a guide to notes, question practice and time planning. Draft lesson — awaiting teacher review.',
+      'Revising with NCTB books before an exam — a guide to notes, question practice and time planning. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'NCTB Revision',
   },
   // Trust/content batch (owner order 28 Nov 2026): 10 new tool-tied
@@ -1803,101 +1813,101 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/guides/ssc-hsc-gpa-calculation-guide': {
     title: 'SSC/HSC GPA হিসাবের নিয়ম — গ্রেড পয়েন্ট ও চতুর্থ বিষয় | Eduvelto',
     description:
-      'SSC ও HSC-তে GPA কীভাবে হিসাব হয় — গ্রেড পয়েন্ট তালিকা, ৬টি মূল বিষয় ও চতুর্থ বিষয়ের অতিরিক্ত নম্বরের নিয়ম। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'SSC ও HSC-তে GPA কীভাবে হিসাব হয় — গ্রেড পয়েন্ট তালিকা, ৬টি মূল বিষয় ও চতুর্থ বিষয়ের অতিরিক্ত নম্বরের নিয়ম। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'GPA হিসাব',
     titleEn: 'SSC/HSC GPA Calculation Rules — Grade Points & the 4th Subject | Eduvelto',
     descriptionEn:
-      'How GPA is calculated in SSC and HSC — the grade-point table, the 6 main subjects and the 4th-subject extra-points rule. Draft lesson — awaiting teacher review.',
+      'How GPA is calculated in SSC and HSC — the grade-point table, 6 main subjects and 4th-subject extra points. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'GPA Calculation',
   },
   '/guides/nu-cgpa-calculation-guide': {
     title: 'জাতীয় বিশ্ববিদ্যালয় CGPA হিসাবের গাইড — ক্রেডিট ও গ্রেড | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয়ে CGPA কীভাবে হিসাব হয় — ৪.০০ স্কেল, ক্রেডিট-ওজনযুক্ত গড় ও গ্রেড পয়েন্ট তালিকা। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'জাতীয় বিশ্ববিদ্যালয়ে CGPA কীভাবে হিসাব হয় — ৪.০০ স্কেল, ক্রেডিট-ওজনযুক্ত গড় ও গ্রেড পয়েন্ট তালিকা। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'NU CGPA',
     titleEn: 'National University CGPA Guide — Credits & Grades | Eduvelto',
     descriptionEn:
-      'How CGPA is calculated at National University — the 4.00 scale, the credit-weighted average and the grade-point table. Draft lesson — awaiting teacher review.',
+      'How CGPA is calculated at National University — the 4.00 scale, credit-weighted average and grade-point table. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'NU CGPA',
   },
   '/guides/land-measurement-bangladesh-guide': {
     title: 'জমি মাপার হিসাব — শতক, কাঠা, বিঘা, একর | Eduvelto',
     description:
-      'বাংলাদেশের জমির একক — শতক, কাঠা, বিঘা, একর, হেক্টর ও বর্গফুটের মধ্যে রূপান্তরের নিয়ম ও হিসাব। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'বাংলাদেশের জমির একক — শতক, কাঠা, বিঘা, একর, হেক্টর ও বর্গফুটের মধ্যে রূপান্তরের নিয়ম ও হিসাব। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'জমি মাপা',
     titleEn: 'Land Measurement in Bangladesh — Decimal, Katha, Bigha, Acre | Eduvelto',
     descriptionEn:
-      'Bangladesh land units — how to convert between decimal, katha, bigha, acre, hectare and square feet. Draft lesson — awaiting teacher review.',
+      'Bangladesh land units — how to convert between decimal, katha, bigha, acre, hectare and square feet. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Land Measurement',
   },
   '/guides/govt-job-age-calculation-guide': {
     title: 'সরকারি চাকরিতে বয়স হিসাব — বয়সসীমা ও যোগ্যতা | Eduvelto',
     description:
-      'সরকারি চাকরির আবেদনে বয়স কীভাবে হিসাব হয় — সাধারণ সীমা ৩০ বছর, মুক্তিযোদ্ধা কোটা ৩২ বছর ও আবেদনের নিয়ম। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'সরকারি চাকরির আবেদনে বয়স কীভাবে হিসাব হয় — সাধারণ সীমা ৩০ বছর, মুক্তিযোদ্ধা কোটা ৩২ বছর ও আবেদনের নিয়ম। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'চাকরির বয়স',
     titleEn: 'Government Job Age Calculation — Age Limits & Eligibility | Eduvelto',
     descriptionEn:
-      'How age is counted for government job applications — the general 30-year limit, the 32-year freedom-fighter quota and the rules. Draft lesson — awaiting teacher review.',
+      'How age is counted for government job applications — 30-year limit, 32-year freedom-fighter quota and rules. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Job Age',
   },
   '/guides/bcs-exam-pattern-strategy-guide': {
     title: 'বিসিএস পরীক্ষার ধরন ও প্রস্তুতির কৌশল — ৫০তম সিলেবাস | Eduvelto',
     description:
-      '৫০তম BCS সিলেবাসের পরীক্ষার ধরন — প্রিলিমিনারি ২০০ নম্বর, লিখিত ৯০০/১১০০ নম্বর ও প্রস্তুতির কৌশল। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      '৫০তম BCS সিলেবাসের পরীক্ষার ধরন — প্রিলিমিনারি ২০০ নম্বর, লিখিত ৯০০/১১০০ নম্বর ও প্রস্তুতির কৌশল। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'BCS ধরন',
     titleEn: 'BCS Exam Pattern & Preparation Strategy — 50th Syllabus | Eduvelto',
     descriptionEn:
-      'The 50th BCS syllabus pattern — Preliminary 200 marks, Written 900/1,100 marks, and how to prepare. Draft lesson — awaiting teacher review.',
+      'The 50th BCS syllabus pattern — Preliminary 200 marks, Written 900/1,100 marks, and how to prepare. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'BCS Pattern',
   },
   '/guides/safe-pdf-usage-guide': {
     title: 'নিরাপদে PDF ব্যবহারের নিয়ম — পাসওয়ার্ড, ভাগ করা ও চাপা | Eduvelto',
     description:
-      'PDF ফাইল নিরাপদে ব্যবহারের নিয়ম — AES-২৫৬ পাসওয়ার্ড সুরক্ষা, ফাইল ভাগ করা, একত্র করা ও আকার কমানো। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'PDF ফাইল নিরাপদে ব্যবহারের নিয়ম — AES-২৫৬ পাসওয়ার্ড সুরক্ষা, ফাইল ভাগ করা, একত্র করা ও আকার কমানো। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'নিরাপদ PDF',
     titleEn: 'Safe PDF Usage Rules — Passwords, Splitting & Compressing | Eduvelto',
     descriptionEn:
-      'Rules for using PDF files safely — AES-256 password protection, splitting, merging and compressing. Draft lesson — awaiting teacher review.',
+      'Rules for using PDF files safely — AES-256 password protection, splitting, merging and compressing. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Safe PDF Use',
   },
   '/guides/loan-emi-calculation-guide': {
     title: 'লোন EMI হিসাবের গাইড — কিস্তি, সুদ ও মোট খরচ | Eduvelto',
     description:
-      'লোনের মাসিক কিস্তি (EMI) কীভাবে হিসাব হয় — সূত্র, সুদের হার, মেয়াদ ও মোট পরিশোধের হিসাব। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'লোনের মাসিক কিস্তি (EMI) কীভাবে হিসাব হয় — সূত্র, সুদের হার, মেয়াদ ও মোট পরিশোধের হিসাব। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'EMI হিসাব',
     titleEn: 'Loan EMI Calculation Guide — Instalment, Interest & Total Cost | Eduvelto',
     descriptionEn:
-      'How a loan EMI is calculated — the formula, the interest rate, the term and the total amount paid. Draft lesson — awaiting teacher review.',
+      'How a loan EMI is calculated — the formula, the interest rate, the term and the total amount paid. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'EMI Calculation',
   },
   '/guides/bmi-healthy-weight-guide': {
     title: 'BMI ও সুস্থ ওজন — হিসাব, সীমা ও স্বাস্থ্যকর ওজন | Eduvelto',
     description:
-      'BMI কীভাবে হিসাব হয় — WHO-র সীমা (১৮.৫–২৪.৯), সুস্থ ওজনের পরিসর ও ওজন নিয়ে সঠিক ধারণা। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'BMI কীভাবে হিসাব হয় — WHO-র সীমা (১৮.৫–২৪.৯), সুস্থ ওজনের পরিসর ও ওজন নিয়ে সঠিক ধারণা। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'BMI ও ওজন',
     titleEn: 'BMI & Healthy Weight — Calculation, Ranges & Healthy Weight | Eduvelto',
     descriptionEn:
-      'How BMI is calculated — the WHO ranges (18.5–24.9), the healthy weight range and the right way to think about weight. Draft lesson — awaiting teacher review.',
+      'How BMI is calculated — the WHO ranges (18.5–24.9), the healthy range and the right way to think about weight. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'BMI & Weight',
   },
   '/guides/age-calculation-guide': {
     title: 'বয়স হিসাবের নিয়ম — বছর, মাস, দিন ও মোট দিন | Eduvelto',
     description:
-      'জন্মতারিখ থেকে বয়স কীভাবে হিসাব হয় — বছর-মাস-দিনের নিয়ম, অধিবর্ষ ও বয়সসীমার হিসাব। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'জন্মতারিখ থেকে বয়স কীভাবে হিসাব হয় — বছর-মাস-দিনের নিয়ম, অধিবর্ষ ও বয়সসীমার হিসাব। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'বয়স হিসাব',
     titleEn: 'Age Calculation Rules — Years, Months, Days & Total Days | Eduvelto',
     descriptionEn:
-      'How age is calculated from a date of birth — the years-months-days rule, leap years and age-limit checks. Draft lesson — awaiting teacher review.',
+      'How age is calculated from a date of birth — the years-months-days rule, leap years and age-limit checks. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Age Calculation',
   },
   '/guides/qr-code-image-tools-guide': {
     title: 'QR কোড ও ছবির টুল ব্যবহারের গাইড — তৈরি, পড়া ও কম্প্রেস | Eduvelto',
     description:
-      'QR কোড তৈরি ও পড়া এবং ছবি কম্প্রেস করার নিয়ম — লিংক, Wi-Fi, যোগাযোগের তথ্য ও নিরাপদ ব্যবহার। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'QR কোড তৈরি ও পড়া এবং ছবি কম্প্রেস করার নিয়ম — লিংক, Wi-Fi, যোগাযোগের তথ্য ও নিরাপদ ব্যবহার। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'QR ও ছবি',
     titleEn: 'QR Code & Image Tools Guide — Create, Scan & Compress | Eduvelto',
     descriptionEn:
-      'How to create and scan QR codes and compress images — links, Wi-Fi, contact details and safe use. Draft lesson — awaiting teacher review.',
+      'How to create and scan QR codes and compress images — links, Wi-Fi, contact details and safe use. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'QR & Images',
   },
   // Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
@@ -1905,11 +1915,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/guides/negative-sentences-class-3': {
     title: 'না-বোধক বাক্য — Negative Sentences (Class 3) | Eduvelto',
     description:
-      'না-বোধক বাক্য কী, do not / does not / did not কখন বসে, আর do/does/did-এর পর ক্রিয়া কেন মূল রূপে ফেরে — তৃতীয় শ্রেণির সহজ গাইড, উদাহরণ ও অনুশীলনসহ। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'না-বোধক বাক্য কী, do not / does not / did not কখন বসে — তৃতীয় শ্রেণির সহজ গাইড, উদাহরণ ও অনুশীলনসহ। যাচাইকৃত: Eduvelto শিক্ষা ও গবেষণা টিম।',
     crumb: 'না-বোধক বাক্য',
     titleEn: 'Negative Sentences — না-বোধক বাক্য (Class 3) | Eduvelto',
     descriptionEn:
-      'What a negative sentence is, when to use do not / does not / did not, and why the verb returns to its base form after do/does/did — a simple Class 3 guide with examples and practice. Draft lesson — awaiting teacher review.',
+      'Negative sentences: when to use do not / does not / did not — a simple Class 3 guide with examples. Verified: Eduvelto Education & Research Team.',
     crumbEn: 'Negative Sentences',
   },
 };
@@ -3159,9 +3169,10 @@ export function resolveRouteSeo(pathname: string, lang: SupportedLang = 'bn'): S
   if (path === '/learn/bcs-english-tense' || path === '/learn/bcs-english-preposition') {
     // Article (24 Nov 2026, SEO pass): the two lesson pages are real
     // article-length texts. datePublished is the real publish date
-    // (AdSense Part 1 merged 23 Nov 2026). The pages themselves
-    // label the lessons drafts awaiting teacher review, and the meta
-    // description says so too — the markup never claims review.
+    // (AdSense Part 1 merged 23 Nov 2026). The lesson pages carry
+    // no review label and no editorial badge — nothing on them
+    // claims review; the meta description states plainly that
+    // they await teacher review, and the markup never claims it.
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'Article',
@@ -3176,8 +3187,10 @@ export function resolveRouteSeo(pathname: string, lang: SupportedLang = 'bn'): S
   }
   if (PUBLIC_GUIDE_META.some((g) => g.path === path)) {
     // Article (24 Nov 2026, brand-SEO wave 1; waves 2–5 keep the
-    // same date — the 41 guides are article-length drafts awaiting
-    // teacher review, published 24 Nov 2026. Never claims review.
+    // same date — the 41 guides are published articles, 24 Nov
+    // 2026, carrying the owner-ordered editorial badge (28 Nov
+    // 2026); the description matches the badge, except GST + DU
+    // admission, which keep draft wording (needsReview).
     // Audit m17: lang-aware headline/description/language, like
     // the lessons branch just above — the EN page must not carry
     // Bangla JSON-LD.
