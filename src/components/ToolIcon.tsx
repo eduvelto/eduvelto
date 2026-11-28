@@ -1082,6 +1082,14 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'signature-maker': 'penSign',
   'image-to-text-ocr': 'scanText',
   'focus-workspace': 'soundWaves',
+  // Extra tools batch (28 Nov 2026, owner delegated decision).
+  'admission-score-calculator': 'gradCap',
+  'daily-walking-goal-calculator': 'pulse',
+  'currency-remittance-calculator': 'calculator',
+  'job-circular-links': 'link',
+  'interview-questions': 'quote',
+  'application-letter-writer': 'envelope',
+  'calendar-3-in-1': 'calendarCheck',
 };
 
 // Category fallback — used only for a slug with no explicit entry

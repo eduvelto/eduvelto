@@ -307,10 +307,10 @@ const HUBS = [
 // had NO tools section and NO link to the Tools Hub at all — the
 // hub existed at /tools but was unreachable from the homepage.
 // These 6 are the most-used tools (titles + slugs verified against
-// src/lib/toolsMeta.ts); the hub count is 275 — the 28 Nov 2026
+// src/lib/toolsMeta.ts); the hub count is 282 — the 28 Nov 2026
 // audit removed 2 duplicates (pdf-page-extractor, jpg-to-pdf), so
 // 265 was the real count then (TOOLS_META.length), not 267; the
-// 28 Nov 2026 global batch added 6 browser tools, 265 -> 271; AI tools batch added 4, 271 -> 275.
+// 28 Nov 2026 global batch added 6 browser tools, 265 -> 271; AI tools batch added 4, 271 -> 275; extra-tools batch added 7, 275 -> 282.
 const POPULAR_TOOLS = [
   { slug: 'pdf-merger', icon: '📄', bn: 'পিডিএফ মার্জার', en: 'PDF Merger' },
   { slug: 'image-compressor', icon: '🖼️', bn: 'ছবি কম্প্রেসর', en: 'Image Compressor' },
@@ -933,10 +933,10 @@ export default function HomePage() {
             </Link>
             {/* 28 Nov 2026 (AdSense-readiness): direct Tools Hub link
                 in the hero — the hub had no link anywhere on the
-                homepage or in the header. 275 free tools (28 Nov 2026
+                homepage or in the header. 282 free tools (28 Nov 2026
                 audit count; TOOLS_META.length). */}
             <Link to="/tools" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
-              {t({ bn: '🛠 ২৭৫টি ফ্রি টুল', en: '🛠 275 free tools' })}
+              {t({ bn: '🛠 ২৮২টি ফ্রি টুল', en: '🛠 282 free tools' })}
             </Link>
           </div>
         </section>
@@ -944,12 +944,12 @@ export default function HomePage() {
         {/* Free Tools Hub (28 Nov 2026 AdSense-readiness): a prominent
             tools section at the very top of the homepage — the hub
             existed at /tools but had no link anywhere on the homepage
-            or in the header. 275 free tools (28 Nov 2026 audit count;
+            or in the header. 282 free tools (28 Nov 2026 audit count;
             TOOLS_META.length). Popular-tool cards link straight to
             their /tools/<slug> pages. */}
         <section className="ev-rd-section" aria-label={t({ bn: 'ফ্রি টুলস', en: 'Free Tools' })}>
           <div className="ev-rd-head">
-            <h2>{t({ bn: '🛠 ২৭৫টি ফ্রি টুল', en: '🛠 275 free tools' })}</h2>
+            <h2>{t({ bn: '🛠 ২৮২টি ফ্রি টুল', en: '🛠 282 free tools' })}</h2>
             <Link to="/tools">{t({ bn: 'সব টুল দেখুন →', en: 'See all tools →' })}</Link>
           </div>
           <p className="ev-rd-sub">

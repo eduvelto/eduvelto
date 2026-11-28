@@ -8,7 +8,7 @@
 // only by the lazy tool pages. Keep this file LIGHT.
 //
 // Source of truth for all tools (live count: TOOLS_META.length —
-// 275 on 28 Nov 2026; never hardcode the count in copy, see
+// 282 on 28 Nov 2026; never hardcode the count in copy, see
 // lib/seo.ts /tools entry): 10 categories x 10 tools
 // + 5 video/music tools + 35 second-batch tools + later batches
 // (see ~/workspace/eduorbit/final-100-tools.md).
@@ -3107,6 +3107,87 @@ export const TOOLS_META: ToolMeta[] = [
     crumbBn: 'এআই রিজিউমে টেইলর',
     crumbEn: 'AI Resume Tailor',
     relatedSlugs: ['cv-builder', 'cover-letter-builder', 'ai-grammar-checker'],
+  },
+  // ---- 15. Extra tools batch (28 Nov 2026, owner delegated the
+  // 8-extra-tools decision to Muse 21:54 — build 7, defer Blood
+  // Donor Directory which needs live donor data). All 7 are pure
+  // browser computation (FOREVER-AUTO): no API, no live data.
+  {
+    slug: 'admission-score-calculator',
+    category: 'education',
+    titleBn: 'ভর্তি স্কোর ক্যালকুলেটর',
+    titleEn: 'Admission Score Calculator',
+    descriptionBn: 'SSC ও HSC GPA থেকে ঢাকা বিশ্ববিদ্যালয় ও মেডিকেল ভর্তির মেধা স্কোর হিসাব করুন।',
+    descriptionEn: 'Calculate Dhaka University and Medical admission merit scores from your SSC and HSC GPA.',
+    crumbBn: 'ভর্তি স্কোর ক্যালকুলেটর',
+    crumbEn: 'Admission Score Calculator',
+    relatedSlugs: ['ssc-hsc-gpa-calculator', 'nu-cgpa-calculator', 'govt-job-age-calculator'],
+  },
+  {
+    slug: 'daily-walking-goal-calculator',
+    category: 'health',
+    titleBn: 'দৈনিক হাঁটার লক্ষ্য ক্যালকুলেটর',
+    titleEn: 'Daily Walking-Goal Calculator',
+    descriptionBn: 'হাঁটার ধাপ থেকে দূরত্ব, সময় ও ক্যালরি হিসাব করুন — দৈনিক লক্ষ্য ঠিক করুন।',
+    descriptionEn: 'Turn your daily steps into distance, time and calories — and set a walking goal.',
+    crumbBn: 'দৈনিক হাঁটার লক্ষ্য',
+    crumbEn: 'Daily Walking-Goal Calculator',
+    relatedSlugs: ['pace-speed-calculator', 'bmi-calculator', 'calorie-tdee-calculator'],
+  },
+  {
+    slug: 'currency-remittance-calculator',
+    category: 'finance',
+    titleBn: 'কারেন্সি ও রেমিট্যান্স ক্যালকুলেটর',
+    titleEn: 'Currency & Remittance Calculator',
+    descriptionBn: 'আপনি রেট বসান — বিদেশ থেকে পাঠানো টাকায় কত টাকা পাবেন, ফি ও ২.৫% প্রণোদনাসহ হিসাব করুন।',
+    descriptionEn: 'You enter the rate — work out how much taka arrives from money sent abroad, with fee and the 2.5% incentive.',
+    crumbBn: 'কারেন্সি ও রেমিট্যান্স',
+    crumbEn: 'Currency & Remittance Calculator',
+    relatedSlugs: ['currency-converter', 'bkash-nagad-calculator', 'salary-to-hourly-converter'],
+  },
+  {
+    slug: 'job-circular-links',
+    category: 'job',
+    titleBn: 'চাকরির বিজ্ঞপ্তি লিংক হাব',
+    titleEn: 'Job Circular Links Hub',
+    descriptionBn: 'সরকারি চাকরির অফিসিয়াল পোর্টালগুলোর লিংক এক জায়গায় — শুধু অফিসিয়াল সাইট, কোনো ভুয়া লিংক নয়।',
+    descriptionEn: 'Official government job portals in one place — official sites only, no fake links.',
+    crumbBn: 'চাকরির বিজ্ঞপ্তি লিংক',
+    crumbEn: 'Job Circular Links Hub',
+    relatedSlugs: ['cv-builder', 'cover-letter-builder', 'interview-questions'],
+  },
+  {
+    slug: 'interview-questions',
+    category: 'job',
+    titleBn: 'ইন্টারভিউ প্রশ্ন ও উত্তর',
+    titleEn: 'Interview Questions & Answers',
+    descriptionBn: 'সবচেয়ে সাধারণ ১২টি ইন্টারভিউ প্রশ্ন ও কীভাবে উত্তর দেবেন — বাংলা ও ইংরেজিতে।',
+    descriptionEn: 'The 12 most common interview questions and how to answer them — in Bangla and English.',
+    crumbBn: 'ইন্টারভিউ প্রশ্ন',
+    crumbEn: 'Interview Questions',
+    relatedSlugs: ['cv-builder', 'cover-letter-builder', 'application-letter-writer'],
+  },
+  {
+    slug: 'application-letter-writer',
+    category: 'job',
+    titleBn: 'আবেদনপত্র লেখক',
+    titleEn: 'Application Letter Writer',
+    descriptionBn: 'আপনার তথ্য বসান — বাংলা বা ইংরেজিতে সাজানো আবেদনপত্র তৈরি হবে, কপি করে নিন।',
+    descriptionEn: 'Enter your details — a properly formatted application letter in Bangla or English, ready to copy.',
+    crumbBn: 'আবেদনপত্র লেখক',
+    crumbEn: 'Application Letter Writer',
+    relatedSlugs: ['cv-builder', 'cover-letter-builder', 'interview-questions'],
+  },
+  {
+    slug: 'calendar-3-in-1',
+    category: 'utility',
+    titleBn: 'ক্যালেন্ডার ৩-ইন-১ (ইংরেজি, বাংলা, হিজরি)',
+    titleEn: 'Calendar 3-in-1 (English, Bangla, Hijri)',
+    descriptionBn: 'একই মাসে ইংরেজি, বাংলা ও হিজরি তারিখ একসাথে দেখুন — ব্রাউজারেই হিসাব হয়।',
+    descriptionEn: 'English, Bangla and Hijri dates together in one month view — calculated in your browser.',
+    crumbBn: 'ক্যালেন্ডার ৩-ইন-১',
+    crumbEn: 'Calendar 3-in-1',
+    relatedSlugs: ['bangla-date-converter', 'prayer-times', 'age-calculator'],
   },
 ];
 

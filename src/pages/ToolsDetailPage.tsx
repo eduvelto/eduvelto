@@ -320,6 +320,14 @@ import { AiPdfSummarizerTool } from './tools/AiPdfSummarizerTool';
 import { AiGrammarCheckerTool } from './tools/AiGrammarCheckerTool';
 import { AiMathSolverTool } from './tools/AiMathSolverTool';
 import { AiResumeTailorTool } from './tools/AiResumeTailorTool';
+// Extra tools batch (28 Nov 2026, owner delegated decision): 7 tools.
+import { AdmissionScoreTool } from './tools/AdmissionScoreTool';
+import { DailyWalkingGoalTool } from './tools/DailyWalkingGoalTool';
+import { CurrencyRemittanceTool } from './tools/CurrencyRemittanceTool';
+import { JobCircularLinksTool } from './tools/JobCircularLinksTool';
+import { InterviewQuestionsTool } from './tools/InterviewQuestionsTool';
+import { ApplicationLetterWriterTool } from './tools/ApplicationLetterWriterTool';
+import { Calendar3In1Tool } from './tools/Calendar3In1Tool';
 import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
@@ -619,6 +627,14 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'ai-grammar-checker': AiGrammarCheckerTool,
   'ai-math-solver': AiMathSolverTool,
   'ai-resume-tailor': AiResumeTailorTool,
+  // Extra tools batch (7, 28 Nov 2026, owner delegated decision).
+  'admission-score-calculator': AdmissionScoreTool,
+  'daily-walking-goal-calculator': DailyWalkingGoalTool,
+  'currency-remittance-calculator': CurrencyRemittanceTool,
+  'job-circular-links': JobCircularLinksTool,
+  'interview-questions': InterviewQuestionsTool,
+  'application-letter-writer': ApplicationLetterWriterTool,
+  'calendar-3-in-1': Calendar3In1Tool,
 };
 
 const gridStyle: CSSProperties = {
