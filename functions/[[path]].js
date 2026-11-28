@@ -95,9 +95,17 @@ export async function onRequest(context) {
     const country = context.request.cf?.country;
     if (!hasLangCookie && !url.searchParams.has('lang') && country && !BOT_RE.test(ua)) {
       const geoLang = GEO_LANG_BY_COUNTRY[country] ?? 'en';
-      const redirect = Response.redirect(new URL(`/${geoLang}/${url.search}`, url), 302);
-      redirect.headers.set('Set-Cookie', `eduvelto-lang=${geoLang}; Path=/; Max-Age=31536000; SameSite=Lax`);
-      return redirect;
+      // NOTE: Response.redirect() returns a Response with IMMUTABLE
+      // headers — headers.set('Set-Cookie') on it throws TypeError
+      // (live 1101 on '/' after the 28 Nov 2026 deploy). Build the
+      // 302 manually so the cookie can be set on it.
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: `/${geoLang}/${url.search}`,
+          'Set-Cookie': `eduvelto-lang=${geoLang}; Path=/; Max-Age=31536000; SameSite=Lax`,
+        },
+      });
     }
   }
   // Static asset (has a file extension) — let Pages serve it normally.
