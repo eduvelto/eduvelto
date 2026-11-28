@@ -1022,14 +1022,46 @@ export function downloadCanvasPng(
   a.click();
 }
 
+/** JPEG quality for the certificate image embedded in the PDF
+ *  (28 Nov 2026 shrink: the full-size PNG embed made a ~13 MB
+ *  PDF; JPEG at 0.92 keeps the certificate visually identical —
+ *  flat fills + large type compress cleanly — at ~0.27 MB, and
+ *  the QR still decodes from the embedded image). */
+export const CERTIFICATE_PDF_JPEG_QUALITY = 0.92;
+
 /** Print-ready PDF (A4 landscape) from the canvas image — never
- *  jsPDF text, so Bangla renders exactly as on the canvas. */
+ *  jsPDF text, so Bangla renders exactly as on the canvas.
+ *  The image is embedded as JPEG (not PNG): the 2480×1754
+ *  canvas as PNG is ~13 MB inside the PDF; as JPEG it is
+ *  ~0.27 MB with no visible difference. The PNG download path
+ *  (downloadCanvasPng) is untouched. */
+async function createCertificatePdfDoc(canvas: HTMLCanvasElement) {
+  const { jsPDF } = await import('jspdf');
+  const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+  doc.addImage(
+    canvas.toDataURL('image/jpeg', CERTIFICATE_PDF_JPEG_QUALITY),
+    'JPEG',
+    0,
+    0,
+    297,
+    210,
+  );
+  return doc;
+}
+
+/** Build the certificate PDF bytes (same document the download
+ *  saves) — exported so tests can measure it without a browser. */
+export async function buildCertificatePdfBytes(
+  canvas: HTMLCanvasElement,
+): Promise<Uint8Array> {
+  const doc = await createCertificatePdfDoc(canvas);
+  return new Uint8Array(doc.output('arraybuffer'));
+}
+
 export async function downloadCertificatePdf(
   canvas: HTMLCanvasElement,
   filename: string,
 ): Promise<void> {
-  const { jsPDF } = await import('jspdf');
-  const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-  doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 297, 210);
+  const doc = await createCertificatePdfDoc(canvas);
   doc.save(filename);
 }
