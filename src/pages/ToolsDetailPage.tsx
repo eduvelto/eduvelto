@@ -36,6 +36,7 @@ import { ToolIcon } from '../components/ToolIcon';
 import EditorialBadge from '../components/EditorialBadge';
 import AdSlot from '../components/AdSlot';
 import ShareButton from '../components/ShareButton';
+import { EmbedWidget, isEmbeddableTool } from '../components/EmbedWidget';
 import LifePdfToolsPage from './LifePdfToolsPage';
 import LifeCalculatorsPage from './LifeCalculatorsPage';
 import LifeConvertersPage from './LifeConvertersPage';
@@ -318,7 +319,7 @@ import ToolGuide from './tools/ToolGuide';
 // only here) as each tool UI lands — no new routes, no new page
 // files, no changes to the dispatch below.
 // ---------------------------------------------------------------------------
-const TOOL_COMPONENTS: Record<string, ComponentType> = {
+export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   // Phase-2 tools, wired 26 Nov 2026 (Wave 3). The other 87 slugs keep
   // showing the honest "still being built" box until their UI lands.
   'ssc-hsc-gpa-calculator': SscHscGpaTool,
@@ -691,6 +692,19 @@ export default function ToolsDetailPage() {
           })}
         </AlertBox>
       )}
+      {/* "Embed This Tool" (28 Nov 2026, growth batch item 4): the
+          iframe-snippet widget for the top-20 embeddable tools only,
+          directly under the tool UI and before the first AdSlot. */}
+      {isEmbeddableTool(meta.slug) ? (
+        <EmbedWidget
+          slug={meta.slug}
+          // Page-language title (bn/en): the staged item-4 change must
+          // not depend on the phased i18n overlay (toolMetaForLang),
+          // which lives in a sibling batch.
+          title={lang === 'bn' ? meta.titleBn : meta.titleEn}
+          lang={lang === 'bn' ? 'bn' : 'en'}
+        />
+      ) : null}
       {/* Ads rollout B1 (27 Nov 2026): the display slots for EVERY tool
           page live here, once — in-content below the tool UI and
           in-content-2 before Related tools. Tool components must NOT

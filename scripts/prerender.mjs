@@ -462,6 +462,70 @@ export function getToolPaths(source) {
   return paths;
 }
 
+/** Converter pair URLs for the sitemap ONLY (28 Nov 2026, owner
+ *  safety rule 4): pair pages are NOT prerendered as static HTML —
+ *  one dynamic client-side route (/convert/:pair) renders every
+ *  registry pair, and this function returns only the genuinely
+ *  useful pairs for the sitemap: pairs starting from a commonly-used
+ *  unit (SITEMAP_FROM_UNITS in lifeConverters.ts, 152 paths).
+ *  Currency is deliberately NOT here: the site has no live
+ *  exchange-rate source, so no currency pair page is ever derived.
+ *  Never invents a path: only unit ids actually present in the
+ *  source. The runtime list in src/lib/convertPairs.ts
+ *  (SITEMAP_PAIRS) enumerates the same subset from the same registry
+ *  — the test asserts the two agree exactly. */
+export function getConvertPairPaths(source) {
+  const paths = [];
+  const seen = new Set();
+  const collectIds = (block) => [...block.matchAll(/id:\s*'([^']+)'/g)].map((m) => m[1]);
+  // Sitemap subset: pairs starting from a commonly-used unit
+  // (SITEMAP_FROM_UNITS, one line per category in the source).
+  const tierStart = source.indexOf('SITEMAP_FROM_UNITS');
+  const tierEnd = tierStart === -1 ? -1 : source.indexOf('\n};', tierStart);
+  const tierFrom = {};
+  if (tierStart !== -1 && tierEnd !== -1) {
+    const tierBlock = source.slice(tierStart, tierEnd);
+    for (const m of tierBlock.matchAll(/^  (\w+): \[([^\]]*)\],?$/gm)) {
+      tierFrom[m[1]] = [...m[2].matchAll(/'([^']+)'/g)].map((q) => q[1]);
+    }
+  }
+  const addPairs = (category, ids) => {
+    const fromUnits = tierFrom[category] ?? [];
+    for (const from of ids) {
+      if (!fromUnits.includes(from)) continue;
+      for (const to of ids) {
+        if (from === to) continue;
+        const pairPath = `/convert/${from}-to-${to}`;
+        if (!seen.has(pairPath)) {
+          seen.add(pairPath);
+          paths.push(pairPath);
+        }
+      }
+    }
+  };
+  // UNIT_CATEGORIES blocks, in file order (category = block key).
+  const catsStart = source.indexOf('UNIT_CATEGORIES');
+  const catsEnd = catsStart === -1 ? -1 : source.indexOf('\n};', catsStart);
+  if (catsStart !== -1 && catsEnd !== -1) {
+    const catsBlock = source.slice(catsStart, catsEnd);
+    const blockRe = /^  (\w+): \[$/gm;
+    let bm;
+    while ((bm = blockRe.exec(catsBlock)) !== null) {
+      const start = bm.index + bm[0].length;
+      const end = catsBlock.indexOf('\n  ],', start);
+      if (end === -1) continue;
+      addPairs(bm[1], collectIds(catsBlock.slice(start, end)));
+    }
+  }
+  // TEMPERATURE_UNITS array.
+  const tempStart = source.indexOf('TEMPERATURE_UNITS');
+  const tempEnd = tempStart === -1 ? -1 : source.indexOf('\n];', tempStart);
+  if (tempStart !== -1 && tempEnd !== -1) {
+    addPairs('temperature', collectIds(source.slice(tempStart, tempEnd)));
+  }
+  return paths;
+}
+
 export function withLangPrefix(path, lang) {
   const bare = path.replace(/\/+$/, '') || '/';
   const stripped = bare.replace(/^\/(bn|en)(?=\/|$)/, '') || '/';
@@ -1309,6 +1373,24 @@ async function main() {
   } catch (err) {
     console.warn(`WARN: could not derive tool paths: ${err.message}`);
   }
+  // --- Converter pair sitemap paths (28 Nov 2026, owner safety
+  //  rule 4) --- Derived from the lifeConverters source of truth
+  //  (src/lib/lifeConverters.ts) — ONLY the genuinely useful pairs
+  //  (starting from a commonly-used unit). They go in the sitemap
+  //  ONLY: NO static HTML is rendered for them (one dynamic
+  //  /convert/:pair route serves every registry pair client-side),
+  //  keeping the deployed file count and build time sane. A future
+  //  unit adds its pairs automatically — no prerender-list edit per
+  //  unit. No currency pairs: the site has no live exchange-rate
+  //  source.
+  let convertPairPaths = [];
+  try {
+    const convertersSource = readFileSync(join(root, 'src/lib/lifeConverters.ts'), 'utf8');
+    convertPairPaths = getConvertPairPaths(convertersSource);
+    console.log(`Convert pairs (sitemap only): ${convertPairPaths.length} paths`);
+  } catch (err) {
+    console.warn(`WARN: could not derive convert pair paths: ${err.message}`);
+  }
   const staticPaths = [...PRERENDER_STATIC_PATHS, ...academicPracticePaths, ...toolPaths];
 
   // --- SSR renderer ---
@@ -1400,6 +1482,14 @@ async function main() {
     sitemapUrls.push({ loc: canonicalUrl(barePath, 'bn'), bn: canonicalUrl(barePath, 'bn'), en: canonicalUrl(barePath, 'en') });
   }
 
+  // --- Converter pair sitemap entries (28 Nov 2026, owner safety
+  //  rule 4) --- Sitemap ONLY: no static HTML file is written for
+  //  these URLs (one dynamic /convert/:pair route serves every pair
+  //  client-side). Listed pairs start from a commonly-used unit.
+  for (const pairPath of convertPairPaths) {
+    sitemapUrls.push({ loc: canonicalUrl(pairPath, 'bn'), bn: canonicalUrl(pairPath, 'bn'), en: canonicalUrl(pairPath, 'en') });
+  }
+
   // --- Book pages (both langs) ---
   for (const book of books) {
     for (const lang of LANGS) {
@@ -1464,7 +1554,7 @@ async function main() {
   console.log(`Book search index: ${searchIndex.count} entries -> dist/book-search-index.json`);
 
   console.log(`Rendered pages: ${rendered} (${staticPaths.length} static paths x 2 langs + ${books.length} books x 2 langs)`);
-  console.log(`Sitemap URLs: ${sitemapUrls.length * 2} (bn + en variants)`);
+  console.log(`Sitemap URLs: ${sitemapUrls.length * 2} (bn + en variants, incl. ${convertPairPaths.length} convert pairs sitemap-only)`);
   console.log(`SSR render fallbacks (shell + head only): ${renderFallbacks}`);
   if (noindexWarnings.length > 0) {
     console.log(`WARN: ${noindexWarnings.length} prerendered URL(s) carry a noindex head (fallback SEO — check whether they should be indexable):`);

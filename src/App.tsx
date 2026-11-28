@@ -229,6 +229,10 @@ const LifeServicesPage = lazy(() => import('./pages/LifeServicesPage'));
 // tools render their own page via the aliasPage dispatch).
 const ToolsHubPage = lazy(() => import('./pages/ToolsHubPage'));
 const ToolsDetailPage = lazy(() => import('./pages/ToolsDetailPage'));
+// Growth batch (28 Nov 2026, items 3+4): converter pair pages +
+// chrome-free embed pages.
+const ConvertPairPage = lazy(() => import('./pages/ConvertPairPage'));
+const EmbedToolPage = lazy(() => import('./pages/EmbedToolPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
@@ -505,7 +509,9 @@ export default function App() {
   const [cookieBannerHeightPx, setCookieBannerHeightPx] = useState(0);
   // Admin + CEO panels render their own shell (sidebar/top bar/bottom
   // nav) — the public header, footer and BottomNav are hidden there.
-  const isAdminShell = location.pathname.startsWith('/admin') || location.pathname.startsWith('/ceo');
+  // Growth batch, item 4 (28 Nov 2026): /embed/* pages are chrome-free
+  // too (iframe embeds carry only the tool + Powered-by link).
+  const isAdminShell = location.pathname.startsWith('/admin') || location.pathname.startsWith('/ceo') || location.pathname.startsWith('/embed');
   return (
     <div
       className="ev-app-shell"
@@ -849,6 +855,12 @@ export default function App() {
             + slug-driven detail page (one component, all 105 tools). */}
         <Route path="tools" element={<ToolsHubPage />} />
         <Route path="tools/:slug" element={<ToolsDetailPage />} />
+        {/* Growth batch, item 3 (28 Nov 2026): one rankable page per
+            ordered unit pair — /{lang}/convert/kg-to-lb etc. The pair
+            slug is `<from>-to-<to>` from the lifeConverters registry;
+            colloquial spellings (kg-to-lbs) redirect to the canonical
+            slug inside the page. */}
+        <Route path="convert/:pair" element={<ConvertPairPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="why-eduvelto" element={<WhyEduveltoPage />} />
         <Route path="founder" element={<FounderPage />} />
@@ -1046,6 +1058,13 @@ export default function App() {
         <Route path="/routine" element={<RoutinePage />} />
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/social" element={<SocialPage />} />
+        {/* Growth batch, item 4 (28 Nov 2026): chrome-free embed pages
+            — /embed/:slug renders only the tool + a "Powered by
+            Eduvelto.com" link, for iframing on other sites. Bare
+            top-level route (no :lang prefix): a static `embed` segment
+            outranks the dynamic :lang route, and LangLayout's ?lang=
+            stripping never applies here, so ?lang=en survives. */}
+        <Route path="/embed/:slug" element={<EmbedToolPage />} />
         <Route path="*" element={<NotFoundPage />} />
         </Routes>
         </Suspense>

@@ -235,6 +235,11 @@ const UNIT_CATEGORY_LABELS: { id: UnitCategory; bn: string; en: string }[] = [
   { id: 'temperature', bn: 'তাপমাত্রা', en: 'Temperature' },
   { id: 'volume', bn: 'আয়তন', en: 'Volume' },
   { id: 'area', bn: 'ক্ষেত্রফল', en: 'Area' },
+  // Speed tab (28 Nov 2026, converter pair pages): the 'speed'
+  // category was added to lifeConverters.ts, so this label +
+  // DEFAULT_UNITS entry keep the hub converter's Record<UnitCategory>
+  // complete (tsc) and expose the new category in the UI.
+  { id: 'speed', bn: 'গতি', en: 'Speed' },
 ];
 
 const DEFAULT_UNITS: Record<UnitCategory, { from: string; to: string }> = {
@@ -243,6 +248,7 @@ const DEFAULT_UNITS: Record<UnitCategory, { from: string; to: string }> = {
   temperature: { from: 'c', to: 'f' },
   volume: { from: 'l', to: 'ml' },
   area: { from: 'acre', to: 'm2' },
+  speed: { from: 'kmh', to: 'ms' },
 };
 
 function UnitSection() {
@@ -270,8 +276,8 @@ function UnitSection() {
       </div>
       <p style={{ color: 'var(--muted)', fontSize: 14, margin: '0 0 14px' }}>
         {t({
-          bn: 'দৈর্ঘ্য, ওজন, তাপমাত্রা, আয়তন ও ক্ষেত্রফল — দেশি এককসহ (মণ, সের, তোলা, কাঠা, বিঘা, শতাংশ)।',
-          en: 'Length, weight, temperature, volume and area — including local units (mon, ser, tola, katha, bigha, decimal).',
+          bn: 'দৈর্ঘ্য, ওজন, তাপমাত্রা, আয়তন, ক্ষেত্রফল ও গতি — দেশি এককসহ (মণ, সের, তোলা, কাঠা, বিঘা, শতাংশ)।',
+          en: 'Length, weight, temperature, volume, area and speed — including local units (mon, ser, tola, katha, bigha, decimal).',
         })}
       </p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }} role="tablist" aria-label={t({ bn: 'এককের ধরন', en: 'Unit type' })}>

@@ -68,14 +68,14 @@ export function convertCurrency(amount: number, from: string, to: string): numbe
   return Number.isFinite(result) ? result : null;
 }
 
-export type UnitCategory = 'length' | 'weight' | 'temperature' | 'volume' | 'area';
+export type UnitCategory = 'length' | 'weight' | 'temperature' | 'volume' | 'area' | 'speed';
 
 /** Every unit is defined by its factor to the category's base unit. */
 export interface UnitDef {
   id: string;
   bn: string;
   en: string;
-  /** Multiply by this to get the base unit (length: metre, weight: kg, volume: litre, area: m²). */
+  /** Multiply by this to get the base unit (length: metre, weight: kg, volume: litre, area: m², speed: m/s). */
   toBase: number;
 }
 
@@ -120,6 +120,15 @@ export const UNIT_CATEGORIES: Record<Exclude<UnitCategory, 'temperature'>, UnitD
     { id: 'katha', bn: 'কাঠা', en: 'Katha', toBase: 66.89025444 },
     { id: 'bigha', bn: 'বিঘা', en: 'Bigha', toBase: 1337.8050888 },
   ],
+  // Speed (28 Nov 2026, converter pair pages): base m/s. Exact
+  // factors — 1 km/h = 1/3.6 m/s, 1 mph = 0.44704 m/s (exact),
+  // 1 knot = 0.514444 m/s (exact, international nautical mile).
+  speed: [
+    { id: 'ms', bn: 'মিটার প্রতি সেকেন্ড', en: 'Metre per second', toBase: 1 },
+    { id: 'kmh', bn: 'কিলোমিটার প্রতি ঘণ্টা', en: 'Kilometre per hour', toBase: 1 / 3.6 },
+    { id: 'mph', bn: 'মাইল প্রতি ঘণ্টা', en: 'Mile per hour', toBase: 0.44704 },
+    { id: 'knot', bn: 'নট', en: 'Knot', toBase: 0.514444 },
+  ],
 };
 
 export const TEMPERATURE_UNITS: UnitDef[] = [
@@ -127,6 +136,23 @@ export const TEMPERATURE_UNITS: UnitDef[] = [
   { id: 'f', bn: 'ফারেনহাইট (°F)', en: 'Fahrenheit (°F)', toBase: 1 },
   { id: 'k', bn: 'কেলভিন (K)', en: 'Kelvin (K)', toBase: 1 },
 ];
+
+/** Sitemap subset for converter pair pages (28 Nov 2026, growth
+ *  batch item 3, owner safety rule 4): the sitemap lists ONLY pairs
+ *  starting from a commonly-used unit — the genuinely useful pairs,
+ *  not every combinatorial pair (152 of 244). The dynamic
+ *  /convert/:pair route still renders ANY registry pair when visited;
+ *  only the sitemap list is bounded. Temperature: all three units
+ *  are common. One line per category — the prerender parses this
+ *  const from this file (same source, same list). */
+export const SITEMAP_FROM_UNITS: Record<UnitCategory, string[]> = {
+  length: ['cm', 'm', 'km', 'in', 'ft', 'mi'],
+  weight: ['g', 'kg', 'oz', 'lb'],
+  volume: ['ml', 'l', 'cup', 'gal'],
+  area: ['m2', 'ft2', 'acre', 'decimal', 'katha', 'bigha'],
+  speed: ['kmh', 'mph'],
+  temperature: ['c', 'f', 'k'],
+};
 
 /** Units available for a category (temperature handled separately). */
 export function unitsForCategory(category: UnitCategory): UnitDef[] {
