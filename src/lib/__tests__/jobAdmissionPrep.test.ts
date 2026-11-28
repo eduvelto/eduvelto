@@ -14,6 +14,7 @@ import {
   RECENT_REPEATED_QUESTIONS,
   SYLLABUS_MOCK_EXAMS,
   admissionUnitByRoute,
+  bnDigits,
   bundledVerifiedCount,
   syllabusMockPlan,
 } from '../jobAdmissionPrep';
@@ -129,6 +130,16 @@ describe('syllabus-based exam engine (28 Nov 2026)', () => {
     for (const slug of ['bank', 'primary-teacher', 'ntrca']) {
       expect(syllabusMockPlan(slug)!.sectionMock, slug).toBeNull();
     }
+  });
+});
+
+describe('bnDigits (28 Nov 2026)', () => {
+  it('converts Western digits to Bengali digits, keeping the decimal point', () => {
+    expect(bnDigits(0)).toBe('০');
+    expect(bnDigits(35)).toBe('৩৫');
+    expect(bnDigits(1208)).toBe('১২০৮');
+    expect(bnDigits('0.50')).toBe('০.৫০');
+    expect(bnDigits(200)).toBe('২০০');
   });
 });
 

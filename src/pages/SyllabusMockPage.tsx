@@ -30,6 +30,7 @@ import { PUBLIC_BCS_ENGLISH_QUESTIONS, PUBLIC_BCS_READING_PASSAGE, type PublicBc
 import {
   BANK_STATE,
   SYLLABUS_MOCK_EXAMS,
+  bnDigits,
   syllabusMockPlan,
   type SyllabusMockPlan,
 } from '../lib/jobAdmissionPrep';
@@ -58,7 +59,7 @@ function formatTime(totalSeconds: number): string {
 type Phase = 'plan' | 'playing' | 'done';
 
 export default function SyllabusMockPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { exam } = useParams<{ exam?: string }>();
   const examSlug = exam ?? 'bcs';
   const plan: SyllabusMockPlan | null = useMemo(() => syllabusMockPlan(examSlug), [examSlug]);
@@ -160,14 +161,14 @@ export default function SyllabusMockPage() {
             </h2>
             <p style={{ margin: '0 0 6px', lineHeight: 1.8 }}>
               {t({
-                bn: `${plan.questionCount}টি প্রশ্ন, ${plan.timeMinutes} মিনিট, মোট ${plan.totalMarks} নম্বর। ভুল উত্তরে ${plan.negativeMarking !== null ? `−${plan.negativeMarking.toFixed(2)}` : '—'} নম্বর কাটা যায়${plan.negativeMarkingVerified ? ' (যাচাইকৃত ধরন)' : ''}।`,
+                bn: `${bnDigits(plan.questionCount)}টি প্রশ্ন, ${bnDigits(plan.timeMinutes)} মিনিট, মোট ${bnDigits(plan.totalMarks)} নম্বর। ভুল উত্তরে ${plan.negativeMarking !== null ? `−${bnDigits(plan.negativeMarking.toFixed(2))}` : '—'} নম্বর কাটা যায়${plan.negativeMarkingVerified ? ' (যাচাইকৃত ধরন)' : ''}।`,
                 en: `${plan.questionCount} questions, ${plan.timeMinutes} minutes, ${plan.totalMarks} marks in total. A wrong answer loses ${plan.negativeMarking !== null ? `−${plan.negativeMarking.toFixed(2)}` : '—'}${plan.negativeMarkingVerified ? ' (verified pattern)' : ''}.`,
               })}
             </p>
             {plan.applicableCycle ? (
               <p style={{ margin: 0, lineHeight: 1.8, color: 'var(--ink-soft)' }}>
                 {t({
-                  bn: `এই ধরনটি ${plan.applicableCycle} পরীক্ষার জন্য যাচাইকৃত — ১৯তম NTRCA-র ধরন এখনো অমীমাংসিত, তাই তা অনুমান করা হয়নি।`,
+                  bn: `এই ধরনটি ${plan.applicableCycle === '18th' ? '১৮তম' : plan.applicableCycle} পরীক্ষার জন্য যাচাইকৃত — ১৯তম NTRCA-র ধরন এখনো অমীমাংসিত, তাই তা অনুমান করা হয়নি।`,
                   en: `This pattern is verified for the ${plan.applicableCycle} exam — the 19th NTRCA pattern is still unresolved, so it is not guessed.`,
                 })}
               </p>
@@ -198,11 +199,11 @@ export default function SyllabusMockPage() {
                     <td style={{ borderBottom: '1px solid var(--hatch-widget-border)', padding: '6px 4px' }}>
                       {t({ bn: s.nameBn, en: s.nameEn })}
                     </td>
-                    <td style={{ textAlign: 'right', borderBottom: '1px solid var(--hatch-widget-border)', padding: '6px 4px' }}>{s.marks}</td>
+                    <td style={{ textAlign: 'right', borderBottom: '1px solid var(--hatch-widget-border)', padding: '6px 4px' }}>{lang === 'bn' ? bnDigits(s.marks) : s.marks}</td>
                     <td style={{ textAlign: 'right', borderBottom: '1px solid var(--hatch-widget-border)', padding: '6px 4px' }}>
                       {s.hasNoVerifiedQuestions
                         ? t({ bn: 'এই বিষয়ে যাচাইকৃত প্রশ্ন এখনো নেই', en: 'No verified questions for this subject yet' })
-                        : s.verifiedAvailable}
+                        : lang === 'bn' ? bnDigits(s.verifiedAvailable) : s.verifiedAvailable}
                     </td>
                   </tr>
                 ))}
@@ -213,7 +214,7 @@ export default function SyllabusMockPage() {
           {plan.fullMockPossible ? null : (
             <AlertBox tone="info">
               {t({
-                bn: `পূর্ণ মক এখনো দেওয়া যাচ্ছে না — সব বিষয়ে যাচাইকৃত প্রশ্ন নেই। ব্যাংকে যাচাইকৃত প্রশ্ন ${BANK_STATE.jobVerified}টি, কিন্তু পাবলিক বান্ডেলে এখন শুধু বিসিএস ইংরেজির ${PUBLIC_BCS_ENGLISH_QUESTIONS.length}টি প্রশ্ন আছে।`,
+                bn: `পূর্ণ মক এখনো দেওয়া যাচ্ছে না — সব বিষয়ে যাচাইকৃত প্রশ্ন নেই। ব্যাংকে যাচাইকৃত প্রশ্ন ${bnDigits(BANK_STATE.jobVerified)}টি, কিন্তু পাবলিক বান্ডেলে এখন শুধু বিসিএস ইংরেজির ${bnDigits(PUBLIC_BCS_ENGLISH_QUESTIONS.length)}টি প্রশ্ন আছে।`,
                 en: `A full mock is not available yet — not every subject has verified questions. The bank holds ${BANK_STATE.jobVerified} verified questions, but the public bundle currently has only the ${PUBLIC_BCS_ENGLISH_QUESTIONS.length} BCS English questions.`,
               })}
             </AlertBox>
@@ -226,7 +227,7 @@ export default function SyllabusMockPage() {
               </h2>
               <p style={{ margin: '0 0 10px', lineHeight: 1.8 }}>
                 {t({
-                  bn: `${plan.sectionMock.questionCount}টি যাচাইকৃত প্রশ্ন, ${plan.sectionMock.timeMinutes} মিনিট (অফিসিয়াল গতি: ৩৬ সেকেন্ড/প্রশ্ন), ভুল উত্তরে −${plan.sectionMock.negativeMarking.toFixed(2)}।`,
+                  bn: `${bnDigits(plan.sectionMock.questionCount)}টি যাচাইকৃত প্রশ্ন, ${bnDigits(plan.sectionMock.timeMinutes)} মিনিট (অফিসিয়াল গতি: ৩৬ সেকেন্ড/প্রশ্ন), ভুল উত্তরে −${bnDigits(plan.sectionMock.negativeMarking.toFixed(2))}।`,
                   en: `${plan.sectionMock.questionCount} verified questions, ${plan.sectionMock.timeMinutes} minutes (official pace: 36 seconds per question), −${plan.sectionMock.negativeMarking.toFixed(2)} per wrong answer.`,
                 })}
               </p>
@@ -250,7 +251,7 @@ export default function SyllabusMockPage() {
           <Card style={{ marginBottom: 12 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
               <strong>
-                {t({ bn: `প্রশ্ন ${index + 1} / ${questions.length}`, en: `Question ${index + 1} / ${questions.length}` })}
+                {t({ bn: `প্রশ্ন ${bnDigits(index + 1)} / ${bnDigits(questions.length)}`, en: `Question ${index + 1} / ${questions.length}` })}
               </strong>
               <strong style={{ color: secondsLeft <= 60 ? '#B91C1C' : 'inherit' }}>
                 {t({ bn: `সময় বাকি: ${formatTime(secondsLeft)}`, en: `Time left: ${formatTime(secondsLeft)}` })}
@@ -312,7 +313,7 @@ export default function SyllabusMockPage() {
             </h2>
             <p style={{ margin: '0 0 6px', lineHeight: 1.8 }}>
               {t({
-                bn: `নম্বর: ${result.score} / ${result.total} (সঠিক ${result.correct}টি, ভুল ${result.wrong}টি, উত্তর দেওয়া হয়নি ${result.skipped}টি; ভুল উত্তরে −${plan!.sectionMock!.negativeMarking.toFixed(2)} করে কাটা হয়েছে)।`,
+                bn: `নম্বর: ${bnDigits(result.score)} / ${bnDigits(result.total)} (সঠিক ${bnDigits(result.correct)}টি, ভুল ${bnDigits(result.wrong)}টি, উত্তর দেওয়া হয়নি ${bnDigits(result.skipped)}টি; ভুল উত্তরে −${bnDigits(plan!.sectionMock!.negativeMarking.toFixed(2))} করে কাটা হয়েছে)।`,
                 en: `Score: ${result.score} / ${result.total} (correct ${result.correct}, wrong ${result.wrong}, skipped ${result.skipped}; −${plan!.sectionMock!.negativeMarking.toFixed(2)} per wrong answer).`,
               })}
             </p>

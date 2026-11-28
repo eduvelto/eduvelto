@@ -223,6 +223,13 @@ export function admissionUnitByRoute(
   return { institution: inst, unit: u };
 }
 
+/** Render a number with Bengali digits in Bangla copy (site
+ *  convention — see the bnDigits helpers in globalSearch/liveExam).
+ *  The '.' decimal separator stays, matching the guides ("০.৫০"). */
+export function bnDigits(n: number | string): string {
+  return String(n).replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]);
+}
+
 /* ------------------------------------------------------------------ */
 /* Bundled verified-question availability (the ONLY servable pool)     */
 /* ------------------------------------------------------------------ */

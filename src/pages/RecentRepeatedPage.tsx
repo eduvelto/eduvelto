@@ -20,6 +20,7 @@ import {
   BANK_STATE,
   RECENT_REPEATED_COUNT,
   RECENT_REPEATED_QUESTIONS,
+  bnDigits,
   recentRepeatedByTopic,
 } from '../lib/jobAdmissionPrep';
 
@@ -35,14 +36,14 @@ export default function RecentRepeatedPage() {
     <PageShell titleBn="সাম্প্রতিক ও বারবার আসা প্রশ্ন" titleEn="Recent & Most Repeated Questions" wide>
       <p style={{ lineHeight: 1.8, color: 'var(--ink-soft)' }}>
         {t({
-          bn: `এই সংগ্রহে এখন ${RECENT_REPEATED_COUNT}টি যাচাইকৃত প্রশ্ন আছে — বিসিএস ইংরেজি ব্যাচ ১ (প্রকাশিত ২২ নভেম্বর ২০২৬)। প্রতিটি প্রশ্নের সঠিক উত্তর ও ব্যাখ্যা দেওয়া আছে।`,
+          bn: `এই সংগ্রহে এখন ${bnDigits(RECENT_REPEATED_COUNT)}টি যাচাইকৃত প্রশ্ন আছে — বিসিএস ইংরেজি ব্যাচ ১ (প্রকাশিত ২২ নভেম্বর ২০২৬)। প্রতিটি প্রশ্নের সঠিক উত্তর ও ব্যাখ্যা দেওয়া আছে।`,
           en: `This collection now holds ${RECENT_REPEATED_COUNT} verified questions — BCS English Batch 1 (published 22 Nov 2026). Every question shows its correct answer and explanation.`,
         })}
       </p>
 
       <AlertBox tone="info">
         {t({
-          bn: `৪৬তম বিসিএস প্রিলিমিনারির ${BANK_STATE.bcs46thPyqInBank}টি যাচাইকৃত PYQ ব্যাংকে আছে, কিন্তু এখনো পাবলিক বান্ডেলে প্রকাশিত হয়নি — তাই সেগুলো এই সংগ্রহে নেই। প্রকাশিত হলেই এখানে যোগ হবে। পরীক্ষার বছর এই ব্যাচে লেখা নেই, তাই কোনো প্রশ্নে বছর দেখানো হয়নি।`,
+          bn: `৪৬তম বিসিএস প্রিলিমিনারির ${bnDigits(BANK_STATE.bcs46thPyqInBank)}টি যাচাইকৃত PYQ ব্যাংকে আছে, কিন্তু এখনো পাবলিক বান্ডেলে প্রকাশিত হয়নি — তাই সেগুলো এই সংগ্রহে নেই। প্রকাশিত হলেই এখানে যোগ হবে। পরীক্ষার বছর এই ব্যাচে লেখা নেই, তাই কোনো প্রশ্নে বছর দেখানো হয়নি।`,
           en: `The ${BANK_STATE.bcs46thPyqInBank} verified 46th BCS Preliminary PYQs are in the bank, but not yet published to the public bundle — so they are not in this collection. They will be added here once published. No exam year is recorded in this batch, so no year is shown on any question.`,
         })}
       </AlertBox>
@@ -58,7 +59,7 @@ export default function RecentRepeatedPage() {
             fontWeight: topic === 'all' ? 700 : 400,
           }}
         >
-          {t({ bn: `সব (${RECENT_REPEATED_COUNT})`, en: `All (${RECENT_REPEATED_COUNT})` })}
+          {t({ bn: `সব (${bnDigits(RECENT_REPEATED_COUNT)})`, en: `All (${RECENT_REPEATED_COUNT})` })}
         </button>
         {PUBLIC_BCS_TOPICS.map((tp) => (
           <button
