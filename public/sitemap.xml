@@ -806,6 +806,19 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/support" />
   </url>
   <url>
+    <loc>https://eduvelto.com/bn/free-quiz</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/free-quiz" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/free-quiz" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://eduvelto.com/hi/free-quiz" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://eduvelto.com/ar/free-quiz" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://eduvelto.com/es/free-quiz" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://eduvelto.com/pt/free-quiz" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://eduvelto.com/fr/free-quiz" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://eduvelto.com/id/free-quiz" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/free-quiz" />
+  </url>
+  <url>
     <loc>https://eduvelto.com/bn/suggestions</loc>
     <lastmod>2026-11-28</lastmod>
     <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/suggestions" />
@@ -14062,6 +14075,76 @@
     <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/sql-formatter" />
     <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/sql-formatter" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/sql-formatter" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/currency-converter</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/currency-converter" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/currency-converter" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/currency-converter" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/screen-recorder</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/screen-recorder" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/screen-recorder" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/screen-recorder" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/internet-speed-test</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/internet-speed-test" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/internet-speed-test" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/internet-speed-test" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/signature-maker</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/signature-maker" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/signature-maker" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/signature-maker" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/image-to-text-ocr</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/image-to-text-ocr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/image-to-text-ocr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/image-to-text-ocr" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/focus-workspace</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/focus-workspace" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/focus-workspace" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/focus-workspace" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/ai-pdf-summarizer</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/ai-pdf-summarizer" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/ai-pdf-summarizer" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/ai-pdf-summarizer" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/ai-grammar-checker</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/ai-grammar-checker" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/ai-grammar-checker" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/ai-grammar-checker" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/ai-math-solver</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/ai-math-solver" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/ai-math-solver" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/ai-math-solver" />
+  </url>
+  <url>
+    <loc>https://eduvelto.com/bn/tools/ai-resume-tailor</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/bn/tools/ai-resume-tailor" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/en/tools/ai-resume-tailor" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/bn/tools/ai-resume-tailor" />
   </url>
   <url>
     <loc>https://eduvelto.com/bn/books/hons-211001</loc>

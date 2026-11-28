@@ -29,8 +29,8 @@ function wordCount(text: string): number {
 }
 
 describe('TOOLS_META', () => {
-  it('has exactly 271 slugs', () => {
-    expect(TOOLS_META.length).toBe(271);
+  it('has exactly 275 slugs', () => {
+    expect(TOOLS_META.length).toBe(275);
   });
 
   it('has no duplicate slugs', () => {
@@ -177,7 +177,7 @@ describe('tool icons (27 Nov 2026 — picture tiles, never a letter)', () => {
     }
   });
 
-  it('has an explicit mapping entry for all 271 slugs (no silent fallback reliance)', () => {
+  it('has an explicit mapping entry for all 275 slugs (no silent fallback reliance)', () => {
     for (const tool of TOOLS_META) {
       expect(TOOL_ICON_BY_SLUG[tool.slug], tool.slug).toBeDefined();
       expect(TOOL_ICON_NAMES, tool.slug).toContain(TOOL_ICON_BY_SLUG[tool.slug]);

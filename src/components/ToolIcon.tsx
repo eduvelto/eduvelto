@@ -543,6 +543,7 @@ const ICON_PATHS = {
     </>
   ),
   // Global batch (28 Nov 2026): screen recorder, speed test, signature,
+  // OCR, focus workspace.
   record: (
     <>
       <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -1066,6 +1067,14 @@ export const TOOL_ICON_BY_SLUG: Record<string, ToolIconName> = {
   'video-format-converter': 'filmConvert',
   'video-to-audio-converter': 'filmMusic',
   'music-player': 'musicNote',
+  // AI tools batch (4, 28 Nov 2026, global batch item 2) — existing
+  // glyphs only: a document for the PDF summariser, sparkles for the
+  // AI grammar tool, a calculator for the math solver, the CV glyph
+  // for the resume tailor.
+  'ai-pdf-summarizer': 'doc',
+  'ai-grammar-checker': 'sparkles',
+  'ai-math-solver': 'calculator',
+  'ai-resume-tailor': 'cvDoc',
   // Global batch (28 Nov 2026, owner order): 6 browser-side tools.
   'currency-converter': 'globe',
   'screen-recorder': 'record',

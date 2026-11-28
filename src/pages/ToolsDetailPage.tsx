@@ -314,6 +314,11 @@ import { InternetSpeedTestTool } from './tools/InternetSpeedTestTool';
 import { SignatureMakerTool } from './tools/SignatureMakerTool';
 import { ImageToTextOcrTool } from './tools/ImageToTextOcrTool';
 import { FocusWorkspaceTool } from './tools/FocusWorkspaceTool';
+// AI tools batch (4, 28 Nov 2026, global batch item 2).
+import { AiPdfSummarizerTool } from './tools/AiPdfSummarizerTool';
+import { AiGrammarCheckerTool } from './tools/AiGrammarCheckerTool';
+import { AiMathSolverTool } from './tools/AiMathSolverTool';
+import { AiResumeTailorTool } from './tools/AiResumeTailorTool';
 import ToolGuide from './tools/ToolGuide';
 
 // ---------------------------------------------------------------------------
@@ -608,6 +613,11 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   'signature-maker': SignatureMakerTool,
   'image-to-text-ocr': ImageToTextOcrTool,
   'focus-workspace': FocusWorkspaceTool,
+  // AI tools batch (4, 28 Nov 2026, global batch item 2).
+  'ai-pdf-summarizer': AiPdfSummarizerTool,
+  'ai-grammar-checker': AiGrammarCheckerTool,
+  'ai-math-solver': AiMathSolverTool,
+  'ai-resume-tailor': AiResumeTailorTool,
 };
 
 const gridStyle: CSSProperties = {
@@ -776,7 +786,7 @@ export default function ToolsDetailPage() {
       ) : null}
       {/* Editorial verification badge (owner order 28 Nov 2026):
           tool pages only — never on question banks, books or exam
-          pages. One component covers all 265 tools. */}
+          pages. One component covers all 275 tools. */}
       <EditorialBadge />
     </PageShell>
   );

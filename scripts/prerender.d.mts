@@ -5,6 +5,9 @@
 
 export const SITE_URL: string;
 export const LANGS: string[];
+export const PHASED_LANGS: string[];
+export const TOP_20_TOOL_SLUGS: string[];
+export const PHASED_BARE_PATHS: string[];
 export const DEFAULT_PROJECT_ID: string;
 export const PRERENDER_STATIC_PATHS: string[];
 export const LINK_REWRITE_SEGMENTS: string[];
@@ -74,6 +77,8 @@ export function getGuidePaths(source: string): string[];
 export function getAcademicPracticePaths(source: string): string[];
 export function getToolPaths(source: string): string[];
 export function getConvertPairPaths(source: string): string[];
+export function isPhasedPath(barePath: string): boolean;
+export function langsForPath(barePath: string): string[];
 export function withLangPrefix(path: string, lang: string): string;
 export function canonicalUrl(path: string, lang: string): string;
 export function normalizeBooksFixture(data: unknown): { books: PrerenderBook[]; skipped: number };
@@ -119,6 +124,8 @@ export function buildBookHead(book: PrerenderBook, lang: string): string;
 export function buildBookSummary(book: PrerenderBook, lang: string): string;
 export function buildBookSummaryHtml(book: PrerenderBook, lang: string): string;
 export function rewriteInternalHrefs(html: string, lang: string): string;
-export function buildSitemapXml(urls: Array<{ loc: string; bn: string; en: string }>): string;
+// Sitemap entries carry bn/en always; phased URLs also carry the six
+// phased languages (hi/ar/es/pt/fr/id) as alternate keys.
+export function buildSitemapXml(urls: Array<{ loc: string; bn: string; en: string; [lang: string]: string }>): string;
 export function buildRobotsTxt(): string;
 export function stripShellSeo(headInner: string): string;

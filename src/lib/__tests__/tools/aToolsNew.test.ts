@@ -61,9 +61,11 @@ describe('bgRemoverOnnx pure math', () => {
 });
 
 describe('languages registry (spec-09 architecture)', () => {
-  it('lists 10 languages with bn+en live and the other 8 not ready', () => {
+  it('lists 10 languages with 8 live (bn/en + 6 phased) and de/ja not ready', () => {
     expect(SUPPORTED_LANGS).toHaveLength(10);
-    expect(LIVE_LANGS).toEqual(['bn', 'en']);
+    // 28 Nov 2026 phased rollout (owner order): es, ar, hi, pt, fr,
+    // id went live; de/ja stay not ready.
+    expect(LIVE_LANGS).toEqual(['bn', 'en', 'es', 'ar', 'hi', 'pt', 'fr', 'id']);
     expect(isSupportedLang('es')).toBe(true);
     expect(isSupportedLang('ko')).toBe(false);
   });

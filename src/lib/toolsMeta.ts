@@ -2993,6 +2993,8 @@ export const TOOLS_META: ToolMeta[] = [
     relatedSlugs: ['xml-formatter', 'json-to-csv', 'url-encoder-decoder'],
   },
   // ---- 13. Global batch (28 Nov 2026, owner order): 6 browser-side tools ----
+  // Currency converter is USER-ENTERED RATE ONLY (binding FOREVER-AUTO
+  // rule) — no rates API anywhere, and the copy never claims a fetched rate.
   {
     slug: 'currency-converter',
     category: 'finance',
@@ -3058,6 +3060,51 @@ export const TOOLS_META: ToolMeta[] = [
     crumbBn: 'ফোকাস ওয়ার্কস্পেস',
     crumbEn: 'Focus Workspace',
     relatedSlugs: ['pomodoro-timer', 'study-routine-maker', 'exam-countdown-timer'],
+  },
+  // ---- 14. AI tools batch (28 Nov 2026, global batch item 2) ----
+  {
+    slug: 'ai-pdf-summarizer',
+    category: 'pdf',
+    titleBn: 'এআই পিডিএফ সারাংশ ও প্রশ্নোত্তর',
+    titleEn: 'AI PDF Summarizer & Q&A',
+    descriptionBn: 'পিডিএফ আপলোড করে AI দিয়ে সারাংশ নিন আর নথি নিয়ে প্রশ্ন করুন — লেখা আপনার ব্রাউজারেই পড়া হয়।',
+    descriptionEn: 'Upload a PDF, get an AI summary with key points, and ask questions about the document — text is read in your browser.',
+    crumbBn: 'এআই পিডিএফ সারাংশ',
+    crumbEn: 'AI PDF Summarizer',
+    relatedSlugs: ['pdf-to-word', 'pdf-merger', 'ai-grammar-checker'],
+  },
+  {
+    slug: 'ai-grammar-checker',
+    category: 'text',
+    titleBn: 'এআই ব্যাকরণ পরীক্ষক ও পুনর্লেখক',
+    titleEn: 'AI Grammar Checker & Paraphraser',
+    descriptionBn: 'ইংরেজি, বাংলা ও আরও ভাষায় লেখার ভুল শুধরে নিন বা নতুন করে সাজান — AI দিয়ে, বিনামূল্যে।',
+    descriptionEn: 'Fix grammar mistakes or paraphrase your writing in English, Bangla and more languages — free, with AI.',
+    crumbBn: 'এআই ব্যাকরণ পরীক্ষক',
+    crumbEn: 'AI Grammar Checker',
+    relatedSlugs: ['essay-thesis-generator', 'dictionary', 'ai-pdf-summarizer'],
+  },
+  {
+    slug: 'ai-math-solver',
+    category: 'education',
+    titleBn: 'এআই হোমওয়ার্ক ও গণিত সমাধানকারী',
+    titleEn: 'AI Homework & Math Solver',
+    descriptionBn: 'গণিত ও হোমওয়ার্কের সমস্যা লিখুন — AI ধাপে ধাপে সমাধান দেখাবে। উত্তর যাচাই করে নিন।',
+    descriptionEn: 'Type a maths or homework problem and get a step-by-step AI solution. Always verify the answer.',
+    crumbBn: 'এআই গণিত সমাধানকারী',
+    crumbEn: 'AI Math Solver',
+    relatedSlugs: ['linear-equation-solver', 'quadratic-equation-solver', 'scientific-calculator'],
+  },
+  {
+    slug: 'ai-resume-tailor',
+    category: 'job',
+    titleBn: 'এআই রিজিউমে ও কভার লেটার',
+    titleEn: 'AI Resume & Cover Letter Tailor',
+    descriptionBn: 'চাকরির বিজ্ঞাপন অনুযায়ী AI দিয়ে সিভির পয়েন্ট ও কভার লেটার সাজান — সিভি বিল্ডার থেকে আলাদা।',
+    descriptionEn: 'Tailor resume bullet points and a cover letter to a job description with AI — different from the CV builder.',
+    crumbBn: 'এআই রিজিউমে টেইলর',
+    crumbEn: 'AI Resume Tailor',
+    relatedSlugs: ['cv-builder', 'cover-letter-builder', 'ai-grammar-checker'],
   },
 ];
 

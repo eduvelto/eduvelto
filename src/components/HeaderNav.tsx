@@ -2,7 +2,7 @@
 //
 // Owner-approved mockups (desktop + mobile, "same arokom hobe"):
 // a LIGHT header — white background, forest text — replacing the old
-// forest-navy header. Nav: Home (blue pill), Tools — 265 free tools
+// forest-navy header. Nav: Home (blue pill), Tools — 275 free tools
 // (blue pill, 28 Nov 2026 AdSense-readiness), Job Preparation,
 // Admission Preparation, Academic Learning, Professional Skills
 // (dropdowns), search icon, dark-mode toggle, Login / Register
@@ -428,12 +428,12 @@ export default function HeaderNav() {
         </NavLink>
         {/* Tools Hub (28 Nov 2026 AdSense-readiness): a prominent
             direct link to /tools — the hub existed but had no link
-            anywhere in the header or on the homepage. 265 free tools
+            anywhere in the header or on the homepage. 275 free tools
             (28 Nov 2026 audit count; TOOLS_META.length). Same blue
             pill as Home; the nav wraps, so a second row at narrow
             widths is acceptable. */}
         <NavLink to={langUrl('/tools', tabLang)} className={({ isActive }) => `ev-hnav-home${isActive ? ' ev-hnav-home-active' : ''}`}>
-          <ToolsIcon /> {tTab({ bn: '২৬৫টি ফ্রি টুল', en: '265 free tools' })}
+          <ToolsIcon /> {tTab({ bn: '২৭৫টি ফ্রি টুল', en: '275 free tools' })}
         </NavLink>
         {MENUS.map((menu) => {
           const open = openMenu === menu.id;

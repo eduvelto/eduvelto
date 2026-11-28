@@ -50,7 +50,8 @@ describe('PRERENDER_STATIC_PATHS', () => {
   it('covers every committed-sitemap URL, plus the new /books hub', () => {
     const sitemapPaths = readSitemapPaths();
     // 27 Nov 2026: the committed sitemap is the PRERENDER-GENERATED
-    // one (bn canonicals, 2,747 locs), not the old hand-maintained
+    // one (bn canonicals, 2,629 locs as of 28 Nov 2026, incl. the
+    // /free-quiz entry + the 10 global-batch tools), not the old hand-maintained
     // 283-URL static list. Derive the expected set the same way
     // scripts/prerender.mjs builds it: static paths + academic
     // practice paths + tool paths, plus one page per book.
@@ -694,11 +695,11 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
 });
 
 describe('getToolPaths — 100-tools project (26 Nov 2026)', () => {
-  it('derives the hub + one path per tool from toolsMeta.ts (272: /tools + 271 live tools)', () => {
+  it('derives the hub + one path per tool from toolsMeta.ts (276: /tools + 275 live tools)', () => {
     // Same source the prerender script reads. A future tool adds its
     // path here automatically — no prerender-list edit per tool.
-    // 28 Nov 2026: 271 slugs in toolsMeta.ts (170 original + 25 Math +
-    // 24 Text + 21 Converters + 15 Finance/Health + 10 Main tables batches + 6 global-batch browser tools), INCLUDING the Lab Test Result Checker — owner
+    // 28 Nov 2026: 275 slugs in toolsMeta.ts (170 original + 25 Math +
+    // 24 Text + 21 Converters + 15 Finance/Health + 10 Main tables batches + 6 global-batch browser tools + 4 AI tools), INCLUDING the Lab Test Result Checker — owner
     // lifted the MBBS-review gate 12:13, so PRERENDER_EXCLUDED_TOOL_SLUGS
     // is empty and the checker prerenders + sitemaps like every other
     // tool — and PDF to Word, the 172nd tool, added the same day.
@@ -706,7 +707,7 @@ describe('getToolPaths — 100-tools project (26 Nov 2026)', () => {
     // jpg-to-pdf, were removed 28 Nov 2026: 267 -> 265.)
     const source = readFileSync(join(process.cwd(), 'src', 'lib', 'toolsMeta.ts'), 'utf8');
     const paths = getToolPaths(source);
-    expect(paths).toHaveLength(272);
+    expect(paths).toHaveLength(276);
     expect(paths[0]).toBe('/tools');
     expect(paths).toContain('/tools/lab-test-result-checker');
     expect(new Set(paths).size).toBe(paths.length);

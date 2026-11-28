@@ -7,6 +7,12 @@
 
 import { useState, type CSSProperties, type ReactNode } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
+import {
+  AI_DAILY_LIMIT,
+  aiQuotaExhaustedMessageBn,
+  aiQuotaExhaustedMessageEn,
+  toBnDigits,
+} from '../../lib/aiQuota';
 
 export const inputStyle: CSSProperties = {
   width: '100%',
@@ -212,5 +218,54 @@ export function ExampleButton(props: { onLoad: () => void }) {
     <button type="button" style={buttonStyle} onClick={props.onLoad}>
       {t({ bn: 'উদাহরণ লোড করুন', en: 'Load example' })}
     </button>
+  );
+}
+
+/**
+ * Daily free-AI budget line (owner rule 3a, 28 Nov 2026): every AI
+ * tool states the 10-questions/day limit and how many the visitor
+ * has left today. Shared so all 4 AI tools word it the same way.
+ */
+export function AiLimitLine(props: { remaining: number }) {
+  const { t } = useLanguage();
+  return (
+    <p style={{ ...noteStyle, fontSize: 14, color: 'var(--heading)' }}>
+      {t({
+        bn: `দিনে ${toBnDigits(AI_DAILY_LIMIT)}টি ফ্রি AI প্রশ্ন — আজ আরও ${toBnDigits(props.remaining)}টি বাকি`,
+        en: `${AI_DAILY_LIMIT} free AI questions per day — ${props.remaining} left today`,
+      })}
+    </p>
+  );
+}
+
+/**
+ * Quota-exhausted notice (owner rule 3c): the owner's EXACT friendly
+ * Bangla message (live registry count) — NEVER a red error. In the
+ * English UI the Bangla stays verbatim with a short gloss beneath.
+ */
+export function AiQuotaNotice() {
+  const { lang } = useLanguage();
+  return (
+    <p
+      role="status"
+      style={{
+        background: 'var(--teal-soft)',
+        border: '1px solid var(--teal)',
+        borderRadius: 8,
+        padding: '10px 12px',
+        fontSize: 14,
+        lineHeight: 1.7,
+        color: 'var(--heading)',
+        margin: '0 0 12px',
+      }}
+    >
+      {aiQuotaExhaustedMessageBn()}
+      {lang === 'en' ? (
+        <>
+          <br />
+          {aiQuotaExhaustedMessageEn()}
+        </>
+      ) : null}
+    </p>
   );
 }
