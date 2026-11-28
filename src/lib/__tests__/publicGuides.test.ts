@@ -10,8 +10,12 @@
 // EXTENDED 28 Nov 2026, eleventh guide (owner order 11:44): 67 guides
 // — 10 new tool-tied Study Guides at /guides/<slug>, 800+ words in
 // Bangla AND English each, every formula grounded in the tools' logic.
+// EXTENDED 28 Nov 2026, finish batch B (owner order, code freeze
+// lifted 21:10): +5 tool-tied guides (6–10), 72 total — discount/VAT,
+// image compress+resize, percentage, BMR/TDEE, digital signature;
+// 800+ words in Bn AND En each, formulas grounded in the tools.
 //
-// The 67 guides are static public data, so the tests guard what
+// The 72 guides are static public data, so the tests guard what
 // matters most: exactly 35 guides with unique slugs/paths, 400–700
 // words each (pinned to the content pack's counts), every internal
 // link pointing at a real route, the draft status never claimed as
@@ -32,9 +36,9 @@ import { PUBLIC_GUIDE_BODIES } from '../publicGuideBodies';
 import { PUBLIC_GUIDE_META } from '../publicGuideMeta';
 
 describe('public guides — meta/body split (25 Nov 2026, entry-chunk budget)', () => {
-  it('meta + bodies cover the same 66 slugs as the joined PUBLIC_GUIDES', () => {
-    expect(PUBLIC_GUIDE_META).toHaveLength(67);
-    expect(Object.keys(PUBLIC_GUIDE_BODIES)).toHaveLength(67);
+  it('meta + bodies cover the same 72 slugs as the joined PUBLIC_GUIDES', () => {
+    expect(PUBLIC_GUIDE_META).toHaveLength(72);
+    expect(Object.keys(PUBLIC_GUIDE_BODIES)).toHaveLength(72);
     const slugs = PUBLIC_GUIDES.map((g) => g.slug);
     expect(PUBLIC_GUIDE_META.map((m) => m.slug).sort()).toEqual([...slugs].sort());
     expect(Object.keys(PUBLIC_GUIDE_BODIES).sort()).toEqual([...slugs].sort());
@@ -260,16 +264,28 @@ const REAL_ROUTES = new Set([
   '/tools/bangla-date-converter',
   '/tools/qr-code-generator',
   '/tools/qr-code-reader',
+  // Finish batch B (28 Nov 2026): the 5 new guide paths + the live
+  // tool routes the new articles link to.
+  '/guides/discount-vat-profit-calculation-guide',
+  '/guides/image-compress-resize-guide',
+  '/guides/percentage-calculation-guide',
+  '/guides/bmr-tdee-calorie-guide',
+  '/guides/digital-signature-maker-guide',
+  '/tools/discount-vat-profit-calculator',
+  '/tools/image-resizer',
+  '/tools/percentage-converter',
+  '/tools/signature-maker',
+  '/tools/pdf-watermark',
   '/tools/image-compressor',
   '/tools/barcode-generator',
 ]);
 
 describe('public guides', () => {
-  it('has exactly the 67 guides, with unique slugs, paths and titles', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(67);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(67);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(67);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(67);
+  it('has exactly the 72 guides, with unique slugs, paths and titles', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(72);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(72);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(72);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(72);
     for (const g of PUBLIC_GUIDES) {
       // Old guides live at /learn/<slug>; Phase 2 Study Guides at /guides/<slug>.
       expect(g.path).toBe(
@@ -291,7 +307,7 @@ describe('public guides', () => {
   });
 
   it('Phase 2 Study Guides are 700+ words in Bangla AND English', () => {
-    expect(PHASE2_GUIDES).toHaveLength(26);
+    expect(PHASE2_GUIDES).toHaveLength(31);
     for (const g of PHASE2_GUIDES) {
       expect(publicGuideWordCount(g), `${g.slug} Bn words`).toBeGreaterThanOrEqual(700);
       expect(publicGuideWordCountEn(g), `${g.slug} En words`).toBeGreaterThanOrEqual(700);
@@ -514,7 +530,7 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
     'bcs-science-ict-preparation',
   ];
 
-  it('has the planned distribution: BCS 5, Primary 3, Bank 2, NTRCA 2, Admission 4, NCTB 3, Tools 5, Finance 1, Health 1', () => {
+  it('has the planned distribution: BCS 5, Primary 3, Bank 2, NTRCA 2, Admission 4, NCTB 3, Tools 8, Finance 2, Health 2', () => {
     const counts = new Map<string, number>();
     for (const g of PHASE2_GUIDES) counts.set(g.category!, (counts.get(g.category!) ?? 0) + 1);
     expect(Object.fromEntries(counts)).toEqual({
@@ -524,9 +540,9 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
       ntrca: 2,
       admission: 4,
       nctb: 3,
-      tools: 5,
-      finance: 1,
-      health: 1,
+      tools: 8,
+      finance: 2,
+      health: 2,
     });
   });
 
@@ -710,5 +726,64 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
     expect(bn).toContain('She did not play');
     expect(en).toContain('He does not go');
     expect(en).toContain('She did not play');
+  });
+
+  it('finish batch B (28 Nov 2026): guides 6–10 are 800+ words in Bn AND En', () => {
+    // Owner order 28 Nov 2026 (code freeze lifted 21:10) — every
+    // formula grounded in the tools' own logic (src/lib/tools/).
+    const FINISH_B_SLUGS = [
+      'discount-vat-profit-calculation-guide',
+      'image-compress-resize-guide',
+      'percentage-calculation-guide',
+      'bmr-tdee-calorie-guide',
+      'digital-signature-maker-guide',
+    ];
+    expect(FINISH_B_SLUGS).toHaveLength(5);
+    for (const slug of FINISH_B_SLUGS) {
+      const g = publicGuideBySlug(slug)!;
+      expect(g, slug).toBeDefined();
+      expect(g.updatedAt).toBe('2026-11-28');
+      expect(publicGuideWordCount(g), `${slug} Bn words`).toBeGreaterThanOrEqual(800);
+      expect(publicGuideWordCountEn(g), `${slug} En words`).toBeGreaterThanOrEqual(800);
+      expect(g.links.some((l) => l.to.startsWith('/tools/')), `${slug} links a tool`).toBe(true);
+    }
+  });
+
+  it('finish batch B: the grounded facts match the tools exactly', () => {
+    // Discount/VAT/profit: hand-checks from discountVatProfit.ts.
+    const d = publicGuideBySlug('discount-vat-profit-calculation-guide')!;
+    expect(d.bodyBn.join(' ')).toContain('২,০০০ × ২৫ ÷ ১০০ = ৫০০ টাকা');
+    expect(d.bodyBn.join(' ')).toContain('১,৪৪০ টাকা');
+    expect(d.bodyBn.join(' ')).toContain('১,১৫০ × ১৫ ÷ ১১৫ = ১৫০ টাকা');
+    expect(d.bodyEn!.join(' ')).toContain('2,000 × 25 ÷ 100 = 500 taka');
+    expect(d.bodyEn!.join(' ')).toContain('1,440 taka');
+    expect(d.bodyEn!.join(' ')).toContain('1,150 × 15 ÷ 115 = 150 taka');
+    // Image: presets + defaults from imageCompressor.ts /
+    // imageResizer.ts and the tools' own guide text.
+    const img = publicGuideBySlug('image-compress-resize-guide')!;
+    expect(img.bodyBn.join(' ')).toContain('টেলিটক ছবি ৩০০×৩০০ পিক্সেল');
+    expect(img.bodyBn.join(' ')).toContain('টেলিটক স্বাক্ষর ৩০০×৮০ পিক্সেল');
+    expect(img.bodyBn.join(' ')).toContain('পাসপোর্ট ছবি ৬০০×৬০০ পিক্সেল');
+    expect(img.bodyEn!.join(' ')).toContain('Teletalk photo is 300×300 pixels');
+    // Percentage: worked examples from the percentage-converter
+    // tool guide.
+    const p = publicGuideBySlug('percentage-calculation-guide')!;
+    expect(p.bodyBn.join(' ')).toContain('১৫০-এর ২০% হলো ৩০');
+    expect(p.bodyBn.join(' ')).toContain('২৫% = ০.২৫ = ১/৪');
+    expect(p.bodyEn!.join(' ')).toContain('20% of 150 is 30');
+    expect(p.bodyEn!.join(' ')).toContain('25% = 0.25 = 1/4');
+    // BMR/TDEE: Mifflin-St Jeor + hand-checks from bodyMetrics.ts.
+    const bmr = publicGuideBySlug('bmr-tdee-calorie-guide')!;
+    expect(bmr.bodyBn.join(' ')).toContain('৭০০ + ১০৯৩.৭৫ − ১৫০ + ৫ = ১৬৪৮.৭৫');
+    expect(bmr.bodyBn.join(' ')).toContain('১৬৪৯ × ১.৫৫ = ২৫৫৫.৯৫');
+    expect(bmr.bodyBn.join(' ')).toContain('এটি আনুমানিক হিসাব, চিকিৎসা পরামর্শ নয়');
+    expect(bmr.bodyEn!.join(' ')).toContain('700 + 1093.75 − 150 + 5 = 1648.75');
+    expect(bmr.bodyEn!.join(' ')).toContain('1649 × 1.55 = 2555.95');
+    expect(bmr.bodyEn!.join(' ')).toContain('this result is an estimate, not medical advice');
+    // Signature: the tool's honest label — a drawn signature, NOT a
+    // certified/legal one (SignatureMakerTool.tsx).
+    const sig = publicGuideBySlug('digital-signature-maker-guide')!;
+    expect(sig.bodyBn.join(' ')).toContain('এটি প্রত্যয়িত বা আইনি ডিজিটাল স্বাক্ষর নয়');
+    expect(sig.bodyEn!.join(' ')).toContain('It is NOT a certified or legal digital signature');
   });
 });
