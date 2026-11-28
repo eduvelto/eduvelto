@@ -276,7 +276,17 @@ function drawWaveEdge(ctx: CanvasRenderingContext2D, W: number): void {
   // Bottom edge of the wave header, right → left. The header is a
   // band ~330 px deep on the right, dipping to ~430–480 px on the
   // left through two smooth bezier swells.
-  ctx.moveTo(W, 330);
+  //
+  // BINDING (regression 28 Nov 2026): this MUST start with lineTo,
+  // never moveTo. The header fill path runs (0, 0) → (W, 0) and then
+  // continues down the right edge into this curve; a moveTo here
+  // splits the path into a zero-area top subpath plus the thin lens
+  // between the curve and its closing chord, so the fill covers only
+  // that lens and the whole title area stays ivory — and the ivory
+  // OF ACHIEVEMENT line drawn on it vanishes. When the edge is
+  // stroked on its own, the caller moveTo's to (W, 330) first, so
+  // the lineTo below is a no-op there.
+  ctx.lineTo(W, 330);
   ctx.bezierCurveTo(W * 0.78, 470, W * 0.58, 300, W * 0.38, 400);
   ctx.bezierCurveTo(W * 0.22, 480, W * 0.08, 380, 0, 430);
 }
@@ -446,6 +456,8 @@ export async function drawQuizCertificateCanvas(
   drawGuilloche(ctx, theme, 200, W - 50, 560, 1420);
 
   // Wave header: navy band with a wavy bottom edge + gold edge line.
+  // Single closed subpath — top edge across, wave curve back, close
+  // along the left edge — so the navy covers the whole title block.
   ctx.beginPath();
   ctx.moveTo(0, 0);
   ctx.lineTo(W, 0);
@@ -455,6 +467,7 @@ export async function drawQuizCertificateCanvas(
   ctx.fillStyle = NAVY;
   ctx.fill();
   ctx.beginPath();
+  ctx.moveTo(W, 330);
   drawWaveEdge(ctx, W);
   ctx.strokeStyle = GOLD;
   ctx.lineWidth = 7;
@@ -466,7 +479,11 @@ export async function drawQuizCertificateCanvas(
   ctx.fillStyle = GOLD;
   ctx.font = '800 116px Poppins, "Hind Siliguri", sans-serif';
   ctx.fillText('CERTIFICATE', 220, 148);
-  ctx.fillStyle = IVORY;
+  // Gold, like the title — never ivory: the subtitle sits on the
+  // navy header, and ivory-on-ivory is exactly how it vanished when
+  // the header fill broke (regression 28 Nov 2026). Gold on navy
+  // stays visible regardless.
+  ctx.fillStyle = GOLD;
   ctx.font = '600 46px Poppins, "Hind Siliguri", sans-serif';
   try {
     (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing =

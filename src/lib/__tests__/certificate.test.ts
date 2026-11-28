@@ -169,3 +169,44 @@ describe('no seal on the certificate', () => {
     expect(src).toContain("fillText('AWARDS'");
   });
 });
+
+describe('wave header fill (regression 28 Nov 2026)', () => {
+  it('drawWaveEdge has no stray moveTo that would split the header fill', () => {
+    const src = readFileSync(new URL('../certificate.ts', import.meta.url), 'utf8');
+    const body = src.slice(
+      src.indexOf('function drawWaveEdge'),
+      src.indexOf('function drawGuilloche'),
+    );
+    // A ctx.moveTo here breaks the fill path into a zero-area top
+    // subpath plus the thin lens between the wave curve and its
+    // closing chord — the title area stays ivory and the subtitle
+    // vanishes. The curve must continue the caller's subpath, so
+    // assert on the actual call (the word may still appear in the
+    // explanatory comment above it).
+    expect(body).not.toContain('ctx.moveTo');
+    expect(body).toContain('lineTo(W, 330)');
+    expect(body).toContain('bezierCurveTo');
+  });
+
+  it('the header fill is one closed subpath: top edge, wave curve, close', () => {
+    const src = readFileSync(new URL('../certificate.ts', import.meta.url), 'utf8');
+    const fill = src.slice(
+      src.indexOf('// Wave header: navy band'),
+      src.indexOf("ctx.fillStyle = NAVY;\n  ctx.fill();"),
+    );
+    expect(fill).toContain('ctx.moveTo(0, 0);');
+    expect(fill).toContain('ctx.lineTo(W, 0);');
+    expect(fill).toContain('drawWaveEdge(ctx, W);');
+    expect(fill).toContain('ctx.closePath();');
+  });
+
+  it('"OF ACHIEVEMENT" is drawn in gold, not ivory, on the navy header', () => {
+    const src = readFileSync(new URL('../certificate.ts', import.meta.url), 'utf8');
+    const segment = src.slice(
+      src.indexOf("fillText('CERTIFICATE'"),
+      src.indexOf("fillText('OF ACHIEVEMENT'"),
+    );
+    expect(segment).toContain('GOLD');
+    expect(segment).not.toContain('IVORY');
+  });
+});
