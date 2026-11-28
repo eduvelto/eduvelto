@@ -99,7 +99,7 @@
 // in src/lib/seo.ts. /founder IS in the list since Phase 2
 // (25 Nov 2026): its SEO moved from FounderPage's client-side
 // useSeo into src/lib/seo.ts. Guide detail pages ARE covered:
-// /learn/<slug> x41 + /guides/<slug> x25.)
+// /learn/<slug> x41 + /guides/<slug> x31 (finish batch A, 28 Nov 2026).)
 
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -225,6 +225,13 @@ export const PRERENDER_STATIC_PATHS = [
   // Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
   // Sentences — Class 3, general version.
   '/guides/negative-sentences-class-3',
+  // FINISH BATCH 28 NOV — GUIDES A (1–5): 5 new tool-tied Study
+  // Guides — same explicit-route pattern as the guides above.
+  '/guides/pdf-compress-guide',
+  '/guides/cv-writing-freshers-guide',
+  '/guides/cover-letter-writing-guide',
+  '/guides/typing-speed-improve-guide',
+  '/guides/compound-interest-calculation-guide',
   '/learn',
   '/admissions',
   '/admissions/national-university',

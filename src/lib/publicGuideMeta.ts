@@ -1321,4 +1321,128 @@ export const PUBLIC_GUIDE_META: PublicGuideMeta[] = [
       { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
     ],
   },
+  // FINISH BATCH 28 NOV — GUIDES A (1–5): 5 new tool-tied Study
+  // Guides, 800+ words in Bangla AND English each. Every
+  // formula/rule matches the tool's own logic (src/lib/tools/):
+  // PDF compression levels + image pass (pdfCompressor.ts),
+  // compound-interest monthly formula + hand-check
+  // (compoundEngine.ts / compoundInterest.ts), typing WPM as the
+  // standard 5-character word, CV / cover-letter structure from
+  // standard practice. No invented numbers, no "best" claims.
+  {
+    slug: 'pdf-compress-guide',
+    path: '/guides/pdf-compress-guide',
+    titleBn: 'PDF ফাইল ছোট করার নিয়ম',
+    titleEn: 'How to Compress a PDF File',
+    crumbBn: 'PDF ছোট করা',
+    category: 'tools',
+    descriptionBn:
+      'PDF ফাইলের আকার ছোট করার নিয়ম — কম্প্রেসের মাত্রা, ছবি চাপা, লক্ষ্য আকার ও মান ধরে রাখার উপায়।',
+    descriptionEn:
+      'How to make a PDF file smaller — compression levels, image downsampling, target size and keeping quality.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/pdf-compressor', bn: 'PDF কম্প্রেসর', en: 'PDF Compressor' },
+      { to: '/tools/pdf-splitter', bn: 'PDF ভাগ করা', en: 'PDF Splitter' },
+      { to: '/tools/pdf-merger', bn: 'PDF একত্র করা', en: 'PDF Merger' },
+      { to: '/tools/pdf-password-protector', bn: 'PDF পাসওয়ার্ড সুরক্ষা', en: 'PDF Password Protector' },
+      { to: '/guides/safe-pdf-usage-guide', bn: 'নিরাপদে PDF ব্যবহারের নিয়ম', en: 'Safe PDF Usage Rules' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'cv-writing-freshers-guide',
+    path: '/guides/cv-writing-freshers-guide',
+    titleBn: 'CV লেখার নিয়ম — ফ্রেশারদের জন্য',
+    titleEn: 'How to Write a CV — For Freshers',
+    crumbBn: 'ফ্রেশারদের CV',
+    category: 'tools',
+    descriptionBn:
+      'অভিজ্ঞতা ছাড়া CV লেখার নিয়ম — গঠন, শিক্ষা, দক্ষতা, প্রকল্প ও এক পাতার বিন্যাসের সহজ গাইড।',
+    descriptionEn:
+      'How to write a CV with no work experience — structure, education, skills, projects and a one-page layout.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/cv-builder', bn: 'সিভি বিল্ডার', en: 'CV Builder' },
+      { to: '/tools/cover-letter-builder', bn: 'কভার লেটার বিল্ডার', en: 'Cover Letter Builder' },
+      { to: '/opportunities/cv-builder', bn: 'CV তৈরি', en: 'CV builder' },
+      { to: '/opportunities/interview-prep', bn: 'সাক্ষাৎকারের প্রস্তুতি', en: 'Interview preparation' },
+      { to: '/guides/cover-letter-writing-guide', bn: 'Cover Letter লেখার নিয়ম', en: 'How to Write a Cover Letter' },
+      { to: '/learn/cv-writing-guide', bn: 'CV লেখার গাইড', en: 'CV writing guide' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'cover-letter-writing-guide',
+    path: '/guides/cover-letter-writing-guide',
+    titleBn: 'Cover Letter লেখার নিয়ম',
+    titleEn: 'How to Write a Cover Letter',
+    crumbBn: 'Cover Letter লেখা',
+    category: 'tools',
+    descriptionBn:
+      'চাকরির আবেদনের Cover Letter লেখার নিয়ম — গঠন, ভূমিকা, মূল অংশ, সমাপনী ও সাধারণ ভুল এড়ানোর উপায়।',
+    descriptionEn:
+      'How to write a job-application cover letter — structure, opening, main part, closing and avoiding common mistakes.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/cover-letter-builder', bn: 'কভার লেটার বিল্ডার', en: 'Cover Letter Builder' },
+      { to: '/tools/cv-builder', bn: 'সিভি বিল্ডার', en: 'CV Builder' },
+      { to: '/guides/cv-writing-freshers-guide', bn: 'CV লেখার নিয়ম — ফ্রেশারদের জন্য', en: 'How to Write a CV — For Freshers' },
+      { to: '/opportunities/interview-prep', bn: 'সাক্ষাৎকারের প্রস্তুতি', en: 'Interview preparation' },
+      { to: '/learn/cv-writing-guide', bn: 'CV লেখার গাইড', en: 'CV writing guide' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'typing-speed-improve-guide',
+    path: '/guides/typing-speed-improve-guide',
+    titleBn: 'টাইপিং স্পিড বাড়ানোর উপায়',
+    titleEn: 'How to Increase Your Typing Speed',
+    crumbBn: 'টাইপিং স্পিড',
+    category: 'tools',
+    descriptionBn:
+      'টাইপিং স্পিড বাড়ানোর উপায় — WPM হিসাব, হোম রো পদ্ধতি, বাংলা ও ইংরেজি অনুশীলন এবং নিয়মিত মাপার নিয়ম।',
+    descriptionEn:
+      'How to increase your typing speed — the WPM calculation, the home-row method, Bangla and English practice and regular testing.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/typing-speed-test', bn: 'টাইপিং গতি পরীক্ষা', en: 'Typing Speed Test' },
+      { to: '/tools/cv-builder', bn: 'সিভি বিল্ডার', en: 'CV Builder' },
+      { to: '/learn/english-vocabulary-building', bn: 'ইংরেজি শব্দভান্ডার গড়া', en: 'English vocabulary building' },
+      { to: '/learn/english-grammar-basics', bn: 'ইংরেজি ব্যাকরণের মৌলিক বিষয়', en: 'English grammar basics' },
+      { to: '/guides/cv-writing-freshers-guide', bn: 'CV লেখার নিয়ম — ফ্রেশারদের জন্য', en: 'How to Write a CV — For Freshers' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
+  {
+    slug: 'compound-interest-calculation-guide',
+    path: '/guides/compound-interest-calculation-guide',
+    titleBn: 'চক্রবৃদ্ধি সুদ হিসাবের নিয়ম',
+    titleEn: 'How to Calculate Compound Interest',
+    crumbBn: 'চক্রবৃদ্ধি সুদ',
+    category: 'finance',
+    descriptionBn:
+      'চক্রবৃদ্ধি সুদ হিসাবের নিয়ম — সূত্র, মাসিক চক্রবৃদ্ধি, মাসিক কিস্তি ও উদাহরণসহ পুরো হিসাব।',
+    descriptionEn:
+      'How to calculate compound interest — the formula, monthly compounding, monthly contributions and worked examples.',
+    readTimeMinutes: 6,
+    updatedAt: '2026-11-28',
+    needsReview: [],
+    links: [
+      { to: '/tools/compound-interest-calculator', bn: 'চক্রবৃদ্ধি সুদ ক্যালকুলেটর', en: 'Compound Interest Calculator' },
+      { to: '/tools/simple-interest-calculator', bn: 'সরল সুদ ক্যালকুলেটর', en: 'Simple Interest Calculator' },
+      { to: '/tools/loan-emi-calculator', bn: 'লোন EMI ক্যালকুলেটর', en: 'Loan EMI Calculator' },
+      { to: '/tools/bank-emi-dps-fdr-calculator', bn: 'ব্যাংক EMI/DPS/FDR ক্যালকুলেটর', en: 'Bank EMI/DPS/FDR Calculator' },
+      { to: '/guides/loan-emi-calculation-guide', bn: 'লোন EMI হিসাবের গাইড', en: 'Loan EMI Calculation Guide' },
+      { to: '/guides', bn: 'সব গাইড', en: 'All guides' },
+    ],
+  },
 ];

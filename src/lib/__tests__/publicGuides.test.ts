@@ -8,6 +8,10 @@
 // Study Guides at /guides/<slug>, 700+ words in Bangla AND English).
 // EXTENDED 28 Nov 2026, trust/content batch (owner order): 66 guides
 // EXTENDED 28 Nov 2026, eleventh guide (owner order 11:44): 67 guides
+// EXTENDED 28 Nov 2026, finish batch A (owner order, code freeze
+// lifted 21:10): 72 guides — 5 new tool-tied Study Guides at
+// /guides/<slug>, 800+ words in Bangla AND English each, every
+// formula grounded in the tools' logic.
 // — 10 new tool-tied Study Guides at /guides/<slug>, 800+ words in
 // Bangla AND English each, every formula grounded in the tools' logic.
 //
@@ -32,9 +36,9 @@ import { PUBLIC_GUIDE_BODIES } from '../publicGuideBodies';
 import { PUBLIC_GUIDE_META } from '../publicGuideMeta';
 
 describe('public guides — meta/body split (25 Nov 2026, entry-chunk budget)', () => {
-  it('meta + bodies cover the same 66 slugs as the joined PUBLIC_GUIDES', () => {
-    expect(PUBLIC_GUIDE_META).toHaveLength(67);
-    expect(Object.keys(PUBLIC_GUIDE_BODIES)).toHaveLength(67);
+  it('meta + bodies cover the same 72 slugs as the joined PUBLIC_GUIDES', () => {
+    expect(PUBLIC_GUIDE_META).toHaveLength(72);
+    expect(Object.keys(PUBLIC_GUIDE_BODIES)).toHaveLength(72);
     const slugs = PUBLIC_GUIDES.map((g) => g.slug);
     expect(PUBLIC_GUIDE_META.map((m) => m.slug).sort()).toEqual([...slugs].sort());
     expect(Object.keys(PUBLIC_GUIDE_BODIES).sort()).toEqual([...slugs].sort());
@@ -230,6 +234,16 @@ const REAL_ROUTES = new Set([
   // Eleventh guide (owner order 28 Nov 2026, 11:44): Negative
   // Sentences — Class 3.
   '/guides/negative-sentences-class-3',
+  // FINISH BATCH 28 NOV — GUIDES A (1–5): the 5 new guide paths +
+  // the live tool routes the new articles link to.
+  '/guides/pdf-compress-guide',
+  '/guides/cv-writing-freshers-guide',
+  '/guides/cover-letter-writing-guide',
+  '/guides/typing-speed-improve-guide',
+  '/guides/compound-interest-calculation-guide',
+  '/tools/cv-builder',
+  '/tools/cover-letter-builder',
+  '/tools/typing-speed-test',
   '/tools/ssc-hsc-gpa-calculator',
   '/tools/nu-cgpa-calculator',
   '/tools/cgpa-to-percentage-converter',
@@ -265,11 +279,11 @@ const REAL_ROUTES = new Set([
 ]);
 
 describe('public guides', () => {
-  it('has exactly the 67 guides, with unique slugs, paths and titles', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(67);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(67);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(67);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(67);
+  it('has exactly the 72 guides, with unique slugs, paths and titles', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(72);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(72);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(72);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(72);
     for (const g of PUBLIC_GUIDES) {
       // Old guides live at /learn/<slug>; Phase 2 Study Guides at /guides/<slug>.
       expect(g.path).toBe(
@@ -291,7 +305,7 @@ describe('public guides', () => {
   });
 
   it('Phase 2 Study Guides are 700+ words in Bangla AND English', () => {
-    expect(PHASE2_GUIDES).toHaveLength(26);
+    expect(PHASE2_GUIDES).toHaveLength(31);
     for (const g of PHASE2_GUIDES) {
       expect(publicGuideWordCount(g), `${g.slug} Bn words`).toBeGreaterThanOrEqual(700);
       expect(publicGuideWordCountEn(g), `${g.slug} En words`).toBeGreaterThanOrEqual(700);
@@ -514,7 +528,7 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
     'bcs-science-ict-preparation',
   ];
 
-  it('has the planned distribution: BCS 5, Primary 3, Bank 2, NTRCA 2, Admission 4, NCTB 3, Tools 5, Finance 1, Health 1', () => {
+  it('has the planned distribution: BCS 5, Primary 3, Bank 2, NTRCA 2, Admission 4, NCTB 3, Tools 9, Finance 2, Health 1', () => {
     const counts = new Map<string, number>();
     for (const g of PHASE2_GUIDES) counts.set(g.category!, (counts.get(g.category!) ?? 0) + 1);
     expect(Object.fromEntries(counts)).toEqual({
@@ -524,8 +538,8 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
       ntrca: 2,
       admission: 4,
       nctb: 3,
-      tools: 5,
-      finance: 1,
+      tools: 9,
+      finance: 2,
       health: 1,
     });
   });
@@ -710,5 +724,60 @@ describe('Phase 2 Study Guides (25 Nov 2026)', () => {
     expect(bn).toContain('She did not play');
     expect(en).toContain('He does not go');
     expect(en).toContain('She did not play');
+  });
+
+  it('finish batch A (28 Nov 2026): the 5 tool-tied guides are 800+ words in Bn AND En', () => {
+    // Owner order 28 Nov 2026 (code freeze lifted 21:10) — every
+    // formula/rule grounded in the tools' own logic (src/lib/tools/),
+    // never from memory.
+    const FINISH_A_SLUGS = [
+      'pdf-compress-guide',
+      'cv-writing-freshers-guide',
+      'cover-letter-writing-guide',
+      'typing-speed-improve-guide',
+      'compound-interest-calculation-guide',
+    ];
+    expect(FINISH_A_SLUGS).toHaveLength(5);
+    for (const slug of FINISH_A_SLUGS) {
+      const g = publicGuideBySlug(slug)!;
+      expect(g, slug).toBeDefined();
+      expect(g.updatedAt).toBe('2026-11-28');
+      expect(publicGuideWordCount(g), `${slug} Bn words`).toBeGreaterThanOrEqual(800);
+      expect(publicGuideWordCountEn(g), `${slug} En words`).toBeGreaterThanOrEqual(800);
+      expect(g.links.some((l) => l.to.startsWith('/tools/')), `${slug} links a tool`).toBe(true);
+    }
+  });
+
+  it('finish batch A: the grounded facts match the tools exactly', () => {
+    // Compound interest: monthly formula + hand-check from
+    // compoundEngine.ts / compoundInterest.ts (verified by hand:
+    // 100,000 + 5,000/month at 10% for 1 year -> 173,299.15).
+    const ci = publicGuideBySlug('compound-interest-calculation-guide')!;
+    expect(ci.bodyBn.join(' ')).toContain('১,৭৩,২৯৯.১৫');
+    expect(ci.bodyBn.join(' ')).toContain('১,১০,৪৭১.৩১');
+    expect(ci.bodyBn.join(' ')).toContain('১,৬৪,৫৩০.৮৯');
+    expect(ci.bodyEn!.join(' ')).toContain('173,299.15');
+    expect(ci.bodyEn!.join(' ')).toContain('110,471.31');
+    expect(ci.bodyEn!.join(' ')).toContain('164,530.89');
+    expect(ci.bodyBn.join(' ')).toContain('A = P(1 + r/n)^(nt)');
+    // PDF: levels + presets from pdfCompressor.ts.
+    const pdf = publicGuideBySlug('pdf-compress-guide')!;
+    expect(pdf.bodyBn.join(' ')).toContain('হালকা, মাঝারি আর শক্তিশালী');
+    expect(pdf.bodyBn.join(' ')).toContain('ইমেইল, ওয়েব আর প্রিন্ট');
+    expect(pdf.bodyEn!.join(' ')).toContain('light, balanced and strong');
+    expect(pdf.bodyEn!.join(' ')).toContain('email, web and print');
+    // Typing: the standard 5-character word + worked WPM example.
+    const typing = publicGuideBySlug('typing-speed-improve-guide')!;
+    expect(typing.bodyBn.join(' ')).toContain('৪০ WPM');
+    expect(typing.bodyBn.join(' ')).toContain('৯৫ শতাংশ');
+    expect(typing.bodyEn!.join(' ')).toContain('40 WPM');
+    expect(typing.bodyEn!.join(' ')).toContain('95 percent');
+    // CV: one page for freshers; cover letter: named greeting.
+    const cv = publicGuideBySlug('cv-writing-freshers-guide')!;
+    expect(cv.bodyBn.join(' ')).toContain('এক পাতায় হওয়া উচিত');
+    expect(cv.bodyEn!.join(' ')).toContain('should be one page');
+    const cl = publicGuideBySlug('cover-letter-writing-guide')!;
+    expect(cl.bodyBn.join(' ')).toContain('Dear Mr. Rahman');
+    expect(cl.bodyEn!.join(' ')).toContain('Dear Mr. Rahman');
   });
 });
